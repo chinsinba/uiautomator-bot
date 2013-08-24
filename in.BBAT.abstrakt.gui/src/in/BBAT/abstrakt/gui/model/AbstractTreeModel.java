@@ -30,7 +30,7 @@ public abstract class  AbstractTreeModel implements IGUITreeNode {
 	@Override
 	public List<IGUITreeNode> getChildren() {
 		List<IGUITreeNode> childNodes = new ArrayList<IGUITreeNode>();
-		List<AbstractEntity> childEntities = entity.getChildren();
+		List<AbstractEntity> childEntities = (List<AbstractEntity>) entity.getChildren();
 		if(childEntities==null)
 			return null;
 		for(AbstractEntity childEntity: childEntities){

@@ -41,7 +41,7 @@ public class TestRunEntity extends AbstractEntity{
 	
 	@OneToMany(mappedBy="testRun", fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST })
 	@OrderColumn
-	private List<TestRunInfoEntity> testRunInfoList;
+	private List<TestRunInfoEntity> testRunInfos;
 	
 	public int getId() {
 		return id;
@@ -56,15 +56,13 @@ public class TestRunEntity extends AbstractEntity{
 	private Timestamp endtiTime;
 	
 	@Override
-	public List<AbstractEntity> getChildren() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<? extends AbstractEntity> getChildren() {
+		return getTestRunInfos();
 	}
 
 
 	@Override
 	public AbstractEntity getParent() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -84,13 +82,7 @@ public class TestRunEntity extends AbstractEntity{
 		this.endtiTime = endtiTime;
 	}
 
-	public List<TestRunInfoEntity> getTestRunInfoList() {
-		return testRunInfoList;
-	}
-
-	public void setTestRunInfoList(List<TestRunInfoEntity> testRunInfoList) {
-		this.testRunInfoList = testRunInfoList;
-	}
+	
 
 	public UserEntity getCreatedBy() {
 		return createdBy;
@@ -114,6 +106,14 @@ public class TestRunEntity extends AbstractEntity{
 
 	public void setVerdict(String verdict) {
 		this.verdict = verdict;
+	}
+
+	public List<TestRunInfoEntity> getTestRunInfos() {
+		return testRunInfos;
+	}
+
+	public void setTestRunInfos(List<TestRunInfoEntity> testRunInfos) {
+		this.testRunInfos = testRunInfos;
 	}
 
 }

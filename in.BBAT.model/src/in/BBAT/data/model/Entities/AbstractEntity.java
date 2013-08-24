@@ -6,10 +6,7 @@ import java.util.List;
 
 public abstract class AbstractEntity implements IBBATEntity {
 
-	public List<AbstractEntity> getChildren() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 
 	@Override
 	public void save() {
@@ -28,7 +25,14 @@ public abstract class AbstractEntity implements IBBATEntity {
 
 	@Override
 	public AbstractEntity getParent() {
+		// TODO Auto-generated method stub
 		return null;
 	}
-
+	
+	
+	@Override
+	public List<? extends AbstractEntity> getChildren() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

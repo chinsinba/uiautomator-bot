@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
@@ -46,6 +47,9 @@ public class TestCaseEntity extends AbstractEntity {
 	@OrderColumn
 	private List<TestSuiteEntity> suite;
 
+	@ManyToOne
+	private TestProjectEntity testProject;
+	
 	public int getId() {
 		return id;
 	}
@@ -94,8 +98,7 @@ public class TestCaseEntity extends AbstractEntity {
 
 	@Override
 	public AbstractEntity getParent() {
-		// TODO Auto-generated method stub
-		return null;
+		return getTestProject();
 	}
 
 	public UserEntity getCreatedBy() {
@@ -112,6 +115,14 @@ public class TestCaseEntity extends AbstractEntity {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public TestProjectEntity getTestProject() {
+		return testProject;
+	}
+
+	public void setTestProject(TestProjectEntity testProject) {
+		this.testProject = testProject;
 	}
 
 }

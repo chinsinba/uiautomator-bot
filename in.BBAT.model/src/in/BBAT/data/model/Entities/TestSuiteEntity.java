@@ -77,15 +77,13 @@ public class TestSuiteEntity extends AbstractEntity  {
 	}
 
 	@Override
-	public List<AbstractEntity> getChildren() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<? extends AbstractEntity> getChildren() {
+		return getTestCases();
 	}
 
 
 	@Override
 	public AbstractEntity getParent() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -103,6 +101,14 @@ public class TestSuiteEntity extends AbstractEntity  {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public List<TestCaseEntity> getTestCases() {
+		return testCases;
+	}
+
+	public void setTestCases(List<TestCaseEntity> testCases) {
+		this.testCases = testCases;
 	}
 
 }

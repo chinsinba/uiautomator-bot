@@ -78,15 +78,13 @@ public class TestRunInfoEntity extends AbstractEntity {
 
 	@Override
 	public List<AbstractEntity> getChildren() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 
 	@Override
 	public AbstractEntity getParent() {
-		// TODO Auto-generated method stub
-		return null;
+		return getTestRun();
 	}
 
 	public TestCaseEntity getTestCase() {
