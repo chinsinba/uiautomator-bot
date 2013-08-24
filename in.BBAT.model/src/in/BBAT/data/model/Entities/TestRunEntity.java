@@ -19,7 +19,7 @@ import javax.persistence.TableGenerator;
  *
  */
 @Entity
-public class TestRunEntity implements IBBATEntity {
+public class TestRunEntity extends AbstractEntity{
 
 	
 	@Id
@@ -51,31 +51,14 @@ public class TestRunEntity implements IBBATEntity {
 	private Timestamp endtiTime;
 	
 	@Override
-	public List<IBBATEntity> getChildren() {
+	public List<AbstractEntity> getChildren() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
-	public void save() {
-		// TODO Auto-generated method stub
-
-	}
 
 	@Override
-	public void delete() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void update() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public IBBATEntity getParent() {
+	public AbstractEntity getParent() {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -9,13 +9,13 @@ import java.util.List;
  */
 public interface IBBATEntity {
 
-	List<IBBATEntity> getChildren();
+	List<? extends IBBATEntity> getChildren();
 
 	void save();
 
 	void delete();
 
-	void update();
+	IBBATEntity update();
 
 	IBBATEntity getParent();
 	

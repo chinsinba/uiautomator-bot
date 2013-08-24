@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.TableGenerator;
 
 @Entity
-public class RoleEntity implements IBBATEntity {
+public class RoleEntity extends AbstractEntity {
 
 	@Id
 	@TableGenerator(name = "Role_GEN", table = "ID_GENERATOR", pkColumnName = "GEN_NAME", valueColumnName = "GEN_VAL", allocationSize=1)
@@ -20,31 +20,13 @@ public class RoleEntity implements IBBATEntity {
 	private String description;
 	
 	@Override
-	public List<IBBATEntity> getChildren() {
+	public List<AbstractEntity> getChildren() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public void save() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void delete() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void update() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public IBBATEntity getParent() {
+	public AbstractEntity getParent() {
 		// TODO Auto-generated method stub
 		return null;
 	}

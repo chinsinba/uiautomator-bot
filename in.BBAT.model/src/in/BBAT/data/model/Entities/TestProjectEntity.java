@@ -9,7 +9,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.TableGenerator;
 
 @Entity
-public class TestProjectEntity implements IBBATEntity {
+public class TestProjectEntity extends AbstractEntity {
 
 	@Id
 	@TableGenerator(name = "TestProject", table = "ID_GENERATOR", pkColumnName = "GEN_NAME", valueColumnName = "GEN_VAL", allocationSize=1)
@@ -29,31 +29,14 @@ public class TestProjectEntity implements IBBATEntity {
 		this.id = id;
 	}
 	@Override
-	public List<IBBATEntity> getChildren() {
+	public List<AbstractEntity> getChildren() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
-	public void save() {
-		// TODO Auto-generated method stub
-
-	}
 
 	@Override
-	public void delete() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void update() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public IBBATEntity getParent() {
+	public AbstractEntity getParent() {
 		// TODO Auto-generated method stub
 		return null;
 	}

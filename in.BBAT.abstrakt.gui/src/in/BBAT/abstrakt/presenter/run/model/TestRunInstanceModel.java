@@ -6,7 +6,7 @@ import org.eclipse.swt.graphics.Image;
 
 import in.BBAT.abstrakt.gui.model.AbstractTreeModel;
 import in.BBAT.abstrakt.gui.model.IGUITreeNode;
-import in.BBAT.data.model.Entities.IBBATEntity;
+import in.BBAT.data.model.Entities.AbstractEntity;
 
 /**
  * 
@@ -15,7 +15,7 @@ import in.BBAT.data.model.Entities.IBBATEntity;
  */
 public class TestRunInstanceModel extends AbstractTreeModel {
 
-	protected TestRunInstanceModel(IBBATEntity entity) {
+	protected TestRunInstanceModel(AbstractEntity entity) {
 		super(entity);
 		// TODO Auto-generated constructor stub
 	}
@@ -33,19 +33,19 @@ public class TestRunInstanceModel extends AbstractTreeModel {
 	}
 
 	@Override
-	protected List<IGUITreeNode> produceChildren(List<IBBATEntity> childEntties) {
+	protected List<IGUITreeNode> produceChildren(List<AbstractEntity> childEntties) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	protected IGUITreeNode produceParent(IBBATEntity childEntties) {
+	protected IGUITreeNode produceParent(AbstractEntity childEntties) {
 		// TODO Auto-generated method stub
 		return new TestRunModel(childEntties);
 	}
 
 	@Override
-	protected IGUITreeNode getChild(IBBATEntity childEntity) {
+	protected IGUITreeNode getChild(AbstractEntity childEntity) {
 		// TODO Auto-generated method stub
 		return null;
 	}

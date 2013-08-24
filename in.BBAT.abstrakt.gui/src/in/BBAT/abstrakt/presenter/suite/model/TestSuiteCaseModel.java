@@ -4,7 +4,7 @@ import org.eclipse.swt.graphics.Image;
 
 import in.BBAT.abstrakt.gui.model.IGUITreeNode;
 import in.BBAT.abstrakt.presenter.pkg.model.TestCaseModel;
-import in.BBAT.data.model.Entities.IBBATEntity;
+import in.BBAT.data.model.Entities.AbstractEntity;
 
 /**
  * 
@@ -13,7 +13,7 @@ import in.BBAT.data.model.Entities.IBBATEntity;
  */
 public class TestSuiteCaseModel extends TestCaseModel {
 
-	protected TestSuiteCaseModel(IBBATEntity entity) {
+	protected TestSuiteCaseModel(AbstractEntity entity) {
 		super(entity);
 		// TODO Auto-generated constructor stub
 	}
@@ -31,7 +31,7 @@ public class TestSuiteCaseModel extends TestCaseModel {
 	}
 	
 	@Override
-	protected IGUITreeNode produceParent(IBBATEntity childEntties) {
+	protected IGUITreeNode produceParent(AbstractEntity childEntties) {
 		// TODO Auto-generated method stub
 		return new TestSuiteModel(childEntties);
 	}

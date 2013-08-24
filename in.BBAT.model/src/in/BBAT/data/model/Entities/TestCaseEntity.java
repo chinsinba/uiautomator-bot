@@ -17,7 +17,7 @@ import javax.persistence.Version;
 
 
 @Entity
-public class TestCaseEntity implements IBBATEntity {
+public class TestCaseEntity extends AbstractEntity {
 
 	@Id
 	@TableGenerator(name = "Case_GEN", table = "ID_GENERATOR", pkColumnName = "GEN_NAME", valueColumnName = "GEN_VAL", allocationSize=1)
@@ -82,30 +82,13 @@ public class TestCaseEntity implements IBBATEntity {
 	}
 
 	@Override
-	public List<IBBATEntity> getChildren() {
+	public List<AbstractEntity> getChildren() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public void save() {
-		
-	}
-
-	@Override
-	public void delete() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void update() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public IBBATEntity getParent() {
+	public AbstractEntity getParent() {
 		// TODO Auto-generated method stub
 		return null;
 	}

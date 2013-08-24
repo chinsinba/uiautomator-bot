@@ -3,6 +3,7 @@ package in.BBAT.abstrakt.gui.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import in.BBAT.data.model.Entities.AbstractEntity;
 import in.BBAT.data.model.Entities.IBBATEntity;
 
 /**
@@ -12,12 +13,12 @@ import in.BBAT.data.model.Entities.IBBATEntity;
  */
 public abstract class  AbstractTreeModel implements IGUITreeNode {
 
-	IBBATEntity entity;
+	AbstractEntity entity;
 
 	private String name;
 
 
-	protected AbstractTreeModel(IBBATEntity entity){
+	protected AbstractTreeModel(AbstractEntity entity){
 		this.entity =entity;
 	}
 
@@ -29,16 +30,16 @@ public abstract class  AbstractTreeModel implements IGUITreeNode {
 	@Override
 	public List<IGUITreeNode> getChildren() {
 		List<IGUITreeNode> childNodes = new ArrayList<IGUITreeNode>();
-		List<IBBATEntity> childEntities = entity.getChildren();
+		List<AbstractEntity> childEntities = entity.getChildren();
 		if(childEntities==null)
 			return null;
-		for(IBBATEntity childEntity: childEntities){
+		for(AbstractEntity childEntity: childEntities){
 			childNodes.add(getChild(childEntity));
 		}
 		return childNodes;
 	}
 
-	protected abstract IGUITreeNode getChild(IBBATEntity childEntity) ;
+	protected abstract IGUITreeNode getChild(AbstractEntity childEntity) ;
 
 	public void save(){
 		entity.save();
@@ -61,6 +62,6 @@ public abstract class  AbstractTreeModel implements IGUITreeNode {
 		this.name = name;
 	}
 
-	protected abstract List<IGUITreeNode> produceChildren(List<IBBATEntity> childEntties );
-	protected abstract IGUITreeNode produceParent(IBBATEntity childEntties );
+	protected abstract List<IGUITreeNode> produceChildren(List<AbstractEntity> childEntties );
+	protected abstract IGUITreeNode produceParent(AbstractEntity childEntties );
 }

@@ -13,7 +13,7 @@ public class MineManager {
 
 	private static EntityManager em = null;
 	private static boolean transactionStarted=false;
-	
+
 	public static void createDb() throws Exception {
 		String path ="127.0.0.1"+":"+"1527";
 		MineManagerHelper.init("BBATDATA", true, true, path + Path.SEPARATOR + "sample","app","app");
@@ -48,11 +48,38 @@ public class MineManager {
 		em.close();
 		transactionStarted =false;
 	}
+
+
+	public static void persist(Object object)
+	{
+		if(em==null)
+		{	
+
+		}
+		em.persist(object);
+	}
 	
+	public static Object merge(Object object)
+	{
+		if(em==null)
+		{	
+
+		}
+		return em.merge(object);
+	}
+	
+	public static void remove(Object object)
+	{
+		if(em==null)
+		{	
+
+		}
+		em.remove(object);
+	}
+
 	public static void main(String[] args) {
 		try {
 			createDb();
-			
 			TestProjectEntity proj = new TestProjectEntity();
 			beginTransaction();
 			em.persist(proj);

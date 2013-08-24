@@ -13,7 +13,7 @@ import javax.persistence.TableGenerator;
  *
  */
 @Entity
-public class TestDeviceEntity implements IBBATEntity {
+public class TestDeviceEntity extends AbstractEntity {
 	@Id
 	@TableGenerator(name = "Dev_GEN", table = "ID_GENERATOR", pkColumnName = "GEN_NAME", valueColumnName = "GEN_VAL", allocationSize=1)
 	@GeneratedValue(generator = "Dev_GEN")
@@ -35,31 +35,14 @@ public class TestDeviceEntity implements IBBATEntity {
 
 
 	@Override
-	public List<IBBATEntity> getChildren() {
+	public List<AbstractEntity> getChildren() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	
 	@Override
-	public void save() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void delete() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void update() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public IBBATEntity getParent() {
+	public AbstractEntity getParent() {
 		// TODO Auto-generated method stub
 		return null;
 	}
