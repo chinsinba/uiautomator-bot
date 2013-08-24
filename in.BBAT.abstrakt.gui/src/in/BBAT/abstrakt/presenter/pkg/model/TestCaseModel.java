@@ -15,7 +15,7 @@ import org.eclipse.swt.graphics.Image;
  */
 public class TestCaseModel extends AbstractTreeModel {
 
-	protected TestCaseModel(AbstractEntity entity) {
+	public TestCaseModel(AbstractEntity entity) {
 		super(entity);
 	}
 

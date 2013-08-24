@@ -1,10 +1,11 @@
 package in.BBAT.abstrakt.presenter.suite.model;
 
-import org.eclipse.swt.graphics.Image;
-
+import in.BBAT.abstrakt.gui.model.AbstractTreeModel;
 import in.BBAT.abstrakt.gui.model.IGUITreeNode;
 import in.BBAT.abstrakt.presenter.pkg.model.TestCaseModel;
 import in.BBAT.data.model.Entities.AbstractEntity;
+
+import org.eclipse.swt.graphics.Image;
 
 /**
  * 
@@ -13,7 +14,9 @@ import in.BBAT.data.model.Entities.AbstractEntity;
  */
 public class TestSuiteCaseModel extends TestCaseModel {
 
-	protected TestSuiteCaseModel(AbstractEntity entity) {
+	private TestSuiteModel parentSuite;
+
+	protected TestSuiteCaseModel(AbstractEntity entity,AbstractTreeModel parent) {
 		super(entity);
 		// TODO Auto-generated constructor stub
 	}
@@ -31,8 +34,15 @@ public class TestSuiteCaseModel extends TestCaseModel {
 	}
 	
 	@Override
-	protected IGUITreeNode produceParent(AbstractEntity childEntties) {
-		// TODO Auto-generated method stub
-		return new TestSuiteModel(childEntties);
+	public IGUITreeNode getParent() {
+		return getParentSuite();
+	}
+
+	public TestSuiteModel getParentSuite() {
+		return parentSuite;
+	}
+
+	public void setParentSuite(TestSuiteModel parentSuite) {
+		this.parentSuite = parentSuite;
 	}
 }

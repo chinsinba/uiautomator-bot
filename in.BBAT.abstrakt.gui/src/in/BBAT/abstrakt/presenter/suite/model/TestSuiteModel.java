@@ -44,7 +44,7 @@ public class TestSuiteModel  extends AbstractTreeModel{
 
 	@Override
 	protected IGUITreeNode getChild(AbstractEntity childEntity) {
-		return new TestSuiteCaseModel(childEntity);
+		return new TestSuiteCaseModel(childEntity,this);
 	}
 
 }
