@@ -15,9 +15,7 @@ Import-Package: javax.persistence,
  org.eclipse.persistence.internal.libraries.antlr.runtime.misc,
  org.eclipse.persistence.internal.libraries.antlr.runtime.tree,
  org.eclipse.persistence.jpa
-Export-Package: in.alethea.swat.datamgr.db,
- in.alethea.swat.datamgr.db.model,
- in.bbat.data.model.Entities
+Export-Package: in.bbat.data.model.Entities
 Bundle-ClassPath: .,
  lib/derby.jar,
  lib/derbyclient.jar,
