@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.OrderColumn;
 import javax.persistence.TableGenerator;
@@ -17,6 +19,9 @@ import javax.persistence.TableGenerator;
  *
  */
 @Entity
+@NamedQueries({
+	@NamedQuery(name="TestRunInfoEntity.findAll",query="SELECT testcase FROM TestRunInfoEntity testcase ORDER BY testcase.id")
+})
 public class TestRunInfoEntity extends AbstractEntity {
 	@Id
 	@TableGenerator(name = "TestRunInfo", table = "ID_GENERATOR", pkColumnName = "GEN_NAME", valueColumnName = "GEN_VAL", allocationSize=1)

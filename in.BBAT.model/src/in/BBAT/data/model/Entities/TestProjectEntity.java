@@ -5,10 +5,15 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.TableGenerator;
 
 @Entity
+@NamedQueries({
+	@NamedQuery(name="TestProjectEntity.findAll",query="SELECT testcase FROM TestProjectEntity testcase ORDER BY testcase.id")
+})
 public class TestProjectEntity extends AbstractEntity {
 
 	@Id

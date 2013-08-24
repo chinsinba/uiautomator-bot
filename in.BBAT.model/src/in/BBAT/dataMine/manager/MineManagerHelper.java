@@ -5,7 +5,6 @@ import in.BBAT.dataMine.Activator;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
 import org.eclipse.persistence.config.PersistenceUnitProperties;
@@ -18,7 +17,6 @@ import org.eclipse.persistence.jpa.PersistenceProvider;
 public class MineManagerHelper {
 
 	private static MineManagerHelper emHelp = null;
-	private EntityManager em = null;
 	private EntityManagerFactory emFactory = null;
 
 	public EntityManagerFactory getEmFactory() {
@@ -60,26 +58,7 @@ public class MineManagerHelper {
 
 		emFactory = new PersistenceProvider().createEntityManagerFactory(
 				persistenceUnitName, properties);
-		try
-		{
-			createEntityMgr();
 		}
-		catch (Exception e)
-		{
-		}
-	}
-
-	private void createEntityMgr() {
-		if(em==null || !em.isOpen())
-			em = emFactory.createEntityManager();
-	}
-
-	public void closeEntityMgr(){
-		if(em!=null && em.isOpen()){
-			em.close();
-
-		}
-	}
 
 	public static MineManagerHelper getInstance() 
 	{
@@ -88,15 +67,8 @@ public class MineManagerHelper {
 			"Call init method before calling this"*/
 			return null;
 		}
-		else
-		{
-			if(!emHelp.getEm().isOpen())
-			{
-				emHelp.createEntityMgr();
-			}
-			return emHelp;
-
-		}
+		
+		return emHelp;
 	}
 
 	public static MineManagerHelper createEntityManager (
@@ -136,14 +108,8 @@ public class MineManagerHelper {
 
 	public void closeEntityManagerHelper() {
 		if (emHelp != null) {
-			em.close();
 			emFactory.close();
 			emHelp = null;
 		}
 	}
-
-	public EntityManager getEm() {
-		return em;
-	}
-
 }

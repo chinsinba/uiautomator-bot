@@ -5,6 +5,8 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.TableGenerator;
 
 /**
@@ -13,6 +15,9 @@ import javax.persistence.TableGenerator;
  *
  */
 @Entity
+@NamedQueries({
+	@NamedQuery(name="TestDeviceEntity.findAll",query="SELECT testcase FROM TestDeviceEntity testcase ORDER BY testcase.id")
+})
 public class TestDeviceEntity extends AbstractEntity {
 	@Id
 	@TableGenerator(name = "Dev_GEN", table = "ID_GENERATOR", pkColumnName = "GEN_NAME", valueColumnName = "GEN_VAL", allocationSize=1)

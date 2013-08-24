@@ -9,12 +9,17 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.OrderColumn;
 import javax.persistence.TableGenerator;
 import javax.persistence.Version;
 
 @Entity
+@NamedQueries({
+	@NamedQuery(name="TestSuiteEntity.findAll",query="SELECT testcase FROM TestSuiteEntity testcase ORDER BY testcase.id")
+})
 public class TestSuiteEntity extends AbstractEntity  {
 
 	@Id

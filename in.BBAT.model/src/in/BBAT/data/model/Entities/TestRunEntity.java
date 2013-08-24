@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.OrderColumn;
@@ -19,6 +21,9 @@ import javax.persistence.TableGenerator;
  *
  */
 @Entity
+@NamedQueries({
+	@NamedQuery(name="TestRunEntity.findAll",query="SELECT testcase FROM TestRunEntity testcase ORDER BY testcase.id")
+})
 public class TestRunEntity extends AbstractEntity{
 
 	

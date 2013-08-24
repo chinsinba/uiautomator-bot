@@ -82,8 +82,11 @@ public class MineManager {
 			createDb();
 			TestProjectEntity proj = new TestProjectEntity();
 			beginTransaction();
-			em.persist(proj);
+			proj.save();
 			commitTransaction();
+			ProjectMineManager.getAllTesPackages();
+			RunMineManager.getAllTestRuns();
+			SuiteMineManager.getAllTestSuite();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
