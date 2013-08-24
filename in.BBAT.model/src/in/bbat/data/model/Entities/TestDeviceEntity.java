@@ -7,6 +7,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.TableGenerator;
 
+/**
+ * 
+ * @author syed Mehtab
+ *
+ */
 @Entity
 public class TestDeviceEntity implements IBBATEntity {
 	@Id

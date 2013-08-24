@@ -5,8 +5,16 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.OrderColumn;
 import javax.persistence.TableGenerator;
 
+/**
+ * 
+ * @author Syed Mehtab
+ *
+ */
 @Entity
 public class TestRunInfoEntity implements IBBATEntity {
 	@Id
@@ -14,6 +22,14 @@ public class TestRunInfoEntity implements IBBATEntity {
 	@GeneratedValue(generator = "TestRunInfo")
 	private int id;
 
+	@OneToOne
+	private TestCaseEntity testCase;
+	
+	
+	@ManyToOne
+	@OrderColumn
+	private TestRunEntity testRun;
+	
 	public int getId() {
 		return id;
 	}
@@ -50,5 +66,13 @@ public class TestRunInfoEntity implements IBBATEntity {
 	public IBBATEntity getParent() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public TestCaseEntity getTestCase() {
+		return testCase;
+	}
+
+	public void setTestCase(TestCaseEntity testCase) {
+		this.testCase = testCase;
 	}
 }

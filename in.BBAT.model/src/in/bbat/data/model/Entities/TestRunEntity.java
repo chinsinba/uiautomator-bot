@@ -3,9 +3,13 @@ package in.bbat.data.model.Entities;
 import java.sql.Timestamp;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OrderColumn;
 import javax.persistence.TableGenerator;
 
 /**
@@ -34,6 +38,9 @@ public class TestRunEntity implements IBBATEntity {
 	
 	private Timestamp endtiTime;
 	
+	@OneToMany(mappedBy="testRun", fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST })
+	@OrderColumn
+	private List<TestRunInfoEntity> testRunInfoList;
 	
 	
 	
@@ -81,6 +88,14 @@ public class TestRunEntity implements IBBATEntity {
 
 	public void setEndtiTime(Timestamp endtiTime) {
 		this.endtiTime = endtiTime;
+	}
+
+	public List<TestRunInfoEntity> getTestRunInfoList() {
+		return testRunInfoList;
+	}
+
+	public void setTestRunInfoList(List<TestRunInfoEntity> testRunInfoList) {
+		this.testRunInfoList = testRunInfoList;
 	}
 
 }

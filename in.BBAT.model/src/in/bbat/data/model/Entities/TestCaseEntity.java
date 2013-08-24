@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.OrderColumn;
 import javax.persistence.TableGenerator;
 import javax.persistence.Version;
 
@@ -32,6 +33,7 @@ public class TestCaseEntity implements IBBATEntity {
 
 	@ManyToMany
 	@JoinColumn(name = "suiteID")
+	@OrderColumn
 	private List<TestSuiteEntity> suite;
 
 	public int getId() {

@@ -7,6 +7,9 @@
 		<class>in.bbat.data.model.Entities.TestCaseEntity</class>
 		<class>in.bbat.data.model.Entities.TestRunInfoEntity</class>
 		<class>in.bbat.data.model.Entities.TestSuiteEntity</class>
+		<class>in.bbat.data.model.Entities.TestRunEntity</class>
+		<class>in.bbat.data.model.Entities.TestProjectEntity</class>
+		<class>in.bbat.data.model.Entities.TestDeviceEntity</class>
 		<properties>
 			<!--<property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.EmbeddedDriver" /> -->
 			<!--<property name="javax.persistence.jdbc.url"
@@ -22,6 +25,10 @@
 			<property name="eclipselink.logging.timestamp" value="false" />
 			<property name="eclipselink.logging.session" value="false" />
 			<property name="eclipselink.logging.thread" value="false" />
+			<property name="javax.persistence.jdbc.user" value="app"/>
+			<property name="javax.persistence.jdbc.password" value="app"/>
+			<property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/sample;create=true"/>
+			<property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.ClientDriver"/>
 
 		</properties>
 	</persistence-unit>
