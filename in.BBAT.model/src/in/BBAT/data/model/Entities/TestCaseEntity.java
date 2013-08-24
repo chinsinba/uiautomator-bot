@@ -1,24 +1,26 @@
-package in.bbat.data.model.Entities;
+package in.BBAT.data.model.Entities;
+
+
 
 import java.sql.Timestamp;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.OrderColumn;
 import javax.persistence.TableGenerator;
 import javax.persistence.Version;
 
+
 @Entity
-public class TestSuiteEntity implements IBBATEntity  {
+public class TestCaseEntity implements IBBATEntity {
 
 	@Id
-	@TableGenerator(name = "Suite_GEN", table = "ID_GENERATOR", pkColumnName = "GEN_NAME", valueColumnName = "GEN_VAL", allocationSize=1)
-	@GeneratedValue(generator = "Suite_GEN")
+	@TableGenerator(name = "Case_GEN", table = "ID_GENERATOR", pkColumnName = "GEN_NAME", valueColumnName = "GEN_VAL", allocationSize=1)
+	@GeneratedValue(generator = "Case_GEN")
 	private int id;
 
 	private String name;
@@ -29,9 +31,10 @@ public class TestSuiteEntity implements IBBATEntity  {
 	private Timestamp createdOn;
 
 
-	@OneToMany(mappedBy="suite", fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST })
+	@ManyToMany
+	@JoinColumn(name = "suiteID")
 	@OrderColumn
-	private List<TestCaseEntity> testCases;
+	private List<TestSuiteEntity> suite;
 
 	public int getId() {
 		return id;
@@ -65,6 +68,14 @@ public class TestSuiteEntity implements IBBATEntity  {
 		this.createdOn = createdOn;
 	}
 
+	public List<TestSuiteEntity> getSuite() {
+		return suite;
+	}
+
+	public void setSuite(List<TestSuiteEntity> suite) {
+		this.suite = suite;
+	}
+
 	@Override
 	public List<IBBATEntity> getChildren() {
 		// TODO Auto-generated method stub
@@ -73,7 +84,6 @@ public class TestSuiteEntity implements IBBATEntity  {
 
 	@Override
 	public void save() {
-		// TODO Auto-generated method stub
 		
 	}
 

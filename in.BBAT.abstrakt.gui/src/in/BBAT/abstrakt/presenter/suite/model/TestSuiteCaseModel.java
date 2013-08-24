@@ -4,7 +4,7 @@ import org.eclipse.swt.graphics.Image;
 
 import in.BBAT.abstrakt.gui.model.IGUITreeNode;
 import in.BBAT.abstrakt.presenter.pkg.model.TestCaseModel;
-import in.bbat.data.model.Entities.IBBATEntity;
+import in.BBAT.data.model.Entities.IBBATEntity;
 
 /**
  * 

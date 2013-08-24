@@ -1,4 +1,4 @@
-package in.bbat.data.model.Entities;
+package in.BBAT.data.model.Entities;
 
 import java.util.List;
 

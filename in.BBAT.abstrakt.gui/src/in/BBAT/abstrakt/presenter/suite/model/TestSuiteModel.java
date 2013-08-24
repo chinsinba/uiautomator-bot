@@ -2,7 +2,7 @@ package in.BBAT.abstrakt.presenter.suite.model;
 
 import in.BBAT.abstrakt.gui.model.AbstractTreeModel;
 import in.BBAT.abstrakt.gui.model.IGUITreeNode;
-import in.bbat.data.model.Entities.IBBATEntity;
+import in.BBAT.data.model.Entities.IBBATEntity;
 
 import java.util.List;
 

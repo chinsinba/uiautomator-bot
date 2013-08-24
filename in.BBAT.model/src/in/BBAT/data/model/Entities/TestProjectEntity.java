@@ -1,35 +1,20 @@
-package in.bbat.data.model.Entities;
+package in.BBAT.data.model.Entities;
 
 import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-import javax.persistence.OrderColumn;
 import javax.persistence.TableGenerator;
 
-/**
- * 
- * @author Syed Mehtab
- *
- */
 @Entity
-public class TestRunInfoEntity implements IBBATEntity {
+public class TestProjectEntity implements IBBATEntity {
+
 	@Id
-	@TableGenerator(name = "TestRunInfo", table = "ID_GENERATOR", pkColumnName = "GEN_NAME", valueColumnName = "GEN_VAL", allocationSize=1)
-	@GeneratedValue(generator = "TestRunInfo")
+	@TableGenerator(name = "TestProject", table = "ID_GENERATOR", pkColumnName = "GEN_NAME", valueColumnName = "GEN_VAL", allocationSize=1)
+	@GeneratedValue(generator = "TestProject")
 	private int id;
 
-	@OneToOne
-	private TestCaseEntity testCase;
-	
-	
-	@ManyToOne
-	@OrderColumn
-	private TestRunEntity testRun;
-	
 	public int getId() {
 		return id;
 	}
@@ -37,7 +22,6 @@ public class TestRunInfoEntity implements IBBATEntity {
 	public void setId(int id) {
 		this.id = id;
 	}
-
 	@Override
 	public List<IBBATEntity> getChildren() {
 		// TODO Auto-generated method stub
@@ -47,19 +31,19 @@ public class TestRunInfoEntity implements IBBATEntity {
 	@Override
 	public void save() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void delete() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void update() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -68,11 +52,4 @@ public class TestRunInfoEntity implements IBBATEntity {
 		return null;
 	}
 
-	public TestCaseEntity getTestCase() {
-		return testCase;
-	}
-
-	public void setTestCase(TestCaseEntity testCase) {
-		this.testCase = testCase;
-	}
 }

@@ -1,4 +1,4 @@
-package in.bbat.data.model.Entities;
+package in.BBAT.data.model.Entities;
 
 import java.sql.Timestamp;
 import java.util.List;

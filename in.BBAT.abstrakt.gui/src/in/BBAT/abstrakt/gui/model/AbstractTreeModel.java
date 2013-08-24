@@ -3,7 +3,7 @@ package in.BBAT.abstrakt.gui.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import in.bbat.data.model.Entities.IBBATEntity;
+import in.BBAT.data.model.Entities.IBBATEntity;
 
 /**
  * 
