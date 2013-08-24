@@ -17,8 +17,8 @@ import org.eclipse.persistence.jpa.PersistenceProvider;
  */
 public class MineManagerHelper {
 
-	private static MineManagerHelper emHelper = null;
-	private EntityManager entityManager = null;
+	private static MineManagerHelper emHelp = null;
+	private EntityManager em = null;
 	private EntityManagerFactory emFactory = null;
 
 	public EntityManagerFactory getEmFactory() {
@@ -70,31 +70,31 @@ public class MineManagerHelper {
 	}
 
 	private void createEntityMgr() {
-		if(entityManager==null || !entityManager.isOpen())
-			entityManager = emFactory.createEntityManager();
+		if(em==null || !em.isOpen())
+			em = emFactory.createEntityManager();
 	}
 
 	public void closeEntityMgr(){
-		if(entityManager!=null && entityManager.isOpen()){
-			entityManager.close();
+		if(em!=null && em.isOpen()){
+			em.close();
 
 		}
 	}
 
 	public static MineManagerHelper getInstance() 
 	{
-		if(emHelper == null){
+		if(emHelp == null){
 			/*"The Entitymanagerhelper should be initialised at least once before accessing this method." +
 			"Call init method before calling this"*/
 			return null;
 		}
 		else
 		{
-			if(!emHelper.getEm().isOpen())
+			if(!emHelp.getEm().isOpen())
 			{
-				emHelper.createEntityMgr();
+				emHelp.createEntityMgr();
 			}
-			return emHelper;
+			return emHelp;
 
 		}
 	}
@@ -102,11 +102,11 @@ public class MineManagerHelper {
 	public static MineManagerHelper createEntityManager (
 			String persistenceUnitName, boolean createTable, boolean networkDb,
 			String dbPath,String dbUserName,String dbPassword) throws Exception{
-		if (emHelper == null) {
-			emHelper = new MineManagerHelper(persistenceUnitName,
+		if (emHelp == null) {
+			emHelp = new MineManagerHelper(persistenceUnitName,
 					createTable, networkDb, dbPath,dbUserName,dbPassword);
 		}
-		return emHelper;
+		return emHelp;
 	}
 
 	/**
@@ -124,26 +124,26 @@ public class MineManagerHelper {
 			String persistenceUnitName, boolean createTable, boolean networkDb,
 			String dbPath,String dbUserName,String dbPassword) throws Exception{
 
-		if (emHelper != null) {
+		if (emHelp != null) {
 			throw new IllegalStateException("already initialized. This can be called only once in the life time of this class object");
 		}
-		if (emHelper == null) {
-			emHelper = new MineManagerHelper(persistenceUnitName,
+		if (emHelp == null) {
+			emHelp = new MineManagerHelper(persistenceUnitName,
 					createTable, networkDb, dbPath,dbUserName,dbPassword);
 		}
-		return emHelper;
+		return emHelp;
 	}
 
 	public void closeEntityManagerHelper() {
-		if (emHelper != null) {
-			entityManager.close();
+		if (emHelp != null) {
+			em.close();
 			emFactory.close();
-			emHelper = null;
+			emHelp = null;
 		}
 	}
 
 	public EntityManager getEm() {
-		return entityManager;
+		return em;
 	}
 
 }

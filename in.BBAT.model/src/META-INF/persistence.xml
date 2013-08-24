@@ -10,6 +10,8 @@
 		<class>in.BBAT.data.model.Entities.TestRunEntity</class>
 		<class>in.BBAT.data.model.Entities.TestProjectEntity</class>
 		<class>in.BBAT.data.model.Entities.TestDeviceEntity</class>
+		<class>in.BBAT.data.model.Entities.RoleEntity</class>
+		<class>in.BBAT.data.model.Entities.UserEntity</class>
 		<properties>
 			<!--<property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.EmbeddedDriver" /> -->
 			<!--<property name="javax.persistence.jdbc.url"
