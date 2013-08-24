@@ -11,6 +11,12 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderColumn;
 import javax.persistence.TableGenerator;
+
+/**
+ * 
+ * @author Syed Mehtab
+ *
+ */
 @Entity
 public class UserEntity implements IBBATEntity {
 
@@ -18,8 +24,6 @@ public class UserEntity implements IBBATEntity {
 	@TableGenerator(name = "User_GEN", table = "ID_GENERATOR", pkColumnName = "GEN_NAME", valueColumnName = "GEN_VAL", allocationSize=1)
 	@GeneratedValue(generator = "User_GEN")
 	private int id;
-
-
 
 	private String userName;
 

@@ -1,5 +1,6 @@
 package in.BBAT.data.model.Entities;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -26,9 +27,41 @@ public class TestRunInfoEntity implements IBBATEntity {
 	private TestCaseEntity testCase;
 	
 	
+	private String verdict;
+	
+	private Timestamp startTime;
+	
+	private Timestamp endTime;
+	
 	@ManyToOne
 	@OrderColumn
 	private TestRunEntity testRun;
+	
+	public Timestamp getStartTime() {
+		return startTime;
+	}
+
+	public void setStartTime(Timestamp startTime) {
+		this.startTime = startTime;
+	}
+
+	public Timestamp getEndTime() {
+		return endTime;
+	}
+
+	public void setEndTime(Timestamp endTime) {
+		this.endTime = endTime;
+	}
+
+	public TestRunEntity getTestRun() {
+		return testRun;
+	}
+
+	public void setTestRun(TestRunEntity testRun) {
+		this.testRun = testRun;
+	}
+
+	
 	
 	public int getId() {
 		return id;
@@ -74,5 +107,13 @@ public class TestRunInfoEntity implements IBBATEntity {
 
 	public void setTestCase(TestCaseEntity testCase) {
 		this.testCase = testCase;
+	}
+
+	public String getVerdict() {
+		return verdict;
+	}
+
+	public void setVerdict(String verdict) {
+		this.verdict = verdict;
 	}
 }

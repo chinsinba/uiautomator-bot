@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.OrderColumn;
 import javax.persistence.TableGenerator;
 import javax.persistence.Version;
@@ -25,11 +26,15 @@ public class TestCaseEntity implements IBBATEntity {
 
 	private String name;
 
+	private String description;
+	
 	@Version
 	private Timestamp lastModified;
 
 	private Timestamp createdOn;
 
+	@OneToOne
+	private UserEntity createdBy;
 
 	@ManyToMany
 	@JoinColumn(name = "suiteID")
@@ -103,6 +108,22 @@ public class TestCaseEntity implements IBBATEntity {
 	public IBBATEntity getParent() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public UserEntity getCreatedBy() {
+		return createdBy;
+	}
+
+	public void setCreatedBy(UserEntity createdBy) {
+		this.createdBy = createdBy;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 }

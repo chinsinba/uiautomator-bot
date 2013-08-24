@@ -17,6 +17,7 @@ public class RoleEntity implements IBBATEntity {
 	
 	private String roleName;
 	
+	private String description;
 	
 	@Override
 	public List<IBBATEntity> getChildren() {
@@ -62,6 +63,14 @@ public class RoleEntity implements IBBATEntity {
 
 	public void setRoleName(String roleName) {
 		this.roleName = roleName;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 }

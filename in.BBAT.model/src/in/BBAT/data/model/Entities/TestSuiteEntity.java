@@ -9,6 +9,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.OrderColumn;
 import javax.persistence.TableGenerator;
 import javax.persistence.Version;
@@ -22,7 +23,12 @@ public class TestSuiteEntity implements IBBATEntity  {
 	private int id;
 
 	private String name;
+	
+	private String description;
 
+	@OneToOne
+	private UserEntity createdBy;
+	
 	@Version
 	private Timestamp lastModified;
 
@@ -93,6 +99,22 @@ public class TestSuiteEntity implements IBBATEntity  {
 	public IBBATEntity getParent() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public UserEntity getCreatedBy() {
+		return createdBy;
+	}
+
+	public void setCreatedBy(UserEntity createdBy) {
+		this.createdBy = createdBy;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 }

@@ -9,6 +9,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.OrderColumn;
 import javax.persistence.TableGenerator;
 
@@ -26,6 +27,17 @@ public class TestRunEntity implements IBBATEntity {
 	@GeneratedValue(generator = "TestRun_GEN")
 	private int id;
 
+	private String description;
+	
+	private String verdict;
+	
+	@OneToOne
+	private UserEntity createdBy;
+	
+	@OneToMany(mappedBy="testRun", fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST })
+	@OrderColumn
+	private List<TestRunInfoEntity> testRunInfoList;
+	
 	public int getId() {
 		return id;
 	}
@@ -37,12 +49,6 @@ public class TestRunEntity implements IBBATEntity {
 	private Timestamp startTime;
 	
 	private Timestamp endtiTime;
-	
-	@OneToMany(mappedBy="testRun", fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST })
-	@OrderColumn
-	private List<TestRunInfoEntity> testRunInfoList;
-	
-	
 	
 	@Override
 	public List<IBBATEntity> getChildren() {
@@ -96,6 +102,30 @@ public class TestRunEntity implements IBBATEntity {
 
 	public void setTestRunInfoList(List<TestRunInfoEntity> testRunInfoList) {
 		this.testRunInfoList = testRunInfoList;
+	}
+
+	public UserEntity getCreatedBy() {
+		return createdBy;
+	}
+
+	public void setCreatedBy(UserEntity createdBy) {
+		this.createdBy = createdBy;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getVerdict() {
+		return verdict;
+	}
+
+	public void setVerdict(String verdict) {
+		this.verdict = verdict;
 	}
 
 }
