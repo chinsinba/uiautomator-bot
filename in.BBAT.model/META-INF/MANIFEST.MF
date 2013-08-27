@@ -16,3 +16,7 @@ Import-Package: javax.persistence,
  org.eclipse.persistence.internal.libraries.antlr.runtime.tree,
  org.eclipse.persistence.jpa
 Export-Package: in.BBAT.data.model.Entities
+Bundle-ClassPath: lib/derby.jar,
+ lib/derbyclient.jar,
+ lib/derbynet.jar,
+ lib/derbytools.jar
