@@ -96,4 +96,14 @@ public class UserEntity extends AbstractEntity{
 		this.recentLogin = recentLogin;
 	}
 
+
+	public List<RoleEntity> getRoles() {
+		return roles;
+	}
+
+
+	public void setRoles(List<RoleEntity> roles) {
+		this.roles = roles;
+	}
+
 }

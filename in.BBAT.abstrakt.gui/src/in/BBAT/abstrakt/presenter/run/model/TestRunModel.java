@@ -3,6 +3,7 @@ package in.BBAT.abstrakt.presenter.run.model;
 import in.BBAT.abstrakt.gui.model.AbstractTreeModel;
 import in.BBAT.abstrakt.gui.model.IGUITreeNode;
 import in.BBAT.data.model.Entities.AbstractEntity;
+import in.BBAT.data.model.Entities.TestRunEntity;
 
 import java.util.List;
 
@@ -17,9 +18,12 @@ public class TestRunModel extends AbstractTreeModel {
 
 	protected TestRunModel(AbstractEntity entity) {
 		super(entity);
-		// TODO Auto-generated constructor stub
 	}
 
+	public TestRunModel() {
+		super(new TestRunEntity());
+	}
+	
 	@Override
 	public String getLabel() {
 		return null;

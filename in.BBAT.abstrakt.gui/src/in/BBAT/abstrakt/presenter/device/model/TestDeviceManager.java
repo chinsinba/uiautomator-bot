@@ -1,5 +1,7 @@
 package in.BBAT.abstrakt.presenter.device.model;
 
+import java.util.List;
+
 
 public class TestDeviceManager {
 
@@ -17,5 +19,9 @@ public class TestDeviceManager {
 			instance= new TestDeviceManager();
 		}
 		return instance;
+	}
+
+	public List<AndroidDevice> getDevices(){
+		return null;
 	}
 }

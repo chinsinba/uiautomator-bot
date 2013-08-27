@@ -1,5 +1,9 @@
 package in.BBAT.abstrakt.presenter.run.model;
 
+import in.BBAT.abstrakt.presenter.suite.model.TestSuiteModel;
+
+import java.util.List;
+
 
 public class TestRunManager {
 
@@ -17,5 +21,9 @@ public class TestRunManager {
 			instance= new TestRunManager();
 		}
 		return instance;
+	}
+	
+	public List<TestRunModel> getTestRuns(){
+		return null;
 	}
 }

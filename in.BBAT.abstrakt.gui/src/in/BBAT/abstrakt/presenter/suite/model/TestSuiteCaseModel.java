@@ -21,6 +21,7 @@ public class TestSuiteCaseModel extends TestCaseModel {
 		// TODO Auto-generated constructor stub
 	}
 
+	
 	@Override
 	public Image getImage() {
 		// TODO Auto-generated method stub

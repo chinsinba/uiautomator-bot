@@ -20,6 +20,7 @@ public abstract class  AbstractTreeModel implements IGUITreeNode {
 	protected AbstractTreeModel(AbstractEntity entity){
 		this.setEntity(entity);
 	}
+	
 
 	@Override
 	public IGUITreeNode getParent(){

@@ -1,5 +1,7 @@
 package in.BBAT.abstrakt.presenter.suite.model;
 
+import java.util.List;
+
 public class TestSuiteManager {
 
 
@@ -16,5 +18,9 @@ public class TestSuiteManager {
 			instance= new TestSuiteManager();
 		}
 		return instance;
+	}
+
+	public List<TestSuiteModel> getTestSuites(){
+		return null;
 	}
 }

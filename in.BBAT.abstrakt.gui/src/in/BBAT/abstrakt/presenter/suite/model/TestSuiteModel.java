@@ -2,7 +2,9 @@ package in.BBAT.abstrakt.presenter.suite.model;
 
 import in.BBAT.abstrakt.gui.model.AbstractTreeModel;
 import in.BBAT.abstrakt.gui.model.IGUITreeNode;
+import in.BBAT.abstrakt.gui.model.UserModel;
 import in.BBAT.data.model.Entities.AbstractEntity;
+import in.BBAT.data.model.Entities.TestSuiteEntity;
 
 import java.util.List;
 
@@ -21,15 +23,35 @@ public class TestSuiteModel  extends AbstractTreeModel{
 		// TODO Auto-generated constructor stub
 	}
 
+
+	public TestSuiteModel(){
+		super(new TestSuiteEntity());
+	}
+
 	@Override
 	public String getLabel() {
-		return null;
+		return getName();
 	}
 
 	@Override
 	public Image getImage() {
 		return null;
 	}
+
+
+	public long getCreatedTime(){
+		return 0;
+	}
+
+	public void setCreatedTime(long milliseconds)
+	{
+
+	}
+
+	public UserModel createdBy(){
+		return null;
+	}
+
 
 	@Override
 	protected List<IGUITreeNode> produceChildren(List<AbstractEntity> childEntties) {

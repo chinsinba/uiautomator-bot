@@ -5,6 +5,7 @@ import java.util.List;
 import in.BBAT.abstrakt.gui.model.AbstractTreeModel;
 import in.BBAT.abstrakt.gui.model.IGUITreeNode;
 import in.BBAT.data.model.Entities.AbstractEntity;
+import in.BBAT.data.model.Entities.TestProjectEntity;
 
 import org.eclipse.swt.graphics.Image;
 
@@ -18,6 +19,10 @@ public class TestProjectModel extends AbstractTreeModel{
 	protected TestProjectModel(AbstractEntity entity) {
 		super(entity);
 		// TODO Auto-generated constructor stub
+	}
+	
+	public TestProjectModel() {
+		super(new TestProjectEntity());
 	}
 
 	@Override

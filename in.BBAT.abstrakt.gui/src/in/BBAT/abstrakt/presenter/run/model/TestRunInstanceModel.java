@@ -7,6 +7,8 @@ import org.eclipse.swt.graphics.Image;
 import in.BBAT.abstrakt.gui.model.AbstractTreeModel;
 import in.BBAT.abstrakt.gui.model.IGUITreeNode;
 import in.BBAT.data.model.Entities.AbstractEntity;
+import in.BBAT.data.model.Entities.TestProjectEntity;
+import in.BBAT.data.model.Entities.TestRunInfoEntity;
 
 /**
  * 
@@ -20,6 +22,9 @@ public class TestRunInstanceModel extends AbstractTreeModel {
 		// TODO Auto-generated constructor stub
 	}
 
+	public TestRunInstanceModel() {
+		super(new TestRunInfoEntity());
+	}
 	@Override
 	public String getLabel() {
 		// TODO Auto-generated method stub

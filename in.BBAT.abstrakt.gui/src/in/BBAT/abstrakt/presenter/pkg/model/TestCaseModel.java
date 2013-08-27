@@ -5,6 +5,7 @@ import java.util.List;
 import in.BBAT.abstrakt.gui.model.AbstractTreeModel;
 import in.BBAT.abstrakt.gui.model.IGUITreeNode;
 import in.BBAT.data.model.Entities.AbstractEntity;
+import in.BBAT.data.model.Entities.TestCaseEntity;
 
 import org.eclipse.swt.graphics.Image;
 
@@ -17,6 +18,10 @@ public class TestCaseModel extends AbstractTreeModel {
 
 	public TestCaseModel(AbstractEntity entity) {
 		super(entity);
+	}
+	
+	public TestCaseModel(){
+		super(new TestCaseEntity());
 	}
 
 	private String scriptPath;
