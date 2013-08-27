@@ -6,6 +6,7 @@ import in.BBAT.abstrakt.gui.model.AbstractTreeModel;
 import in.BBAT.abstrakt.gui.model.IGUITreeNode;
 import in.BBAT.data.model.Entities.AbstractEntity;
 import in.BBAT.data.model.Entities.TestCaseEntity;
+import in.BBAT.data.model.Entities.TestProjectEntity;
 
 import org.eclipse.swt.graphics.Image;
 
@@ -46,19 +47,16 @@ public class TestCaseModel extends AbstractTreeModel {
 
 	@Override
 	protected List<IGUITreeNode> produceChildren(List<AbstractEntity> childEntties) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	protected IGUITreeNode produceParent(AbstractEntity childEntties) {
-		// TODO Auto-generated method stub
-		return new TestProjectModel(childEntties);
+		return new TestProjectModel((TestProjectEntity) childEntties);
 	}
 
 	@Override
 	protected IGUITreeNode getChild(AbstractEntity childEntity) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 	

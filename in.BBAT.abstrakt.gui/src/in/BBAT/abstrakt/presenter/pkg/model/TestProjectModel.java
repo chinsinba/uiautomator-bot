@@ -16,7 +16,7 @@ import org.eclipse.swt.graphics.Image;
  */
 public class TestProjectModel extends AbstractTreeModel{
 
-	protected TestProjectModel(AbstractEntity entity) {
+	protected TestProjectModel(TestProjectEntity entity) {
 		super(entity);
 		// TODO Auto-generated constructor stub
 	}

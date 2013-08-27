@@ -18,7 +18,7 @@ import org.eclipse.swt.graphics.Image;
 public class TestSuiteModel  extends AbstractTreeModel{
 
 
-	protected TestSuiteModel(AbstractEntity entity) {
+	protected TestSuiteModel(TestSuiteEntity entity) {
 		super(entity);
 		// TODO Auto-generated constructor stub
 	}
@@ -66,7 +66,7 @@ public class TestSuiteModel  extends AbstractTreeModel{
 
 	@Override
 	protected IGUITreeNode getChild(AbstractEntity childEntity) {
-		return new TestSuiteCaseModel(childEntity,this);
+		return new TestSuiteCaseModel((TestSuiteEntity) childEntity,this);
 	}
 
 }

@@ -4,6 +4,7 @@ import in.BBAT.abstrakt.gui.model.AbstractTreeModel;
 import in.BBAT.abstrakt.gui.model.IGUITreeNode;
 import in.BBAT.data.model.Entities.AbstractEntity;
 import in.BBAT.data.model.Entities.TestRunEntity;
+import in.BBAT.data.model.Entities.TestRunInfoEntity;
 
 import java.util.List;
 
@@ -16,7 +17,7 @@ import org.eclipse.swt.graphics.Image;
  */
 public class TestRunModel extends AbstractTreeModel {
 
-	protected TestRunModel(AbstractEntity entity) {
+	protected TestRunModel(TestRunEntity entity) {
 		super(entity);
 	}
 
@@ -48,7 +49,7 @@ public class TestRunModel extends AbstractTreeModel {
 
 	@Override
 	protected IGUITreeNode getChild(AbstractEntity childEntity) {
-		return new TestRunInstanceModel(childEntity);
+		return new TestRunInstanceModel((TestRunInfoEntity) childEntity);
 	}
 
 	
