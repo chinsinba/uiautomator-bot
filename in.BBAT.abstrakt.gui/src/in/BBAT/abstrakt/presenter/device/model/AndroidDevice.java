@@ -10,25 +10,21 @@ public class AndroidDevice implements IGUITreeNode{
 
 	@Override
 	public String getLabel() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public Image getImage() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public List<IGUITreeNode> getChildren() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public IGUITreeNode getParent() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
