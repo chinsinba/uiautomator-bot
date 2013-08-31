@@ -5,9 +5,15 @@ import java.util.List;
 import org.eclipse.swt.graphics.Image;
 
 import in.BBAT.abstrakt.gui.model.IGUITreeNode;
+import in.bbat.testrunner.IAndroidDevice;
 
 public class AndroidDevice implements IGUITreeNode{
 
+	private IAndroidDevice device;
+
+	public AndroidDevice(IAndroidDevice dev){
+		this.device = dev;
+	}
 	@Override
 	public String getLabel() {
 		return null;
