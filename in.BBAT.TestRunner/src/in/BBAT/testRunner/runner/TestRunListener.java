@@ -32,25 +32,21 @@ public class TestRunListener implements ITestRunListener {
 
 	@Override
 	public void testRunFailed(String arg0) {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void testRunStarted(String arg0, int arg1) {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void testRunStopped(long arg0) {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void testStarted(TestIdentifier arg0) {
-		// TODO Auto-generated method stub
 
 	}
 

@@ -9,10 +9,10 @@ import in.bbat.testrunner.IAndroidDevice;
 
 public class AndroidDevice implements IGUITreeNode{
 
-	private IAndroidDevice device;
+	private IAndroidDevice iDevice;
 
 	public AndroidDevice(IAndroidDevice dev){
-		this.device = dev;
+		this.setiDevice(dev);
 	}
 	@Override
 	public String getLabel() {
@@ -32,6 +32,14 @@ public class AndroidDevice implements IGUITreeNode{
 	@Override
 	public IGUITreeNode getParent() {
 		return null;
+	}
+	
+	public IAndroidDevice getiDevice() {
+		return iDevice;
+	}
+	
+	public void setiDevice(IAndroidDevice iDevice) {
+		this.iDevice = iDevice;
 	}
 
 }

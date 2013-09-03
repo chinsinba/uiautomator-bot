@@ -1,5 +1,8 @@
 package in.BBAT.testRunner.runner;
 
+import in.bbat.testrunner.IAndroidDevice;
+import in.bbat.testrunner.TestDevice;
+
 
 /**
  * 
@@ -10,8 +13,17 @@ public class TestRunner implements ITestRunner{
 
 	private TestArtifacts testArtifacts;
 
+	private UiAutoTestCaseJar jar;
+
+	private IAndroidDevice testDevice;
 	public TestRunner(TestArtifacts artifacts){
 		this.testArtifacts =artifacts;
+	}
+
+	public TestRunner(UiAutoTestCaseJar jar, IAndroidDevice device){
+		this.jar = jar;
+		this.testDevice = device;
+
 	}
 
 	@Override
@@ -20,14 +32,13 @@ public class TestRunner implements ITestRunner{
 		pushJarToDevice();		
 		initialiseDevcieLoggers();
 		runTestcases();
-
 	}
 
 	/**
 	 * Initialises the loggers
 	 */
 	private void initialiseDevcieLoggers() {
-		
+
 	}
 
 	@Override
@@ -56,7 +67,7 @@ public class TestRunner implements ITestRunner{
 	private void runTestcases(){
 
 	}
-	
+
 	public TestArtifacts getTestArtifacts() {
 		return testArtifacts;
 	}

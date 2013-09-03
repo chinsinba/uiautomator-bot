@@ -1,21 +1,21 @@
 package in.BBAT.testRunner.runner;
 
+import in.bbat.testrunner.IAndroidDevice;
+
 import java.util.List;
 
-import com.android.ddmlib.IDevice;
 import com.android.ddmlib.testrunner.ITestRunListener;
 /**
  * 
  * @author syed mehtab
  * This class is a container holding all the selected test cases to be executed.
- * 
  *
  */
 public class TestArtifacts {
 
 	private List<String> testCasePath;
 
-	private IDevice device;
+	private IAndroidDevice device;
 
 	private ITestRunListener listener; 
 	private ILogListener logListener;
@@ -25,7 +25,7 @@ public class TestArtifacts {
 	 * @param testcasePath
 	 * @param testDevice
 	 */
-	public TestArtifacts(List<String> testcasePath, IDevice testDevice, ITestRunListener listener,ILogListener deviceLogListener){
+	public TestArtifacts(List<String> testcasePath, IAndroidDevice testDevice, ITestRunListener listener,ILogListener deviceLogListener){
 		this.testCasePath = testcasePath;
 		this.device = testDevice;
 		this.listener=listener;
@@ -40,11 +40,11 @@ public class TestArtifacts {
 		this.testCasePath = testCasePath;
 	}
 
-	public IDevice getDevice() {
+	public IAndroidDevice getDevice() {
 		return device;
 	}
 
-	public void setDevice(IDevice device) {
+	public void setDevice(IAndroidDevice device) {
 		this.device = device;
 	}
 

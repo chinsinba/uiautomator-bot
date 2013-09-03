@@ -3,7 +3,6 @@ package in.BBAT.abstrakt.presenter.device.model;
 import in.bbat.testrunner.IAndroidDevice;
 import in.bbat.testrunner.IDeviceConnectionListener;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,13 +12,11 @@ public class TestDeviceManager  implements IDeviceConnectionListener{
 
 
 	private static TestDeviceManager instance;
-	List<AndroidDevice> devices;
 	
 	private Map<IAndroidDevice, AndroidDevice> iDeviceMap = new HashMap<IAndroidDevice, AndroidDevice>();
 
 	private TestDeviceManager()
 	{
-		devices = new ArrayList<AndroidDevice>();
 	}
 
 	public static TestDeviceManager getInstance(){
@@ -31,7 +28,7 @@ public class TestDeviceManager  implements IDeviceConnectionListener{
 	}
 
 	public List<AndroidDevice> getDevices(){
-		return devices;
+		return (List<AndroidDevice>) iDeviceMap.values();
 	}
 
 	@Override
@@ -47,6 +44,6 @@ public class TestDeviceManager  implements IDeviceConnectionListener{
 
 	@Override
 	public void deviceChanged(IAndroidDevice device, int changeMask) {
-		
 	}
+
 }
