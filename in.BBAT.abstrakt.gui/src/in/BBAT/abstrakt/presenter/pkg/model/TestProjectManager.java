@@ -1,10 +1,7 @@
 package in.BBAT.abstrakt.presenter.pkg.model;
 
-import in.BBAT.abstrakt.presenter.run.model.TestRunModel;
 import in.BBAT.data.model.Entities.TestProjectEntity;
-import in.BBAT.data.model.Entities.TestRunEntity;
 import in.BBAT.dataMine.manager.ProjectMineManager;
-import in.BBAT.dataMine.manager.RunMineManager;
 
 import java.util.ArrayList;
 import java.util.List;
