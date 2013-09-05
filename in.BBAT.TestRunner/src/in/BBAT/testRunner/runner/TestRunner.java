@@ -27,7 +27,7 @@ public class TestRunner implements ITestRunner{
 	}
 
 	@Override
-	public void execute() {
+	public void execute(String testCaseClassName) {
 		createTestJar();
 		pushJarToDevice();		
 		initialiseDevcieLoggers();

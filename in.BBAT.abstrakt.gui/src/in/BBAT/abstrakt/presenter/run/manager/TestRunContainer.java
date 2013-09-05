@@ -5,6 +5,7 @@ import java.util.List;
 
 import in.BBAT.abstrakt.presenter.device.model.AndroidDevice;
 import in.BBAT.abstrakt.presenter.pkg.model.TestCaseModel;
+import in.BBAT.abstrakt.presenter.run.model.TestRunCase;
 import in.BBAT.abstrakt.presenter.run.model.TestRunInstanceModel;
 import in.BBAT.abstrakt.presenter.run.model.TestRunModel;
 import in.BBAT.testRunner.runner.TestRunner;
@@ -15,14 +16,18 @@ public class TestRunContainer {
 
 	private TestRunModel currentRunningTestRun;
 
-	private TestCaseModel currentrunningTestCase;
+	private TestRunCase currentrunningTestCase;
 
+	private List<TestRunCase> caseList;
 	private UiAutoTestCaseJar jar;
-	
-	AndroidDevice testDevice ;
 
-	public TestRunContainer(List<TestCaseModel> testCaseModels, AndroidDevice device){
-testDevice =device;
+	private AndroidDevice testDevice ;
+
+	private TestRunner runer;
+
+	public TestRunContainer(List<TestRunCase> testRunCaseList, AndroidDevice device){
+		testDevice =device;
+		this.caseList = testRunCaseList;
 	}
 	/**
 	 * This method will prepare the test run for execution.
@@ -30,26 +35,28 @@ testDevice =device;
 	 */
 	public void prepareRun(){
 		jar = new UiAutoTestCaseJar("");
-
+		runer = new TestRunner(jar,testDevice.getiDevice());
 	}
 
 	/**
 	 * Runs the test cases in the test run one by one.
 	 */
 	public void run(){
-		
-		TestRunner runer = new TestRunner(jar,testDevice.getiDevice());
+		for(TestRunCase runCaseObj : caseList){
+			runer.execute(runCaseObj.getTestcase().getName());
+		}
 
+		
 		//for each testcase in the testrun execute 
 	}
 
 	private List<TestRunInstanceModel> createTestRunInstances(List<TestCaseModel> testCaseModels){
 		return null;
 	}
-	
+
 	public UiAutoTestCaseJar getJar() {
 		return jar;
 	}
-	
+
 
 }
