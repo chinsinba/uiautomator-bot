@@ -1,5 +1,6 @@
 package in.BBAT.abstrakt.presenter.run.manager;
 
+import in.BBAT.abstrakt.presenter.device.model.AndroidDevice;
 import in.BBAT.abstrakt.presenter.run.model.TestRunCase;
 
 import java.util.Map;
@@ -10,9 +11,12 @@ import com.android.ddmlib.testrunner.TestIdentifier;
 public class TestCaseExecutionListener implements ITestRunListener {
 
 	private TestRunCase runCase;
-	
-	public TestCaseExecutionListener(TestRunCase testRunCase){
+	private AndroidDevice device;
+
+	public TestCaseExecutionListener(TestRunCase testRunCase, AndroidDevice testDevice){
 		this.runCase = testRunCase;
+		this.device = testDevice;
+
 	}
 	@Override
 	public void testEnded(TestIdentifier arg0, Map<String, String> arg1) {
