@@ -36,6 +36,7 @@ public class TestRunner implements ITestRunner{
 	}
 
 	private void postExecution() {
+		testDevice.stopLogging();
 	}
 
 	public void execute(String className, String testMethodName) {
@@ -47,7 +48,7 @@ public class TestRunner implements ITestRunner{
 	 * @param deviceLogListener 
 	 */
 	private void initialiseDevcieLoggers(ILogListener deviceLogListener) {
-		testDevice.addLogListener(deviceLogListener);
+		testDevice.setLogListener(deviceLogListener);
 		testDevice.startLogging();
 	}
 
@@ -69,7 +70,7 @@ public class TestRunner implements ITestRunner{
 	 * @param testCaseExecutionListener 
 	 */
 	private void runTestCase(String testCaseClassName, ITestRunListener testCaseExecutionListener){
-
+		testDevice.executeTestCase(testCaseClassName, testCaseExecutionListener);
 	}
 
 	public TestArtifacts getTestArtifacts() {

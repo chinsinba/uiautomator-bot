@@ -13,7 +13,7 @@ public interface IAndroidDevice {
 
 	 String getStatus();
 
-	 void addLogListener(ILogListener listener);
+	 void setLogListener(ILogListener listener);
 	
 	 void startLogging();
 	

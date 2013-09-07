@@ -4,8 +4,6 @@ import in.BBAT.testRunner.runner.UiAutoTestCaseJar;
 import in.BBAT.testRunner.runner.internal.UIAutomatorRunner;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import com.android.ddmlib.AdbCommandRejectedException;
 import com.android.ddmlib.IDevice;
@@ -22,9 +20,9 @@ public class TestDevice implements IAndroidDevice {
 	private boolean active;
 	private IDevice monkeyDevice;
 
-	private List<ILogListener> listeners = new ArrayList<ILogListener>();
+	private ILogListener listener;
 	private LogLineReciever logReciever;
-	
+
 	public final static String UIAUTOMATOR_JAR_PATH = "/data/local/tmp/";
 
 	public TestDevice(IDevice device) {
@@ -48,8 +46,8 @@ public class TestDevice implements IAndroidDevice {
 	}
 
 	@Override
-	public void addLogListener(ILogListener listener) {
-		listeners.add(listener);
+	public void setLogListener(ILogListener listener) {
+		this.listener = listener;
 	}
 
 
@@ -132,9 +130,7 @@ public class TestDevice implements IAndroidDevice {
 		@Override
 		public void processNewLines(String[] logs) {
 			for(int i=0;i<logs.length;i++){
-				for(ILogListener logListener : listeners){
-					logListener.processLogLine(logs[i]);
-				}
+				listener.processLogLine(logs[i]);
 			}
 		}
 
