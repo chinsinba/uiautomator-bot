@@ -1,6 +1,6 @@
 package in.BBAT.abstrakt.presenter.run.manager;
 
-import in.bbat.testrunner.ILogListener;
+import in.BBAT.TestRunner.device.ILogListener;
 
 public class DeviceLogListener implements ILogListener {
 

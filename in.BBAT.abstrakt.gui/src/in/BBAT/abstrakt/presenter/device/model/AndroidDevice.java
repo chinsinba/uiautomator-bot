@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.eclipse.swt.graphics.Image;
 
+import in.BBAT.TestRunner.device.IAndroidDevice;
 import in.BBAT.abstrakt.gui.model.IGUITreeNode;
-import in.bbat.testrunner.IAndroidDevice;
 
 public class AndroidDevice implements IGUITreeNode{
 

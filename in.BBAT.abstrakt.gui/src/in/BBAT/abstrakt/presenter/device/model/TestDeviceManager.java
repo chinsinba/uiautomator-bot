@@ -1,7 +1,7 @@
 package in.BBAT.abstrakt.presenter.device.model;
 
-import in.bbat.testrunner.IAndroidDevice;
-import in.bbat.testrunner.IDeviceConnectionListener;
+import in.BBAT.TestRunner.device.IAndroidDevice;
+import in.BBAT.TestRunner.device.IDeviceConnectionListener;
 
 import java.util.HashMap;
 import java.util.List;

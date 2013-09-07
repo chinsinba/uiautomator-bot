@@ -1,7 +1,7 @@
 package in.BBAT.testRunner.runner;
 
-import in.bbat.testrunner.IAndroidDevice;
-import in.bbat.testrunner.ILogListener;
+import in.BBAT.TestRunner.device.IAndroidDevice;
+import in.BBAT.TestRunner.device.ILogListener;
 
 import java.util.List;
 

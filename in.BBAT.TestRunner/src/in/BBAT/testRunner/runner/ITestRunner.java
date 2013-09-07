@@ -1,6 +1,6 @@
 package in.BBAT.testRunner.runner;
 
-import in.bbat.testrunner.ILogListener;
+import in.BBAT.TestRunner.device.ILogListener;
 
 import com.android.ddmlib.testrunner.ITestRunListener;
 

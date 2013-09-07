@@ -1,4 +1,4 @@
-package in.bbat.testrunner;
+package in.BBAT.TestRunner.device;
 
 
 public interface IDeviceConnectionListener  {

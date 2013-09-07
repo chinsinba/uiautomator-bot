@@ -1,4 +1,4 @@
-package in.bbat.testrunner;
+package in.BBAT.TestRunner.device;
 
 import java.io.File;
 import java.util.ArrayList;
