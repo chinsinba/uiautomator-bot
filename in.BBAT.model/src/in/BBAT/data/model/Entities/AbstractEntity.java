@@ -6,8 +6,6 @@ import java.util.List;
 
 public abstract class AbstractEntity implements IBBATEntity {
 
-	
-
 	@Override
 	public void save() {
 		MineManager.persist(this);
@@ -35,4 +33,16 @@ public abstract class AbstractEntity implements IBBATEntity {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	@Override
+	public void addChild(IBBATEntity childEntity) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	@Override
+	public void removeChild(IBBATEntity childEntity) {
+		
+	}
+	
 }

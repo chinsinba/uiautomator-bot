@@ -1,16 +1,14 @@
 package in.BBAT.abstrakt.presenter.run.manager;
 
 
-import java.util.List;
-
 import in.BBAT.abstrakt.presenter.device.model.AndroidDevice;
-import in.BBAT.abstrakt.presenter.pkg.model.TestCaseModel;
 import in.BBAT.abstrakt.presenter.run.model.TestRunCase;
 import in.BBAT.abstrakt.presenter.run.model.TestRunInstanceModel;
 import in.BBAT.abstrakt.presenter.run.model.TestRunModel;
 import in.BBAT.testRunner.runner.TestRunner;
 import in.BBAT.testRunner.runner.UiAutoTestCaseJar;
-import in.bbat.testrunner.TestDevice;
+
+import java.util.List;
 
 public class TestRunContainer {
 
@@ -36,6 +34,7 @@ public class TestRunContainer {
 	public void prepareRun(){
 		jar = new UiAutoTestCaseJar("");
 		runer = new TestRunner(jar,testDevice.getiDevice());
+		currentRunningTestRun = new TestRunModel();
 	}
 
 	/**
@@ -43,14 +42,13 @@ public class TestRunContainer {
 	 */
 	public void run(){
 		for(TestRunCase runCaseObj : caseList){
-			runer.execute(runCaseObj.getTestcase().getName());
+			currentrunningTestCase = runCaseObj;
+			runer.execute(runCaseObj.getTestcase().getName(),new TestCaseExecutionListener(runCaseObj));
 		}
-
-		
 		//for each testcase in the testrun execute 
 	}
 
-	private List<TestRunInstanceModel> createTestRunInstances(List<TestCaseModel> testCaseModels){
+	private List<TestRunInstanceModel> createTestRunInstances(List<TestRunCase> testRunCases){
 		return null;
 	}
 

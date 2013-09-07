@@ -77,12 +77,6 @@ public class TestRunInfoEntity extends AbstractEntity {
 	}
 
 	@Override
-	public List<AbstractEntity> getChildren() {
-		return null;
-	}
-
-
-	@Override
 	public AbstractEntity getParent() {
 		return getTestRun();
 	}

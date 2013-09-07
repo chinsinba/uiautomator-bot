@@ -28,12 +28,12 @@ public class TestSuiteEntity extends AbstractEntity  {
 	private int id;
 
 	private String name;
-	
+
 	private String description;
 
 	@OneToOne
 	private UserEntity createdBy;
-	
+
 	@Version
 	private Timestamp lastModified;
 
@@ -81,10 +81,15 @@ public class TestSuiteEntity extends AbstractEntity  {
 		return getTestCases();
 	}
 
+	@Override
+	public void addChild(IBBATEntity childEntity) {
+
+		addTestCase((TestCaseEntity) childEntity);
+	}
 
 	@Override
-	public AbstractEntity getParent() {
-		return null;
+	public void removeChild(IBBATEntity childEntity) {
+		removeTestCase((TestCaseEntity) childEntity);
 	}
 
 	public UserEntity getCreatedBy() {
@@ -109,6 +114,16 @@ public class TestSuiteEntity extends AbstractEntity  {
 
 	public void setTestCases(List<TestCaseEntity> testCases) {
 		this.testCases = testCases;
+	}
+
+	public void addTestCase(TestCaseEntity testCase)
+	{
+		this.testCases.add(testCase);
+	}
+
+	public void removeTestCase(TestCaseEntity testCase)
+	{
+		this.testCases.remove(testCase);
 	}
 
 }

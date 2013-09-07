@@ -19,4 +19,7 @@ public interface IBBATEntity {
 
 	IBBATEntity getParent();
 	
+	void addChild(IBBATEntity childEntity);
+	
+	void removeChild(IBBATEntity childEntity);
 }

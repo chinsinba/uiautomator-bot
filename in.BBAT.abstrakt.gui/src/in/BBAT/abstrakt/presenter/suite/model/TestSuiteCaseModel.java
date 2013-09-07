@@ -3,7 +3,6 @@ package in.BBAT.abstrakt.presenter.suite.model;
 import in.BBAT.abstrakt.gui.model.AbstractTreeModel;
 import in.BBAT.abstrakt.gui.model.IGUITreeNode;
 import in.BBAT.abstrakt.presenter.pkg.model.TestCaseModel;
-import in.BBAT.data.model.Entities.AbstractEntity;
 import in.BBAT.data.model.Entities.TestSuiteEntity;
 
 import org.eclipse.swt.graphics.Image;

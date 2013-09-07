@@ -1,7 +1,5 @@
 package in.BBAT.data.model.Entities;
 
-import java.util.List;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -19,18 +17,6 @@ public class RoleEntity extends AbstractEntity {
 	
 	private String description;
 	
-	@Override
-	public List<AbstractEntity> getChildren() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public AbstractEntity getParent() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	public int getId() {
 		return id;
 	}

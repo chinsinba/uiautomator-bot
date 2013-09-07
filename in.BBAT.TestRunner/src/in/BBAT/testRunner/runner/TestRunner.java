@@ -1,5 +1,7 @@
 package in.BBAT.testRunner.runner;
 
+import com.android.ddmlib.testrunner.ITestRunListener;
+
 import in.bbat.testrunner.IAndroidDevice;
 import in.bbat.testrunner.TestDevice;
 
@@ -16,6 +18,7 @@ public class TestRunner implements ITestRunner{
 	private UiAutoTestCaseJar jar;
 
 	private IAndroidDevice testDevice;
+	
 	public TestRunner(TestArtifacts artifacts){
 		this.testArtifacts =artifacts;
 	}
@@ -27,13 +30,17 @@ public class TestRunner implements ITestRunner{
 	}
 
 	@Override
-	public void execute(String testCaseClassName) {
+	public void execute(String testCaseClassName, ITestRunListener testCaseExecutionListener) {
 		createTestJar();
 		pushJarToDevice();		
 		initialiseDevcieLoggers();
 		runTestcases();
 	}
 
+	public void execute(String className, String testMethodName) {
+		
+	}
+	
 	/**
 	 * Initialises the loggers
 	 */

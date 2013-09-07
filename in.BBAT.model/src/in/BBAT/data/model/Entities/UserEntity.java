@@ -43,19 +43,6 @@ public class UserEntity extends AbstractEntity{
 	private List<RoleEntity> roles;
 
 
-	@Override
-	public List<AbstractEntity> getChildren() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-	@Override
-	public AbstractEntity getParent() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	public int getId() {
 		return id;
 	}

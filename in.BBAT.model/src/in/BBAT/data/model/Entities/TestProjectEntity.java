@@ -26,13 +26,13 @@ public class TestProjectEntity extends AbstractEntity {
 	private int id;
 
 	private String description;
-	
+
 	@OneToOne
 	private UserEntity createdBy;
-	
+
 	@OneToMany(mappedBy="testProject",fetch = FetchType.LAZY, cascade = { CascadeType.ALL })
 	private List<TestCaseEntity> testcases;
-	
+
 	public int getId() {
 		return id;
 	}
@@ -40,10 +40,10 @@ public class TestProjectEntity extends AbstractEntity {
 	public void setId(int id) {
 		this.id = id;
 	}
-	
+
 	@Override
 	public List<? extends AbstractEntity> getChildren() {
-		
+
 		return getTestcases();
 	}
 
@@ -54,6 +54,16 @@ public class TestProjectEntity extends AbstractEntity {
 		return null;
 	}
 
+	@Override
+	public void addChild(IBBATEntity childEntity) {
+		addTestCase((TestCaseEntity) childEntity);
+	}
+
+	@Override
+	public void removeChild(IBBATEntity childEntity) {
+		removeTestCase((TestCaseEntity) childEntity);
+	}
+	
 	public UserEntity getCreatedBy() {
 		return createdBy;
 	}
@@ -78,4 +88,11 @@ public class TestProjectEntity extends AbstractEntity {
 		this.testcases = testcases;
 	}
 
+	public void addTestCase(TestCaseEntity testCase){
+		this.testcases.add(testCase);
+	}
+
+	public void removeTestCase(TestCaseEntity testCase){
+		this.testcases.remove(testCase);
+	}
 }

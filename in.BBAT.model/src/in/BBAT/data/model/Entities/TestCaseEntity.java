@@ -91,12 +91,6 @@ public class TestCaseEntity extends AbstractEntity {
 	}
 
 	@Override
-	public List<AbstractEntity> getChildren() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public AbstractEntity getParent() {
 		return getTestProject();
 	}

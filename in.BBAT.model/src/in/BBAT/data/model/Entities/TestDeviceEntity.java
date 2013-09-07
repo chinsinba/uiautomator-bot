@@ -38,20 +38,6 @@ public class TestDeviceEntity extends AbstractEntity {
 
 	private String osName;
 
-
-	@Override
-	public List<AbstractEntity> getChildren() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	
-	@Override
-	public AbstractEntity getParent() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	public String getDeviceId() {
 		return deviceId;
 	}

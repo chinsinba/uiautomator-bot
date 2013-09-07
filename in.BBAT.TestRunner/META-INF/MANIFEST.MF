@@ -16,5 +16,6 @@ Bundle-ClassPath: .,
  lib/guava-13.0.1.jar,
  lib/kxml2-2.3.0.jar,
  lib/monkeyrunner.jar
-Export-Package: in.bbat.testrunner,
- in.BBAT.testRunner.runner
+Export-Package: com.android.ddmlib.testrunner,
+ in.BBAT.testRunner.runner,
+ in.bbat.testrunner

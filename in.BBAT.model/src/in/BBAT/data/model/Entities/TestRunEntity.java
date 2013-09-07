@@ -26,23 +26,23 @@ import javax.persistence.TableGenerator;
 })
 public class TestRunEntity extends AbstractEntity{
 
-	
+
 	@Id
 	@TableGenerator(name = "TestRun_GEN", table = "ID_GENERATOR", pkColumnName = "GEN_NAME", valueColumnName = "GEN_VAL", allocationSize=1)
 	@GeneratedValue(generator = "TestRun_GEN")
 	private int id;
 
 	private String description;
-	
+
 	private String verdict;
-	
+
 	@OneToOne
 	private UserEntity createdBy;
-	
+
 	@OneToMany(mappedBy="testRun", fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST })
 	@OrderColumn
 	private List<TestRunInfoEntity> testRunInfos;
-	
+
 	public int getId() {
 		return id;
 	}
@@ -50,20 +50,24 @@ public class TestRunEntity extends AbstractEntity{
 	public void setId(int id) {
 		this.id = id;
 	}
-	
+
 	private Timestamp startTime;
-	
+
 	private Timestamp endtiTime;
-	
+
 	@Override
 	public List<? extends AbstractEntity> getChildren() {
 		return getTestRunInfos();
 	}
 
-
 	@Override
-	public AbstractEntity getParent() {
-		return null;
+	public void addChild(IBBATEntity childEntity) {
+		addTestRunInfo((TestRunInfoEntity) childEntity);
+	}
+	
+	@Override
+	public void removeChild(IBBATEntity childEntity) {
+		removeTestRunInfo((TestRunInfoEntity) childEntity);
 	}
 
 	public Timestamp getStartTime() {
@@ -82,7 +86,7 @@ public class TestRunEntity extends AbstractEntity{
 		this.endtiTime = endtiTime;
 	}
 
-	
+
 
 	public UserEntity getCreatedBy() {
 		return createdBy;
@@ -116,4 +120,13 @@ public class TestRunEntity extends AbstractEntity{
 		this.testRunInfos = testRunInfos;
 	}
 
+	public void addTestRunInfo(TestRunInfoEntity entity)
+	{
+		this.testRunInfos.add(entity);
+	}
+	
+	public void removeTestRunInfo(TestRunInfoEntity entity)
+	{
+		this.testRunInfos.remove(entity);
+	}
 }

@@ -16,11 +16,13 @@ public abstract class  AbstractTreeModel implements IGUITreeNode {
 
 	private String name;
 
+	private ArrayList<IGUITreeNode> childNodes;
+
 
 	protected AbstractTreeModel(AbstractEntity entity){
 		this.setEntity(entity);
 	}
-	
+
 
 	@Override
 	public IGUITreeNode getParent(){
@@ -29,7 +31,7 @@ public abstract class  AbstractTreeModel implements IGUITreeNode {
 
 	@Override
 	public List<IGUITreeNode> getChildren() {
-		List<IGUITreeNode> childNodes = new ArrayList<IGUITreeNode>();
+		childNodes = new ArrayList<IGUITreeNode>();
 		List<AbstractEntity> childEntities = (List<AbstractEntity>) getEntity().getChildren();
 		if(childEntities==null)
 			return null;
@@ -39,7 +41,18 @@ public abstract class  AbstractTreeModel implements IGUITreeNode {
 		return childNodes;
 	}
 
-	protected abstract IGUITreeNode getChild(AbstractEntity childEntity) ;
+	@Override
+	public void addChild(IGUITreeNode childNode) {
+		if(!childNodes.contains(childNode))
+			childNodes.add(childNode);
+		getEntity().addChild(((AbstractTreeModel)childNode).getEntity());
+	}
+
+	public void removeChild(IGUITreeNode childNode)
+	{
+		if(childNodes.contains(childNode))
+			childNodes.remove(childNode);
+	}
 
 	public void save(){
 		getEntity().save();
@@ -48,6 +61,7 @@ public abstract class  AbstractTreeModel implements IGUITreeNode {
 	public void delete(){
 		getEntity().delete();
 	}
+
 
 	public void update()
 	{
@@ -62,8 +76,6 @@ public abstract class  AbstractTreeModel implements IGUITreeNode {
 		this.name = name;
 	}
 
-	protected abstract List<IGUITreeNode> produceChildren(List<AbstractEntity> childEntties );
-	protected abstract IGUITreeNode produceParent(AbstractEntity childEntties );
 
 	public AbstractEntity getEntity() {
 		return entity;
@@ -72,4 +84,9 @@ public abstract class  AbstractTreeModel implements IGUITreeNode {
 	public void setEntity(AbstractEntity entity) {
 		this.entity = entity;
 	}
+
+	protected abstract IGUITreeNode getChild(AbstractEntity childEntity) ;
+	protected abstract List<IGUITreeNode> produceChildren(List<AbstractEntity> childEntties );
+	protected abstract IGUITreeNode produceParent(AbstractEntity childEntties );
+
 }

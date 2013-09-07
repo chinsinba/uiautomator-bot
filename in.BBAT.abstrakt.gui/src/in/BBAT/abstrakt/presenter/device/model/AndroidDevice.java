@@ -41,5 +41,10 @@ public class AndroidDevice implements IGUITreeNode{
 	public void setiDevice(IAndroidDevice iDevice) {
 		this.iDevice = iDevice;
 	}
+	@Override
+	public void addChild(IGUITreeNode childNode) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }

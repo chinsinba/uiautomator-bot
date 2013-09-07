@@ -14,4 +14,5 @@ public interface IGUITreeNode {
 	Image getImage();
 	List<IGUITreeNode> getChildren();
 	IGUITreeNode getParent();
+	void addChild(IGUITreeNode childNode);
 }
