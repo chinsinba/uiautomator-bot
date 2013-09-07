@@ -1,6 +1,5 @@
 package in.bbat.testrunner;
 
-import in.BBAT.testRunner.runner.ILogListener;
 
 public interface IAndroidDevice {
 

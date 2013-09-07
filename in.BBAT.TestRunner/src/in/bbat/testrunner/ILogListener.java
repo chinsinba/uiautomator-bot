@@ -1,4 +1,4 @@
-package in.BBAT.testRunner.runner;
+package in.bbat.testrunner;
 
 public interface ILogListener {
 	
