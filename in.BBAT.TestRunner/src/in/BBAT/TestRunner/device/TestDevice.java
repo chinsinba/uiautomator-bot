@@ -1,5 +1,7 @@
 package in.BBAT.TestRunner.device;
 
+import in.BBAT.testRunner.runner.internal.UIAutomatorRunner;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +12,7 @@ import com.android.ddmlib.IShellOutputReceiver;
 import com.android.ddmlib.MultiLineReceiver;
 import com.android.ddmlib.ShellCommandUnresponsiveException;
 import com.android.ddmlib.TimeoutException;
+import com.android.ddmlib.testrunner.ITestRunListener;
 
 
 public class TestDevice implements IAndroidDevice {
@@ -67,7 +70,6 @@ public class TestDevice implements IAndroidDevice {
 				{
 				}
 			}, 0);
-
 		} catch (TimeoutException e) {
 			e.printStackTrace();
 		} catch (AdbCommandRejectedException e) {
@@ -81,8 +83,8 @@ public class TestDevice implements IAndroidDevice {
 
 	@Override
 	public void startLogging() {
+		clearLogs();
 		try {
-
 			monkeyDevice.executeShellCommand("logcat -v time", logReciever);
 		} catch (TimeoutException e) {
 			e.printStackTrace();
@@ -114,7 +116,6 @@ public class TestDevice implements IAndroidDevice {
 		logReciever.setStop(true);
 	}
 
-
 	private class LogLineReciever extends MultiLineReceiver
 	{
 		private boolean stop;
@@ -139,6 +140,27 @@ public class TestDevice implements IAndroidDevice {
 
 		public void setStop(boolean stop) {
 			this.stop = stop;
+		}
+	}
+
+	@Override
+	public void pushTestJar() {
+
+	}
+
+	@Override
+	public void executeTestCase(String testCaseName, ITestRunListener listener) {
+		UIAutomatorRunner runner = new UIAutomatorRunner(testCaseName, monkeyDevice);
+		try {
+			runner.run(listener);
+		} catch (TimeoutException e) {
+			e.printStackTrace();
+		} catch (AdbCommandRejectedException e) {
+			e.printStackTrace();
+		} catch (ShellCommandUnresponsiveException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 }

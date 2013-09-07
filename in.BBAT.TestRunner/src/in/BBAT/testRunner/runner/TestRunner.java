@@ -33,7 +33,7 @@ public class TestRunner implements ITestRunner{
 	@Override
 	public void execute(String testCaseClassName, ITestRunListener testCaseExecutionListener, ILogListener deviceLogListener) {
 		initialiseDevcieLoggers(deviceLogListener);
-		runTestCase(testCaseClassName);
+		runTestCase(testCaseClassName,testCaseExecutionListener);
 		postExecution();
 	}
 
@@ -76,8 +76,9 @@ public class TestRunner implements ITestRunner{
 	/**
 	 * Starts the execution of testcases on the devices
 	 * @param testCaseClassName 
+	 * @param testCaseExecutionListener 
 	 */
-	private void runTestCase(String testCaseClassName){
+	private void runTestCase(String testCaseClassName, ITestRunListener testCaseExecutionListener){
 
 	}
 

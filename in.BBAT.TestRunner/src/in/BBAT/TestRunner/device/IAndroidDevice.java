@@ -1,19 +1,29 @@
 package in.BBAT.TestRunner.device;
 
+import com.android.ddmlib.testrunner.ITestRunListener;
+
 
 public interface IAndroidDevice {
 
-	public String getModelName();
+	 String getModelName();
 
-	public String getDeviceId();
+	 String getDeviceId();
 
-	public String getStatus();
+	 String getStatus();
 
-	public void addLogListener(ILogListener listener);
+	 void addLogListener(ILogListener listener);
 	
-	public void startLogging();
-	public void stopLogging();
-	public void activate() ;
-	public void deActivate() ;
-
+	 void startLogging();
+	
+	 void stopLogging();
+	
+	 void activate() ;
+	
+	 void deActivate() ;
+	 
+	 void pushTestJar();
+	 
+	 void executeTestCase(String testCaseName,ITestRunListener listener);
+	 
+	
 }
