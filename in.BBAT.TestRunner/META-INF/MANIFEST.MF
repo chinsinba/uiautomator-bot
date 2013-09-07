@@ -17,5 +17,6 @@ Bundle-ClassPath: .,
  lib/kxml2-2.3.0.jar,
  lib/monkeyrunner.jar
 Export-Package: com.android.ddmlib.testrunner,
+ in.BBAT.TestRunner.device,
  in.BBAT.testRunner.runner,
  in.bbat.testrunner
