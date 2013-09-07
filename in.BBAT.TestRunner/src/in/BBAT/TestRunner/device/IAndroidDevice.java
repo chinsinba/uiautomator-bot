@@ -1,5 +1,7 @@
 package in.BBAT.TestRunner.device;
 
+import in.BBAT.testRunner.runner.UiAutoTestCaseJar;
+
 import com.android.ddmlib.testrunner.ITestRunListener;
 
 
@@ -21,7 +23,7 @@ public interface IAndroidDevice {
 	
 	 void deActivate() ;
 	 
-	 void pushTestJar();
+	 void pushTestJar(UiAutoTestCaseJar jar);
 	 
 	 void executeTestCase(String testCaseName,ITestRunListener listener);
 	 

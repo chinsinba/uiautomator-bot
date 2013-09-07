@@ -1,5 +1,6 @@
 package in.BBAT.TestRunner.device;
 
+import in.BBAT.testRunner.runner.UiAutoTestCaseJar;
 import in.BBAT.testRunner.runner.internal.UIAutomatorRunner;
 
 import java.io.IOException;
@@ -11,6 +12,7 @@ import com.android.ddmlib.IDevice;
 import com.android.ddmlib.IShellOutputReceiver;
 import com.android.ddmlib.MultiLineReceiver;
 import com.android.ddmlib.ShellCommandUnresponsiveException;
+import com.android.ddmlib.SyncException;
 import com.android.ddmlib.TimeoutException;
 import com.android.ddmlib.testrunner.ITestRunListener;
 
@@ -22,6 +24,8 @@ public class TestDevice implements IAndroidDevice {
 
 	private List<ILogListener> listeners = new ArrayList<ILogListener>();
 	private LogLineReciever logReciever;
+	
+	public final static String UIAUTOMATOR_JAR_PATH = "/data/local/tmp/";
 
 	public TestDevice(IDevice device) {
 		this.monkeyDevice = device;
@@ -144,8 +148,18 @@ public class TestDevice implements IAndroidDevice {
 	}
 
 	@Override
-	public void pushTestJar() {
-
+	public void pushTestJar(UiAutoTestCaseJar jar) {
+		try {
+			monkeyDevice.pushFile(jar.getJarPath(), UIAUTOMATOR_JAR_PATH);
+		} catch (SyncException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (AdbCommandRejectedException e) {
+			e.printStackTrace();
+		} catch (TimeoutException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override

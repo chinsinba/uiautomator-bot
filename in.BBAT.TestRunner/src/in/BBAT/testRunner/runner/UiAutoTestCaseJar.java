@@ -4,7 +4,6 @@ import java.io.File;
 
 public class UiAutoTestCaseJar {
 
-
 	private String jarPath;
 	private File jarFile;
 
@@ -14,13 +13,11 @@ public class UiAutoTestCaseJar {
 	}
 
 	private void createJar() {
-		// TODO Auto-generated method stub
-
+		//run ant build command
 	}
 
 	private void initializeBuildEnvironment() {
-		// TODO Auto-generated method stub
-
+		// <android-sdk>/tools/android create uitest-project -n <name> -t 1 -p <path>
 	}
 
 	public String getJarPath() {

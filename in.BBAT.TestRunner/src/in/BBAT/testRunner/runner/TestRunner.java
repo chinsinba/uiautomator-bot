@@ -4,8 +4,6 @@ import in.BBAT.TestRunner.device.IAndroidDevice;
 import in.BBAT.TestRunner.device.ILogListener;
 
 import com.android.ddmlib.testrunner.ITestRunListener;
-
-
 /**
  * 
  * @author Syed Mehtab
@@ -59,18 +57,10 @@ public class TestRunner implements ITestRunner{
 	}
 
 	/**
-	 * Runs the ant to build the jar.
-	 */
-	private void createTestJar()
-	{
-
-	}
-
-	/**
 	 * pushes the testcase jar to the device.
 	 */
 	private void pushJarToDevice(){
-
+		testDevice.pushTestJar(jar);
 	}
 
 	/**
