@@ -13,6 +13,7 @@ public interface IAndroidDevice {
 	public void addLogListener(ILogListener listener);
 	
 	public void startLogging();
+	public void stopLogging();
 	public void activate() ;
 	public void deActivate() ;
 

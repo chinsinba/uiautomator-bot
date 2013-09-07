@@ -1,9 +1,8 @@
 package in.BBAT.testRunner.runner;
 
-import com.android.ddmlib.testrunner.ITestRunListener;
-
 import in.bbat.testrunner.IAndroidDevice;
-import in.bbat.testrunner.TestDevice;
+
+import com.android.ddmlib.testrunner.ITestRunListener;
 
 
 /**
@@ -18,7 +17,7 @@ public class TestRunner implements ITestRunner{
 	private UiAutoTestCaseJar jar;
 
 	private IAndroidDevice testDevice;
-	
+
 	public TestRunner(TestArtifacts artifacts){
 		this.testArtifacts =artifacts;
 	}
@@ -26,26 +25,31 @@ public class TestRunner implements ITestRunner{
 	public TestRunner(UiAutoTestCaseJar jar, IAndroidDevice device){
 		this.jar = jar;
 		this.testDevice = device;
+		pushJarToDevice();
 
 	}
 
 	@Override
-	public void execute(String testCaseClassName, ITestRunListener testCaseExecutionListener) {
-		createTestJar();
-		pushJarToDevice();		
-		initialiseDevcieLoggers();
-		runTestcases();
+	public void execute(String testCaseClassName, ITestRunListener testCaseExecutionListener, ILogListener deviceLogListener) {
+		initialiseDevcieLoggers(deviceLogListener);
+		runTestCase(testCaseClassName);
+		postExecution();
+	}
+
+	private void postExecution() {
 	}
 
 	public void execute(String className, String testMethodName) {
-		
+
 	}
-	
+
 	/**
 	 * Initialises the loggers
+	 * @param deviceLogListener 
 	 */
-	private void initialiseDevcieLoggers() {
-
+	private void initialiseDevcieLoggers(ILogListener deviceLogListener) {
+		testDevice.addLogListener(deviceLogListener);
+		testDevice.startLogging();
 	}
 
 	@Override
@@ -70,8 +74,9 @@ public class TestRunner implements ITestRunner{
 
 	/**
 	 * Starts the execution of testcases on the devices
+	 * @param testCaseClassName 
 	 */
-	private void runTestcases(){
+	private void runTestCase(String testCaseClassName){
 
 	}
 
@@ -82,6 +87,4 @@ public class TestRunner implements ITestRunner{
 	public void setTestArtifacts(TestArtifacts testArtifacts) {
 		this.testArtifacts = testArtifacts;
 	}
-
-
 }

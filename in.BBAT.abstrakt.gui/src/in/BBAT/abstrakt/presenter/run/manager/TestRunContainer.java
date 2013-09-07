@@ -43,7 +43,7 @@ public class TestRunContainer {
 	public void run(){
 		for(TestRunCase runCaseObj : caseList){
 			currentrunningTestCase = runCaseObj;
-			runer.execute(runCaseObj.getTestcase().getName(),new TestCaseExecutionListener(runCaseObj));
+			runer.execute(runCaseObj.getTestcase().getName(),new TestCaseExecutionListener(runCaseObj), new DeviceLogListener());
 		}
 		//for each testcase in the testrun execute 
 	}
@@ -55,6 +55,5 @@ public class TestRunContainer {
 	public UiAutoTestCaseJar getJar() {
 		return jar;
 	}
-
 
 }

@@ -18,11 +18,9 @@ public abstract class  AbstractTreeModel implements IGUITreeNode {
 
 	private ArrayList<IGUITreeNode> childNodes;
 
-
 	protected AbstractTreeModel(AbstractEntity entity){
 		this.setEntity(entity);
 	}
-
 
 	@Override
 	public IGUITreeNode getParent(){
@@ -43,15 +41,19 @@ public abstract class  AbstractTreeModel implements IGUITreeNode {
 
 	@Override
 	public void addChild(IGUITreeNode childNode) {
-		if(!childNodes.contains(childNode))
+		// the child nodes is really not necessary
+		if(!childNodes.contains(childNode)){
 			childNodes.add(childNode);
-		getEntity().addChild(((AbstractTreeModel)childNode).getEntity());
+			getEntity().addChild(((AbstractTreeModel)childNode).getEntity());
+		}
 	}
 
 	public void removeChild(IGUITreeNode childNode)
 	{
-		if(childNodes.contains(childNode))
+		if(childNodes.contains(childNode)){
 			childNodes.remove(childNode);
+			getEntity().removeChild(((AbstractTreeModel)childNode).getEntity());
+		}
 	}
 
 	public void save(){
@@ -61,7 +63,6 @@ public abstract class  AbstractTreeModel implements IGUITreeNode {
 	public void delete(){
 		getEntity().delete();
 	}
-
 
 	public void update()
 	{
@@ -76,7 +77,6 @@ public abstract class  AbstractTreeModel implements IGUITreeNode {
 		this.name = name;
 	}
 
-
 	public AbstractEntity getEntity() {
 		return entity;
 	}
@@ -88,5 +88,4 @@ public abstract class  AbstractTreeModel implements IGUITreeNode {
 	protected abstract IGUITreeNode getChild(AbstractEntity childEntity) ;
 	protected abstract List<IGUITreeNode> produceChildren(List<AbstractEntity> childEntties );
 	protected abstract IGUITreeNode produceParent(AbstractEntity childEntties );
-
 }

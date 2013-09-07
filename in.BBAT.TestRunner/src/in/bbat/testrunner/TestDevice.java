@@ -20,9 +20,11 @@ public class TestDevice implements IAndroidDevice {
 	private IDevice monkeyDevice;
 
 	private List<ILogListener> listeners = new ArrayList<ILogListener>();
+	private LogLineReciever logReciever;
 
 	public TestDevice(IDevice device) {
 		this.monkeyDevice = device;
+		logReciever =new LogLineReciever();
 	}
 
 	@Override
@@ -69,16 +71,12 @@ public class TestDevice implements IAndroidDevice {
 			}, 0);
 
 		} catch (TimeoutException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (AdbCommandRejectedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (ShellCommandUnresponsiveException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -86,31 +84,15 @@ public class TestDevice implements IAndroidDevice {
 	@Override
 	public void startLogging() {
 		try {
-			monkeyDevice.executeShellCommand("logcat -v time", new MultiLineReceiver() {
 
-				@Override
-				public boolean isCancelled() {
-					// TODO Auto-generated method stub
-					return false;
-				}
-
-				@Override
-				public void processNewLines(String[] arg0) {
-					// TODO Auto-generated method stub
-
-				}
-			});
+			monkeyDevice.executeShellCommand("logcat -v time", logReciever);
 		} catch (TimeoutException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (AdbCommandRejectedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (ShellCommandUnresponsiveException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -127,5 +109,38 @@ public class TestDevice implements IAndroidDevice {
 	@Override
 	public void deActivate() {
 		this.active = false;		
+	}
+
+	@Override
+	public void stopLogging() {
+		logReciever.setStop(true);
+	}
+
+
+	private class LogLineReciever extends MultiLineReceiver
+	{
+		private boolean stop;
+
+		@Override
+		public boolean isCancelled() {
+			return isStop();
+		}
+
+		@Override
+		public void processNewLines(String[] logs) {
+			for(int i=0;i<logs.length;i++){
+				for(ILogListener logListener : listeners){
+					logListener.processLogLine(logs[i]);
+				}
+			}
+		}
+
+		public boolean isStop() {
+			return stop;
+		}
+
+		public void setStop(boolean stop) {
+			this.stop = stop;
+		}
 	}
 }
