@@ -16,18 +16,26 @@ import org.eclipse.swt.graphics.Image;
  */
 public class TestProjectModel extends AbstractTreeModel{
 
+	private String location;
+
 	protected TestProjectModel(TestProjectEntity entity) {
 		super(entity);
-		// TODO Auto-generated constructor stub
+		
 	}
-	
-	public TestProjectModel() {
-		super(new TestProjectEntity());
+
+	public TestProjectModel(String projectName) {
+		this(new TestProjectEntity());
+		this.location = projectName;
+		createProjectDir();
 	}
 
 	@Override
 	public String getLabel() {
 		return null;
+	}
+
+	private void createProjectDir() {
+
 	}
 
 	@Override
@@ -42,14 +50,16 @@ public class TestProjectModel extends AbstractTreeModel{
 
 	@Override
 	protected IGUITreeNode produceParent(AbstractEntity childEntties) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	protected IGUITreeNode getChild(AbstractEntity childEntity) {
-		// TODO Auto-generated method stub
 		return new TestCaseModel(childEntity);
+	}
+
+	public String getLocation(){
+		return this.location;
 	}
 
 }

@@ -17,15 +17,29 @@ import org.eclipse.swt.graphics.Image;
  */
 public class TestCaseModel extends AbstractTreeModel {
 
-	public TestCaseModel(AbstractEntity entity) {
+	private String scriptPath;
+
+	protected TestCaseModel(AbstractEntity entity) {
 		super(entity);
-	}
-	
-	public TestCaseModel(){
-		super(new TestCaseEntity());
+
 	}
 
-	private String scriptPath;
+	public TestCaseModel(String testCaseName){
+		this(new TestCaseEntity());
+		setName(testCaseName);
+		createTestCaseTemplate();
+		
+	}
+
+	/**
+	 * this method will create the template.
+	 */
+	private void createTestCaseTemplate() {
+		// TODO Auto-generated method stub
+
+	}
+
+
 
 	public String getScriptPath() {
 		return scriptPath;
@@ -59,5 +73,5 @@ public class TestCaseModel extends AbstractTreeModel {
 	protected IGUITreeNode getChild(AbstractEntity childEntity) {
 		return null;
 	}
-	
+
 }
