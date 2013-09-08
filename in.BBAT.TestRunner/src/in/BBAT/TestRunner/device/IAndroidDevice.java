@@ -25,7 +25,7 @@ public interface IAndroidDevice {
 	 
 	 void pushTestJar(UiAutoTestCaseJar jar);
 	 
-	 void executeTestCase(String testCaseName,ITestRunListener listener);
+	 void executeTestCase(String testCaseName,ITestRunListener... listener);
 	 
 	
 }

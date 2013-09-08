@@ -1,9 +1,12 @@
 package in.BBAT.testRunner.runner;
 
+import java.util.Map;
+
 import in.BBAT.TestRunner.device.IAndroidDevice;
 import in.BBAT.TestRunner.device.ILogListener;
 
 import com.android.ddmlib.testrunner.ITestRunListener;
+import com.android.ddmlib.testrunner.TestIdentifier;
 /**
  * 
  * @author Syed Mehtab
@@ -30,12 +33,14 @@ public class TestRunner implements ITestRunner{
 
 	@Override
 	public void execute(String testCaseClassName, ITestRunListener testCaseExecutionListener, ILogListener deviceLogListener) {
-		initialiseDevcieLoggers(deviceLogListener);
-		runTestCase(testCaseClassName,testCaseExecutionListener);
-		postExecution();
+		preRun(deviceLogListener);
+
+		run(testCaseClassName,testCaseExecutionListener);
+
+		postRun();
 	}
 
-	private void postExecution() {
+	private void postRun() {
 		testDevice.stopLogging();
 	}
 
@@ -47,7 +52,7 @@ public class TestRunner implements ITestRunner{
 	 * Initialises the loggers
 	 * @param deviceLogListener 
 	 */
-	private void initialiseDevcieLoggers(ILogListener deviceLogListener) {
+	private void preRun(ILogListener deviceLogListener) {
 		testDevice.setLogListener(deviceLogListener);
 		testDevice.startLogging();
 	}
@@ -69,8 +74,13 @@ public class TestRunner implements ITestRunner{
 	 * @param testCaseClassName 
 	 * @param testCaseExecutionListener 
 	 */
-	private void runTestCase(String testCaseClassName, ITestRunListener testCaseExecutionListener){
-		testDevice.executeTestCase(testCaseClassName, testCaseExecutionListener);
+	private void run(String testCaseClassName, ITestRunListener testCaseExecutionListener){
+		testDevice.executeTestCase(testCaseClassName, testCaseExecutionListener, new TestRunListener());
+		waitForCompletion();
+	}
+
+	private void waitForCompletion() {
+
 	}
 
 	public TestArtifacts getTestArtifacts() {
@@ -79,5 +89,44 @@ public class TestRunner implements ITestRunner{
 
 	public void setTestArtifacts(TestArtifacts testArtifacts) {
 		this.testArtifacts = testArtifacts;
+	}
+	
+	private class TestRunListener implements ITestRunListener
+	{
+
+		@Override
+		public void testEnded(TestIdentifier arg0, Map<String, String> arg1) {
+			
+		}
+
+		@Override
+		public void testFailed(TestFailure arg0, TestIdentifier arg1,
+				String arg2) {
+		}
+
+		@Override
+		public void testRunEnded(long arg0, Map<String, String> arg1) {
+			
+		}
+
+		@Override
+		public void testRunFailed(String arg0) {
+			
+		}
+
+		@Override
+		public void testRunStarted(String arg0, int arg1) {
+			
+		}
+
+		@Override
+		public void testRunStopped(long arg0) {
+		}
+
+		@Override
+		public void testStarted(TestIdentifier arg0) {
+			
+		}
+		
 	}
 }

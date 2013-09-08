@@ -159,7 +159,7 @@ public class TestDevice implements IAndroidDevice {
 	}
 
 	@Override
-	public void executeTestCase(String testCaseName, ITestRunListener listener) {
+	public void executeTestCase(String testCaseName, ITestRunListener... listener) {
 		UIAutomatorRunner runner = new UIAutomatorRunner(testCaseName, monkeyDevice);
 		try {
 			runner.run(listener);
