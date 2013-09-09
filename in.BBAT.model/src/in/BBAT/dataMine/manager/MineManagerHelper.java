@@ -25,7 +25,7 @@ public class MineManagerHelper {
 
 	private  void getPropertiesCreateTable(Map<String, Object> properties) {
 		properties.put(PersistenceUnitProperties.DDL_GENERATION,
-				PersistenceUnitProperties.CREATE_OR_EXTEND);
+				PersistenceUnitProperties.CREATE_ONLY);
 		properties.put(PersistenceUnitProperties.DDL_GENERATION_MODE,
 				PersistenceUnitProperties.DDL_DATABASE_GENERATION);
 		properties.put(PersistenceUnitProperties.CLASSLOADER,
