@@ -19,18 +19,30 @@ public class MineManager {
 	private static boolean transactionStarted=false;
 	private static NetworkServerControl server;
 
-	public static void createDb() throws Exception {
+	private static MineManager instance_;
+	private MineManager(){
+
+	}
+
+	public static MineManager getInstance()
+	{
+		if(instance_ == null)
+			instance_ = new MineManager();
+		return instance_;
+	}
+
+	public  void createDb() throws Exception {
 		String path ="127.0.0.1"+":"+"1527";
 		MineManagerHelper.init("BBATDATA", true, true, path + Path.SEPARATOR + "sample","app","app");
 	}
 
-	public static void connectDB() throws Exception {
+	public  void connectDB() throws Exception {
 		String path ="127.0.0.1"+":"+"1527";
 		MineManagerHelper.init("BBATDATA", false, true, path + Path.SEPARATOR + "sample","app","app");
 	}
-	
 
-	public static void beginTransaction()
+
+	public  void beginTransaction()
 	{
 		if(transactionStarted){
 
@@ -40,7 +52,7 @@ public class MineManager {
 		transactionStarted = true;
 	}
 
-	public static void commitTransaction()
+	public  void commitTransaction()
 	{
 		if(!transactionStarted){
 
@@ -50,7 +62,7 @@ public class MineManager {
 		transactionStarted =false;
 	}
 
-	public static void abortTransaction()
+	public  void abortTransaction()
 	{
 		if(!transactionStarted){
 
@@ -60,7 +72,7 @@ public class MineManager {
 	}
 
 
-	public static void persist(Object object)
+	public  void persist(Object object)
 	{
 		if(em==null)
 		{	
@@ -68,8 +80,8 @@ public class MineManager {
 		}
 		em.persist(object);
 	}
-	
-	public static Object merge(Object object)
+
+	public  Object merge(Object object)
 	{
 		if(em==null)
 		{	
@@ -77,8 +89,8 @@ public class MineManager {
 		}
 		return em.merge(object);
 	}
-	
-	public static void remove(Object object)
+
+	public  void remove(Object object)
 	{
 		if(em==null)
 		{	
@@ -87,8 +99,8 @@ public class MineManager {
 		em.remove(object);
 	}
 
-	
-	public static void startDBServer() throws UnknownHostException, Exception {
+
+	public  void startDBServer() throws UnknownHostException, Exception {
 
 		System.setProperty("derby.drda.startNetworkServer", "true");
 		server = new NetworkServerControl(InetAddress.getByName("127.0.0.1"), 
@@ -97,9 +109,9 @@ public class MineManager {
 		server.start(consoleWriter);
 	}
 
-	
 
-	public static void stopDBServer() throws UnknownHostException, Exception {
+
+	public  void stopDBServer() throws UnknownHostException, Exception {
 		if(server!=null)
 		{
 			try{
@@ -111,12 +123,12 @@ public class MineManager {
 
 	public static void main(String[] args) {
 		try {
-			startDBServer();
-			createDb();
+			MineManager.getInstance().startDBServer();
+			MineManager.getInstance().createDb();
 			TestProjectEntity proj = new TestProjectEntity();
-			beginTransaction();
+			MineManager.getInstance().beginTransaction();
 			proj.save();
-			commitTransaction();
+			MineManager.getInstance().commitTransaction();
 			ProjectMineManager.getAllTesPackages();
 			RunMineManager.getAllTestRuns();
 			SuiteMineManager.getAllTestSuite();
@@ -124,5 +136,5 @@ public class MineManager {
 			e.printStackTrace();
 		}
 	}
-	
+
 }

@@ -1,5 +1,6 @@
 package in.bbat.presenter.views.developer;
 
+import in.BBAT.abstrakt.presenter.pkg.model.TestProjectManager;
 import in.BBAT.presenter.labelProviders.ViewLabelProvider;
 
 import org.eclipse.jface.viewers.ArrayContentProvider;
@@ -54,7 +55,7 @@ public class TestCaseBrowserView extends ViewPart {
 		viewer.setContentProvider(new ArrayContentProvider());
 		viewer.setLabelProvider(new ViewLabelProvider());
 		// Provide the input to the ContentProvider
-		viewer.setInput(new String[] {"One", "Two", "Three"});
+		viewer.setInput(TestProjectManager.getInstance().getTestProjects());
 	}
 
 	/**

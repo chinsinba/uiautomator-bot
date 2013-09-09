@@ -8,17 +8,17 @@ public abstract class AbstractEntity implements IBBATEntity {
 
 	@Override
 	public void save() {
-		MineManager.persist(this);
+		MineManager.getInstance().persist(this);
 	}
 
 	@Override
 	public void delete() {
-		MineManager.remove(this);
+		MineManager.getInstance().remove(this);
 	}
 
 	@Override
 	public AbstractEntity update() {
-		return (AbstractEntity) MineManager.merge(this);
+		return (AbstractEntity) MineManager.getInstance().merge(this);
 	}
 
 	@Override
