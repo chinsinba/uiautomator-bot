@@ -20,33 +20,33 @@ public class UIAutomatorRunner extends RemoteAndroidTestRunner {
 		super(packageName, remoteDevice);
 		this.testDevice=remoteDevice;
 	}
-	
+
 	@Override
 	public void run(Collection<ITestRunListener> listeners) throws TimeoutException,
-			AdbCommandRejectedException, ShellCommandUnresponsiveException,
-			IOException {
+	AdbCommandRejectedException, ShellCommandUnresponsiveException,
+	IOException {
 
-        final String runCaseCommandStr = "uiautomator runtest LaunchSettings.jar -c com.uia.example.my.LaunchSetting";
-        String runName = getRunnerName() == null ? getPackageName() : getRunnerName();
-        deviceResultReciever = new RunnerResultParser(runName, listeners);
+		final String runCaseCommandStr = "uiautomator runtest LaunchSettings.jar -c com.uia.example.my.LaunchSetting";
+		String runName = getRunnerName() == null ? getPackageName() : getRunnerName();
+		deviceResultReciever = new RunnerResultParser(runName, listeners);
 
-        try {
-            testDevice.executeShellCommand(runCaseCommandStr, deviceResultReciever, 0);
-        } catch (IOException e) {
-            // rely on parser to communicate results to listeners
-            deviceResultReciever.handleTestRunFailed(e.toString());
-            throw e;
-        } catch (ShellCommandUnresponsiveException e) {
-            deviceResultReciever.handleTestRunFailed(String.format(
-                    "Failed to receive adb shell test output within %1$d ms. " +
-                    "Test may have timed out, or adb connection to device became unresponsive",0));
-            throw e;
-        } catch (TimeoutException e) {
-            deviceResultReciever.handleTestRunFailed(e.toString());
-            throw e;
-        } catch (AdbCommandRejectedException e) {
-            deviceResultReciever.handleTestRunFailed(e.toString());
-            throw e;
-        }
+		try {
+			testDevice.executeShellCommand(runCaseCommandStr, deviceResultReciever, 0);
+		} catch (IOException e) {
+			// rely on parser to communicate results to listeners
+			deviceResultReciever.handleTestRunFailed(e.toString());
+			throw e;
+		} catch (ShellCommandUnresponsiveException e) {
+			deviceResultReciever.handleTestRunFailed(String.format(
+					"Failed to receive adb shell test output within %1$d ms. " +
+							"Test may have timed out, or adb connection to device became unresponsive",0));
+			throw e;
+		} catch (TimeoutException e) {
+			deviceResultReciever.handleTestRunFailed(e.toString());
+			throw e;
+		} catch (AdbCommandRejectedException e) {
+			deviceResultReciever.handleTestRunFailed(e.toString());
+			throw e;
+		}
 	}
 }
