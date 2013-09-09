@@ -37,6 +37,12 @@
             name="Device"
             restorable="true">
       </view>
+      <view
+            class="in.bbat.presenter.views.developer.ScreenShotView"
+            id="in.BBAT.presenter.developer.screenShotView"
+            name="ScreenShot"
+            restorable="true">
+      </view>
    </extension>
    <extension
          point="org.eclipse.ui.perspectiveExtensions">
@@ -57,6 +63,14 @@
                ratio="0.80f"
                relationship="bottom"
                relative="in.BBAT.presenter.developer.testcaseBrowserView">
+         </view>
+         <view
+               id="in.BBAT.presenter.developer.screenShotView"
+               minimized="false"
+               ratio="0.70f"
+               relationship="right"
+               relative="org.eclipse.ui.editorss"
+               visible="true">
          </view>
       </perspectiveExtension>
    </extension>
