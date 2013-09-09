@@ -43,6 +43,18 @@
             name="ScreenShot"
             restorable="true">
       </view>
+      <view
+            class="in.bbat.presenter.views.developer.UiTreeView"
+            id="in.BBAT.presenter.developer.uitreeView"
+            name="UITree"
+            restorable="true">
+      </view>
+      <view
+            class="in.bbat.presenter.views.developer.NodesView"
+            id="in.BBAT.presenter.developer.nodeDetailView"
+            name="Nodes"
+            restorable="true">
+      </view>
    </extension>
    <extension
          point="org.eclipse.ui.perspectiveExtensions">
@@ -60,7 +72,7 @@
                closeable="false"
                id="in.BBAT.presenter.developer.deviceView"
                minimized="false"
-               ratio="0.80f"
+               ratio="0.70f"
                relationship="bottom"
                relative="in.BBAT.presenter.developer.testcaseBrowserView">
          </view>
@@ -69,6 +81,22 @@
                minimized="false"
                ratio="0.70f"
                relationship="right"
+               relative="org.eclipse.ui.editorss"
+               visible="true">
+         </view>
+         <view
+               id="in.BBAT.presenter.developer.uitreeView"
+               minimized="false"
+               ratio="0.70f"
+               relationship="bottom"
+               relative="in.BBAT.presenter.developer.screenShotView"
+               visible="true">
+         </view>
+         <view
+               id="in.BBAT.presenter.developer.nodeDetailView"
+               minimized="false"
+               ratio="0.70f"
+               relationship="bottom"
                relative="org.eclipse.ui.editorss"
                visible="true">
          </view>
