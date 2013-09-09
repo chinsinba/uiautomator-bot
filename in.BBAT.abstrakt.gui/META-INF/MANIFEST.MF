@@ -10,3 +10,10 @@ Require-Bundle: org.eclipse.ui,
  in.BBAT.TestRunner;bundle-version="1.0.0"
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Export-Package: in.bbat.abstrakt.gui,
+ in.BBAT.abstrakt.gui.model,
+ in.BBAT.abstrakt.presenter.device.model,
+ in.BBAT.abstrakt.presenter.pkg.model,
+ in.BBAT.abstrakt.presenter.run.manager,
+ in.BBAT.abstrakt.presenter.run.model,
+ in.BBAT.abstrakt.presenter.suite.model
