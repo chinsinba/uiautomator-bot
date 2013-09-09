@@ -23,6 +23,11 @@
             id="in.BBAT.presenter.perspective.tester"
             name="Tester">
       </perspective>
+      <perspective
+            class="in.bbat.presenter.perstpectives.ReporterPerspective"
+            id="in.BBAT.presenter.perspective.reporter"
+            name="Reporter">
+      </perspective>
    </extension>
    <extension
          point="org.eclipse.ui.views">
