@@ -18,6 +18,11 @@
             class="in.bbat.presenter.perstpectives.DeveloperPerspective"
             id="in.BBAT.presenter.perspective.developer">
       </perspective>
+      <perspective
+            class="in.bbat.presenter.perstpectives.TesterPerspective"
+            id="in.BBAT.presenter.perspective.tester"
+            name="Tester">
+      </perspective>
    </extension>
    <extension
          point="org.eclipse.ui.views">
@@ -26,17 +31,32 @@
             class="in.bbat.presenter.views.developer.TestCaseBrowserView"
             id="in.BBAT.presenter.developer.testcaseBrowserView">
       </view>
+      <view
+            class="in.bbat.presenter.views.developer.DeveloperDeviceView"
+            id="in.BBAT.presenter.developer.deviceView"
+            name="Device"
+            restorable="true">
+      </view>
    </extension>
    <extension
          point="org.eclipse.ui.perspectiveExtensions">
       <perspectiveExtension
             targetID="in.BBAT.presenter.perspective.developer">
          <view
-               standalone="true"
+               closeable="false"
+               id="in.BBAT.presenter.developer.testcaseBrowserView"
                minimized="false"
-               relative="org.eclipse.ui.editorss"
+               ratio="0.25f"
                relationship="left"
-               id="in.BBAT.presenter.developer.testcaseBrowserView">
+               relative="org.eclipse.ui.editorss">
+         </view>
+         <view
+               closeable="false"
+               id="in.BBAT.presenter.developer.deviceView"
+               minimized="false"
+               ratio="0.80f"
+               relationship="bottom"
+               relative="in.BBAT.presenter.developer.testcaseBrowserView">
          </view>
       </perspectiveExtension>
    </extension>

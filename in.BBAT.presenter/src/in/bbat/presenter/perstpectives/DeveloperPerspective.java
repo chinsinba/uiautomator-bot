@@ -7,8 +7,8 @@ public class DeveloperPerspective implements IPerspectiveFactory {
 
 	public static final String PERSPECTIVE_ID = "in.BBAT.presenter.perspective.developer";
 	public void createInitialLayout(IPageLayout layout) {
-		layout.setEditorAreaVisible(false);
-		layout.setFixed(true);
+		layout.setEditorAreaVisible(true);
+//		layout.setFixed(true);
 		
 	}
 
