@@ -33,12 +33,12 @@ public class MineManager {
 
 	public  void createDb() throws Exception {
 		String path ="127.0.0.1"+":"+"1527";
-		MineManagerHelper.init("BBATDATA", true, true, path + Path.SEPARATOR + "sample","app","app");
+		MineManagerHelper.init("BBATDATA", true, true, path + Path.SEPARATOR + "sample112","app","app");
 	}
 
 	public  void connectDB() throws Exception {
 		String path ="127.0.0.1"+":"+"1527";
-		MineManagerHelper.init("BBATDATA", false, true, path + Path.SEPARATOR + "sample","app","app");
+		MineManagerHelper.init("BBATDATA", false, true, path + Path.SEPARATOR + "sample112","app","app");
 	}
 
 
