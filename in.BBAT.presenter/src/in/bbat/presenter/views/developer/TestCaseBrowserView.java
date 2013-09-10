@@ -5,7 +5,6 @@ import in.BBAT.presenter.contentProviders.TestCaseBrowserContentProvider;
 import in.BBAT.presenter.labelProviders.TestCaseLabelProvider;
 import in.bbat.presenter.views.BBATViewPart;
 
-import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.IStructuredContentProvider;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.Viewer;
@@ -60,5 +59,11 @@ public class TestCaseBrowserView extends BBATViewPart {
 	 */
 	public void setFocus() {
 		viewer.getControl().setFocus();
+	}
+	
+	@Override
+	public void refresh() {
+		viewer.setInput(TestProjectManager.getInstance().getTestProjects());
+		viewer.refresh();
 	}
 }

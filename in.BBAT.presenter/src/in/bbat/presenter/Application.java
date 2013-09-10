@@ -1,5 +1,6 @@
 package in.bbat.presenter;
 
+import in.BBAT.abstrakt.presenter.device.model.TestDeviceManager;
 import in.bbat.abstrakt.gui.ApplicationHelper;
 
 import java.net.UnknownHostException;
@@ -23,6 +24,7 @@ public class Application implements IApplication {
 		try {
 			try {
 				ApplicationHelper.initializeDb();
+				TestDeviceManager.init("/home/syed/Documents/android-sdk-linux/platform-tools/adb");
 			} catch (UnknownHostException e) {
 				e.printStackTrace();
 			} catch (Exception e) {

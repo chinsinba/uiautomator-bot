@@ -37,7 +37,7 @@ public class TestDevice implements IAndroidDevice {
 
 	@Override
 	public String getDeviceId() {
-		return null;
+		return monkeyDevice.getSerialNumber();
 	}
 
 	@Override

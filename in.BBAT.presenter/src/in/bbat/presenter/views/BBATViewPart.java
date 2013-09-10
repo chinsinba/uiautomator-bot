@@ -15,4 +15,6 @@ public abstract class BBATViewPart extends ViewPart {
 				menuManager.createContextMenu(viewer.getControl()));
 	
 	}
+	
+	abstract public void refresh();
 }

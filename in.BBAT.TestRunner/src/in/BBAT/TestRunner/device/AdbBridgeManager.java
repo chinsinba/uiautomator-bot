@@ -107,7 +107,11 @@ public class AdbBridgeManager {
 	}
 
 	public List<IAndroidDevice> getDevices() {
-		return (List<IAndroidDevice>) iDeviceMap.values();
+		List<IAndroidDevice> devices = new ArrayList<IAndroidDevice>();
+		for(Object devObj : iDeviceMap.values()){
+			devices.add((IAndroidDevice) devObj);
+		}
+		return devices;
 	}
 
 }

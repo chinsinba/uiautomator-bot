@@ -16,7 +16,7 @@ public class AndroidDevice implements IGUITreeNode{
 	}
 	@Override
 	public String getLabel() {
-		return null;
+		return iDevice.getDeviceId();
 	}
 
 	@Override

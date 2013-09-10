@@ -1,8 +1,10 @@
 package in.BBAT.abstrakt.presenter.device.model;
 
+import in.BBAT.TestRunner.device.AdbBridgeManager;
 import in.BBAT.TestRunner.device.IAndroidDevice;
 import in.BBAT.TestRunner.device.IDeviceConnectionListener;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,11 +14,12 @@ public class TestDeviceManager  implements IDeviceConnectionListener{
 
 
 	private static TestDeviceManager instance;
-	
+
 	private Map<IAndroidDevice, AndroidDevice> iDeviceMap = new HashMap<IAndroidDevice, AndroidDevice>();
 
 	private TestDeviceManager()
 	{
+		AdbBridgeManager.getInstance().addConnectionListeners(this);
 	}
 
 	public static TestDeviceManager getInstance(){
@@ -28,7 +31,14 @@ public class TestDeviceManager  implements IDeviceConnectionListener{
 	}
 
 	public List<AndroidDevice> getDevices(){
-		return (List<AndroidDevice>) iDeviceMap.values();
+		List<AndroidDevice> devices = new ArrayList<AndroidDevice>();
+		for(IAndroidDevice devObj : AdbBridgeManager.getInstance().getDevices()){
+			if(iDeviceMap.get(devObj)==null){
+				AndroidDevice dev = new AndroidDevice( devObj);
+				devices.add(dev);
+			}
+		}
+		return devices;
 	}
 
 	@Override
@@ -44,6 +54,10 @@ public class TestDeviceManager  implements IDeviceConnectionListener{
 
 	@Override
 	public void deviceChanged(IAndroidDevice device, int changeMask) {
+	}
+
+	public static void init(String adbLocation) {
+		AdbBridgeManager.init(adbLocation);		
 	}
 
 }
