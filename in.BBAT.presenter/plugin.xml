@@ -134,6 +134,24 @@
             </command>
          </menu>
       </menuContribution>
+      <menuContribution
+            allPopups="false"
+            locationURI="popup:in.BBAT.presenter.developer.testcaseBrowserView">
+      </menuContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            id="in.BBAT.presenter.testCase.CreateTestCase"
+            name="Create TestCase">
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.handlers">
+      <handler
+            class="in.BBAT.presenter.developer.handlers.testcaseBrowser.CreateTestCaseHandler"
+            commandId="in.BBAT.presenter.testCase.CreateTestCase">
+      </handler>
    </extension>
 
 </plugin>

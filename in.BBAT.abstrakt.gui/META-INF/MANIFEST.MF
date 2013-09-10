@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Gui
-Bundle-SymbolicName: in.BBAT.abstrakt.presenter
+Bundle-SymbolicName: in.BBAT.abstrakt.presenter;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: in.bbat.abstrakt.gui.Activator
 Require-Bundle: org.eclipse.ui,
