@@ -29,6 +29,8 @@ public class TestProjectEntity extends AbstractEntity {
 
 	@OneToOne
 	private UserEntity createdBy;
+	
+	private String name;
 
 	@OneToMany(mappedBy="testProject",fetch = FetchType.LAZY, cascade = { CascadeType.ALL })
 	private List<TestCaseEntity> testcases;
@@ -94,5 +96,13 @@ public class TestProjectEntity extends AbstractEntity {
 
 	public void removeTestCase(TestCaseEntity testCase){
 		this.testcases.remove(testCase);
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 }

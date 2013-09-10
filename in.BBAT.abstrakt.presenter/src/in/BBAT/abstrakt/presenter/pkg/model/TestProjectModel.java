@@ -39,6 +39,11 @@ public class TestProjectModel extends AbstractTreeModel{
 	}
 
 	@Override
+	public String getName() {
+		// TODO Auto-generated method stub
+		return ((TestProjectEntity)getEntity()).getName();
+	}
+	@Override
 	public Image getImage() {
 		return null;
 	}
@@ -58,6 +63,11 @@ public class TestProjectModel extends AbstractTreeModel{
 		return new TestCaseModel(childEntity);
 	}
 
+	@Override
+	public void setName(String name) {
+		((TestProjectEntity)getEntity()).setName(name);
+	}
+	
 	public String getLocation(){
 		return this.location;
 	}

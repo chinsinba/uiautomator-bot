@@ -18,6 +18,10 @@ public class MineManager {
 	private static EntityManager em = null;
 	private static boolean transactionStarted=false;
 	private static NetworkServerControl server;
+	
+	private static final String UNIT_NAME ="BBATDATA";
+	
+	private static final String DB_ADDRESS ="127.0.0.1"+":"+"1527";
 
 	private static MineManager instance_;
 	private MineManager(){
@@ -31,14 +35,12 @@ public class MineManager {
 		return instance_;
 	}
 
-	public  void createDb() throws Exception {
-		String path ="127.0.0.1"+":"+"1527";
-		MineManagerHelper.init("BBATDATA", true, true, path + Path.SEPARATOR + "sample112","app","app");
+	public  void createDb(String dbName) throws Exception {
+		MineManagerHelper.init(UNIT_NAME, true, true, DB_ADDRESS + Path.SEPARATOR + dbName,"app","app");
 	}
 
-	public  void connectDB() throws Exception {
-		String path ="127.0.0.1"+":"+"1527";
-		MineManagerHelper.init("BBATDATA", false, true, path + Path.SEPARATOR + "sample112","app","app");
+	public  void connectDB(String dbName) throws Exception {
+		MineManagerHelper.init(UNIT_NAME, false, true, DB_ADDRESS + Path.SEPARATOR + dbName,"app","app");
 	}
 
 
@@ -124,7 +126,7 @@ public class MineManager {
 	public static void main(String[] args) {
 		try {
 			MineManager.getInstance().startDBServer();
-			MineManager.getInstance().createDb();
+			MineManager.getInstance().createDb("");
 			TestProjectEntity proj = new TestProjectEntity();
 			MineManager.getInstance().beginTransaction();
 			proj.save();

@@ -6,6 +6,8 @@ Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: in.bbat.presenter.Activator
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
- in.BBAT.abstrakt.presenter
+ in.BBAT.abstrakt.presenter;bundle-version="1.0.0",
+ in.BBAT.dataMine;bundle-version="1.0.0"
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ClassPath: .
