@@ -3,10 +3,8 @@ Bundle-ManifestVersion: 2
 Bundle-Name: datamgr.db
 Bundle-SymbolicName: in.BBAT.dataMine
 Bundle-Version: 1.0.0.qualifier
-Bundle-Activator: in.alethea.swat.datamgr.db.Activator
-Require-Bundle: org.eclipse.core.runtime,
- org.junit,
- org.apache.derby.core;bundle-version="10.8.2"
+Bundle-Activator: in.BBAT.dataMine.Activator
+Require-Bundle: org.eclipse.core.runtime
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Import-Package: javax.persistence,
  org.eclipse.persistence.config,
@@ -18,7 +16,9 @@ Import-Package: javax.persistence,
 Export-Package: in.BBAT.data.model.Entities,
  in.BBAT.dataMine,
  in.BBAT.dataMine.manager
-Bundle-ClassPath: lib/derby.jar,
+Bundle-ActivationPolicy: lazy
+Bundle-ClassPath: .,
+ lib/derby.jar,
  lib/derbyclient.jar,
  lib/derbynet.jar,
  lib/derbytools.jar
