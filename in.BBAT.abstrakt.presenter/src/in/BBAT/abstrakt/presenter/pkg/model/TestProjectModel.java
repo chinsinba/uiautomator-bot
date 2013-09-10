@@ -31,7 +31,7 @@ public class TestProjectModel extends AbstractTreeModel{
 
 	@Override
 	public String getLabel() {
-		return null;
+		return getName();
 	}
 
 	private void createProjectDir() {

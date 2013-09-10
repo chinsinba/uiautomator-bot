@@ -1,12 +1,13 @@
 package in.bbat.presenter.views.developer;
 
 import in.BBAT.abstrakt.presenter.pkg.model.TestProjectManager;
-import in.BBAT.presenter.labelProviders.ViewLabelProvider;
+import in.BBAT.presenter.contentProviders.TestCaseBrowserContentProvider;
+import in.BBAT.presenter.labelProviders.TestCaseLabelProvider;
 import in.bbat.presenter.views.BBATViewPart;
 
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.IStructuredContentProvider;
-import org.eclipse.jface.viewers.TableViewer;
+import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
@@ -14,7 +15,7 @@ import org.eclipse.swt.widgets.Composite;
 public class TestCaseBrowserView extends BBATViewPart {
 	public static final String ID = "in.BBAT.presenter.developer.testcaseBrowserView";
 
-	private TableViewer viewer;
+	private TreeViewer viewer;
 
 	/**
 	 * The content provider class is responsible for providing objects to the
@@ -45,10 +46,10 @@ public class TestCaseBrowserView extends BBATViewPart {
 	 * it.
 	 */
 	public void createPartControl(Composite parent) {
-		viewer = new TableViewer(parent, SWT.MULTI | SWT.H_SCROLL
+		viewer = new TreeViewer(parent, SWT.MULTI | SWT.H_SCROLL
 				| SWT.V_SCROLL);
-		viewer.setContentProvider(new ArrayContentProvider());
-		viewer.setLabelProvider(new ViewLabelProvider());
+		viewer.setContentProvider(new TestCaseBrowserContentProvider());
+		viewer.setLabelProvider(new TestCaseLabelProvider());
 		// Provide the input to the ContentProvider
 		viewer.setInput(TestProjectManager.getInstance().getTestProjects());
 		addMenuManager(viewer);
