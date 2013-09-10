@@ -2,21 +2,16 @@ package in.bbat.presenter.views.developer;
 
 import in.BBAT.abstrakt.presenter.pkg.model.TestProjectManager;
 import in.BBAT.presenter.labelProviders.ViewLabelProvider;
+import in.bbat.presenter.views.BBATViewPart;
 
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.IStructuredContentProvider;
-import org.eclipse.jface.viewers.ITableLabelProvider;
-import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.ui.ISharedImages;
-import org.eclipse.ui.PlatformUI;
-import org.eclipse.ui.part.ViewPart;
 
-public class TestCaseBrowserView extends ViewPart {
+public class TestCaseBrowserView extends BBATViewPart {
 	public static final String ID = "in.BBAT.presenter.developer.testcaseBrowserView";
 
 	private TableViewer viewer;
@@ -39,11 +34,11 @@ public class TestCaseBrowserView extends ViewPart {
 			if (parent instanceof Object[]) {
 				return (Object[]) parent;
 			}
-	        return new Object[0];
+			return new Object[0];
 		}
 	}
 
-	
+
 
 	/**
 	 * This is a callback that will allow us to create the viewer and initialize
@@ -56,6 +51,7 @@ public class TestCaseBrowserView extends ViewPart {
 		viewer.setLabelProvider(new ViewLabelProvider());
 		// Provide the input to the ContentProvider
 		viewer.setInput(TestProjectManager.getInstance().getTestProjects());
+		addMenuManager(viewer);
 	}
 
 	/**

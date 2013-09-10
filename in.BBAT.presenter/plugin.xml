@@ -137,6 +137,11 @@
       <menuContribution
             allPopups="false"
             locationURI="popup:in.BBAT.presenter.developer.testcaseBrowserView">
+         <command
+               commandId="in.BBAT.presenter.testCase.CreateTestCase"
+               label="TestCase"
+               style="push">
+         </command>
       </menuContribution>
    </extension>
    <extension
