@@ -4,6 +4,9 @@ import java.util.List;
 
 import org.eclipse.swt.graphics.Image;
 
+import com.android.ddmlib.CollectingOutputReceiver;
+import com.android.ddmlib.RawImage;
+
 import in.BBAT.TestRunner.device.IAndroidDevice;
 import in.BBAT.abstrakt.gui.model.IGUITreeNode;
 
@@ -43,6 +46,19 @@ public class AndroidDevice implements IGUITreeNode{
 	}
 	@Override
 	public void addChild(IGUITreeNode childNode) {
+		// TODO Auto-generated method stub
+		
+	}
+	public String getName() {
+		// TODO Auto-generated method stub
+		return iDevice.getName();
+	}
+	public RawImage getScreenshot() {
+		// TODO Auto-generated method stub
+		return iDevice.getScreenshot();
+	}
+	public void executeShellCommand(String command,
+			CollectingOutputReceiver collectingOutputReceiver, int i) {
 		// TODO Auto-generated method stub
 		
 	}

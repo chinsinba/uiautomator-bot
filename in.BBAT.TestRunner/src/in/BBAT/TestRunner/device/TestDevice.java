@@ -9,6 +9,7 @@ import com.android.ddmlib.AdbCommandRejectedException;
 import com.android.ddmlib.IDevice;
 import com.android.ddmlib.IShellOutputReceiver;
 import com.android.ddmlib.MultiLineReceiver;
+import com.android.ddmlib.RawImage;
 import com.android.ddmlib.ShellCommandUnresponsiveException;
 import com.android.ddmlib.SyncException;
 import com.android.ddmlib.TimeoutException;
@@ -172,5 +173,32 @@ public class TestDevice implements IAndroidDevice {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public String getName() {
+		// TODO Auto-generated method stub
+		return monkeyDevice.getName();
+	}
+
+	@Override
+	public RawImage getScreenshot() {
+		// TODO Auto-generated method stub
+		try {
+			return monkeyDevice.getScreenshot();
+		} catch (TimeoutException e) {
+			e.printStackTrace();
+		} catch (AdbCommandRejectedException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	@Override
+	public IDevice getMonkeyDevice() {
+		// TODO Auto-generated method stub
+		return monkeyDevice;
 	}
 }
