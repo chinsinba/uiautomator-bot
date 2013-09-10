@@ -142,6 +142,11 @@
                label="TestCase"
                style="push">
          </command>
+         <command
+               commandId="in.BBAT.presenter.testCase.CreateProject"
+               label="TestProject"
+               style="push">
+         </command>
       </menuContribution>
    </extension>
    <extension
@@ -150,12 +155,20 @@
             id="in.BBAT.presenter.testCase.CreateTestCase"
             name="Create TestCase">
       </command>
+      <command
+            id="in.BBAT.presenter.testCase.CreateProject"
+            name="Create Project">
+      </command>
    </extension>
    <extension
          point="org.eclipse.ui.handlers">
       <handler
             class="in.BBAT.presenter.developer.handlers.testcaseBrowser.CreateTestCaseHandler"
             commandId="in.BBAT.presenter.testCase.CreateTestCase">
+      </handler>
+      <handler
+            class="in.BBAT.presenter.developer.handlers.testcaseBrowser.CreateTestProjectHandler"
+            commandId="in.BBAT.presenter.testCase.CreateProject">
       </handler>
    </extension>
 
