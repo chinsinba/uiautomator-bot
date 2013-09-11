@@ -13,5 +13,11 @@ public class CreateTestCaseHandler extends BBATHandler {
 		TestCaseModel m = new TestCaseModel("");
 		return null;
 	}
+	
+	@Override
+	public boolean isEnabled() {
+		// TODO Auto-generated method stub
+		return super.isEnabled();
+	}
 
 }

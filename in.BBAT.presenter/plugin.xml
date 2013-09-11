@@ -43,9 +43,10 @@
             restorable="true">
       </view>
       <view
+            allowMultiple="false"
             class="in.bbat.presenter.views.developer.ScreenShotView"
             id="in.BBAT.presenter.developer.screenShotView"
-            name="ScreenShot"
+            name="UI Automator View"
             restorable="true">
       </view>
       <view
@@ -87,7 +88,7 @@
                ratio="0.50f"
                relationship="left"
                relative="org.eclipse.ui.editorss"
-               visible="true">
+               visible="false">
          </view>
          <view
                id="in.BBAT.presenter.developer.uitreeView"
@@ -148,6 +149,17 @@
                style="push">
          </command>
       </menuContribution>
+      <menuContribution
+            allPopups="false"
+            locationURI="toolbar:in.BBAT.presenter.developer.deviceView">
+         <command
+               commandId="in.BBAT.presenter.device.openScreenShot"
+               icon="icons/alt_window_16.gif"
+               label="UiAutoamtor"
+               style="push"
+               tooltip="opens UI automator viewer">
+         </command>
+      </menuContribution>
    </extension>
    <extension
          point="org.eclipse.ui.commands">
@@ -159,6 +171,10 @@
             id="in.BBAT.presenter.testCase.CreateProject"
             name="Create Project">
       </command>
+      <command
+            id="in.BBAT.presenter.device.openScreenShot"
+            name="Open Screen Shot">
+      </command>
    </extension>
    <extension
          point="org.eclipse.ui.handlers">
@@ -169,6 +185,10 @@
       <handler
             class="in.BBAT.presenter.developer.handlers.testcaseBrowser.CreateTestProjectHandler"
             commandId="in.BBAT.presenter.testCase.CreateProject">
+      </handler>
+      <handler
+            class="in.BBAT.presenter.developer.handlers.OpenScreenShotViewHandler"
+            commandId="in.BBAT.presenter.device.openScreenShot">
       </handler>
    </extension>
 

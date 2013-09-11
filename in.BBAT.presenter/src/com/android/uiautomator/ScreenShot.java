@@ -64,6 +64,14 @@ public class ScreenShot {
 		mScreenshotComposite.layout();
 
 		mScreenshotCanvas.addMouseListener(new MouseAdapter() {
+			
+			@Override
+			public void mouseDoubleClick(MouseEvent e) {
+				if (getmModel() != null) {
+					getmModel().toggleExploreMode();
+					redrawScreenshot();
+				}
+			}
 			@Override
 			public void mouseUp(MouseEvent e) {
 				if (getmModel() != null) {
