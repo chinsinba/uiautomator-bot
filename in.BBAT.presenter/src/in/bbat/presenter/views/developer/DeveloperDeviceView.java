@@ -1,30 +1,30 @@
 package in.bbat.presenter.views.developer;
 
+import in.BBAT.abstrakt.presenter.device.model.AndroidDevice;
+import in.BBAT.abstrakt.presenter.device.model.IDeviceModelChangeListener;
 import in.BBAT.abstrakt.presenter.device.model.TestDeviceManager;
-import in.BBAT.abstrakt.presenter.pkg.model.TestProjectManager;
-import in.BBAT.presenter.contentProviders.TestCaseBrowserContentProvider;
 import in.BBAT.presenter.labelProviders.DeviceViewLabelProvider;
-import in.BBAT.presenter.labelProviders.TestCaseLabelProvider;
 import in.bbat.presenter.views.BBATViewPart;
 
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Display;
 
 public class DeveloperDeviceView extends BBATViewPart {
 
 	public static final String ID = "in.BBAT.presenter.developer.deviceView";
 	private TableViewer viewer;
-	
+
 
 	@Override
 	public void createPartControl(Composite parent) {
-		viewer = new TableViewer(parent, SWT.MULTI | SWT.H_SCROLL
-				| SWT.V_SCROLL);
+		viewer = new TableViewer(parent, SWT.H_SCROLL| SWT.V_SCROLL);
 		viewer.setContentProvider(new ArrayContentProvider());
 		viewer.setLabelProvider(new DeviceViewLabelProvider());
 		// Provide the input to the ContentProvider
+		TestDeviceManager.getInstance().addDeviceModelChangeListener(new DeviceModelListener());
 		viewer.setInput(TestDeviceManager.getInstance().getDevices());
 		addMenuManager(viewer);
 	}
@@ -37,7 +37,33 @@ public class DeveloperDeviceView extends BBATViewPart {
 
 	@Override
 	public void refresh() {
-		
+		viewer.setInput(TestDeviceManager.getInstance().getDevices());
+		viewer.refresh();
+	}
+
+	private class DeviceModelListener implements IDeviceModelChangeListener
+	{
+		@Override
+		public void deviceAdded(AndroidDevice device) {
+			refreshInUIThread();
+		}
+
+
+		private void refreshInUIThread() {
+			Display.getDefault().asyncExec(new Runnable() {
+
+				@Override
+				public void run() {
+					refresh();	
+				}
+			});
+		}
+
+
+		@Override
+		public void deviceRemoved(AndroidDevice device) {
+			refreshInUIThread();
+		}
 	}
 
 }

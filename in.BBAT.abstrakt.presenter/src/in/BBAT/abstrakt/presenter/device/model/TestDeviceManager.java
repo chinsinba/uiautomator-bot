@@ -17,6 +17,8 @@ public class TestDeviceManager  implements IDeviceConnectionListener{
 
 	private Map<IAndroidDevice, AndroidDevice> iDeviceMap = new HashMap<IAndroidDevice, AndroidDevice>();
 
+	private List<IDeviceModelChangeListener> listners = new ArrayList<IDeviceModelChangeListener>();
+
 	private TestDeviceManager()
 	{
 		AdbBridgeManager.getInstance().addConnectionListeners(this);
@@ -37,19 +39,34 @@ public class TestDeviceManager  implements IDeviceConnectionListener{
 				AndroidDevice dev = new AndroidDevice( devObj);
 				devices.add(dev);
 			}
+			else
+			{
+				devices.add(iDeviceMap.get(devObj));
+			}
 		}
 		return devices;
 	}
 
 	@Override
 	public void deviceDisconnected(IAndroidDevice device) {
-		AndroidDevice dev = new AndroidDevice(device);
-		iDeviceMap.put(device, dev);
+		AndroidDevice dev =iDeviceMap.get(device);
+		iDeviceMap.remove(device);
+		for(IDeviceModelChangeListener listnr : listners)
+		{
+			listnr.deviceRemoved(dev);
+		}
+
 	}
 
 	@Override
 	public void deviceConnected(IAndroidDevice device) {
-		iDeviceMap.get(device);
+		AndroidDevice dev = new AndroidDevice(device);
+		iDeviceMap.put(device, dev);
+		for(IDeviceModelChangeListener listnr : listners)
+		{
+			listnr.deviceAdded(dev);
+		}
+
 	}
 
 	@Override
@@ -58,6 +75,16 @@ public class TestDeviceManager  implements IDeviceConnectionListener{
 
 	public static void init(String adbLocation) {
 		AdbBridgeManager.init(adbLocation);		
+	}
+
+	public void addDeviceModelChangeListener(IDeviceModelChangeListener listener){
+		listners.add(listener);
+
+	}
+
+	public void removeDeviceModelChangeListener(IDeviceModelChangeListener listener){
+		if(listners.contains(listener))
+			listners.remove(listener);
 	}
 
 }

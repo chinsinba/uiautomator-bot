@@ -24,7 +24,7 @@ public class AdbBridgeManager {
 	private static AdbBridgeManager manager = null;
 
 	private Map<IDevice, IAndroidDevice> iDeviceMap = new HashMap<IDevice, IAndroidDevice>();
-	
+
 	private List<IDeviceConnectionListener> connectionListeners = new ArrayList<IDeviceConnectionListener>();
 
 	private AdbBridgeManager(String adbLocation) {
@@ -72,6 +72,7 @@ public class AdbBridgeManager {
 		@Override
 		public void deviceDisconnected(IDevice device) {
 			IAndroidDevice dev = iDeviceMap.get(device);
+			iDeviceMap.remove(device);
 			for(IDeviceConnectionListener listener :connectionListeners){
 				listener.deviceDisconnected(dev);
 			}
@@ -88,7 +89,7 @@ public class AdbBridgeManager {
 
 		@Override
 		public void deviceChanged(IDevice arg0, int changeMask) {
-			
+
 		}
 	}
 
