@@ -69,7 +69,7 @@
                closeable="false"
                id="in.BBAT.presenter.developer.testcaseBrowserView"
                minimized="false"
-               ratio="0.25f"
+               ratio="0.20f"
                relationship="left"
                relative="org.eclipse.ui.editorss">
          </view>
@@ -77,15 +77,15 @@
                closeable="false"
                id="in.BBAT.presenter.developer.deviceView"
                minimized="false"
-               ratio="0.70f"
+               ratio="0.80f"
                relationship="bottom"
                relative="in.BBAT.presenter.developer.testcaseBrowserView">
          </view>
          <view
                id="in.BBAT.presenter.developer.screenShotView"
                minimized="false"
-               ratio="0.70f"
-               relationship="right"
+               ratio="0.50f"
+               relationship="left"
                relative="org.eclipse.ui.editorss"
                visible="true">
          </view>
@@ -95,7 +95,7 @@
                ratio="0.70f"
                relationship="bottom"
                relative="in.BBAT.presenter.developer.screenShotView"
-               visible="true">
+               visible="false">
          </view>
          <view
                id="in.BBAT.presenter.developer.nodeDetailView"
@@ -103,7 +103,7 @@
                ratio="0.70f"
                relationship="bottom"
                relative="org.eclipse.ui.editorss"
-               visible="true">
+               visible="false">
          </view>
       </perspectiveExtension>
       <perspectiveExtension

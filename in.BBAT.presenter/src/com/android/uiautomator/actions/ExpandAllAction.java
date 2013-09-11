@@ -16,18 +16,19 @@
 
 package com.android.uiautomator.actions;
 
-import com.android.uiautomator.UiAutomatorView;
 
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.resource.ImageDescriptor;
 
+import com.android.uiautomator.XMLArea;
+
 public class ExpandAllAction extends Action {
 
-    UiAutomatorView mView;
+	XMLArea mView;
 
-    public ExpandAllAction(UiAutomatorView view) {
+    public ExpandAllAction(XMLArea xmlArea) {
         super("&Expand All");
-        mView = view;;
+        mView = xmlArea;;
     }
 
     @Override

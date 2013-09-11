@@ -17,19 +17,20 @@
 package com.android.uiautomator.actions;
 
 import com.android.uiautomator.UiAutomatorView;
+import com.android.uiautomator.XMLArea;
 
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.resource.ImageDescriptor;
 
 public class ToggleNafAction extends Action {
-    private UiAutomatorView mView;
+    private XMLArea mView;
 
-    public ToggleNafAction(UiAutomatorView view) {
+    public ToggleNafAction(XMLArea xmlArea) {
         super("&Toggle NAF Nodes", IAction.AS_CHECK_BOX);
-        setChecked(view.shouldShowNafNodes());
+        setChecked(xmlArea.shouldShowNafNodes());
 
-        mView = view;
+        mView = xmlArea;
     }
 
     @Override
