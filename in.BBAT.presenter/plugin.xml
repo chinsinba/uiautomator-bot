@@ -148,6 +148,11 @@
                label="TestProject"
                style="push">
          </command>
+         <command
+               commandId="in.BBAT.presenter.device.deleteElement"
+               label="Delete"
+               style="push">
+         </command>
       </menuContribution>
       <menuContribution
             allPopups="false"
@@ -175,6 +180,10 @@
             id="in.BBAT.presenter.device.openScreenShot"
             name="Open Screen Shot">
       </command>
+      <command
+            id="in.BBAT.presenter.device.deleteElement"
+            name="Delete Elements">
+      </command>
    </extension>
    <extension
          point="org.eclipse.ui.handlers">
@@ -189,6 +198,10 @@
       <handler
             class="in.BBAT.presenter.developer.handlers.OpenScreenShotViewHandler"
             commandId="in.BBAT.presenter.device.openScreenShot">
+      </handler>
+      <handler
+            class="in.BBAT.presenter.developer.handlers.testcaseBrowser.DeleteElementsHandler"
+            commandId="in.BBAT.presenter.device.deleteElement">
       </handler>
    </extension>
 
