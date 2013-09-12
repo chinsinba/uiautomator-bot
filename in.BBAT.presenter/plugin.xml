@@ -149,8 +149,13 @@
                style="push">
          </command>
          <command
-               commandId="in.BBAT.presenter.device.deleteElement"
+               commandId="in.BBAT.presenter.testCase.deleteElement"
                label="Delete"
+               style="push">
+         </command>
+         <command
+               commandId="in.BBAT.presenter.testCase.edit"
+               label="Edit"
                style="push">
          </command>
       </menuContribution>
@@ -181,8 +186,12 @@
             name="Open Screen Shot">
       </command>
       <command
-            id="in.BBAT.presenter.device.deleteElement"
+            id="in.BBAT.presenter.testCase.deleteElement"
             name="Delete Elements">
+      </command>
+      <command
+            id="in.BBAT.presenter.testCase.edit"
+            name="Edit Script">
       </command>
    </extension>
    <extension
@@ -201,7 +210,11 @@
       </handler>
       <handler
             class="in.BBAT.presenter.developer.handlers.testcaseBrowser.DeleteElementsHandler"
-            commandId="in.BBAT.presenter.device.deleteElement">
+            commandId="in.BBAT.presenter.testCase.deleteElement">
+      </handler>
+      <handler
+            class="in.BBAT.presenter.developer.handlers.testcaseBrowser.EditScriptHandler"
+            commandId="in.BBAT.presenter.testCase.edit">
       </handler>
    </extension>
 
