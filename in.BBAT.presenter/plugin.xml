@@ -158,6 +158,11 @@
                label="Edit"
                style="push">
          </command>
+         <command
+               commandId="in.BBAT.presenter.testCase.export"
+               label="Export"
+               style="push">
+         </command>
       </menuContribution>
       <menuContribution
             allPopups="false"
@@ -193,6 +198,10 @@
             id="in.BBAT.presenter.testCase.edit"
             name="Edit Script">
       </command>
+      <command
+            id="in.BBAT.presenter.testCase.export"
+            name="Export">
+      </command>
    </extension>
    <extension
          point="org.eclipse.ui.handlers">
@@ -215,6 +224,10 @@
       <handler
             class="in.BBAT.presenter.developer.handlers.testcaseBrowser.EditScriptHandler"
             commandId="in.BBAT.presenter.testCase.edit">
+      </handler>
+      <handler
+            class="in.BBAT.presenter.developer.handlers.testcaseBrowser.ExportScriptsHandler"
+            commandId="in.BBAT.presenter.testCase.export">
       </handler>
    </extension>
 
