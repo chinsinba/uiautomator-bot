@@ -39,19 +39,20 @@ public class TestSuiteEntity extends AbstractEntity  {
 	private Timestamp lastModified;
 
 	private Timestamp createdOn;
-	
+
 	@ManyToOne
 	private TestProjectEntity testProject;
-	
+
 	@OneToMany(mappedBy="suite", fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST })
 	@OrderColumn
 	private List<TestCaseEntity> testCases;
 
-	public TestSuiteEntity(String name) {
+	public TestSuiteEntity(TestProjectEntity testProject, String name) {
 
 		this.name = name;
+		this.testProject = testProject;
 	}
-	
+
 	public TestSuiteEntity() {
 		// TODO Auto-generated constructor stub
 	}

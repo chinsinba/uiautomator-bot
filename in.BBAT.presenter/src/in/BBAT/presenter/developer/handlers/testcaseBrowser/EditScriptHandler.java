@@ -1,5 +1,7 @@
 package in.BBAT.presenter.developer.handlers.testcaseBrowser;
 
+import in.BBAT.abstrakt.presenter.pkg.model.TestCaseModel;
+
 import java.util.List;
 
 import org.eclipse.core.commands.ExecutionEvent;
@@ -7,13 +9,23 @@ import org.eclipse.core.commands.ExecutionEvent;
 public class EditScriptHandler extends AbstractTestCaseBrowserHandler {
 
 	@Override
-	public Object run(ExecutionEvent event) {
+	public Object run(ExecutionEvent event, List<?> selectedObjects) {
 		return null;
 	}
 
 	
 	@Override
 	public boolean isEnabled(List<?> object) {
+		if(!object.isEmpty())
+		{
+			if(object.size()==1)
+			{
+				if(object.get(0) instanceof TestCaseModel)
+				{
+					return true;
+				}
+			}
+		}
 		return false;
 	}
 }

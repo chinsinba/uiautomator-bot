@@ -27,9 +27,4 @@ public abstract class BBATHandler extends AbstractHandler implements IBBATHandle
 		return true;
 	}
 
-	public Object run(ExecutionEvent event) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
 }

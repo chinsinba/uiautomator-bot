@@ -154,11 +154,6 @@
                style="push">
          </command>
          <command
-               commandId="in.BBAT.presenter.testCase.deleteElement"
-               label="Delete"
-               style="push">
-         </command>
-         <command
                commandId="in.BBAT.presenter.testCase.edit"
                label="Edit"
                style="push">
@@ -166,6 +161,11 @@
          <command
                commandId="in.BBAT.presenter.testCase.export"
                label="Export"
+               style="push">
+         </command>
+         <command
+               commandId="in.BBAT.presenter.testCase.deleteElement"
+               label="Delete"
                style="push">
          </command>
       </menuContribution>

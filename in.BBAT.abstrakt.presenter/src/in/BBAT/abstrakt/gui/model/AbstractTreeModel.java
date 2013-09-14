@@ -14,13 +14,13 @@ public abstract class  AbstractTreeModel implements IGUITreeNode {
 
 	private AbstractTreeModel parent;
 
-	private ArrayList<AbstractTreeModel> childNodes;
+	private ArrayList<AbstractTreeModel> childNodes = new ArrayList<AbstractTreeModel>();
 
 	protected AbstractTreeModel(AbstractTreeModel parentNode , AbstractEntity entity){
 		this.parent = parentNode;
 		this.setEntity(entity);
-		if(parent!=null)
-			this.parent.addChild(this);
+		/*if(parent!=null)
+			this.parent.addChild(this);*/
 	}
 
 	@Override

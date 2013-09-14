@@ -13,14 +13,13 @@ import org.eclipse.ui.PlatformUI;
 public class CreateTestProjectHandler extends AbstractTestCaseBrowserHandler {
 
 	@Override
-	public Object run(ExecutionEvent event) {
+	public Object run(ExecutionEvent event, List<?> selectedObjects) {
 		TestProjectModel newTestProject = null;
 		try {
 			newTestProject = new TestProjectModel("TestIT");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		newTestProject.setName("TestProj");
 		MineManager.getInstance().beginTransaction();
 		newTestProject.save();
 		MineManager.getInstance().commitTransaction();

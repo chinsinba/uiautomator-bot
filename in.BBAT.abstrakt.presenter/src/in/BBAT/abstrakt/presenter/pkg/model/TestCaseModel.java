@@ -1,6 +1,7 @@
 package in.BBAT.abstrakt.presenter.pkg.model;
 
 import in.BBAT.data.model.Entities.TestCaseEntity;
+import in.BBAT.data.model.Entities.TestSuiteEntity;
 
 import java.io.File;
 import java.io.IOException;
@@ -25,15 +26,20 @@ public class TestCaseModel extends AbstractProjectTree{
 	}
 
 	public TestCaseModel(TestSuiteModel parent,String testCaseName) throws Exception{
-		this(parent,new TestCaseEntity(testCaseName),true);
+		this(parent,new TestCaseEntity((TestSuiteEntity)parent.getEntity(),testCaseName),true);
 		
 	}
 
 	@Override
 	public String getLabel() {
-		return null;
+		return getName();
 	}
 
+	@Override
+	public String getName() {
+		// TODO Auto-generated method stub
+		return ((TestCaseEntity)getEntity()).getName();
+	}
 	@Override
 	public Image getImage() {
 		return null;

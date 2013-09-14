@@ -21,7 +21,7 @@ public class TestSuiteModel  extends AbstractTreeModel{
 
 
 	public TestSuiteModel(){
-		super(null,new TestSuiteEntity(""));
+		super(null,new TestSuiteEntity(null,""));
 	}
 
 	@Override

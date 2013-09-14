@@ -42,8 +42,9 @@ public class TestCaseEntity extends AbstractEntity {
 	private UserEntity createdBy;
 
 
-	public TestCaseEntity(String testCaseName) {
+	public TestCaseEntity(TestSuiteEntity testSuiteEntity, String testCaseName) {
 		this.name = testCaseName;
+		this.suite = testSuiteEntity;
 	}
 
 	TestCaseEntity(){

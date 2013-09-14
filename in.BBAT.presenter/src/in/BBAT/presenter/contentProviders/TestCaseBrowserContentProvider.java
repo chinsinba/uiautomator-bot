@@ -50,9 +50,15 @@ public class TestCaseBrowserContentProvider implements ITreeContentProvider {
 	}
 
 	@Override
-	public boolean hasChildren(Object element) {
-		// TODO Auto-generated method stub
-		return true;
+	public boolean hasChildren(Object parentElement) {
+		if(parentElement instanceof IGUITreeNode){
+			try {
+				if (((IGUITreeNode) parentElement).getChildren() == null)
+					return false;
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}		return true;
 	}
 
 }

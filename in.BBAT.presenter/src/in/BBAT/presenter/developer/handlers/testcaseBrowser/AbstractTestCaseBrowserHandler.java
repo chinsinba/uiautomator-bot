@@ -14,13 +14,18 @@ public abstract class AbstractTestCaseBrowserHandler extends BBATHandler {
 
 	@Override
 	public Object run(ExecutionEvent event) {
-		// TODO Auto-generated method stub
-		return null;
+		return run(event, getSelectedList());
 	}
 
 	@Override
 	public boolean isEnabled() {
 
+		List<?> list = getSelectedList();
+
+		return isEnabled(list);
+	}
+
+	private List<?> getSelectedList() {
 		TestCaseBrowserView view  = (TestCaseBrowserView) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().findView(TestCaseBrowserView.ID);
 		ISelection selection = view.getSelectedElements();
 		List<?> list = null;
@@ -28,8 +33,7 @@ public abstract class AbstractTestCaseBrowserHandler extends BBATHandler {
 		{
 			list = ((IStructuredSelection) selection).toList();
 		}
-
-		return isEnabled(list);
+		return list;
 	}
 
 }

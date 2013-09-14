@@ -28,4 +28,10 @@ public class OpenScreenShotViewHandler extends BBATHandler {
 		return false;
 	}
 
+	@Override
+	public Object run(ExecutionEvent event, List<?> selectedObjects) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

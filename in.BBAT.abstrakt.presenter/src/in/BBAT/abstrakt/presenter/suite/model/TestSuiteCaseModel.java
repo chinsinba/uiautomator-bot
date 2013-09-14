@@ -2,6 +2,7 @@ package in.BBAT.abstrakt.presenter.suite.model;
 
 import in.BBAT.abstrakt.gui.model.AbstractTreeModel;
 import in.BBAT.abstrakt.presenter.pkg.model.TestCaseModel;
+import in.BBAT.data.model.Entities.TestProjectEntity;
 import in.BBAT.data.model.Entities.TestSuiteEntity;
 
 import org.eclipse.swt.graphics.Image;
@@ -27,10 +28,13 @@ public class TestSuiteCaseModel extends TestCaseModel {
 		return super.getImage();
 	}
 
+	public String getName() {
+		return ((TestProjectEntity)getEntity()).getName();
+	}
+	
 	@Override
 	public String getLabel() {
-		// TODO Auto-generated method stub
-		return super.getLabel();
+		return getName();
 	}
 	
 
