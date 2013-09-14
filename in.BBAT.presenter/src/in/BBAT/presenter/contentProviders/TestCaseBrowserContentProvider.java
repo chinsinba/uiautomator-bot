@@ -30,7 +30,11 @@ public class TestCaseBrowserContentProvider implements ITreeContentProvider {
 	@Override
 	public Object[] getChildren(Object parentElement) {
 		if(parentElement instanceof IGUITreeNode){
-			return ((IGUITreeNode) parentElement).getChildren().toArray();
+			try {
+				return ((IGUITreeNode) parentElement).getChildren().toArray();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 
 		List<IGUITreeNode> children = (List<IGUITreeNode>) parentElement;

@@ -16,5 +16,5 @@ public abstract class BBATViewPart extends ViewPart {
 	
 	}
 	
-	abstract public void refresh();
+	abstract public void refresh() throws Exception;
 }

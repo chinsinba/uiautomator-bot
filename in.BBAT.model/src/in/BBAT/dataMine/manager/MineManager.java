@@ -127,7 +127,7 @@ public class MineManager {
 		try {
 			MineManager.getInstance().startDBServer();
 			MineManager.getInstance().createDb("");
-			TestProjectEntity proj = new TestProjectEntity();
+			TestProjectEntity proj = new TestProjectEntity("gygy");
 			MineManager.getInstance().beginTransaction();
 			proj.save();
 			MineManager.getInstance().commitTransaction();

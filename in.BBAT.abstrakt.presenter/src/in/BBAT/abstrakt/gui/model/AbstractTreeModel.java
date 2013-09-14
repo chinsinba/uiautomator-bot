@@ -6,30 +6,31 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 
  * @author Syed Mehtab
- *
  */
 public abstract class  AbstractTreeModel implements IGUITreeNode {
 
 	private AbstractEntity entity;
 
-	private String name;
+	private AbstractTreeModel parent;
 
-	private ArrayList<IGUITreeNode> childNodes;
+	private ArrayList<AbstractTreeModel> childNodes;
 
-	protected AbstractTreeModel(AbstractEntity entity){
+	protected AbstractTreeModel(AbstractTreeModel parentNode , AbstractEntity entity){
+		this.parent = parentNode;
 		this.setEntity(entity);
+		if(parent!=null)
+			this.parent.addChild(this);
 	}
 
 	@Override
-	public IGUITreeNode getParent(){
-		return  produceParent(getEntity().getParent());
+	public AbstractTreeModel getParent(){
+		return  parent;
 	}
 
 	@Override
-	public List<IGUITreeNode> getChildren() {
-		childNodes = new ArrayList<IGUITreeNode>();
+	public List<AbstractTreeModel> getChildren() throws Exception {
+		childNodes = new ArrayList<AbstractTreeModel>();
 		List<AbstractEntity> childEntities = (List<AbstractEntity>) getEntity().getChildren();
 		if(childEntities==null)
 			return null;
@@ -43,7 +44,7 @@ public abstract class  AbstractTreeModel implements IGUITreeNode {
 	public void addChild(IGUITreeNode childNode) {
 		// the child nodes is really not necessary
 		if(!childNodes.contains(childNode)){
-			childNodes.add(childNode);
+			childNodes.add((AbstractTreeModel) childNode);
 			getEntity().addChild(((AbstractTreeModel)childNode).getEntity());
 		}
 	}
@@ -69,14 +70,6 @@ public abstract class  AbstractTreeModel implements IGUITreeNode {
 		getEntity().update();
 	}
 
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
 	public AbstractEntity getEntity() {
 		return entity;
 	}
@@ -85,7 +78,16 @@ public abstract class  AbstractTreeModel implements IGUITreeNode {
 		this.entity = entity;
 	}
 
-	protected abstract IGUITreeNode getChild(AbstractEntity childEntity) ;
-//	protected abstract List<IGUITreeNode> produceChildren(List<AbstractEntity> childEntties );
-	protected abstract IGUITreeNode produceParent(AbstractEntity childEntties );
+	public String getName()
+	{
+		return "";	
+	}
+
+	public void setName(String name){
+
+	}
+
+
+	protected abstract AbstractTreeModel getChild(AbstractEntity childEntity)throws Exception ;
+	//	protected abstract IGUITreeNode produceParent(AbstractEntity childEntties );
 }

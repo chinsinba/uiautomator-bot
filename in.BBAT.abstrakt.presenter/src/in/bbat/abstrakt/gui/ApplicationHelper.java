@@ -9,6 +9,6 @@ public class ApplicationHelper {
 
 	public static void initializeDb() throws UnknownHostException, Exception{
 		MineManager.getInstance().startDBServer();
-		MineManager.getInstance().createDb("sample112");
+		MineManager.getInstance().createDb("sample_new");
 	}
 }

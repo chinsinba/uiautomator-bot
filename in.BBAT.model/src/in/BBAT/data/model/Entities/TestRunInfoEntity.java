@@ -1,7 +1,6 @@
 package in.BBAT.data.model.Entities;
 
 import java.sql.Timestamp;
-import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

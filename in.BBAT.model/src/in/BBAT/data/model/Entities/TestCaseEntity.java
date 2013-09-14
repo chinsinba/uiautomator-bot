@@ -3,18 +3,14 @@ package in.BBAT.data.model.Entities;
 
 
 import java.sql.Timestamp;
-import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
-import javax.persistence.OrderColumn;
 import javax.persistence.TableGenerator;
 import javax.persistence.Version;
 
@@ -33,23 +29,26 @@ public class TestCaseEntity extends AbstractEntity {
 	private String name;
 
 	private String description;
-	
+
 	@Version
 	private Timestamp lastModified;
 
 	private Timestamp createdOn;
 
+	@ManyToOne
+	private TestSuiteEntity suite;
+
 	@OneToOne
 	private UserEntity createdBy;
 
-	@ManyToMany
-	@JoinColumn(name = "suiteID")
-	@OrderColumn
-	private List<TestSuiteEntity> suite;
 
-	@ManyToOne
-	private TestProjectEntity testProject;
-	
+	public TestCaseEntity(String testCaseName) {
+		this.name = testCaseName;
+	}
+
+	TestCaseEntity(){
+
+	}
 	public int getId() {
 		return id;
 	}
@@ -82,17 +81,9 @@ public class TestCaseEntity extends AbstractEntity {
 		this.createdOn = createdOn;
 	}
 
-	public List<TestSuiteEntity> getSuite() {
-		return suite;
-	}
-
-	public void setSuite(List<TestSuiteEntity> suite) {
-		this.suite = suite;
-	}
-
 	@Override
 	public AbstractEntity getParent() {
-		return getTestProject();
+		return getSuite();
 	}
 
 	public UserEntity getCreatedBy() {
@@ -111,12 +102,11 @@ public class TestCaseEntity extends AbstractEntity {
 		this.description = description;
 	}
 
-	public TestProjectEntity getTestProject() {
-		return testProject;
+	public TestSuiteEntity getSuite() {
+		return suite;
 	}
 
-	public void setTestProject(TestProjectEntity testProject) {
-		this.testProject = testProject;
+	public void setSuite(TestSuiteEntity suite) {
+		this.suite = suite;
 	}
-
 }

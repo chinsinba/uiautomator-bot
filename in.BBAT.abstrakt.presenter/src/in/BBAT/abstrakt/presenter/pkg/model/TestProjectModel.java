@@ -1,11 +1,10 @@
 package in.BBAT.abstrakt.presenter.pkg.model;
 
-import java.util.List;
-
-import in.BBAT.abstrakt.gui.model.AbstractTreeModel;
-import in.BBAT.abstrakt.gui.model.IGUITreeNode;
 import in.BBAT.data.model.Entities.AbstractEntity;
 import in.BBAT.data.model.Entities.TestProjectEntity;
+import in.BBAT.data.model.Entities.TestSuiteEntity;
+
+import java.io.File;
 
 import org.eclipse.swt.graphics.Image;
 
@@ -14,19 +13,19 @@ import org.eclipse.swt.graphics.Image;
  * @author Syed Mehtab
  *
  */
-public class TestProjectModel extends AbstractTreeModel{
+public class TestProjectModel extends AbstractProjectTree {
 
-	private String location;
 
-	protected TestProjectModel(TestProjectEntity entity) {
-		super(entity);
-		
+	protected TestProjectModel(TestProjectEntity entity) throws Exception {
+		super(null,entity, entity.getName(),false);
 	}
 
-	public TestProjectModel(String projectName) {
-		this(new TestProjectEntity());
-		this.location = projectName;
-		createProjectDir();
+	protected TestProjectModel(TestProjectEntity entity,boolean createResource) throws Exception {
+		super(null,entity, entity.getName(),createResource);
+	}
+
+	public TestProjectModel(String projectName) throws Exception {
+		this(new TestProjectEntity(projectName),true);
 	}
 
 	@Override
@@ -34,37 +33,28 @@ public class TestProjectModel extends AbstractTreeModel{
 		return getName();
 	}
 
-	private void createProjectDir() {
-
-	}
-
-	@Override
 	public String getName() {
-		// TODO Auto-generated method stub
 		return ((TestProjectEntity)getEntity()).getName();
 	}
-	@Override
+
 	public Image getImage() {
 		return null;
 	}
 
 	@Override
-	protected IGUITreeNode produceParent(AbstractEntity childEntties) {
-		return null;
-	}
-
-	@Override
-	protected IGUITreeNode getChild(AbstractEntity childEntity) {
-		return new TestSuiteModel(childEntity);
+	protected AbstractProjectTree getChild(AbstractEntity childEntity) throws Exception {
+		return new TestSuiteModel(this,(TestSuiteEntity) childEntity);
 	}
 
 	@Override
 	public void setName(String name) {
 		((TestProjectEntity)getEntity()).setName(name);
 	}
-	
-	public String getLocation(){
-		return this.location;
+
+	@Override
+	public void createResource() {
+		File f = new File(getPath());
+		f.mkdir();
 	}
 
 }

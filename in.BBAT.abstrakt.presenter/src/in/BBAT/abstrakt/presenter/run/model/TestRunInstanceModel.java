@@ -17,13 +17,13 @@ import org.eclipse.swt.graphics.Image;
  */
 public class TestRunInstanceModel extends AbstractTreeModel {
 
-	protected TestRunInstanceModel(TestRunInfoEntity entity) {
-		super(entity);
+	protected TestRunInstanceModel(TestRunModel parent,TestRunInfoEntity entity) {
+		super(parent,entity);
 		// TODO Auto-generated constructor stub
 	}
 
-	public TestRunInstanceModel() {
-		super(new TestRunInfoEntity());
+	public TestRunInstanceModel(TestRunModel parent) {
+		super(parent,new TestRunInfoEntity());
 	}
 	@Override
 	public String getLabel() {
@@ -37,16 +37,15 @@ public class TestRunInstanceModel extends AbstractTreeModel {
 		return null;
 	}
 
-	@Override
 	protected IGUITreeNode produceParent(AbstractEntity childEntties) {
-		// TODO Auto-generated method stub
 		return new TestRunModel((TestRunEntity) childEntties);
 	}
 
 	@Override
-	protected IGUITreeNode getChild(AbstractEntity childEntity) {
+	protected AbstractTreeModel getChild(AbstractEntity childEntity) {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 
 }

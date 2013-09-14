@@ -50,7 +50,11 @@ public class TestCaseBrowserView extends BBATViewPart {
 		viewer.setContentProvider(new TestCaseBrowserContentProvider());
 		viewer.setLabelProvider(new TestCaseLabelProvider());
 		// Provide the input to the ContentProvider
-		viewer.setInput(TestProjectManager.getInstance().getTestProjects());
+		try {
+			viewer.setInput(TestProjectManager.getInstance().getTestProjects());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		addMenuManager(viewer);
 	}
 
@@ -62,7 +66,7 @@ public class TestCaseBrowserView extends BBATViewPart {
 	}
 	
 	@Override
-	public void refresh() {
+	public void refresh() throws Exception {
 		viewer.setInput(TestProjectManager.getInstance().getTestProjects());
 		viewer.refresh();
 	}

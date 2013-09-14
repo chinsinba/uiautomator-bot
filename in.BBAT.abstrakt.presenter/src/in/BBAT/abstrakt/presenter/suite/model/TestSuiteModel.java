@@ -1,7 +1,6 @@
 package in.BBAT.abstrakt.presenter.suite.model;
 
 import in.BBAT.abstrakt.gui.model.AbstractTreeModel;
-import in.BBAT.abstrakt.gui.model.IGUITreeNode;
 import in.BBAT.abstrakt.gui.model.UserModel;
 import in.BBAT.data.model.Entities.AbstractEntity;
 import in.BBAT.data.model.Entities.TestSuiteEntity;
@@ -17,13 +16,12 @@ public class TestSuiteModel  extends AbstractTreeModel{
 
 
 	protected TestSuiteModel(TestSuiteEntity entity) {
-		super(entity);
-		// TODO Auto-generated constructor stub
+		super(null,entity);
 	}
 
 
 	public TestSuiteModel(){
-		super(new TestSuiteEntity());
+		super(null,new TestSuiteEntity(""));
 	}
 
 	@Override
@@ -51,13 +49,9 @@ public class TestSuiteModel  extends AbstractTreeModel{
 	}
 
 
-	@Override
-	protected IGUITreeNode produceParent(AbstractEntity childEntties) {
-		return null;
-	}
 
 	@Override
-	protected IGUITreeNode getChild(AbstractEntity childEntity) {
+	protected AbstractTreeModel getChild(AbstractEntity childEntity) throws Exception {
 		return new TestSuiteCaseModel((TestSuiteEntity) childEntity,this);
 	}
 

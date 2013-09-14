@@ -18,11 +18,11 @@ import org.eclipse.swt.graphics.Image;
 public class TestRunModel extends AbstractTreeModel {
 
 	protected TestRunModel(TestRunEntity entity) {
-		super(entity);
+		super(null,entity);
 	}
 
 	public TestRunModel() {
-		super(new TestRunEntity());
+		super(null,new TestRunEntity());
 	}
 	
 	@Override
@@ -36,14 +36,8 @@ public class TestRunModel extends AbstractTreeModel {
 	}
 
 	@Override
-	protected IGUITreeNode produceParent(AbstractEntity childEntties) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	protected IGUITreeNode getChild(AbstractEntity childEntity) {
-		return new TestRunInstanceModel((TestRunInfoEntity) childEntity);
+	protected AbstractTreeModel getChild(AbstractEntity childEntity) {
+		return new TestRunInstanceModel(this,(TestRunInfoEntity) childEntity);
 	}
 
 	

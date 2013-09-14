@@ -8,9 +8,10 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.OrderColumn;
 import javax.persistence.TableGenerator;
@@ -38,11 +39,22 @@ public class TestSuiteEntity extends AbstractEntity  {
 	private Timestamp lastModified;
 
 	private Timestamp createdOn;
-
-
-	@ManyToMany(mappedBy="suite", fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST })
+	
+	@ManyToOne
+	private TestProjectEntity testProject;
+	
+	@OneToMany(mappedBy="suite", fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST })
 	@OrderColumn
 	private List<TestCaseEntity> testCases;
+
+	public TestSuiteEntity(String name) {
+
+		this.name = name;
+	}
+	
+	public TestSuiteEntity() {
+		// TODO Auto-generated constructor stub
+	}
 
 	public int getId() {
 		return id;
@@ -124,6 +136,14 @@ public class TestSuiteEntity extends AbstractEntity  {
 	public void removeTestCase(TestCaseEntity testCase)
 	{
 		this.testCases.remove(testCase);
+	}
+
+	public TestProjectEntity getTestProject() {
+		return testProject;
+	}
+
+	public void setTestProject(TestProjectEntity testProject) {
+		this.testProject = testProject;
 	}
 
 }

@@ -1,12 +1,9 @@
 package in.BBAT.abstrakt.presenter.pkg.model;
 
-import java.util.List;
-
-import in.BBAT.abstrakt.gui.model.AbstractTreeModel;
-import in.BBAT.abstrakt.gui.model.IGUITreeNode;
-import in.BBAT.data.model.Entities.AbstractEntity;
 import in.BBAT.data.model.Entities.TestCaseEntity;
-import in.BBAT.data.model.Entities.TestProjectEntity;
+
+import java.io.File;
+import java.io.IOException;
 
 import org.eclipse.swt.graphics.Image;
 
@@ -15,38 +12,21 @@ import org.eclipse.swt.graphics.Image;
  * @author Syed Mehtab
  *
  */
-public class TestCaseModel extends AbstractTreeModel {
+public class TestCaseModel extends AbstractProjectTree{
 
-	private String scriptPath;
-
-	protected TestCaseModel(AbstractEntity entity) {
-		super(entity);
+	public final static String JAVA = ".java";
+	protected TestCaseModel(TestSuiteModel parent ,TestCaseEntity entity) throws Exception {
+		super(parent,entity,entity.getName()+JAVA,false);
 
 	}
+	
+	protected TestCaseModel(TestSuiteModel parent ,TestCaseEntity entity,boolean createResource) throws Exception {
+		super(parent,entity,entity.getName()+JAVA,createResource);
+	}
 
-	public TestCaseModel(String testCaseName){
-		this(new TestCaseEntity());
-		setName(testCaseName);
-		createTestCaseTemplate();
+	public TestCaseModel(TestSuiteModel parent,String testCaseName) throws Exception{
+		this(parent,new TestCaseEntity(testCaseName),true);
 		
-	}
-
-	/**
-	 * this method will create the template.
-	 */
-	private void createTestCaseTemplate() {
-		// TODO Auto-generated method stub
-
-	}
-
-
-
-	public String getScriptPath() {
-		return scriptPath;
-	}
-
-	public void setScriptPath(String scriptPath) {
-		this.scriptPath = scriptPath;
 	}
 
 	@Override
@@ -60,13 +40,9 @@ public class TestCaseModel extends AbstractTreeModel {
 	}
 
 	@Override
-	protected IGUITreeNode produceParent(AbstractEntity childEntties) {
-		return new TestProjectModel((TestProjectEntity) childEntties);
-	}
-
-	@Override
-	protected IGUITreeNode getChild(AbstractEntity childEntity) {
-		return null;
+	public void createResource() throws IOException {
+		File newFile = new File(getPath());
+		newFile.createNewFile();
 	}
 
 }

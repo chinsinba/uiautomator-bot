@@ -12,7 +12,7 @@ public interface IGUITreeNode {
 
 	String getLabel();
 	Image getImage();
-	List<IGUITreeNode> getChildren();
+	List<? extends IGUITreeNode> getChildren() throws Exception;
 	IGUITreeNode getParent();
 	void addChild(IGUITreeNode childNode);
 }

@@ -25,7 +25,7 @@ public class TestProjectManager {
 		return instance;
 	}
 
-	public List<TestProjectModel> getTestProjects(){
+	public List<TestProjectModel> getTestProjects() throws Exception{
 		List<TestProjectModel> models = new ArrayList<TestProjectModel>();
 		for(TestProjectEntity entity: ProjectMineManager.getAllTesPackages()){
 			TestProjectModel model = new TestProjectModel(entity);

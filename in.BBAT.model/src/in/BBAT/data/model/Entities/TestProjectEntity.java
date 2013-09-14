@@ -11,6 +11,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.OrderColumn;
 import javax.persistence.TableGenerator;
 
 @Entity
@@ -33,7 +34,16 @@ public class TestProjectEntity extends AbstractEntity {
 	private String name;
 
 	@OneToMany(mappedBy="testProject",fetch = FetchType.LAZY, cascade = { CascadeType.ALL })
-	private List<TestCaseEntity> testcases;
+	@OrderColumn
+	private List<TestSuiteEntity> testSuites;
+
+	public TestProjectEntity(String projectName) {
+		this.name = projectName;
+	}
+	
+	public TestProjectEntity() {
+		// TODO Auto-generated constructor stub
+	}
 
 	public int getId() {
 		return id;
@@ -46,7 +56,7 @@ public class TestProjectEntity extends AbstractEntity {
 	@Override
 	public List<? extends AbstractEntity> getChildren() {
 
-		return getTestcases();
+		return getTestSuites();
 	}
 
 
@@ -58,12 +68,12 @@ public class TestProjectEntity extends AbstractEntity {
 
 	@Override
 	public void addChild(IBBATEntity childEntity) {
-		addTestCase((TestCaseEntity) childEntity);
+		addTestSuite((TestSuiteEntity) childEntity);
 	}
 
 	@Override
 	public void removeChild(IBBATEntity childEntity) {
-		removeTestCase((TestCaseEntity) childEntity);
+		removeTestSuite((TestSuiteEntity) childEntity);
 	}
 	
 	public UserEntity getCreatedBy() {
@@ -82,20 +92,20 @@ public class TestProjectEntity extends AbstractEntity {
 		this.description = description;
 	}
 
-	public List<TestCaseEntity> getTestcases() {
-		return testcases;
+	public List<TestSuiteEntity> getTestSuites() {
+		return testSuites;
 	}
 
-	public void setTestcases(List<TestCaseEntity> testcases) {
-		this.testcases = testcases;
+	public void setTestSuites(List<TestSuiteEntity> testSuites) {
+		this.testSuites = testSuites;
 	}
 
-	public void addTestCase(TestCaseEntity testCase){
-		this.testcases.add(testCase);
+	public void addTestSuite(TestSuiteEntity testSuite){
+		this.testSuites.add(testSuite);
 	}
 
-	public void removeTestCase(TestCaseEntity testCase){
-		this.testcases.remove(testCase);
+	public void removeTestSuite(TestSuiteEntity testSuite){
+		this.testSuites.remove(testSuite);
 	}
 
 	public String getName() {

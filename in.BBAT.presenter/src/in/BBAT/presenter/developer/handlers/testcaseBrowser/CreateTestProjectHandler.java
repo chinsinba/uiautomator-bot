@@ -13,14 +13,23 @@ public class CreateTestProjectHandler extends BBATHandler {
 
 	@Override
 	protected Object run(ExecutionEvent event) {
-		TestProjectModel newTestProject = new TestProjectModel("TestIT");
+		TestProjectModel newTestProject = null;
+		try {
+			newTestProject = new TestProjectModel("TestIT");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		newTestProject.setName("TestProj");
 		MineManager.getInstance().beginTransaction();
 		newTestProject.save();
 		MineManager.getInstance().commitTransaction();
-		
+
 		BBATViewPart view = (BBATViewPart) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().findView(TestCaseBrowserView.ID);
-		view.refresh();
+		try {
+			view.refresh();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return null;
 	}
 
