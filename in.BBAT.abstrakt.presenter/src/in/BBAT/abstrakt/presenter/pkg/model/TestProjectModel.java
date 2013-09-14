@@ -57,4 +57,12 @@ public class TestProjectModel extends AbstractProjectTree {
 		f.mkdir();
 	}
 
+	public void setDescription(String description) {
+		((TestProjectEntity)getEntity()).setDescription(description);		
+	}
+
+	public String getDescription()
+	{
+		return ((TestProjectEntity)getEntity()).getDescription();
+	}
 }

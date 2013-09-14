@@ -49,4 +49,14 @@ public class TestSuiteModel extends AbstractProjectTree{
 		f.mkdirs();
 	}
 
+	@Override
+	public String getDescription() {
+		return ((TestSuiteEntity)getEntity()).getDescription();
+	}
+
+	@Override
+	public void setDescription(String description) {
+		((TestSuiteEntity)getEntity()).setDescription(description);
+	}
+
 }

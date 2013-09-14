@@ -2,6 +2,7 @@ package in.BBAT.abstrakt.presenter.pkg.model;
 
 import in.BBAT.abstrakt.gui.model.AbstractTreeModel;
 import in.BBAT.data.model.Entities.AbstractEntity;
+import in.BBAT.data.model.Entities.TestProjectEntity;
 
 import java.io.File;
 
@@ -46,6 +47,14 @@ public abstract class AbstractProjectTree extends AbstractTreeModel implements I
 	@Override
 	protected AbstractTreeModel getChild(AbstractEntity childEntity) throws Exception{
 		return null;
+	}
+
+	public void setDescription(String description) {
+	}
+
+	public String getDescription()
+	{
+		return "";
 	}
 
 }

@@ -37,7 +37,6 @@ public class TestCaseModel extends AbstractProjectTree{
 
 	@Override
 	public String getName() {
-		// TODO Auto-generated method stub
 		return ((TestCaseEntity)getEntity()).getName();
 	}
 	@Override
@@ -49,6 +48,16 @@ public class TestCaseModel extends AbstractProjectTree{
 	public void createResource() throws IOException {
 		File newFile = new File(getPath());
 		newFile.createNewFile();
+	}
+	
+	@Override
+	public String getDescription() {
+		return ((TestCaseEntity)getEntity()).getDescription();
+	}
+	
+	@Override
+	public void setDescription(String description) {
+		((TestCaseEntity)getEntity()).setDescription(description);
 	}
 
 }
