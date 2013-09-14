@@ -6,8 +6,6 @@ import in.BBAT.abstrakt.gui.model.UserModel;
 import in.BBAT.data.model.Entities.AbstractEntity;
 import in.BBAT.data.model.Entities.TestSuiteEntity;
 
-import java.util.List;
-
 import org.eclipse.swt.graphics.Image;
 /**
  * 
@@ -52,12 +50,6 @@ public class TestSuiteModel  extends AbstractTreeModel{
 		return null;
 	}
 
-
-	@Override
-	protected List<IGUITreeNode> produceChildren(List<AbstractEntity> childEntties) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
 	protected IGUITreeNode produceParent(AbstractEntity childEntties) {

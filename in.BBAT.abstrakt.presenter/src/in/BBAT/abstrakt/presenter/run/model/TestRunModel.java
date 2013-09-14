@@ -36,12 +36,6 @@ public class TestRunModel extends AbstractTreeModel {
 	}
 
 	@Override
-	protected List<IGUITreeNode> produceChildren(List<AbstractEntity> childEntties) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	protected IGUITreeNode produceParent(AbstractEntity childEntties) {
 		// TODO Auto-generated method stub
 		return null;

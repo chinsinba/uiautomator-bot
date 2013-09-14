@@ -60,11 +60,6 @@ public class TestCaseModel extends AbstractTreeModel {
 	}
 
 	@Override
-	protected List<IGUITreeNode> produceChildren(List<AbstractEntity> childEntties) {
-		return null;
-	}
-
-	@Override
 	protected IGUITreeNode produceParent(AbstractEntity childEntties) {
 		return new TestProjectModel((TestProjectEntity) childEntties);
 	}

@@ -86,6 +86,6 @@ public abstract class  AbstractTreeModel implements IGUITreeNode {
 	}
 
 	protected abstract IGUITreeNode getChild(AbstractEntity childEntity) ;
-	protected abstract List<IGUITreeNode> produceChildren(List<AbstractEntity> childEntties );
+//	protected abstract List<IGUITreeNode> produceChildren(List<AbstractEntity> childEntties );
 	protected abstract IGUITreeNode produceParent(AbstractEntity childEntties );
 }
