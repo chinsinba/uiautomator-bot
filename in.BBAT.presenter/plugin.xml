@@ -139,13 +139,18 @@
             allPopups="false"
             locationURI="popup:in.BBAT.presenter.developer.testcaseBrowserView">
          <command
-               commandId="in.BBAT.presenter.testCase.CreateTestCase"
-               label="TestCase"
+               commandId="in.BBAT.presenter.testCase.CreateProject"
+               label="TestProject"
                style="push">
          </command>
          <command
-               commandId="in.BBAT.presenter.testCase.CreateProject"
-               label="TestProject"
+               commandId="in.BBAT.presenter.testCase.CreateSuite"
+               label="TestSuite"
+               style="push">
+         </command>
+         <command
+               commandId="in.BBAT.presenter.testCase.CreateTestCase"
+               label="TestCase"
                style="push">
          </command>
          <command
@@ -202,6 +207,10 @@
             id="in.BBAT.presenter.testCase.export"
             name="Export">
       </command>
+      <command
+            id="in.BBAT.presenter.testCase.CreateSuite"
+            name="Create TestSuite">
+      </command>
    </extension>
    <extension
          point="org.eclipse.ui.handlers">
@@ -214,7 +223,7 @@
             commandId="in.BBAT.presenter.testCase.CreateProject">
       </handler>
       <handler
-            class="in.BBAT.presenter.developer.handlers.OpenScreenShotViewHandler"
+            class="in.BBAT.presenter.developer.handlers.device.OpenScreenShotViewHandler"
             commandId="in.BBAT.presenter.device.openScreenShot">
       </handler>
       <handler
@@ -228,6 +237,10 @@
       <handler
             class="in.BBAT.presenter.developer.handlers.testcaseBrowser.ExportScriptsHandler"
             commandId="in.BBAT.presenter.testCase.export">
+      </handler>
+      <handler
+            class="in.BBAT.presenter.developer.handlers.testcaseBrowser.CreateTestSuiteHandler"
+            commandId="in.BBAT.presenter.testCase.CreateSuite">
       </handler>
    </extension>
 

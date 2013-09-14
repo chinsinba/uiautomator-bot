@@ -1,18 +1,19 @@
 package in.BBAT.presenter.developer.handlers.testcaseBrowser;
 
-import org.eclipse.core.commands.ExecutionEvent;
-import org.eclipse.ui.PlatformUI;
+import java.util.List;
 
 import in.BBAT.abstrakt.presenter.pkg.model.TestProjectModel;
 import in.BBAT.dataMine.manager.MineManager;
-import in.BBAT.presenter.developer.handlers.BBATHandler;
 import in.bbat.presenter.views.BBATViewPart;
 import in.bbat.presenter.views.developer.TestCaseBrowserView;
 
-public class CreateTestProjectHandler extends BBATHandler {
+import org.eclipse.core.commands.ExecutionEvent;
+import org.eclipse.ui.PlatformUI;
+
+public class CreateTestProjectHandler extends AbstractTestCaseBrowserHandler {
 
 	@Override
-	protected Object run(ExecutionEvent event) {
+	public Object run(ExecutionEvent event) {
 		TestProjectModel newTestProject = null;
 		try {
 			newTestProject = new TestProjectModel("TestIT");
@@ -31,6 +32,11 @@ public class CreateTestProjectHandler extends BBATHandler {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	@Override
+	public boolean isEnabled(List<?> object) {
+		return true;
 	}
 
 }

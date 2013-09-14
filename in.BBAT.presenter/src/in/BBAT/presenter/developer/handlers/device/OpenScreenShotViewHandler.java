@@ -1,5 +1,8 @@
-package in.BBAT.presenter.developer.handlers;
+package in.BBAT.presenter.developer.handlers.device;
 
+import java.util.List;
+
+import in.BBAT.presenter.developer.handlers.BBATHandler;
 import in.bbat.presenter.views.developer.ScreenShotView;
 
 import org.eclipse.core.commands.ExecutionEvent;
@@ -9,7 +12,7 @@ import org.eclipse.ui.PlatformUI;
 public class OpenScreenShotViewHandler extends BBATHandler {
 
 	@Override
-	protected Object run(ExecutionEvent event) {
+	public Object run(ExecutionEvent event) {
 
 		try {
 			PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().showView(ScreenShotView.ID);
@@ -17,6 +20,12 @@ public class OpenScreenShotViewHandler extends BBATHandler {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	@Override
+	public boolean isEnabled(List<?> object) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

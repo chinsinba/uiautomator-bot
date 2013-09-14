@@ -1,20 +1,31 @@
 package in.BBAT.presenter.developer.handlers.testcaseBrowser;
 
-import in.BBAT.presenter.developer.handlers.BBATHandler;
+import in.BBAT.abstrakt.presenter.pkg.model.TestSuiteModel;
+
+import java.util.List;
 
 import org.eclipse.core.commands.ExecutionEvent;
-import org.eclipse.core.commands.IHandler;
 
-public class DeleteElementsHandler extends BBATHandler implements IHandler {
+public class DeleteElementsHandler extends AbstractTestCaseBrowserHandler {
 
 	@Override
-	protected Object run(ExecutionEvent event) {
+	public Object run(ExecutionEvent event) {
 		return null;
 	}
 
 	@Override
-	public boolean isEnabled() {
-		// TODO Auto-generated method stub
-		return super.isEnabled();
+	public boolean isEnabled(List<?> object) {
+		if(!object.isEmpty())
+		{
+			if(object.size()==1)
+			{
+				if(object.get(0) instanceof TestSuiteModel)
+				{
+					return true;
+				}
+			}
+		}
+		return false;
 	}
+
 }

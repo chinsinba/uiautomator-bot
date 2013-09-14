@@ -1,10 +1,13 @@
 package in.bbat.presenter.views.developer;
 
+import java.util.List;
+
 import in.BBAT.abstrakt.presenter.pkg.model.TestProjectManager;
 import in.BBAT.presenter.contentProviders.TestCaseBrowserContentProvider;
 import in.BBAT.presenter.labelProviders.TestCaseLabelProvider;
 import in.bbat.presenter.views.BBATViewPart;
 
+import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredContentProvider;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.Viewer;
@@ -69,5 +72,10 @@ public class TestCaseBrowserView extends BBATViewPart {
 	public void refresh() throws Exception {
 		viewer.setInput(TestProjectManager.getInstance().getTestProjects());
 		viewer.refresh();
+	}
+
+	@Override
+	public ISelection getSelectedElements() {
+		return viewer.getSelection();
 	}
 }

@@ -1,15 +1,19 @@
 package in.BBAT.presenter.developer.handlers.testcaseBrowser;
 
+import java.util.List;
+
 import org.eclipse.core.commands.ExecutionEvent;
 
-import in.BBAT.presenter.developer.handlers.BBATHandler;
-
-public class ExportScriptsHandler extends BBATHandler {
+public class ExportScriptsHandler extends AbstractTestCaseBrowserHandler {
 
 	@Override
-	protected Object run(ExecutionEvent event) {
-		// TODO Auto-generated method stub
+	public Object run(ExecutionEvent event) {
 		return null;
 	}
 
+	
+	@Override
+	public boolean isEnabled(List<?> object) {
+		return false;
+	}
 }

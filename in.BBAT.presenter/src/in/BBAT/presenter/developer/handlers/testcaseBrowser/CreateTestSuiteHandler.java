@@ -1,18 +1,18 @@
 package in.BBAT.presenter.developer.handlers.testcaseBrowser;
 
 import in.BBAT.abstrakt.presenter.pkg.model.TestProjectModel;
-import in.BBAT.abstrakt.presenter.pkg.model.TestSuiteModel;
 
 import java.util.List;
 
 import org.eclipse.core.commands.ExecutionEvent;
 
-public class CreateTestCaseHandler extends AbstractTestCaseBrowserHandler {
+public class CreateTestSuiteHandler extends AbstractTestCaseBrowserHandler {
+
 
 	@Override
 	public Object run(ExecutionEvent event) {
-
-		return null;
+		// TODO Auto-generated method stub
+		return super.run(event);
 	}
 
 	@Override
@@ -21,7 +21,7 @@ public class CreateTestCaseHandler extends AbstractTestCaseBrowserHandler {
 		{
 			if(object.size()==1)
 			{
-				if(object.get(0) instanceof TestSuiteModel)
+				if(object.get(0) instanceof TestProjectModel)
 				{
 					return true;
 				}

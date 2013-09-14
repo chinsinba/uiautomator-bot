@@ -11,7 +11,7 @@ public abstract class AbstractProjectTree extends AbstractTreeModel implements I
 
 
 	private String resourcePath;
-	public final static String UI_AUTO_CASE_PATH ="";
+	public final static String UI_AUTO_CASE_PATH ="/home/syed/Documents/BlackAndro/UserPack";
 
 	/**
 	 * 

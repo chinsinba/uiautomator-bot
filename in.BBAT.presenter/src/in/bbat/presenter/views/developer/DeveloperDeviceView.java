@@ -7,6 +7,7 @@ import in.BBAT.presenter.labelProviders.DeviceViewLabelProvider;
 import in.bbat.presenter.views.BBATViewPart;
 
 import org.eclipse.jface.viewers.ArrayContentProvider;
+import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
@@ -51,7 +52,6 @@ public class DeveloperDeviceView extends BBATViewPart {
 
 		private void refreshInUIThread() {
 			Display.getDefault().asyncExec(new Runnable() {
-
 				@Override
 				public void run() {
 					refresh();	
@@ -64,6 +64,11 @@ public class DeveloperDeviceView extends BBATViewPart {
 		public void deviceRemoved(AndroidDevice device) {
 			refreshInUIThread();
 		}
+	}
+
+	@Override
+	public ISelection getSelectedElements() {
+		return viewer.getSelection();
 	}
 
 }
