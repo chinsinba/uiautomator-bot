@@ -23,7 +23,8 @@ public class NameAndDescriptionComponent {
 		Label nameLabel = new Label(group, SWT.NULL);
 		nameLabel.setText("Name:");
 		setNameText(new Text(group, SWT.BORDER));
-
+		getNameText().setFocus();
+		
 		GridData gdPkgName = new GridData(GridData.FILL_HORIZONTAL);
 		getNameText().setLayoutData(gdPkgName);
 		Label commentLabel = new Label(group, SWT.NULL);

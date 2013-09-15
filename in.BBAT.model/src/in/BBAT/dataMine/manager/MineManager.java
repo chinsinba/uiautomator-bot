@@ -18,9 +18,9 @@ public class MineManager {
 	private static EntityManager em = null;
 	private static boolean transactionStarted=false;
 	private static NetworkServerControl server;
-	
+
 	private static final String UNIT_NAME ="BBATDATA";
-	
+
 	private static final String DB_ADDRESS ="127.0.0.1"+":"+"1527";
 
 	private static MineManager instance_;
@@ -98,7 +98,8 @@ public class MineManager {
 		{	
 
 		}
-		em.remove(object);
+
+		em.remove(em.merge(object));
 	}
 
 

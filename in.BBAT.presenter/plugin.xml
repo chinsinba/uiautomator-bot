@@ -234,7 +234,7 @@
             commandId="in.BBAT.presenter.device.openScreenShot">
       </handler>
       <handler
-            class="in.BBAT.presenter.developer.handlers.testcaseBrowser.DeleteElementsHandler"
+            class="in.BBAT.presenter.developer.handlers.testcaseBrowser.DeleteTestCaseHandler"
             commandId="in.BBAT.presenter.testCase.deleteElement">
       </handler>
       <handler

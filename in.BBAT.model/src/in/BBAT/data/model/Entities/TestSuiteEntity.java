@@ -43,7 +43,7 @@ public class TestSuiteEntity extends AbstractEntity  {
 	@ManyToOne
 	private TestProjectEntity testProject;
 
-	@OneToMany(mappedBy="suite", fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST })
+	@OneToMany(mappedBy="suite", fetch = FetchType.LAZY, cascade = { CascadeType.ALL })
 	@OrderColumn
 	private List<TestCaseEntity> testCases;
 
