@@ -61,7 +61,7 @@ public abstract class  AbstractTreeModel implements IGUITreeNode {
 		getEntity().save();
 	}
 
-	public void delete(){
+	public void delete() throws Exception{
 		getEntity().delete();
 	}
 

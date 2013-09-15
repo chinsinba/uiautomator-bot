@@ -6,6 +6,7 @@ import in.BBAT.data.model.Entities.TestSuiteEntity;
 import in.bbat.abstrakt.gui.BBATImageManager;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 
 import org.eclipse.swt.graphics.Image;
 
@@ -39,7 +40,7 @@ public class TestProjectModel extends AbstractProjectTree {
 	}
 
 	public Image getImage() {
-		 return BBATImageManager.getInstance().getImage(BBATImageManager.PROJECT_GIF_16);
+		return BBATImageManager.getInstance().getImage(BBATImageManager.PROJECT_GIF_16);
 	}
 
 	@Override

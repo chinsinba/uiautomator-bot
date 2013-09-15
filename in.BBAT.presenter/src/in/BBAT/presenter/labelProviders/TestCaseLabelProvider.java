@@ -5,8 +5,6 @@ import in.BBAT.abstrakt.presenter.pkg.model.AbstractProjectTree;
 
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.swt.graphics.Image;
-import org.eclipse.ui.ISharedImages;
-import org.eclipse.ui.PlatformUI;
 
 public class TestCaseLabelProvider extends LabelProvider {
 

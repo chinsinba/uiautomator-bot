@@ -16,12 +16,11 @@
 
 package com.android.uiautomator.actions;
 
-import com.android.uiautomator.UiAutomatorView;
-import com.android.uiautomator.XMLArea;
-
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.resource.ImageDescriptor;
+
+import com.android.uiautomator.XMLArea;
 
 public class ToggleNafAction extends Action {
     private XMLArea mView;

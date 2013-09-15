@@ -5,6 +5,7 @@ import in.BBAT.data.model.Entities.AbstractEntity;
 import in.BBAT.data.model.Entities.TestProjectEntity;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 
 import org.eclipse.core.runtime.Path;
 
@@ -57,4 +58,23 @@ public abstract class AbstractProjectTree extends AbstractTreeModel implements I
 		return "";
 	}
 
+	public void delete() throws Exception {
+		super.delete();
+		deleteResource();
+	}
+
+	@Override
+	public void deleteResource() throws Exception {
+		File f = new File(getPath());
+		deleteFolder(f);
+	}
+
+	private void deleteFolder(File f) throws FileNotFoundException{
+		if (f.isDirectory()) {
+			for (File c : f.listFiles())
+				deleteFolder(c);
+		}
+		if (!f.delete())
+			throw new FileNotFoundException("Failed to delete file: " + f);
+	}
 }
