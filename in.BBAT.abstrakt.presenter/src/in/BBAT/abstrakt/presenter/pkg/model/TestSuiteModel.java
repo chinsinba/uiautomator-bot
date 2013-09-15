@@ -4,6 +4,7 @@ import in.BBAT.data.model.Entities.AbstractEntity;
 import in.BBAT.data.model.Entities.TestCaseEntity;
 import in.BBAT.data.model.Entities.TestProjectEntity;
 import in.BBAT.data.model.Entities.TestSuiteEntity;
+import in.bbat.abstrakt.gui.BBATImageManager;
 
 import java.io.File;
 
@@ -35,7 +36,7 @@ public class TestSuiteModel extends AbstractProjectTree{
 
 	@Override
 	public Image getImage() {
-		return null;
+		return BBATImageManager.getInstance().getImage(BBATImageManager.TESTSUITE_GIF_16);
 	}
 
 	@Override

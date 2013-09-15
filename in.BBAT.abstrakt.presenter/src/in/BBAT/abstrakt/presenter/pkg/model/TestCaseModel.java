@@ -2,6 +2,7 @@ package in.BBAT.abstrakt.presenter.pkg.model;
 
 import in.BBAT.data.model.Entities.TestCaseEntity;
 import in.BBAT.data.model.Entities.TestSuiteEntity;
+import in.bbat.abstrakt.gui.BBATImageManager;
 
 import java.io.File;
 import java.io.IOException;
@@ -41,7 +42,7 @@ public class TestCaseModel extends AbstractProjectTree{
 	}
 	@Override
 	public Image getImage() {
-		return null;
+		return BBATImageManager.getInstance().getImage(BBATImageManager.TESTCASE_GIF_16);
 	}
 
 	@Override

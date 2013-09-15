@@ -1,6 +1,7 @@
 package in.BBAT.presenter.labelProviders;
 
 import in.BBAT.abstrakt.gui.model.IGUITreeNode;
+import in.BBAT.abstrakt.presenter.pkg.model.AbstractProjectTree;
 
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.swt.graphics.Image;
@@ -19,7 +20,9 @@ public class TestCaseLabelProvider extends LabelProvider {
 
 
 	public Image getImage(Object obj) {
-		return PlatformUI.getWorkbench().getSharedImages().getImage(
-				ISharedImages.IMG_OBJ_ELEMENT);
+
+		if(obj instanceof AbstractProjectTree)
+			return ((AbstractProjectTree) obj).getImage();
+		return null;
 	}
 }
