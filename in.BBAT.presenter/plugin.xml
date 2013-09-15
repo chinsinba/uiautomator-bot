@@ -138,21 +138,28 @@
       <menuContribution
             allPopups="false"
             locationURI="popup:in.BBAT.presenter.developer.testcaseBrowserView">
-         <command
-               commandId="in.BBAT.presenter.testCase.CreateProject"
-               label="TestProject"
-               style="push">
-         </command>
-         <command
-               commandId="in.BBAT.presenter.testCase.CreateSuite"
-               label="TestSuite"
-               style="push">
-         </command>
-         <command
-               commandId="in.BBAT.presenter.testCase.CreateTestCase"
-               label="TestCase"
-               style="push">
-         </command>
+         <menu
+               label="New">
+            <command
+                  commandId="in.BBAT.presenter.testCase.CreateTestCase"
+                  label="TestCase"
+                  style="push">
+            </command>
+            <command
+                  commandId="in.BBAT.presenter.testCase.CreateSuite"
+                  label="TestSuite"
+                  style="push">
+            </command>
+            <command
+                  commandId="in.BBAT.presenter.testCase.CreateProject"
+                  label="TestProject"
+                  style="push">
+            </command>
+         </menu>
+         <separator
+               name="in.BBAT.presenter.separator1"
+               visible="true">
+         </separator>
          <command
                commandId="in.BBAT.presenter.testCase.edit"
                label="Edit"

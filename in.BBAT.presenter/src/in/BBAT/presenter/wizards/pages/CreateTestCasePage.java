@@ -24,23 +24,21 @@ public class CreateTestCasePage extends CreatePage {
 		comp.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false));
 		comp.setLayout(new GridLayout(2, false));
 
-		{
-			Label nameLabel = new Label(comp, SWT.NULL);
-			nameLabel.setText("TestProject :");
-			Text valueText = new Text(comp, SWT.BORDER|SWT.READ_ONLY);
-			valueText.setText(parentSuite.getParent().getName());
-			GridData gd = new GridData(GridData.FILL_HORIZONTAL);
-			valueText.setLayoutData(gd);
-		}
-		{
-			Label nameLabel = new Label(comp, SWT.NULL);
-			nameLabel.setText("TestSuite :");
-			Text valueText = new Text(comp, SWT.BORDER|SWT.READ_ONLY);
-			valueText.setText(parentSuite.getName());
-			GridData gd = new GridData(GridData.FILL_HORIZONTAL);
-			valueText.setLayoutData(gd);
-		}
+		Label projectNameLabel = new Label(comp, SWT.NULL);
+		projectNameLabel.setText("TestProject :");
+		Text projectNameText = new Text(comp, SWT.BORDER|SWT.READ_ONLY);
+		projectNameText.setText(parentSuite.getParent().getName());
+		projectNameText.setEditable(false);
+		GridData gd = new GridData(GridData.FILL_HORIZONTAL);
+		projectNameText.setLayoutData(gd);
 
+		Label suiteNameLabel = new Label(comp, SWT.NULL);
+		suiteNameLabel.setText("TestSuite :");
+		Text suiteNameText = new Text(comp, SWT.BORDER|SWT.READ_ONLY);
+		suiteNameText.setText(parentSuite.getName());
+		suiteNameText.setEditable(false);
+		gd = new GridData(GridData.FILL_HORIZONTAL);
+		suiteNameText.setLayoutData(gd);
 	}
 
 }

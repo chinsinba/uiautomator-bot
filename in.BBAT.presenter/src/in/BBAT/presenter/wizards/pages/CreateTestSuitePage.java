@@ -29,6 +29,7 @@ public class CreateTestSuitePage extends CreatePage {
 		nameLabel.setText("Test Project :");
 		Text valueText = new Text(comp, SWT.BORDER|SWT.READ_ONLY);
 		valueText.setText(parentProj.getName());
+		valueText.setEditable(false);
 		GridData gd = new GridData(GridData.FILL_BOTH);
 		gd.grabExcessVerticalSpace = true;
 		valueText.setLayoutData(gd);
