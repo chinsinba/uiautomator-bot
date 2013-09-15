@@ -37,7 +37,7 @@ public class CreateTestProjectWizard extends Wizard {
 	
 	@Override
 	public void addPages() {
-		projCreationPage = new CreateTestProjectPage("TestCase");
+		projCreationPage = new CreateTestProjectPage("TestProject");
 		addPage(projCreationPage);
 	}
 	

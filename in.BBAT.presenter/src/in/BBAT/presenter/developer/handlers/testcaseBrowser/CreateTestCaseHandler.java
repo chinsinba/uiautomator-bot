@@ -1,11 +1,7 @@
 package in.BBAT.presenter.developer.handlers.testcaseBrowser;
 
-import in.BBAT.abstrakt.presenter.pkg.model.TestCaseModel;
 import in.BBAT.abstrakt.presenter.pkg.model.TestSuiteModel;
-import in.BBAT.dataMine.manager.MineManager;
 import in.BBAT.presenter.wizards.CreateTestCaseWizard;
-import in.bbat.presenter.views.BBATViewPart;
-import in.bbat.presenter.views.developer.TestCaseBrowserView;
 
 import java.util.List;
 
@@ -18,6 +14,7 @@ public class CreateTestCaseHandler extends AbstractTestCaseBrowserHandler {
 	@Override
 	public Object run(ExecutionEvent event, List<?> selectedObjects) {
 		WizardDialog dialog = new WizardDialog(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(), new CreateTestCaseWizard((TestSuiteModel) selectedObjects.get(0)));
+		dialog.setPageSize(300,300);
 		dialog.open();
 		if(!selectedObjects.isEmpty()){}
 

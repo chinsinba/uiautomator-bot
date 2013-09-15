@@ -42,7 +42,7 @@ public class CreateTestSuiteWizard extends Wizard {
 
 	@Override
 	public void addPages() {
-		suiteCreationPage = new CreateTestSuitePage("TestCase",parent);
+		suiteCreationPage = new CreateTestSuitePage("TestSuite",parent);
 		addPage(suiteCreationPage);
 	}
 

@@ -3,6 +3,7 @@ package in.BBAT.presenter.wizards.pages;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
+import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Text;
 
@@ -15,11 +16,15 @@ public abstract class CreatePage extends WizardPage{
 
 	protected CreatePage(String pageName) {
 		super(pageName);
+		setTitle(pageName);
+		
 	}
 
 	@Override
 	public void createControl(Composite parent) {
-	//	createUpperArea(parent);
+//		getContainer().getShell().setSize(500, 500);
+		parent.setLayout(new GridLayout(1,false));
+		createUpperArea(parent);
 		nameDescComp = new NameAndDescriptionComponent(parent);
 		nameDescComp.getNameText().addModifyListener( new ModifyListener() {
 			@Override

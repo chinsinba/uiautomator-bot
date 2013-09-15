@@ -16,14 +16,13 @@ public class NameAndDescriptionComponent {
 
 	public NameAndDescriptionComponent(Composite parent) {
 		Group group = new Group(parent, SWT.BORDER);
-		group.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false));
+		group.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		group.setLayout(new GridLayout(2, false));
 		group.setText("Details");
 
 		Label nameLabel = new Label(group, SWT.NULL);
 		nameLabel.setText("Name:");
 		setNameText(new Text(group, SWT.BORDER));
-
 
 		GridData gdPkgName = new GridData(GridData.FILL_HORIZONTAL);
 		getNameText().setLayoutData(gdPkgName);

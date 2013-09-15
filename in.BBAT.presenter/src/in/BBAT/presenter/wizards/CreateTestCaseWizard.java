@@ -3,7 +3,6 @@ package in.BBAT.presenter.wizards;
 import in.BBAT.abstrakt.presenter.pkg.model.TestCaseModel;
 import in.BBAT.abstrakt.presenter.pkg.model.TestSuiteModel;
 import in.BBAT.dataMine.manager.MineManager;
-import in.BBAT.presenter.wizards.pages.CreatePage;
 import in.BBAT.presenter.wizards.pages.CreateTestCasePage;
 import in.bbat.presenter.views.BBATViewPart;
 import in.bbat.presenter.views.developer.TestCaseBrowserView;

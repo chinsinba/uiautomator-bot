@@ -1,10 +1,6 @@
 package in.BBAT.presenter.developer.handlers.testcaseBrowser;
 
-import in.BBAT.abstrakt.presenter.pkg.model.TestProjectModel;
-import in.BBAT.dataMine.manager.MineManager;
 import in.BBAT.presenter.wizards.CreateTestProjectWizard;
-import in.bbat.presenter.views.BBATViewPart;
-import in.bbat.presenter.views.developer.TestCaseBrowserView;
 
 import java.util.List;
 
@@ -18,6 +14,7 @@ public class CreateTestProjectHandler extends AbstractTestCaseBrowserHandler {
 	public Object run(ExecutionEvent event, List<?> selectedObjects) {
 
 		WizardDialog dialog = new WizardDialog(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(), new CreateTestProjectWizard());
+		dialog.setPageSize(300,300);
 		dialog.open();
 
 		return null;
