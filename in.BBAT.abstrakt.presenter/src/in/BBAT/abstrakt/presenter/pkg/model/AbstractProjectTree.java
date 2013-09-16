@@ -2,7 +2,6 @@ package in.BBAT.abstrakt.presenter.pkg.model;
 
 import in.BBAT.abstrakt.gui.model.AbstractTreeModel;
 import in.BBAT.data.model.Entities.AbstractEntity;
-import in.BBAT.data.model.Entities.TestProjectEntity;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -25,13 +24,14 @@ public abstract class AbstractProjectTree extends AbstractTreeModel implements I
 	protected AbstractProjectTree(AbstractProjectTree parent ,AbstractEntity entity,String resourceName,boolean createResources) throws Exception {
 		super(parent,entity);
 		if(parent!=null)
-			this.resourcePath =parent.getPath()+Path.SEPARATOR+resourceName;
+			this.setResourcePath(parent.getPath()+Path.SEPARATOR+resourceName);
 		else {
-			this.resourcePath =UI_AUTO_CASE_PATH+Path.SEPARATOR+resourceName;
+			this.setResourcePath(UI_AUTO_CASE_PATH+Path.SEPARATOR+resourceName);
 		}
 		if(createResources){
 			createFiles();
 		}
+		linkToProject();
 	}
 
 	private void createFiles() throws Exception {
@@ -42,7 +42,7 @@ public abstract class AbstractProjectTree extends AbstractTreeModel implements I
 
 	@Override
 	public String getPath() {
-		return resourcePath;
+		return getResourcePath();
 	}
 
 	@Override
@@ -60,6 +60,7 @@ public abstract class AbstractProjectTree extends AbstractTreeModel implements I
 
 	public void delete() throws Exception {
 		super.delete();
+		deLinkFromProject();
 		deleteResource();
 	}
 
@@ -76,5 +77,23 @@ public abstract class AbstractProjectTree extends AbstractTreeModel implements I
 		}
 		if (!f.delete())
 			throw new FileNotFoundException("Failed to delete file: " + f);
+	}
+
+	@Override
+	public void linkToProject() {
+
+	}
+
+	@Override
+	public void deLinkFromProject() {
+
+	}
+
+	public String getResourcePath() {
+		return resourcePath;
+	}
+
+	public void setResourcePath(String resourcePath) {
+		this.resourcePath = resourcePath;
 	}
 }
