@@ -2,25 +2,54 @@ package in.BBAT.testRunner.runner;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 import org.eclipse.ant.core.AntRunner;
 import org.eclipse.core.runtime.CoreException;
+
+import com.google.common.io.Files;
 
 public class UiAutoTestCaseJar {
 
 	private String jarPath;
 	private File jarFile;
+	private static final String jarName = "BBAT";
+
+	private static final String tempFolderPath ="/home/syed/Documents/test";
 
 	public UiAutoTestCaseJar(String srcFolderPath){
 		initializeBuildEnvironment(srcFolderPath);
-		createJar();
 	}
 
-	private void createJar() {
-		//run ant build command
+	public UiAutoTestCaseJar(List<String> testScriptPaths){
+		initializeBuildEnvironment(testScriptPaths);
+	}
+
+	private void initializeBuildEnvironment(List<String> testScriptPaths) {
+
+		File temp = new File(tempFolderPath+"/src");
+		try {
+			for (String testScriptPath : testScriptPaths) {
+				Files.copy(new File(testScriptPath), temp);	
+			}
+
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+		try {
+			Runtime.getRuntime().exec("/home/syed/Documents/Android_SDK_21/sdk/tools/android create uitest-project -n "+jarName+" -t 6 -p "+tempFolderPath);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		createJar(tempFolderPath);
+		setJarFile(new File(tempFolderPath+"/"+jarName+".jar"));
+
+	}
+
+	private void createJar(String tempfolderpath) {
 		AntRunner runner = new AntRunner();
-//		runner.setAntHome("/home/syed/Documents/runtime-BBAT.product/trrwree");
-		runner.setBuildFileLocation("/home/syed/Documents/runtime-BBAT.product/trrwree/build.xml");
+		runner.setBuildFileLocation(tempfolderpath+"/build.xml");
 		try {
 			runner.run();
 		} catch (CoreException e) {
@@ -29,13 +58,20 @@ public class UiAutoTestCaseJar {
 	}
 
 	private void initializeBuildEnvironment(String srcFolderPath) {
-		// <android-sdk>/tools/android create uitest-project -n <name> -t 1 -p <path>
-
+		File temp = new File(tempFolderPath+"/src");
 		try {
-			Runtime.getRuntime().exec("/home/syed/Documents/Android_SDK_21/sdk/tools/android create uitest-project -n Tedfdmf -t 6 -p "+srcFolderPath);
+			FileUtils.copyFolder(new File(srcFolderPath), temp);
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+		try {
+			Runtime.getRuntime().exec("/home/syed/Documents/Android_SDK_21/sdk/tools/android create uitest-project -n "+jarName+" -t 6 -p "+tempFolderPath);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+
+		createJar(tempFolderPath);
+		setJarFile(new File(tempFolderPath+"/"+jarName+".jar"));
 	}
 
 	public String getJarPath() {
@@ -52,9 +88,10 @@ public class UiAutoTestCaseJar {
 
 	public void setJarFile(File jarFile) {
 		this.jarFile = jarFile;
+		setJarPath(jarFile.getAbsolutePath());
 	}
 
 	public static void main(String[] args) {
-		new UiAutoTestCaseJar("/home/syed/Documents/runtime-BBAT.product/trrwree/src");
+		new UiAutoTestCaseJar("/home/syed/Documents/trrwree");
 	}
 }

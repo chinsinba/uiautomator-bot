@@ -1,6 +1,7 @@
 package in.bbat.presenter;
 
 import in.BBAT.abstrakt.presenter.device.model.TestDeviceManager;
+import in.BBAT.testRunner.runner.UiAutoTestCaseJar;
 import in.bbat.abstrakt.gui.ApplicationHelper;
 
 import java.net.UnknownHostException;
@@ -25,6 +26,7 @@ public class Application implements IApplication {
 			try {
 				ApplicationHelper.initializeDb();
 				TestDeviceManager.init("/home/syed/Documents/android-sdk-linux/platform-tools/adb");
+				new UiAutoTestCaseJar("/home/syed/Documents/runtime-BBAT.product/trrwree");
 			} catch (UnknownHostException e) {
 				e.printStackTrace();
 			} catch (Exception e) {

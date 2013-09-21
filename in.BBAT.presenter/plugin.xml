@@ -61,6 +61,12 @@
             name="Nodes"
             restorable="true">
       </view>
+      <view
+            class="in.bbat.presenter.views.tester.TestRunnerView"
+            id="in.BBAT.presenter.tester.TestRunnerView"
+            name="TestRunner"
+            restorable="true">
+      </view>
    </extension>
    <extension
          point="org.eclipse.ui.perspectiveExtensions">
@@ -113,9 +119,17 @@
                closeable="false"
                id="in.BBAT.presenter.developer.testcaseBrowserView"
                minimized="false"
-               ratio="0.20f"
+               ratio="0.75f"
                relationship="left"
                relative="org.eclipse.ui.editorss"
+               visible="true">
+         </view>
+         <view
+               id="in.BBAT.presenter.tester.TestRunnerView"
+               minimized="false"
+               ratio="0.20F"
+               relationship="right"
+               relative="in.BBAT.presenter.developer.testcaseBrowserView"
                visible="true">
          </view>
       </perspectiveExtension>
@@ -187,6 +201,15 @@
                tooltip="opens UI automator viewer">
          </command>
       </menuContribution>
+      <menuContribution
+            allPopups="false"
+            locationURI="toolbar:in.BBAT.presenter.tester.TestRunnerView">
+         <command
+               commandId="in.BBAT.presenter.testrunner.execute"
+               label="Execute"
+               style="push">
+         </command>
+      </menuContribution>
    </extension>
    <extension
          point="org.eclipse.ui.commands">
@@ -218,6 +241,10 @@
             id="in.BBAT.presenter.testCase.CreateSuite"
             name="Create TestSuite">
       </command>
+      <command
+            id="in.BBAT.presenter.testrunner.execute"
+            name="Execute">
+      </command>
    </extension>
    <extension
          point="org.eclipse.ui.handlers">
@@ -248,6 +275,10 @@
       <handler
             class="in.BBAT.presenter.developer.handlers.testcaseBrowser.CreateTestSuiteHandler"
             commandId="in.BBAT.presenter.testCase.CreateSuite">
+      </handler>
+      <handler
+            class="in.BBAT.presenter.tester.handlers.ExecuteTestRunHandler"
+            commandId="in.BBAT.presenter.testrunner.execute">
       </handler>
    </extension>
 

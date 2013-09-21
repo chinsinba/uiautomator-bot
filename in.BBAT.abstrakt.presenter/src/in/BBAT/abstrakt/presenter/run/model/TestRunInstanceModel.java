@@ -6,8 +6,6 @@ import in.BBAT.data.model.Entities.AbstractEntity;
 import in.BBAT.data.model.Entities.TestRunEntity;
 import in.BBAT.data.model.Entities.TestRunInfoEntity;
 
-import java.util.List;
-
 import org.eclipse.swt.graphics.Image;
 
 /**

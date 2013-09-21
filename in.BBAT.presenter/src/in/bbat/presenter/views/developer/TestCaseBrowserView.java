@@ -1,45 +1,23 @@
 package in.bbat.presenter.views.developer;
 
 import in.BBAT.abstrakt.presenter.pkg.model.TestProjectManager;
+import in.BBAT.presenter.DND.listeners.TestCaseDragListener;
 import in.BBAT.presenter.contentProviders.TestCaseBrowserContentProvider;
 import in.BBAT.presenter.labelProviders.TestCaseLabelProvider;
 import in.bbat.presenter.views.BBATViewPart;
 
+import org.eclipse.jface.util.LocalSelectionTransfer;
 import org.eclipse.jface.viewers.ISelection;
-import org.eclipse.jface.viewers.IStructuredContentProvider;
 import org.eclipse.jface.viewers.TreeViewer;
-import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.dnd.DND;
+import org.eclipse.swt.dnd.Transfer;
 import org.eclipse.swt.widgets.Composite;
 
 public class TestCaseBrowserView extends BBATViewPart {
 	public static final String ID = "in.BBAT.presenter.developer.testcaseBrowserView";
 
 	private TreeViewer viewer;
-
-	/**
-	 * The content provider class is responsible for providing objects to the
-	 * view. It can wrap existing objects in adapters or simply return objects
-	 * as-is. These objects may be sensitive to the current input of the view,
-	 * or ignore it and always show the same content (like Task List, for
-	 * example).
-	 */
-	class ViewContentProvider implements IStructuredContentProvider {
-		public void inputChanged(Viewer v, Object oldInput, Object newInput) {
-		}
-
-		public void dispose() {
-		}
-
-		public Object[] getElements(Object parent) {
-			if (parent instanceof Object[]) {
-				return (Object[]) parent;
-			}
-			return new Object[0];
-		}
-	}
-
-
 
 	/**
 	 * This is a callback that will allow us to create the viewer and initialize
@@ -57,6 +35,7 @@ public class TestCaseBrowserView extends BBATViewPart {
 			e.printStackTrace();
 		}
 		addMenuManager(viewer);
+		createDragSupport();
 	}
 
 	/**
@@ -75,5 +54,12 @@ public class TestCaseBrowserView extends BBATViewPart {
 	@Override
 	public ISelection getSelectedElements() {
 		return viewer.getSelection();
+	}
+	
+	protected void createDragSupport() 
+	{
+		int operations = DND.DROP_COPY| DND.DROP_MOVE;
+		Transfer[] transferTypes = new Transfer[]{LocalSelectionTransfer.getTransfer()};
+		viewer.addDragSupport(operations, transferTypes, new TestCaseDragListener(viewer));
 	}
 }

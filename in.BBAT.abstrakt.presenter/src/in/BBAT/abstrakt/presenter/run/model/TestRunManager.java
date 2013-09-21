@@ -11,7 +11,7 @@ public class TestRunManager {
 
 
 	private static TestRunManager instance;
-
+	private List<TestRunCase> testRunCases = new ArrayList<TestRunCase>();
 	private TestRunManager()
 	{
 
@@ -24,8 +24,8 @@ public class TestRunManager {
 		}
 		return instance;
 	}
-	
-	
+
+
 	public List<TestRunModel> getTestRuns(){
 		List<TestRunModel> models = new ArrayList<TestRunModel>();
 		for(TestRunEntity entity: RunMineManager.getAllTestRuns()){
@@ -33,5 +33,17 @@ public class TestRunManager {
 			models.add(model);
 		}
 		return models;
+	}
+
+	public List<TestRunCase> getTestRunCases(){
+		return testRunCases;
+	}
+
+	public void addTestRunCase(TestRunCase runCase){
+		testRunCases.add(runCase);	
+	}
+
+	public void removeTestRunCase(TestRunCase runCase){
+		testRunCases.remove(runCase);
 	}
 }

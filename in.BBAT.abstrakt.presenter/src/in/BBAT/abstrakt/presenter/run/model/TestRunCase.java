@@ -1,5 +1,7 @@
 package in.BBAT.abstrakt.presenter.run.model;
 
+import org.eclipse.swt.graphics.Image;
+
 import in.BBAT.abstrakt.presenter.pkg.model.TestCaseModel;
 
 public class TestRunCase {
@@ -25,5 +27,13 @@ public class TestRunCase {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+	
+	public Image getImage(){
+		return null;
+	}
+	
+	public String getLabel(){
+		return testcase.getName();
 	}
 }
