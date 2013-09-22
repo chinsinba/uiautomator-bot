@@ -86,18 +86,26 @@ public class TestDevice implements IAndroidDevice {
 
 	@Override
 	public void startLogging() {
-		clearLogs();
-		try {
-			monkeyDevice.executeShellCommand("logcat -v time", logReciever);
-		} catch (TimeoutException e) {
-			e.printStackTrace();
-		} catch (AdbCommandRejectedException e) {
-			e.printStackTrace();
-		} catch (ShellCommandUnresponsiveException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		Thread logger = new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+
+				clearLogs();
+				try {
+					monkeyDevice.executeShellCommand("logcat -v time",new LogLineReciever(),0);
+				} catch (TimeoutException e) {
+					e.printStackTrace();
+				} catch (AdbCommandRejectedException e) {
+					e.printStackTrace();
+				} catch (ShellCommandUnresponsiveException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}}
+		});
+
+		logger.start();
 	}
 
 	public boolean isActive() {

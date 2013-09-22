@@ -25,7 +25,7 @@ public class Application implements IApplication {
 		try {
 			try {
 				ApplicationHelper.initializeDb();
-				TestDeviceManager.init("/home/syed/Documents/android-sdk-linux/platform-tools/adb");
+				TestDeviceManager.init("/home/syed/Documents/Android_SDK_21/sdk/platform-tools/adb");
 			} catch (UnknownHostException e) {
 				e.printStackTrace();
 			} catch (Exception e) {

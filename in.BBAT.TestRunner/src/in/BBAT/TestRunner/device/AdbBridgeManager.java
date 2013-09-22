@@ -31,7 +31,7 @@ public class AdbBridgeManager {
 		if (!(new File(adbLocation).canExecute())) {
 		}
 
-		AdbBackend adbBackend = new AdbBackend(adbLocation,false);
+		AdbBackend	 adbBackend = new AdbBackend(adbLocation,false);
 		bridge = AndroidDebugBridge.getBridge();
 		if (bridge != null) {
 			AndroidDebugBridge.addDeviceChangeListener(new AdbDeviceChangeListener());
