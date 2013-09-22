@@ -206,7 +206,6 @@ public class TestDevice implements IAndroidDevice {
 
 	@Override
 	public IDevice getMonkeyDevice() {
-		// TODO Auto-generated method stub
 		return monkeyDevice;
 	}
 }

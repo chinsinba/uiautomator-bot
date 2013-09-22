@@ -1,7 +1,8 @@
-package in.BBAT.abstrakt.presenter.run.manager;
+package in.bbat.presenter;
 
 
 import in.BBAT.abstrakt.presenter.device.model.AndroidDevice;
+import in.BBAT.abstrakt.presenter.run.manager.DeviceLogListener;
 import in.BBAT.abstrakt.presenter.run.model.TestRunCase;
 import in.BBAT.abstrakt.presenter.run.model.TestRunInstanceModel;
 import in.BBAT.abstrakt.presenter.run.model.TestRunModel;

@@ -2,11 +2,11 @@ package in.BBAT.presenter.tester.handlers;
 
 import in.BBAT.abstrakt.presenter.device.model.TestDeviceManager;
 import in.BBAT.abstrakt.presenter.run.manager.DeviceLogListener;
-import in.BBAT.abstrakt.presenter.run.manager.TestCaseExecutionListener;
 import in.BBAT.abstrakt.presenter.run.model.TestRunCase;
 import in.BBAT.abstrakt.presenter.run.model.TestRunManager;
 import in.BBAT.testRunner.runner.TestRunner;
 import in.BBAT.testRunner.runner.UiAutoTestCaseJar;
+import in.bbat.presenter.TestCaseExecutionListener;
 import in.bbat.presenter.views.tester.TestRunnerView;
 
 import java.util.ArrayList;
@@ -41,19 +41,6 @@ public class ExecuteTestRunHandler extends AbstractTestRunnerHandler {
 
 				for (TestRunCase testRunCase : TestRunManager.getInstance().getTestRunCases()) {
 					runner.execute(testRunCase.getTestcase().getName(), new TestCaseExecutionListener(testRunCase, TestDeviceManager.getInstance().getDevices().get(0)), new DeviceLogListener(testRunCase));
-					Display.getDefault().syncExec(new Runnable() {
-
-						@Override
-						public void run() {
-							TestRunnerView view  = (TestRunnerView) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().findView(TestRunnerView.ID);
-							try {
-								view.refresh();
-							} catch (Exception e) {
-								e.printStackTrace();
-							}							
-						}
-					});
-
 				}
 				return Status.OK_STATUS;
 			}
