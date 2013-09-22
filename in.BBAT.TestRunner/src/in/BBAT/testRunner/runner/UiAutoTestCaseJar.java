@@ -16,7 +16,8 @@ public class UiAutoTestCaseJar {
 	private File jarFile;
 	private static final String jarName = "BBAT";
 
-	private static final String tempFolderPath ="/home/syed/Documents/test";
+	private static final String TEMP_FOLDER_PATH ="/home/syed/Documents/test";
+	private static final String ANDROID_SDK_TOOLS = "/home/syed/Documents/Android_SDK_21/sdk/tools/";
 
 	public UiAutoTestCaseJar(String srcFolderPath){
 		initializeBuildEnvironment(srcFolderPath);
@@ -28,7 +29,7 @@ public class UiAutoTestCaseJar {
 
 	private void initializeBuildEnvironment(List<String> testScriptPaths) {
 
-		File temp = new File(tempFolderPath+"/src");
+		File temp = new File(TEMP_FOLDER_PATH+"/src");
 		temp.mkdirs();
 		try {
 			for (String testScriptPath : testScriptPaths) {
@@ -40,13 +41,13 @@ public class UiAutoTestCaseJar {
 			e1.printStackTrace();
 		}
 		try {
-			Runtime.getRuntime().exec("/home/syed/Documents/Android_SDK_21/sdk/tools/android create uitest-project -n "+jarName+" -t 6 -p "+tempFolderPath);
+			Runtime.getRuntime().exec(ANDROID_SDK_TOOLS+"/android create uitest-project -n "+jarName+" -t 6 -p "+TEMP_FOLDER_PATH);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
-		createJar(tempFolderPath);
-		setJarFile(new File(tempFolderPath+"/bin/"+jarName+".jar"));
+		createJar(TEMP_FOLDER_PATH);
+		setJarFile(new File(TEMP_FOLDER_PATH+"/bin/"+jarName+".jar"));
 
 	}
 
@@ -63,20 +64,20 @@ public class UiAutoTestCaseJar {
 	}
 
 	private void initializeBuildEnvironment(String srcFolderPath) {
-		File temp = new File(tempFolderPath+"/src");
+		File temp = new File(TEMP_FOLDER_PATH+"/src");
 		try {
 			FileUtils.copyFolder(new File(srcFolderPath), temp);
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
 		try {
-			Runtime.getRuntime().exec("/home/syed/Documents/Android_SDK_21/sdk/tools/android create uitest-project -n "+jarName+" -t 6 -p "+tempFolderPath);
+			Runtime.getRuntime().exec("/home/syed/Documents/Android_SDK_21/sdk/tools/android create uitest-project -n "+jarName+" -t 6 -p "+TEMP_FOLDER_PATH);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
-		createJar(tempFolderPath);
-		setJarFile(new File(tempFolderPath+"/"+jarName+".jar"));
+		createJar(TEMP_FOLDER_PATH);
+		setJarFile(new File(TEMP_FOLDER_PATH+"/"+jarName+".jar"));
 	}
 
 	public String getJarPath() {

@@ -44,6 +44,7 @@ public class TestRunnerView extends BBATViewPart {
 				| SWT.V_SCROLL);
 		viewer.setContentProvider(new ArrayContentProvider());
 		viewer.getTable().setLinesVisible(true);
+		viewer.getTable().setHeaderVisible(true);
 		tableLayout = new TableColumnLayout();
 		parent.setLayout(tableLayout);
 		createColumns(parent, viewer);

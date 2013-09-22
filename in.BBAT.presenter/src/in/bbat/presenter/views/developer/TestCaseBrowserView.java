@@ -28,6 +28,7 @@ public class TestCaseBrowserView extends BBATViewPart {
 				| SWT.V_SCROLL);
 		viewer.setContentProvider(new TestCaseBrowserContentProvider());
 		viewer.setLabelProvider(new TestCaseLabelProvider());
+		viewer.setAutoExpandLevel(2);
 		// Provide the input to the ContentProvider
 		try {
 			viewer.setInput(TestProjectManager.getInstance().getTestProjects());
