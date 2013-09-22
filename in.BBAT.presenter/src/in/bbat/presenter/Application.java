@@ -26,7 +26,6 @@ public class Application implements IApplication {
 			try {
 				ApplicationHelper.initializeDb();
 				TestDeviceManager.init("/home/syed/Documents/android-sdk-linux/platform-tools/adb");
-				new UiAutoTestCaseJar("/home/syed/Documents/runtime-BBAT.product/trrwree");
 			} catch (UnknownHostException e) {
 				e.printStackTrace();
 			} catch (Exception e) {

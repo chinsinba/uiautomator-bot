@@ -26,7 +26,7 @@ public class UIAutomatorRunner extends RemoteAndroidTestRunner {
 	AdbCommandRejectedException, ShellCommandUnresponsiveException,
 	IOException {
 
-		final String runCaseCommandStr = "uiautomator runtest LaunchSettings.jar -c com.uia.example.my.LaunchSetting";
+		final String runCaseCommandStr = "uiautomator runtest BBAT.jar -c "+getPackageName();
 		String runName = getRunnerName() == null ? getPackageName() : getRunnerName();
 		deviceResultReciever = new RunnerResultParser(runName, listeners);
 

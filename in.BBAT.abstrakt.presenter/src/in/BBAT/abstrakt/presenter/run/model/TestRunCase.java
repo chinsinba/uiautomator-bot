@@ -7,10 +7,11 @@ import in.BBAT.abstrakt.presenter.pkg.model.TestCaseModel;
 public class TestRunCase {
 
 	private TestCaseModel testcase;
-	private String status;
+	private TestStatus status;
 
 	public TestRunCase(TestCaseModel testcase){
 		this.testcase = testcase;
+		this.status = TestStatus.NOTEXECUTED;
 	}
 
 	public TestCaseModel getTestcase() {
@@ -22,18 +23,34 @@ public class TestRunCase {
 	}
 
 	public String getStatus() {
-		return status;
+		return status.getStatus();
 	}
 
-	public void setStatus(String status) {
+	public void setStatus(TestStatus status) {
 		this.status = status;
 	}
-	
+
 	public Image getImage(){
 		return null;
 	}
-	
+
 	public String getLabel(){
 		return testcase.getName();
+	}
+
+	public enum TestStatus{
+		PASS("PASS"),FAIL("FAIL"),
+		ERROR("ERROR"),EXECUTING("EXECUTING"),
+		NOTEXECUTED("NOTEXECUTED");
+
+		String value;
+		TestStatus(String value){
+			this.value = value;
+		}
+
+		public String getStatus(){
+			return value;
+		}
+
 	}
 }

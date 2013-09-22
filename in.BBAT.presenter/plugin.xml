@@ -209,6 +209,20 @@
                label="Execute"
                style="push">
          </command>
+         <command
+               commandId="in.BBAT.presenter.testrunner.stop"
+               label="Stop"
+               style="push">
+         </command>
+      </menuContribution>
+      <menuContribution
+            allPopups="false"
+            locationURI="popup:in.BBAT.presenter.tester.TestRunnerView">
+         <command
+               commandId="in.BBAT.presenter.testrunner.remove"
+               label="Delete"
+               style="push">
+         </command>
       </menuContribution>
    </extension>
    <extension
@@ -245,6 +259,14 @@
             id="in.BBAT.presenter.testrunner.execute"
             name="Execute">
       </command>
+      <command
+            id="in.BBAT.presenter.testrunner.stop"
+            name="Stop">
+      </command>
+      <command
+            id="in.BBAT.presenter.testrunner.remove"
+            name="Remove TestRuncase">
+      </command>
    </extension>
    <extension
          point="org.eclipse.ui.handlers">
@@ -279,6 +301,14 @@
       <handler
             class="in.BBAT.presenter.tester.handlers.ExecuteTestRunHandler"
             commandId="in.BBAT.presenter.testrunner.execute">
+      </handler>
+      <handler
+            class="in.BBAT.presenter.tester.handlers.StopTestRunHandler"
+            commandId="in.BBAT.presenter.testrunner.stop">
+      </handler>
+      <handler
+            class="in.BBAT.presenter.tester.handlers.RemoveTestRunCaseHandler"
+            commandId="in.BBAT.presenter.testrunner.remove">
       </handler>
    </extension>
 

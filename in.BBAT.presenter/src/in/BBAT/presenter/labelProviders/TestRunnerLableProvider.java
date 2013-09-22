@@ -25,7 +25,7 @@ ITableLabelProvider {
 			case 2:
 				return ((TestRunCase) element).getLabel();
 			case 3:
-				return ((TestRunCase) element).getTestcase().getParent().getParent().getLabel();
+				return ((TestRunCase) element).getStatus();
 
 			default:
 				break;

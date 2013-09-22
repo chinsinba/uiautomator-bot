@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.eclipse.ant.core.AntRunner;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.Path;
 
 import com.google.common.io.Files;
 
@@ -28,9 +29,11 @@ public class UiAutoTestCaseJar {
 	private void initializeBuildEnvironment(List<String> testScriptPaths) {
 
 		File temp = new File(tempFolderPath+"/src");
+		temp.mkdirs();
 		try {
 			for (String testScriptPath : testScriptPaths) {
-				Files.copy(new File(testScriptPath), temp);	
+				Path path = new Path(testScriptPath);
+				FileUtils.copyFolder(new File(testScriptPath), new File(temp.getAbsolutePath()+"/"+path.lastSegment()));	
 			}
 
 		} catch (IOException e1) {
@@ -43,13 +46,15 @@ public class UiAutoTestCaseJar {
 		}
 
 		createJar(tempFolderPath);
-		setJarFile(new File(tempFolderPath+"/"+jarName+".jar"));
+		setJarFile(new File(tempFolderPath+"/bin/"+jarName+".jar"));
 
 	}
 
 	private void createJar(String tempfolderpath) {
 		AntRunner runner = new AntRunner();
 		runner.setBuildFileLocation(tempfolderpath+"/build.xml");
+		String[] target = {"build"};
+		runner.setExecutionTargets(target);
 		try {
 			runner.run();
 		} catch (CoreException e) {

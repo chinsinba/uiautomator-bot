@@ -24,7 +24,7 @@ public class TestDevice implements IAndroidDevice {
 	private ILogListener listener;
 	private LogLineReciever logReciever;
 
-	public final static String UIAUTOMATOR_JAR_PATH = "/data/local/tmp/";
+	public final static String UIAUTOMATOR_JAR_PATH = "/data/local/tmp/BBAT.jar";
 
 	public TestDevice(IDevice device) {
 		this.monkeyDevice = device;
@@ -147,7 +147,7 @@ public class TestDevice implements IAndroidDevice {
 	@Override
 	public void pushTestJar(UiAutoTestCaseJar jar) {
 		try {
-			monkeyDevice.pushFile(jar.getJarPath(), UIAUTOMATOR_JAR_PATH);
+			monkeyDevice.pushFile(jar.getJarPath(),UIAUTOMATOR_JAR_PATH);
 		} catch (SyncException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
