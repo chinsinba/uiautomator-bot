@@ -46,4 +46,8 @@ public class TestRunManager {
 	public void removeTestRunCase(TestRunCase runCase){
 		testRunCases.remove(runCase);
 	}
+
+	public void clearTestRunCases(){
+		testRunCases.clear();
+	}
 }
