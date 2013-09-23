@@ -1,5 +1,7 @@
 package in.bbat.presenter.internal;
 
+import in.BBAT.TestRunner.device.IAndroidDevice;
+import in.BBAT.TestRunner.device.TestDevice;
 import in.BBAT.abstrakt.presenter.device.model.AndroidDevice;
 import in.BBAT.abstrakt.presenter.run.manager.DeviceLogListener;
 import in.BBAT.abstrakt.presenter.run.model.TestRunCase;
@@ -28,20 +30,28 @@ public class TestRunExecutor {
 	}
 
 	public void run() {
+
+		for (AndroidDevice device : devices) {
+			excute(device);
+		}
+		
+
+	}
+
+	private void excute(final AndroidDevice device) {
 		Job testRunJob = new Job("Execute") {
 
 			@Override
 			protected IStatus run(IProgressMonitor monitor) {
 
-				TestRunner runner = new TestRunner(new UiAutoTestCaseJar(testScriptPaths),devices.get(0).getiDevice());
+				TestRunner runner = new TestRunner(new UiAutoTestCaseJar(testScriptPaths),device.getiDevice());
 				for (TestRunCase testRunCase : testCases) {
-					runner.execute(testRunCase.getTestcase().getName(), new TestCaseExecutionListener(testRunCase, devices.get(0)), new DeviceLogListener(testRunCase));
+					runner.execute(testRunCase.getTestcase().getName(), new TestCaseExecutionListener(testRunCase, device), new DeviceLogListener(testRunCase));
 				}
 				return Status.OK_STATUS;
 			}
 		};
 		testRunJob.schedule();
-		
 	}
 
 	private List<String> getTestScriptPaths() {
