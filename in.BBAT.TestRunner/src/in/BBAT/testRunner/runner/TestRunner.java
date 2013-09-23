@@ -75,7 +75,7 @@ public class TestRunner implements ITestRunner{
 	 * @param testCaseExecutionListener 
 	 */
 	private void run(String testCaseClassName, ITestRunListener testCaseExecutionListener){
-		testDevice.executeTestCase(testCaseClassName, testCaseExecutionListener, new TestRunListener());
+		testDevice.executeTestCase(testCaseClassName, testCaseExecutionListener);
 		waitForCompletion();
 	}
 
