@@ -8,8 +8,6 @@ import org.eclipse.ant.core.AntRunner;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.Path;
 
-import com.google.common.io.Files;
-
 public class UiAutoTestCaseJar {
 
 	private String jarPath;
@@ -18,10 +16,6 @@ public class UiAutoTestCaseJar {
 
 	private static final String TEMP_FOLDER_PATH ="/home/syed/Documents/test";
 	private static final String ANDROID_SDK_TOOLS = "/home/syed/Documents/Android_SDK_21/sdk/tools/";
-
-	public UiAutoTestCaseJar(String srcFolderPath){
-		initializeBuildEnvironment(srcFolderPath);
-	}
 
 	public UiAutoTestCaseJar(List<String> testScriptPaths){
 		initializeBuildEnvironment(testScriptPaths);
@@ -63,7 +57,7 @@ public class UiAutoTestCaseJar {
 		}
 	}
 
-	private void initializeBuildEnvironment(String srcFolderPath) {
+	/*private void initializeBuildEnvironment(String srcFolderPath) {
 		File temp = new File(TEMP_FOLDER_PATH+"/src");
 		try {
 			FileUtils.copyFolder(new File(srcFolderPath), temp);
@@ -79,7 +73,7 @@ public class UiAutoTestCaseJar {
 		createJar(TEMP_FOLDER_PATH);
 		setJarFile(new File(TEMP_FOLDER_PATH+"/"+jarName+".jar"));
 	}
-
+*/
 	public String getJarPath() {
 		return jarPath;
 	}
@@ -97,7 +91,4 @@ public class UiAutoTestCaseJar {
 		setJarPath(jarFile.getAbsolutePath());
 	}
 
-	public static void main(String[] args) {
-		new UiAutoTestCaseJar("/home/syed/Documents/trrwree");
-	}
 }

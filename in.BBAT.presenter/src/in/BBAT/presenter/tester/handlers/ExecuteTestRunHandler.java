@@ -7,7 +7,6 @@ import in.BBAT.abstrakt.presenter.run.model.TestRunManager;
 import in.BBAT.testRunner.runner.TestRunner;
 import in.BBAT.testRunner.runner.UiAutoTestCaseJar;
 import in.bbat.presenter.TestCaseExecutionListener;
-import in.bbat.presenter.views.tester.TestRunnerView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,9 +16,6 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
-import org.eclipse.jface.viewers.ISelection;
-import org.eclipse.swt.widgets.Display;
-import org.eclipse.ui.PlatformUI;
 
 public class ExecuteTestRunHandler extends AbstractTestRunnerHandler {
 

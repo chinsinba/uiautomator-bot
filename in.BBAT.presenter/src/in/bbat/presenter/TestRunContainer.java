@@ -33,7 +33,7 @@ public class TestRunContainer {
 	 * 
 	 */
 	public void prepareRun(){
-		jar = new UiAutoTestCaseJar("");
+		jar = new UiAutoTestCaseJar(null);
 		runer = new TestRunner(jar,testDevice.getiDevice());
 		currentRunningTestRun = new TestRunModel();
 	}

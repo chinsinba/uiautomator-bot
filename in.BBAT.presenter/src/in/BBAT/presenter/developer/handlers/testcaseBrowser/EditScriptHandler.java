@@ -4,8 +4,6 @@ import in.BBAT.abstrakt.presenter.pkg.model.TestCaseModel;
 
 import java.util.List;
 
-import javax.naming.OperationNotSupportedException;
-
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.PartInitException;
