@@ -1,6 +1,7 @@
 package in.BBAT.presenter.DND.listeners;
 
 import in.BBAT.abstrakt.gui.model.AbstractTreeModel;
+import in.BBAT.abstrakt.presenter.device.model.AndroidDevice;
 import in.BBAT.abstrakt.presenter.pkg.model.AbstractProjectTree;
 import in.BBAT.abstrakt.presenter.pkg.model.TestCaseModel;
 import in.BBAT.abstrakt.presenter.run.model.TestRunCase;
@@ -12,8 +13,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
-import org.eclipse.jface.viewers.TreeSelection;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerDropAdapter;
 import org.eclipse.swt.dnd.TransferData;
@@ -27,20 +28,27 @@ public class TestRunDropListener extends ViewerDropAdapter{
 
 	@Override
 	public boolean performDrop(Object data) {
-		AbstractProjectTree testObj=null;
+		Object testObj=null;
 		List<TestRunCase> tempList = new ArrayList<TestRunCase>();
-		if(data instanceof TreeSelection){
+
+
+		if(data instanceof ISelection){
 			/*Multiple selection is allowed
 			 */
 			Iterator<IStructuredSelection> iterator = ((IStructuredSelection) data).iterator();
 			while(iterator.hasNext())
 			{
-				testObj = (AbstractProjectTree) iterator.next();
-
-				addToTestCaseList(testObj, tempList);
+				testObj = iterator.next();
+				if (testObj instanceof AndroidDevice) {
+					TestRunManager.getInstance().addTestDevice((AndroidDevice) testObj);
+				}
+				if(testObj instanceof AbstractProjectTree){
+					addToTestCaseList((AbstractTreeModel) testObj, tempList);
+				}
 			}
 		}
-		
+
+
 		for (TestRunCase testRunCase : tempList) {
 			TestRunManager.getInstance().addTestRunCase(testRunCase);
 		}
@@ -73,6 +81,7 @@ public class TestRunDropListener extends ViewerDropAdapter{
 	@Override
 	public boolean validateDrop(Object target, int operation,
 			TransferData transferType) {
+		System.out.println(target);
 		return true;
 	}
 

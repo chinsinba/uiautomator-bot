@@ -84,7 +84,7 @@
                closeable="false"
                id="in.BBAT.presenter.developer.deviceView"
                minimized="false"
-               ratio="0.80f"
+               ratio="0.70f"
                relationship="bottom"
                relative="in.BBAT.presenter.developer.testcaseBrowserView">
          </view>
@@ -127,7 +127,7 @@
                closeable="false"
                id="in.BBAT.presenter.developer.deviceView"
                minimized="false"
-               ratio="0.80f"
+               ratio="0.70f"
                relationship="bottom"
                relative="in.BBAT.presenter.developer.testcaseBrowserView">
          </view>

@@ -23,9 +23,9 @@ public class ExecuteTestRunHandler extends AbstractTestRunnerHandler {
 
 	@Override
 	public boolean isEnabled(List<?> object) {
-		if(TestRunManager.getInstance().getTestRunCases().isEmpty())
-			return false;
-		return true;
+		if(!TestRunManager.getInstance().getTestRunCases().isEmpty()&& !TestRunManager.getInstance().getSelectedDevices().isEmpty())
+			return true;
+		return false;
 	}
 
 }

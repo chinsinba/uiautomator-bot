@@ -13,6 +13,7 @@ public class RemoveAllTestRunCaseHandler extends AbstractTestRunnerHandler {
 	@Override
 	public Object run(ExecutionEvent event, List<?> selectedObjects) {
 		TestRunManager.getInstance().clearTestRunCases();
+		TestRunManager.getInstance().clearTestDevices();
 		TestRunnerView view  = (TestRunnerView) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().findView(TestRunnerView.ID);
 		try {
 			view.refresh();

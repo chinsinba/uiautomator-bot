@@ -1,7 +1,5 @@
 package in.bbat.presenter.internal;
 
-import in.BBAT.TestRunner.device.IAndroidDevice;
-import in.BBAT.TestRunner.device.TestDevice;
 import in.BBAT.abstrakt.presenter.device.model.AndroidDevice;
 import in.BBAT.abstrakt.presenter.run.manager.DeviceLogListener;
 import in.BBAT.abstrakt.presenter.run.model.TestRunCase;
@@ -34,8 +32,6 @@ public class TestRunExecutor {
 		for (AndroidDevice device : devices) {
 			excute(device);
 		}
-		
-
 	}
 
 	private void excute(final AndroidDevice device) {

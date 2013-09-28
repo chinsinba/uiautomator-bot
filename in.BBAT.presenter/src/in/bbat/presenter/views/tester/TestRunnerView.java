@@ -1,7 +1,18 @@
 package in.bbat.presenter.views.tester;
 
+
+
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import in.BBAT.abstrakt.presenter.device.model.AndroidDevice;
+import in.BBAT.abstrakt.presenter.device.model.TestDeviceManager;
 import in.BBAT.abstrakt.presenter.run.model.TestRunManager;
 import in.BBAT.presenter.DND.listeners.TestRunDropListener;
+import in.BBAT.presenter.labelProviders.DeviceViewLabelProvider;
 import in.BBAT.presenter.labelProviders.TestRunnerLableProvider;
 import in.bbat.presenter.views.BBATViewPart;
 
@@ -16,6 +27,11 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.dnd.DND;
 import org.eclipse.swt.dnd.Transfer;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.layout.FillLayout;
+import org.eclipse.swt.layout.FormAttachment;
+import org.eclipse.swt.layout.FormData;
+import org.eclipse.swt.layout.FormLayout;
+import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.TableColumn;
 
@@ -24,6 +40,7 @@ public class TestRunnerView extends BBATViewPart {
 	public static final String ID = "in.BBAT.presenter.tester.TestRunnerView";
 	private TableViewer viewer;
 	private TableColumnLayout tableLayout;
+	private TableViewer testDeviceViewer;
 
 	public TestRunnerView() {
 	}
@@ -31,6 +48,7 @@ public class TestRunnerView extends BBATViewPart {
 	@Override
 	public void refresh() throws Exception {
 		viewer.refresh();
+		testDeviceViewer.refresh();
 	}
 
 	@Override
@@ -40,25 +58,76 @@ public class TestRunnerView extends BBATViewPart {
 
 	@Override
 	public void createPartControl(Composite parent) {
-		viewer = new TableViewer(parent, SWT.MULTI | SWT.H_SCROLL
-				| SWT.V_SCROLL);
+
+		Composite outer = new Composite( parent, SWT.BORDER );
+
+		FormLayout formLayout = new FormLayout();
+		formLayout.marginHeight = 5;
+		formLayout.marginWidth = 5;
+		formLayout.spacing = 5;
+		outer.setLayout( formLayout );
+
+		Composite innerLeft = new Composite( outer, SWT.BORDER );
+		innerLeft.setLayout( new GridLayout() );
+
+		FormData fData = new FormData();
+		fData.top = new FormAttachment( 0 );
+		fData.left = new FormAttachment( 0 );
+		fData.right = new FormAttachment(12  ); // Locks on 10% of the view
+		fData.bottom = new FormAttachment( 100 );
+		innerLeft.setLayoutData( fData );
+		innerLeft.setLayout(new FillLayout());
+
+		createDeviceViewer(innerLeft);
+
+		Composite innerRight = new Composite( outer, SWT.BORDER );
+		innerRight.setLayout( new FillLayout() );
+
+		fData = new FormData();
+		fData.top = new FormAttachment( 0 );
+		fData.left = new FormAttachment( innerLeft );
+		fData.right = new FormAttachment( 100 );
+		fData.bottom = new FormAttachment( 100 );
+		innerRight.setLayoutData( fData );
+
+
+
+		viewer = new TableViewer(innerRight, SWT.MULTI | SWT.H_SCROLL| SWT.V_SCROLL);
 		viewer.setContentProvider(new ArrayContentProvider());
 		viewer.getTable().setLinesVisible(true);
 		viewer.getTable().setHeaderVisible(true);
-		tableLayout = new TableColumnLayout();
-		parent.setLayout(tableLayout);
-		createColumns(parent, viewer);
+		createColumns(innerRight, viewer);
 		viewer.setLabelProvider(new TestRunnerLableProvider());
-		// Provide the input to the ContentProvider
 		try {
 			viewer.setInput(TestRunManager.getInstance().getTestRunCases());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+
+		getViewSite().setSelectionProvider(viewer);
 		addMenuManager(viewer);
 		createDropSupport();
 	}
 
+	private void createDeviceViewer(Composite innerLeft) {
+
+		testDeviceViewer = new TableViewer(innerLeft, SWT.H_SCROLL| SWT.V_SCROLL);
+		testDeviceViewer.setContentProvider(new ArrayContentProvider());
+		testDeviceViewer.setLabelProvider(new DeviceViewLabelProvider());
+		// Provide the input to the ContentProvider
+		testDeviceViewer.setInput(TestRunManager.getInstance().getSelectedDevices());
+
+		createDropSupportForDevice();
+
+	}
+
+
+	private void createDropSupportForDevice() {
+		int operations = DND.DROP_COPY | DND.DROP_MOVE;
+		Transfer[] transferTypes = new Transfer[] { LocalSelectionTransfer.getTransfer() };
+		testDeviceViewer.addDropSupport(operations, transferTypes,new TestRunDropListener(testDeviceViewer));
+
+	}
 
 	public void createColumns(final Composite parent, final TableViewer viewer) {
 		String[] titles = { "Project","TestSuite","TestCase","Status" };
@@ -86,6 +155,7 @@ public class TestRunnerView extends BBATViewPart {
 		tableLayout.setColumnData(col3.getColumn(), new ColumnWeightData(bounds[3],width));
 
 	}
+
 	@Override
 	protected void createDropSupport() {
 		int operations = DND.DROP_COPY | DND.DROP_MOVE;
