@@ -119,17 +119,24 @@
                closeable="false"
                id="in.BBAT.presenter.developer.testcaseBrowserView"
                minimized="false"
-               ratio="0.75f"
+               ratio="0.20f"
                relationship="left"
-               relative="org.eclipse.ui.editorss"
-               visible="true">
+               relative="org.eclipse.ui.editorss">
+         </view>
+         <view
+               closeable="false"
+               id="in.BBAT.presenter.developer.deviceView"
+               minimized="false"
+               ratio="0.80f"
+               relationship="bottom"
+               relative="in.BBAT.presenter.developer.testcaseBrowserView">
          </view>
          <view
                id="in.BBAT.presenter.tester.TestRunnerView"
                minimized="false"
-               ratio="0.20F"
-               relationship="right"
-               relative="in.BBAT.presenter.developer.testcaseBrowserView"
+               ratio="0.80F"
+               relationship="left"
+               relative="org.eclipse.ui.editorss"
                visible="true">
          </view>
       </perspectiveExtension>
