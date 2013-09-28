@@ -6,6 +6,7 @@ import in.BBAT.abstrakt.presenter.pkg.model.AbstractProjectTree;
 import in.BBAT.abstrakt.presenter.pkg.model.TestCaseModel;
 import in.BBAT.abstrakt.presenter.run.model.TestRunCase;
 import in.BBAT.abstrakt.presenter.run.model.TestRunManager;
+import in.bbat.presenter.internal.TestRunExecutionManager;
 import in.bbat.presenter.views.BBATViewPart;
 import in.bbat.presenter.views.tester.TestRunnerView;
 
@@ -40,7 +41,7 @@ public class TestRunDropListener extends ViewerDropAdapter{
 			{
 				testObj = iterator.next();
 				if (testObj instanceof AndroidDevice) {
-					TestRunManager.getInstance().addTestDevice((AndroidDevice) testObj);
+					TestRunExecutionManager.getInstance().addTestDevice((AndroidDevice) testObj);
 				}
 				if(testObj instanceof AbstractProjectTree){
 					addToTestCaseList((AbstractTreeModel) testObj, tempList);
@@ -50,7 +51,7 @@ public class TestRunDropListener extends ViewerDropAdapter{
 
 
 		for (TestRunCase testRunCase : tempList) {
-			TestRunManager.getInstance().addTestRunCase(testRunCase);
+			TestRunExecutionManager.getInstance().addTestRunCase(testRunCase);
 		}
 
 		BBATViewPart testRunView = (BBATViewPart) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().findView(TestRunnerView.ID);

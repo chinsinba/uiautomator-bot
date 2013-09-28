@@ -1,6 +1,6 @@
 package in.BBAT.presenter.tester.handlers;
 
-import in.BBAT.abstrakt.presenter.run.model.TestRunManager;
+import in.bbat.presenter.internal.TestRunExecutionManager;
 import in.bbat.presenter.views.tester.TestRunnerView;
 
 import java.util.List;
@@ -12,8 +12,8 @@ public class RemoveAllTestRunCaseHandler extends AbstractTestRunnerHandler {
 
 	@Override
 	public Object run(ExecutionEvent event, List<?> selectedObjects) {
-		TestRunManager.getInstance().clearTestRunCases();
-		TestRunManager.getInstance().clearTestDevices();
+		TestRunExecutionManager.getInstance().clearTestRunCases();
+		TestRunExecutionManager.getInstance().clearTestDevices();
 		TestRunnerView view  = (TestRunnerView) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().findView(TestRunnerView.ID);
 		try {
 			view.refresh();
@@ -26,7 +26,7 @@ public class RemoveAllTestRunCaseHandler extends AbstractTestRunnerHandler {
 
 	@Override
 	public boolean isEnabled(List<?> object) {
-		if(TestRunManager.getInstance().getTestRunCases().isEmpty())
+		if(TestRunExecutionManager.getInstance().getTestRunCases().isEmpty())
 			return false;
 		return true;
 	}

@@ -1,7 +1,7 @@
 package in.BBAT.presenter.tester.handlers;
 
 import in.BBAT.abstrakt.presenter.run.model.TestRunCase;
-import in.BBAT.abstrakt.presenter.run.model.TestRunManager;
+import in.bbat.presenter.internal.TestRunExecutionManager;
 import in.bbat.presenter.views.tester.TestRunnerView;
 
 import java.util.List;
@@ -16,7 +16,7 @@ public class RemoveTestRunCaseHandler extends AbstractTestRunnerHandler {
 
 		for (Object runCase : selectedObjects) {
 			if(runCase instanceof TestRunCase){
-				TestRunManager.getInstance().removeTestRunCase((TestRunCase) runCase);
+				TestRunExecutionManager.getInstance().removeTestRunCase((TestRunCase) runCase);
 			}
 		}
 

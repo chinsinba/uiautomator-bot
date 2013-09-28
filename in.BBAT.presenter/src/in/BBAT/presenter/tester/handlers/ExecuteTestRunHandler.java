@@ -1,8 +1,6 @@
 package in.BBAT.presenter.tester.handlers;
 
-import in.BBAT.abstrakt.presenter.device.model.TestDeviceManager;
-import in.BBAT.abstrakt.presenter.run.model.TestRunManager;
-import in.bbat.presenter.internal.TestRunExecutor;
+import in.bbat.presenter.internal.TestRunExecutionManager;
 
 import java.util.List;
 
@@ -14,8 +12,8 @@ public class ExecuteTestRunHandler extends AbstractTestRunnerHandler {
 	public Object run(ExecutionEvent event, List<?> selectedObjects) {
 
 
-		TestRunExecutor executor = new TestRunExecutor(TestDeviceManager.getInstance().getDevices(),TestRunManager.getInstance().getTestRunCases());
-		executor.run();
+		TestRunExecutionManager.getInstance().execute();
+		
 		return null;
 
 	}
@@ -23,7 +21,7 @@ public class ExecuteTestRunHandler extends AbstractTestRunnerHandler {
 
 	@Override
 	public boolean isEnabled(List<?> object) {
-		if(!TestRunManager.getInstance().getTestRunCases().isEmpty()&& !TestRunManager.getInstance().getSelectedDevices().isEmpty())
+		if(!TestRunExecutionManager.getInstance().getTestRunCases().isEmpty()&& !TestRunExecutionManager.getInstance().getSelectedDevices().isEmpty())
 			return true;
 		return false;
 	}

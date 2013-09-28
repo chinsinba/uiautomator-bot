@@ -1,6 +1,6 @@
 package in.BBAT.presenter.tester.handlers;
 
-import in.BBAT.abstrakt.presenter.run.model.TestRunManager;
+import in.bbat.presenter.internal.TestRunExecutionManager;
 
 import java.util.List;
 
@@ -20,7 +20,7 @@ public class StopTestRunHandler extends AbstractTestRunnerHandler {
 
 	@Override
 	public boolean isEnabled(List<?> object) {
-		if(!TestRunManager.getInstance().getTestRunCases().isEmpty()&& !TestRunManager.getInstance().getSelectedDevices().isEmpty())
+		if(!TestRunExecutionManager.getInstance().getTestRunCases().isEmpty()&& !TestRunExecutionManager.getInstance().getSelectedDevices().isEmpty())
 			return true;
 		return false;
 	}

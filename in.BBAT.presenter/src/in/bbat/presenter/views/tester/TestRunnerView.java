@@ -1,19 +1,9 @@
 package in.bbat.presenter.views.tester;
 
-
-
-
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
-import in.BBAT.abstrakt.presenter.device.model.AndroidDevice;
-import in.BBAT.abstrakt.presenter.device.model.TestDeviceManager;
-import in.BBAT.abstrakt.presenter.run.model.TestRunManager;
 import in.BBAT.presenter.DND.listeners.TestRunDropListener;
 import in.BBAT.presenter.labelProviders.DeviceViewLabelProvider;
 import in.BBAT.presenter.labelProviders.TestRunnerLableProvider;
+import in.bbat.presenter.internal.TestRunExecutionManager;
 import in.bbat.presenter.views.BBATViewPart;
 
 import org.eclipse.jface.layout.TableColumnLayout;
@@ -99,7 +89,7 @@ public class TestRunnerView extends BBATViewPart {
 		createColumns(innerRight, viewer);
 		viewer.setLabelProvider(new TestRunnerLableProvider());
 		try {
-			viewer.setInput(TestRunManager.getInstance().getTestRunCases());
+			viewer.setInput(TestRunExecutionManager.getInstance().getTestRunCases());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -115,7 +105,7 @@ public class TestRunnerView extends BBATViewPart {
 		testDeviceViewer.setContentProvider(new ArrayContentProvider());
 		testDeviceViewer.setLabelProvider(new DeviceViewLabelProvider());
 		// Provide the input to the ContentProvider
-		testDeviceViewer.setInput(TestRunManager.getInstance().getSelectedDevices());
+		testDeviceViewer.setInput(TestRunExecutionManager.getInstance().getSelectedDevices());
 
 		createDropSupportForDevice();
 

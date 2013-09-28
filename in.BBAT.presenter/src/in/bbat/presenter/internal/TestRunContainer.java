@@ -1,6 +1,7 @@
-package in.BBAT.abstrakt.presenter.run.model;
+package in.bbat.presenter.internal;
 
 import in.BBAT.abstrakt.presenter.device.model.AndroidDevice;
+import in.BBAT.abstrakt.presenter.run.model.TestRunCase;
 
 import java.util.ArrayList;
 import java.util.HashSet;
