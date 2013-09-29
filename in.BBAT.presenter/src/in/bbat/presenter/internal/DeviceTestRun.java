@@ -156,4 +156,23 @@ public class DeviceTestRun {
 	public void refresh() {
 		viewer.refresh();		
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if(obj instanceof DeviceTestRun){
+			((DeviceTestRun) obj).getDevice().equals(getDevice());
+			return true;
+		}
+		return false ;
+	}
+	
+	@Override
+	public int hashCode() {
+		// TODO Auto-generated method stub
+		return getDevice().hashCode();
+	}
+	public void focus() {
+		if(testRunItem != null)
+			testRunFolder.setSelection(testRunItem);
+	}
 }

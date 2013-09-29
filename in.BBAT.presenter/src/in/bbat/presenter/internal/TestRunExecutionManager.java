@@ -1,7 +1,5 @@
 package in.bbat.presenter.internal;
 
-import in.BBAT.abstrakt.presenter.device.model.AndroidDevice;
-import in.BBAT.abstrakt.presenter.device.model.TestDeviceManager;
 import in.BBAT.abstrakt.presenter.run.model.TestRunCase;
 
 import java.util.List;

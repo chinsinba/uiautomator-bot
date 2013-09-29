@@ -1,20 +1,24 @@
 package in.bbat.presenter.views.tester;
 
-import java.util.List;
-
 import in.BBAT.abstrakt.presenter.device.model.AndroidDevice;
 import in.BBAT.abstrakt.presenter.run.model.TestRunInstanceModel;
 import in.BBAT.presenter.DND.listeners.TestRunDropListener;
 import in.BBAT.presenter.labelProviders.DeviceViewLabelProvider;
 import in.BBAT.presenter.labelProviders.TestRunnerLableProvider;
+import in.bbat.presenter.internal.DeviceTestRun;
 import in.bbat.presenter.internal.TestRunExecutionManager;
 import in.bbat.presenter.views.BBATViewPart;
+
+import java.util.List;
 
 import org.eclipse.jface.layout.TableColumnLayout;
 import org.eclipse.jface.util.LocalSelectionTransfer;
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.ColumnWeightData;
 import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.jface.viewers.ISelectionChangedListener;
+import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.swt.SWT;
@@ -29,7 +33,6 @@ import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.FormAttachment;
 import org.eclipse.swt.layout.FormData;
 import org.eclipse.swt.layout.FormLayout;
-import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.TableColumn;
@@ -48,7 +51,8 @@ public class TestRunnerView extends BBATViewPart {
 	@Override
 	public void refresh() throws Exception {
 		viewer.refresh();
-		testDeviceViewer.refresh();
+		if(testDeviceViewer!=null)
+			testDeviceViewer.refresh();
 	}
 
 	@Override
@@ -127,11 +131,11 @@ public class TestRunnerView extends BBATViewPart {
 		button.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				
+
 			}
 		});
-		
-		
+
+
 		testRunItem.setControl(comp);
 
 	}
@@ -148,6 +152,16 @@ public class TestRunnerView extends BBATViewPart {
 		testDeviceViewer.getTable().setLinesVisible(true);
 		testDeviceViewer.setContentProvider(new ArrayContentProvider());
 		testDeviceViewer.setLabelProvider(new DeviceViewLabelProvider());
+		testDeviceViewer.addSelectionChangedListener(new ISelectionChangedListener() {
+
+			@Override
+			public void selectionChanged(SelectionChangedEvent event) {
+				IStructuredSelection selection  =(IStructuredSelection) event.getSelection();
+				DeviceTestRun run = (DeviceTestRun) selection.getFirstElement();
+				if(run !=null)
+					run.focus();
+			}
+		});
 		TableColumn col = new TableColumn(testDeviceViewer.getTable(), SWT.None);
 		col.setText("Devices");
 		TableColumnLayout lay = new TableColumnLayout();
