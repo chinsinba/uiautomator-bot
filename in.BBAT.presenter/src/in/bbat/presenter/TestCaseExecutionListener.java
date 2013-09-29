@@ -1,8 +1,8 @@
 package in.bbat.presenter;
 
-import in.BBAT.abstrakt.presenter.device.model.AndroidDevice;
 import in.BBAT.abstrakt.presenter.run.model.TestRunCase;
 import in.BBAT.abstrakt.presenter.run.model.TestRunCase.TestStatus;
+import in.bbat.presenter.internal.DeviceTestRun;
 import in.bbat.presenter.views.tester.TestRunnerView;
 
 import java.util.Map;
@@ -16,12 +16,12 @@ import com.android.ddmlib.testrunner.TestIdentifier;
 public class TestCaseExecutionListener implements ITestRunListener {
 
 	private TestRunCase runCase;
-	private AndroidDevice device;
+	private DeviceTestRun deviceRun;
 	private TestStatus status = TestStatus.PASS;
 
-	public TestCaseExecutionListener(TestRunCase testRunCase, AndroidDevice testDevice){
+	public TestCaseExecutionListener(TestRunCase testRunCase, DeviceTestRun deviceRun){
 		this.runCase = testRunCase;
-		this.device = testDevice;
+		this.deviceRun = deviceRun;
 	}
 
 	@Override
@@ -74,7 +74,9 @@ public class TestCaseExecutionListener implements ITestRunListener {
 					view.refresh();
 				} catch (Exception e) {
 					e.printStackTrace();
-				}							
+				}		
+				
+				deviceRun.refresh();
 			}
 		});
 	}

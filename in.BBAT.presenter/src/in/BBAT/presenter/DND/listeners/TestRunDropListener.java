@@ -5,7 +5,7 @@ import in.BBAT.abstrakt.presenter.device.model.AndroidDevice;
 import in.BBAT.abstrakt.presenter.pkg.model.AbstractProjectTree;
 import in.BBAT.abstrakt.presenter.pkg.model.TestCaseModel;
 import in.BBAT.abstrakt.presenter.run.model.TestRunCase;
-import in.BBAT.abstrakt.presenter.run.model.TestRunManager;
+import in.bbat.presenter.internal.DeviceTestRun;
 import in.bbat.presenter.internal.TestRunExecutionManager;
 import in.bbat.presenter.views.BBATViewPart;
 import in.bbat.presenter.views.tester.TestRunnerView;
@@ -41,7 +41,7 @@ public class TestRunDropListener extends ViewerDropAdapter{
 			{
 				testObj = iterator.next();
 				if (testObj instanceof AndroidDevice) {
-					TestRunExecutionManager.getInstance().addTestDevice((AndroidDevice) testObj);
+					TestRunExecutionManager.getInstance().addTestDevice(new DeviceTestRun((AndroidDevice) testObj,TestRunnerView.testRunFolder));
 				}
 				if(testObj instanceof AbstractProjectTree){
 					addToTestCaseList((AbstractTreeModel) testObj, tempList);

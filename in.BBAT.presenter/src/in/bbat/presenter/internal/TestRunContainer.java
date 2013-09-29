@@ -1,6 +1,5 @@
 package in.bbat.presenter.internal;
 
-import in.BBAT.abstrakt.presenter.device.model.AndroidDevice;
 import in.BBAT.abstrakt.presenter.run.model.TestRunCase;
 
 import java.util.ArrayList;
@@ -11,7 +10,7 @@ import java.util.Set;
 public class TestRunContainer {
 
 	private List<TestRunCase> testRunCases = new ArrayList<TestRunCase>();
-	private Set<AndroidDevice> selectedTestDeviceList = new HashSet<AndroidDevice>();
+	private Set<DeviceTestRun> deviceTestRuns = new HashSet<DeviceTestRun>();
 
 	public List<TestRunCase> getTestRunCases(){
 		return testRunCases;
@@ -29,19 +28,22 @@ public class TestRunContainer {
 		testRunCases.clear();
 	}
 
-	public Set<AndroidDevice> getSelectedTestDeviceList() {
-		return selectedTestDeviceList;
+	public Set<DeviceTestRun> getdeviceTestRuns() {
+		return deviceTestRuns;
 	}
 
-	public void addTestDevice(AndroidDevice selectedTestDevice) {
-		selectedTestDeviceList.add(selectedTestDevice);
+	public void addTestDevice(DeviceTestRun deviceTestRun) {
+		deviceTestRuns.add(deviceTestRun);
 	}
-	
-	public void clearDevices(){
-		selectedTestDeviceList.clear();
+
+	public void clearDeviceRuns(){
+		for(DeviceTestRun run : deviceTestRuns){
+			run.clear();
+		}
+		deviceTestRuns.clear();
 	}
-	
-	public void removeDevice(AndroidDevice selectedTestDevice){
-		selectedTestDeviceList.remove(selectedTestDevice);
+
+	public void removeDeviceRun(DeviceTestRun selectedTestDevice){
+		deviceTestRuns.remove(selectedTestDevice);
 	}
 }

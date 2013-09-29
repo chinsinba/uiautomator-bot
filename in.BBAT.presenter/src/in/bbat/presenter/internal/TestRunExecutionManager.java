@@ -45,23 +45,23 @@ public class TestRunExecutionManager {
 	}
 
 	public void clearTestDevices() {
-		runContainer.clearDevices();		
+		runContainer.clearDeviceRuns();		
 	}
 
-	public void addTestDevice(AndroidDevice selectedDevice){
+	public void addTestDevice(DeviceTestRun selectedDevice){
 		runContainer.addTestDevice(selectedDevice);
 	}
 
-	public void removeDevice(AndroidDevice selectedTestDevice){
-		runContainer.removeDevice(selectedTestDevice);
+	public void removeDevice(DeviceTestRun selectedTestDevice){
+		runContainer.removeDeviceRun(selectedTestDevice);
 	}
 
-	public Set<AndroidDevice> getSelectedDevices(){
-		return runContainer.getSelectedTestDeviceList();
+	public Set<DeviceTestRun> getSelectedDevices(){
+		return runContainer.getdeviceTestRuns();
 	}
 
 	public void execute() {
-		TestRunExecutor executor = new TestRunExecutor(TestDeviceManager.getInstance().getDevices(),TestRunExecutionManager.getInstance().getTestRunCases());
+		TestRunExecutor executor = new TestRunExecutor(getSelectedDevices());
 		executor.run();		
 	}
 }

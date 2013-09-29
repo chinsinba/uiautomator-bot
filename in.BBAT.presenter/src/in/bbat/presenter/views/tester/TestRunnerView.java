@@ -1,5 +1,9 @@
 package in.bbat.presenter.views.tester;
 
+import java.util.List;
+
+import in.BBAT.abstrakt.presenter.device.model.AndroidDevice;
+import in.BBAT.abstrakt.presenter.run.model.TestRunInstanceModel;
 import in.BBAT.presenter.DND.listeners.TestRunDropListener;
 import in.BBAT.presenter.labelProviders.DeviceViewLabelProvider;
 import in.BBAT.presenter.labelProviders.TestRunnerLableProvider;
@@ -14,14 +18,19 @@ import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.CTabFolder;
+import org.eclipse.swt.custom.CTabItem;
 import org.eclipse.swt.dnd.DND;
 import org.eclipse.swt.dnd.Transfer;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.FormAttachment;
 import org.eclipse.swt.layout.FormData;
 import org.eclipse.swt.layout.FormLayout;
-import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.TableColumn;
 
@@ -29,8 +38,9 @@ public class TestRunnerView extends BBATViewPart {
 
 	public static final String ID = "in.BBAT.presenter.tester.TestRunnerView";
 	private TableViewer viewer;
-	private TableColumnLayout tableLayout;
 	private TableViewer testDeviceViewer;
+	public static CTabFolder testRunFolder;
+	private CTabItem testRunItem;
 
 	public TestRunnerView() {
 	}
@@ -52,18 +62,18 @@ public class TestRunnerView extends BBATViewPart {
 		Composite outer = new Composite( parent, SWT.BORDER );
 
 		FormLayout formLayout = new FormLayout();
-		formLayout.marginHeight = 5;
+		/*formLayout.marginHeight = 5;
 		formLayout.marginWidth = 5;
-		formLayout.spacing = 5;
+		formLayout.spacing = 5;*/
 		outer.setLayout( formLayout );
 
 		Composite innerLeft = new Composite( outer, SWT.BORDER );
-		innerLeft.setLayout( new GridLayout() );
+		//		innerLeft.setLayout( new GridLayout() );
 
 		FormData fData = new FormData();
 		fData.top = new FormAttachment( 0 );
 		fData.left = new FormAttachment( 0 );
-		fData.right = new FormAttachment(12  ); // Locks on 10% of the view
+		fData.right = new FormAttachment(20  ); // Locks on 10% of the view
 		fData.bottom = new FormAttachment( 100 );
 		innerLeft.setLayoutData( fData );
 		innerLeft.setLayout(new FillLayout());
@@ -71,22 +81,30 @@ public class TestRunnerView extends BBATViewPart {
 		createDeviceViewer(innerLeft);
 
 		Composite innerRight = new Composite( outer, SWT.BORDER );
-		innerRight.setLayout( new FillLayout() );
-
 		fData = new FormData();
 		fData.top = new FormAttachment( 0 );
 		fData.left = new FormAttachment( innerLeft );
 		fData.right = new FormAttachment( 100 );
 		fData.bottom = new FormAttachment( 100 );
 		innerRight.setLayoutData( fData );
+		innerRight.setLayout(new FillLayout());
+
+		createTestRunViewer(innerRight);
+		createDropSupport();
+	}
+
+	private void createTestRunViewer(Composite innerRight) {
+		testRunFolder = new CTabFolder(innerRight, SWT.TOP);
+		testRunItem = new CTabItem(testRunFolder, SWT.None);
+		testRunItem.setText("Test Run");
+		Composite comp = new Composite(testRunFolder, SWT.None);
 
 
-
-		viewer = new TableViewer(innerRight, SWT.MULTI | SWT.H_SCROLL| SWT.V_SCROLL);
+		viewer = new TableViewer(comp, SWT.MULTI | SWT.H_SCROLL| SWT.V_SCROLL);
 		viewer.setContentProvider(new ArrayContentProvider());
 		viewer.getTable().setLinesVisible(true);
 		viewer.getTable().setHeaderVisible(true);
-		createColumns(innerRight, viewer);
+		createColumns(comp, viewer);
 		viewer.setLabelProvider(new TestRunnerLableProvider());
 		try {
 			viewer.setInput(TestRunExecutionManager.getInstance().getTestRunCases());
@@ -96,17 +114,55 @@ public class TestRunnerView extends BBATViewPart {
 
 		getViewSite().setSelectionProvider(viewer);
 		addMenuManager(viewer);
-		createDropSupport();
+		testRunItem.setControl(comp);
+		testRunFolder.setSelection(0);
+	}
+
+	public void createTestDeviceTab(AndroidDevice testDevice, List<TestRunInstanceModel> input){
+		CTabItem testRunItem = new CTabItem(testRunFolder, SWT.None);
+		testRunItem.setText("Test Devices");
+		Composite comp = new Composite(testRunFolder, SWT.None);
+		Button button = new Button(comp, SWT.PUSH);
+		button.setText("Hello");
+		button.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				
+			}
+		});
+		
+		
+		testRunItem.setControl(comp);
+
 	}
 
 	private void createDeviceViewer(Composite innerLeft) {
 
-		testDeviceViewer = new TableViewer(innerLeft, SWT.H_SCROLL| SWT.V_SCROLL);
+		CTabFolder tabFolder = new CTabFolder(innerLeft, SWT.TOP);
+		CTabItem testRunItem = new CTabItem(tabFolder, SWT.None);
+		testRunItem.setText("Test Devices");
+		Composite comp = new Composite(tabFolder, SWT.None);
+
+		testDeviceViewer = new TableViewer(comp, SWT.H_SCROLL| SWT.V_SCROLL);
+		testDeviceViewer.getTable().setHeaderVisible(true);
+		testDeviceViewer.getTable().setLinesVisible(true);
 		testDeviceViewer.setContentProvider(new ArrayContentProvider());
 		testDeviceViewer.setLabelProvider(new DeviceViewLabelProvider());
+		TableColumn col = new TableColumn(testDeviceViewer.getTable(), SWT.None);
+		col.setText("Devices");
+		TableColumnLayout lay = new TableColumnLayout();
+		comp.setLayout(lay);
+		lay.setColumnData(col, new ColumnWeightData(50));
+		{
+			col = new TableColumn(testDeviceViewer.getTable(), SWT.None);
+			col.setText("Status");
+			comp.setLayout(lay);
+			lay.setColumnData(col, new ColumnWeightData(50));
+		}
 		// Provide the input to the ContentProvider
 		testDeviceViewer.setInput(TestRunExecutionManager.getInstance().getSelectedDevices());
-
+		testRunItem.setControl(comp);
+		tabFolder.setSelection(0);
 		createDropSupportForDevice();
 
 	}
@@ -121,28 +177,22 @@ public class TestRunnerView extends BBATViewPart {
 
 	public void createColumns(final Composite parent, final TableViewer viewer) {
 		String[] titles = { "Project","TestSuite","TestCase","Status" };
-		int[] bounds = { 17, 20, 23, 35, 15 };
+		int[] bounds = { 25,25,25,25 };
+
+		TableColumnLayout layout = new TableColumnLayout();
+		parent.setLayout(layout);
 
 		TableViewerColumn col =createTableViewerColumn(viewer,null, titles[0],bounds[0]);
-
-		int width = col.getColumn().getWidth();
-		tableLayout= new TableColumnLayout();
-		tableLayout.setColumnData(col.getColumn(), new ColumnWeightData(bounds[0],width));
+		layout.setColumnData(col.getColumn(), new ColumnWeightData(bounds[0]));
 
 		TableViewerColumn col1 = createTableViewerColumn(viewer, null, titles[1],bounds[1]);
-		tableLayout= new TableColumnLayout();
-		width = col1.getColumn().getWidth();
-		tableLayout.setColumnData(col1.getColumn(), new ColumnWeightData(bounds[1],width));
+		layout.setColumnData(col1.getColumn(), new ColumnWeightData(bounds[1]));
 
 		TableViewerColumn col2 = createTableViewerColumn(viewer, null, titles[2],bounds[2]);
-		tableLayout= new TableColumnLayout();
-		width = col2.getColumn().getWidth();
-		tableLayout.setColumnData(col2.getColumn(), new ColumnWeightData(bounds[2],width));
+		layout.setColumnData(col2.getColumn(), new ColumnWeightData(bounds[2]));
 
 		TableViewerColumn col3 = createTableViewerColumn(viewer, null, titles[3],bounds[3]);
-		tableLayout= new TableColumnLayout();
-		width = col3.getColumn().getWidth();
-		tableLayout.setColumnData(col3.getColumn(), new ColumnWeightData(bounds[3],width));
+		layout.setColumnData(col3.getColumn(), new ColumnWeightData(bounds[3]));
 
 	}
 
@@ -167,6 +217,7 @@ public class TestRunnerView extends BBATViewPart {
 		column.setMoveable(true);
 		return viewerColumn;
 	}
+
 	@Override
 	public void setFocus() {
 
