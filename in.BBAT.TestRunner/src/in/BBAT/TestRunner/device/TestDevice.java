@@ -4,15 +4,19 @@ import in.BBAT.testRunner.runner.UiAutoTestCaseJar;
 import in.BBAT.testRunner.runner.internal.UIAutomatorRunner;
 
 import java.io.IOException;
+import java.util.List;
 
 import com.android.ddmlib.AdbCommandRejectedException;
 import com.android.ddmlib.IDevice;
 import com.android.ddmlib.IShellOutputReceiver;
-import com.android.ddmlib.MultiLineReceiver;
+import com.android.ddmlib.NullOutputReceiver;
 import com.android.ddmlib.RawImage;
 import com.android.ddmlib.ShellCommandUnresponsiveException;
 import com.android.ddmlib.SyncException;
 import com.android.ddmlib.TimeoutException;
+import com.android.ddmlib.logcat.LogCatListener;
+import com.android.ddmlib.logcat.LogCatMessage;
+import com.android.ddmlib.logcat.LogCatReceiverTask;
 import com.android.ddmlib.testrunner.ITestRunListener;
 
 
@@ -22,13 +26,12 @@ public class TestDevice implements IAndroidDevice {
 	private IDevice monkeyDevice;
 
 	private ILogListener listener;
-	private LogLineReciever logReciever;
+	private LogCatReceiverTask logReciever;
 
 	public final static String UIAUTOMATOR_JAR_PATH = "/data/local/tmp/BBAT.jar";
 
 	public TestDevice(IDevice device) {
 		this.monkeyDevice = device;
-		logReciever =new LogLineReciever();
 	}
 
 	@Override
@@ -56,23 +59,7 @@ public class TestDevice implements IAndroidDevice {
 	{
 		final String cmd ="logcat -c";
 		try {
-			monkeyDevice.executeShellCommand(cmd, new IShellOutputReceiver() {
-				@Override
-				public boolean isCancelled()
-				{
-					return false;
-				}
-
-				@Override
-				public void flush()
-				{
-				}
-
-				@Override
-				public void addOutput(byte[] arg0, int arg1, int arg2)
-				{
-				}
-			}, 0);
+			monkeyDevice.executeShellCommand(cmd, new NullOutputReceiver(),0);
 		} catch (TimeoutException e) {
 			e.printStackTrace();
 		} catch (AdbCommandRejectedException e) {
@@ -86,23 +73,16 @@ public class TestDevice implements IAndroidDevice {
 
 	@Override
 	public void startLogging() {
+
 		Thread logger = new Thread(new Runnable() {
 
 			@Override
 			public void run() {
-
 				clearLogs();
-				try {
-					monkeyDevice.executeShellCommand("logcat -v time",new LogLineReciever(),0);
-				} catch (TimeoutException e) {
-					e.printStackTrace();
-				} catch (AdbCommandRejectedException e) {
-					e.printStackTrace();
-				} catch (ShellCommandUnresponsiveException e) {
-					e.printStackTrace();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}}
+				logReciever =new LogCatReceiverTask(monkeyDevice);
+				logReciever.addLogCatListener(new LogLineReciever());
+				logReciever.run();
+			}
 		});
 
 		logger.start();
@@ -124,31 +104,17 @@ public class TestDevice implements IAndroidDevice {
 
 	@Override
 	public void stopLogging() {
-		logReciever.setStop(true);
+		logReciever.stop();
 	}
 
-	private class LogLineReciever extends MultiLineReceiver
+	private class LogLineReciever implements LogCatListener
 	{
-		private boolean stop;
-
+		int count =0;
 		@Override
-		public boolean isCancelled() {
-			return isStop();
-		}
-
-		@Override
-		public void processNewLines(String[] logs) {
-			for(int i=0;i<logs.length;i++){
-				listener.processLogLine(logs[i]);
+		public void log(List<LogCatMessage> arg0) {
+			for(LogCatMessage msg : arg0){
+				System.out.println(msg.getMessage());
 			}
-		}
-
-		public boolean isStop() {
-			return stop;
-		}
-
-		public void setStop(boolean stop) {
-			this.stop = stop;
 		}
 	}
 
