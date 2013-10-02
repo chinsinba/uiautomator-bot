@@ -2,7 +2,9 @@ package in.BBAT.abstrakt.presenter.run.model;
 
 import in.BBAT.abstrakt.gui.model.AbstractTreeModel;
 import in.BBAT.abstrakt.gui.model.IGUITreeNode;
+import in.BBAT.abstrakt.presenter.pkg.model.TestCaseModel;
 import in.BBAT.data.model.Entities.AbstractEntity;
+import in.BBAT.data.model.Entities.TestCaseEntity;
 import in.BBAT.data.model.Entities.TestRunEntity;
 import in.BBAT.data.model.Entities.TestRunInfoEntity;
 
@@ -15,23 +17,22 @@ import org.eclipse.swt.graphics.Image;
  */
 public class TestRunInstanceModel extends AbstractTreeModel {
 
+	private TestCaseModel testCaseModel ;
 	protected TestRunInstanceModel(TestRunModel parent,TestRunInfoEntity entity) {
 		super(parent,entity);
-		// TODO Auto-generated constructor stub
 	}
 
-	public TestRunInstanceModel(TestRunModel parent) {
-		super(parent,new TestRunInfoEntity());
+	public TestRunInstanceModel(TestRunModel parent,TestCaseModel testCase,String status) {
+		super(parent,new TestRunInfoEntity((TestCaseEntity) testCase.getEntity(),status));
+		this.setTestCaseModel(testCase);
 	}
 	@Override
 	public String getLabel() {
-		// TODO Auto-generated method stub
-		return null;
+		return getName();
 	}
 
 	@Override
 	public Image getImage() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -41,9 +42,27 @@ public class TestRunInstanceModel extends AbstractTreeModel {
 
 	@Override
 	protected AbstractTreeModel getChild(AbstractEntity childEntity) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
+	public String getName(){
+		return getTestCaseModel().getName();
+	}
+
+	public TestCaseModel getTestCaseModel() {
+		return testCaseModel;
+	}
+
+	public void setTestCaseModel(TestCaseModel testCaseModel) {
+		this.testCaseModel = testCaseModel;
+	}
+
+	public String getStatus() {
+		return ((TestRunInfoEntity)getEntity()).getVerdict();
+	}
+
+	public void setStatus(String status){
+		((TestRunInfoEntity)getEntity()).setVerdict(status);
+	}
 
 }

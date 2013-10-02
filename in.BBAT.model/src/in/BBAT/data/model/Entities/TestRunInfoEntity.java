@@ -22,6 +22,16 @@ import javax.persistence.TableGenerator;
 	@NamedQuery(name="TestRunInfoEntity.findAll",query="SELECT testcase FROM TestRunInfoEntity testcase ORDER BY testcase.id")
 })
 public class TestRunInfoEntity extends AbstractEntity {
+	
+	public TestRunInfoEntity(TestCaseEntity testCase,String verdict) {
+		this.testCase = testCase;
+		this.verdict = verdict;
+	}
+	
+	public TestRunInfoEntity() {
+		// TODO Auto-generated constructor stub
+	}
+	
 	@Id
 	@TableGenerator(name = "TestRunInfo", table = "ID_GENERATOR", pkColumnName = "GEN_NAME", valueColumnName = "GEN_VAL", allocationSize=1)
 	@GeneratedValue(generator = "TestRunInfo")

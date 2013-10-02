@@ -1,7 +1,7 @@
 package in.bbat.presenter;
 
-import in.BBAT.abstrakt.presenter.run.model.TestRunCase;
 import in.BBAT.abstrakt.presenter.run.model.TestRunCase.TestStatus;
+import in.BBAT.abstrakt.presenter.run.model.TestRunInstanceModel;
 import in.bbat.presenter.internal.DeviceTestRun;
 import in.bbat.presenter.views.tester.TestRunnerView;
 
@@ -15,11 +15,11 @@ import com.android.ddmlib.testrunner.TestIdentifier;
 
 public class TestCaseExecutionListener implements ITestRunListener {
 
-	private TestRunCase runCase;
+	private TestRunInstanceModel runCase;
 	private DeviceTestRun deviceRun;
 	private TestStatus status = TestStatus.PASS;
 
-	public TestCaseExecutionListener(TestRunCase testRunCase, DeviceTestRun deviceRun){
+	public TestCaseExecutionListener(TestRunInstanceModel testRunCase, DeviceTestRun deviceRun){
 		this.runCase = testRunCase;
 		this.deviceRun = deviceRun;
 	}
@@ -38,7 +38,7 @@ public class TestCaseExecutionListener implements ITestRunListener {
 	@Override
 	public void testRunEnded(long arg0, Map<String, String> arg1) {
 		System.out.println("Run Ended "+arg1);
-		runCase.setStatus(status);
+		runCase.setStatus(status.getStatus());
 		refresh();
 	}
 
@@ -50,7 +50,7 @@ public class TestCaseExecutionListener implements ITestRunListener {
 	@Override
 	public void testRunStarted(String arg0, int arg1) {
 		System.out.println("Run Started "+ arg1);
-		runCase.setStatus(TestStatus.EXECUTING);
+		runCase.setStatus(TestStatus.EXECUTING.getStatus());
 		refresh();
 	}
 

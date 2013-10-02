@@ -10,10 +10,7 @@ public class ExecuteTestRunHandler extends AbstractTestRunnerHandler {
 
 	@Override
 	public Object run(ExecutionEvent event, List<?> selectedObjects) {
-
-
 		TestRunExecutionManager.getInstance().execute();
-		
 		return null;
 
 	}

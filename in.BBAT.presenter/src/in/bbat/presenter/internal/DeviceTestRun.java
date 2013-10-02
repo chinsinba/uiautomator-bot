@@ -3,6 +3,11 @@ package in.bbat.presenter.internal;
 import in.BBAT.abstrakt.presenter.device.model.AndroidDevice;
 import in.BBAT.abstrakt.presenter.run.manager.DeviceLogListener;
 import in.BBAT.abstrakt.presenter.run.model.TestRunCase;
+import in.BBAT.abstrakt.presenter.run.model.TestRunCase.TestStatus;
+import in.BBAT.abstrakt.presenter.run.model.TestRunInstanceModel;
+import in.BBAT.abstrakt.presenter.run.model.TestRunModel;
+import in.BBAT.dataMine.manager.RunMineManager;
+import in.BBAT.presenter.labelProviders.DeviceTestRunLableProvider;
 import in.BBAT.presenter.labelProviders.TestRunnerLableProvider;
 import in.BBAT.testRunner.runner.TestRunner;
 import in.BBAT.testRunner.runner.UiAutoTestCaseJar;
@@ -34,10 +39,13 @@ public class DeviceTestRun {
 	private TableViewer viewer;
 	private CTabItem testRunItem;
 	private List<TestRunCase> testRunCases = new ArrayList<TestRunCase>();
+	private TestRunModel testRun;
+	private ArrayList<TestRunInstanceModel> testRunInstances;
 
 	public DeviceTestRun(AndroidDevice device,CTabFolder mainTabFolder) {
 		this.setDevice(device);
 		this.setTabFolder(mainTabFolder);
+		this.testRun = new TestRunModel();
 	}
 
 	public AndroidDevice getDevice() {
@@ -68,15 +76,26 @@ public class DeviceTestRun {
 		viewer.getTable().setLinesVisible(true);
 		viewer.getTable().setHeaderVisible(true);
 		createColumns(comp, viewer);
-		viewer.setLabelProvider(new TestRunnerLableProvider());
+		viewer.setLabelProvider(new DeviceTestRunLableProvider());
 		try {
-			viewer.setInput(getTestRunCases());
+			viewer.setInput(getRunInstances());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
 		testRunItem.setControl(comp);
 		testRunFolder.setSelection(0);
+	}
+
+	private List<TestRunInstanceModel> getRunInstances() {
+		if(testRunInstances!=null)
+			return testRunInstances;
+		testRunInstances = new ArrayList<TestRunInstanceModel>();
+		for(TestRunCase caseObj:getTestRunCases()){
+			TestRunInstanceModel runInstModel = new TestRunInstanceModel(testRun,caseObj.getTestcase(),TestStatus.NOTEXECUTED.getStatus());
+			testRunInstances.add(runInstModel);
+		}
+		return testRunInstances;
 	}
 
 	public void createColumns(final Composite parent, final TableViewer viewer) {
@@ -138,8 +157,8 @@ public class DeviceTestRun {
 			protected IStatus run(IProgressMonitor monitor) {
 
 				TestRunner runner = new TestRunner(new UiAutoTestCaseJar(getTestScriptPaths()),getDevice().getiDevice());
-				for (TestRunCase testRunCase : getTestRunCases()) {
-					runner.execute(testRunCase.getTestcase().getName(), new TestCaseExecutionListener(testRunCase, DeviceTestRun.this), new DeviceLogListener(testRunCase));
+				for (TestRunInstanceModel testRunCase : getRunInstances()) {
+					runner.execute(testRunCase.getTestCaseModel().getName(), new TestCaseExecutionListener(testRunCase, DeviceTestRun.this), new DeviceLogListener(testRunCase));
 				}
 				return Status.OK_STATUS;
 			}
@@ -151,6 +170,7 @@ public class DeviceTestRun {
 	{
 		if(testRunItem!=null)
 			testRunItem.dispose();
+		testRunInstances= null;
 	}
 
 	public void refresh() {
@@ -165,7 +185,7 @@ public class DeviceTestRun {
 		}
 		return false ;
 	}
-	
+
 	@Override
 	public int hashCode() {
 		// TODO Auto-generated method stub
