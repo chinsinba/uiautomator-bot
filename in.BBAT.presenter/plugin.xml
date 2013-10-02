@@ -67,6 +67,12 @@
             name="TestRunner"
             restorable="true">
       </view>
+      <view
+            class="in.bbat.presenter.views.tester.TestLogView"
+            id="in.BBAT.presenter.tester.AndroidLogView"
+            name="AndroidLogView"
+            restorable="true">
+      </view>
    </extension>
    <extension
          point="org.eclipse.ui.perspectiveExtensions">
@@ -132,11 +138,21 @@
                relative="in.BBAT.presenter.developer.testcaseBrowserView">
          </view>
          <view
+               closeable="false"
                id="in.BBAT.presenter.tester.TestRunnerView"
                minimized="false"
                ratio="0.80F"
                relationship="left"
                relative="org.eclipse.ui.editorss"
+               visible="true">
+         </view>
+         <view
+               closeable="true"
+               id="in.BBAT.presenter.tester.AndroidLogView"
+               minimized="false"
+               ratio="0.50f"
+               relationship="bottom"
+               relative="in.BBAT.presenter.tester.TestRunnerView"
                visible="true">
          </view>
       </perspectiveExtension>

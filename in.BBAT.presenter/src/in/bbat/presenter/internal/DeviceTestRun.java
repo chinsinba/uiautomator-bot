@@ -6,12 +6,12 @@ import in.BBAT.abstrakt.presenter.run.model.TestRunCase;
 import in.BBAT.abstrakt.presenter.run.model.TestRunCase.TestStatus;
 import in.BBAT.abstrakt.presenter.run.model.TestRunInstanceModel;
 import in.BBAT.abstrakt.presenter.run.model.TestRunModel;
-import in.BBAT.dataMine.manager.RunMineManager;
+import in.BBAT.dataMine.manager.MineManager;
 import in.BBAT.presenter.labelProviders.DeviceTestRunLableProvider;
-import in.BBAT.presenter.labelProviders.TestRunnerLableProvider;
 import in.BBAT.testRunner.runner.TestRunner;
 import in.BBAT.testRunner.runner.UiAutoTestCaseJar;
 import in.bbat.presenter.TestCaseExecutionListener;
+import in.bbat.presenter.views.tester.TestRunnerView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +35,7 @@ import org.eclipse.swt.widgets.TableColumn;
 public class DeviceTestRun {
 
 	private AndroidDevice device;
-	private CTabFolder testRunFolder;
+	private CTabFolder testRunFolder ;
 	private TableViewer viewer;
 	private CTabItem testRunItem;
 	private List<TestRunCase> testRunCases = new ArrayList<TestRunCase>();
@@ -45,7 +45,9 @@ public class DeviceTestRun {
 	public DeviceTestRun(AndroidDevice device,CTabFolder mainTabFolder) {
 		this.setDevice(device);
 		this.setTabFolder(mainTabFolder);
-		this.testRun = new TestRunModel();
+	}
+	public DeviceTestRun(AndroidDevice device) {
+		this(device, TestRunnerView.testRunFolder);
 	}
 
 	public AndroidDevice getDevice() {
@@ -66,7 +68,7 @@ public class DeviceTestRun {
 
 	public void createTab(){
 		clear();
-		testRunItem = new CTabItem(testRunFolder, SWT.None);
+		testRunItem = new CTabItem(TestRunnerView.testRunFolder, SWT.None);
 		testRunItem.setText(device.getName());
 		Composite comp = new Composite(testRunFolder, SWT.None);
 
@@ -91,10 +93,17 @@ public class DeviceTestRun {
 		if(testRunInstances!=null)
 			return testRunInstances;
 		testRunInstances = new ArrayList<TestRunInstanceModel>();
+		this.testRun = new TestRunModel();
+		MineManager.getInstance().beginTransaction();
+		testRun.save();
+		MineManager.getInstance().commitTransaction();
+		MineManager.getInstance().beginTransaction();
 		for(TestRunCase caseObj:getTestRunCases()){
 			TestRunInstanceModel runInstModel = new TestRunInstanceModel(testRun,caseObj.getTestcase(),TestStatus.NOTEXECUTED.getStatus());
+			runInstModel.save();
 			testRunInstances.add(runInstModel);
 		}
+		MineManager.getInstance().commitTransaction();
 		return testRunInstances;
 	}
 

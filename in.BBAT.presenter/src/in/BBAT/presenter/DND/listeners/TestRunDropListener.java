@@ -41,7 +41,7 @@ public class TestRunDropListener extends ViewerDropAdapter{
 			{
 				testObj = iterator.next();
 				if (testObj instanceof AndroidDevice) {
-					TestRunExecutionManager.getInstance().addTestDevice(new DeviceTestRun((AndroidDevice) testObj,TestRunnerView.testRunFolder));
+					TestRunExecutionManager.getInstance().addTestDevice(new DeviceTestRun((AndroidDevice) testObj));
 				}
 				if(testObj instanceof AbstractProjectTree){
 					addToTestCaseList((AbstractTreeModel) testObj, tempList);

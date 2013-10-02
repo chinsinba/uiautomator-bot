@@ -205,8 +205,8 @@ public class TestRunnerView extends BBATViewPart {
 		TableViewerColumn col2 = createTableViewerColumn(viewer, null, titles[2],bounds[2]);
 		layout.setColumnData(col2.getColumn(), new ColumnWeightData(bounds[2]));
 
-		TableViewerColumn col3 = createTableViewerColumn(viewer, null, titles[3],bounds[3]);
-		layout.setColumnData(col3.getColumn(), new ColumnWeightData(bounds[3]));
+	/*	TableViewerColumn col3 = createTableViewerColumn(viewer, null, titles[3],bounds[3]);
+		layout.setColumnData(col3.getColumn(), new ColumnWeightData(bounds[3]));*/
 
 	}
 
