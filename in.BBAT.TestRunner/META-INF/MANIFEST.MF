@@ -8,18 +8,11 @@ Bundle-Vendor: ME
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  org.apache.ant;bundle-version="1.8.4",
- org.eclipse.ant.core;bundle-version="3.2.500"
+ org.eclipse.ant.core;bundle-version="3.2.500",
+ in.BBAT.monkey.libs;bundle-version="1.0.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
-Bundle-ClassPath: .,
- lib/chimpchat.jar,
- lib/common.jar,
- lib/ddmlib.jar,
- lib/guava-13.0.1.jar,
- lib/kxml2-2.3.0.jar,
- lib/monkeyrunner.jar
-Export-Package: com.android.ddmlib,
- com.android.ddmlib.testrunner,
- in.BBAT.TestRunner.device,
+Bundle-ClassPath: .
+Export-Package: in.BBAT.TestRunner.device,
  in.BBAT.testRunner.runner,
  in.bbat.testrunner

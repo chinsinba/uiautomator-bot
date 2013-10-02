@@ -8,7 +8,6 @@ import java.util.List;
 
 import com.android.ddmlib.AdbCommandRejectedException;
 import com.android.ddmlib.IDevice;
-import com.android.ddmlib.IShellOutputReceiver;
 import com.android.ddmlib.NullOutputReceiver;
 import com.android.ddmlib.RawImage;
 import com.android.ddmlib.ShellCommandUnresponsiveException;
@@ -109,12 +108,9 @@ public class TestDevice implements IAndroidDevice {
 
 	private class LogLineReciever implements LogCatListener
 	{
-		int count =0;
 		@Override
-		public void log(List<LogCatMessage> arg0) {
-			for(LogCatMessage msg : arg0){
-				System.out.println(msg.getMessage());
-			}
+		public void log(List<LogCatMessage> logMessages) {
+			listener.processLogLine(logMessages);
 		}
 	}
 
