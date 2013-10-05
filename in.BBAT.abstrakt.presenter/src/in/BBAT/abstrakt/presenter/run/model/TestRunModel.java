@@ -2,6 +2,7 @@ package in.BBAT.abstrakt.presenter.run.model;
 
 import in.BBAT.abstrakt.gui.model.AbstractTreeModel;
 import in.BBAT.data.model.Entities.AbstractEntity;
+import in.BBAT.data.model.Entities.TestDeviceRunEntity;
 import in.BBAT.data.model.Entities.TestRunEntity;
 import in.BBAT.data.model.Entities.TestRunInfoEntity;
 
@@ -34,7 +35,7 @@ public class TestRunModel extends AbstractTreeModel {
 
 	@Override
 	protected AbstractTreeModel getChild(AbstractEntity childEntity) {
-		return new TestRunInstanceModel(this,(TestRunInfoEntity) childEntity);
+		return new TestDeviceRunModel(this,(TestDeviceRunEntity) childEntity);
 	}
 
 	

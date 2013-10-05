@@ -49,7 +49,7 @@ public class TestRunInfoEntity extends AbstractEntity {
 	
 	@ManyToOne
 	@OrderColumn
-	private TestRunEntity testRun;
+	private TestDeviceRunEntity testDeviceRun;;
 	
 	public Timestamp getStartTime() {
 		return startTime;
@@ -66,16 +66,6 @@ public class TestRunInfoEntity extends AbstractEntity {
 	public void setEndTime(Timestamp endTime) {
 		this.endTime = endTime;
 	}
-
-	public TestRunEntity getTestRun() {
-		return testRun;
-	}
-
-	public void setTestRun(TestRunEntity testRun) {
-		this.testRun = testRun;
-	}
-
-	
 	
 	public int getId() {
 		return id;
@@ -87,7 +77,7 @@ public class TestRunInfoEntity extends AbstractEntity {
 
 	@Override
 	public AbstractEntity getParent() {
-		return getTestRun();
+		return getTestDeviceRun();
 	}
 
 	public TestCaseEntity getTestCase() {
@@ -104,5 +94,13 @@ public class TestRunInfoEntity extends AbstractEntity {
 
 	public void setVerdict(String verdict) {
 		this.verdict = verdict;
+	}
+
+	public TestDeviceRunEntity getTestDeviceRun() {
+		return testDeviceRun;
+	}
+
+	public void setTestDeviceRun(TestDeviceRunEntity testDeviceRun) {
+		this.testDeviceRun = testDeviceRun;
 	}
 }

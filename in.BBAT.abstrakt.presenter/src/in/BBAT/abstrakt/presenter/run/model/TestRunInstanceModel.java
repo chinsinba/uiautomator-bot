@@ -5,6 +5,7 @@ import in.BBAT.abstrakt.gui.model.IGUITreeNode;
 import in.BBAT.abstrakt.presenter.pkg.model.TestCaseModel;
 import in.BBAT.data.model.Entities.AbstractEntity;
 import in.BBAT.data.model.Entities.TestCaseEntity;
+import in.BBAT.data.model.Entities.TestDeviceRunEntity;
 import in.BBAT.data.model.Entities.TestRunEntity;
 import in.BBAT.data.model.Entities.TestRunInfoEntity;
 
@@ -18,11 +19,11 @@ import org.eclipse.swt.graphics.Image;
 public class TestRunInstanceModel extends AbstractTreeModel {
 
 	private TestCaseModel testCaseModel ;
-	protected TestRunInstanceModel(TestRunModel parent,TestRunInfoEntity entity) {
+	protected TestRunInstanceModel(TestDeviceRunModel parent,TestRunInfoEntity entity) {
 		super(parent,entity);
 	}
 
-	public TestRunInstanceModel(TestRunModel parent,TestCaseModel testCase,String status) {
+	public TestRunInstanceModel(TestDeviceRunModel parent,TestCaseModel testCase,String status) {
 		super(parent,new TestRunInfoEntity((TestCaseEntity) testCase.getEntity(),status));
 		this.setTestCaseModel(testCase);
 	}
@@ -37,7 +38,7 @@ public class TestRunInstanceModel extends AbstractTreeModel {
 	}
 
 	protected IGUITreeNode produceParent(AbstractEntity childEntties) {
-		return new TestRunModel((TestRunEntity) childEntties);
+		return new TestDeviceRunModel((TestDeviceRunEntity) childEntties);
 	}
 
 	@Override

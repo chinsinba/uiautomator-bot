@@ -18,15 +18,13 @@ ITableLabelProvider {
 	public String getColumnText(Object element, int columnIndex) {
 		if(element instanceof TestRunCase){
 			switch (columnIndex) {
-			case 0:
+			case 2:
 				return ((TestRunCase) element).getTestcase().getParent().getParent().getLabel();
 			case 1:
 				return ((TestRunCase) element).getTestcase().getParent().getLabel();
-			case 2:
+			case 0:
 				return ((TestRunCase) element).getLabel();
-			case 3:
-				return ((TestRunCase) element).getStatus();
-
+			
 			default:
 				break;
 			}

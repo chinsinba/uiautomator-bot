@@ -2,6 +2,7 @@ package in.bbat.presenter.internal;
 
 import in.BBAT.abstrakt.presenter.device.model.AndroidDevice;
 import in.BBAT.abstrakt.presenter.run.manager.DeviceLogListener;
+import in.BBAT.abstrakt.presenter.run.model.TestDeviceRunModel;
 import in.BBAT.abstrakt.presenter.run.model.TestRunCase;
 import in.BBAT.abstrakt.presenter.run.model.TestRunCase.TestStatus;
 import in.BBAT.abstrakt.presenter.run.model.TestRunInstanceModel;
@@ -43,7 +44,7 @@ public class DeviceTestRun {
 	private TableViewer viewer;
 	private CTabItem testRunItem;
 	private List<TestRunCase> testRunCases = new ArrayList<TestRunCase>();
-	private TestRunModel testRun;
+	private TestDeviceRunModel testDeviceRun;
 	private ArrayList<TestRunInstanceModel> testRunInstances;
 
 	public DeviceTestRun(AndroidDevice device,CTabFolder mainTabFolder) {
@@ -109,13 +110,13 @@ public class DeviceTestRun {
 		if(testRunInstances!=null)
 			return testRunInstances;
 		testRunInstances = new ArrayList<TestRunInstanceModel>();
-		this.testRun = new TestRunModel();
+		this.testDeviceRun = new TestDeviceRunModel();
 		MineManager.getInstance().beginTransaction();
-		testRun.save();
+		testDeviceRun.save();
 		MineManager.getInstance().commitTransaction();
 		MineManager.getInstance().beginTransaction();
 		for(TestRunCase caseObj:getTestRunCases()){
-			TestRunInstanceModel runInstModel = new TestRunInstanceModel(testRun,caseObj.getTestcase(),TestStatus.NOTEXECUTED.getStatus());
+			TestRunInstanceModel runInstModel = new TestRunInstanceModel(testDeviceRun,caseObj.getTestcase(),TestStatus.NOTEXECUTED.getStatus());
 			runInstModel.save();
 			testRunInstances.add(runInstModel);
 		}

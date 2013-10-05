@@ -41,7 +41,7 @@ public class TestRunEntity extends AbstractEntity{
 
 	@OneToMany(mappedBy="testRun", fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST })
 	@OrderColumn
-	private List<TestRunInfoEntity> testRunInfos;
+	private List<TestDeviceRunEntity> testDeviceRuns;
 
 	public int getId() {
 		return id;
@@ -57,12 +57,12 @@ public class TestRunEntity extends AbstractEntity{
 
 	@Override
 	public List<? extends AbstractEntity> getChildren() {
-		return getTestRunInfos();
+		return getTestDeviceRuns();
 	}
 
 	@Override
 	public void addChild(IBBATEntity childEntity) {
-		addTestRunInfo((TestRunInfoEntity) childEntity);
+		addTestRunInfo((TestDeviceRunEntity) childEntity);
 	}
 	
 	@Override
@@ -112,21 +112,22 @@ public class TestRunEntity extends AbstractEntity{
 		this.verdict = verdict;
 	}
 
-	public List<TestRunInfoEntity> getTestRunInfos() {
-		return testRunInfos;
-	}
 
-	public void setTestRunInfos(List<TestRunInfoEntity> testRunInfos) {
-		this.testRunInfos = testRunInfos;
-	}
-
-	public void addTestRunInfo(TestRunInfoEntity entity)
+	public void addTestRunInfo(TestDeviceRunEntity entity)
 	{
-		this.testRunInfos.add(entity);
+		this.getTestDeviceRuns().add(entity);
 	}
 	
 	public void removeTestRunInfo(TestRunInfoEntity entity)
 	{
-		this.testRunInfos.remove(entity);
+		this.getTestDeviceRuns().remove(entity);
+	}
+
+	public List<TestDeviceRunEntity> getTestDeviceRuns() {
+		return testDeviceRuns;
+	}
+
+	public void setTestDeviceRuns(List<TestDeviceRunEntity> testDeviceRuns) {
+		this.testDeviceRuns = testDeviceRuns;
 	}
 }

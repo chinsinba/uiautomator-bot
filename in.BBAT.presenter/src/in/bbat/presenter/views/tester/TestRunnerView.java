@@ -190,7 +190,7 @@ public class TestRunnerView extends BBATViewPart {
 	}
 
 	public void createColumns(final Composite parent, final TableViewer viewer) {
-		String[] titles = { "Project","TestSuite","TestCase","Status" };
+		String[] titles = { "TestCase","TestSuite","Project" };
 		int[] bounds = { 25,25,25,25 };
 
 		TableColumnLayout layout = new TableColumnLayout();
