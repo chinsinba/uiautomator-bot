@@ -1,7 +1,5 @@
 package in.BBAT.abstrakt.presenter.run.model;
 
-import java.util.List;
-
 import in.BBAT.abstrakt.gui.model.AbstractTreeModel;
 import in.BBAT.abstrakt.gui.model.IGUITreeNode;
 import in.BBAT.abstrakt.presenter.pkg.model.TestCaseModel;
@@ -10,10 +8,11 @@ import in.BBAT.data.model.Entities.TestCaseEntity;
 import in.BBAT.data.model.Entities.TestDeviceRunEntity;
 import in.BBAT.data.model.Entities.TestRunInfoEntity;
 
+import java.util.List;
+
 import org.eclipse.swt.graphics.Image;
 
 import com.android.ddmlib.logcat.LogCatMessage;
-import com.android.ddmuilib.logcat.LogCatReceiver;
 
 /**
  * 
@@ -23,8 +22,7 @@ import com.android.ddmuilib.logcat.LogCatReceiver;
 public class TestRunInstanceModel extends AbstractTreeModel {
 
 	private TestCaseModel testCaseModel ;
-	
-	private LogCatReceiver logReciever;
+	private boolean showLogs;
 	
 	protected TestRunInstanceModel(TestDeviceRunModel parent,TestRunInfoEntity entity) {
 		super(parent,entity);
@@ -77,12 +75,12 @@ public class TestRunInstanceModel extends AbstractTreeModel {
 		
 	}
 
-	public LogCatReceiver getLogReciever() {
-		return logReciever;
+	public boolean isShowLogs() {
+		return showLogs;
 	}
 
-	public void setLogReciever(LogCatReceiver logReciever) {
-		this.logReciever = logReciever;
+	public void setShowLogs(boolean showLogs) {
+		this.showLogs = showLogs;
 	}
 
 }

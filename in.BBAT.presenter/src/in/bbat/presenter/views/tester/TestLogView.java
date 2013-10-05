@@ -1,7 +1,6 @@
 package in.bbat.presenter.views.tester;
 
 import in.BBAT.abstrakt.presenter.device.model.AndroidDevice;
-import in.BBAT.abstrakt.presenter.device.model.TestDeviceManager;
 import in.bbat.presenter.Activator;
 import in.bbat.presenter.views.BBATViewPart;
 

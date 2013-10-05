@@ -20,8 +20,8 @@ public class DeviceLogListener implements ILogListener {
 
 	private TestRunInstanceModel testRunCase;
 	private List<LogCatMessage> tempLogCatMessageList = new ArrayList<LogCatMessage>();
-	
-	
+
+
 	public DeviceLogListener(TestRunInstanceModel runCaseObj) {
 		this.testRunCase = runCaseObj;
 	}
@@ -36,14 +36,15 @@ public class DeviceLogListener implements ILogListener {
 		}
 		MineManager.getInstance().commitTransaction();
 
-		Display.getDefault().asyncExec(new Runnable() {
-			@Override
-			public void run() {
-				IViewPart view =  PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().findView(TestLogView.ID);
-				if(view!= null)
-					((TestLogView)view).getPanel().bufferChanged(logMessages, new ArrayList<LogCatMessage>());		
-			}
-		});
+		if(testRunCase.isShowLogs())	
+			Display.getDefault().asyncExec(new Runnable() {
+				@Override
+				public void run() {
+					IViewPart view =  PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().findView(TestLogView.ID);
+					if(view!= null)
+						((TestLogView)view).getPanel().bufferChanged(logMessages, new ArrayList<LogCatMessage>());		
+				}
+			});
 
 	}
 
@@ -51,5 +52,5 @@ public class DeviceLogListener implements ILogListener {
 	public void startLogging(IDevice iDevice) {
 	}
 
-	
+
 }

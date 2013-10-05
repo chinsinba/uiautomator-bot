@@ -26,6 +26,7 @@ import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.ColumnWeightData;
 import org.eclipse.jface.viewers.DoubleClickEvent;
 import org.eclipse.jface.viewers.IDoubleClickListener;
+import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.swt.SWT;
@@ -34,6 +35,7 @@ import org.eclipse.swt.custom.CTabItem;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.TableColumn;
+import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 
 public class DeviceTestRun {
@@ -90,10 +92,17 @@ public class DeviceTestRun {
 					TestLogView view  = (TestLogView) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().findView(TestLogView.ID);
 					if(view!=null)
 						PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().hideView(view);
-					PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().showView(TestLogView.ID);
+					Object sel = ((IStructuredSelection)event.getSelection()).getFirstElement();
+					((TestRunInstanceModel)sel).setShowLogs(true);
+//					
 				} catch (Exception e) {
 					e.printStackTrace();
-				}		
+				}	
+				try {
+					PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().showView(TestLogView.ID);
+				} catch (PartInitException e) {
+					e.printStackTrace();
+				}
 			}
 		});
 
