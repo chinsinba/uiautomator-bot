@@ -1,7 +1,6 @@
 package in.bbat.presenter.internal;
 
 import in.BBAT.abstrakt.presenter.device.model.AndroidDevice;
-import in.BBAT.abstrakt.presenter.run.manager.DeviceLogListener;
 import in.BBAT.abstrakt.presenter.run.model.TestDeviceRunModel;
 import in.BBAT.abstrakt.presenter.run.model.TestRunCase;
 import in.BBAT.abstrakt.presenter.run.model.TestRunCase.TestStatus;
@@ -45,6 +44,7 @@ public class DeviceTestRun {
 	private CTabItem testRunItem;
 	private List<TestRunCase> testRunCases = new ArrayList<TestRunCase>();
 	private TestDeviceRunModel testDeviceRun;
+	private TestRunModel testRun;
 	private ArrayList<TestRunInstanceModel> testRunInstances;
 
 	public DeviceTestRun(AndroidDevice device,CTabFolder mainTabFolder) {
@@ -87,7 +87,10 @@ public class DeviceTestRun {
 			@Override
 			public void doubleClick(DoubleClickEvent event) {
 				try {
-					TestLogView view  = (TestLogView) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().showView(TestLogView.ID);
+					TestLogView view  = (TestLogView) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().findView(TestLogView.ID);
+					if(view!=null)
+						PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().hideView(view);
+					PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().showView(TestLogView.ID);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}		
@@ -110,7 +113,7 @@ public class DeviceTestRun {
 		if(testRunInstances!=null)
 			return testRunInstances;
 		testRunInstances = new ArrayList<TestRunInstanceModel>();
-		this.testDeviceRun = new TestDeviceRunModel();
+		this.testDeviceRun = new TestDeviceRunModel(testRun);
 		MineManager.getInstance().beginTransaction();
 		testDeviceRun.save();
 		MineManager.getInstance().commitTransaction();
@@ -178,6 +181,7 @@ public class DeviceTestRun {
 
 	public void excute() {
 
+
 		Job testRunJob = new Job("Execute") {
 			@Override
 			protected IStatus run(IProgressMonitor monitor) {
@@ -220,5 +224,8 @@ public class DeviceTestRun {
 	public void focus() {
 		if(testRunItem != null)
 			testRunFolder.setSelection(testRunItem);
+	}
+	public void setTestRun(TestRunModel testRun) {
+		this.testRun = testRun;
 	}
 }

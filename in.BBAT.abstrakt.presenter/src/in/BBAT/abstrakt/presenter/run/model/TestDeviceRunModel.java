@@ -19,8 +19,8 @@ public class TestDeviceRunModel extends AbstractTreeModel {
 		super(null,childEntties);
 	}
 
-	public TestDeviceRunModel() {
-		super(null,new TestDeviceRunEntity());
+	public TestDeviceRunModel(TestRunModel runModel) {
+		super(runModel,new TestDeviceRunEntity((TestRunEntity) runModel.getEntity()));
 	}
 
 	@Override

@@ -16,9 +16,9 @@ public class TestLogView extends BBATViewPart {
 
 	@Override
 	public void createPartControl(Composite parent) {
-		panel = new LogCatPanel(Activator.getDefault().getPreferenceStore());
-		panel.createControl(parent);
-		startLogging(TestDeviceManager.getInstance().getDevices().get(0));
+		setPanel(new LogCatPanel(Activator.getDefault().getPreferenceStore()));
+		getPanel().createControl(parent);
+//		startLogging(TestDeviceManager.getInstance().getDevices().get(0));
 
 	}
 
@@ -41,13 +41,22 @@ public class TestLogView extends BBATViewPart {
 	}
 
 	public void startLogging(AndroidDevice device){
-		panel.deviceSelected(device.getiDevice().getMonkeyDevice());
+		getPanel().deviceSelected(device.getiDevice().getMonkeyDevice());
 		setPartName(device.getiDevice().getName());
 	}
 
 	@Override
 	public void dispose() {
-		panel.stopLogging();
+		super.dispose();
+//		getPanel().stopLogging();
+	}
+
+	public LogCatPanel getPanel() {
+		return panel;
+	}
+
+	public void setPanel(LogCatPanel panel) {
+		this.panel = panel;
 	}
 
 }

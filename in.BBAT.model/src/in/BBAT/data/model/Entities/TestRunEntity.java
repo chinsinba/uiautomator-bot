@@ -32,6 +32,8 @@ public class TestRunEntity extends AbstractEntity{
 	@GeneratedValue(generator = "TestRun_GEN")
 	private int id;
 
+	private String name;
+
 	private String description;
 
 	private String verdict;
@@ -64,7 +66,7 @@ public class TestRunEntity extends AbstractEntity{
 	public void addChild(IBBATEntity childEntity) {
 		addTestRunInfo((TestDeviceRunEntity) childEntity);
 	}
-	
+
 	@Override
 	public void removeChild(IBBATEntity childEntity) {
 		removeTestRunInfo((TestRunInfoEntity) childEntity);
@@ -117,7 +119,7 @@ public class TestRunEntity extends AbstractEntity{
 	{
 		this.getTestDeviceRuns().add(entity);
 	}
-	
+
 	public void removeTestRunInfo(TestRunInfoEntity entity)
 	{
 		this.getTestDeviceRuns().remove(entity);
@@ -129,5 +131,13 @@ public class TestRunEntity extends AbstractEntity{
 
 	public void setTestDeviceRuns(List<TestDeviceRunEntity> testDeviceRuns) {
 		this.testDeviceRuns = testDeviceRuns;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 }

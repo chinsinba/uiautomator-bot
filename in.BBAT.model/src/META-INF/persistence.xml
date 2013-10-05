@@ -12,7 +12,7 @@
 		<class>in.BBAT.data.model.Entities.RoleEntity</class>
 		<class>in.BBAT.data.model.Entities.UserEntity</class>
 		<class>in.BBAT.data.model.Entities.TestDeviceRunEntity</class>
-		<class>in.BBAT.data.model.Entities.TestDeviceLogs</class>
+		<class>in.BBAT.data.model.Entities.TestDeviceLogEntity</class>
 		<properties>
 			<!--<property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.EmbeddedDriver" 
 				/> -->

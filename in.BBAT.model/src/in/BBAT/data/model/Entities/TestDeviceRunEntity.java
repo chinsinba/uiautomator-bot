@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.OrderColumn;
@@ -28,18 +29,26 @@ public class TestDeviceRunEntity extends AbstractEntity {
 		this.id = id;
 	}
 
+	public TestDeviceRunEntity(TestRunEntity runEntity) {
+		this.testRun = runEntity;
+	}
+	public TestDeviceRunEntity() {
+		// TODO Auto-generated constructor stub
+	}
+
+
 	@OneToOne
 	private TestDeviceEntity device;
 
 	private String status;
-	
+
 	@OneToMany(mappedBy="testDeviceRun", fetch = FetchType.LAZY, cascade = { CascadeType.ALL })
 	@OrderColumn
 	private List<TestRunInfoEntity> testRunInfos;
 
-	
+	@ManyToOne
 	private TestRunEntity testRun;
-	
+
 	public TestDeviceEntity getDevice() {
 		return device;
 	}
