@@ -8,12 +8,12 @@ import in.BBAT.abstrakt.presenter.pkg.model.TestCaseModel;
 import in.BBAT.data.model.Entities.AbstractEntity;
 import in.BBAT.data.model.Entities.TestCaseEntity;
 import in.BBAT.data.model.Entities.TestDeviceRunEntity;
-import in.BBAT.data.model.Entities.TestRunEntity;
 import in.BBAT.data.model.Entities.TestRunInfoEntity;
 
 import org.eclipse.swt.graphics.Image;
 
 import com.android.ddmlib.logcat.LogCatMessage;
+import com.android.ddmuilib.logcat.LogCatReceiver;
 
 /**
  * 
@@ -23,6 +23,9 @@ import com.android.ddmlib.logcat.LogCatMessage;
 public class TestRunInstanceModel extends AbstractTreeModel {
 
 	private TestCaseModel testCaseModel ;
+	
+	private LogCatReceiver logReciever;
+	
 	protected TestRunInstanceModel(TestDeviceRunModel parent,TestRunInfoEntity entity) {
 		super(parent,entity);
 	}
@@ -72,6 +75,14 @@ public class TestRunInstanceModel extends AbstractTreeModel {
 	
 	public void addLogs(List<LogCatMessage> messsages ){
 		
+	}
+
+	public LogCatReceiver getLogReciever() {
+		return logReciever;
+	}
+
+	public void setLogReciever(LogCatReceiver logReciever) {
+		this.logReciever = logReciever;
 	}
 
 }

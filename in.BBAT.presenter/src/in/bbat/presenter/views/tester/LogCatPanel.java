@@ -696,7 +696,7 @@ public final class LogCatPanel implements ILogCatBufferChangeListener {
 				}
 			}
 		});
-
+		clearLog.setEnabled(false);
 		final ToolItem showFiltersColumn = new ToolItem(toolBar, SWT.CHECK);
 		showFiltersColumn.setImage(
 				ImageLoader.getDdmUiLibLoader().loadImage(IMAGE_DISPLAY_FILTERS,
@@ -949,8 +949,8 @@ public final class LogCatPanel implements ILogCatBufferChangeListener {
 				}
 
 				// thumb + selection < max => bar is not at the bottom.
-						// We subtract an arbitrary amount (thumbSize/2) from this difference to allow
-						// for cases like half a line being displayed at the end from affecting this
+				// We subtract an arbitrary amount (thumbSize/2) from this difference to allow
+				// for cases like half a line being displayed at the end from affecting this
 				// calculation. The thumbSize/2 number seems to work experimentally across
 				// Linux/Mac & Windows, but might possibly need tweaking.
 				int diff = vbar.getThumb() + vbar.getSelection() - vbar.getMaximum();

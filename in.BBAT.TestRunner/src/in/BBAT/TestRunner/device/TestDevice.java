@@ -78,6 +78,7 @@ public class TestDevice implements IAndroidDevice {
 			@Override
 			public void run() {
 				clearLogs();
+				listener.startLogging(TestDevice.this.getMonkeyDevice());
 				logReciever =new LogCatReceiverTask(monkeyDevice);
 				logReciever.addLogCatListener(new LogLineReciever());
 				logReciever.run();
