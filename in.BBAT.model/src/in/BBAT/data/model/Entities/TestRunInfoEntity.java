@@ -1,13 +1,17 @@
 package in.BBAT.data.model.Entities;
 
 import java.sql.Timestamp;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.OrderColumn;
 import javax.persistence.TableGenerator;
@@ -50,6 +54,12 @@ public class TestRunInfoEntity extends AbstractEntity {
 	@ManyToOne
 	@OrderColumn
 	private TestDeviceRunEntity testDeviceRun;;
+	
+	
+	@OneToMany(mappedBy="testRunInfo", fetch = FetchType.LAZY, cascade = { CascadeType.ALL })
+	@OrderColumn
+	private List<TestDeviceLogs> deviceLogs;
+
 	
 	public Timestamp getStartTime() {
 		return startTime;
@@ -102,5 +112,13 @@ public class TestRunInfoEntity extends AbstractEntity {
 
 	public void setTestDeviceRun(TestDeviceRunEntity testDeviceRun) {
 		this.testDeviceRun = testDeviceRun;
+	}
+
+	public List<TestDeviceLogs> getDeviceLogs() {
+		return deviceLogs;
+	}
+
+	public void setDeviceLogs(List<TestDeviceLogs> deviceLogs) {
+		this.deviceLogs = deviceLogs;
 	}
 }
