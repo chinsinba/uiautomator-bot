@@ -6,7 +6,6 @@ import in.BBAT.abstrakt.presenter.run.model.TestRunCase;
 import in.BBAT.abstrakt.presenter.run.model.TestRunCase.TestStatus;
 import in.BBAT.abstrakt.presenter.run.model.TestRunInstanceModel;
 import in.BBAT.abstrakt.presenter.run.model.TestRunModel;
-import in.BBAT.dataMine.manager.MineManager;
 import in.BBAT.presenter.labelProviders.DeviceTestRunLableProvider;
 import in.BBAT.testRunner.runner.TestRunner;
 import in.BBAT.testRunner.runner.UiAutoTestCaseJar;
@@ -182,15 +181,12 @@ public class DeviceTestRun {
 	}
 
 	public void excute() {
-
-
 		Job testRunJob = new Job("Execute") {
 			@Override
 			protected IStatus run(IProgressMonitor monitor) {
-
 				TestRunner runner = new TestRunner(new UiAutoTestCaseJar(getTestScriptPaths()),getDevice().getiDevice());
 				for (TestRunInstanceModel testRunCase : getRunInstances()) {
-					runner.execute(testRunCase.getTestCaseModel().getName(), new TestCaseExecutionListener(testRunCase, DeviceTestRun.this), new DeviceLogListener(testRunCase));
+					runner.execute(testRunCase.getTestCaseModel().getName(), new TestCaseExecutionListener(testRunCase, DeviceTestRun.this), new DeviceLogListener(testRunCase),new UIAutomatorOutputListener(testRunCase));
 				}
 				return Status.OK_STATUS;
 			}

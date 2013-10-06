@@ -1,5 +1,6 @@
 package in.BBAT.TestRunner.device;
 
+import in.BBAT.testRunner.runner.IUiAutomatorListener;
 import in.BBAT.testRunner.runner.UiAutoTestCaseJar;
 
 import com.android.ddmlib.IDevice;
@@ -27,7 +28,7 @@ public interface IAndroidDevice {
 
 	void pushTestJar(UiAutoTestCaseJar jar);
 
-	void executeTestCase(String testCaseName,ITestRunListener... listener);
+	void executeTestCase(String testCaseName,IUiAutomatorListener uiAutoListener,ITestRunListener... listener);
 
 	String getName();
 

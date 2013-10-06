@@ -1,5 +1,6 @@
 package in.BBAT.testRunner.runner.internal;
 
+import in.BBAT.testRunner.runner.IUiAutomatorListener;
 import in.BBAT.testRunner.runner.RunnerResultParser;
 
 import java.io.IOException;
@@ -16,7 +17,9 @@ public class UIAutomatorRunner extends RemoteAndroidTestRunner {
 
 	IShellEnabledDevice testDevice ;
 	private RunnerResultParser deviceResultReciever;
-	public UIAutomatorRunner(String packageName, IShellEnabledDevice remoteDevice) {
+	private IUiAutomatorListener autoListener;
+	private final static String UI_AUTO_COMMAND="uiautomator runtest BBAT.jar -c ";
+	public UIAutomatorRunner(String packageName, IShellEnabledDevice remoteDevice,IUiAutomatorListener listener) {
 		super(packageName, remoteDevice);
 		this.testDevice=remoteDevice;
 	}
@@ -26,9 +29,9 @@ public class UIAutomatorRunner extends RemoteAndroidTestRunner {
 	AdbCommandRejectedException, ShellCommandUnresponsiveException,
 	IOException {
 
-		final String runCaseCommandStr = "uiautomator runtest BBAT.jar -c "+getPackageName();
+		final String runCaseCommandStr = UI_AUTO_COMMAND+getPackageName();
 		String runName = getRunnerName() == null ? getPackageName() : getRunnerName();
-		deviceResultReciever = new RunnerResultParser(runName, listeners);
+		deviceResultReciever = new RunnerResultParser(runName, listeners,autoListener);
 
 		try {
 			testDevice.executeShellCommand(runCaseCommandStr, deviceResultReciever, 0);

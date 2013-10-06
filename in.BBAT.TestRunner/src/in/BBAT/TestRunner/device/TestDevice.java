@@ -1,5 +1,6 @@
 package in.BBAT.TestRunner.device;
 
+import in.BBAT.testRunner.runner.IUiAutomatorListener;
 import in.BBAT.testRunner.runner.UiAutoTestCaseJar;
 import in.BBAT.testRunner.runner.internal.UIAutomatorRunner;
 
@@ -131,8 +132,8 @@ public class TestDevice implements IAndroidDevice {
 	}
 
 	@Override
-	public void executeTestCase(String testCaseName, ITestRunListener... listener) {
-		UIAutomatorRunner runner = new UIAutomatorRunner(testCaseName, monkeyDevice);
+	public void executeTestCase(String testCaseName,IUiAutomatorListener uiAutoListener,ITestRunListener... listener) {
+		UIAutomatorRunner runner = new UIAutomatorRunner(testCaseName, monkeyDevice,uiAutoListener);
 		try {
 			runner.run(listener);
 		} catch (TimeoutException e) {

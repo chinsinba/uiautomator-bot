@@ -35,10 +35,10 @@ public class TestRunner implements ITestRunner{
 	}
 
 	@Override
-	public void execute(String testCaseClassName, ITestRunListener testCaseExecutionListener, ILogListener deviceLogListener) {
+	public void execute(String testCaseClassName, ITestRunListener testCaseExecutionListener, ILogListener deviceLogListener,IUiAutomatorListener autoListener) {
 		preRun(deviceLogListener);
 
-		run(testCaseClassName,testCaseExecutionListener);
+		run(testCaseClassName,testCaseExecutionListener,autoListener);
 
 		postRun();
 	}
@@ -77,8 +77,8 @@ public class TestRunner implements ITestRunner{
 	 * @param testCaseClassName 
 	 * @param testCaseExecutionListener 
 	 */
-	private void run(String testCaseClassName, ITestRunListener testCaseExecutionListener){
-		testDevice.executeTestCase(testCaseClassName, testCaseExecutionListener);
+	private void run(String testCaseClassName, ITestRunListener testCaseExecutionListener,IUiAutomatorListener autoListener){
+		testDevice.executeTestCase(testCaseClassName,autoListener, testCaseExecutionListener);
 		waitForCompletion();
 	}
 
