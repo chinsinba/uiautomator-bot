@@ -28,13 +28,13 @@ public class DeviceLogListener implements ILogListener {
 
 	@Override
 	public void processLogLine(final List<LogCatMessage> logMessages) {
-		MineManager.getInstance().beginTransaction();
+//		MineManager.getInstance().beginTransaction();
 		for(LogCatMessage message : logMessages){
 			tempLogCatMessageList.add(message);
 			DeviceLog log  = new DeviceLog(testRunCase,message);
 			log.save();
 		}
-		MineManager.getInstance().commitTransaction();
+//		MineManager.getInstance().commitTransaction();
 
 		if(testRunCase.isShowLogs())	
 			Display.getDefault().asyncExec(new Runnable() {

@@ -15,7 +15,6 @@ import org.eclipse.core.runtime.Path;
  */
 public class MineManager {
 
-	private static EntityManager em = null;
 	private static boolean transactionStarted=false;
 	private static NetworkServerControl server;
 
@@ -44,31 +43,33 @@ public class MineManager {
 	}
 
 
-	public  void beginTransaction()
+	/*public synchronized void beginTransaction()
 	{
 		if(transactionStarted){
 
 		}
-		em = MineManagerHelper.getInstance().getEmFactory().createEntityManager();
+		EntityManager em = MineManagerHelper.getInstance().getEmFactory().createEntityManager();
 		em.getTransaction().begin();
 		transactionStarted = true;
 	}
 
-	public  void commitTransaction()
+	public synchronized void commitTransaction()
 	{
 		if(!transactionStarted){
 
 		}
+		EntityManager em = MineManagerHelper.getInstance().getEmFactory().createEntityManager();
 		em.getTransaction().commit();
 		em.close();
 		transactionStarted =false;
 	}
-
+	 */
 	public  void abortTransaction()
 	{
 		if(!transactionStarted){
 
 		}
+		EntityManager em = MineManagerHelper.getInstance().getEmFactory().createEntityManager();
 		em.close();
 		transactionStarted =false;
 	}
@@ -76,30 +77,39 @@ public class MineManager {
 
 	public  void persist(Object object)
 	{
+		EntityManager em = MineManagerHelper.getInstance().getEmFactory().createEntityManager();
 		if(em==null)
 		{	
 
 		}
+		em.getTransaction().begin();
 		em.persist(object);
+		em.getTransaction().commit();
 	}
 
 	public  Object merge(Object object)
 	{
+		EntityManager em = MineManagerHelper.getInstance().getEmFactory().createEntityManager();
 		if(em==null)
 		{	
 
 		}
-		return em.merge(object);
+		em.getTransaction().begin();
+		Object obj =em.merge(object);
+		em.getTransaction().commit();
+		return obj;
 	}
 
 	public  void remove(Object object)
 	{
+		EntityManager em = MineManagerHelper.getInstance().getEmFactory().createEntityManager();
 		if(em==null)
 		{	
 
 		}
-
+		em.getTransaction().begin();
 		em.remove(em.merge(object));
+		em.getTransaction().commit();
 	}
 
 
@@ -129,9 +139,9 @@ public class MineManager {
 			MineManager.getInstance().startDBServer();
 			MineManager.getInstance().createDb("");
 			TestProjectEntity proj = new TestProjectEntity("gygy");
-			MineManager.getInstance().beginTransaction();
+			//			MineManager.getInstance().beginTransaction();
 			proj.save();
-			MineManager.getInstance().commitTransaction();
+			//			MineManager.getInstance().commitTransaction();
 			ProjectMineManager.getAllTesPackages();
 			RunMineManager.getAllTestRuns();
 			SuiteMineManager.getAllTestSuite();

@@ -27,9 +27,10 @@ import javax.persistence.TableGenerator;
 })
 public class TestRunInfoEntity extends AbstractEntity {
 	
-	public TestRunInfoEntity(TestCaseEntity testCase,String verdict) {
+	public TestRunInfoEntity(TestDeviceRunEntity deviceRun,TestCaseEntity testCase,String verdict) {
 		this.testCase = testCase;
 		this.verdict = verdict;
+		this.testDeviceRun = deviceRun;
 	}
 	
 	public TestRunInfoEntity() {
@@ -50,6 +51,8 @@ public class TestRunInfoEntity extends AbstractEntity {
 	private Timestamp startTime;
 	
 	private Timestamp endTime;
+	
+	private long timeTaken;
 	
 	@ManyToOne
 	@OrderColumn
@@ -120,5 +123,13 @@ public class TestRunInfoEntity extends AbstractEntity {
 
 	public void setDeviceLogs(List<TestDeviceLogEntity> deviceLogs) {
 		this.deviceLogs = deviceLogs;
+	}
+
+	public long getTimeTaken() {
+		return timeTaken;
+	}
+
+	public void setTimeTaken(long timeTaken) {
+		this.timeTaken = timeTaken;
 	}
 }

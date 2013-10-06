@@ -29,7 +29,7 @@ public class TestRunInstanceModel extends AbstractTreeModel {
 	}
 
 	public TestRunInstanceModel(TestDeviceRunModel parent,TestCaseModel testCase,String status) {
-		super(parent,new TestRunInfoEntity((TestCaseEntity) testCase.getEntity(),status));
+		super(parent,new TestRunInfoEntity((TestDeviceRunEntity) parent.getEntity(),(TestCaseEntity) testCase.getEntity(),status));
 		this.setTestCaseModel(testCase);
 	}
 	@Override
@@ -83,4 +83,13 @@ public class TestRunInstanceModel extends AbstractTreeModel {
 		this.showLogs = showLogs;
 	}
 
+	
+	public void setTimeTaken(long timeTaken)
+	{
+		((TestRunInfoEntity)getEntity()).setTimeTaken(timeTaken);
+	}
+	
+	public long getTimeTaken(){
+		return ((TestRunInfoEntity)getEntity()).getTimeTaken();
+	}
 }

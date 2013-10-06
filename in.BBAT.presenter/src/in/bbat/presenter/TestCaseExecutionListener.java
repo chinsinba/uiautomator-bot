@@ -2,6 +2,7 @@ package in.bbat.presenter;
 
 import in.BBAT.abstrakt.presenter.run.model.TestRunCase.TestStatus;
 import in.BBAT.abstrakt.presenter.run.model.TestRunInstanceModel;
+import in.BBAT.dataMine.manager.MineManager;
 import in.bbat.presenter.internal.DeviceTestRun;
 import in.bbat.presenter.views.tester.TestRunnerView;
 
@@ -36,9 +37,13 @@ public class TestCaseExecutionListener implements ITestRunListener {
 	}
 
 	@Override
-	public void testRunEnded(long arg0, Map<String, String> arg1) {
+	public synchronized void testRunEnded(long timeTaken, Map<String, String> arg1) {
 		System.out.println("Run Ended "+arg1);
+		//		MineManager.getInstance().beginTransaction();
+		runCase.setTimeTaken(timeTaken);
 		runCase.setStatus(status.getStatus());
+		runCase.update();
+		//		MineManager.getInstance().commitTransaction();
 		refresh();
 	}
 
@@ -48,9 +53,10 @@ public class TestCaseExecutionListener implements ITestRunListener {
 	}
 
 	@Override
-	public void testRunStarted(String arg0, int arg1) {
+	public synchronized void testRunStarted(String arg0, int arg1) {
 		System.out.println("Run Started "+ arg1);
 		runCase.setStatus(TestStatus.EXECUTING.getStatus());
+		runCase.update();
 		refresh();
 	}
 
@@ -75,7 +81,7 @@ public class TestCaseExecutionListener implements ITestRunListener {
 				} catch (Exception e) {
 					e.printStackTrace();
 				}		
-				
+
 				deviceRun.refresh();
 			}
 		});

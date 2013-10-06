@@ -35,6 +35,10 @@ public class TestDeviceEntity extends AbstractEntity {
 	private String buildId;
 
 	private String osName;
+	
+	private String apiLevel;
+	
+	private String modelName;
 
 	public String getDeviceId() {
 		return deviceId;
@@ -58,6 +62,22 @@ public class TestDeviceEntity extends AbstractEntity {
 
 	public void setOsName(String osName) {
 		this.osName = osName;
+	}
+
+	public String getApiLevel() {
+		return apiLevel;
+	}
+
+	public void setApiLevel(String apiLevel) {
+		this.apiLevel = apiLevel;
+	}
+
+	public String getModelName() {
+		return modelName;
+	}
+
+	public void setModelName(String modelName) {
+		this.modelName = modelName;
 	}
 
 }

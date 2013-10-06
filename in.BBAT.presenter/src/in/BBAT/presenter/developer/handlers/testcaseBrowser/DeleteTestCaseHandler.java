@@ -19,7 +19,7 @@ public class DeleteTestCaseHandler extends AbstractTestCaseBrowserHandler {
 		if(!MessageDialog.openQuestion(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(), "Delete","Do you want to delete ?"))
 			return null;
 
-		MineManager.getInstance().beginTransaction();
+//		MineManager.getInstance().beginTransaction();
 		for(Object pkgObj :selectedObjects){
 			try {
 				((AbstractProjectTree)pkgObj).delete();
@@ -27,7 +27,7 @@ public class DeleteTestCaseHandler extends AbstractTestCaseBrowserHandler {
 				e.printStackTrace();
 			}
 		}
-		MineManager.getInstance().commitTransaction();
+//		MineManager.getInstance().commitTransaction();
 
 		BBATViewPart view = (BBATViewPart) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().findView(TestCaseBrowserView.ID);
 		try {

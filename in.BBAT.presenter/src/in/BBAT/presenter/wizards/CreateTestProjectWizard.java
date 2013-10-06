@@ -22,9 +22,9 @@ public class CreateTestProjectWizard extends Wizard {
 			e.printStackTrace();
 		}
 		newTestProject.setDescription(projCreationPage.getDescription());
-		MineManager.getInstance().beginTransaction();
+//		MineManager.getInstance().beginTransaction();
 		newTestProject.save();
-		MineManager.getInstance().commitTransaction();
+//		MineManager.getInstance().commitTransaction();
 
 		BBATViewPart view = (BBATViewPart) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().findView(TestCaseBrowserView.ID);
 		try {

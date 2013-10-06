@@ -4,6 +4,7 @@ import org.eclipse.swt.graphics.Image;
 
 import in.BBAT.abstrakt.gui.model.AbstractTreeModel;
 import in.BBAT.abstrakt.gui.model.IGUITreeNode;
+import in.BBAT.abstrakt.presenter.device.model.AndroidDevice;
 import in.BBAT.data.model.Entities.AbstractEntity;
 import in.BBAT.data.model.Entities.TestDeviceRunEntity;
 import in.BBAT.data.model.Entities.TestRunEntity;
@@ -20,7 +21,7 @@ public class TestDeviceRunModel extends AbstractTreeModel {
 	}
 
 	public TestDeviceRunModel(TestRunModel runModel) {
-		super(runModel,new TestDeviceRunEntity((TestRunEntity) runModel.getEntity()));
+		super(runModel,new TestDeviceRunEntity((TestRunEntity) runModel.getEntity(),null));
 	}
 
 	@Override

@@ -32,9 +32,9 @@ public class CreateTestCaseWizard extends Wizard {
 		try {
 			TestCaseModel newTestCase = new TestCaseModel(parent, caseCreationPage.getName());
 			newTestCase.setDescription(caseCreationPage.getDescription());
-			MineManager.getInstance().beginTransaction();
+//			MineManager.getInstance().beginTransaction();
 			newTestCase.save();
-			MineManager.getInstance().commitTransaction();
+//			MineManager.getInstance().commitTransaction();
 			BBATViewPart view = (BBATViewPart) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().findView(TestCaseBrowserView.ID);
 			try {
 				view.refresh();

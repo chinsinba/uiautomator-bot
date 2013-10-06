@@ -29,7 +29,7 @@ public class TestDeviceRunEntity extends AbstractEntity {
 		this.id = id;
 	}
 
-	public TestDeviceRunEntity(TestRunEntity runEntity) {
+	public TestDeviceRunEntity(TestRunEntity runEntity,TestDeviceEntity deviceEntity) {
 		this.testRun = runEntity;
 	}
 	public TestDeviceRunEntity() {

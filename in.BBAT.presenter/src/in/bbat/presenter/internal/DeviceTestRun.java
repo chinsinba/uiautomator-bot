@@ -78,8 +78,6 @@ public class DeviceTestRun {
 		testRunItem = new CTabItem(TestRunnerView.testRunFolder, SWT.None);
 		testRunItem.setText(device.getName());
 		Composite comp = new Composite(testRunFolder, SWT.None);
-
-
 		viewer = new TableViewer(comp, SWT.MULTI | SWT.H_SCROLL| SWT.V_SCROLL);
 		viewer.setContentProvider(new ArrayContentProvider());
 		viewer.getTable().setLinesVisible(true);
@@ -94,7 +92,6 @@ public class DeviceTestRun {
 						PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().hideView(view);
 					Object sel = ((IStructuredSelection)event.getSelection()).getFirstElement();
 					((TestRunInstanceModel)sel).setShowLogs(true);
-//					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}	
@@ -123,16 +120,12 @@ public class DeviceTestRun {
 			return testRunInstances;
 		testRunInstances = new ArrayList<TestRunInstanceModel>();
 		this.testDeviceRun = new TestDeviceRunModel(testRun);
-		MineManager.getInstance().beginTransaction();
 		testDeviceRun.save();
-		MineManager.getInstance().commitTransaction();
-		MineManager.getInstance().beginTransaction();
 		for(TestRunCase caseObj:getTestRunCases()){
 			TestRunInstanceModel runInstModel = new TestRunInstanceModel(testDeviceRun,caseObj.getTestcase(),TestStatus.NOTEXECUTED.getStatus());
 			runInstModel.save();
 			testRunInstances.add(runInstModel);
 		}
-		MineManager.getInstance().commitTransaction();
 		return testRunInstances;
 	}
 
@@ -227,13 +220,14 @@ public class DeviceTestRun {
 
 	@Override
 	public int hashCode() {
-		// TODO Auto-generated method stub
 		return getDevice().hashCode();
 	}
+
 	public void focus() {
 		if(testRunItem != null)
 			testRunFolder.setSelection(testRunItem);
 	}
+
 	public void setTestRun(TestRunModel testRun) {
 		this.testRun = testRun;
 	}

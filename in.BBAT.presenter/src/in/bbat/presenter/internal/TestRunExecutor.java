@@ -16,11 +16,11 @@ public class TestRunExecutor {
 	}
 
 	public void run() {
-		MineManager.getInstance().beginTransaction();
+//		MineManager.getInstance().beginTransaction();
 		TestRunModel testRun = new TestRunModel();
 		testRun.setStartTime(new Timestamp(System.currentTimeMillis()));
 		testRun.save();
-		MineManager.getInstance().commitTransaction();
+//		MineManager.getInstance().commitTransaction();
 
 		for (DeviceTestRun device : deviceTestRuns) {
 			device.setTestRun(testRun);
@@ -29,9 +29,9 @@ public class TestRunExecutor {
 			device.excute();
 		}
 
-		MineManager.getInstance().beginTransaction();
+//		MineManager.getInstance().beginTransaction();
 		testRun.setEndtiTime(new Timestamp(System.currentTimeMillis()));
 		testRun.update();
-		MineManager.getInstance().commitTransaction();
+//		MineManager.getInstance().commitTransaction();
 	}
 }
