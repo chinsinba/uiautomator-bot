@@ -171,7 +171,7 @@ public class RunnerResultParser extends MultiLineReceiver {
 	public  RunnerResultParser(String runName, Collection<ITestRunListener> listeners,IUiAutomatorListener autoListener) {
 		mTestRunName = runName;
 		mTestListeners = new ArrayList<ITestRunListener>(listeners);
-		this.autoListener =autoListener;
+		this.autoListener = autoListener;
 	}
 
 	/**

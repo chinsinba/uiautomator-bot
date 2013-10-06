@@ -22,6 +22,7 @@ public class UIAutomatorRunner extends RemoteAndroidTestRunner {
 	public UIAutomatorRunner(String packageName, IShellEnabledDevice remoteDevice,IUiAutomatorListener listener) {
 		super(packageName, remoteDevice);
 		this.testDevice=remoteDevice;
+		this.autoListener = listener;
 	}
 
 	@Override

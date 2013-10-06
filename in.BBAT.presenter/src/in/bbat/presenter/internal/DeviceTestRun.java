@@ -9,7 +9,6 @@ import in.BBAT.abstrakt.presenter.run.model.TestRunModel;
 import in.BBAT.presenter.labelProviders.DeviceTestRunLableProvider;
 import in.BBAT.testRunner.runner.TestRunner;
 import in.BBAT.testRunner.runner.UiAutoTestCaseJar;
-import in.bbat.presenter.TestCaseExecutionListener;
 import in.bbat.presenter.views.tester.TestLogView;
 import in.bbat.presenter.views.tester.TestRunnerView;
 
