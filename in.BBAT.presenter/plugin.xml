@@ -38,6 +38,7 @@
       </view>
       <view
             class="in.bbat.presenter.views.developer.DeveloperDeviceView"
+            icon="icons/Android_device.png"
             id="in.BBAT.presenter.developer.deviceView"
             name="Device"
             restorable="true">
@@ -69,6 +70,7 @@
       </view>
       <view
             class="in.bbat.presenter.views.tester.TestLogView"
+            icon="icons/android.png"
             id="in.BBAT.presenter.tester.AndroidLogView"
             name="AndroidLogView"
             restorable="true">
@@ -153,7 +155,7 @@
                ratio="0.50f"
                relationship="bottom"
                relative="in.BBAT.presenter.tester.TestRunnerView"
-               visible="true">
+               visible="false">
          </view>
       </perspectiveExtension>
       <perspectiveExtension

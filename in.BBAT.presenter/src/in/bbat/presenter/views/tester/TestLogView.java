@@ -44,6 +44,9 @@ public class TestLogView extends BBATViewPart {
 		setPartName(device.getiDevice().getName());
 	}
 
+	public void setName(String name){
+		setPartName(name);
+	}
 	@Override
 	public void dispose() {
 		super.dispose();

@@ -5,6 +5,7 @@ import in.BBAT.abstrakt.presenter.run.model.TestRunInstanceModel;
 import in.BBAT.presenter.DND.listeners.TestRunDropListener;
 import in.BBAT.presenter.labelProviders.DeviceViewLabelProvider;
 import in.BBAT.presenter.labelProviders.TestRunnerLableProvider;
+import in.bbat.abstrakt.gui.BBATImageManager;
 import in.bbat.presenter.internal.DeviceTestRun;
 import in.bbat.presenter.internal.TestRunExecutionManager;
 import in.bbat.presenter.views.BBATViewPart;
@@ -167,12 +168,10 @@ public class TestRunnerView extends BBATViewPart {
 		TableColumnLayout lay = new TableColumnLayout();
 		comp.setLayout(lay);
 		lay.setColumnData(col, new ColumnWeightData(50));
-		{
-			col = new TableColumn(testDeviceViewer.getTable(), SWT.None);
-			col.setText("Status");
-			comp.setLayout(lay);
-			lay.setColumnData(col, new ColumnWeightData(50));
-		}
+		col = new TableColumn(testDeviceViewer.getTable(), SWT.None);
+		col.setText("Status");
+		comp.setLayout(lay);
+		lay.setColumnData(col, new ColumnWeightData(50));
 		// Provide the input to the ContentProvider
 		testDeviceViewer.setInput(TestRunExecutionManager.getInstance().getSelectedDevices());
 		testRunItem.setControl(comp);
@@ -196,16 +195,16 @@ public class TestRunnerView extends BBATViewPart {
 		TableColumnLayout layout = new TableColumnLayout();
 		parent.setLayout(layout);
 
-		TableViewerColumn col =createTableViewerColumn(viewer,null, titles[0],bounds[0]);
+		TableViewerColumn col =createTableViewerColumn(viewer,BBATImageManager.getInstance().getImage(BBATImageManager.TESTCASE_GIF_16), titles[0],bounds[0]);
 		layout.setColumnData(col.getColumn(), new ColumnWeightData(bounds[0]));
 
-		TableViewerColumn col1 = createTableViewerColumn(viewer, null, titles[1],bounds[1]);
+		TableViewerColumn col1 = createTableViewerColumn(viewer, BBATImageManager.getInstance().getImage(BBATImageManager.TESTSUITE_GIF_16), titles[1],bounds[1]);
 		layout.setColumnData(col1.getColumn(), new ColumnWeightData(bounds[1]));
 
-		TableViewerColumn col2 = createTableViewerColumn(viewer, null, titles[2],bounds[2]);
+		TableViewerColumn col2 = createTableViewerColumn(viewer, BBATImageManager.getInstance().getImage(BBATImageManager.PROJECT_GIF_16), titles[2],bounds[2]);
 		layout.setColumnData(col2.getColumn(), new ColumnWeightData(bounds[2]));
 
-	/*	TableViewerColumn col3 = createTableViewerColumn(viewer, null, titles[3],bounds[3]);
+		/*	TableViewerColumn col3 = createTableViewerColumn(viewer, null, titles[3],bounds[3]);
 		layout.setColumnData(col3.getColumn(), new ColumnWeightData(bounds[3]));*/
 
 	}

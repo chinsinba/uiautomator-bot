@@ -41,11 +41,11 @@ public class DeviceLogListener implements ILogListener {
 				@Override
 				public void run() {
 					IViewPart view =  PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().findView(TestLogView.ID);
-					if(view!= null)
-						((TestLogView)view).getPanel().bufferChanged(logMessages, new ArrayList<LogCatMessage>());		
+					if(view!= null){
+						((TestLogView)view).getPanel().bufferChanged(logMessages, new ArrayList<LogCatMessage>());
+					}
 				}
 			});
-
 	}
 
 	@Override

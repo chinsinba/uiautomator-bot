@@ -15,7 +15,7 @@ public class DeviceViewLabelProvider extends LabelProvider implements ITableLabe
 	public Image getColumnImage(Object element, int columnIndex) {
 		// TODO Auto-generated method stub
 		return  PlatformUI.getWorkbench().getSharedImages().getImage(
-				ISharedImages.IMG_OBJ_ELEMENT);
+				ISharedImages.IMG_OBJS_INFO_TSK);
 	}
 
 	@Override
