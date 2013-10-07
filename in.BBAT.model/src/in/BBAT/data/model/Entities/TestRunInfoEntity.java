@@ -63,6 +63,9 @@ public class TestRunInfoEntity extends AbstractEntity {
 	@OrderColumn
 	private List<TestDeviceLogEntity> deviceLogs;
 
+	@OneToMany(mappedBy="testRunInfo", fetch = FetchType.LAZY, cascade = { CascadeType.ALL })
+	@OrderColumn
+	private List<AutomatorLogEntity> autoLogs;
 	
 	public Timestamp getStartTime() {
 		return startTime;
@@ -131,5 +134,13 @@ public class TestRunInfoEntity extends AbstractEntity {
 
 	public void setTimeTaken(long timeTaken) {
 		this.timeTaken = timeTaken;
+	}
+
+	public List<AutomatorLogEntity> getAutoLogs() {
+		return autoLogs;
+	}
+
+	public void setAutoLogs(List<AutomatorLogEntity> autoLogs) {
+		this.autoLogs = autoLogs;
 	}
 }
