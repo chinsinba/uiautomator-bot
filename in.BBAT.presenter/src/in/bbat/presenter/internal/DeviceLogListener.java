@@ -1,7 +1,7 @@
 package in.bbat.presenter.internal;
 
 import in.BBAT.TestRunner.device.ILogListener;
-import in.BBAT.abstrakt.presenter.run.model.DeviceLog;
+import in.BBAT.abstrakt.presenter.run.model.DeviceLogModel;
 import in.BBAT.abstrakt.presenter.run.model.TestRunInstanceModel;
 import in.BBAT.dataMine.manager.MineManager;
 import in.bbat.presenter.views.tester.TestLogView;
@@ -31,7 +31,7 @@ public class DeviceLogListener implements ILogListener {
 //		MineManager.getInstance().beginTransaction();
 		for(LogCatMessage message : logMessages){
 			tempLogCatMessageList.add(message);
-			DeviceLog log  = new DeviceLog(testRunCase,message);
+			DeviceLogModel log  = new DeviceLogModel(testRunCase,message);
 			log.save();
 		}
 //		MineManager.getInstance().commitTransaction();

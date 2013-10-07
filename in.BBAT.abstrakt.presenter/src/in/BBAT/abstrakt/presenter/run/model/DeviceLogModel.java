@@ -5,7 +5,7 @@ import in.BBAT.data.model.Entities.TestRunInfoEntity;
 
 import com.android.ddmlib.logcat.LogCatMessage;
 
-public class DeviceLog {
+public class DeviceLogModel {
 
 	private  String mLogLevel;
 	private  String mPid;
@@ -17,11 +17,11 @@ public class DeviceLog {
 
 	private TestDeviceLogEntity deviceLog ;
 
-	public DeviceLog(TestDeviceLogEntity log) {
+	public DeviceLogModel(TestDeviceLogEntity log) {
 		deviceLog =log;
 	}
 
-	public DeviceLog(TestRunInstanceModel runInfo,LogCatMessage message) {
+	public DeviceLogModel(TestRunInstanceModel runInfo,LogCatMessage message) {
 		deviceLog = new TestDeviceLogEntity((TestRunInfoEntity) runInfo.getEntity());
 		deviceLog.setmLogLevel(message.getLogLevel().getStringValue());
 		deviceLog.setmPid(message.getPid());
