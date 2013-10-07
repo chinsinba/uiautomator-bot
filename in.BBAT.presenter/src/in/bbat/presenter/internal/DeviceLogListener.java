@@ -3,7 +3,6 @@ package in.bbat.presenter.internal;
 import in.BBAT.TestRunner.device.ILogListener;
 import in.BBAT.abstrakt.presenter.run.model.DeviceLogModel;
 import in.BBAT.abstrakt.presenter.run.model.TestRunInstanceModel;
-import in.BBAT.dataMine.manager.MineManager;
 import in.bbat.presenter.views.tester.TestLogView;
 
 import java.util.ArrayList;
@@ -28,13 +27,11 @@ public class DeviceLogListener implements ILogListener {
 
 	@Override
 	public void processLogLine(final List<LogCatMessage> logMessages) {
-//		MineManager.getInstance().beginTransaction();
 		for(LogCatMessage message : logMessages){
 			tempLogCatMessageList.add(message);
 			DeviceLogModel log  = new DeviceLogModel(testRunCase,message);
 			log.save();
 		}
-//		MineManager.getInstance().commitTransaction();
 
 		if(testRunCase.isShowLogs())	
 			Display.getDefault().asyncExec(new Runnable() {
@@ -51,6 +48,5 @@ public class DeviceLogListener implements ILogListener {
 	@Override
 	public void startLogging(IDevice iDevice) {
 	}
-
 
 }

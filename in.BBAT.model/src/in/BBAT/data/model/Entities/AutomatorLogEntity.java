@@ -8,7 +8,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.TableGenerator;
 
 @Entity
-public class AutomatorLogEntity {
+public class AutomatorLogEntity extends AbstractEntity {
 
 	@Id
 	@TableGenerator(name = "AutomatorLog", table = "ID_GENERATOR", pkColumnName = "GEN_NAME", valueColumnName = "GEN_VAL", allocationSize=1)

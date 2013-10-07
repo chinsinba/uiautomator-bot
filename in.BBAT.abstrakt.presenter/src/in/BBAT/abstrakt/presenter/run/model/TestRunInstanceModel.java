@@ -92,4 +92,8 @@ public class TestRunInstanceModel extends AbstractTreeModel {
 	public long getTimeTaken(){
 		return ((TestRunInfoEntity)getEntity()).getTimeTaken();
 	}
+	
+	public void addAutoLog(String message){
+		
+	}
 }
