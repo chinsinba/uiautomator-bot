@@ -185,7 +185,10 @@ public class DeviceTestRun {
 			protected IStatus run(IProgressMonitor monitor) {
 				TestRunner runner = new TestRunner(new UiAutoTestCaseJar(getTestScriptPaths()),getDevice().getiDevice());
 				for (TestRunInstanceModel testRunCase : getRunInstances()) {
+					testRunCase.setStartTime(System.currentTimeMillis());
 					runner.execute(testRunCase.getTestCaseModel().getName(), new TestCaseExecutionListener(testRunCase, DeviceTestRun.this), new DeviceLogListener(testRunCase),new UIAutomatorOutputListener(testRunCase));
+					testRunCase.setEndTime(System.currentTimeMillis());
+					testRunCase.update();
 				}
 				return Status.OK_STATUS;
 			}

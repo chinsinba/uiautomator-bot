@@ -8,6 +8,7 @@ import in.BBAT.data.model.Entities.TestCaseEntity;
 import in.BBAT.data.model.Entities.TestDeviceRunEntity;
 import in.BBAT.data.model.Entities.TestRunInfoEntity;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import org.eclipse.swt.graphics.Image;
@@ -95,5 +96,13 @@ public class TestRunInstanceModel extends AbstractTreeModel {
 	
 	public void addAutoLog(String message){
 		
+	}
+
+	public void setStartTime(long timeInMillis) {
+		((TestRunInfoEntity)getEntity()).setStartTime(new Timestamp(timeInMillis));
+	}
+
+	public void setEndTime(long timeInMillis) {
+		((TestRunInfoEntity)getEntity()).setEndTime(new Timestamp(timeInMillis));		
 	}
 }
