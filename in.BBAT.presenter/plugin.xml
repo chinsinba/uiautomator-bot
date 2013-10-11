@@ -72,7 +72,7 @@
             class="in.bbat.presenter.views.tester.TestLogView"
             icon="icons/android.png"
             id="in.BBAT.presenter.tester.AndroidLogView"
-            name="AndroidLogView"
+            name="Android Logs"
             restorable="true">
       </view>
       <view

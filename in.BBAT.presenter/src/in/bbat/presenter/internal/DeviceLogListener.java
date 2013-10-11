@@ -31,6 +31,7 @@ public class DeviceLogListener implements ILogListener {
 			tempLogCatMessageList.add(message);
 			DeviceLogModel log  = new DeviceLogModel(testRunCase,message);
 			log.save();
+			testRunCase.addDeviceLog(log);
 		}
 
 		if(testRunCase.isShowLogs())	

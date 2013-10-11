@@ -9,6 +9,7 @@ import in.BBAT.data.model.Entities.TestDeviceRunEntity;
 import in.BBAT.data.model.Entities.TestRunInfoEntity;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.swt.graphics.Image;
@@ -24,7 +25,9 @@ public class TestRunInstanceModel extends AbstractTreeModel {
 
 	private TestCaseModel testCaseModel ;
 	private boolean showLogs;
-	
+	private List<AutomatorLogModel> autoLogs = new ArrayList<AutomatorLogModel>();
+	private List<DeviceLogModel> deviceLogs = new ArrayList<DeviceLogModel>();
+
 	protected TestRunInstanceModel(TestDeviceRunModel parent,TestRunInfoEntity entity) {
 		super(parent,entity);
 	}
@@ -71,9 +74,9 @@ public class TestRunInstanceModel extends AbstractTreeModel {
 	public void setStatus(String status){
 		((TestRunInfoEntity)getEntity()).setVerdict(status);
 	}
-	
+
 	public void addLogs(List<LogCatMessage> messsages ){
-		
+
 	}
 
 	public boolean isShowLogs() {
@@ -84,18 +87,35 @@ public class TestRunInstanceModel extends AbstractTreeModel {
 		this.showLogs = showLogs;
 	}
 
+	public void addAutoLog(AutomatorLogModel log){
+		autoLogs.add(log);
+
+	}
 	
+	public void addDeviceLog(DeviceLogModel log){
+		deviceLogs.add(log);
+	}
+
+	
+	public List<DeviceLogModel> getDeviceLogs(){
+		return deviceLogs;
+	}
+	
+	public List<AutomatorLogModel> getAutoLogs(){
+		return autoLogs;
+	}
+
 	public void setTimeTaken(long timeTaken)
 	{
 		((TestRunInfoEntity)getEntity()).setTimeTaken(timeTaken);
 	}
-	
+
 	public long getTimeTaken(){
 		return ((TestRunInfoEntity)getEntity()).getTimeTaken();
 	}
-	
+
 	public void addAutoLog(String message){
-		
+
 	}
 
 	public void setStartTime(long timeInMillis) {

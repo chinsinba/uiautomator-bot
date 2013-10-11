@@ -17,6 +17,7 @@ public class UIAutomatorOutputListener implements IUiAutomatorListener {
 		System.out.println(line);
 		AutomatorLogModel log = new AutomatorLogModel(runInstance,line);
 		log.save();
+		runInstance.addAutoLog(log);
 	}
 
 }
