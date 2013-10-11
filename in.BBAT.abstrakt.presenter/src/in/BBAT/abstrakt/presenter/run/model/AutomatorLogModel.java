@@ -18,4 +18,8 @@ public class AutomatorLogModel {
 	public void save(){
 		logEntity.save();
 	}
+	
+	public String getMessage(){
+		return logEntity.getMessage();
+	}
 }

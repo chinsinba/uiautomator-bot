@@ -1,5 +1,10 @@
 package in.bbat.presenter.views.tester;
 
+import in.BBAT.abstrakt.presenter.run.model.TestRunInstanceModel;
+import in.BBAT.presenter.labelProviders.AutoLogLabelProvider;
+import in.BBAT.presenter.labelProviders.TestRunnerLableProvider;
+import in.bbat.presenter.views.BBATViewPart;
+
 import org.eclipse.jface.layout.TableColumnLayout;
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.ColumnWeightData;
@@ -12,18 +17,14 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Text;
 
-import in.BBAT.presenter.labelProviders.TestRunnerLableProvider;
-import in.bbat.presenter.internal.TestRunExecutionManager;
-import in.bbat.presenter.views.BBATViewPart;
-
 public class AutomatorLogView extends BBATViewPart {
 
 	private TableViewer viewer;
 
+	public static final String ID= "in.BBAT.presenter.tester.AutoLogView";
 	@Override
 	public void refresh() throws Exception {
-		// TODO Auto-generated method stub
-
+		viewer.refresh();
 	}
 
 	@Override
@@ -37,7 +38,7 @@ public class AutomatorLogView extends BBATViewPart {
 		parent.setLayout(layout);
 		parent.setLayoutData(new GridData(GridData.FILL_BOTH));
 		createTextFilter(parent);
-		
+
 		createLogTable(parent);
 
 		getViewSite().setSelectionProvider(viewer);
@@ -45,7 +46,7 @@ public class AutomatorLogView extends BBATViewPart {
 	}
 
 	private void createLogTable(Composite parent) {
-		
+
 		Composite comp2 = new Composite(parent, SWT.None);
 		comp2.setLayout(new GridLayout());
 		comp2.setLayoutData(new GridData(GridData.FILL_BOTH));
@@ -55,20 +56,20 @@ public class AutomatorLogView extends BBATViewPart {
 		viewer.getTable().setLinesVisible(true);
 		viewer.getTable().setHeaderVisible(true);
 		createColumns(comp2, viewer);
-		viewer.setLabelProvider(new TestRunnerLableProvider());
+		viewer.setLabelProvider(new AutoLogLabelProvider());
 	}
 
 	private void createTextFilter(Composite parent) {
 		Composite comp1 = new Composite(parent, SWT.NONE);
 		comp1.setLayout(new GridLayout(1,false));
 		comp1.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		
+
 		Text text = new Text(comp1, SWT.BORDER);
 		text.setMessage("Search for messages");
 		text.setLayoutData(new GridData(GridData.FILL_BOTH));
-		
+
 	}
-	
+
 	public void createColumns(final Composite parent, final TableViewer viewer) {
 		String[] titles = { "Message" };
 
@@ -80,7 +81,10 @@ public class AutomatorLogView extends BBATViewPart {
 		layout.setColumnData(col, new ColumnWeightData(100));
 
 	}
-	
+
+	public void setInput(TestRunInstanceModel model){
+		viewer.setInput(model.getAutoLogs());
+	}
 
 	@Override
 	public void setFocus() {

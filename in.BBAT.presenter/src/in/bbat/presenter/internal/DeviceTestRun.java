@@ -9,6 +9,7 @@ import in.BBAT.abstrakt.presenter.run.model.TestRunModel;
 import in.BBAT.presenter.labelProviders.DeviceTestRunLableProvider;
 import in.BBAT.testRunner.runner.TestRunner;
 import in.BBAT.testRunner.runner.UiAutoTestCaseJar;
+import in.bbat.presenter.views.tester.AutomatorLogView;
 import in.bbat.presenter.views.tester.TestLogView;
 import in.bbat.presenter.views.tester.TestRunnerView;
 
@@ -33,6 +34,7 @@ import org.eclipse.swt.custom.CTabItem;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.TableColumn;
+import org.eclipse.ui.IViewPart;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 
@@ -90,6 +92,11 @@ public class DeviceTestRun {
 						PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().hideView(view);
 					Object sel = ((IStructuredSelection)event.getSelection()).getFirstElement();
 					((TestRunInstanceModel)sel).setShowLogs(true);
+					
+					IViewPart autoLogView =  PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().showView(AutomatorLogView.ID);
+					if(autoLogView!= null){
+						((AutomatorLogView)autoLogView).setInput((TestRunInstanceModel)sel);
+					}
 				} catch (Exception e) {
 					e.printStackTrace();
 				}	
