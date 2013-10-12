@@ -7,9 +7,8 @@ Bundle-Activator: in.bbat.testrunner.Activator
 Bundle-Vendor: ME
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
- org.apache.ant;bundle-version="1.8.4",
- org.eclipse.ant.core;bundle-version="3.2.500",
- in.BBAT.monkey.libs;bundle-version="1.0.0"
+ in.BBAT.monkey.libs;bundle-version="1.0.0",
+ org.eclipse.ant.core;bundle-version="3.2.500"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: .

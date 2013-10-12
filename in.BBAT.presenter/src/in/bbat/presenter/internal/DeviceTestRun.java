@@ -9,6 +9,7 @@ import in.BBAT.abstrakt.presenter.run.model.TestRunModel;
 import in.BBAT.presenter.labelProviders.DeviceTestRunLableProvider;
 import in.BBAT.testRunner.runner.TestRunner;
 import in.BBAT.testRunner.runner.UiAutoTestCaseJar;
+import in.bbat.abstrakt.gui.BBATImageManager;
 import in.bbat.presenter.views.tester.AutomatorLogView;
 import in.bbat.presenter.views.tester.TestLogView;
 import in.bbat.presenter.views.tester.TestRunnerView;
@@ -141,13 +142,13 @@ public class DeviceTestRun {
 		TableColumnLayout layout = new TableColumnLayout();
 		parent.setLayout(layout);
 
-		TableViewerColumn col =createTableViewerColumn(viewer,null, titles[0],bounds[0]);
+		TableViewerColumn col =createTableViewerColumn(viewer,BBATImageManager.getInstance().getImage(BBATImageManager.PROJECT_GIF_16), titles[0],bounds[0]);
 		layout.setColumnData(col.getColumn(), new ColumnWeightData(bounds[0]));
 
-		TableViewerColumn col1 = createTableViewerColumn(viewer, null, titles[1],bounds[1]);
+		TableViewerColumn col1 = createTableViewerColumn(viewer, BBATImageManager.getInstance().getImage(BBATImageManager.TESTSUITE_GIF_16), titles[1],bounds[1]);
 		layout.setColumnData(col1.getColumn(), new ColumnWeightData(bounds[1]));
 
-		TableViewerColumn col2 = createTableViewerColumn(viewer, null, titles[2],bounds[2]);
+		TableViewerColumn col2 = createTableViewerColumn(viewer, BBATImageManager.getInstance().getImage(BBATImageManager.TESTCASE_GIF_16), titles[2],bounds[2]);
 		layout.setColumnData(col2.getColumn(), new ColumnWeightData(bounds[2]));
 
 		TableViewerColumn col3 = createTableViewerColumn(viewer, null, titles[3],bounds[3]);

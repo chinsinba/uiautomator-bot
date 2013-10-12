@@ -184,6 +184,8 @@ public final class LogCatPanel implements ILogCatBufferChangeListener {
 
 	private List<LogCatFilter> mCurrentFilters = Collections.emptyList();
 
+	
+
 	private Table mTable;
 
 	private boolean mShouldScrollToLatestLog = true;
@@ -1606,5 +1608,9 @@ public final class LogCatPanel implements ILogCatBufferChangeListener {
 		mReceiver.stop();
 		mReceiver.clearMessages();
 		mReceiver.removeMessageReceivedEventListener(this);
+	}
+	
+	public Table getmTable() {
+		return mTable;
 	}
 }

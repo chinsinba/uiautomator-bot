@@ -10,7 +10,11 @@ import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.ColumnWeightData;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.TableViewer;
+import org.eclipse.jface.viewers.ViewerCell;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.MouseEvent;
+import org.eclipse.swt.events.MouseMoveListener;
+import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
@@ -57,6 +61,7 @@ public class AutomatorLogView extends BBATViewPart {
 		viewer.getTable().setHeaderVisible(true);
 		createColumns(comp2, viewer);
 		viewer.setLabelProvider(new AutoLogLabelProvider());
+		viewer.getTable().addMouseMoveListener(getMouseMoveListener());
 	}
 
 	private void createTextFilter(Composite parent) {
@@ -78,8 +83,22 @@ public class AutomatorLogView extends BBATViewPart {
 
 		TableColumn col =new TableColumn(viewer.getTable(), SWT.None);
 		col.setText(titles[0]);
-		layout.setColumnData(col, new ColumnWeightData(100));
+		layout.setColumnData(col, new ColumnWeightData(100,true));
 
+	}
+
+
+	MouseMoveListener getMouseMoveListener() {
+		MouseMoveListener listener = new MouseMoveListener() {
+
+			@Override
+			public void mouseMove(MouseEvent event) {
+				ViewerCell cell = viewer.getCell(new Point(event.x, event.y));
+				if (cell != null)
+					viewer.getTable().setToolTipText(cell.getText());
+			}
+		};
+		return listener;
 	}
 
 	public void setInput(TestRunInstanceModel model){
