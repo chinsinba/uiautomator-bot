@@ -1,30 +1,49 @@
 package in.bbat.presenter.views.history;
 
+import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.jface.viewers.TableViewer;
+import org.eclipse.jface.viewers.TreeViewer;
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 
+import in.BBAT.abstrakt.presenter.device.model.TestDeviceManager;
+import in.BBAT.abstrakt.presenter.pkg.model.TestProjectManager;
+import in.BBAT.abstrakt.presenter.run.model.TestRunManager;
+import in.BBAT.presenter.contentProviders.TestCaseBrowserContentProvider;
+import in.BBAT.presenter.contentProviders.TestRunHistoryContentProvider;
+import in.BBAT.presenter.labelProviders.DeviceViewLabelProvider;
+import in.BBAT.presenter.labelProviders.TestCaseLabelProvider;
+import in.BBAT.presenter.labelProviders.TestRunHistoryLabelProvider;
 import in.bbat.presenter.views.BBATViewPart;
 
 public class TestRunHistoryView extends BBATViewPart {
 
 	public static final String ID="in.BBAT.presenter.history.TestRunHistoryView";
+	private TreeViewer viewer;
 	@Override
 	public void refresh() throws Exception {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public ISelection getSelectedElements() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public void createPartControl(Composite parent) {
-		// TODO Auto-generated method stub
-
-	}
+		viewer = new TreeViewer(parent, SWT.MULTI | SWT.H_SCROLL| SWT.V_SCROLL);
+		viewer.setContentProvider(new TestRunHistoryContentProvider());
+		viewer.setLabelProvider(new TestRunHistoryLabelProvider());
+		viewer.setAutoExpandLevel(1);
+		// Provide the input to the ContentProvider
+		try {
+			viewer.setInput(TestRunManager.getInstance());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		addMenuManager(viewer);}
 
 	@Override
 	public void setFocus() {

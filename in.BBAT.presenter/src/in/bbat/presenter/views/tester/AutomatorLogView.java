@@ -2,7 +2,6 @@ package in.bbat.presenter.views.tester;
 
 import in.BBAT.abstrakt.presenter.run.model.TestRunInstanceModel;
 import in.BBAT.presenter.labelProviders.AutoLogLabelProvider;
-import in.BBAT.presenter.labelProviders.TestRunnerLableProvider;
 import in.bbat.presenter.views.BBATViewPart;
 
 import org.eclipse.jface.layout.TableColumnLayout;
