@@ -6,7 +6,6 @@ import in.BBAT.abstrakt.gui.model.AbstractTreeModel;
 import in.BBAT.data.model.Entities.AbstractEntity;
 import in.BBAT.data.model.Entities.TestDeviceRunEntity;
 import in.BBAT.data.model.Entities.TestRunEntity;
-import in.BBAT.data.model.Entities.TestRunInfoEntity;
 
 import org.eclipse.swt.graphics.Image;
 

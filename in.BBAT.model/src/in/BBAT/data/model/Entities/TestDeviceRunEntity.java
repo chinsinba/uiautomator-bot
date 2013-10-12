@@ -1,5 +1,6 @@
 package in.BBAT.data.model.Entities;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -31,7 +32,9 @@ public class TestDeviceRunEntity extends AbstractEntity {
 
 	public TestDeviceRunEntity(TestRunEntity runEntity,TestDeviceEntity deviceEntity) {
 		this.testRun = runEntity;
+		this.device = deviceEntity;
 	}
+	
 	public TestDeviceRunEntity() {
 		// TODO Auto-generated constructor stub
 	}
@@ -41,6 +44,10 @@ public class TestDeviceRunEntity extends AbstractEntity {
 	private TestDeviceEntity device;
 
 	private String status;
+	
+	private Timestamp startTime;
+	
+	private Timestamp endTime;
 
 	@OneToMany(mappedBy="testDeviceRun", fetch = FetchType.LAZY, cascade = { CascadeType.ALL })
 	@OrderColumn
@@ -71,5 +78,21 @@ public class TestDeviceRunEntity extends AbstractEntity {
 
 	public void setTestRun(TestRunEntity testRun) {
 		this.testRun = testRun;
+	}
+
+	public Timestamp getStartTime() {
+		return startTime;
+	}
+
+	public void setStartTime(Timestamp startTime) {
+		this.startTime = startTime;
+	}
+
+	public Timestamp getEndTime() {
+		return endTime;
+	}
+
+	public void setEndTime(Timestamp endTime) {
+		this.endTime = endTime;
 	}
 }
