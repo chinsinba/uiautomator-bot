@@ -42,28 +42,6 @@ public class MineManager {
 		MineManagerHelper.init(UNIT_NAME, false, true, DB_ADDRESS + Path.SEPARATOR + dbName,"app","app");
 	}
 
-
-	/*public synchronized void beginTransaction()
-	{
-		if(transactionStarted){
-
-		}
-		EntityManager em = MineManagerHelper.getInstance().getEmFactory().createEntityManager();
-		em.getTransaction().begin();
-		transactionStarted = true;
-	}
-
-	public synchronized void commitTransaction()
-	{
-		if(!transactionStarted){
-
-		}
-		EntityManager em = MineManagerHelper.getInstance().getEmFactory().createEntityManager();
-		em.getTransaction().commit();
-		em.close();
-		transactionStarted =false;
-	}
-	 */
 	public  void abortTransaction()
 	{
 		if(!transactionStarted){

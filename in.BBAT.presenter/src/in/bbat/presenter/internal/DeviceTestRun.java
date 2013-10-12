@@ -125,7 +125,7 @@ public class DeviceTestRun {
 		if(testRunInstances!=null)
 			return testRunInstances;
 		testRunInstances = new ArrayList<TestRunInstanceModel>();
-		this.testDeviceRun = new TestDeviceRunModel(testRun);
+		this.testDeviceRun = new TestDeviceRunModel(testRun,device);
 		testDeviceRun.save();
 		for(TestRunCase caseObj:getTestRunCases()){
 			TestRunInstanceModel runInstModel = new TestRunInstanceModel(testDeviceRun,caseObj.getTestcase(),TestStatus.NOTEXECUTED.getStatus());

@@ -36,5 +36,7 @@ public interface IAndroidDevice {
 	
 	IDevice getMonkeyDevice();
 
+	String getSerialNo();
+
 
 }

@@ -2,6 +2,8 @@ package in.BBAT.abstrakt.presenter.device.model;
 
 import in.BBAT.TestRunner.device.IAndroidDevice;
 import in.BBAT.abstrakt.gui.model.IGUITreeNode;
+import in.BBAT.data.model.Entities.TestDeviceEntity;
+import in.BBAT.dataMine.manager.DeviceMineManager;
 
 import java.util.List;
 
@@ -14,8 +16,22 @@ public class AndroidDevice implements IGUITreeNode{
 	private IAndroidDevice iDevice;
 	private boolean isAddedToRun =false;
 
+	private TestDeviceEntity deviceEntity;
+
 	public AndroidDevice(IAndroidDevice dev){
 		this.setiDevice(dev);
+		initializeEntity(dev);
+	}
+
+	private void initializeEntity(IAndroidDevice dev) {
+		TestDeviceEntity entity = DeviceMineManager.find(dev.getSerialNo());
+		if(entity==null)
+		{
+			entity = new TestDeviceEntity();
+			entity.setDeviceId(dev.getSerialNo());
+			entity.save();
+		}
+		deviceEntity = entity;
 	}
 
 	@Override
@@ -71,4 +87,7 @@ public class AndroidDevice implements IGUITreeNode{
 		this.isAddedToRun = isAddedToRun;
 	}
 
+	public TestDeviceEntity getDeviceEntity(){
+		return deviceEntity;
+	}
 }

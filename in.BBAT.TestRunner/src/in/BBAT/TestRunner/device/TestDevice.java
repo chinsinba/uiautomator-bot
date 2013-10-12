@@ -172,4 +172,9 @@ public class TestDevice implements IAndroidDevice {
 	public IDevice getMonkeyDevice() {
 		return monkeyDevice;
 	}
+
+	@Override
+	public String getSerialNo() {
+		return monkeyDevice.getSerialNumber();
+	}
 }

@@ -40,6 +40,7 @@ public abstract class AbstractEntity implements IBBATEntity {
 		
 	}
 	
+	
 	@Override
 	public void removeChild(IBBATEntity childEntity) {
 		

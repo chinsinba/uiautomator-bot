@@ -1,10 +1,14 @@
 package in.BBAT.data.model.Entities;
 
+import in.BBAT.dataMine.manager.MineManagerHelper;
+
 import javax.persistence.Entity;
+import javax.persistence.EntityManager;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.Query;
 import javax.persistence.TableGenerator;
 
 /**
@@ -14,7 +18,8 @@ import javax.persistence.TableGenerator;
  */
 @Entity
 @NamedQueries({
-	@NamedQuery(name="TestDeviceEntity.findAll",query="SELECT testcase FROM TestDeviceEntity testcase ORDER BY testcase.id")
+	@NamedQuery(name="TestDeviceEntity.findAll",query="SELECT device FROM TestDeviceEntity device ORDER BY device.id"),
+	@NamedQuery(name="TestDeviceEntity.findByID",query="SELECT device FROM TestDeviceEntity device WHERE device.deviceId = ?1")
 })
 public class TestDeviceEntity extends AbstractEntity {
 	@Id
@@ -35,9 +40,9 @@ public class TestDeviceEntity extends AbstractEntity {
 	private String buildId;
 
 	private String osName;
-	
+
 	private String apiLevel;
-	
+
 	private String modelName;
 
 	public String getDeviceId() {
