@@ -20,6 +20,8 @@ import java.util.List;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.jobs.IJobChangeEvent;
+import org.eclipse.core.runtime.jobs.IJobChangeListener;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.jface.layout.TableColumnLayout;
 import org.eclipse.jface.viewers.ArrayContentProvider;
@@ -51,6 +53,7 @@ public class DeviceTestRun {
 	private TestRunModel testRun;
 	private ArrayList<TestRunInstanceModel> testRunInstances;
 	private TestStatus status = TestStatus.NOTEXECUTED;
+	private boolean stopped = false;
 
 	public DeviceTestRun(AndroidDevice device,CTabFolder mainTabFolder) {
 		this.setDevice(device);
@@ -127,14 +130,17 @@ public class DeviceTestRun {
 		if(testRunInstances!=null)
 			return testRunInstances;
 		testRunInstances = new ArrayList<TestRunInstanceModel>();
-		this.testDeviceRun = new TestDeviceRunModel(testRun,device);
-		testDeviceRun.save();
+		createTestDeviceRun();
 		for(TestRunCase caseObj:getTestRunCases()){
 			TestRunInstanceModel runInstModel = new TestRunInstanceModel(testDeviceRun,caseObj.getTestcase(),TestStatus.NOTEXECUTED.getStatus());
 			runInstModel.save();
 			testRunInstances.add(runInstModel);
 		}
 		return testRunInstances;
+	}
+	private void createTestDeviceRun() {
+		this.testDeviceRun = new TestDeviceRunModel(testRun,device);
+		testDeviceRun.save();
 	}
 
 	public void createColumns(final Composite parent, final TableViewer viewer) {
@@ -190,7 +196,7 @@ public class DeviceTestRun {
 	}
 
 	public void execute(final UiAutoTestCaseJar jar) {
-
+		setStopped(false);
 		updateStatus(TestStatus.EXECUTING);
 		testDeviceRun.setStartTime(System.currentTimeMillis());
 		testDeviceRun.update();
@@ -199,6 +205,9 @@ public class DeviceTestRun {
 			protected IStatus run(IProgressMonitor monitor) {
 				TestRunner runner = new TestRunner(jar,getDevice().getiDevice());
 				for (TestRunInstanceModel testRunCase : getRunInstances()) {
+					if(isStopped()){
+						return Status.OK_STATUS;
+					}
 					testRunCase.setStartTime(System.currentTimeMillis());
 					runner.execute(testRunCase.getTestCaseModel().getName(), new TestCaseExecutionListener(testRunCase, DeviceTestRun.this), new DeviceLogListener(testRunCase),new UIAutomatorOutputListener(testRunCase));
 					testRunCase.setEndTime(System.currentTimeMillis());
@@ -213,6 +222,44 @@ public class DeviceTestRun {
 
 		};
 		testRunJob.schedule();
+		testRunJob.addJobChangeListener(new IJobChangeListener() {
+			
+			@Override
+			public void sleeping(IJobChangeEvent event) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void scheduled(IJobChangeEvent event) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void running(IJobChangeEvent event) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void done(IJobChangeEvent event) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void awake(IJobChangeEvent event) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void aboutToRun(IJobChangeEvent event) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 	}
 
 
@@ -273,10 +320,22 @@ public class DeviceTestRun {
 	public void setTestRun(TestRunModel testRun) {
 		this.testRun = testRun;
 	}
+
 	public TestStatus getStatus() {
 		return status;
 	}
+
 	public void setStatus(TestStatus status) {
 		this.status = status;
+	}
+
+	public void stop(){
+		setStopped(true);
+	}
+	public boolean isStopped() {
+		return stopped;
+	}
+	public void setStopped(boolean stopped) {
+		this.stopped = stopped;
 	}
 }

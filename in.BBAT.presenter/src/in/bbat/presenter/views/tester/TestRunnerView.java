@@ -1,6 +1,8 @@
 package in.bbat.presenter.views.tester;
 
 import in.BBAT.abstrakt.presenter.device.model.AndroidDevice;
+import in.BBAT.abstrakt.presenter.device.model.IDeviceModelChangeListener;
+import in.BBAT.abstrakt.presenter.device.model.TestDeviceManager;
 import in.BBAT.abstrakt.presenter.run.model.TestRunInstanceModel;
 import in.BBAT.presenter.DND.listeners.TestRunDropListener;
 import in.BBAT.presenter.labelProviders.DeviceViewLabelProvider;
@@ -36,6 +38,7 @@ import org.eclipse.swt.layout.FormData;
 import org.eclipse.swt.layout.FormLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.TableColumn;
 
 public class TestRunnerView extends BBATViewPart {
@@ -103,9 +106,6 @@ public class TestRunnerView extends BBATViewPart {
 		testRunItem = new CTabItem(testRunFolder, SWT.None);
 		testRunItem.setText("Test Run");
 		Composite comp = new Composite(testRunFolder, SWT.None);
-
-		
-
 		viewer = new TableViewer(comp, SWT.MULTI | SWT.H_SCROLL| SWT.V_SCROLL);
 		viewer.setContentProvider(new ArrayContentProvider());
 		viewer.getTable().setLinesVisible(true);
@@ -133,11 +133,8 @@ public class TestRunnerView extends BBATViewPart {
 		button.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-
 			}
 		});
-
-
 		testRunItem.setControl(comp);
 
 	}
@@ -236,5 +233,4 @@ public class TestRunnerView extends BBATViewPart {
 	public void setFocus() {
 
 	}
-
 }

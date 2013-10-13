@@ -28,6 +28,8 @@ public class RemoveAllTestRunCaseHandler extends AbstractTestRunnerHandler {
 	public boolean isEnabled(List<?> object) {
 		if(TestRunExecutionManager.getInstance().getTestRunCases().isEmpty())
 			return false;
+		if(TestRunExecutionManager.getInstance().isExecuting())
+			return false;
 		return true;
 	}
 

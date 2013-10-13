@@ -84,5 +84,5 @@ public class DeveloperDeviceView extends BBATViewPart {
 	public ISelection getSelectedElements() {
 		return viewer.getSelection();
 	}
-
+	
 }

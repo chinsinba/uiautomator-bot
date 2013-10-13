@@ -11,6 +11,8 @@ public class TestRunExecutionManager {
 
 	private static TestRunExecutionManager instance;
 	private TestRunContainer runContainer;
+	private boolean executing = false;
+
 
 	private TestRunExecutionManager()
 	{
@@ -58,8 +60,23 @@ public class TestRunExecutionManager {
 		return runContainer.getdeviceTestRuns();
 	}
 
+	public void stopRun(){
+		setExecuting(false);
+		runContainer.stopRuns();
+	}
+
 	public void execute() {
+		setExecuting(true);
 		TestRunExecutor executor = new TestRunExecutor(getSelectedDevices());
 		executor.run();		
 	}
+
+	public boolean isExecuting() {
+		return executing;
+	}
+
+	public void setExecuting(boolean executing) {
+		this.executing = executing;
+	}
+
 }

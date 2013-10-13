@@ -30,7 +30,6 @@ public class TestRunExecutor {
 			device.createTab();
 			device.execute(jar);
 		}
-
 		testRun.setEndtiTime(new Timestamp(System.currentTimeMillis()));
 		testRun.update();
 	}

@@ -15,13 +15,15 @@ public class StopTestRunHandler extends AbstractTestRunnerHandler {
 
 	@Override
 	public Object run(ExecutionEvent event) {
+		TestRunExecutionManager.getInstance().stopRun();
 		return null;
 	}
 
 	@Override
 	public boolean isEnabled(List<?> object) {
 		if(!TestRunExecutionManager.getInstance().getTestRunCases().isEmpty()&& !TestRunExecutionManager.getInstance().getSelectedDevices().isEmpty())
-			return true;
+			if(TestRunExecutionManager.getInstance().isExecuting())
+				return true;
 		return false;
 	}
 

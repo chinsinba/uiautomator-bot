@@ -1,7 +1,10 @@
 package in.bbat.presenter.views.history;
 
 import org.eclipse.jface.viewers.ArrayContentProvider;
+import org.eclipse.jface.viewers.DoubleClickEvent;
+import org.eclipse.jface.viewers.IDoubleClickListener;
 import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.swt.SWT;
@@ -9,7 +12,9 @@ import org.eclipse.swt.widgets.Composite;
 
 import in.BBAT.abstrakt.presenter.device.model.TestDeviceManager;
 import in.BBAT.abstrakt.presenter.pkg.model.TestProjectManager;
+import in.BBAT.abstrakt.presenter.run.model.TestDeviceRunModel;
 import in.BBAT.abstrakt.presenter.run.model.TestRunManager;
+import in.BBAT.abstrakt.presenter.run.model.TestRunModel;
 import in.BBAT.presenter.contentProviders.TestCaseBrowserContentProvider;
 import in.BBAT.presenter.contentProviders.TestRunHistoryContentProvider;
 import in.BBAT.presenter.labelProviders.DeviceViewLabelProvider;
@@ -43,6 +48,19 @@ public class TestRunHistoryView extends BBATViewPart {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		viewer.addDoubleClickListener(new IDoubleClickListener() {
+			
+			@Override
+			public void doubleClick(DoubleClickEvent event) {
+				Object sel = ((IStructuredSelection)event.getSelection()).getFirstElement();
+				if(sel instanceof TestRunModel){
+					
+				}
+				if(sel instanceof TestDeviceRunModel){
+					
+				}
+			}
+		});
 		addMenuManager(viewer);}
 
 	@Override
