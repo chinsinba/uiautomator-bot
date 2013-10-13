@@ -34,6 +34,7 @@ import org.eclipse.swt.custom.CTabFolder;
 import org.eclipse.swt.custom.CTabItem;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.ui.IViewPart;
 import org.eclipse.ui.PartInitException;
@@ -49,6 +50,7 @@ public class DeviceTestRun {
 	private TestDeviceRunModel testDeviceRun;
 	private TestRunModel testRun;
 	private ArrayList<TestRunInstanceModel> testRunInstances;
+	private TestStatus status = TestStatus.NOTEXECUTED;
 
 	public DeviceTestRun(AndroidDevice device,CTabFolder mainTabFolder) {
 		this.setDevice(device);
@@ -93,7 +95,7 @@ public class DeviceTestRun {
 						PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().hideView(view);
 					Object sel = ((IStructuredSelection)event.getSelection()).getFirstElement();
 					((TestRunInstanceModel)sel).setShowLogs(true);
-					
+
 					IViewPart autoLogView =  PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().showView(AutomatorLogView.ID);
 					if(autoLogView!= null){
 						((AutomatorLogView)autoLogView).setInput((TestRunInstanceModel)sel);
@@ -187,21 +189,55 @@ public class DeviceTestRun {
 		return testScriptPaths;
 	}
 
-	public void excute() {
+	public void execute(final UiAutoTestCaseJar jar) {
+
+		updateStatus(TestStatus.EXECUTING);
+		testDeviceRun.setStartTime(System.currentTimeMillis());
+		testDeviceRun.update();
 		Job testRunJob = new Job("Execute") {
 			@Override
 			protected IStatus run(IProgressMonitor monitor) {
-				TestRunner runner = new TestRunner(new UiAutoTestCaseJar(getTestScriptPaths()),getDevice().getiDevice());
+				TestRunner runner = new TestRunner(jar,getDevice().getiDevice());
 				for (TestRunInstanceModel testRunCase : getRunInstances()) {
 					testRunCase.setStartTime(System.currentTimeMillis());
 					runner.execute(testRunCase.getTestCaseModel().getName(), new TestCaseExecutionListener(testRunCase, DeviceTestRun.this), new DeviceLogListener(testRunCase),new UIAutomatorOutputListener(testRunCase));
 					testRunCase.setEndTime(System.currentTimeMillis());
 					testRunCase.update();
 				}
+				testDeviceRun.setEndTime(System.currentTimeMillis());
+				testDeviceRun.update();
+				updateStatus(TestStatus.EXECUTED);
+
 				return Status.OK_STATUS;
 			}
+
 		};
 		testRunJob.schedule();
+	}
+
+
+	private void updateStatus(TestStatus status) {
+		setStatus(status);
+		testDeviceRun.setStatus(getStatus());
+		testDeviceRun.update();
+		refrestTestRunnerView();		
+	}
+	private void refrestTestRunnerView() {
+		Display.getDefault().asyncExec(new Runnable() {
+
+			@Override
+			public void run() {
+				IViewPart autoLogView =  PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().findView(TestRunnerView.ID);
+				if(autoLogView!= null){
+					try {
+						((TestRunnerView)autoLogView).refresh();
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+
+			}
+		});
 	}
 
 	public void clear()
@@ -236,5 +272,11 @@ public class DeviceTestRun {
 
 	public void setTestRun(TestRunModel testRun) {
 		this.testRun = testRun;
+	}
+	public TestStatus getStatus() {
+		return status;
+	}
+	public void setStatus(TestStatus status) {
+		this.status = status;
 	}
 }

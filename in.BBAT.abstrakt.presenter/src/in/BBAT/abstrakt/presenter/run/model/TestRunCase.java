@@ -41,7 +41,7 @@ public class TestRunCase {
 	public enum TestStatus{
 		PASS("PASS"),FAIL("FAIL"),
 		ERROR("ERROR"),EXECUTING("EXECUTING"),
-		NOTEXECUTED("NOTEXECUTED");
+		NOTEXECUTED("NOTEXECUTED"),EXECUTED("EXECUTED");
 
 		String value;
 		TestStatus(String value){

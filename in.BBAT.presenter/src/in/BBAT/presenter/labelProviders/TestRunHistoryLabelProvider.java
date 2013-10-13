@@ -21,7 +21,7 @@ public class TestRunHistoryLabelProvider extends LabelProvider {
 
 		if(element instanceof TestDeviceRunModel)
 		{
-			return ((TestDeviceRunModel) element).getName(); 
+			return ((TestDeviceRunModel) element).getDeviceName();
 		}
 		return super.getText(element);
 	}

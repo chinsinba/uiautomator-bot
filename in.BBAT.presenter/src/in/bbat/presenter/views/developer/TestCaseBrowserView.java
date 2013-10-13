@@ -9,9 +9,12 @@ import in.bbat.presenter.views.BBATViewPart;
 import org.eclipse.jface.util.LocalSelectionTransfer;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.TreeViewer;
+import org.eclipse.nebula.widgets.pshelf.PShelf;
+import org.eclipse.nebula.widgets.pshelf.PShelfItem;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.dnd.DND;
 import org.eclipse.swt.dnd.Transfer;
+import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
 
 public class TestCaseBrowserView extends BBATViewPart {
@@ -19,12 +22,22 @@ public class TestCaseBrowserView extends BBATViewPart {
 
 	private TreeViewer viewer;
 
+	private PShelf testCaseShelf;
+
+	private PShelfItem automatorShelfItem;
+
+	private PShelfItem monkeyShelfItem;
+
 	/**
 	 * This is a callback that will allow us to create the viewer and initialize
 	 * it.
 	 */
 	public void createPartControl(Composite parent) {
-		viewer = new TreeViewer(parent, SWT.MULTI | SWT.H_SCROLL
+		testCaseShelf = new PShelf(parent, SWT.NONE);
+		automatorShelfItem = new PShelfItem(testCaseShelf, SWT.NONE);
+		automatorShelfItem.setText("UIAutomator Testcase");
+		automatorShelfItem.getBody().setLayout(new FillLayout());	
+		viewer = new TreeViewer(automatorShelfItem.getBody(), SWT.MULTI | SWT.H_SCROLL
 				| SWT.V_SCROLL);
 		viewer.setContentProvider(new TestCaseBrowserContentProvider());
 		viewer.setLabelProvider(new TestCaseLabelProvider());
@@ -37,6 +50,13 @@ public class TestCaseBrowserView extends BBATViewPart {
 		}
 		addMenuManager(viewer);
 		createDragSupport();
+		
+		
+		{
+			monkeyShelfItem = new PShelfItem(testCaseShelf, SWT.NONE);
+			monkeyShelfItem.setText("Monkey TestCase");
+			monkeyShelfItem.getBody().setLayout(new FillLayout());	
+		}
 	}
 
 	/**

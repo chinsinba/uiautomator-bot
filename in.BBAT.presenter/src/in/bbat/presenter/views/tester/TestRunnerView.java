@@ -72,7 +72,7 @@ public class TestRunnerView extends BBATViewPart {
 		formLayout.spacing = 5;*/
 		outer.setLayout( formLayout );
 
-		Composite innerLeft = new Composite( outer, SWT.BORDER );
+		Composite innerLeft = new Composite( outer, SWT.NONE );
 		//		innerLeft.setLayout( new GridLayout() );
 
 		FormData fData = new FormData();
@@ -85,7 +85,7 @@ public class TestRunnerView extends BBATViewPart {
 
 		createDeviceViewer(innerLeft);
 
-		Composite innerRight = new Composite( outer, SWT.BORDER );
+		Composite innerRight = new Composite( outer, SWT.NONE );
 		fData = new FormData();
 		fData.top = new FormAttachment( 0 );
 		fData.left = new FormAttachment( innerLeft );
@@ -104,6 +104,7 @@ public class TestRunnerView extends BBATViewPart {
 		testRunItem.setText("Test Run");
 		Composite comp = new Composite(testRunFolder, SWT.None);
 
+		
 
 		viewer = new TableViewer(comp, SWT.MULTI | SWT.H_SCROLL| SWT.V_SCROLL);
 		viewer.setContentProvider(new ArrayContentProvider());

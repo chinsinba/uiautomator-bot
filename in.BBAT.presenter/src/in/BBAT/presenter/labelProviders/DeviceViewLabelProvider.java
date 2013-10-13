@@ -22,8 +22,17 @@ public class DeviceViewLabelProvider extends LabelProvider implements ITableLabe
 	public String getColumnText(Object element, int columnIndex) {
 		if(element instanceof AndroidDevice)
 			return ((AndroidDevice) element).getLabel();
-		if(element  instanceof DeviceTestRun)
-			return ((DeviceTestRun) element).getDevice().getLabel();
+		if(element  instanceof DeviceTestRun){
+			switch (columnIndex) {
+			case 0:
+				return ((DeviceTestRun) element).getDevice().getLabel();
+			case 1:
+				return ((DeviceTestRun) element).getStatus().getStatus();
+			default:
+				break;
+			}
+		}
+
 		return element.toString();
 	}
 }
