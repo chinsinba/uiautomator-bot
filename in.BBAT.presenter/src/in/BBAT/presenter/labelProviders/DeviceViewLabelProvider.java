@@ -1,21 +1,23 @@
 package in.BBAT.presenter.labelProviders;
 
 import in.BBAT.abstrakt.presenter.device.model.AndroidDevice;
+import in.bbat.abstrakt.gui.BBATImageManager;
 import in.bbat.presenter.internal.DeviceTestRun;
 
 import org.eclipse.jface.viewers.ITableLabelProvider;
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.swt.graphics.Image;
-import org.eclipse.ui.ISharedImages;
-import org.eclipse.ui.PlatformUI;
 
 public class DeviceViewLabelProvider extends LabelProvider implements ITableLabelProvider {
 
 	@Override
 	public Image getColumnImage(Object element, int columnIndex) {
-		// TODO Auto-generated method stub
-		return  PlatformUI.getWorkbench().getSharedImages().getImage(
-				ISharedImages.IMG_OBJS_INFO_TSK);
+
+	/*	switch (columnIndex) {
+		case 0:
+			return  BBATImageManager.getInstance().getImage(BBATImageManager.ANDROID_DEVICE);
+		}*/
+		return null;
 	}
 
 	@Override

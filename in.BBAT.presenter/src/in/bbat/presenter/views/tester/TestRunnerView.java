@@ -1,8 +1,6 @@
 package in.bbat.presenter.views.tester;
 
 import in.BBAT.abstrakt.presenter.device.model.AndroidDevice;
-import in.BBAT.abstrakt.presenter.device.model.IDeviceModelChangeListener;
-import in.BBAT.abstrakt.presenter.device.model.TestDeviceManager;
 import in.BBAT.abstrakt.presenter.run.model.TestRunInstanceModel;
 import in.BBAT.presenter.DND.listeners.TestRunDropListener;
 import in.BBAT.presenter.labelProviders.DeviceViewLabelProvider;
@@ -38,7 +36,6 @@ import org.eclipse.swt.layout.FormData;
 import org.eclipse.swt.layout.FormLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.TableColumn;
 
 public class TestRunnerView extends BBATViewPart {
@@ -163,6 +160,7 @@ public class TestRunnerView extends BBATViewPart {
 		});
 		TableColumn col = new TableColumn(testDeviceViewer.getTable(), SWT.None);
 		col.setText("Devices");
+		col.setImage(BBATImageManager.getInstance().getImage(BBATImageManager.ANDROID_DEVICE));
 		TableColumnLayout lay = new TableColumnLayout();
 		comp.setLayout(lay);
 		lay.setColumnData(col, new ColumnWeightData(50));

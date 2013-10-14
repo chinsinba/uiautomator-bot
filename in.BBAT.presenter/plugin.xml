@@ -20,16 +20,19 @@
       </perspective>
       <perspective
             class="in.bbat.presenter.perstpectives.TesterPerspective"
+            icon="icons/execute.gif"
             id="in.BBAT.presenter.perspective.tester"
             name="Tester">
       </perspective>
       <perspective
             class="in.bbat.presenter.perstpectives.ReporterPerspective"
+            icon="icons/reporter.png"
             id="in.BBAT.presenter.perspective.reporter"
             name="Reporter">
       </perspective>
       <perspective
             class="in.bbat.presenter.perstpectives.HistoryPerspective"
+            icon="icons/history.png"
             id="in.BBAT.presenter.perspective.history"
             name="History">
       </perspective>
@@ -37,9 +40,10 @@
    <extension
          point="org.eclipse.ui.views">
       <view
-            name="TestCase Browser"
             class="in.bbat.presenter.views.developer.TestCaseBrowserView"
-            id="in.BBAT.presenter.developer.testcaseBrowserView">
+            icon="icons/package.gif"
+            id="in.BBAT.presenter.developer.testcaseBrowserView"
+            name="TestCase Browser">
       </view>
       <view
             class="in.bbat.presenter.views.developer.DeveloperDeviceView"

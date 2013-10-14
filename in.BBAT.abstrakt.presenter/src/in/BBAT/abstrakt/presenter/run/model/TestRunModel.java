@@ -50,7 +50,7 @@ public class TestRunModel extends AbstractTreeModel {
 		return ((TestRunEntity)getEntity()).getEndtiTime();
 	}
 
-	public void setEndtiTime(Timestamp endtiTime) {
+	public void setEndTime(Timestamp endtiTime) {
 		((TestRunEntity)getEntity()).setEndtiTime(endtiTime);
 	}
 

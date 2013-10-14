@@ -24,6 +24,7 @@ public class BBATImageManager
 	public static final String PROJECT_GIF_16="project.gif";
 	public static final String TESTSUITE_GIF_16="suite.gif";
 	public static final String TESTCASE_GIF_16="testcase.gif";
+	public static final String ANDROID_DEVICE ="Android_device.png";
 	
 	
 	/**
@@ -36,6 +37,7 @@ public class BBATImageManager
 		addImage(PROJECT_GIF_16, "project.gif");
 		addImage(TESTSUITE_GIF_16, "suite.gif");
 		addImage(TESTCASE_GIF_16, "testcase.gif");
+		addImage(ANDROID_DEVICE, ANDROID_DEVICE);
 	}
 
 	/**

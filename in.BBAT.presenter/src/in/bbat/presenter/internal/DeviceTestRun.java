@@ -14,6 +14,7 @@ import in.bbat.presenter.views.tester.AutomatorLogView;
 import in.bbat.presenter.views.tester.TestLogView;
 import in.bbat.presenter.views.tester.TestRunnerView;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -215,6 +216,8 @@ public class DeviceTestRun {
 				}
 				testDeviceRun.setEndTime(System.currentTimeMillis());
 				testDeviceRun.update();
+				testRun.setEndTime(new Timestamp(System.currentTimeMillis()));
+				testRun.update();
 				updateStatus(TestStatus.EXECUTED);
 
 				return Status.OK_STATUS;

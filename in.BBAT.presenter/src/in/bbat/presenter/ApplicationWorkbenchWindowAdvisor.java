@@ -1,12 +1,19 @@
 package in.bbat.presenter;
 
+import in.bbat.presenter.perstpectives.DeveloperPerspective;
+import in.bbat.presenter.perstpectives.HistoryPerspective;
+import in.bbat.presenter.perstpectives.ReporterPerspective;
+import in.bbat.presenter.perstpectives.TesterPerspective;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import org.eclipse.core.runtime.dynamichelpers.IExtensionChangeHandler;
+import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.ui.IPerspectiveDescriptor;
 import org.eclipse.ui.IPerspectiveRegistry;
+import org.eclipse.ui.IWorkbenchPreferenceConstants;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.application.ActionBarAdvisor;
 import org.eclipse.ui.application.IActionBarConfigurer;
@@ -26,6 +33,10 @@ public class ApplicationWorkbenchWindowAdvisor extends WorkbenchWindowAdvisor {
 
 	public void preWindowOpen() {
 		IWorkbenchWindowConfigurer configurer = getWindowConfigurer();
+		IPreferenceStore prefStore = PlatformUI.getPreferenceStore();
+
+		prefStore.setValue(IWorkbenchPreferenceConstants.PERSPECTIVE_BAR_EXTRAS,DeveloperPerspective.ID+","+TesterPerspective.ID+","+HistoryPerspective.ID+","+ReporterPerspective.ID);
+		
 		//		configurer.setInitialSize(new Point(800, 600));
 		configurer.setShowCoolBar(true);
 		configurer.setShowStatusLine(true);

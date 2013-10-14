@@ -5,7 +5,7 @@ import org.eclipse.ui.IPerspectiveFactory;
 
 public class HistoryPerspective implements IPerspectiveFactory {
 
-	public static final String PERSPECTIVE_ID = "in.BBAT.presenter.perspective.history";
+	public static final String ID = "in.BBAT.presenter.perspective.history";
 	
 	@Override
 	public void createInitialLayout(IPageLayout layout) {

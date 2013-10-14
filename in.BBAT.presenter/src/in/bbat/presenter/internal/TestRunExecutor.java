@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+
 public class TestRunExecutor {
 
 	private Set<DeviceTestRun> deviceTestRuns;
@@ -19,21 +20,23 @@ public class TestRunExecutor {
 	}
 
 	public void run() {
+
+		UiAutoTestCaseJar jar = new UiAutoTestCaseJar(getTestScriptPaths());
 		TestRunModel testRun = new TestRunModel();
 		testRun.setStartTime(new Timestamp(System.currentTimeMillis()));
 		testRun.save();
-		UiAutoTestCaseJar jar = new UiAutoTestCaseJar(getTestScriptPaths());
-
+		
 		for (DeviceTestRun device : deviceTestRuns) {
 			device.setTestRun(testRun);
 			device.setTestRunCases(TestRunExecutionManager.getInstance().getTestRunCases());
 			device.createTab();
 			device.execute(jar);
 		}
-		testRun.setEndtiTime(new Timestamp(System.currentTimeMillis()));
+		testRun.setEndTime(new Timestamp(System.currentTimeMillis()));
 		testRun.update();
+		//		TestRunExecutionManager.getInstance().setExecuting(false);
 	}
-	
+
 	public List<String> getTestScriptPaths() {
 		List<String> testScriptPaths = new ArrayList<String>();
 		for (TestRunCase testRunCase : TestRunExecutionManager.getInstance().getTestRunCases()) {
