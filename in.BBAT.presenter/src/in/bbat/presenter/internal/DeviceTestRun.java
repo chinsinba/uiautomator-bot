@@ -10,6 +10,7 @@ import in.BBAT.presenter.labelProviders.DeviceTestRunLableProvider;
 import in.BBAT.testRunner.runner.TestRunner;
 import in.BBAT.testRunner.runner.UiAutoTestCaseJar;
 import in.bbat.abstrakt.gui.BBATImageManager;
+import in.bbat.presenter.internal.TestRunExecutor.DeviceRunListener;
 import in.bbat.presenter.views.tester.AutomatorLogView;
 import in.bbat.presenter.views.tester.TestLogView;
 import in.bbat.presenter.views.tester.TestRunnerView;
@@ -55,6 +56,7 @@ public class DeviceTestRun {
 	private ArrayList<TestRunInstanceModel> testRunInstances;
 	private TestStatus status = TestStatus.NOTEXECUTED;
 	private boolean stopped = false;
+	private List<IDeviceRunExecutionlistener> listener = new ArrayList<IDeviceRunExecutionlistener>();
 
 	public DeviceTestRun(AndroidDevice device,CTabFolder mainTabFolder) {
 		this.setDevice(device);
@@ -197,6 +199,9 @@ public class DeviceTestRun {
 	}
 
 	public void execute(final UiAutoTestCaseJar jar) {
+		for(IDeviceRunExecutionlistener l :listener){
+			l.deviceRunExecutionStarted(DeviceTestRun.this);
+		}
 		setStopped(false);
 		updateStatus(TestStatus.EXECUTING);
 		testDeviceRun.setStartTime(System.currentTimeMillis());
@@ -204,6 +209,7 @@ public class DeviceTestRun {
 		Job testRunJob = new Job("Execute") {
 			@Override
 			protected IStatus run(IProgressMonitor monitor) {
+				
 				TestRunner runner = new TestRunner(jar,getDevice().getiDevice());
 				for (TestRunInstanceModel testRunCase : getRunInstances()) {
 					if(isStopped()){
@@ -226,41 +232,37 @@ public class DeviceTestRun {
 		};
 		testRunJob.schedule();
 		testRunJob.addJobChangeListener(new IJobChangeListener() {
-			
+
 			@Override
 			public void sleeping(IJobChangeEvent event) {
-				// TODO Auto-generated method stub
-				
+
 			}
-			
+
 			@Override
 			public void scheduled(IJobChangeEvent event) {
-				// TODO Auto-generated method stub
-				
+
 			}
-			
+
 			@Override
 			public void running(IJobChangeEvent event) {
-				// TODO Auto-generated method stub
-				
+
 			}
-			
+
 			@Override
 			public void done(IJobChangeEvent event) {
-				// TODO Auto-generated method stub
-				
+				for(IDeviceRunExecutionlistener l :listener){
+					l.deviceRunExecutionCompleted(DeviceTestRun.this);
+				}
 			}
-			
+
 			@Override
 			public void awake(IJobChangeEvent event) {
-				// TODO Auto-generated method stub
-				
+
 			}
-			
+
 			@Override
 			public void aboutToRun(IJobChangeEvent event) {
-				// TODO Auto-generated method stub
-				
+
 			}
 		});
 	}
@@ -340,5 +342,8 @@ public class DeviceTestRun {
 	}
 	public void setStopped(boolean stopped) {
 		this.stopped = stopped;
+	}
+	public void addListener(IDeviceRunExecutionlistener listener) {
+		this.listener.add(listener);		
 	}
 }

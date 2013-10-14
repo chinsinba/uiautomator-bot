@@ -223,7 +223,7 @@
                ratio="0.80f"
                relationship="right"
                relative="org.eclipse.ui.editorss"
-               visible="false">
+               visible="true">
          </view>
          <view
                id="in.BBAT.presenter.history.DeviceLogView"
@@ -436,6 +436,9 @@
             class="in.BBAT.presenter.tester.handlers.RemoveAllTestRunCaseHandler"
             commandId="in.BBAT.presenter.testrunner.removeAll">
       </handler>
+   </extension>
+   <extension
+         point="org.eclipse.ui.bindings">
    </extension>
 
 </plugin>

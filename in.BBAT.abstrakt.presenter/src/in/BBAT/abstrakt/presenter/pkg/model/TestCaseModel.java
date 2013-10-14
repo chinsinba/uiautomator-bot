@@ -20,6 +20,7 @@ public class TestCaseModel extends AbstractProjectTree{
 	public final static String JAVA = ".java";
 
 	public IFile testCaseFile;
+	
 
 	private String testScriptPath;
 
