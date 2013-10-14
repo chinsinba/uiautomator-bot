@@ -25,6 +25,7 @@ import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CTabFolder;
 import org.eclipse.swt.custom.CTabItem;
+import org.eclipse.swt.custom.SashForm;
 import org.eclipse.swt.dnd.DND;
 import org.eclipse.swt.dnd.Transfer;
 import org.eclipse.swt.events.SelectionAdapter;
@@ -34,6 +35,7 @@ import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.FormAttachment;
 import org.eclipse.swt.layout.FormData;
 import org.eclipse.swt.layout.FormLayout;
+import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.TableColumn;
@@ -61,40 +63,19 @@ public class TestRunnerView extends BBATViewPart {
 		return viewer.getSelection();
 	}
 
+	private SashForm createSash(Composite parent) {
+		SashForm sash = new SashForm(parent, SWT.HORIZONTAL);
+		sash.setLayoutData(new GridData(GridData.FILL_BOTH));
+		return sash;
+	}
 	@Override
 	public void createPartControl(Composite parent) {
 
-		Composite outer = new Composite( parent, SWT.BORDER );
+		SashForm form = createSash(parent);
 
-		FormLayout formLayout = new FormLayout();
-		/*formLayout.marginHeight = 5;
-		formLayout.marginWidth = 5;
-		formLayout.spacing = 5;*/
-		outer.setLayout( formLayout );
-
-		Composite innerLeft = new Composite( outer, SWT.NONE );
-		//		innerLeft.setLayout( new GridLayout() );
-
-		FormData fData = new FormData();
-		fData.top = new FormAttachment( 0 );
-		fData.left = new FormAttachment( 0 );
-		fData.right = new FormAttachment(20  ); // Locks on 10% of the view
-		fData.bottom = new FormAttachment( 100 );
-		innerLeft.setLayoutData( fData );
-		innerLeft.setLayout(new FillLayout());
-
-		createDeviceViewer(innerLeft);
-
-		Composite innerRight = new Composite( outer, SWT.NONE );
-		fData = new FormData();
-		fData.top = new FormAttachment( 0 );
-		fData.left = new FormAttachment( innerLeft );
-		fData.right = new FormAttachment( 100 );
-		fData.bottom = new FormAttachment( 100 );
-		innerRight.setLayoutData( fData );
-		innerRight.setLayout(new FillLayout());
-
-		createTestRunViewer(innerRight);
+		createDeviceViewer(form);
+		createTestRunViewer(form);
+		form.setWeights(new int[]{30,70});
 		createDropSupport();
 	}
 
