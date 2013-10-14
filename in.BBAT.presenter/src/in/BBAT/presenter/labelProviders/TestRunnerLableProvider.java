@@ -1,6 +1,6 @@
 package in.BBAT.presenter.labelProviders;
 
-import in.BBAT.abstrakt.presenter.run.model.TestRunCase;
+import in.BBAT.abstrakt.presenter.pkg.model.TestCaseModel;
 
 import org.eclipse.jface.viewers.ITableLabelProvider;
 import org.eclipse.jface.viewers.LabelProvider;
@@ -16,14 +16,14 @@ ITableLabelProvider {
 
 	@Override
 	public String getColumnText(Object element, int columnIndex) {
-		if(element instanceof TestRunCase){
+		if(element instanceof TestCaseModel){
 			switch (columnIndex) {
 			case 2:
-				return ((TestRunCase) element).getTestcase().getParent().getParent().getLabel();
+				return ((TestCaseModel) element).getParent().getParent().getLabel();
 			case 1:
-				return ((TestRunCase) element).getTestcase().getParent().getLabel();
+				return ((TestCaseModel) element).getParent().getLabel();
 			case 0:
-				return ((TestRunCase) element).getLabel();
+				return ((TestCaseModel) element).getLabel();
 			
 			default:
 				break;

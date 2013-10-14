@@ -1,6 +1,5 @@
 package in.BBAT.presenter.labelProviders;
 
-import in.BBAT.abstrakt.presenter.run.model.TestRunCase;
 import in.BBAT.abstrakt.presenter.run.model.TestRunInstanceModel;
 
 import org.eclipse.jface.viewers.ITableLabelProvider;

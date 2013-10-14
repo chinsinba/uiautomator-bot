@@ -1,7 +1,7 @@
 package in.bbat.presenter.internal;
 
 
-import in.BBAT.abstrakt.presenter.run.model.TestRunCase;
+import in.BBAT.abstrakt.presenter.pkg.model.TestCaseModel;
 import in.BBAT.abstrakt.presenter.run.model.TestRunModel;
 import in.BBAT.testRunner.runner.UiAutoTestCaseJar;
 
@@ -39,9 +39,9 @@ public class TestRunExecutor {
 
 	public List<String> getTestScriptPaths() {
 		List<String> testScriptPaths = new ArrayList<String>();
-		for (TestRunCase testRunCase : TestRunExecutionManager.getInstance().getTestRunCases()) {
-			if(!testScriptPaths.contains(testRunCase.getTestcase().getTestScriptPath()))
-				testScriptPaths.add(testRunCase.getTestcase().getTestScriptPath());
+		for (TestCaseModel testRunCase : TestRunExecutionManager.getInstance().getTestRunCases()) {
+			if(!testScriptPaths.contains(testRunCase.getTestScriptPath()))
+				testScriptPaths.add(testRunCase.getTestScriptPath());
 		}
 		return testScriptPaths;
 	}

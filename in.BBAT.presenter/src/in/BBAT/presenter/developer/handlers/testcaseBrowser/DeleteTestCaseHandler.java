@@ -1,7 +1,7 @@
 package in.BBAT.presenter.developer.handlers.testcaseBrowser;
 
 import in.BBAT.abstrakt.presenter.pkg.model.AbstractProjectTree;
-import in.BBAT.dataMine.manager.MineManager;
+import in.bbat.presenter.internal.TestRunExecutionManager;
 import in.bbat.presenter.views.BBATViewPart;
 import in.bbat.presenter.views.developer.TestCaseBrowserView;
 
@@ -15,11 +15,10 @@ public class DeleteTestCaseHandler extends AbstractTestCaseBrowserHandler {
 
 	@Override
 	public Object run(ExecutionEvent event, List<?> selectedObjects) {
-
+  
 		if(!MessageDialog.openQuestion(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(), "Delete","Do you want to delete ?"))
 			return null;
 
-//		MineManager.getInstance().beginTransaction();
 		for(Object pkgObj :selectedObjects){
 			try {
 				((AbstractProjectTree)pkgObj).delete();
@@ -27,7 +26,6 @@ public class DeleteTestCaseHandler extends AbstractTestCaseBrowserHandler {
 				e.printStackTrace();
 			}
 		}
-//		MineManager.getInstance().commitTransaction();
 
 		BBATViewPart view = (BBATViewPart) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().findView(TestCaseBrowserView.ID);
 		try {

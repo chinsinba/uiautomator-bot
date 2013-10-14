@@ -4,7 +4,6 @@ import in.BBAT.abstrakt.gui.model.AbstractTreeModel;
 import in.BBAT.abstrakt.presenter.device.model.AndroidDevice;
 import in.BBAT.abstrakt.presenter.pkg.model.AbstractProjectTree;
 import in.BBAT.abstrakt.presenter.pkg.model.TestCaseModel;
-import in.BBAT.abstrakt.presenter.run.model.TestRunCase;
 import in.bbat.presenter.internal.DeviceTestRun;
 import in.bbat.presenter.internal.TestRunExecutionManager;
 import in.bbat.presenter.views.BBATViewPart;
@@ -30,7 +29,7 @@ public class TestRunDropListener extends ViewerDropAdapter{
 	@Override
 	public boolean performDrop(Object data) {
 		Object testObj=null;
-		List<TestRunCase> tempList = new ArrayList<TestRunCase>();
+		List<TestCaseModel> tempList = new ArrayList<TestCaseModel>();
 
 
 		if(data instanceof ISelection){
@@ -50,7 +49,7 @@ public class TestRunDropListener extends ViewerDropAdapter{
 		}
 
 
-		for (TestRunCase testRunCase : tempList) {
+		for (TestCaseModel testRunCase : tempList) {
 			TestRunExecutionManager.getInstance().addTestRunCase(testRunCase);
 		}
 
@@ -63,10 +62,10 @@ public class TestRunDropListener extends ViewerDropAdapter{
 		return false;
 	}
 
-	private void addToTestCaseList(AbstractTreeModel testObj,List<TestRunCase> tempList) {
+	private void addToTestCaseList(AbstractTreeModel testObj,List<TestCaseModel> tempList) {
 
 		if (testObj instanceof TestCaseModel) {
-			tempList.add(new TestRunCase((TestCaseModel) testObj));
+			tempList.add((TestCaseModel) testObj);
 			return;
 		}
 
@@ -82,7 +81,8 @@ public class TestRunDropListener extends ViewerDropAdapter{
 	@Override
 	public boolean validateDrop(Object target, int operation,
 			TransferData transferType) {
-		System.out.println(target);
+		if(TestRunExecutionManager.getInstance().isExecuting())
+			return  false;
 		return true;
 	}
 

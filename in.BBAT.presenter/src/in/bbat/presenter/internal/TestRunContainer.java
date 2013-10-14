@@ -3,7 +3,7 @@ package in.bbat.presenter.internal;
 import in.BBAT.abstrakt.presenter.device.model.AndroidDevice;
 import in.BBAT.abstrakt.presenter.device.model.IDeviceModelChangeListener;
 import in.BBAT.abstrakt.presenter.device.model.TestDeviceManager;
-import in.BBAT.abstrakt.presenter.run.model.TestRunCase;
+import in.BBAT.abstrakt.presenter.pkg.model.TestCaseModel;
 import in.bbat.presenter.views.BBATViewPart;
 import in.bbat.presenter.views.tester.TestRunnerView;
 
@@ -17,22 +17,22 @@ import org.eclipse.ui.PlatformUI;
 
 public class TestRunContainer {
 
-	private List<TestRunCase> testRunCases = new ArrayList<TestRunCase>();
+	private List<TestCaseModel> testRunCases = new ArrayList<TestCaseModel>();
 	private Set<DeviceTestRun> deviceTestRuns = new HashSet<DeviceTestRun>();
 
 	public TestRunContainer() {
 		TestDeviceManager.getInstance().addDeviceModelChangeListener(new DeviceModelListener());
 	}
 
-	public List<TestRunCase> getTestRunCases(){
+	public List<TestCaseModel> getTestRunCases(){
 		return testRunCases;
 	}
 
-	public void addTestRunCase(TestRunCase runCase){
+	public void addTestRunCase(TestCaseModel runCase){
 		testRunCases.add(runCase);	
 	}
 
-	public void removeTestRunCase(TestRunCase runCase){
+	public void removeTestRunCase(TestCaseModel runCase){
 		testRunCases.remove(runCase);
 	}
 

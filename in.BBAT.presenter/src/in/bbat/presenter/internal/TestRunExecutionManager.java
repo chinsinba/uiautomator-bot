@@ -1,6 +1,6 @@
 package in.bbat.presenter.internal;
 
-import in.BBAT.abstrakt.presenter.run.model.TestRunCase;
+import in.BBAT.abstrakt.presenter.pkg.model.TestCaseModel;
 
 import java.util.List;
 import java.util.Set;
@@ -28,15 +28,15 @@ public class TestRunExecutionManager {
 	}
 
 
-	public List<TestRunCase> getTestRunCases(){
+	public List<TestCaseModel> getTestRunCases(){
 		return runContainer.getTestRunCases();
 	}
 
-	public void addTestRunCase(TestRunCase runCase){
+	public void addTestRunCase(TestCaseModel runCase){
 		runContainer.addTestRunCase(runCase);	
 	}
 
-	public void removeTestRunCase(TestRunCase runCase){
+	public void removeTestRunCase(TestCaseModel runCase){
 		runContainer.removeTestRunCase(runCase);
 	}
 

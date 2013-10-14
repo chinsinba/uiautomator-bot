@@ -1,11 +1,11 @@
 package in.bbat.presenter.internal;
 
 import in.BBAT.abstrakt.presenter.device.model.AndroidDevice;
+import in.BBAT.abstrakt.presenter.pkg.model.TestCaseModel;
 import in.BBAT.abstrakt.presenter.run.model.TestDeviceRunModel;
-import in.BBAT.abstrakt.presenter.run.model.TestRunCase;
-import in.BBAT.abstrakt.presenter.run.model.TestRunCase.TestStatus;
 import in.BBAT.abstrakt.presenter.run.model.TestRunInstanceModel;
 import in.BBAT.abstrakt.presenter.run.model.TestRunModel;
+import in.BBAT.abstrakt.presenter.run.model.TestStatus;
 import in.BBAT.presenter.labelProviders.DeviceTestRunLableProvider;
 import in.BBAT.testRunner.runner.TestRunner;
 import in.BBAT.testRunner.runner.UiAutoTestCaseJar;
@@ -49,7 +49,7 @@ public class DeviceTestRun {
 	private CTabFolder testRunFolder ;
 	private TableViewer viewer;
 	private CTabItem testRunItem;
-	private List<TestRunCase> testRunCases = new ArrayList<TestRunCase>();
+	private List<TestCaseModel> testRunCases = new ArrayList<TestCaseModel>();
 	private TestDeviceRunModel testDeviceRun;
 	private TestRunModel testRun;
 	private ArrayList<TestRunInstanceModel> testRunInstances;
@@ -132,8 +132,8 @@ public class DeviceTestRun {
 			return testRunInstances;
 		testRunInstances = new ArrayList<TestRunInstanceModel>();
 		createTestDeviceRun();
-		for(TestRunCase caseObj:getTestRunCases()){
-			TestRunInstanceModel runInstModel = new TestRunInstanceModel(testDeviceRun,caseObj.getTestcase(),TestStatus.NOTEXECUTED.getStatus());
+		for(TestCaseModel caseObj:getTestRunCases()){
+			TestRunInstanceModel runInstModel = new TestRunInstanceModel(testDeviceRun,caseObj,TestStatus.NOTEXECUTED.getStatus());
 			runInstModel.save();
 			testRunInstances.add(runInstModel);
 		}
@@ -179,19 +179,19 @@ public class DeviceTestRun {
 		return viewerColumn;
 	}
 
-	public List<TestRunCase> getTestRunCases() {
+	public List<TestCaseModel> getTestRunCases() {
 		return testRunCases;
 	}
 
-	public void setTestRunCases(List<TestRunCase> testRunCases) {
+	public void setTestRunCases(List<TestCaseModel> testRunCases) {
 		this.testRunCases = testRunCases;
 	}
 
 	public List<String> getTestScriptPaths() {
 		List<String> testScriptPaths = new ArrayList<String>();
-		for (TestRunCase testRunCase : testRunCases) {
-			if(!testScriptPaths.contains(testRunCase.getTestcase().getTestScriptPath()))
-				testScriptPaths.add(testRunCase.getTestcase().getTestScriptPath());
+		for (TestCaseModel testRunCase : testRunCases) {
+			if(!testScriptPaths.contains(testRunCase.getTestScriptPath()))
+				testScriptPaths.add(testRunCase.getTestScriptPath());
 		}
 		return testScriptPaths;
 	}

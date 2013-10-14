@@ -1,7 +1,7 @@
 package in.bbat.presenter.internal;
 
-import in.BBAT.abstrakt.presenter.run.model.TestRunCase.TestStatus;
 import in.BBAT.abstrakt.presenter.run.model.TestRunInstanceModel;
+import in.BBAT.abstrakt.presenter.run.model.TestStatus;
 import in.bbat.presenter.views.tester.TestRunnerView;
 
 import java.util.Map;
