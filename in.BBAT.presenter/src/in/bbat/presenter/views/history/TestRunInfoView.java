@@ -69,16 +69,16 @@ public class TestRunInfoView extends BBATViewPart {
 			public void doubleClick(DoubleClickEvent event) {
 				try {
 					Object sel = ((IStructuredSelection)event.getSelection()).getFirstElement();
-					TestLogView view  = (TestLogView) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().findView(TestLogView.ID);
+					TestLogView view  = (TestLogView) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().findView(HistoryDeviceLogView.ID);
 
 					if(view != null){
 						PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().hideView(view);
 					}
-					view  = (TestLogView) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().showView(TestLogView.ID);
+					view  = (TestLogView) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().showView(HistoryDeviceLogView.ID);
 					view.getPanel().clearBuffer();
 					view.getPanel().bufferChanged(((TestRunInstanceModel)sel).getDeviceLogsFromDB(), new ArrayList<LogCatMessage>());
 
-					IViewPart autoLogView =  PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().showView(AutomatorLogView.ID);
+					IViewPart autoLogView =  PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().showView(HistoryAutoLogView.ID);
 					if(autoLogView!= null){
 						((AutomatorLogView)autoLogView).setInput((TestRunInstanceModel)sel);
 					}
@@ -86,7 +86,7 @@ public class TestRunInfoView extends BBATViewPart {
 					e.printStackTrace();
 				}	
 				try {
-					PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().showView(TestLogView.ID);
+					PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().showView(HistoryDeviceLogView.ID);
 				} catch (PartInitException e) {
 					e.printStackTrace();
 				}

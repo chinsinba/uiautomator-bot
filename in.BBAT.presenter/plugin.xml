@@ -102,6 +102,18 @@
             name="Device Run"
             restorable="true">
       </view>
+      <view
+            class="in.bbat.presenter.views.history.HistoryDeviceLogView"
+            id="in.BBAT.presenter.history.DeviceLogView"
+            name="Device Logs"
+            restorable="true">
+      </view>
+      <view
+            class="in.bbat.presenter.views.history.HistoryAutoLogView"
+            id="in.BBAT.presenter.history.AutoLogView"
+            name="UI Automator Logs"
+            restorable="true">
+      </view>
    </extension>
    <extension
          point="org.eclipse.ui.perspectiveExtensions">
@@ -174,7 +186,7 @@
                ratio="0.50f"
                relationship="bottom"
                relative="in.BBAT.presenter.tester.TestRunnerView"
-               visible="true">
+               visible="false">
          </view>
          <view
                id="in.BBAT.presenter.tester.AutoLogView"
@@ -182,7 +194,7 @@
                ratio="0.50f"
                relationship="right"
                relative="in.alethea.swat.gui.AndroidLogView"
-               visible="true">
+               visible="false">
          </view>
          <view
                closeable="false"
@@ -214,14 +226,14 @@
                visible="false">
          </view>
          <view
-               id="in.BBAT.presenter.tester.AndroidLogView"
+               id="in.BBAT.presenter.history.DeviceLogView"
                minimized="false"
                relationship="stack"
                relative="in.BBAT.presenter.history.TestRunInstanceView"
                visible="false">
          </view>
          <view
-               id="in.BBAT.presenter.tester.AutoLogView"
+               id="in.BBAT.presenter.history.AutoLogView"
                minimized="false"
                relationship="bottom"
                relative="in.BBAT.presenter.history.TestRunInstanceView"
