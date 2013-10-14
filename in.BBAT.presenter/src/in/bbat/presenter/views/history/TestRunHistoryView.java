@@ -9,6 +9,8 @@ import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.ui.PartInitException;
+import org.eclipse.ui.PlatformUI;
 
 import in.BBAT.abstrakt.presenter.device.model.TestDeviceManager;
 import in.BBAT.abstrakt.presenter.pkg.model.TestProjectManager;
@@ -57,7 +59,12 @@ public class TestRunHistoryView extends BBATViewPart {
 					
 				}
 				if(sel instanceof TestDeviceRunModel){
-					
+					try {
+						TestRunInfoView view  = (TestRunInfoView) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().showView(TestRunInfoView.ID);
+						view.setInput(((TestDeviceRunModel) sel).getChildren());
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
 				}
 			}
 		});

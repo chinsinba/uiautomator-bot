@@ -96,6 +96,12 @@
             name="Test Runs"
             restorable="true">
       </view>
+      <view
+            class="in.bbat.presenter.views.history.TestRunInfoView"
+            id="in.BBAT.presenter.history.TestRunInstanceView"
+            name="Device Run"
+            restorable="true">
+      </view>
    </extension>
    <extension
          point="org.eclipse.ui.perspectiveExtensions">
@@ -198,6 +204,30 @@
                relationship="left"
                relative="org.eclipse.ui.editorss"
                visible="true">
+         </view>
+         <view
+               id="in.BBAT.presenter.history.TestRunInstanceView"
+               minimized="false"
+               ratio="0.80f"
+               relationship="right"
+               relative="org.eclipse.ui.editorss"
+               visible="false">
+         </view>
+         <view
+               id="in.BBAT.presenter.tester.AndroidLogView"
+               minimized="false"
+               ratio="0.50f"
+               relationship="bottom"
+               relative="in.BBAT.presenter.history.TestRunInstanceView"
+               visible="false">
+         </view>
+         <view
+               id="in.BBAT.presenter.tester.AutoLogView"
+               minimized="false"
+               ratio="0.50f"
+               relationship="right"
+               relative="in.alethea.swat.gui.AndroidLogView"
+               visible="false">
          </view>
       </perspectiveExtension>
       <perspectiveExtension

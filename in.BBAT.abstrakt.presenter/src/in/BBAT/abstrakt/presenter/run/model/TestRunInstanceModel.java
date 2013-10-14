@@ -125,4 +125,8 @@ public class TestRunInstanceModel extends AbstractTreeModel {
 	public void setEndTime(long timeInMillis) {
 		((TestRunInfoEntity)getEntity()).setEndTime(new Timestamp(timeInMillis));		
 	}
+	
+	public TestCaseEntity getTestCaseEntity(){
+		return ((TestRunInfoEntity)getEntity()).getTestCase();
+	}
 }

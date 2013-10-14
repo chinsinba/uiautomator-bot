@@ -34,7 +34,7 @@ public class TestDeviceRunEntity extends AbstractEntity {
 		this.testRun = runEntity;
 		this.device = deviceEntity;
 	}
-	
+
 	public TestDeviceRunEntity() {
 		// TODO Auto-generated constructor stub
 	}
@@ -44,9 +44,9 @@ public class TestDeviceRunEntity extends AbstractEntity {
 	private TestDeviceEntity device;
 
 	private String status;
-	
+
 	private Timestamp startTime;
-	
+
 	private Timestamp endTime;
 
 	@OneToMany(mappedBy="testDeviceRun", fetch = FetchType.LAZY, cascade = { CascadeType.ALL })
@@ -94,5 +94,19 @@ public class TestDeviceRunEntity extends AbstractEntity {
 
 	public void setEndTime(Timestamp endTime) {
 		this.endTime = endTime;
+	}
+
+	@Override
+	public List<? extends AbstractEntity> getChildren() {
+		// TODO Auto-generated method stub
+		return getTestRunInfos();
+	}
+
+	public List<TestRunInfoEntity> getTestRunInfos() {
+		return testRunInfos;
+	}
+
+	public void setTestRunInfos(List<TestRunInfoEntity> testRunInfos) {
+		this.testRunInfos = testRunInfos;
 	}
 }

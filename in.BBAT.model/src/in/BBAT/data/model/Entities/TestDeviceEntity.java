@@ -1,5 +1,7 @@
 package in.BBAT.data.model.Entities;
 
+import java.util.List;
+
 import in.BBAT.dataMine.manager.MineManagerHelper;
 
 import javax.persistence.Entity;
@@ -84,5 +86,4 @@ public class TestDeviceEntity extends AbstractEntity {
 	public void setModelName(String modelName) {
 		this.modelName = modelName;
 	}
-
 }

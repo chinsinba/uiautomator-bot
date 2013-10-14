@@ -15,7 +15,7 @@ public class DeleteTestCaseHandler extends AbstractTestCaseBrowserHandler {
 
 	@Override
 	public Object run(ExecutionEvent event, List<?> selectedObjects) {
-  
+
 		if(!MessageDialog.openQuestion(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(), "Delete","Do you want to delete ?"))
 			return null;
 
@@ -38,6 +38,9 @@ public class DeleteTestCaseHandler extends AbstractTestCaseBrowserHandler {
 
 	@Override
 	public boolean isEnabled(List<?> selectedObjects) {
+
+		if(TestRunExecutionManager.getInstance().isExecuting())
+			return false;
 		if(!selectedObjects.isEmpty())
 		{
 			Object sample = selectedObjects.get(0);

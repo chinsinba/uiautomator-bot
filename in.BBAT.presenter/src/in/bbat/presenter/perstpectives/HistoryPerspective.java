@@ -9,7 +9,7 @@ public class HistoryPerspective implements IPerspectiveFactory {
 	
 	@Override
 	public void createInitialLayout(IPageLayout layout) {
-		layout.setEditorAreaVisible(true);
+		layout.setEditorAreaVisible(false);
 	}
 
 }
