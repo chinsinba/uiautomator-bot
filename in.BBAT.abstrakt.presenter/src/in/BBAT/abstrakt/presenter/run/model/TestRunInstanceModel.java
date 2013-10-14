@@ -4,9 +4,11 @@ import in.BBAT.abstrakt.gui.model.AbstractTreeModel;
 import in.BBAT.abstrakt.gui.model.IGUITreeNode;
 import in.BBAT.abstrakt.presenter.pkg.model.TestCaseModel;
 import in.BBAT.data.model.Entities.AbstractEntity;
+import in.BBAT.data.model.Entities.AutomatorLogEntity;
 import in.BBAT.data.model.Entities.TestCaseEntity;
 import in.BBAT.data.model.Entities.TestDeviceRunEntity;
 import in.BBAT.data.model.Entities.TestRunInfoEntity;
+import in.BBAT.dataMine.manager.LogsMineManager;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -128,5 +130,13 @@ public class TestRunInstanceModel extends AbstractTreeModel {
 	
 	public TestCaseEntity getTestCaseEntity(){
 		return ((TestRunInfoEntity)getEntity()).getTestCase();
+	}
+
+	public List<AutomatorLogModel> getAutoLogsFromDB() {
+		List<AutomatorLogModel> logs = new ArrayList<AutomatorLogModel>();
+		for( AutomatorLogEntity entity :LogsMineManager.getAutoLogs((TestRunInfoEntity) getEntity())){
+			logs.add(new AutomatorLogModel(entity));
+		}
+		return logs;
 	}
 }

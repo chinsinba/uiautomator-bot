@@ -1,6 +1,7 @@
 package in.bbat.presenter.views.tester;
 
 import in.BBAT.abstrakt.presenter.run.model.TestRunInstanceModel;
+import in.BBAT.abstrakt.presenter.run.model.TestStatus;
 import in.BBAT.presenter.labelProviders.AutoLogLabelProvider;
 import in.bbat.presenter.views.BBATViewPart;
 
@@ -50,7 +51,7 @@ public class AutomatorLogView extends BBATViewPart {
 
 	private void createLogTable(Composite parent) {
 
-		Composite comp2 = new Composite(parent, SWT.None);
+		Composite comp2 = new Composite(parent, SWT.BORDER);
 		comp2.setLayout(new GridLayout());
 		comp2.setLayoutData(new GridData(GridData.FILL_BOTH));
 		viewer = new TableViewer(comp2, SWT.MULTI | SWT.H_SCROLL| SWT.V_SCROLL);
@@ -64,7 +65,7 @@ public class AutomatorLogView extends BBATViewPart {
 	}
 
 	private void createTextFilter(Composite parent) {
-		Composite comp1 = new Composite(parent, SWT.NONE);
+		Composite comp1 = new Composite(parent, SWT.BORDER);
 		comp1.setLayout(new GridLayout(1,false));
 		comp1.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
@@ -101,7 +102,11 @@ public class AutomatorLogView extends BBATViewPart {
 	}
 
 	public void setInput(TestRunInstanceModel model){
-		viewer.setInput(model.getAutoLogs());
+		if(model.getStatus().equalsIgnoreCase(TestStatus.EXECUTING.getStatus()))
+			viewer.setInput(model.getAutoLogs());
+		else
+			viewer.setInput(model.getAutoLogsFromDB());
+
 	}
 
 	@Override

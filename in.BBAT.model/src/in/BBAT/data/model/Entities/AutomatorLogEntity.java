@@ -5,9 +5,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.TableGenerator;
 
 @Entity
+@NamedQueries({
+	@NamedQuery(name="AutomatorLogEntity.findLogsForCase",query="SELECT logs FROM AutomatorLogEntity logs WHERE logs.testRunInfo =?1")
+})
 public class AutomatorLogEntity extends AbstractEntity {
 
 	@Id

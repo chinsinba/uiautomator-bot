@@ -76,10 +76,10 @@ public class TestRunnerView extends BBATViewPart {
 	}
 
 	private void createTestRunViewer(Composite innerRight) {
-		testRunFolder = new CTabFolder(innerRight, SWT.TOP);
-		testRunItem = new CTabItem(testRunFolder, SWT.None);
+		testRunFolder = new CTabFolder(innerRight, SWT.TOP|SWT.BORDER);
+		testRunItem = new CTabItem(testRunFolder, SWT.BORDER);
 		testRunItem.setText("Test Run");
-		Composite comp = new Composite(testRunFolder, SWT.None);
+		Composite comp = new Composite(testRunFolder, SWT.BORDER);
 		viewer = new TableViewer(comp, SWT.MULTI | SWT.H_SCROLL| SWT.V_SCROLL);
 		viewer.setContentProvider(new ArrayContentProvider());
 		viewer.getTable().setLinesVisible(true);
@@ -99,9 +99,9 @@ public class TestRunnerView extends BBATViewPart {
 	}
 
 	public void createTestDeviceTab(AndroidDevice testDevice, List<TestRunInstanceModel> input){
-		CTabItem testRunItem = new CTabItem(testRunFolder, SWT.None);
+		CTabItem testRunItem = new CTabItem(testRunFolder, SWT.BORDER);
 		testRunItem.setText("Test Devices");
-		Composite comp = new Composite(testRunFolder, SWT.None);
+		Composite comp = new Composite(testRunFolder, SWT.BORDER);
 		Button button = new Button(comp, SWT.PUSH);
 		button.setText("Hello");
 		button.addSelectionListener(new SelectionAdapter() {
@@ -115,10 +115,10 @@ public class TestRunnerView extends BBATViewPart {
 
 	private void createDeviceViewer(Composite innerLeft) {
 
-		CTabFolder tabFolder = new CTabFolder(innerLeft, SWT.TOP);
-		CTabItem testRunItem = new CTabItem(tabFolder, SWT.None);
+		CTabFolder tabFolder = new CTabFolder(innerLeft, SWT.TOP|SWT.BORDER);
+		CTabItem testRunItem = new CTabItem(tabFolder, SWT.BORDER);
 		testRunItem.setText("Test Devices");
-		Composite comp = new Composite(tabFolder, SWT.None);
+		Composite comp = new Composite(tabFolder, SWT.BORDER);
 
 		testDeviceViewer = new TableViewer(comp, SWT.H_SCROLL| SWT.V_SCROLL);
 		testDeviceViewer.getTable().setHeaderVisible(true);
