@@ -1,5 +1,6 @@
 package in.bbat.presenter.views.history;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import in.BBAT.abstrakt.gui.model.AbstractTreeModel;
@@ -31,10 +32,12 @@ import org.eclipse.ui.IViewPart;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 
+import com.android.ddmlib.logcat.LogCatMessage;
+
 public class TestRunInfoView extends BBATViewPart {
-	
+
 	public static final String ID = "in.BBAT.presenter.history.TestRunInstanceView";
-	
+
 	private CTabFolder testRunFolder;
 	private CTabItem testRunItem;
 	private TableViewer viewer;
@@ -67,11 +70,15 @@ public class TestRunInfoView extends BBATViewPart {
 			@Override
 			public void doubleClick(DoubleClickEvent event) {
 				try {
-					TestLogView view  = (TestLogView) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().findView(TestLogView.ID);
-					if(view!=null)
-						PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().hideView(view);
 					Object sel = ((IStructuredSelection)event.getSelection()).getFirstElement();
-					((TestRunInstanceModel)sel).setShowLogs(true);
+					TestLogView view  = (TestLogView) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().findView(TestLogView.ID);
+
+					if(view != null){
+						PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().hideView(view);
+					}
+					view  = (TestLogView) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().showView(TestLogView.ID);
+					view.getPanel().clearBuffer();
+					view.getPanel().bufferChanged(((TestRunInstanceModel)sel).getDeviceLogsFromDB(), new ArrayList<LogCatMessage>());
 
 					IViewPart autoLogView =  PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().showView(AutomatorLogView.ID);
 					if(autoLogView!= null){
@@ -133,9 +140,9 @@ public class TestRunInfoView extends BBATViewPart {
 	public void setInput(List<AbstractTreeModel> runInstances){
 		viewer.setInput(runInstances);
 		viewer.refresh();
-		
+
 	}
-	
+
 	@Override
 	public void setFocus() {
 

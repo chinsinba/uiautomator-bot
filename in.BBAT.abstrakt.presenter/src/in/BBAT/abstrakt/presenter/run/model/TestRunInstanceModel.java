@@ -6,6 +6,7 @@ import in.BBAT.abstrakt.presenter.pkg.model.TestCaseModel;
 import in.BBAT.data.model.Entities.AbstractEntity;
 import in.BBAT.data.model.Entities.AutomatorLogEntity;
 import in.BBAT.data.model.Entities.TestCaseEntity;
+import in.BBAT.data.model.Entities.TestDeviceLogEntity;
 import in.BBAT.data.model.Entities.TestDeviceRunEntity;
 import in.BBAT.data.model.Entities.TestRunInfoEntity;
 import in.BBAT.dataMine.manager.LogsMineManager;
@@ -16,6 +17,7 @@ import java.util.List;
 
 import org.eclipse.swt.graphics.Image;
 
+import com.android.ddmlib.Log.LogLevel;
 import com.android.ddmlib.logcat.LogCatMessage;
 
 /**
@@ -93,16 +95,16 @@ public class TestRunInstanceModel extends AbstractTreeModel {
 		autoLogs.add(log);
 
 	}
-	
+
 	public void addDeviceLog(DeviceLogModel log){
 		deviceLogs.add(log);
 	}
 
-	
+
 	public List<DeviceLogModel> getDeviceLogs(){
 		return deviceLogs;
 	}
-	
+
 	public List<AutomatorLogModel> getAutoLogs(){
 		return autoLogs;
 	}
@@ -127,7 +129,7 @@ public class TestRunInstanceModel extends AbstractTreeModel {
 	public void setEndTime(long timeInMillis) {
 		((TestRunInfoEntity)getEntity()).setEndTime(new Timestamp(timeInMillis));		
 	}
-	
+
 	public TestCaseEntity getTestCaseEntity(){
 		return ((TestRunInfoEntity)getEntity()).getTestCase();
 	}
@@ -136,6 +138,22 @@ public class TestRunInstanceModel extends AbstractTreeModel {
 		List<AutomatorLogModel> logs = new ArrayList<AutomatorLogModel>();
 		for( AutomatorLogEntity entity :LogsMineManager.getAutoLogs((TestRunInfoEntity) getEntity())){
 			logs.add(new AutomatorLogModel(entity));
+		}
+		return logs;
+	}
+
+	public List<LogCatMessage> getDeviceLogsFromDB(){
+		List<LogCatMessage> logs = new ArrayList<LogCatMessage>();
+		for( TestDeviceLogEntity entity :LogsMineManager.getDeviceLogs((TestRunInfoEntity) getEntity())){
+			LogLevel level = LogLevel.getByString(entity.getmLogLevel());
+			String pid = entity.getmPid();
+			String tid = entity.getmTid();
+			String appName = entity.getmAppName();
+			String tag = entity.getmTag();
+			String time = entity.getmTime();
+			String msg = entity.getmMessage();
+			LogCatMessage log = new LogCatMessage(level, pid, tid, appName, tag, time, msg);
+			logs.add(log);
 		}
 		return logs;
 	}

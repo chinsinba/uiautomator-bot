@@ -639,6 +639,9 @@ public final class LogCatPanel implements ILogCatBufferChangeListener {
 		createLogcatViewTable(c);
 	}
 
+	public void clearBuffer(){
+		mLogBuffer.clear();
+	}
 	/** Create the search bar at the top of the logcat messages table. */
 	private void createLiveFilters(Composite parent) {
 		Composite c = new Composite(parent, SWT.NONE);

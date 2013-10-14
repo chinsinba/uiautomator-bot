@@ -216,17 +216,15 @@
          <view
                id="in.BBAT.presenter.tester.AndroidLogView"
                minimized="false"
-               ratio="0.50f"
-               relationship="bottom"
+               relationship="stack"
                relative="in.BBAT.presenter.history.TestRunInstanceView"
                visible="false">
          </view>
          <view
                id="in.BBAT.presenter.tester.AutoLogView"
                minimized="false"
-               ratio="0.50f"
-               relationship="right"
-               relative="in.alethea.swat.gui.AndroidLogView"
+               relationship="bottom"
+               relative="in.BBAT.presenter.history.TestRunInstanceView"
                visible="false">
          </view>
       </perspectiveExtension>
