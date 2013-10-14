@@ -124,7 +124,7 @@ public class DeviceTestRun {
 		}
 
 		testRunItem.setControl(comp);
-		testRunFolder.setSelection(0);
+		testRunFolder.setSelection(testRunItem);
 	}
 
 	private List<TestRunInstanceModel> getRunInstances() {

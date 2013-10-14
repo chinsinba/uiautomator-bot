@@ -1,17 +1,15 @@
 package in.bbat.presenter.views.history;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import in.BBAT.abstrakt.gui.model.AbstractTreeModel;
 import in.BBAT.abstrakt.presenter.run.model.TestRunInstanceModel;
-import in.BBAT.presenter.labelProviders.DeviceTestRunLableProvider;
 import in.BBAT.presenter.labelProviders.HistoryTestRunInfoLabelProvider;
 import in.bbat.abstrakt.gui.BBATImageManager;
 import in.bbat.presenter.views.BBATViewPart;
 import in.bbat.presenter.views.tester.AutomatorLogView;
 import in.bbat.presenter.views.tester.TestLogView;
-import in.bbat.presenter.views.tester.TestRunnerView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import org.eclipse.jface.layout.TableColumnLayout;
 import org.eclipse.jface.viewers.ArrayContentProvider;
@@ -57,8 +55,8 @@ public class TestRunInfoView extends BBATViewPart {
 	}
 
 	private void createRunInstannceViewer(Composite innerRight) {
-		testRunFolder = new CTabFolder(innerRight, SWT.TOP);
-		testRunItem = new CTabItem(testRunFolder, SWT.None);
+		testRunFolder = new CTabFolder(innerRight, SWT.TOP|SWT.BORDER);
+		testRunItem = new CTabItem(testRunFolder, SWT.BORDER);
 		testRunItem.setText("Device Name");
 		Composite comp = new Composite(testRunFolder, SWT.None);
 		viewer = new TableViewer(comp, SWT.MULTI | SWT.H_SCROLL| SWT.V_SCROLL);
