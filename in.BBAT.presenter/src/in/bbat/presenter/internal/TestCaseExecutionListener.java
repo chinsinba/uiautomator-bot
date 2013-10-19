@@ -25,11 +25,16 @@ public class TestCaseExecutionListener implements ITestRunListener {
 
 	@Override
 	public void testEnded(TestIdentifier arg0, Map<String, String> arg1) {
+		System.out.println("pass");
 	}
 
-	@Override
+	@Override	
 	public void testFailed(TestFailure arg0, TestIdentifier arg1, String arg2) {
-		status=TestStatus.FAIL;
+		if(arg0.ordinal() == ITestRunListener.TestFailure.FAILURE.ordinal())
+			status=TestStatus.FAIL;
+		if(arg0.ordinal() == ITestRunListener.TestFailure.ERROR.ordinal())
+			status=TestStatus.ERROR;
+
 	}
 
 	@Override
@@ -42,6 +47,7 @@ public class TestCaseExecutionListener implements ITestRunListener {
 
 	@Override
 	public void testRunFailed(String arg0) {
+		status = TestStatus.ERROR;
 	}
 
 	@Override

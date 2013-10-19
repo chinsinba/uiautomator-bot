@@ -1,14 +1,22 @@
 package in.BBAT.abstrakt.presenter.pkg.model;
 
 
-import java.io.File;
-import java.lang.reflect.InvocationTargetException;
+import in.BBAT.testRunner.runner.FileUtils;
 
+import java.io.File;
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.eclipse.core.internal.resources.Project;
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IProjectDescription;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IWorkspace;
+import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
@@ -16,6 +24,13 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.jdt.core.IClasspathEntry;
+import org.eclipse.jdt.core.IJavaProject;
+import org.eclipse.jdt.core.IPackageFragmentRoot;
+import org.eclipse.jdt.core.JavaCore;
+import org.eclipse.jdt.launching.IVMInstall;
+import org.eclipse.jdt.launching.JavaRuntime;
+import org.eclipse.jdt.launching.LibraryLocation;
 import org.eclipse.ui.internal.ide.IDEWorkbenchPlugin;
 
 public class BBATProjectUtil {
@@ -34,9 +49,61 @@ public class BBATProjectUtil {
 		return instance;
 	}
 
+	private IProject project()  throws Exception{
+
+		IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
+		IProject project = root.getProject("Macac");
+		try {
+			if(!project.exists()){
+				project.create(null);
+				project.open(null);
+				IProjectDescription description = project.getDescription();
+				description.setNatureIds(new String[] { JavaCore.NATURE_ID });
+				project.setDescription(description, null);
+
+				IJavaProject javaProject = JavaCore.create(project);
+
+				IFolder binFolder = project.getFolder("bin");
+				javaProject.setOutputLocation(binFolder.getFullPath(), null);
+
+				List<IClasspathEntry> entries = new ArrayList<IClasspathEntry>();
+				entries.add(JavaCore.newLibraryEntry(new Path(ITempConstants.ANDROPATH), null, null));
+				entries.add(JavaCore.newLibraryEntry(new Path(ITempConstants.UIAUTOPATH), null, null));
+				entries.add(JavaCore.newSourceEntry(project.getFullPath()));
+				IVMInstall vmInstall = JavaRuntime.getDefaultVMInstall();
+				LibraryLocation[] locations = JavaRuntime.getLibraryLocations(vmInstall);
+				for (LibraryLocation element : locations) {
+					entries.add(JavaCore.newLibraryEntry(element.getSystemLibraryPath(), null, null));
+				}
+				//add libs to project class pathproject
+				javaProject.setRawClasspath(entries.toArray(new IClasspathEntry[entries.size()]), null);
+				/*try {
+					FileUtils.copyFolder(project.getFile(".classpath").getRawLocation().toFile(), new File(ITempConstants.USERWKSPC+"/.classpath"));
+					FileUtils.copyFolder(project.getFile(".project").getRawLocation().toFile(), new File(ITempConstants.USERWKSPC+"/.project"));
+				} catch (IOException e) {
+					e.printStackTrace();
+				}*/
+			}
+		} catch (CoreException e1) {
+			e1.printStackTrace();
+		}
+
+		return project;
+
+	}
+
+
 	private void initializeBBATProject() {
 
-		ProjectRecord record = new ProjectRecord(new File("/home/syed/Documents/trrwree/.project"));
+		IProject pro =null;
+		try {
+			pro = 	project();
+			pro.refreshLocal(IResource.DEPTH_INFINITE,new NullProgressMonitor());
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		/*ProjectRecord record = new ProjectRecord(new File(ITempConstants.USERWKSPC+"/.project"));
 
 		try {
 			createExistingProject(record, new NullProgressMonitor());
@@ -45,11 +112,11 @@ public class BBATProjectUtil {
 		}
 
 		try {
-			project.refreshLocal(IResource.DEPTH_INFINITE,new NullProgressMonitor());
+			pro.refreshLocal(IResource.DEPTH_INFINITE,new NullProgressMonitor());
 		} catch (CoreException e) {
 			e.printStackTrace();
-		}
-		setProject(project);
+		}*/
+		setProject(pro);
 	}
 
 	/**

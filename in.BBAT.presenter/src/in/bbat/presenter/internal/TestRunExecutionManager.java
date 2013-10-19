@@ -5,6 +5,8 @@ import in.BBAT.abstrakt.presenter.pkg.model.TestCaseModel;
 import java.util.List;
 import java.util.Set;
 
+import org.eclipse.swt.widgets.Display;
+
 
 public class TestRunExecutionManager {
 
@@ -66,9 +68,15 @@ public class TestRunExecutionManager {
 	}
 
 	public void execute() {
-		setExecuting(true);
-		TestRunExecutor executor = new TestRunExecutor(getSelectedDevices());
-		executor.run();		
+		
+		Display.getDefault().asyncExec(new Runnable() {
+			@Override
+			public void run() {
+				setExecuting(true);
+				TestRunExecutor executor = new TestRunExecutor(getSelectedDevices());
+				executor.run();					
+			}
+		});
 	}
 
 	public boolean isExecuting() {

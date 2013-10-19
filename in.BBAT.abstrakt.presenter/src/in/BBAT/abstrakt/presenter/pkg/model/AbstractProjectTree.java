@@ -12,7 +12,7 @@ public abstract class AbstractProjectTree extends AbstractTreeModel implements I
 
 
 	private String resourcePath;
-	public final static String UI_AUTO_CASE_PATH ="/home/syed/Documents";
+//	public final static String UI_AUTO_CASE_PATH ="/home/syed/Documents/Macac";
 
 	/**
 	 * 
@@ -26,7 +26,7 @@ public abstract class AbstractProjectTree extends AbstractTreeModel implements I
 		if(parent!=null)
 			this.setResourcePath(parent.getPath()+Path.SEPARATOR+resourceName);
 		else {
-			this.setResourcePath(UI_AUTO_CASE_PATH+Path.SEPARATOR+resourceName);
+			this.setResourcePath(ITempConstants.USERWKSPC+Path.SEPARATOR+resourceName);
 		}
 		if(createResources){
 			createFiles();

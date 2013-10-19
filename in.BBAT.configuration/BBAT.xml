@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MasterConfig baseDir="." toolVersion="">
+	<!--DB details for saving the campaign history -->
+	<Database update="" userName="" isExternal="" pwd="" port=""
+		name="" ipAddress="" pageSize="200" />
+
+	<User name="" email="" />
+
+	<!--LiceneceKey -->
+	<Licence key="" />
+
+	<Android adbPath="" cpuReportInterval="10" androidPath="" />
+	
+	<Workspace path = ""/>
+
+</MasterConfig>
