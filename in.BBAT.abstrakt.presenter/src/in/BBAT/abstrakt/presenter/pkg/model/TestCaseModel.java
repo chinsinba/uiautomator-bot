@@ -103,11 +103,12 @@ public class TestCaseModel extends AbstractProjectTree{
 		Configuration cfgFtl =new Configuration();
 		try {
 			cfgFtl.setDirectoryForTemplateLoading(new File(
-					"/home/syed/Documents/src/"));
+					"/home/syed/Documents/BlackAndro/BBAT/in.BBAT.abstrakt.presenter/lib/"));
 			Template testCaseTemplate = cfgFtl.getTemplate("testcase.ftl");
 			Map<String, Object> data = new HashMap<String, Object>();
 			data.put("package_name", getParent().getParent().getName()+"."+getParent().getName());
 			data.put("testCase_name", getName());
+			data.put("description", getDescription());
 			Writer fileWriter = new FileWriter(new File(getTestScriptPath()));
 			try {
 				testCaseTemplate.process(data, fileWriter);
