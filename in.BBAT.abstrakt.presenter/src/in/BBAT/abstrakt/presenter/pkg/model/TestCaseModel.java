@@ -4,10 +4,13 @@ import in.BBAT.data.model.Entities.TestCaseEntity;
 import in.BBAT.data.model.Entities.TestSuiteEntity;
 import in.bbat.abstrakt.gui.BBATImageManager;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.swt.graphics.Image;
 
 /**
@@ -20,7 +23,7 @@ public class TestCaseModel extends AbstractProjectTree{
 	public final static String JAVA = ".java";
 
 	public IFile testCaseFile;
-	
+
 
 	private String testScriptPath;
 
@@ -58,6 +61,7 @@ public class TestCaseModel extends AbstractProjectTree{
 		newFile.createNewFile();
 	}
 
+
 	@Override
 	public String getDescription() {
 		return ((TestCaseEntity)getEntity()).getDescription();
@@ -84,6 +88,21 @@ public class TestCaseModel extends AbstractProjectTree{
 
 	public String getTestScriptPath() {
 		return getResourcePath();
+	}
+
+	public void createContents() {
+
+		String packDecl = "package "+getParent().getParent().getName()+"."+getParent().getName()+";\n\n";
+		packDecl +="import com.android.uiautomator.core.*;\nimport com.android.uiautomator.testrunner.*;\n\n";
+		packDecl+="public class "+getName()+" extends UiAutomatorTestCase {\n\n";
+		packDecl+="/** "+getDescription()+"\n*/\n\tpublic void test"+getName()+"()throws UiObjectNotFoundException{\n}\n}";
+		InputStream st = new ByteArrayInputStream(packDecl.getBytes());
+		try {
+			getIFile().setContents(st,0, null);
+		} catch (CoreException e) {
+			e.printStackTrace();
+		}
+
 	}
 
 }

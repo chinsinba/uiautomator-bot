@@ -77,7 +77,6 @@ public class TestProjectModel extends AbstractProjectTree {
 	@Override
 	public void deLinkFromProject() {
 		BBATProjectUtil.getInstance().deletePack(folder);
-
 	}
 
 }

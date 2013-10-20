@@ -131,12 +131,12 @@ public class BBATProjectUtil {
 
 
 		IFile scriptIfile = getProject().getFile(locationPath.SEPARATOR+seg[len-3]+locationPath.SEPARATOR+seg[len-2]+locationPath.SEPARATOR+seg[len-1]);
-		/*try {
+		try {
 			if(!scriptIfile.isLinked())
 				scriptIfile.createLink(locationPath, IResource.NONE, null);
 		} catch (CoreException e) {
 			return scriptIfile;
-		}*/
+		}
 		return scriptIfile;
 	}
 
