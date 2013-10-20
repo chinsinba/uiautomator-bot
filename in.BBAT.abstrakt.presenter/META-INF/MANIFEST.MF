@@ -22,4 +22,5 @@ Export-Package: in.bbat.abstrakt.gui,
  in.BBAT.abstrakt.presenter.run.manager,
  in.BBAT.abstrakt.presenter.run.model,
  in.BBAT.abstrakt.presenter.suite.model
-Bundle-ClassPath: .
+Bundle-ClassPath: .,
+ lib/freemarker.jar

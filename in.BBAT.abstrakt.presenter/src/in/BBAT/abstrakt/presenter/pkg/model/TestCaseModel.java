@@ -1,13 +1,21 @@
 package in.BBAT.abstrakt.presenter.pkg.model;
 
+import freemarker.template.Configuration;
+import freemarker.template.Template;
+import freemarker.template.TemplateException;
 import in.BBAT.data.model.Entities.TestCaseEntity;
 import in.BBAT.data.model.Entities.TestSuiteEntity;
 import in.bbat.abstrakt.gui.BBATImageManager;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
@@ -92,16 +100,36 @@ public class TestCaseModel extends AbstractProjectTree{
 
 	public void createContents() {
 
-		String packDecl = "package "+getParent().getParent().getName()+"."+getParent().getName()+";\n\n";
-		packDecl +="import com.android.uiautomator.core.*;\nimport com.android.uiautomator.testrunner.*;\n\n";
-		packDecl+="public class "+getName()+" extends UiAutomatorTestCase {\n\n";
-		packDecl+="/** "+getDescription()+"\n*/\n\tpublic void test"+getName()+"()throws UiObjectNotFoundException{\n}\n}";
-		InputStream st = new ByteArrayInputStream(packDecl.getBytes());
+		Configuration cfgFtl =new Configuration();
 		try {
-			getIFile().setContents(st,0, null);
-		} catch (CoreException e) {
+			cfgFtl.setDirectoryForTemplateLoading(new File(
+					"/home/syed/Documents/src/"));
+			Template testCaseTemplate = cfgFtl.getTemplate("testcase.ftl");
+			Map<String, Object> data = new HashMap<String, Object>();
+			data.put("package_name", getParent().getParent().getName()+"."+getParent().getName());
+			data.put("testCase_name", getName());
+			Writer fileWriter = new FileWriter(new File(getTestScriptPath()));
+			try {
+				testCaseTemplate.process(data, fileWriter);
+			} finally {
+				fileWriter.close();
+			}
+
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		} catch (TemplateException e) {
 			e.printStackTrace();
 		}
+		//String packDecl = "package "+getParent().getParent().getName()+"."+getParent().getName()+";\n\n";
+		//packDecl +="import com.android.uiautomator.core.*;\nimport com.android.uiautomator.testrunner.*;\n\n";
+		//		packDecl+="public class "+getName()+" extends UiAutomatorTestCase {\n\n";
+		//		packDecl+="/** "+getDescription()+"\n*/\n\tpublic void test"+getName()+"()throws UiObjectNotFoundException{\n}\n}";
+		//		InputStream st = new ByteArrayInputStream(packDecl.getBytes());
+		//		try {
+		//			getIFile().setContents(st,0, null);
+		//		} catch (CoreException e) {
+		//			e.printStackTrace();
+		//		}
 
 	}
 
