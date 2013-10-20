@@ -209,14 +209,14 @@ public class DeviceTestRun {
 		Job testRunJob = new Job("Execute") {
 			@Override
 			protected IStatus run(IProgressMonitor monitor) {
-				
+
 				TestRunner runner = new TestRunner(jar,getDevice().getiDevice());
 				for (TestRunInstanceModel testRunCase : getRunInstances()) {
 					if(isStopped()){
 						return Status.OK_STATUS;
 					}
 					testRunCase.setStartTime(System.currentTimeMillis());
-					runner.execute(testRunCase.getTestCaseModel().getName(), new TestCaseExecutionListener(testRunCase, DeviceTestRun.this), new DeviceLogListener(testRunCase),new UIAutomatorOutputListener(testRunCase));
+					runner.execute(getFullTestCaseName(testRunCase), new TestCaseExecutionListener(testRunCase, DeviceTestRun.this), new DeviceLogListener(testRunCase),new UIAutomatorOutputListener(testRunCase));
 					testRunCase.setEndTime(System.currentTimeMillis());
 					testRunCase.update();
 				}
@@ -267,6 +267,10 @@ public class DeviceTestRun {
 		});
 	}
 
+	public String getFullTestCaseName(TestRunInstanceModel testRunCase){
+
+		return testRunCase.getTestCaseModel().getParent().getParent().getName()+"."+testRunCase.getTestCaseModel().getParent().getName()+"."+testRunCase.getTestCaseModel().getName();
+	}
 
 	private void updateStatus(TestStatus status) {
 		setStatus(status);

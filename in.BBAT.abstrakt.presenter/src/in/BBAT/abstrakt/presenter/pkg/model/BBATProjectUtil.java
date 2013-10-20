@@ -123,25 +123,73 @@ public class BBATProjectUtil {
 	 * @param testScriptPath
 	 * @return
 	 */
-	public IFile createLink(String testScriptPath){
+	public IFile linkScript(String testScriptPath){
 		File scripFile = new File(testScriptPath);
 		IPath locationPath = new Path(scripFile.getAbsolutePath());
-		IFile scriptIfile = getProject().getFile(locationPath.lastSegment());
-		try {
+		String[] seg = locationPath.segments();
+		int len =seg.length;
+
+
+		IFile scriptIfile = getProject().getFile(locationPath.SEPARATOR+seg[len-3]+locationPath.SEPARATOR+seg[len-2]+locationPath.SEPARATOR+seg[len-1]);
+		/*try {
 			if(!scriptIfile.isLinked())
 				scriptIfile.createLink(locationPath, IResource.NONE, null);
 		} catch (CoreException e) {
 			return scriptIfile;
-		}
+		}*/
 		return scriptIfile;
 	}
 
+	public IFolder linkSuite(String testScriptPath){
+		File scripFile = new File(testScriptPath);
+		IPath locationPath = new Path(scripFile.getAbsolutePath());
+		IFolder packFolder = null;
+		String[] seg = locationPath.segments();
+		int len =seg.length;
+		packFolder = getProject().getFolder(locationPath.SEPARATOR+seg[len-2]+locationPath.SEPARATOR+seg[len-1]);	
+		if(!packFolder.isLinked()){
+			try {
+				packFolder.createLink(locationPath, IResource.NONE, null);
+			} catch (CoreException e) {
+				e.printStackTrace();
+			}
+		}
+		return packFolder;
+	}
+
+	public IFolder linkPackage(String testScriptPath){
+		File scripFile = new File(testScriptPath);
+		IPath locationPath = new Path(scripFile.getAbsolutePath());
+		IFolder packFolder = null;
+		String[] seg = locationPath.segments();
+		int len =seg.length;
+		packFolder = getProject().getFolder(locationPath.SEPARATOR+seg[len-1]);	
+		if(!packFolder.isLinked()){
+			try {
+				packFolder.createLink(locationPath, IResource.NONE, null);
+			} catch (CoreException e) {
+				e.printStackTrace();
+			}
+		}
+		return packFolder;
+	}
 	/**
 	 * @param file
 	 */
 	public void deleteLink (IFile file){
 		try {
 			file.delete(true,new NullProgressMonitor());
+		} catch (CoreException e) {
+			return;
+		}
+	}
+
+	/**
+	 * @param folder
+	 */
+	public void deletePack (IFolder folder){
+		try {
+			folder.delete(true,new NullProgressMonitor());
 		} catch (CoreException e) {
 			return;
 		}

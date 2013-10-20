@@ -70,7 +70,7 @@ public class TestCaseModel extends AbstractProjectTree{
 
 	@Override
 	public void linkToProject() {
-		testCaseFile = BBATProjectUtil.getInstance().createLink(getTestScriptPath());
+		testCaseFile = BBATProjectUtil.getInstance().linkScript(getTestScriptPath());
 	}
 
 	@Override

@@ -38,8 +38,14 @@ public class UiAutoTestCaseJar {
 		temp.mkdirs();
 		try {
 			for (String testScriptPath : testScriptPaths) {
-				Path path = new Path(testScriptPath);
-				FileUtils.copyFolder(new File(testScriptPath), new File(temp.getAbsolutePath()+"/"+path.lastSegment()));	
+				Path path =new Path(testScriptPath);
+				String[] seg = path.segments();
+				int len =seg.length;
+				
+				File createPack = new File(temp.getAbsolutePath()+path.SEPARATOR+seg[len-3]+path.SEPARATOR+seg[len-2]);
+				createPack.mkdirs();
+				
+				FileUtils.copyFolder(new File(testScriptPath), new File(createPack.getAbsolutePath()+"/"+path.lastSegment()));	
 			}
 
 		} catch (IOException e1) {

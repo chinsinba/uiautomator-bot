@@ -60,4 +60,9 @@ public class TestSuiteModel extends AbstractProjectTree{
 		((TestSuiteEntity)getEntity()).setDescription(description);
 	}
 
+	@Override
+	public void linkToProject() {
+//		BBATProjectUtil.getInstance().linkSuite(getResourcePath());
+	}
+
 }

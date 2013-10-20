@@ -8,6 +8,7 @@ import in.bbat.abstrakt.gui.BBATImageManager;
 import java.io.File;
 import java.io.FileNotFoundException;
 
+import org.eclipse.core.resources.IFolder;
 import org.eclipse.swt.graphics.Image;
 
 /**
@@ -17,7 +18,7 @@ import org.eclipse.swt.graphics.Image;
  */
 public class TestProjectModel extends AbstractProjectTree {
 
-
+	private IFolder folder ;
 	protected TestProjectModel(TestProjectEntity entity) throws Exception {
 		super(null,entity, entity.getName(),false);
 	}
@@ -67,4 +68,16 @@ public class TestProjectModel extends AbstractProjectTree {
 	{
 		return ((TestProjectEntity)getEntity()).getDescription();
 	}
+
+	@Override
+	public void linkToProject() {
+		folder =BBATProjectUtil.getInstance().linkPackage(getResourcePath());
+	}
+
+	@Override
+	public void deLinkFromProject() {
+		BBATProjectUtil.getInstance().deletePack(folder);
+
+	}
+
 }
