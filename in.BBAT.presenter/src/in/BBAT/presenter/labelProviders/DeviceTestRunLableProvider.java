@@ -10,17 +10,23 @@ import org.eclipse.swt.graphics.Image;
 public class DeviceTestRunLableProvider extends LabelProvider implements
 ITableLabelProvider {
 
-	
+
 	public DeviceTestRunLableProvider() {
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	@Override
 	public Image getColumnImage(Object element, int columnIndex) {
 		if(element instanceof TestRunCaseModel){
 			switch (columnIndex) {
 			case 0:
 				return ((TestRunCaseModel) element).getTestcase().getImage();
+			}
+		}
+		if(element  instanceof DeviceTestRun){
+			switch (columnIndex) {
+			case 0:
+				return ((DeviceTestRun) element).getImage();
 			}
 		}
 		return null;

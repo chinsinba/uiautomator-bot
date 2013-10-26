@@ -8,6 +8,7 @@ import in.BBAT.abstrakt.presenter.run.model.TestRunModel;
 import in.BBAT.abstrakt.presenter.run.model.TestStatus;
 import in.BBAT.testRunner.runner.TestRunner;
 import in.BBAT.testRunner.runner.UiAutoTestCaseJar;
+import in.bbat.abstrakt.gui.BBATImageManager;
 import in.bbat.presenter.views.tester.TestRunnerView;
 
 import java.sql.Timestamp;
@@ -20,6 +21,7 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.IJobChangeEvent;
 import org.eclipse.core.runtime.jobs.IJobChangeListener;
 import org.eclipse.core.runtime.jobs.Job;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IViewPart;
 import org.eclipse.ui.PlatformUI;
@@ -177,15 +179,15 @@ public class DeviceTestRun {
 	public void stop(){
 		setStopped(true);
 	}
-	
+
 	public boolean isStopped() {
 		return stopped;
 	}
-	
+
 	public void setStopped(boolean stopped) {
 		this.stopped = stopped;
 	}
-	
+
 	public void addListener(IDeviceRunExecutionlistener listener) {
 		this.listener.add(listener);		
 	}
@@ -220,7 +222,7 @@ public class DeviceTestRun {
 		}
 		return count;
 	}
-	
+
 	public int noOfFailedCases(){
 		return getCount(TestStatus.FAIL.getStatus());
 
@@ -234,5 +236,15 @@ public class DeviceTestRun {
 				testScriptPaths.add(cas.getTestcase().getTestScriptPath());
 		}
 		return testScriptPaths;
+	}
+
+	public Image getImage() {
+		if(getStatus().equals(TestStatus.EXECUTING))
+			return BBATImageManager.getInstance().getImage(BBATImageManager.EXECUTING);
+		
+		if(getStatus().equals(TestStatus.EXECUTED))
+			return BBATImageManager.getInstance().getImage(BBATImageManager.PASS);
+		
+		return null;
 	}
 }

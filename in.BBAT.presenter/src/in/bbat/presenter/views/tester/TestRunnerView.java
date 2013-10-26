@@ -311,27 +311,29 @@ public class TestRunnerView extends BBATViewPart {
 		TreeColumn col = new TreeColumn(testDeviceViewer.getTree(), SWT.LEFT);
 		col.setText("Devices");
 		col.setImage(BBATImageManager.getInstance().getImage(BBATImageManager.ANDROID_DEVICE));
-		lay.setColumnData(col, new ColumnWeightData(40));
+		lay.setColumnData(col, new ColumnWeightData(36));
 
 		col = new TreeColumn(testDeviceViewer.getTree(), SWT.LEFT);
 		col.setText("TOTAL");
 		comp.setLayout(lay);
-		lay.setColumnData(col, new ColumnWeightData(10));
+		lay.setColumnData(col, new ColumnWeightData(12));
 
 		col = new TreeColumn(testDeviceViewer.getTree(), SWT.LEFT);
 		col.setText("PASS");
+		col.setImage(BBATImageManager.getInstance().getImage(BBATImageManager.PASS));
 		comp.setLayout(lay);
-		lay.setColumnData(col, new ColumnWeightData(10));
+		lay.setColumnData(col, new ColumnWeightData(12));
 
 		col = new TreeColumn(testDeviceViewer.getTree(), SWT.LEFT);
 		col.setText("FAIL");
+		col.setImage(BBATImageManager.getInstance().getImage(BBATImageManager.FAIL));
 		comp.setLayout(lay);
-		lay.setColumnData(col, new ColumnWeightData(10));
+		lay.setColumnData(col, new ColumnWeightData(12));
 
 		col = new TreeColumn(testDeviceViewer.getTree(), SWT.LEFT);
 		col.setText("Status");
 		comp.setLayout(lay);
-		lay.setColumnData(col, new ColumnWeightData(30));
+		lay.setColumnData(col, new ColumnWeightData(28));
 	}
 
 
