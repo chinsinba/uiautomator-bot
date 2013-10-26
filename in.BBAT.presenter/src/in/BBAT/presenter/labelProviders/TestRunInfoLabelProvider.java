@@ -1,6 +1,5 @@
 package in.BBAT.presenter.labelProviders;
 
-import in.BBAT.abstrakt.presenter.run.model.TestRunCaseModel;
 import in.BBAT.abstrakt.presenter.run.model.TestRunInstanceModel;
 
 import org.eclipse.jface.viewers.ITableLabelProvider;
@@ -15,7 +14,7 @@ ITableLabelProvider {
 		if(element instanceof TestRunInstanceModel){
 			switch (columnIndex) {
 			case 0:
-				return ((TestRunInstanceModel) element).getTestCaseModel().getImage();
+				return ((TestRunInstanceModel) element).getImage();
 			}
 		}
 		return null;

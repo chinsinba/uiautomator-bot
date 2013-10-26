@@ -10,6 +10,7 @@ import in.BBAT.data.model.Entities.TestDeviceLogEntity;
 import in.BBAT.data.model.Entities.TestDeviceRunEntity;
 import in.BBAT.data.model.Entities.TestRunInfoEntity;
 import in.BBAT.dataMine.manager.LogsMineManager;
+import in.bbat.abstrakt.gui.BBATImageManager;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -47,7 +48,25 @@ public class TestRunInstanceModel extends AbstractTreeModel {
 
 	@Override
 	public Image getImage() {
-		return null;
+		if(getStatus().equals(TestStatus.ERROR.getStatus())){
+			return BBATImageManager.getInstance().getImage(BBATImageManager.ERROR);
+		}
+		if(getStatus().equals(TestStatus.PASS.getStatus())){
+			return BBATImageManager.getInstance().getImage(BBATImageManager.PASS);
+		}
+		
+		if(getStatus().equals(TestStatus.FAIL.getStatus())){
+			return BBATImageManager.getInstance().getImage(BBATImageManager.FAIL);
+		}
+		if(getStatus().equals(TestStatus.EXECUTING.getStatus())){
+			return BBATImageManager.getInstance().getImage(BBATImageManager.EXECUTING);
+		}
+		
+		if(getStatus().equals(TestStatus.NOTEXECUTED.getStatus())){
+			return BBATImageManager.getInstance().getImage(BBATImageManager.TESTCASE_GIF_16);
+		}
+		
+		return BBATImageManager.getInstance().getImage(BBATImageManager.TESTCASE_GIF_16);
 	}
 
 	protected IGUITreeNode produceParent(AbstractEntity childEntties) {

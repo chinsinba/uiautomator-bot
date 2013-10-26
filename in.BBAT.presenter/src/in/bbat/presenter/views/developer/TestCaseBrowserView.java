@@ -35,7 +35,7 @@ public class TestCaseBrowserView extends BBATViewPart {
 	public void createPartControl(Composite parent) {
 		testCaseShelf = new PShelf(parent, SWT.NONE);
 		automatorShelfItem = new PShelfItem(testCaseShelf, SWT.NONE);
-		automatorShelfItem.setText("UIAutomator Testcase");
+		automatorShelfItem.setText("UIAutomator");
 		automatorShelfItem.getBody().setLayout(new FillLayout());	
 		viewer = new TreeViewer(automatorShelfItem.getBody(), SWT.MULTI | SWT.H_SCROLL
 				| SWT.V_SCROLL);
@@ -54,7 +54,7 @@ public class TestCaseBrowserView extends BBATViewPart {
 		
 		{
 			monkeyShelfItem = new PShelfItem(testCaseShelf, SWT.NONE);
-			monkeyShelfItem.setText("Monkey TestCase");
+			monkeyShelfItem.setText("MonkeyRunner");
 			monkeyShelfItem.getBody().setLayout(new FillLayout());	
 		}
 	}

@@ -16,6 +16,8 @@ import in.bbat.presenter.views.BBATViewPart;
 import java.util.List;
 
 import org.eclipse.jface.action.Action;
+import org.eclipse.jface.action.IMenuListener;
+import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.layout.TableColumnLayout;
 import org.eclipse.jface.layout.TreeColumnLayout;
@@ -103,7 +105,7 @@ public class TestRunnerView extends BBATViewPart {
 		CTabFolder testRunFolder = new CTabFolder(innerleft, SWT.TOP|SWT.BORDER);
 		CTabItem runTabItem = new CTabItem(testRunFolder, SWT.None);
 		runTabItem.setText("Execution View");
-		Composite comp = new Composite(testRunFolder, SWT.None);
+		Composite comp = new Composite(testRunFolder, SWT.BORDER);
 
 		deviceRunInfoViewer = new TableViewer(comp, SWT.MULTI | SWT.H_SCROLL| SWT.V_SCROLL);
 		deviceRunInfoViewer.setContentProvider(new ArrayContentProvider());
@@ -282,14 +284,22 @@ public class TestRunnerView extends BBATViewPart {
 					e.printStackTrace();
 				}
 			}
-
+			
 			@Override
 			public boolean isEnabled() {
 				return !TestRunExecutionManager.getInstance().isExecuting();
 			}
 		};
 		final MenuManager menuManager = new MenuManager();
-		menuManager.add(removeAction);
+		menuManager.setRemoveAllWhenShown(true);
+		menuManager.addMenuListener(new IMenuListener() {
+
+			@Override
+			public void menuAboutToShow(IMenuManager manager) {
+				removeAction.setEnabled(removeAction.isEnabled());
+				manager.add(removeAction);
+			}
+		});
 		viewer.getControl().setMenu(menuManager.createContextMenu(viewer.getControl()));
 
 	}

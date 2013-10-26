@@ -11,7 +11,12 @@ public class HistoryTestRunInfoLabelProvider extends LabelProvider implements
 
 	@Override
 	public Image getColumnImage(Object element, int columnIndex) {
-		// TODO Auto-generated method stub
+		if(element instanceof TestRunInstanceModel){
+			switch (columnIndex) {
+			case 0:
+				return  ((TestRunInstanceModel) element).getImage();
+			}
+		}
 		return null;
 	}
 

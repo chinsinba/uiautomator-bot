@@ -25,6 +25,10 @@ public class BBATImageManager
 	public static final String TESTSUITE_GIF_16="suite.gif";
 	public static final String TESTCASE_GIF_16="testcase.gif";
 	public static final String ANDROID_DEVICE ="Android_device.png";
+	public static final String PASS ="pass.png";
+	public static final String FAIL ="fail.png";
+	public static final String ERROR ="error.png";
+	public static final String EXECUTING ="execute.gif";
 	
 	
 	/**
@@ -38,6 +42,10 @@ public class BBATImageManager
 		addImage(TESTSUITE_GIF_16, "suite.gif");
 		addImage(TESTCASE_GIF_16, "testcase.gif");
 		addImage(ANDROID_DEVICE, ANDROID_DEVICE);
+		addImage(PASS, PASS);
+		addImage(FAIL, FAIL);
+		addImage(ERROR, ERROR);
+		addImage(EXECUTING, EXECUTING);
 	}
 
 	/**

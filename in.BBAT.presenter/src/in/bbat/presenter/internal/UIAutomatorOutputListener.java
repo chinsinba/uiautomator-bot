@@ -25,7 +25,7 @@ public class UIAutomatorOutputListener implements IUiAutomatorListener {
 		runInstance.addAutoLog(log);
 
 
-		Display.getDefault().asyncExec(new Runnable() {
+	/*	Display.getDefault().asyncExec(new Runnable() {
 
 			@Override
 			public void run() {
@@ -40,7 +40,7 @@ public class UIAutomatorOutputListener implements IUiAutomatorListener {
 				}
 
 			}
-		});
+		});*/
 
 	}
 
