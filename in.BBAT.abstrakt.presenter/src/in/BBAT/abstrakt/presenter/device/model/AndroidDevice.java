@@ -90,4 +90,10 @@ public class AndroidDevice implements IGUITreeNode{
 	public TestDeviceEntity getDeviceEntity(){
 		return deviceEntity;
 	}
+
+	@Override
+	public void setParent(IGUITreeNode parent) {
+		// TODO Auto-generated method stub
+		
+	}
 }

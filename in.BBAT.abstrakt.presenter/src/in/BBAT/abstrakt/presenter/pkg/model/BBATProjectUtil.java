@@ -149,7 +149,7 @@ public class BBATProjectUtil {
 		packFolder = getProject().getFolder(locationPath.SEPARATOR+seg[len-2]+locationPath.SEPARATOR+seg[len-1]);	
 		if(!packFolder.isLinked()){
 			try {
-				packFolder.createLink(locationPath, IResource.NONE, null);
+				packFolder.createLink(locationPath, IResource.DEPTH_INFINITE, null);
 			} catch (CoreException e) {
 				e.printStackTrace();
 			}
@@ -166,7 +166,7 @@ public class BBATProjectUtil {
 		packFolder = getProject().getFolder(locationPath.SEPARATOR+seg[len-1]);	
 		if(!packFolder.isLinked()){
 			try {
-				packFolder.createLink(locationPath, IResource.NONE, null);
+				packFolder.createLink(locationPath, IResource.DEPTH_INFINITE, null);
 			} catch (CoreException e) {
 				e.printStackTrace();
 			}

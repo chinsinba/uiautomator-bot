@@ -14,5 +14,6 @@ public interface IGUITreeNode {
 	Image getImage();
 	List<? extends IGUITreeNode> getChildren() throws Exception;
 	IGUITreeNode getParent();
+	void setParent(IGUITreeNode parent);
 	void addChild(IGUITreeNode childNode);
 }

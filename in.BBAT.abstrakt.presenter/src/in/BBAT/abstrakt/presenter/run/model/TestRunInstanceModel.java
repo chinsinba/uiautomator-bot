@@ -134,6 +134,11 @@ public class TestRunInstanceModel extends AbstractTreeModel {
 		return ((TestRunInfoEntity)getEntity()).getTestCase();
 	}
 
+	
+	public String getCompleteScriptName(){
+		return getTestCaseModel().getCompleteScriptName();
+	}
+
 	public List<AutomatorLogModel> getAutoLogsFromDB() {
 		List<AutomatorLogModel> logs = new ArrayList<AutomatorLogModel>();
 		for( AutomatorLogEntity entity :LogsMineManager.getAutoLogs((TestRunInfoEntity) getEntity())){

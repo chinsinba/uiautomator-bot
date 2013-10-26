@@ -21,16 +21,19 @@ import org.eclipse.jface.viewers.ViewerDropAdapter;
 import org.eclipse.swt.dnd.TransferData;
 import org.eclipse.ui.PlatformUI;
 
-public class TestRunDropListener extends ViewerDropAdapter{
+public class TestCaseDropListener extends ViewerDropAdapter {
 
-	public TestRunDropListener(Viewer viewer) {
+	public TestCaseDropListener(Viewer viewer) {
 		super(viewer);
+		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public boolean performDrop(Object data) {
 		Object testObj=null;
 		List<TestRunCaseModel> tempList = new ArrayList<TestRunCaseModel>();
+
+
 
 		if(data instanceof ISelection){
 			/*Multiple selection is allowed
@@ -39,18 +42,22 @@ public class TestRunDropListener extends ViewerDropAdapter{
 			while(iterator.hasNext())
 			{
 				testObj = iterator.next();
-				if (testObj instanceof AndroidDevice) {
+			/*	if (testObj instanceof AndroidDevice) {
 					TestRunExecutionManager.getInstance().addTestDevice(new DeviceTestRun((AndroidDevice) testObj,TestRunExecutionManager.getInstance().getTestRunCases()));
-				}
+				}*/
 				if(testObj instanceof AbstractProjectTree){
 					addToTestCaseList((AbstractTreeModel) testObj, tempList);
 				}
 			}
 		}
 
-		Object deviceRun = getCurrentTarget();
-		if(deviceRun instanceof DeviceTestRun){
-			((DeviceTestRun) deviceRun).addTestCases(tempList);
+
+		for (TestRunCaseModel testRunCase : tempList) {
+			TestRunExecutionManager.getInstance().addTestRunCase(testRunCase);
+		}
+		
+		for(DeviceTestRun run : TestRunExecutionManager.getInstance().getSelectedDevices()){
+			run.addTestCases(tempList);
 		}
 
 		BBATViewPart testRunView = (BBATViewPart) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().findView(TestRunnerView.ID);

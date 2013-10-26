@@ -98,6 +98,10 @@ public class TestCaseModel extends AbstractProjectTree{
 		return getResourcePath();
 	}
 
+	public String getCompleteScriptName(){
+		return getParent().getParent().getName()+"."+getParent().getName()+"."+getName();
+	}
+
 	public void createContents() {
 
 		Configuration cfgFtl =new Configuration();

@@ -27,6 +27,12 @@ public class TestDeviceRunModel extends AbstractTreeModel {
 	}
 
 	@Override
+	public void setParent(IGUITreeNode parent) {
+		super.setParent(parent);
+		((TestDeviceRunEntity)getEntity()).setTestRun((TestRunEntity) ((TestRunModel)parent).getEntity());
+	}
+
+	@Override
 	public String getLabel() {
 		return null;
 	}
@@ -45,28 +51,28 @@ public class TestDeviceRunModel extends AbstractTreeModel {
 			throws Exception {
 		return new TestRunInstanceModel(this,(TestRunInfoEntity) childEntity);
 	}
-	
+
 	public void setStatus(TestStatus status){
 		((TestDeviceRunEntity)getEntity()).setStatus(status.getStatus());
 	}
-	
+
 	public String getStatus(){
 		return ((TestDeviceRunEntity)getEntity()).getStatus();
 	}
-	
+
 	public void setStartTime(long timeInMilis){
 		((TestDeviceRunEntity)getEntity()).setStartTime(new Timestamp(timeInMilis));
 	}
-	
+
 	public void setEndTime(long timeInMilis){
 		((TestDeviceRunEntity)getEntity()).setEndTime(new Timestamp(timeInMilis));
 	}
-	
+
 	public Timestamp getStartTime(){
 		return ((TestDeviceRunEntity)getEntity()).getStartTime();
 	} 
 	public String getDeviceName(){
 		return ((TestDeviceRunEntity)getEntity()).getDevice().getDeviceId();
 	}
-	
+
 }

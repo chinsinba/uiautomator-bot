@@ -1,18 +1,13 @@
 package in.bbat.presenter.internal;
 
 import in.BBAT.abstrakt.presenter.device.model.AndroidDevice;
-import in.BBAT.abstrakt.presenter.pkg.model.TestCaseModel;
 import in.BBAT.abstrakt.presenter.run.model.TestDeviceRunModel;
+import in.BBAT.abstrakt.presenter.run.model.TestRunCaseModel;
 import in.BBAT.abstrakt.presenter.run.model.TestRunInstanceModel;
 import in.BBAT.abstrakt.presenter.run.model.TestRunModel;
 import in.BBAT.abstrakt.presenter.run.model.TestStatus;
-import in.BBAT.presenter.labelProviders.DeviceTestRunLableProvider;
 import in.BBAT.testRunner.runner.TestRunner;
 import in.BBAT.testRunner.runner.UiAutoTestCaseJar;
-import in.bbat.abstrakt.gui.BBATImageManager;
-import in.bbat.presenter.internal.TestRunExecutor.DeviceRunListener;
-import in.bbat.presenter.views.tester.AutomatorLogView;
-import in.bbat.presenter.views.tester.TestLogView;
 import in.bbat.presenter.views.tester.TestRunnerView;
 
 import java.sql.Timestamp;
@@ -25,45 +20,23 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.IJobChangeEvent;
 import org.eclipse.core.runtime.jobs.IJobChangeListener;
 import org.eclipse.core.runtime.jobs.Job;
-import org.eclipse.jface.layout.TableColumnLayout;
-import org.eclipse.jface.viewers.ArrayContentProvider;
-import org.eclipse.jface.viewers.ColumnWeightData;
-import org.eclipse.jface.viewers.DoubleClickEvent;
-import org.eclipse.jface.viewers.IDoubleClickListener;
-import org.eclipse.jface.viewers.IStructuredSelection;
-import org.eclipse.jface.viewers.TableViewer;
-import org.eclipse.jface.viewers.TableViewerColumn;
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.custom.CTabFolder;
-import org.eclipse.swt.custom.CTabItem;
-import org.eclipse.swt.graphics.Image;
-import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.ui.IViewPart;
-import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 
 public class DeviceTestRun {
 
 	private AndroidDevice device;
-	private CTabFolder testRunFolder ;
-	private TableViewer viewer;
-	private CTabItem testRunItem;
-	private List<TestCaseModel> testRunCases = new ArrayList<TestCaseModel>();
-	private TestDeviceRunModel testDeviceRun;
-	private TestRunModel testRun;
-	private ArrayList<TestRunInstanceModel> testRunInstances;
+	private List<TestRunCaseModel> testCases = new ArrayList<TestRunCaseModel>();
+	private ArrayList<TestRunInstanceModel> testRunInstances = new ArrayList<TestRunInstanceModel>();
 	private TestStatus status = TestStatus.NOTEXECUTED;
 	private boolean stopped = false;
 	private List<IDeviceRunExecutionlistener> listener = new ArrayList<IDeviceRunExecutionlistener>();
+	private TestDeviceRunModel testDeviceRun;
 
-	public DeviceTestRun(AndroidDevice device,CTabFolder mainTabFolder) {
+	public DeviceTestRun(AndroidDevice device,List<TestRunCaseModel> testCases) {
 		this.setDevice(device);
-		this.setTabFolder(mainTabFolder);
-	}
-	public DeviceTestRun(AndroidDevice device) {
-		this(device, TestRunnerView.testRunFolder);
+		this.testCases.addAll(testCases);
 	}
 
 	public AndroidDevice getDevice() {
@@ -74,131 +47,36 @@ public class DeviceTestRun {
 		this.device = device;
 	}
 
-	public CTabFolder getTabFolder() {
-		return testRunFolder;
+	public List<TestRunInstanceModel> getRunInstances() {
+		return testRunInstances;
 	}
 
-	public void setTabFolder(CTabFolder tabFolder) {
-		this.testRunFolder = tabFolder;
-	}
-
-	public void createTab(){
-		clear();
-		testRunItem = new CTabItem(TestRunnerView.testRunFolder, SWT.None);
-		testRunItem.setText(device.getName());
-		Composite comp = new Composite(testRunFolder, SWT.None);
-		viewer = new TableViewer(comp, SWT.MULTI | SWT.H_SCROLL| SWT.V_SCROLL);
-		viewer.setContentProvider(new ArrayContentProvider());
-		viewer.getTable().setLinesVisible(true);
-		viewer.getTable().setHeaderVisible(true);
-		viewer.addDoubleClickListener(new IDoubleClickListener() {
-
-			@Override
-			public void doubleClick(DoubleClickEvent event) {
-				try {
-					TestLogView view  = (TestLogView) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().findView(TestLogView.ID);
-					if(view!=null)
-						PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().hideView(view);
-					Object sel = ((IStructuredSelection)event.getSelection()).getFirstElement();
-					((TestRunInstanceModel)sel).setShowLogs(true);
-
-					IViewPart autoLogView =  PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().showView(AutomatorLogView.ID);
-					if(autoLogView!= null){
-						((AutomatorLogView)autoLogView).setInput((TestRunInstanceModel)sel);
-					}
-				} catch (Exception e) {
-					e.printStackTrace();
-				}	
-				try {
-					PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().showView(TestLogView.ID);
-				} catch (PartInitException e) {
-					e.printStackTrace();
-				}
-			}
-		});
-
-		createColumns(comp, viewer);
-		viewer.setLabelProvider(new DeviceTestRunLableProvider());
-		try {
-			viewer.setInput(getRunInstances());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		testRunItem.setControl(comp);
-		testRunFolder.setSelection(testRunItem);
-	}
-
-	private List<TestRunInstanceModel> getRunInstances() {
-		if(testRunInstances!=null)
-			return testRunInstances;
-		testRunInstances = new ArrayList<TestRunInstanceModel>();
-		createTestDeviceRun();
-		for(TestCaseModel caseObj:getTestRunCases()){
-			TestRunInstanceModel runInstModel = new TestRunInstanceModel(testDeviceRun,caseObj,TestStatus.NOTEXECUTED.getStatus());
+	private void createRunInstances() {
+		for(TestRunCaseModel caseObj:getTestRunCases()){
+			TestRunInstanceModel runInstModel = new TestRunInstanceModel(testDeviceRun,caseObj.getTestcase(),TestStatus.NOTEXECUTED.getStatus());
 			runInstModel.save();
 			testRunInstances.add(runInstModel);
 		}
-		return testRunInstances;
-	}
-	private void createTestDeviceRun() {
-		this.testDeviceRun = new TestDeviceRunModel(testRun,device);
-		testDeviceRun.save();
 	}
 
-	public void createColumns(final Composite parent, final TableViewer viewer) {
-		String[] titles = { "Project","TestSuite","TestCase","Status" };
-		int[] bounds = { 25,25,25,25 };
-
-		TableColumnLayout layout = new TableColumnLayout();
-		parent.setLayout(layout);
-
-		TableViewerColumn col =createTableViewerColumn(viewer,BBATImageManager.getInstance().getImage(BBATImageManager.PROJECT_GIF_16), titles[0],bounds[0]);
-		layout.setColumnData(col.getColumn(), new ColumnWeightData(bounds[0]));
-
-		TableViewerColumn col1 = createTableViewerColumn(viewer, BBATImageManager.getInstance().getImage(BBATImageManager.TESTSUITE_GIF_16), titles[1],bounds[1]);
-		layout.setColumnData(col1.getColumn(), new ColumnWeightData(bounds[1]));
-
-		TableViewerColumn col2 = createTableViewerColumn(viewer, BBATImageManager.getInstance().getImage(BBATImageManager.TESTCASE_GIF_16), titles[2],bounds[2]);
-		layout.setColumnData(col2.getColumn(), new ColumnWeightData(bounds[2]));
-
-		TableViewerColumn col3 = createTableViewerColumn(viewer, null, titles[3],bounds[3]);
-		layout.setColumnData(col3.getColumn(), new ColumnWeightData(bounds[3]));
-
-	}
-
-	private TableViewerColumn createTableViewerColumn(TableViewer viewer,
-			Image imag, String titles, int bounds) {
-		final TableViewerColumn viewerColumn = new TableViewerColumn(viewer,
-				SWT.NONE);
-		final TableColumn column = viewerColumn.getColumn();
-		column.setText(titles);
-		column.setToolTipText(titles);
-		column.setImage(imag);
-		column.setWidth(bounds);
-		column.setResizable(true);
-		column.setMoveable(true);
-		return viewerColumn;
-	}
-
-	public List<TestCaseModel> getTestRunCases() {
-		return testRunCases;
-	}
-
-	public void setTestRunCases(List<TestCaseModel> testRunCases) {
-		this.testRunCases = testRunCases;
+	public List<TestRunCaseModel> getTestRunCases() {
+		return testCases;
 	}
 
 	public List<String> getTestScriptPaths() {
 		List<String> testScriptPaths = new ArrayList<String>();
-		for (TestCaseModel testRunCase : testRunCases) {
-			if(!testScriptPaths.contains(testRunCase.getTestScriptPath()))
-				testScriptPaths.add(testRunCase.getTestScriptPath());
+		for (TestRunCaseModel testRunCase : testCases) {
+			if(!testScriptPaths.contains(testRunCase.getTestcase().getTestScriptPath()))
+				testScriptPaths.add(testRunCase.getTestcase().getTestScriptPath());
 		}
 		return testScriptPaths;
 	}
 
-	public void execute(final UiAutoTestCaseJar jar) {
+	public void execute(final UiAutoTestCaseJar jar,final TestRunModel testRun) {
+		reset();
+		testDeviceRun = new TestDeviceRunModel(testRun, getDevice());
+		testDeviceRun.save();
+		createRunInstances();
 		for(IDeviceRunExecutionlistener l :listener){
 			l.deviceRunExecutionStarted(DeviceTestRun.this);
 		}
@@ -209,14 +87,13 @@ public class DeviceTestRun {
 		Job testRunJob = new Job("Execute") {
 			@Override
 			protected IStatus run(IProgressMonitor monitor) {
-
 				TestRunner runner = new TestRunner(jar,getDevice().getiDevice());
 				for (TestRunInstanceModel testRunCase : getRunInstances()) {
 					if(isStopped()){
 						return Status.OK_STATUS;
 					}
 					testRunCase.setStartTime(System.currentTimeMillis());
-					runner.execute(getFullTestCaseName(testRunCase), new TestCaseExecutionListener(testRunCase, DeviceTestRun.this), new DeviceLogListener(testRunCase),new UIAutomatorOutputListener(testRunCase));
+					runner.execute(testRunCase.getCompleteScriptName(), new TestCaseExecutionListener(testRunCase, DeviceTestRun.this), new DeviceLogListener(testRunCase),new UIAutomatorOutputListener(testRunCase));
 					testRunCase.setEndTime(System.currentTimeMillis());
 					testRunCase.update();
 				}
@@ -225,52 +102,29 @@ public class DeviceTestRun {
 				testRun.setEndTime(new Timestamp(System.currentTimeMillis()));
 				testRun.update();
 				updateStatus(TestStatus.EXECUTED);
-
 				return Status.OK_STATUS;
 			}
-
 		};
 		testRunJob.schedule();
 		testRunJob.addJobChangeListener(new IJobChangeListener() {
-
-			@Override
-			public void sleeping(IJobChangeEvent event) {
-
-			}
-
-			@Override
-			public void scheduled(IJobChangeEvent event) {
-
-			}
-
-			@Override
-			public void running(IJobChangeEvent event) {
-
-			}
-
+			public void sleeping(IJobChangeEvent event) {}
+			public void scheduled(IJobChangeEvent event) {}
+			public void running(IJobChangeEvent event) {}
 			@Override
 			public void done(IJobChangeEvent event) {
 				for(IDeviceRunExecutionlistener l :listener){
 					l.deviceRunExecutionCompleted(DeviceTestRun.this);
 				}
 			}
-
-			@Override
-			public void awake(IJobChangeEvent event) {
-
-			}
-
-			@Override
-			public void aboutToRun(IJobChangeEvent event) {
-
-			}
+			public void awake(IJobChangeEvent event) {}
+			public void aboutToRun(IJobChangeEvent event) {}
 		});
 	}
 
-	public String getFullTestCaseName(TestRunInstanceModel testRunCase){
-
-		return testRunCase.getTestCaseModel().getParent().getParent().getName()+"."+testRunCase.getTestCaseModel().getParent().getName()+"."+testRunCase.getTestCaseModel().getName();
+	private void reset() {
+		testRunInstances.clear();
 	}
+
 
 	private void updateStatus(TestStatus status) {
 		setStatus(status);
@@ -278,6 +132,7 @@ public class DeviceTestRun {
 		testDeviceRun.update();
 		refrestTestRunnerView();		
 	}
+
 	private void refrestTestRunnerView() {
 		Display.getDefault().asyncExec(new Runnable() {
 
@@ -291,21 +146,10 @@ public class DeviceTestRun {
 						e.printStackTrace();
 					}
 				}
-
 			}
 		});
 	}
 
-	public void clear()
-	{
-		if(testRunItem!=null)
-			testRunItem.dispose();
-		testRunInstances= null;
-	}
-
-	public void refresh() {
-		viewer.refresh();		
-	}
 
 	@Override
 	public boolean equals(Object obj) {
@@ -321,14 +165,6 @@ public class DeviceTestRun {
 		return getDevice().hashCode();
 	}
 
-	public void focus() {
-		if(testRunItem != null)
-			testRunFolder.setSelection(testRunItem);
-	}
-
-	public void setTestRun(TestRunModel testRun) {
-		this.testRun = testRun;
-	}
 
 	public TestStatus getStatus() {
 		return status;
@@ -341,13 +177,62 @@ public class DeviceTestRun {
 	public void stop(){
 		setStopped(true);
 	}
+	
 	public boolean isStopped() {
 		return stopped;
 	}
+	
 	public void setStopped(boolean stopped) {
 		this.stopped = stopped;
 	}
+	
 	public void addListener(IDeviceRunExecutionlistener listener) {
 		this.listener.add(listener);		
+	}
+
+	public void addTestCases(List<TestRunCaseModel> testCases){
+		this.testCases.addAll(testCases);
+	}
+
+	public List<TestRunCaseModel> getCases(){
+		return testCases;
+	}
+
+	public boolean hasChildren(){
+		return !testCases.isEmpty();
+	}
+
+	public void removeCase(TestRunCaseModel runCase) {
+		testCases.remove(runCase);		
+	}
+
+	public int noOfPassedCases(){
+		return getCount(TestStatus.PASS.getStatus());
+
+	}
+
+	private int getCount(String status) {
+		int count =0;
+		for(TestRunInstanceModel model : getRunInstances())
+		{
+			if(model.getStatus().equalsIgnoreCase(status))
+				count++;
+		}
+		return count;
+	}
+	
+	public int noOfFailedCases(){
+		return getCount(TestStatus.FAIL.getStatus());
+
+	}
+
+	public List<String> getDistinctScriptPaths(){
+		List<String> testScriptPaths = new ArrayList<String>();
+
+		for(TestRunCaseModel cas: getCases()){
+			if(!testScriptPaths.contains(cas.getTestcase().getTestScriptPath()))
+				testScriptPaths.add(cas.getTestcase().getTestScriptPath());
+		}
+		return testScriptPaths;
 	}
 }

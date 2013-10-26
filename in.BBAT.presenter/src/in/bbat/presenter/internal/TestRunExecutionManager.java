@@ -1,6 +1,6 @@
 package in.bbat.presenter.internal;
 
-import in.BBAT.abstrakt.presenter.pkg.model.TestCaseModel;
+import in.BBAT.abstrakt.presenter.run.model.TestRunCaseModel;
 
 import java.util.List;
 import java.util.Set;
@@ -10,11 +10,9 @@ import org.eclipse.swt.widgets.Display;
 
 public class TestRunExecutionManager {
 
-
 	private static TestRunExecutionManager instance;
 	private TestRunContainer runContainer;
 	private boolean executing = false;
-
 
 	private TestRunExecutionManager()
 	{
@@ -30,15 +28,15 @@ public class TestRunExecutionManager {
 	}
 
 
-	public List<TestCaseModel> getTestRunCases(){
+	public List<TestRunCaseModel> getTestRunCases(){
 		return runContainer.getTestRunCases();
 	}
 
-	public void addTestRunCase(TestCaseModel runCase){
+	public void addTestRunCase(TestRunCaseModel runCase){
 		runContainer.addTestRunCase(runCase);	
 	}
 
-	public void removeTestRunCase(TestCaseModel runCase){
+	public void removeTestRunCase(TestRunCaseModel runCase){
 		runContainer.removeTestRunCase(runCase);
 	}
 
@@ -51,7 +49,15 @@ public class TestRunExecutionManager {
 	}
 
 	public void addTestDevice(DeviceTestRun selectedDevice){
-		runContainer.addTestDevice(selectedDevice);
+		boolean present =false;
+		for(DeviceTestRun run : runContainer.getdeviceTestRuns()){
+			if(run.getDevice().getiDevice().getDeviceId().equals(selectedDevice.getDevice().getiDevice().getDeviceId())){
+				present =true;
+				break;
+			}
+		}
+		if(!present)
+			runContainer.addTestDevice(selectedDevice);
 	}
 
 	public void removeDevice(DeviceTestRun selectedTestDevice){
@@ -68,7 +74,6 @@ public class TestRunExecutionManager {
 	}
 
 	public void execute() {
-		
 		Display.getDefault().asyncExec(new Runnable() {
 			@Override
 			public void run() {

@@ -31,12 +31,17 @@ public class TestDeviceRunEntity extends AbstractEntity {
 	}
 
 	public TestDeviceRunEntity(TestRunEntity runEntity,TestDeviceEntity deviceEntity) {
+		this(deviceEntity);
 		this.testRun = runEntity;
-		this.device = deviceEntity;
 	}
 
 	public TestDeviceRunEntity() {
 		// TODO Auto-generated constructor stub
+	}
+
+
+	public TestDeviceRunEntity(TestDeviceEntity deviceEntity) {
+		this.device = deviceEntity;
 	}
 
 

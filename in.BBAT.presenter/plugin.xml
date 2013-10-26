@@ -338,7 +338,7 @@
          <command
                commandId="in.BBAT.presenter.testrunner.remove"
                icon="icons/delete.gif"
-               label="Delete"
+               label="Remove"
                style="push">
          </command>
       </menuContribution>

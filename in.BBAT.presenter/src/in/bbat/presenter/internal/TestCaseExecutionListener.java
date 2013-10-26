@@ -76,7 +76,6 @@ public class TestCaseExecutionListener implements ITestRunListener {
 					e.printStackTrace();
 				}		
 
-				deviceRun.refresh();
 			}
 		});
 	}
