@@ -114,6 +114,12 @@
             name="UI Automator Logs"
             restorable="true">
       </view>
+      <view
+            class="in.bbat.presenter.views.tester.DeviceLogView"
+            id="in.BBAT.presenter.tester.deviceLogView"
+            name="Device logs"
+            restorable="true">
+      </view>
    </extension>
    <extension
          point="org.eclipse.ui.perspectiveExtensions">
@@ -342,6 +348,15 @@
                style="push">
          </command>
       </menuContribution>
+      <menuContribution
+            allPopups="false"
+            locationURI="popup:in.BBAT.presenter.developer.deviceView">
+         <command
+               commandId="in.BBAT.presenter.device.openDeviceLogs"
+               label="Open Log view"
+               style="push">
+         </command>
+      </menuContribution>
    </extension>
    <extension
          point="org.eclipse.ui.commands">
@@ -389,6 +404,10 @@
             id="in.BBAT.presenter.testrunner.removeAll"
             name="Remove All Testruncase">
       </command>
+      <command
+            id="in.BBAT.presenter.device.openDeviceLogs"
+            name="Logcat view">
+      </command>
    </extension>
    <extension
          point="org.eclipse.ui.handlers">
@@ -435,6 +454,10 @@
       <handler
             class="in.BBAT.presenter.tester.handlers.RemoveAllTestRunCaseHandler"
             commandId="in.BBAT.presenter.testrunner.removeAll">
+      </handler>
+      <handler
+            class="in.BBAT.presenter.developer.handlers.device.OpenDeviceLogsHandler"
+            commandId="in.BBAT.presenter.device.openDeviceLogs">
       </handler>
    </extension>
    <extension
