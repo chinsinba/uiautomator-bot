@@ -1,6 +1,7 @@
 package in.bbat.presenter.views.history;
 
 import in.BBAT.abstrakt.gui.model.AbstractTreeModel;
+import in.BBAT.abstrakt.presenter.run.model.TestDeviceRunModel;
 import in.BBAT.abstrakt.presenter.run.model.TestRunInstanceModel;
 import in.BBAT.presenter.labelProviders.HistoryTestRunInfoLabelProvider;
 import in.bbat.abstrakt.gui.BBATImageManager;
@@ -57,7 +58,7 @@ public class TestRunInfoView extends BBATViewPart {
 	private void createRunInstannceViewer(Composite innerRight) {
 		testRunFolder = new CTabFolder(innerRight, SWT.TOP|SWT.BORDER);
 		testRunItem = new CTabItem(testRunFolder, SWT.BORDER);
-		testRunItem.setText("Device Name");
+		testRunItem.setText("Device ");
 		Composite comp = new Composite(testRunFolder, SWT.None);
 		viewer = new TableViewer(comp, SWT.MULTI | SWT.H_SCROLL| SWT.V_SCROLL);
 		viewer.setContentProvider(new ArrayContentProvider());
@@ -99,23 +100,26 @@ public class TestRunInfoView extends BBATViewPart {
 	}
 
 	public void createColumns(final Composite parent, final TableViewer viewer) {
-		String[] titles = { "Project","TestSuite","TestCase","Status" };
-		int[] bounds = { 25,25,25,25 };
+		String[] titles = { "TestCase","TestSuite","Project","Status","Time(s)" };
+		int[] bounds = { 25,25,25,12,13 };
 
 		TableColumnLayout layout = new TableColumnLayout();
 		parent.setLayout(layout);
 
-		TableViewerColumn col =createTableViewerColumn(viewer,BBATImageManager.getInstance().getImage(BBATImageManager.PROJECT_GIF_16), titles[0],bounds[0]);
+		TableViewerColumn col =createTableViewerColumn(viewer,BBATImageManager.getInstance().getImage(BBATImageManager.TESTCASE_GIF_16), titles[0],bounds[0]);
 		layout.setColumnData(col.getColumn(), new ColumnWeightData(bounds[0]));
 
 		TableViewerColumn col1 = createTableViewerColumn(viewer, BBATImageManager.getInstance().getImage(BBATImageManager.TESTSUITE_GIF_16), titles[1],bounds[1]);
 		layout.setColumnData(col1.getColumn(), new ColumnWeightData(bounds[1]));
 
-		TableViewerColumn col2 = createTableViewerColumn(viewer, BBATImageManager.getInstance().getImage(BBATImageManager.TESTCASE_GIF_16), titles[2],bounds[2]);
+		TableViewerColumn col2 = createTableViewerColumn(viewer, BBATImageManager.getInstance().getImage(BBATImageManager.PROJECT_GIF_16), titles[2],bounds[2]);
 		layout.setColumnData(col2.getColumn(), new ColumnWeightData(bounds[2]));
 
 		TableViewerColumn col3 = createTableViewerColumn(viewer, null, titles[3],bounds[3]);
 		layout.setColumnData(col3.getColumn(), new ColumnWeightData(bounds[3]));
+		
+		TableViewerColumn col4 = createTableViewerColumn(viewer, BBATImageManager.getInstance().getImage(BBATImageManager.TIME), titles[4],bounds[4]);
+		layout.setColumnData(col4.getColumn(), new ColumnWeightData(bounds[4]));
 
 
 	}
@@ -134,8 +138,9 @@ public class TestRunInfoView extends BBATViewPart {
 		return viewerColumn;
 	}
 
-	public void setInput(List<AbstractTreeModel> runInstances){
-		viewer.setInput(runInstances);
+	public void setInput(TestDeviceRunModel sel) throws Exception{
+		testRunItem.setText(sel.getDeviceName());
+		viewer.setInput(sel.getChildren());
 		viewer.refresh();
 
 	}

@@ -95,6 +95,8 @@ public class DeviceTestRun {
 						return Status.OK_STATUS;
 					}
 					testRunCase.setStartTime(System.currentTimeMillis());
+					testRunCase.setStatus(TestStatus.EXECUTING.getStatus());
+					testRunCase.update();
 					runner.execute(testRunCase.getCompleteScriptName(), new TestCaseExecutionListener(testRunCase, DeviceTestRun.this), new DeviceLogListener(testRunCase),new UIAutomatorOutputListener(testRunCase));
 					testRunCase.setEndTime(System.currentTimeMillis());
 					testRunCase.update();

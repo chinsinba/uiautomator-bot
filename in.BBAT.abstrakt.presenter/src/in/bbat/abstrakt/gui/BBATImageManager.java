@@ -29,6 +29,7 @@ public class BBATImageManager
 	public static final String FAIL ="fail.png";
 	public static final String ERROR ="error.png";
 	public static final String EXECUTING ="execute.gif";
+	public static final String TIME ="time.png";
 	
 	
 	/**
@@ -46,6 +47,7 @@ public class BBATImageManager
 		addImage(FAIL, FAIL);
 		addImage(ERROR, ERROR);
 		addImage(EXECUTING, EXECUTING);
+		addImage(TIME, TIME);
 	}
 
 	/**

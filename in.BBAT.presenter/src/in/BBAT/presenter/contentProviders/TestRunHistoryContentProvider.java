@@ -1,5 +1,7 @@
 package in.BBAT.presenter.contentProviders;
 
+import in.BBAT.abstrakt.presenter.run.model.TestDeviceRunModel;
+import in.BBAT.abstrakt.presenter.run.model.TestRunInstanceModel;
 import in.BBAT.abstrakt.presenter.run.model.TestRunManager;
 import in.BBAT.abstrakt.presenter.run.model.TestRunModel;
 
@@ -24,7 +26,7 @@ public class TestRunHistoryContentProvider implements ITreeContentProvider {
 
 	@Override
 	public Object[] getElements(Object inputElement) {
-			return getChildren(inputElement);
+		return getChildren(inputElement);
 	}
 
 	@Override
@@ -36,7 +38,7 @@ public class TestRunHistoryContentProvider implements ITreeContentProvider {
 				e.printStackTrace();
 			}
 		}
-		
+
 		if(parentElement instanceof TestRunModel){
 			try {
 				return ((TestRunModel) parentElement).getChildren().toArray();
@@ -55,7 +57,14 @@ public class TestRunHistoryContentProvider implements ITreeContentProvider {
 
 	@Override
 	public boolean hasChildren(Object element) {
-		// TODO Auto-generated method stub
+		if(element instanceof TestDeviceRunModel){
+			try {
+				return false;
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
 		return true;
 	}
 

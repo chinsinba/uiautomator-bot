@@ -7,7 +7,7 @@ import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.swt.graphics.Image;
 
 public class HistoryTestRunInfoLabelProvider extends LabelProvider implements
-		ITableLabelProvider {
+ITableLabelProvider {
 
 	@Override
 	public Image getColumnImage(Object element, int columnIndex) {
@@ -25,16 +25,16 @@ public class HistoryTestRunInfoLabelProvider extends LabelProvider implements
 		if(element instanceof TestRunInstanceModel){
 			switch (columnIndex) {
 			case 0:
-				return ((TestRunInstanceModel) element).getTestCaseEntity().getSuite().getTestProject().getName();
+				return ((TestRunInstanceModel) element).getTestCaseEntity().getName();
 			case 1:
 				return ((TestRunInstanceModel) element).getTestCaseEntity().getSuite().getName();
 			case 2:
-				return ((TestRunInstanceModel) element).getTestCaseEntity().getName();
+				return ((TestRunInstanceModel) element).getTestCaseEntity().getSuite().getTestProject().getName();
 			case 3:
 				return ((TestRunInstanceModel) element).getStatus();
-
-			default:
-				break;
+			case 4:
+				return String.valueOf(((TestRunInstanceModel) element).getTimeTaken()/1000f);			default:
+					break;
 			}
 		}
 		return "";

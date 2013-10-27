@@ -154,7 +154,7 @@ public class TestRunnerView extends BBATViewPart {
 
 		createRunColumns(comp, deviceRunInfoViewer);
 		deviceRunInfoViewer.setLabelProvider(new TestRunInfoLabelProvider());
-
+		runTabItem.setImage(BBATImageManager.getInstance().getImage(BBATImageManager.EXECUTING));
 		runTabItem.setControl(comp);
 		testRunFolder.setSelection(runTabItem);
 
@@ -185,7 +185,8 @@ public class TestRunnerView extends BBATViewPart {
 
 		CTabFolder testRunFolder = new CTabFolder(innerRight, SWT.TOP|SWT.BORDER);
 		testRunItem = new CTabItem(testRunFolder, SWT.BORDER);
-		testRunItem.setText("Test Run");
+		testRunItem.setText("Common Test Cases");
+		testRunItem.setImage(BBATImageManager.getInstance().getImage(BBATImageManager.TESTCASE_GIF_16));
 		Composite comp = new Composite(testRunFolder, SWT.BORDER);
 		commonTestCaseViewer = new TableViewer(comp, SWT.MULTI | SWT.H_SCROLL| SWT.V_SCROLL);
 		commonTestCaseViewer.setContentProvider(new ArrayContentProvider());
@@ -226,7 +227,7 @@ public class TestRunnerView extends BBATViewPart {
 		final CTabFolder tabFolder = new CTabFolder(form, SWT.TOP|SWT.BORDER);
 		CTabItem testRunItem = new CTabItem(tabFolder, SWT.BORDER);
 		testRunItem.setText("Test Devices");
-
+		testRunItem.setImage(BBATImageManager.getInstance().getImage(BBATImageManager.ANDROID_DEVICE));
 		Composite comp = new Composite(tabFolder, SWT.BORDER);
 		testDeviceViewer = new TreeViewer(comp, SWT.H_SCROLL| SWT.V_SCROLL);
 		testDeviceViewer.getTree().setHeaderVisible(true);
@@ -324,12 +325,12 @@ public class TestRunnerView extends BBATViewPart {
 		comp.setLayout(lay);
 
 		TreeColumn col = new TreeColumn(testDeviceViewer.getTree(), SWT.LEFT);
-		col.setText("Devices");
+		col.setText("Device Name");
 		col.setImage(BBATImageManager.getInstance().getImage(BBATImageManager.ANDROID_DEVICE));
 		lay.setColumnData(col, new ColumnWeightData(36));
 
 		col = new TreeColumn(testDeviceViewer.getTree(), SWT.LEFT);
-		col.setText("TOTAL");
+		col.setText("Count");
 		comp.setLayout(lay);
 		lay.setColumnData(col, new ColumnWeightData(12));
 

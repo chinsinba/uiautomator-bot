@@ -357,6 +357,16 @@
                style="push">
          </command>
       </menuContribution>
+      <menuContribution
+            allPopups="false"
+            locationURI="popup:in.BBAT.presenter.history.TestRunHistoryView">
+         <command
+               commandId="in.BBAT.presenter.history.deleteTestRun"
+               icon="icons/delete.gif"
+               label="Delete"
+               style="push">
+         </command>
+      </menuContribution>
    </extension>
    <extension
          point="org.eclipse.ui.commands">
@@ -408,6 +418,10 @@
             id="in.BBAT.presenter.device.openDeviceLogs"
             name="Logcat view">
       </command>
+      <command
+            id="in.BBAT.presenter.history.deleteTestRun"
+            name="Delete TestRun">
+      </command>
    </extension>
    <extension
          point="org.eclipse.ui.handlers">
@@ -458,6 +472,10 @@
       <handler
             class="in.BBAT.presenter.developer.handlers.device.OpenDeviceLogsHandler"
             commandId="in.BBAT.presenter.device.openDeviceLogs">
+      </handler>
+      <handler
+            class="in.BBAT.presenter.history.handlers.DeleteTestRunHandler"
+            commandId="in.BBAT.presenter.history.deleteTestRun">
       </handler>
    </extension>
    <extension

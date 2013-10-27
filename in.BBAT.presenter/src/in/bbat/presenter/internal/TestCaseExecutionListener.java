@@ -21,6 +21,7 @@ public class TestCaseExecutionListener implements ITestRunListener {
 	public TestCaseExecutionListener(TestRunInstanceModel testRunCase, DeviceTestRun deviceRun){
 		this.runCase = testRunCase;
 		this.deviceRun = deviceRun;
+		refresh();
 	}
 
 	@Override

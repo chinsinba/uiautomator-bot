@@ -39,7 +39,7 @@ public class TestDeviceRunModel extends AbstractTreeModel {
 	}
 
 	public Image getImage() {
-		
+
 		if(getStatus().equalsIgnoreCase(TestStatus.EXECUTING.getStatus()))
 			return BBATImageManager.getInstance().getImage(BBATImageManager.EXECUTING);
 
@@ -78,8 +78,16 @@ public class TestDeviceRunModel extends AbstractTreeModel {
 	public Timestamp getStartTime(){
 		return ((TestDeviceRunEntity)getEntity()).getStartTime();
 	} 
+
+	public Timestamp getEndTime(){
+		return ((TestDeviceRunEntity)getEntity()).getEndTime();
+	} 
 	public String getDeviceName(){
 		return ((TestDeviceRunEntity)getEntity()).getDevice().getDeviceId();
+	}
+
+	public long getTimeTaken(){
+		return getEndTime().getTime()-getStartTime().getTime();
 	}
 
 }
