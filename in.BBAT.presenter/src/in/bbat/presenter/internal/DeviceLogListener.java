@@ -33,17 +33,6 @@ public class DeviceLogListener implements ILogListener {
 			log.save();
 			testRunCase.addDeviceLog(log);
 		}
-
-		if(testRunCase.isShowLogs())	
-			Display.getDefault().asyncExec(new Runnable() {
-				@Override
-				public void run() {
-					IViewPart view =  PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().findView(TestLogView.ID);
-					if(view!= null){
-						((TestLogView)view).getPanel().bufferChanged(logMessages, new ArrayList<LogCatMessage>());
-					}
-				}
-			});
 	}
 
 	@Override

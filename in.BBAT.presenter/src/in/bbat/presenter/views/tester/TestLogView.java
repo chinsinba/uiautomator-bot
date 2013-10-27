@@ -1,11 +1,16 @@
 package in.bbat.presenter.views.tester;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import in.BBAT.abstrakt.presenter.device.model.AndroidDevice;
 import in.bbat.presenter.Activator;
 import in.bbat.presenter.views.BBATViewPart;
 
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.swt.widgets.Composite;
+
+import com.android.ddmlib.logcat.LogCatMessage;
 
 
 public class TestLogView extends BBATViewPart {
@@ -17,7 +22,7 @@ public class TestLogView extends BBATViewPart {
 	public void createPartControl(Composite parent) {
 		setPanel(new LogCatPanel(Activator.getDefault().getPreferenceStore()));
 		getPanel().createControl(parent);
-//		startLogging(TestDeviceManager.getInstance().getDevices().get(0));
+		//		startLogging(TestDeviceManager.getInstance().getDevices().get(0));
 
 	}
 
@@ -50,7 +55,7 @@ public class TestLogView extends BBATViewPart {
 	@Override
 	public void dispose() {
 		super.dispose();
-//		getPanel().stopLogging();
+		//		getPanel().stopLogging();
 	}
 
 	public LogCatPanel getPanel() {
@@ -61,4 +66,9 @@ public class TestLogView extends BBATViewPart {
 		this.panel = panel;
 	}
 
+	public void bufferChanged(List<LogCatMessage> addedMessages, ArrayList<LogCatMessage> deletedMessages){
+		getPanel().clearBuffer();
+		getPanel().bufferChanged(addedMessages, deletedMessages);
+
+	}
 }

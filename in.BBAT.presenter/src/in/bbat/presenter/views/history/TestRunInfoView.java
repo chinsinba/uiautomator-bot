@@ -75,8 +75,7 @@ public class TestRunInfoView extends BBATViewPart {
 						PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().hideView(view);
 					}
 					view  = (TestLogView) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().showView(HistoryDeviceLogView.ID);
-					view.getPanel().clearBuffer();
-					view.getPanel().bufferChanged(((TestRunInstanceModel)sel).getDeviceLogsFromDB(), new ArrayList<LogCatMessage>());
+					view.bufferChanged(((TestRunInstanceModel)sel).getDeviceLogsFromDB(), new ArrayList<LogCatMessage>());
 
 					IViewPart autoLogView =  PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().showView(HistoryAutoLogView.ID);
 					if(autoLogView!= null){

@@ -3,6 +3,7 @@ package in.bbat.presenter.views.tester;
 import in.BBAT.abstrakt.presenter.device.model.AndroidDevice;
 import in.BBAT.abstrakt.presenter.run.model.TestRunCaseModel;
 import in.BBAT.abstrakt.presenter.run.model.TestRunInstanceModel;
+import in.BBAT.abstrakt.presenter.run.model.TestStatus;
 import in.BBAT.presenter.DND.listeners.TestCaseDropListener;
 import in.BBAT.presenter.DND.listeners.TestRunDropListener;
 import in.BBAT.presenter.labelProviders.DeviceTestRunLableProvider;
@@ -13,6 +14,7 @@ import in.bbat.presenter.internal.DeviceTestRun;
 import in.bbat.presenter.internal.TestRunExecutionManager;
 import in.bbat.presenter.views.BBATViewPart;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.jface.action.Action;
@@ -51,6 +53,8 @@ import org.eclipse.swt.widgets.TreeColumn;
 import org.eclipse.ui.IViewPart;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
+
+import com.android.ddmlib.logcat.LogCatMessage;
 
 public class TestRunnerView extends BBATViewPart {
 
@@ -116,15 +120,21 @@ public class TestRunnerView extends BBATViewPart {
 			@Override
 			public void doubleClick(DoubleClickEvent event) {
 				try {
-					TestLogView view  = (TestLogView) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().findView(TestLogView.ID);
-					if(view!=null)
-						PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().hideView(view);
 					Object sel = ((IStructuredSelection)event.getSelection()).getFirstElement();
 					((TestRunInstanceModel)sel).setShowLogs(true);
 
-					IViewPart autoLogView =  PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().showView(AutomatorLogView.ID);
-					if(autoLogView!= null){
-						((AutomatorLogView)autoLogView).setInput((TestRunInstanceModel)sel);
+					if(((TestRunInstanceModel)sel).getStatus().equalsIgnoreCase(TestStatus.NOTEXECUTED.getStatus()))
+					{
+						return;
+					}
+
+					if(!((TestRunInstanceModel)sel).getStatus().equalsIgnoreCase(TestStatus.EXECUTING.getStatus())){
+						IViewPart autoLogView =  PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().showView(AutomatorLogView.ID);
+						if(autoLogView!= null){
+							((AutomatorLogView)autoLogView).setInput((TestRunInstanceModel)sel);
+						}
+						TestLogView view  = (TestLogView) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().showView(TestLogView.ID);
+						view.bufferChanged(((TestRunInstanceModel)sel).getDeviceLogsFromDB(), new ArrayList<LogCatMessage>());
 					}
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -284,7 +294,7 @@ public class TestRunnerView extends BBATViewPart {
 					e.printStackTrace();
 				}
 			}
-			
+
 			@Override
 			public boolean isEnabled() {
 				return !TestRunExecutionManager.getInstance().isExecuting();
