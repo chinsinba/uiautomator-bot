@@ -133,7 +133,12 @@ public class TestRunnerView extends BBATViewPart {
 						if(autoLogView!= null){
 							((AutomatorLogView)autoLogView).setInput((TestRunInstanceModel)sel);
 						}
-						TestLogView view  = (TestLogView) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().showView(TestLogView.ID);
+						TestLogView view  = (TestLogView) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().findView(TestLogView.ID);
+
+						if(view != null){
+							PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().hideView(view);
+						}
+						view =  (TestLogView) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().showView(TestLogView.ID);
 						view.bufferChanged(((TestRunInstanceModel)sel).getDeviceLogsFromDB(), new ArrayList<LogCatMessage>());
 					}
 				} catch (Exception e) {
@@ -412,6 +417,10 @@ public class TestRunnerView extends BBATViewPart {
 
 	@Override
 	public void setFocus() {
-
+		try {
+			refresh();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }

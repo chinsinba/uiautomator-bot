@@ -11,6 +11,7 @@ import in.BBAT.data.model.Entities.AbstractEntity;
 import in.BBAT.data.model.Entities.TestDeviceRunEntity;
 import in.BBAT.data.model.Entities.TestRunEntity;
 import in.BBAT.data.model.Entities.TestRunInfoEntity;
+import in.bbat.abstrakt.gui.BBATImageManager;
 
 public class TestDeviceRunModel extends AbstractTreeModel {
 
@@ -37,8 +38,14 @@ public class TestDeviceRunModel extends AbstractTreeModel {
 		return null;
 	}
 
-	@Override
 	public Image getImage() {
+		
+		if(getStatus().equalsIgnoreCase(TestStatus.EXECUTING.getStatus()))
+			return BBATImageManager.getInstance().getImage(BBATImageManager.EXECUTING);
+
+		if(getStatus().equalsIgnoreCase(TestStatus.EXECUTED.getStatus()))
+			return BBATImageManager.getInstance().getImage(BBATImageManager.PASS);
+
 		return null;
 	}
 
