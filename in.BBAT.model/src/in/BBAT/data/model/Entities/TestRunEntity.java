@@ -41,7 +41,7 @@ public class TestRunEntity extends AbstractEntity{
 	@OneToOne
 	private UserEntity createdBy;
 
-	@OneToMany(mappedBy="testRun", fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST })
+	@OneToMany(mappedBy="testRun", fetch = FetchType.LAZY, cascade = { CascadeType.ALL })
 	@OrderColumn
 	private List<TestDeviceRunEntity> testDeviceRuns;
 
