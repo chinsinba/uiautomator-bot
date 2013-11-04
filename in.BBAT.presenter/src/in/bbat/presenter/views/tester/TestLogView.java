@@ -71,4 +71,6 @@ public class TestLogView extends BBATViewPart {
 		getPanel().bufferChanged(addedMessages, deletedMessages);
 
 	}
+	
+	
 }

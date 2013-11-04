@@ -42,4 +42,6 @@ public class DeviceLogView extends BBATViewPart {
 		panel.deviceSelected(device);
 	}
 
+	
+	
 }

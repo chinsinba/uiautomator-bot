@@ -85,4 +85,6 @@ public class DeveloperDeviceView extends BBATViewPart {
 		return viewer.getSelection();
 	}
 	
+	
+	
 }

@@ -1,6 +1,5 @@
 package in.bbat.presenter.views.history;
 
-import in.BBAT.abstrakt.gui.model.AbstractTreeModel;
 import in.BBAT.abstrakt.presenter.run.model.TestDeviceRunModel;
 import in.BBAT.abstrakt.presenter.run.model.TestRunInstanceModel;
 import in.BBAT.presenter.labelProviders.HistoryTestRunInfoLabelProvider;
@@ -10,7 +9,6 @@ import in.bbat.presenter.views.tester.AutomatorLogView;
 import in.bbat.presenter.views.tester.TestLogView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import org.eclipse.jface.layout.TableColumnLayout;
 import org.eclipse.jface.viewers.ArrayContentProvider;
@@ -70,15 +68,12 @@ public class TestRunInfoView extends BBATViewPart {
 			public void doubleClick(DoubleClickEvent event) {
 				try {
 					Object sel = ((IStructuredSelection)event.getSelection()).getFirstElement();
-					TestLogView view  = (TestLogView) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().findView(HistoryDeviceLogView.ID);
 
-					if(view != null){
-						PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().hideView(view);
-					}
-					view  = (TestLogView) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().showView(HistoryDeviceLogView.ID);
+					BBATViewPart.hideView(HistoryDeviceLogView.ID);
+					TestLogView view  = (TestLogView) BBATViewPart.openView(HistoryDeviceLogView.ID);
 					view.bufferChanged(((TestRunInstanceModel)sel).getDeviceLogsFromDB(), new ArrayList<LogCatMessage>());
 
-					IViewPart autoLogView =  PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().showView(HistoryAutoLogView.ID);
+					IViewPart autoLogView =  BBATViewPart.openView(HistoryAutoLogView.ID);
 					if(autoLogView!= null){
 						((AutomatorLogView)autoLogView).setInput((TestRunInstanceModel)sel);
 					}
@@ -117,7 +112,7 @@ public class TestRunInfoView extends BBATViewPart {
 
 		TableViewerColumn col3 = createTableViewerColumn(viewer, null, titles[3],bounds[3]);
 		layout.setColumnData(col3.getColumn(), new ColumnWeightData(bounds[3]));
-		
+
 		TableViewerColumn col4 = createTableViewerColumn(viewer, BBATImageManager.getInstance().getImage(BBATImageManager.TIME), titles[4],bounds[4]);
 		layout.setColumnData(col4.getColumn(), new ColumnWeightData(bounds[4]));
 
@@ -149,5 +144,7 @@ public class TestRunInfoView extends BBATViewPart {
 	public void setFocus() {
 
 	}
+
+
 
 }

@@ -15,7 +15,6 @@ import in.bbat.presenter.internal.TestRunExecutionManager;
 import in.bbat.presenter.views.BBATViewPart;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -131,16 +130,12 @@ public class TestRunnerView extends BBATViewPart {
 					}
 
 					if(!((TestRunInstanceModel)sel).getStatus().equalsIgnoreCase(TestStatus.EXECUTING.getStatus())){
-						IViewPart autoLogView =  PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().showView(AutomatorLogView.ID);
+						IViewPart autoLogView =  BBATViewPart.openView(AutomatorLogView.ID);
 						if(autoLogView!= null){
 							((AutomatorLogView)autoLogView).setInput((TestRunInstanceModel)sel);
 						}
-						TestLogView view  = (TestLogView) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().findView(TestLogView.ID);
-
-						if(view != null){
-							PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().hideView(view);
-						}
-						view =  (TestLogView) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().showView(TestLogView.ID);
+						BBATViewPart.hideView(TestLogView.ID);
+						TestLogView view =  (TestLogView) BBATViewPart.openView(TestLogView.ID);
 						view.bufferChanged(((TestRunInstanceModel)sel).getDeviceLogsFromDB(), new ArrayList<LogCatMessage>());
 					}
 				} catch (Exception e) {
@@ -437,4 +432,6 @@ public class TestRunnerView extends BBATViewPart {
 			e.printStackTrace();
 		}
 	}
+
+
 }

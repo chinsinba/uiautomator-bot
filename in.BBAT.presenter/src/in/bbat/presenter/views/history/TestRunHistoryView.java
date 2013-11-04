@@ -7,6 +7,7 @@ import in.BBAT.presenter.contentProviders.TestRunHistoryContentProvider;
 import in.BBAT.presenter.labelProviders.TestRunHistoryLabelProvider;
 import in.bbat.abstrakt.gui.BBATImageManager;
 import in.bbat.presenter.views.BBATViewPart;
+import in.bbat.presenter.views.tester.TestLogView;
 
 import org.eclipse.jface.layout.TreeColumnLayout;
 import org.eclipse.jface.viewers.ColumnWeightData;
@@ -18,7 +19,6 @@ import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.TreeColumn;
-import org.eclipse.ui.PlatformUI;
 
 public class TestRunHistoryView extends BBATViewPart {
 
@@ -59,8 +59,11 @@ public class TestRunHistoryView extends BBATViewPart {
 
 				}
 				if(sel instanceof TestDeviceRunModel){
+
+					BBATViewPart.hideView(TestLogView.ID);
+
 					try {
-						TestRunInfoView view  = (TestRunInfoView) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().showView(TestRunInfoView.ID);
+						TestRunInfoView view  = (TestRunInfoView) BBATViewPart.openView(TestRunInfoView.ID);
 						view.setInput(((TestDeviceRunModel) sel));
 					} catch (Exception e) {
 						e.printStackTrace();
@@ -68,7 +71,7 @@ public class TestRunHistoryView extends BBATViewPart {
 				}
 			}
 		});
-		
+
 		addMenuManager(viewer);
 
 	}
@@ -105,7 +108,7 @@ public class TestRunHistoryView extends BBATViewPart {
 	}
 	@Override
 	public void setFocus() {
-//		viewer.refresh();
+		//		viewer.refresh();
 
 	}
 

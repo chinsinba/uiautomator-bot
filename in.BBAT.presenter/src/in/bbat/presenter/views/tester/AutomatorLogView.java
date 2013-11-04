@@ -113,4 +113,6 @@ public class AutomatorLogView extends BBATViewPart {
 	public void setFocus() {
 	}
 
+	
+	
 }

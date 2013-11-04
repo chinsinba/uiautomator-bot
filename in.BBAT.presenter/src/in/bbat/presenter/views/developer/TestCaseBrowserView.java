@@ -83,4 +83,5 @@ public class TestCaseBrowserView extends BBATViewPart {
 		Transfer[] transferTypes = new Transfer[]{LocalSelectionTransfer.getTransfer()};
 		viewer.addDragSupport(operations, transferTypes, new TestCaseDragListener(viewer));
 	}
+	
 }
