@@ -15,6 +15,8 @@ import in.bbat.presenter.internal.TestRunExecutionManager;
 import in.bbat.presenter.views.BBATViewPart;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.jface.action.Action;
@@ -416,6 +418,17 @@ public class TestRunnerView extends BBATViewPart {
 		deviceRunInfoViewer.refresh();
 	}
 
+	public void clearRunViewerInput(){
+		deviceRunInfoViewer.setInput(Collections.EMPTY_LIST);
+		deviceRunInfoViewer.refresh();
+	}
+
+	public void clearDeviceRunItem(){
+		if(deviceRunItem!=null){
+			deviceRunItem.dispose();
+			deviceTestRun =null;
+		}
+	}
 	@Override
 	public void setFocus() {
 		try {

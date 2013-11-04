@@ -16,6 +16,8 @@ public class RemoveAllTestRunCaseHandler extends AbstractTestRunnerHandler {
 		TestRunExecutionManager.getInstance().clearTestDevices();
 		TestRunnerView view  = (TestRunnerView) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().findView(TestRunnerView.ID);
 		try {
+			view.clearRunViewerInput();
+			view.clearDeviceRunItem();
 			view.refresh();
 		} catch (Exception e) {
 			e.printStackTrace();
