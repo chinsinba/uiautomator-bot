@@ -7,7 +7,6 @@ import in.BBAT.presenter.contentProviders.TestRunHistoryContentProvider;
 import in.BBAT.presenter.labelProviders.TestRunHistoryLabelProvider;
 import in.bbat.abstrakt.gui.BBATImageManager;
 import in.bbat.presenter.views.BBATViewPart;
-import in.bbat.presenter.views.tester.TestLogView;
 
 import org.eclipse.jface.layout.TreeColumnLayout;
 import org.eclipse.jface.viewers.ColumnWeightData;
@@ -60,8 +59,9 @@ public class TestRunHistoryView extends BBATViewPart {
 				}
 				if(sel instanceof TestDeviceRunModel){
 
-					BBATViewPart.hideView(TestLogView.ID);
-
+					
+					BBATViewPart.hideView(HistoryDeviceLogView.ID);
+					BBATViewPart.hideView(HistoryAutoLogView.ID);
 					try {
 						TestRunInfoView view  = (TestRunInfoView) BBATViewPart.openView(TestRunInfoView.ID);
 						view.setInput(((TestDeviceRunModel) sel));
