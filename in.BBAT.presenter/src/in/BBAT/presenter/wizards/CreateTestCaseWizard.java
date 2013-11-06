@@ -1,17 +1,11 @@
 package in.BBAT.presenter.wizards;
 
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
-
 import in.BBAT.abstrakt.presenter.pkg.model.TestCaseModel;
 import in.BBAT.abstrakt.presenter.pkg.model.TestSuiteModel;
-import in.BBAT.dataMine.manager.MineManager;
 import in.BBAT.presenter.wizards.pages.CreateTestCasePage;
 import in.bbat.presenter.views.BBATViewPart;
 import in.bbat.presenter.views.developer.TestCaseBrowserView;
 
-import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.PartInitException;

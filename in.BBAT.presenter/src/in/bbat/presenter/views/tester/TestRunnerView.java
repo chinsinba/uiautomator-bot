@@ -240,6 +240,18 @@ public class TestRunnerView extends BBATViewPart {
 				if(obj  instanceof DeviceTestRun){
 					DeviceTestRun run = (DeviceTestRun) obj;
 					setRunViewerInput(run);
+//					createDeviceItem(tabFolder,run);
+				}
+			}
+		});
+		testDeviceViewer.addDoubleClickListener(new IDoubleClickListener() {
+
+			@Override
+			public void doubleClick(DoubleClickEvent event) {
+				IStructuredSelection selection  =(IStructuredSelection) event.getSelection();
+				Object obj = selection.getFirstElement();
+				if(obj  instanceof DeviceTestRun){
+					DeviceTestRun run = (DeviceTestRun) obj;
 					createDeviceItem(tabFolder,run);
 				}
 			}

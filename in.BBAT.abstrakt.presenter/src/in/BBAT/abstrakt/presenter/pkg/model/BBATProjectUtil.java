@@ -137,6 +137,11 @@ public class BBATProjectUtil {
 		} catch (CoreException e) {
 			return scriptIfile;
 		}
+		try {
+			getProject().refreshLocal(IResource.DEPTH_INFINITE,new NullProgressMonitor());
+		} catch (CoreException e) {
+			e.printStackTrace();
+		}
 		return scriptIfile;
 	}
 
@@ -154,6 +159,12 @@ public class BBATProjectUtil {
 				e.printStackTrace();
 			}
 		}
+		try {
+			getProject().refreshLocal(IResource.DEPTH_INFINITE,new NullProgressMonitor());
+		} catch (CoreException e) {
+			e.printStackTrace();
+		}
+
 		return packFolder;
 	}
 
@@ -171,6 +182,13 @@ public class BBATProjectUtil {
 				e.printStackTrace();
 			}
 		}
+		
+		try {
+			getProject().refreshLocal(IResource.DEPTH_INFINITE,new NullProgressMonitor());
+		} catch (CoreException e) {
+			e.printStackTrace();
+		}
+
 		return packFolder;
 	}
 	/**
