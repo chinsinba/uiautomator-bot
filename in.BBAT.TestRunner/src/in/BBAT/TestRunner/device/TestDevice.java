@@ -21,7 +21,7 @@ import com.android.ddmlib.testrunner.ITestRunListener;
 
 
 public class TestDevice implements IAndroidDevice {
-
+	public static final int UIAUTOMATOR_MIN_API_LEVEL = 16;
 	private boolean active;
 	private IDevice monkeyDevice;
 
@@ -176,5 +176,23 @@ public class TestDevice implements IAndroidDevice {
 	@Override
 	public String getSerialNo() {
 		return monkeyDevice.getSerialNumber();
+	}
+
+	@Override
+	public int getApiLevel() {
+		String apiLevelString = getMonkeyDevice().getProperty("ro.build.version.sdk");
+
+		int apiLevel;
+		try {
+			apiLevel = Integer.parseInt(apiLevelString);
+		} catch (NumberFormatException e) {
+			apiLevel = UIAUTOMATOR_MIN_API_LEVEL;
+		}
+		return apiLevel;
+	}
+
+	@Override
+	public boolean isUIAutomatorSupported() {
+		return getApiLevel() >= UIAUTOMATOR_MIN_API_LEVEL;
 	}
 }

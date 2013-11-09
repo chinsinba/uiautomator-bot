@@ -38,5 +38,9 @@ public interface IAndroidDevice {
 
 	String getSerialNo();
 
+	int getApiLevel();
+	
+	boolean isUIAutomatorSupported();
+
 
 }

@@ -96,4 +96,8 @@ public class AndroidDevice implements IGUITreeNode{
 		// TODO Auto-generated method stub
 		
 	}
+	
+	public boolean isUIAutomatorSupported(){
+		return iDevice.isUIAutomatorSupported();
+	}
 }

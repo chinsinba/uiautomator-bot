@@ -3,7 +3,6 @@ package in.BBAT.presenter.labelProviders;
 import in.BBAT.abstrakt.presenter.run.model.TestDeviceRunModel;
 import in.BBAT.abstrakt.presenter.run.model.TestRunModel;
 import in.BBAT.data.model.Entities.TestRunEntity;
-import in.bbat.abstrakt.gui.BBATImageManager;
 
 import org.eclipse.jface.viewers.ITableLabelProvider;
 import org.eclipse.jface.viewers.LabelProvider;
@@ -18,7 +17,7 @@ public class TestRunHistoryLabelProvider extends LabelProvider implements ITable
 			switch (columnIndex) {
 			case 0:
 				return ((TestDeviceRunModel) element).getImage();
-				
+
 			}
 		}
 		return null;
@@ -29,7 +28,9 @@ public class TestRunHistoryLabelProvider extends LabelProvider implements ITable
 		if(element instanceof TestRunModel){
 			switch (columnIndex) {
 			case 0:
-				return	"Run_"+((TestRunEntity)((TestRunModel) element).getEntity()).getId();
+				String s= "Run_"+((TestRunEntity)((TestRunModel) element).getEntity()).getId();
+
+				return s;
 			}			
 		}
 
@@ -40,7 +41,7 @@ public class TestRunHistoryLabelProvider extends LabelProvider implements ITable
 				return ((TestDeviceRunModel) element).getDeviceName();
 			case 1:
 				return ((TestDeviceRunModel) element).getStatus();
-				
+
 			case 2:
 				return  String.valueOf(((TestDeviceRunModel) element).getTimeTaken()/1000f);
 			}
