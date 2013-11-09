@@ -5,6 +5,7 @@ import in.BBAT.abstrakt.presenter.run.model.TestRunCaseModel;
 import in.BBAT.abstrakt.presenter.run.model.TestRunInstanceModel;
 import in.BBAT.abstrakt.presenter.run.model.TestStatus;
 import in.BBAT.presenter.DND.listeners.TestCaseDropListener;
+import in.BBAT.presenter.DND.listeners.TestDeviceRunCaseDropListener;
 import in.BBAT.presenter.DND.listeners.TestRunDropListener;
 import in.BBAT.presenter.labelProviders.DeviceTestRunLableProvider;
 import in.BBAT.presenter.labelProviders.TestRunInfoLabelProvider;
@@ -288,8 +289,15 @@ public class TestRunnerView extends BBATViewPart {
 		}
 		addMenu(deviceTestCaseViewer);
 		deviceRunItem.setControl(comp);
+		createDropForDeviceRunItem(run);
 		tabFolder.setSelection(deviceRunItem);
 
+	}
+
+	private void createDropForDeviceRunItem(DeviceTestRun run) {
+		int operations = DND.DROP_COPY | DND.DROP_MOVE;
+		Transfer[] transferTypes = new Transfer[] { LocalSelectionTransfer.getTransfer() };
+		deviceTestCaseViewer.addDropSupport(operations, transferTypes,new TestDeviceRunCaseDropListener(deviceTestCaseViewer,run));
 	}
 
 	public void addMenu(final Viewer viewer){

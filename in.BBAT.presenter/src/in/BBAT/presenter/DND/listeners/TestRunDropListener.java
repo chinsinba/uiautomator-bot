@@ -59,10 +59,10 @@ public class TestRunDropListener extends ViewerDropAdapter{
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return false;
+		return true;
 	}
 
-	private void addToTestCaseList(AbstractTreeModel testObj,List<TestRunCaseModel> tempList) {
+	protected void addToTestCaseList(AbstractTreeModel testObj,List<TestRunCaseModel> tempList) {
 
 		if (testObj instanceof TestCaseModel) {
 			tempList.add(new TestRunCaseModel((TestCaseModel) testObj));

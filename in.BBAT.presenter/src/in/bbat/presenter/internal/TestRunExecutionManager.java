@@ -92,4 +92,15 @@ public class TestRunExecutionManager {
 		this.executing = executing;
 	}
 
+	public boolean deviceContainsTestCases(){
+
+		for(DeviceTestRun run :runContainer.getdeviceTestRuns()){
+			if(!run.getCases().isEmpty()){
+				return true;
+			}
+		}
+
+		return false;
+	}
+
 }
