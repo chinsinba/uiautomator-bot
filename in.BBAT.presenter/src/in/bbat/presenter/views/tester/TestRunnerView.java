@@ -222,6 +222,13 @@ public class TestRunnerView extends BBATViewPart {
 	private void createDeviceViewer(Composite innerLeft) {
 
 		SashForm form = new SashForm(innerLeft, SWT.VERTICAL);
+		createTestRunViewer(form);
+		createDeviceRun(form);
+		form.setWeights(new int[]{50,50});
+
+	}
+
+	private void createDeviceRun(SashForm form) {
 		final CTabFolder tabFolder = new CTabFolder(form, SWT.TOP|SWT.BORDER);
 		CTabItem testRunItem = new CTabItem(tabFolder, SWT.BORDER);
 		testRunItem.setText("Test Devices");
@@ -262,9 +269,6 @@ public class TestRunnerView extends BBATViewPart {
 		testRunItem.setControl(comp);
 		tabFolder.setSelection(testRunItem);
 		createDropSupportForDevice();
-		createTestRunViewer(form);
-		form.setWeights(new int[]{50,50});
-
 	}
 
 	private void createDeviceItem(CTabFolder tabFolder,DeviceTestRun run) {

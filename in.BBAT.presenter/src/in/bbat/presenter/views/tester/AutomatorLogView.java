@@ -1,5 +1,6 @@
 package in.bbat.presenter.views.tester;
 
+import in.BBAT.abstrakt.presenter.run.model.AutomatorLogModel;
 import in.BBAT.abstrakt.presenter.run.model.TestRunInstanceModel;
 import in.BBAT.abstrakt.presenter.run.model.TestStatus;
 import in.BBAT.presenter.labelProviders.AutoLogLabelProvider;
@@ -10,8 +11,12 @@ import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.ColumnWeightData;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.TableViewer;
+import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerCell;
+import org.eclipse.jface.viewers.ViewerFilter;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.ModifyEvent;
+import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.MouseMoveListener;
 import org.eclipse.swt.graphics.Point;
@@ -24,6 +29,10 @@ import org.eclipse.swt.widgets.Text;
 public class AutomatorLogView extends BBATViewPart {
 
 	private TableViewer viewer;
+
+	private AutoLogFilter filter;
+
+	private Text searchText;
 
 	public static final String ID= "in.BBAT.presenter.tester.AutoLogView";
 	@Override
@@ -62,6 +71,9 @@ public class AutomatorLogView extends BBATViewPart {
 		createColumns(comp2, viewer);
 		viewer.setLabelProvider(new AutoLogLabelProvider());
 		viewer.getTable().addMouseMoveListener(getMouseMoveListener());
+
+		filter = new AutoLogFilter();
+		viewer.addFilter(filter);
 	}
 
 	private void createTextFilter(Composite parent) {
@@ -69,9 +81,21 @@ public class AutomatorLogView extends BBATViewPart {
 		comp1.setLayout(new GridLayout(1,false));
 		comp1.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
-		Text text = new Text(comp1, SWT.BORDER);
-		text.setMessage("Search for messages");
-		text.setLayoutData(new GridData(GridData.FILL_BOTH));
+		searchText = new Text(comp1, SWT.BORDER);
+		searchText.setMessage("Search for messages");
+		searchText.setLayoutData(new GridData(GridData.FILL_BOTH));
+		searchText.addModifyListener(new ModifyListener() {
+
+			@Override
+			public void modifyText(ModifyEvent e) {
+				filter.setSearchText(searchText.getText());
+				try {
+					refresh();
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
 
 	}
 
@@ -113,6 +137,30 @@ public class AutomatorLogView extends BBATViewPart {
 	public void setFocus() {
 	}
 
-	
-	
+
+
+	class AutoLogFilter extends ViewerFilter
+	{
+
+		private String searchString ="";
+
+		public void setSearchText(String s)
+		{
+			this.searchString = ".*" + s.trim().toLowerCase() + ".*";
+		}
+
+		@Override
+		public boolean select(Viewer viewer, Object parentElement,Object element) {
+			if(searchString==null || searchString.isEmpty())
+				return true;
+
+			if(element instanceof AutomatorLogModel){
+
+				return ((AutomatorLogModel) element).getMessage().toLowerCase().matches(searchString);
+			}
+			return false;
+		}
+
+	}
+
 }

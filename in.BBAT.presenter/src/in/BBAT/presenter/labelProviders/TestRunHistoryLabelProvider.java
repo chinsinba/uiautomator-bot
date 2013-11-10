@@ -28,12 +28,11 @@ public class TestRunHistoryLabelProvider extends LabelProvider implements ITable
 		if(element instanceof TestRunModel){
 			switch (columnIndex) {
 			case 0:
-				String s= "Run_"+((TestRunEntity)((TestRunModel) element).getEntity()).getId();
+				String s= "RUN_"+((TestRunEntity)((TestRunModel) element).getEntity()).getId();
 
-				return s;
+				return s/*+" ["+ ((TestRunModel) element).getStartTime() +"]"*/;
 			}			
 		}
-
 		if(element instanceof TestDeviceRunModel)
 		{
 			switch (columnIndex) {
