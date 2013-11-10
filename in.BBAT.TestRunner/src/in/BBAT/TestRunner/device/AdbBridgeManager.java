@@ -27,11 +27,13 @@ public class AdbBridgeManager {
 
 	private List<IDeviceConnectionListener> connectionListeners = new ArrayList<IDeviceConnectionListener>();
 
+	private AdbBackend adbBackend;
+
 	private AdbBridgeManager(String adbLocation) {
 		if (!(new File(adbLocation).canExecute())) {
 		}
 
-		AdbBackend	 adbBackend = new AdbBackend(adbLocation,false);
+		adbBackend = new AdbBackend(adbLocation,false);
 		bridge = AndroidDebugBridge.getBridge();
 		if (bridge != null) {
 			AndroidDebugBridge.addDeviceChangeListener(new AdbDeviceChangeListener());
@@ -113,6 +115,14 @@ public class AdbBridgeManager {
 			devices.add((IAndroidDevice) devObj);
 		}
 		return devices;
+	}
+
+	public AdbBackend getAdbBackend() {
+		return adbBackend;
+	}
+
+	public void setAdbBackend(AdbBackend adbBackend) {
+		this.adbBackend = adbBackend;
 	}
 
 }

@@ -3,6 +3,7 @@ package in.BBAT.TestRunner.device;
 import in.BBAT.testRunner.runner.IUiAutomatorListener;
 import in.BBAT.testRunner.runner.UiAutoTestCaseJar;
 
+import com.android.chimpchat.core.IChimpDevice;
 import com.android.ddmlib.IDevice;
 import com.android.ddmlib.RawImage;
 import com.android.ddmlib.testrunner.ITestRunListener;
@@ -41,6 +42,10 @@ public interface IAndroidDevice {
 	int getApiLevel();
 	
 	boolean isUIAutomatorSupported();
+
+	void getProperties();
+	
+	IChimpDevice getChimpDevice();
 
 
 }

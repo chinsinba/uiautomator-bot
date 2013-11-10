@@ -26,6 +26,8 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IViewPart;
 import org.eclipse.ui.PlatformUI;
 
+import com.android.uiautomator.MonkeyRecorderFrame;
+
 public class DeviceTestRun {
 
 	private AndroidDevice device;
@@ -36,9 +38,17 @@ public class DeviceTestRun {
 	private List<IDeviceRunExecutionlistener> listener = new ArrayList<IDeviceRunExecutionlistener>();
 	private TestDeviceRunModel testDeviceRun;
 
-	public DeviceTestRun(AndroidDevice device,List<TestRunCaseModel> testCases) {
+	public DeviceTestRun(final AndroidDevice device,List<TestRunCaseModel> testCases) {
 		this.setDevice(device);
 		this.testCases.addAll(testCases);
+		/*Display.getDefault().asyncExec(new Runnable() {
+
+			@Override
+			public void run() {
+				MonkeyRecorderFrame.start(device.getiDevice().getChimpDevice());				
+			}
+		});*/
+
 	}
 
 	public AndroidDevice getDevice() {
@@ -243,10 +253,10 @@ public class DeviceTestRun {
 	public Image getImage() {
 		if(getStatus().equals(TestStatus.EXECUTING))
 			return BBATImageManager.getInstance().getImage(BBATImageManager.EXECUTING);
-		
+
 		if(getStatus().equals(TestStatus.EXECUTED))
 			return BBATImageManager.getInstance().getImage(BBATImageManager.PASS);
-		
+
 		return null;
 	}
 }

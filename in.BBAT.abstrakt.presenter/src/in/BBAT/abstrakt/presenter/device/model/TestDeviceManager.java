@@ -9,6 +9,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.android.monkeyrunner.MonkeyDevice;
+import com.android.monkeyrunner.recorder.MonkeyRecorder;
+
 
 public class TestDeviceManager  implements IDeviceConnectionListener{
 
@@ -61,6 +64,7 @@ public class TestDeviceManager  implements IDeviceConnectionListener{
 	@Override
 	public void deviceConnected(IAndroidDevice device) {
 		AndroidDevice dev = new AndroidDevice(device);
+
 		iDeviceMap.put(device, dev);
 		for(IDeviceModelChangeListener listnr : listners)
 		{

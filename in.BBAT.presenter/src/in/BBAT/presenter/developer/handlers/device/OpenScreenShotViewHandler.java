@@ -9,6 +9,8 @@ import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 
+import com.android.monkeyrunner.recorder.MonkeyRecorder;
+
 public class OpenScreenShotViewHandler extends BBATHandler {
 
 	@Override

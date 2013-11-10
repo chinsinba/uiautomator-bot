@@ -7,6 +7,7 @@ import in.BBAT.testRunner.runner.internal.UIAutomatorRunner;
 import java.io.IOException;
 import java.util.List;
 
+import com.android.chimpchat.core.IChimpDevice;
 import com.android.ddmlib.AdbCommandRejectedException;
 import com.android.ddmlib.IDevice;
 import com.android.ddmlib.NullOutputReceiver;
@@ -27,11 +28,15 @@ public class TestDevice implements IAndroidDevice {
 
 	private ILogListener listener;
 	private LogCatReceiverTask logReciever;
+	private IChimpDevice chimpDevice;
+
+	
 
 	public final static String UIAUTOMATOR_JAR_PATH = "/data/local/tmp/BBAT.jar";
 
 	public TestDevice(IDevice device) {
 		this.monkeyDevice = device;
+		chimpDevice = AdbBridgeManager.getInstance().getAdbBackend().waitForConnection(10000, device.getSerialNumber());
 	}
 
 	@Override
@@ -194,5 +199,13 @@ public class TestDevice implements IAndroidDevice {
 	@Override
 	public boolean isUIAutomatorSupported() {
 		return getApiLevel() >= UIAUTOMATOR_MIN_API_LEVEL;
+	}
+
+	public void getProperties(){
+		getMonkeyDevice().getProperties();
+	}
+	
+	public IChimpDevice getChimpDevice() {
+		return chimpDevice;
 	}
 }
