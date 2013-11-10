@@ -184,7 +184,7 @@ public final class LogCatPanel implements ILogCatBufferChangeListener {
 
 	private List<LogCatFilter> mCurrentFilters = Collections.emptyList();
 
-	
+
 
 	private Table mTable;
 
@@ -217,6 +217,7 @@ public final class LogCatPanel implements ILogCatBufferChangeListener {
 	// # of messages deleted since last refresh, synchronized on mLogBuffer
 	private int mDeletedLogCount;
 
+	private List<LogCatMessage> originalMessages;
 	/**
 	 * Construct a logcat panel.
 	 * @param prefStore preference store where UI preferences will be saved
@@ -394,7 +395,7 @@ public final class LogCatPanel implements ILogCatBufferChangeListener {
 		parent.setLayout(layout);
 
 		createViews(parent);
-		setupDefaults();
+		//		setupDefaults();
 
 		return null;
 	}
@@ -402,11 +403,11 @@ public final class LogCatPanel implements ILogCatBufferChangeListener {
 	private void createViews(Composite parent) {
 		mSash = createSash(parent);
 
-		createListOfFilters(mSash);
+//		createListOfFilters(mSash);
 		createLogTableView(mSash);
 
-		boolean showFilters = mPrefStore.getBoolean(DISPLAY_FILTERS_COLUMN_PREFKEY);
-		updateFiltersColumn(showFilters);
+//		boolean showFilters = mPrefStore.getBoolean(DISPLAY_FILTERS_COLUMN_PREFKEY);
+//		updateFiltersColumn(showFilters);
 	}
 
 	private SashForm createSash(Composite parent) {
@@ -684,7 +685,7 @@ public final class LogCatPanel implements ILogCatBufferChangeListener {
 			}
 		});
 
-		ToolItem clearLog = new ToolItem(toolBar, SWT.PUSH);
+		/*ToolItem clearLog = new ToolItem(toolBar, SWT.PUSH);
 		clearLog.setImage(
 				ImageLoader.getDdmUiLibLoader().loadImage(IMAGE_CLEAR_LOG, toolBar.getDisplay()));
 		clearLog.setToolTipText("Clear Log");
@@ -729,7 +730,7 @@ public final class LogCatPanel implements ILogCatBufferChangeListener {
 				boolean scrollLock = mScrollLockCheckBox.getSelection();
 				setScrollToLatestLog(scrollLock);
 			}
-		});
+		});*/
 	}
 
 	/** Sets the foreground color of filter text based on whether the regex is valid. */
@@ -1004,7 +1005,7 @@ public final class LogCatPanel implements ILogCatBufferChangeListener {
 	/** Setup menu to be displayed when right clicking a log message. */
 	private void addRightClickMenu(final Table table) {
 		// This action will pop up a create filter dialog pre-populated with current selection
-		final Action filterAction = new Action("Filter similar messages...") {
+		/*final Action filterAction = new Action("Filter similar messages...") {
 			@Override
 			public void run() {
 				List<LogCatMessage> selectedMessages = getSelectedLogCatMessages();
@@ -1017,7 +1018,7 @@ public final class LogCatPanel implements ILogCatBufferChangeListener {
 				}
 			}
 		};
-
+*/
 		final Action findAction = new Action("Find...") {
 			@Override
 			public void run() {
@@ -1026,7 +1027,7 @@ public final class LogCatPanel implements ILogCatBufferChangeListener {
 		};
 
 		final MenuManager mgr = new MenuManager();
-		mgr.add(filterAction);
+//		mgr.add(filterAction);
 		mgr.add(findAction);
 		final Menu menu = mgr.createContextMenu(table);
 
@@ -1167,6 +1168,7 @@ public final class LogCatPanel implements ILogCatBufferChangeListener {
 	@Override
 	public void bufferChanged(List<LogCatMessage> addedMessages,
 			List<LogCatMessage> deletedMessages) {
+		originalMessages = addedMessages;
 		updateUnreadCount(addedMessages);
 		refreshFiltersTable();
 
@@ -1189,11 +1191,11 @@ public final class LogCatPanel implements ILogCatBufferChangeListener {
 			mDeletedLogCount = 0;
 		}
 
-		if (mReceiver == null || mReceiver.getMessages() == null) {
+		/*if (mReceiver == null || mReceiver.getMessages() == null) {
 			return;
-		}
+		}*/
 
-		List<LogCatMessage> addedMessages = mReceiver.getMessages().getAllMessages();
+		List<LogCatMessage> addedMessages =originalMessages;
 		List<LogCatMessage> deletedMessages = Collections.emptyList();
 		bufferChanged(addedMessages, deletedMessages);
 	}
@@ -1612,7 +1614,7 @@ public final class LogCatPanel implements ILogCatBufferChangeListener {
 		mReceiver.clearMessages();
 		mReceiver.removeMessageReceivedEventListener(this);
 	}
-	
+
 	public Table getmTable() {
 		return mTable;
 	}
