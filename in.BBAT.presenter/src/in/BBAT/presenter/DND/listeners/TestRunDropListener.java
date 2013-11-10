@@ -14,11 +14,13 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerDropAdapter;
 import org.eclipse.swt.dnd.TransferData;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.PlatformUI;
 
 public class TestRunDropListener extends ViewerDropAdapter{
@@ -40,6 +42,18 @@ public class TestRunDropListener extends ViewerDropAdapter{
 			{
 				testObj = iterator.next();
 				if (testObj instanceof AndroidDevice) {
+					if(!((AndroidDevice) testObj).isUIAutomatorSupported()){
+						Display.getDefault().asyncExec(new Runnable() {
+							
+							@Override
+							public void run() {
+								MessageDialog.openInformation(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell() ,"Info", "The device does not support UiAutomator."
+										+ "");
+								
+							}
+						});
+						return true;
+					}
 					TestRunExecutionManager.getInstance().addTestDevice(new DeviceTestRun((AndroidDevice) testObj,TestRunExecutionManager.getInstance().getTestRunCases()));
 				}
 				if(testObj instanceof AbstractProjectTree){

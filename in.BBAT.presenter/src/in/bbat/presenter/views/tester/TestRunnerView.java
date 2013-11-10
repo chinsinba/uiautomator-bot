@@ -69,6 +69,7 @@ public class TestRunnerView extends BBATViewPart {
 	private CTabItem deviceRunItem;
 	private TableViewer deviceTestCaseViewer;
 	private DeviceTestRun deviceTestRun;
+	private CTabItem executionViewItem;
 
 	public TestRunnerView() {
 	}
@@ -109,8 +110,8 @@ public class TestRunnerView extends BBATViewPart {
 	private void createDeviceRunViewerTabs(Composite innerleft) {
 
 		CTabFolder testRunFolder = new CTabFolder(innerleft, SWT.TOP|SWT.BORDER);
-		CTabItem runTabItem = new CTabItem(testRunFolder, SWT.None);
-		runTabItem.setText("Execution View");
+		executionViewItem = new CTabItem(testRunFolder, SWT.None);
+		executionViewItem.setText("Execution View");
 		Composite comp = new Composite(testRunFolder, SWT.BORDER);
 
 		deviceRunInfoViewer = new TableViewer(comp, SWT.MULTI | SWT.H_SCROLL| SWT.V_SCROLL);
@@ -152,9 +153,9 @@ public class TestRunnerView extends BBATViewPart {
 
 		createRunColumns(comp, deviceRunInfoViewer);
 		deviceRunInfoViewer.setLabelProvider(new TestRunInfoLabelProvider());
-		runTabItem.setImage(BBATImageManager.getInstance().getImage(BBATImageManager.EXECUTING));
-		runTabItem.setControl(comp);
-		testRunFolder.setSelection(runTabItem);
+		executionViewItem.setImage(BBATImageManager.getInstance().getImage(BBATImageManager.EXECUTING));
+		executionViewItem.setControl(comp);
+		testRunFolder.setSelection(executionViewItem);
 
 	}
 
@@ -433,6 +434,7 @@ public class TestRunnerView extends BBATViewPart {
 	}
 
 	public void setRunViewerInput(DeviceTestRun execRun){
+		executionViewItem.setText(execRun.getDevice().getName());
 		deviceRunInfoViewer.setInput(execRun.getRunInstances());
 		deviceRunInfoViewer.refresh();
 	}
