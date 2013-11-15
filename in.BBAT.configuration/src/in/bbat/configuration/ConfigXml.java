@@ -25,17 +25,17 @@ public class ConfigXml {
 	/**
 	 * Object corresponding to the root element in the masterConfig.xml
 	 */
-	private  Config masterConfig_;
+	private  BbatConfig masterConfig_;
 
 	private static ConfigXml instance_;
 	private String masterConfigFilePath;
 	private JAXBContext context;
 
 	private ConfigXml(final String masterConfigFilePath) throws JAXBException, FileNotFoundException{
-		masterConfig_ = new Config();
-		context = JAXBContext.newInstance(Config.class);
+		masterConfig_ = new BbatConfig();
+		context = JAXBContext.newInstance(BbatConfig.class);
 		Unmarshaller um = context.createUnmarshaller();
-		masterConfig_ = (Config) um.unmarshal(new FileReader(masterConfigFilePath));
+		masterConfig_ = (BbatConfig) um.unmarshal(new FileReader(masterConfigFilePath));
 		this.masterConfigFilePath = masterConfigFilePath;
 	}
 
@@ -93,105 +93,256 @@ public class ConfigXml {
 			}
 			catch (Exception e) 
 			{
-				LOG.error("Failled to close Masterconfig.xml file",e);
+				//				LOG.error("Failled to close Masterconfig.xml file",e);
 			}
 		}
 	}
 
-	public String getPhone_AdbPath() {
-		return convertToCorrectProgramFilesPath(masterConfig_.getPhone().getAdbPath());
+
+	/**
+	 * Gets the value of the sdkPath property.
+	 * 
+	 * @return
+	 *     possible object is
+	 *     {@link String }
+	 *     
+	 */
+	public String getAndroid_SdkPath() {
+		return masterConfig_.getAndroid().getSdkPath();
+	}
+
+	/**
+	 * Sets the value of the sdkPath property.
+	 * 
+	 * @param value
+	 *     allowed object is
+	 *     {@link String }
+	 *     
+	 */
+	public void setAndroid_SdkPath(String value) {
+		masterConfig_.getAndroid().setSdkPath(value);
+	}
+
+	/**
+	 * Gets the value of the toolVersion property.
+	 * 
+	 * @return
+	 *     possible object is
+	 *     {@link String }
+	 *     
+	 */
+	public String getToolVersion() {
+		return   masterConfig_.getToolVersion();
+	}
+
+	/**
+	 * Sets the value of the toolVersion property.
+	 * 
+	 * @param value
+	 *     allowed object is
+	 *     {@link String }
+	 *     
+	 */
+	public void setToolVersion(String value) {
+		masterConfig_.setToolVersion(value);
 	}
 
 
-	public String getDatabase_UserName() {
-		return masterConfig_.getDatabase().getUserName();
-	}
+    /**
+     * Gets the value of the ipAddress property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getDatabase_IpAddress() {
+        return masterConfig_.getDatabase().getIpAddress();
+    }
 
-	public void setDatabase_UserName(String database_UserName) {
-		masterConfig_.getDatabase().setUserName(database_UserName);
-	}
+    /**
+     * Sets the value of the ipAddress property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setDatabase_IpAddress(String value) {
+    	masterConfig_.getDatabase().setIpAddress(value);
+    }
 
-	public boolean getDatabase_IsExternal() {
-		return masterConfig_.getDatabase().getIsExternal();
-	}
+    /**
+     * Gets the value of the isExternal property.
+     * 
+     */
+    public boolean database_isExternal() {
+        return masterConfig_.getDatabase().isIsExternal();
+    }
 
-	public void setDatabase_IsExternal(boolean database_IsExternal) {
-		masterConfig_.getDatabase().setIsExternal(database_IsExternal);
-	}
+    /**
+     * Sets the value of the isExternal property.
+     * 
+     */
+    public void setDatabase_IsExternal(boolean value) {
+    	masterConfig_.getDatabase().setIsExternal(value);
+    }
 
-	public String getDatabase_Pwd() {
+    /**
+     * Gets the value of the name property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getDatabase_Name() {
+        return masterConfig_.getDatabase().getName();
+    }
 
-		return EncryptDecrypt.getDecryptedData(masterConfig_.getDatabase().getPwd());
-	}
+    /**
+     * Sets the value of the name property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setDatabase_Name(String value) {
+    	masterConfig_.getDatabase().setName(value);
+    }
 
-	public void setDatabase_Pwd(String database_Pwd) {
-		masterConfig_.getDatabase().setPwd(EncryptDecrypt.getEncryptedData(database_Pwd));
-	}
+    /**
+     * Gets the value of the pageSize property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link int }
+     *     
+     */
+    public int getDatabase_PageSize() {
+        return masterConfig_.getDatabase().getPageSize();
+    }
 
-	public String getDatabase_Port() {
-		return masterConfig_.getDatabase().getPort();
-	}
+    /**
+     * Sets the value of the pageSize property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link int }
+     *     
+     */
+    public void setDatabase_PageSize(int value) {
+    	masterConfig_.getDatabase().setPageSize(value);;
+    }
 
-	public void setDatabase_Port(String database_Port) {
-		masterConfig_.getDatabase().setPort(database_Port);
-	}
+    /**
+     * Gets the value of the port property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link int }
+     *     
+     */
+    public int getDatabase_Port() {
+        return masterConfig_.getDatabase().getPort();
+    }
 
-	public String getDatabase_Name() {
-		return masterConfig_.getDatabase().getName();
-	}
+    /**
+     * Sets the value of the port property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link int }
+     *     
+     */
+    public void setDatabase_Port(int value) {
+    	masterConfig_.getDatabase().setPort(value);
+    }
+
+    /**
+     * Gets the value of the pwd property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getDatabase_Pwd() {
+        return masterConfig_.getDatabase().getPwd();
+    }
+
+    /**
+     * Sets the value of the pwd property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setDatabase_Pwd(String value) {
+    	masterConfig_.getDatabase().setPwd(value);
+    }
+
+    /**
+     * Gets the value of the update property.
+     * 
+     */
+    public boolean database_isUpdate() {
+        return masterConfig_.getDatabase().isUpdate();
+    }
+
+    /**
+     * Sets the value of the update property.
+     * 
+     */
+    public void setDatabase_Update(boolean value) {
+        masterConfig_.getDatabase().setUpdate(value);
+    }
+
+    /**
+     * Gets the value of the userName property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getDatabase_UserName() {
+        return masterConfig_.getDatabase().getUserName();
+    }
+
+    /**
+     * Sets the value of the userName property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setDatabase_UserName(String value) {
+        masterConfig_.getDatabase().setUserName(value);
+    }
+	
+    
+    public String getLicence_Key() {
+        return masterConfig_.getLicence().getKey();
+    }
+
+    /**
+     * Sets the value of the key property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setLicence_Key(String value) {
+       masterConfig_.getLicence().setKey(value);
+    }
 
 	
-	public void setDatabase_Name(String database_Name) {
-		masterConfig_.getDatabase().setName(database_Name);
-	}
 	
-	public void setDatabase_Update(boolean isUpdate) {
-		masterConfig_.getDatabase().setUpdate(isUpdate);
-	}
-
-	public boolean getDatabase_Update() {
-		return masterConfig_.getDatabase().getUpdate();
-	}
-	public String getDatabase_IpAddress() {
-		return masterConfig_.getDatabase().getIpAddress();
-	}
-
-	public void setDatabase_IpAddress(String database_IpAddress) {
-		masterConfig_.getDatabase().setIpAddress(database_IpAddress);
-	}
-	public void setDatabase_PageSize(int database_IpAddress) {
-		masterConfig_.getDatabase().setPageSize(String.valueOf(database_IpAddress));
-	}
-
-	public int getDatabase_PageSize() {
-		if(masterConfig_.getDatabase().getPageSize().isEmpty()){
-			return 0;
-		}
-		return Integer.parseInt(masterConfig_.getDatabase().getPageSize());
-	}
-
-	public String getLicence_Key() {
-		return masterConfig_.getLicence().getKey();
-	}
-
-	public void setLicence_Key(String licence_Key) {
-		masterConfig_.getLicence().setKey(licence_Key);
-	}
-
-	public String getUser_Email() {
-		return  masterConfig_.getUser().getEmail();
-	}
-
-	public void setUser_Email(String user_Email) {
-		masterConfig_.getUser().setEmail(user_Email);
-	}
-
-	public void setPhone_AndroidPath(String androidPath){
-		masterConfig_.getPhone().setAndroidPath(convertToCorrectProgramFilesPath(androidPath));
-	}
-	
-	
-
 	private static String convertToCorrectProgramFilesPath(String pathString) {
 		final String PROGRAM_FILES = "Program Files";
 		String newPath=pathString.replace(PROGRAM_FILES, "progra~1");
