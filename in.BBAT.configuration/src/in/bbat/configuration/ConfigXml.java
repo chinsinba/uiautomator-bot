@@ -351,6 +351,53 @@ public class ConfigXml {
        masterConfig_.getLicence().setKey(value);
     }
 
+    /**
+     * Gets the value of the monKey property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getWkspc_MonKey() {
+        return masterConfig_.getWorkspace().getMonKey();
+    }
+
+    /**
+     * Sets the value of the monKey property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setWkspc_MonKey(String value) {
+       masterConfig_.getWorkspace().setMonKey(value);
+    }
+
+    /**
+     * Gets the value of the uiAutomator property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getWkspc_UiAutomator() {
+        return masterConfig_.getWorkspace().getUiAutomator();
+    }
+
+    /**
+     * Sets the value of the uiAutomator property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setWkspc_UiAutomator(String value) {
+        masterConfig_.getWorkspace().setUiAutomator(value);
+    }
 	
 	private static String convertToCorrectProgramFilesPath(String pathString) {
 		final String PROGRAM_FILES = "Program Files";

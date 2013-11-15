@@ -9,6 +9,6 @@
 
 	<Android sdkPath ="/home/syed/Documents/Android_SDK_21/sdk/tools/"/>
 	
-	<Workspace uiAutomator = "dsghds/dagshdg" monKey="davsdgsj/sagdhs"/>
+	<Workspace uiAutomator = "/home/syed/Documents/Macac" monKey="davsdgsj/sagdhs"/>
 
 </BbatConfig>
