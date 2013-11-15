@@ -3,6 +3,7 @@ package in.bbat.presenter;
 import in.BBAT.abstrakt.presenter.device.model.TestDeviceManager;
 import in.BBAT.abstrakt.presenter.pkg.model.ITempConstants;
 import in.bbat.abstrakt.gui.ApplicationHelper;
+import in.bbat.configuration.ConfigXml;
 
 import java.net.UnknownHostException;
 

@@ -1,6 +1,8 @@
 package in.bbat.configuration;
 
 
+import in.bbat.utility.BBATPluginUtility;
+
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -14,43 +16,44 @@ import javax.xml.bind.Unmarshaller;
 
 import org.eclipse.core.runtime.Path;
 
+
 /**
- * This class is the interface for reading/writing the MasterConfig.xml file.
- * It uses JAXB to read and write the MasterConfig.Xml. 
+ * This class is the interface for reading/writing the bbat.xml file.
+ * It uses JAXB to read and write the bbat.Xml. 
  * @author syed
  */
 public class ConfigXml {
 
 
+	public final static String CONFIG_XML ="BBAT.xml";
 	/**
 	 * Object corresponding to the root element in the masterConfig.xml
 	 */
 	private  BbatConfig masterConfig_;
 
 	private static ConfigXml instance_;
-	private String masterConfigFilePath;
+	private String bbatConfigFilePath;
 	private JAXBContext context;
 
-	private ConfigXml(final String masterConfigFilePath) throws JAXBException, FileNotFoundException{
+	private ConfigXml(final String bbatConfigFilePath) throws JAXBException, FileNotFoundException{
 		masterConfig_ = new BbatConfig();
 		context = JAXBContext.newInstance(BbatConfig.class);
 		Unmarshaller um = context.createUnmarshaller();
-		masterConfig_ = (BbatConfig) um.unmarshal(new FileReader(masterConfigFilePath));
-		this.masterConfigFilePath = masterConfigFilePath;
+		masterConfig_ = (BbatConfig) um.unmarshal(new FileReader(bbatConfigFilePath));
+		this.bbatConfigFilePath = bbatConfigFilePath;
 	}
 
 	/**
 	 * This method initializes the class with the context.
 	 * <br><b>NOTE:This method should be called first and only then the other methods of this class can be called.
 	 * If this method is not called then calling othr methods of the class will throw {@link NullPointerException}</b>
-	 * @param masterConfigFilePath  Path of the masterconfig.xml file
 	 * @throws JAXBException
 	 * @throws FileNotFoundException If the input file is not found
 	 */
-	public static void init(final String masterConfigFilePath) throws JAXBException, FileNotFoundException {
+	public static void init() throws JAXBException, FileNotFoundException {
 		if(instance_!=null)
 			return;
-		instance_ = new ConfigXml(masterConfigFilePath);
+		instance_ = new ConfigXml(BBATPluginUtility.getInstance().getPluginDir(Activator.PLUGIN_ID)+Path.SEPARATOR+CONFIG_XML);
 	}
 	/**
 	 * This method will return the {@link ConfigXml} object reference;
@@ -59,6 +62,13 @@ public class ConfigXml {
 	 * @return
 	 */
 	public static ConfigXml getInstance(){
+		try {
+			init();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (JAXBException e) {
+			e.printStackTrace();
+		}
 		if(instance_==null)
 			throw new NullPointerException("The init() method should be called once before using this method");
 		return instance_;
@@ -82,7 +92,7 @@ public class ConfigXml {
 		Writer w = null;
 		try 
 		{
-			w = new FileWriter(masterConfigFilePath);
+			w = new FileWriter(bbatConfigFilePath);
 			m.marshal(masterConfig_, w);
 		}
 		finally

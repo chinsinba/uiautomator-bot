@@ -10,6 +10,7 @@ import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.ide.IDE;
 import org.eclipse.ui.part.FileEditorInput;
 
 public class CreateTestCaseWizard extends Wizard {
@@ -47,7 +48,8 @@ public class CreateTestCaseWizard extends Wizard {
 			input = new FileEditorInput(newTestCase.getIFile());
 			try
 			{
-				PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().openEditor(input, "org.eclipse.jdt.ui.CompilationUnitEditor");
+				IDE.openEditor(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage(), newTestCase.getIFile());
+//				PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().openEditor(input, "org.eclipse.jdt.ui.CompilationUnitEditor");
 			} catch (PartInitException e)
 			{
 			}

@@ -8,6 +8,7 @@ import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.ide.IDE;
 import org.eclipse.ui.part.FileEditorInput;
 
 public class EditScriptHandler extends AbstractTestCaseBrowserHandler {
@@ -19,7 +20,8 @@ public class EditScriptHandler extends AbstractTestCaseBrowserHandler {
 		input = new FileEditorInput(((TestCaseModel) selectedObjects.get(0)).getIFile());
 		try
 		{
-			PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().openEditor(input, "org.eclipse.jdt.ui.CompilationUnitEditor");
+			IDE.openEditor(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage(),((TestCaseModel) selectedObjects.get(0)).getIFile());
+//			PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().openEditor(input, "org.eclipse.jdt.ui.CompilationUnitEditor");
 		} catch (PartInitException e)
 		{
 		}
