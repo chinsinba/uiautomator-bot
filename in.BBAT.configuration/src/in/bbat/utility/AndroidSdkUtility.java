@@ -1,33 +1,66 @@
 package in.bbat.utility;
 
+import java.io.File;
+import java.io.FilenameFilter;
+
+import org.eclipse.core.runtime.Path;
+
 import in.bbat.configuration.ConfigXml;
 
 public class AndroidSdkUtility {
 
 	public  final static  String  ANDROID_SDK = ConfigXml.getInstance().getAndroid_SdkPath();
 	public  final static  String PLATFORM = "platforms";
+	public  final static  String  UNIX_ADB ="adb";
+	public  final static  String  WINDOWS_ADB ="adb.exe";
+	
+	public  final static  String PLATFORM_TOOLS = "platform-tools";
 	public  final static  String UIAUTOMATOR_JAR ="uiautomator.jar";
 	public  final static  String ANDROID_JAR ="android.jar";
-	
-
-	private final static String UIAUTOPATH="/home/syed/Documents/Android_SDK_21/sdk/platforms/android-18/uiautomator.jar";
-	private final static String ANDROPATH="/home/syed/Documents/Android_SDK_21/sdk/platforms/android-18/android.jar";
-	private final static String ADBPATH ="/home/syed/Documents/Android_SDK_21/sdk/platform-tools/adb";
-	private final static String USERWKSPC="/home/syed/Documents/Macac";
 
 	public static String getUiautopath() {
-		return ANDROID_SDK;
+		return getJarPath(UIAUTOMATOR_JAR);
+	}
+
+	private static String getJarPath(String uiautomatorJar) {
+		String temp = getTheLatestPlatformAvailable(uiautomatorJar);
+		return ANDROID_SDK+Path.SEPARATOR+PLATFORM+Path.SEPARATOR+temp+Path.SEPARATOR+uiautomatorJar;
+	}
+
+	private static String getTheLatestPlatformAvailable(final String jarName) {
+		File andPlatForm_ = new File(ANDROID_SDK+Path.SEPARATOR+PLATFORM+Path.SEPARATOR);
+		String temp= "";
+		if(andPlatForm_.exists()){
+			String[] foldNames = andPlatForm_.list(new FilenameFilter() {
+				@Override
+				public boolean accept(File file, String fileName) {
+					if(fileName.matches("android-"+"(\\d)+"))
+					{
+						File uiauto = new File(file,Path.SEPARATOR+fileName+Path.SEPARATOR+jarName);
+						if(uiauto.exists())
+							return true;
+					}
+					return false;
+				}
+			});
+			int i = 0;
+			for(String fold : foldNames)
+			{
+				if(i<Integer.parseInt(fold.replaceAll("android-", ""))){
+					i=Integer.parseInt(fold.replaceAll("android-", ""));
+					temp = fold;
+				}
+			}
+		}
+		return temp;
 	}
 
 	public static String getAndropath() {
-		return ANDROPATH;
+		return getJarPath(ANDROID_JAR);
 	}
 
-	public static String getAdbpath() {
-		return ADBPATH;
+	public static String getADBpath(){
+		return ANDROID_SDK+Path.SEPARATOR+PLATFORM_TOOLS+Path.SEPARATOR+UNIX_ADB;
 	}
 
-	public static String getUserwkspc() {
-		return USERWKSPC;
-	}
 }

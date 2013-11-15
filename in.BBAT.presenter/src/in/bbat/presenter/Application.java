@@ -4,6 +4,7 @@ import in.BBAT.abstrakt.presenter.device.model.TestDeviceManager;
 import in.BBAT.abstrakt.presenter.pkg.model.ITempConstants;
 import in.bbat.abstrakt.gui.ApplicationHelper;
 import in.bbat.configuration.ConfigXml;
+import in.bbat.utility.AndroidSdkUtility;
 
 import java.net.UnknownHostException;
 
@@ -26,7 +27,7 @@ public class Application implements IApplication {
 		try {
 			try {
 				ApplicationHelper.initializeDb();
-				TestDeviceManager.init(ITempConstants.ADBPATH);
+				TestDeviceManager.init(ConfigXml.getInstance().getAndroid_AdbPath());
 			} catch (UnknownHostException e) {
 				e.printStackTrace();
 			} catch (Exception e) {

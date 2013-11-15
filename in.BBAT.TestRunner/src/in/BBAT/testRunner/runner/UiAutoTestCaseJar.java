@@ -22,7 +22,7 @@ public class UiAutoTestCaseJar {
 	
 
 	private static final String TEMP_FOLDER_PATH ="/home/syed/Documents/test";
-	private static final String ANDROID_SDK_TOOLS = ConfigXml.getInstance().getAndroid_SdkPath();
+	private static final String ANDROID_SDK_TOOLS = ConfigXml.getInstance().getAndroid_SdkPath()+Path.SEPARATOR+"tools";
 	private static final String CREATE_UI_PROJECT_COMMAND = "/android create uitest-project -n "+JAR_NAME+" -t 6 -p "+TEMP_FOLDER_PATH;
 
 	

@@ -1,6 +1,7 @@
 package in.bbat.configuration;
 
 
+import in.bbat.utility.AndroidSdkUtility;
 import in.bbat.utility.BBATPluginUtility;
 
 import java.io.FileNotFoundException;
@@ -133,6 +134,18 @@ public class ConfigXml {
 		masterConfig_.getAndroid().setSdkPath(value);
 	}
 
+	
+	public String getAndroid_UiAutomatorPath(){
+		return AndroidSdkUtility.getUiautopath();
+	}
+	
+	public String getAndroid_AndroidJarPath(){
+		return AndroidSdkUtility.getAndropath();
+	}
+	
+	public String getAndroid_AdbPath(){
+		return AndroidSdkUtility.getADBpath();
+	}
 	/**
 	 * Gets the value of the toolVersion property.
 	 * 

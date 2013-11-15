@@ -2,6 +2,7 @@ package in.BBAT.abstrakt.presenter.pkg.model;
 
 
 import in.BBAT.testRunner.runner.FileUtils;
+import in.bbat.configuration.ConfigXml;
 
 import java.io.File;
 import java.io.IOException;
@@ -67,8 +68,8 @@ public class BBATProjectUtil {
 				javaProject.setOutputLocation(binFolder.getFullPath(), null);
 
 				List<IClasspathEntry> entries = new ArrayList<IClasspathEntry>();
-				entries.add(JavaCore.newLibraryEntry(new Path(ITempConstants.ANDROPATH), null, null));
-				entries.add(JavaCore.newLibraryEntry(new Path(ITempConstants.UIAUTOPATH), null, null));
+				entries.add(JavaCore.newLibraryEntry(new Path(ConfigXml.getInstance().getAndroid_AndroidJarPath()), null, null));
+				entries.add(JavaCore.newLibraryEntry(new Path(ConfigXml.getInstance().getAndroid_UiAutomatorPath()), null, null));
 				entries.add(JavaCore.newSourceEntry(project.getFullPath()));
 				IVMInstall vmInstall = JavaRuntime.getDefaultVMInstall();
 				LibraryLocation[] locations = JavaRuntime.getLibraryLocations(vmInstall);
