@@ -340,7 +340,7 @@ public class ConfigXml {
     }
 
     /**
-     * Sets the value of the key property.
+     * Sets the value of the licence key property.
      * 
      * @param value
      *     allowed object is
@@ -351,7 +351,6 @@ public class ConfigXml {
        masterConfig_.getLicence().setKey(value);
     }
 
-	
 	
 	private static String convertToCorrectProgramFilesPath(String pathString) {
 		final String PROGRAM_FILES = "Program Files";

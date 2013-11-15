@@ -1,5 +1,7 @@
 package in.BBAT.testRunner.runner;
 
+import in.bbat.configuration.ConfigXml;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -13,19 +15,24 @@ public class UiAutoTestCaseJar {
 
 	private String jarPath;
 	private File jarFile;
-	private static final String jarName = "BBAT";
+	private static final String JAR_NAME = "BBAT";
+	private static final String SRC = "src";
+	private static final String BIN = "bin";
+	private static final String BUILD_FILE = "build.xml";
+	
 
 	private static final String TEMP_FOLDER_PATH ="/home/syed/Documents/test";
-	private static final String ANDROID_SDK_TOOLS = "/home/syed/Documents/Android_SDK_21/sdk/tools/";
-	private static final String COMMAND = "/android create uitest-project -n "+jarName+" -t 6 -p "+TEMP_FOLDER_PATH;
+	private static final String ANDROID_SDK_TOOLS = ConfigXml.getInstance().getAndroid_SdkPath();
+	private static final String CREATE_UI_PROJECT_COMMAND = "/android create uitest-project -n "+JAR_NAME+" -t 6 -p "+TEMP_FOLDER_PATH;
 
+	
 	public UiAutoTestCaseJar(List<String> testScriptPaths){
 		initializeBuildEnvironment(testScriptPaths);
 	}
 
 	private void initializeBuildEnvironment(List<String> testScriptPaths) {
 
-		File temp = new File(TEMP_FOLDER_PATH+"/src");
+		File temp = new File(TEMP_FOLDER_PATH+Path.SEPARATOR+SRC);
 
 		try {
 			clearFolder(new File(TEMP_FOLDER_PATH));
@@ -42,17 +49,17 @@ public class UiAutoTestCaseJar {
 				String[] seg = path.segments();
 				int len =seg.length;
 				
-				File createPack = new File(temp.getAbsolutePath()+path.SEPARATOR+seg[len-3]+path.SEPARATOR+seg[len-2]);
+				File createPack = new File(temp.getAbsolutePath()+Path.SEPARATOR+seg[len-3]+Path.SEPARATOR+seg[len-2]);
 				createPack.mkdirs();
 				
-				FileUtils.copyFolder(new File(testScriptPath), new File(createPack.getAbsolutePath()+"/"+path.lastSegment()));	
+				FileUtils.copyFolder(new File(testScriptPath), new File(createPack.getAbsolutePath()+Path.SEPARATOR+path.lastSegment()));	
 			}
 
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
 		try {
-			Process p = Runtime.getRuntime().exec(ANDROID_SDK_TOOLS+COMMAND);
+			Process p = Runtime.getRuntime().exec(ANDROID_SDK_TOOLS+CREATE_UI_PROJECT_COMMAND);
 			p.waitFor();
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -61,7 +68,7 @@ public class UiAutoTestCaseJar {
 		}
 
 		createJar(TEMP_FOLDER_PATH);
-		setJarFile(new File(TEMP_FOLDER_PATH+"/bin/"+jarName+".jar"));
+		setJarFile(new File(TEMP_FOLDER_PATH+Path.SEPARATOR+BIN+Path.SEPARATOR+JAR_NAME+".jar"));
 
 	}
 
@@ -77,7 +84,7 @@ public class UiAutoTestCaseJar {
 	private void createJar(String tempfolderpath) {
 
 		AntRunner runner = new AntRunner();
-		runner.setBuildFileLocation(tempfolderpath+"/build.xml");
+		runner.setBuildFileLocation(tempfolderpath+Path.SEPARATOR+BUILD_FILE);
 		String[] target = {"build"};
 		runner.setExecutionTargets(target);
 		try {
