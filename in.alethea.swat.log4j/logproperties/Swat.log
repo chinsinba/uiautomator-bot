@@ -1,0 +1,261 @@
+INFO  : [2012-05-24 18:47:10,970] [0     ] [main]  in.alethea.swat.datamgr.preferences.Preferences  - Master preferences file:master_config.xml
+INFO  : [2012-05-24 18:47:10,978] [8     ] [main]  in.alethea.swat.datamgr.xml.XmlConverter  - Reading XML file:master_config.xml
+DEBUG : [2012-05-24 18:47:11,090] [120   ] [main]  inalethea.swat.tmg.NetworkManager.NetworkManagerAnite  - <?xml version="1.0" encoding="ISO-8859-1"?>
+<nwifmsg>
+	<msgtype>nwsetup</msgtype>
+	<msgnum>swat_dev_to_nw_audit_req</msgnum>
+	<condnid>1</condnid>
+	<payload>audit_request </payload>
+</nwifmsg>
+
+
+INFO  : [2012-05-24 18:47:11,128] [158   ] [Thread-2]  inalethea.swat.tmg.NetworkManager.NetworkManagerAnite  - Received from control socket:<?xml version="1.0" encoding="ISO-8859-1"?><networkInfo><msgtype>nwsetup</msgtype><msgnum>swat_nw_dev_audit_response</msgnum><condnid>1</condnid><numterminals>1</numterminals><network_list><network><terminal>1</terminal><nwtype>wimax</nwtype><relnum>16e</relnum><hardware>runcom</hardware><software>0.1.12</software><dltxpower>0</dltxpower><dlmodulation>0</dlmodulation><numcells>1</numcells><cells><cell><centrefreq>2575000</centrefreq><bandwidth>1</bandwidth></cell></cells></network></network_list></networkInfo>
+INFO  : [2012-05-24 18:47:11,162] [192   ] [Thread-2]  inalethea.swat.tmg.NetworkManager.NetworkXmlConverter  - Parsing netwokr response
+INFO  : [2012-05-24 18:47:11,229] [259   ] [Thread-2]  inalethea.swat.tmg.NetworkManager.NetworkManagerAnite  - Network list received
+INFO  : [2012-05-24 18:47:11,249] [279   ] [Thread-2]  inalethea.swat.tmg.NetworkManager.NetworkAniteWimax  - Created:1
+INFO  : [2012-05-24 18:47:11,301] [331   ] [Thread-2]  inalethea.swat.tmg.DeviceManager.AdbMonkeyRunnerDeviceManager  - Adb path:~/android/sdk/android-sdk-linux_x86/platform-tools/adb
+WARN  : [2012-05-24 18:47:11,304] [334   ] [Thread-2]  inalethea.swat.tmg.DeviceManager.AdbMonkeyRunnerDeviceManager  - adb path is not valid, please check Preferences.
+INFO  : [2012-05-24 18:47:13,985] [3015  ] [main]  in.alethea.swat.gui.CommandStateSourceProvider  - 
+INFO  : [2012-05-24 18:47:18,120] [7150  ] [main]  in.alethea.swat.datamgr.testcases.AbstractTestModel  - Config file:null
+INFO  : [2012-05-24 18:47:18,133] [7163  ] [main]  in.alethea.swat.datamgr.testcases.TestPackageRoot  - Confile file:swatpackages/SwatPackageConfig.xml
+INFO  : [2012-05-24 18:47:18,133] [7163  ] [main]  in.alethea.swat.datamgr.testcases.AbstractTestModel  - Config file:swatpackages/SwatPackageConfig.xml
+INFO  : [2012-05-24 18:47:18,134] [7164  ] [main]  in.alethea.swat.datamgr.xml.XmlConverter  - Reading XML file:swatpackages/SwatPackageConfig.xml
+INFO  : [2012-05-24 18:47:18,147] [7177  ] [main]  in.alethea.swat.datamgr.testcases.TestPackage  - Config file:swatpackages/wimax/pkginfo.xml
+INFO  : [2012-05-24 18:47:18,147] [7177  ] [main]  in.alethea.swat.datamgr.testcases.AbstractTestModel  - Config file:swatpackages/wimax/pkginfo.xml
+WARN  : [2012-05-24 18:47:18,147] [7177  ] [main]  in.alethea.swat.datamgr.datastore.FileSystemAdapter  - Config file not found, may be new file needed:swatpackages/wimax/pkginfo.xml
+INFO  : [2012-05-24 18:47:18,148] [7178  ] [main]  in.alethea.swat.datamgr.testcases.TestPackage  - Config file:swatpackages/LTE/pkginfo.xml
+INFO  : [2012-05-24 18:47:18,148] [7178  ] [main]  in.alethea.swat.datamgr.testcases.AbstractTestModel  - Config file:swatpackages/LTE/pkginfo.xml
+INFO  : [2012-05-24 18:47:18,148] [7178  ] [main]  in.alethea.swat.datamgr.xml.XmlConverter  - Reading XML file:swatpackages/LTE/pkginfo.xml
+INFO  : [2012-05-24 18:47:18,153] [7183  ] [main]  in.alethea.swat.datamgr.testcases.TestSuite  - Config file:swatpackages/LTE/video streaming/suiteinfo.xml
+INFO  : [2012-05-24 18:47:18,153] [7183  ] [main]  in.alethea.swat.datamgr.testcases.AbstractTestModel  - Config file:swatpackages/LTE/video streaming/suiteinfo.xml
+INFO  : [2012-05-24 18:47:18,154] [7184  ] [main]  in.alethea.swat.datamgr.xml.XmlConverter  - Reading XML file:swatpackages/LTE/video streaming/suiteinfo.xml
+INFO  : [2012-05-24 18:47:18,160] [7190  ] [main]  in.alethea.swat.datamgr.testcases.TestCase  - Config file:swatpackages/LTE/video streaming/httpondemand_normal.py
+INFO  : [2012-05-24 18:47:18,160] [7190  ] [main]  in.alethea.swat.datamgr.testcases.AbstractTestModel  - Config file:swatpackages/LTE/video streaming/httpondemand_normal.py
+INFO  : [2012-05-24 18:47:18,162] [7192  ] [main]  in.alethea.swat.datamgr.testcases.TestCase  - Test Case props:{packageroot=swatpackages, network_tech=LTE, name=httpondemand_normal, package=LTE, device_api_version=12.0, suite=video streaming, script=swatpackages/LTE/video streaming/httpondemand_normal.py}
+INFO  : [2012-05-24 18:47:18,163] [7193  ] [main]  in.alethea.swat.datamgr.testcases.TestCase  - Config file:swatpackages/LTE/video streaming/httpondemand_lowcpu.py
+INFO  : [2012-05-24 18:47:18,163] [7193  ] [main]  in.alethea.swat.datamgr.testcases.AbstractTestModel  - Config file:swatpackages/LTE/video streaming/httpondemand_lowcpu.py
+INFO  : [2012-05-24 18:47:18,163] [7193  ] [main]  in.alethea.swat.datamgr.testcases.TestCase  - Test Case props:{packageroot=swatpackages, network_tech=LTE, name=httpondemand_lowcpu, package=LTE, device_api_version=12.0, suite=video streaming, script=swatpackages/LTE/video streaming/httpondemand_lowcpu.py}
+INFO  : [2012-05-24 18:47:18,163] [7193  ] [main]  in.alethea.swat.datamgr.testcases.TestCase  - Config file:swatpackages/LTE/video streaming/httpondemand_lowmem.py
+INFO  : [2012-05-24 18:47:18,163] [7193  ] [main]  in.alethea.swat.datamgr.testcases.AbstractTestModel  - Config file:swatpackages/LTE/video streaming/httpondemand_lowmem.py
+INFO  : [2012-05-24 18:47:18,164] [7194  ] [main]  in.alethea.swat.datamgr.testcases.TestCase  - Test Case props:{packageroot=swatpackages, network_tech=LTE, name=httpondemand_lowmem, package=LTE, device_api_version=12.0, suite=video streaming, script=swatpackages/LTE/video streaming/httpondemand_lowmem.py}
+INFO  : [2012-05-24 18:47:18,164] [7194  ] [main]  in.alethea.swat.datamgr.testcases.TestCase  - Config file:swatpackages/LTE/video streaming/httpondemandTxpower_normal.py
+INFO  : [2012-05-24 18:47:18,164] [7194  ] [main]  in.alethea.swat.datamgr.testcases.AbstractTestModel  - Config file:swatpackages/LTE/video streaming/httpondemandTxpower_normal.py
+INFO  : [2012-05-24 18:47:18,164] [7194  ] [main]  in.alethea.swat.datamgr.testcases.TestCase  - Test Case props:{packageroot=swatpackages, network_tech=LTE, name=httpondemandTxpower_normal, package=LTE, device_api_version=12.0, suite=video streaming, script=swatpackages/LTE/video streaming/httpondemandTxpower_normal.py}
+INFO  : [2012-05-24 18:47:18,165] [7195  ] [main]  in.alethea.swat.datamgr.testcases.TestCase  - Config file:swatpackages/LTE/video streaming/httpondemandTxpower_lowcpu.py
+INFO  : [2012-05-24 18:47:18,165] [7195  ] [main]  in.alethea.swat.datamgr.testcases.AbstractTestModel  - Config file:swatpackages/LTE/video streaming/httpondemandTxpower_lowcpu.py
+INFO  : [2012-05-24 18:47:18,165] [7195  ] [main]  in.alethea.swat.datamgr.testcases.TestCase  - Test Case props:{packageroot=swatpackages, network_tech=LTE, name=httpondemandTxpower_lowcpu, package=LTE, device_api_version=12.0, suite=video streaming, script=swatpackages/LTE/video streaming/httpondemandTxpower_lowcpu.py}
+INFO  : [2012-05-24 18:47:18,165] [7195  ] [main]  in.alethea.swat.datamgr.testcases.TestCase  - Config file:swatpackages/LTE/video streaming/httpondemandTxpower_lowmem.py
+INFO  : [2012-05-24 18:47:18,165] [7195  ] [main]  in.alethea.swat.datamgr.testcases.AbstractTestModel  - Config file:swatpackages/LTE/video streaming/httpondemandTxpower_lowmem.py
+INFO  : [2012-05-24 18:47:18,166] [7196  ] [main]  in.alethea.swat.datamgr.testcases.TestCase  - Test Case props:{packageroot=swatpackages, network_tech=LTE, name=httpondemandTxpower_lowmem, package=LTE, device_api_version=12.0, suite=video streaming, script=swatpackages/LTE/video streaming/httpondemandTxpower_lowmem.py}
+INFO  : [2012-05-24 18:47:18,166] [7196  ] [main]  in.alethea.swat.datamgr.testcases.TestSuite  - Config file:swatpackages/LTE/download manager/suiteinfo.xml
+INFO  : [2012-05-24 18:47:18,166] [7196  ] [main]  in.alethea.swat.datamgr.testcases.AbstractTestModel  - Config file:swatpackages/LTE/download manager/suiteinfo.xml
+INFO  : [2012-05-24 18:47:18,166] [7196  ] [main]  in.alethea.swat.datamgr.xml.XmlConverter  - Reading XML file:swatpackages/LTE/download manager/suiteinfo.xml
+INFO  : [2012-05-24 18:47:18,173] [7203  ] [main]  in.alethea.swat.datamgr.testcases.TestCase  - Config file:swatpackages/LTE/download manager/singlefile_normal.py
+INFO  : [2012-05-24 18:47:18,174] [7204  ] [main]  in.alethea.swat.datamgr.testcases.AbstractTestModel  - Config file:swatpackages/LTE/download manager/singlefile_normal.py
+INFO  : [2012-05-24 18:47:18,174] [7204  ] [main]  in.alethea.swat.datamgr.testcases.TestCase  - Test Case props:{packageroot=swatpackages, network_tech=LTE, name=singlefile_normal, package=LTE, device_api_version=12.0, suite=download manager, script=swatpackages/LTE/download manager/singlefile_normal.py}
+INFO  : [2012-05-24 18:47:18,174] [7204  ] [main]  in.alethea.swat.datamgr.testcases.TestCase  - Config file:swatpackages/LTE/download manager/singlefile_lowcpu.py
+INFO  : [2012-05-24 18:47:18,174] [7204  ] [main]  in.alethea.swat.datamgr.testcases.AbstractTestModel  - Config file:swatpackages/LTE/download manager/singlefile_lowcpu.py
+INFO  : [2012-05-24 18:47:18,175] [7205  ] [main]  in.alethea.swat.datamgr.testcases.TestCase  - Test Case props:{packageroot=swatpackages, network_tech=LTE, name=singlefile_lowcpu, package=LTE, device_api_version=12.0, suite=download manager, script=swatpackages/LTE/download manager/singlefile_lowcpu.py}
+INFO  : [2012-05-24 18:47:18,175] [7205  ] [main]  in.alethea.swat.datamgr.testcases.TestCase  - Config file:swatpackages/LTE/download manager/singlefile_lowmem.py
+INFO  : [2012-05-24 18:47:18,178] [7208  ] [main]  in.alethea.swat.datamgr.testcases.AbstractTestModel  - Config file:swatpackages/LTE/download manager/singlefile_lowmem.py
+INFO  : [2012-05-24 18:47:18,179] [7209  ] [main]  in.alethea.swat.datamgr.testcases.TestCase  - Test Case props:{packageroot=swatpackages, network_tech=LTE, name=singlefile_lowmem, package=LTE, device_api_version=12.0, suite=download manager, script=swatpackages/LTE/download manager/singlefile_lowmem.py}
+INFO  : [2012-05-24 18:47:18,179] [7209  ] [main]  in.alethea.swat.datamgr.testcases.TestCase  - Config file:swatpackages/LTE/download manager/multiplefile_normal.py
+INFO  : [2012-05-24 18:47:18,179] [7209  ] [main]  in.alethea.swat.datamgr.testcases.AbstractTestModel  - Config file:swatpackages/LTE/download manager/multiplefile_normal.py
+INFO  : [2012-05-24 18:47:18,179] [7209  ] [main]  in.alethea.swat.datamgr.testcases.TestCase  - Test Case props:{packageroot=swatpackages, network_tech=LTE, name=multiplefile_normal, package=LTE, device_api_version=12.0, suite=download manager, script=swatpackages/LTE/download manager/multiplefile_normal.py}
+INFO  : [2012-05-24 18:47:18,180] [7210  ] [main]  in.alethea.swat.datamgr.testcases.TestCase  - Config file:swatpackages/LTE/download manager/multiplefile_lowcpu.py
+INFO  : [2012-05-24 18:47:18,180] [7210  ] [main]  in.alethea.swat.datamgr.testcases.AbstractTestModel  - Config file:swatpackages/LTE/download manager/multiplefile_lowcpu.py
+INFO  : [2012-05-24 18:47:18,181] [7211  ] [main]  in.alethea.swat.datamgr.testcases.TestCase  - Test Case props:{packageroot=swatpackages, network_tech=LTE, name=multiplefile_lowcpu, package=LTE, device_api_version=12.0, suite=download manager, script=swatpackages/LTE/download manager/multiplefile_lowcpu.py}
+INFO  : [2012-05-24 18:47:18,181] [7211  ] [main]  in.alethea.swat.datamgr.testcases.TestCase  - Config file:swatpackages/LTE/download manager/multiplefile_lowmem.py
+INFO  : [2012-05-24 18:47:18,181] [7211  ] [main]  in.alethea.swat.datamgr.testcases.AbstractTestModel  - Config file:swatpackages/LTE/download manager/multiplefile_lowmem.py
+INFO  : [2012-05-24 18:47:18,182] [7212  ] [main]  in.alethea.swat.datamgr.testcases.TestCase  - Test Case props:{packageroot=swatpackages, network_tech=LTE, name=multiplefile_lowmem, package=LTE, device_api_version=12.0, suite=download manager, script=swatpackages/LTE/download manager/multiplefile_lowmem.py}
+INFO  : [2012-05-24 18:47:18,182] [7212  ] [main]  in.alethea.swat.datamgr.testcases.TestCase  - Config file:swatpackages/LTE/download manager/allow_wifi.py
+INFO  : [2012-05-24 18:47:18,182] [7212  ] [main]  in.alethea.swat.datamgr.testcases.AbstractTestModel  - Config file:swatpackages/LTE/download manager/allow_wifi.py
+INFO  : [2012-05-24 18:47:18,184] [7214  ] [main]  in.alethea.swat.datamgr.testcases.TestCase  - Test Case props:{packageroot=swatpackages, network_tech=LTE, name=allow_wifi, package=LTE, device_api_version=12.0, suite=download manager, script=swatpackages/LTE/download manager/allow_wifi.py}
+INFO  : [2012-05-24 18:47:18,184] [7214  ] [main]  in.alethea.swat.datamgr.testcases.TestCase  - Config file:swatpackages/LTE/download manager/allow_mobile.py
+INFO  : [2012-05-24 18:47:18,185] [7215  ] [main]  in.alethea.swat.datamgr.testcases.AbstractTestModel  - Config file:swatpackages/LTE/download manager/allow_mobile.py
+INFO  : [2012-05-24 18:47:18,185] [7215  ] [main]  in.alethea.swat.datamgr.testcases.TestCase  - Test Case props:{packageroot=swatpackages, network_tech=LTE, name=allow_mobile, package=LTE, device_api_version=12.0, suite=download manager, script=swatpackages/LTE/download manager/allow_mobile.py}
+INFO  : [2012-05-24 18:47:18,185] [7215  ] [main]  in.alethea.swat.datamgr.testcases.TestCase  - Config file:swatpackages/LTE/download manager/allow_lte.py
+INFO  : [2012-05-24 18:47:18,185] [7215  ] [main]  in.alethea.swat.datamgr.testcases.AbstractTestModel  - Config file:swatpackages/LTE/download manager/allow_lte.py
+INFO  : [2012-05-24 18:47:18,186] [7216  ] [main]  in.alethea.swat.datamgr.testcases.TestCase  - Test Case props:{packageroot=swatpackages, network_tech=LTE, name=allow_lte, package=LTE, device_api_version=12.0, suite=download manager, script=swatpackages/LTE/download manager/allow_lte.py}
+INFO  : [2012-05-24 18:47:18,186] [7216  ] [main]  in.alethea.swat.datamgr.testcases.TestCase  - Config file:swatpackages/LTE/download manager/allow_lte_cellbarred.py
+INFO  : [2012-05-24 18:47:18,186] [7216  ] [main]  in.alethea.swat.datamgr.testcases.AbstractTestModel  - Config file:swatpackages/LTE/download manager/allow_lte_cellbarred.py
+INFO  : [2012-05-24 18:47:18,186] [7216  ] [main]  in.alethea.swat.datamgr.testcases.TestCase  - Test Case props:{packageroot=swatpackages, network_tech=LTE, name=allow_lte_cellbarred, package=LTE, device_api_version=12.0, suite=download manager, script=swatpackages/LTE/download manager/allow_lte_cellbarred.py}
+INFO  : [2012-05-24 18:47:18,186] [7216  ] [main]  in.alethea.swat.datamgr.testcases.TestCase  - Config file:swatpackages/LTE/download manager/allow_lte_plmn.py
+INFO  : [2012-05-24 18:47:18,187] [7217  ] [main]  in.alethea.swat.datamgr.testcases.AbstractTestModel  - Config file:swatpackages/LTE/download manager/allow_lte_plmn.py
+INFO  : [2012-05-24 18:47:18,187] [7217  ] [main]  in.alethea.swat.datamgr.testcases.TestCase  - Test Case props:{packageroot=swatpackages, network_tech=LTE, name=allow_lte_plmn, package=LTE, device_api_version=12.0, suite=download manager, script=swatpackages/LTE/download manager/allow_lte_plmn.py}
+INFO  : [2012-05-24 18:47:18,187] [7217  ] [main]  in.alethea.swat.datamgr.testcases.TestCase  - Config file:swatpackages/LTE/download manager/allow_all_device.py
+INFO  : [2012-05-24 18:47:18,187] [7217  ] [main]  in.alethea.swat.datamgr.testcases.AbstractTestModel  - Config file:swatpackages/LTE/download manager/allow_all_device.py
+INFO  : [2012-05-24 18:47:18,187] [7217  ] [main]  in.alethea.swat.datamgr.testcases.TestCase  - Test Case props:{packageroot=swatpackages, network_tech=LTE, name=allow_all_device, package=LTE, device_api_version=12.0, suite=download manager, script=swatpackages/LTE/download manager/allow_all_device.py}
+INFO  : [2012-05-24 18:47:18,188] [7218  ] [main]  in.alethea.swat.datamgr.testcases.TestCase  - Config file:swatpackages/LTE/download manager/allow_all_nw.py
+INFO  : [2012-05-24 18:47:18,188] [7218  ] [main]  in.alethea.swat.datamgr.testcases.AbstractTestModel  - Config file:swatpackages/LTE/download manager/allow_all_nw.py
+INFO  : [2012-05-24 18:47:18,188] [7218  ] [main]  in.alethea.swat.datamgr.testcases.TestCase  - Test Case props:{packageroot=swatpackages, network_tech=LTE, name=allow_all_nw, package=LTE, device_api_version=12.0, suite=download manager, script=swatpackages/LTE/download manager/allow_all_nw.py}
+INFO  : [2012-05-24 18:47:18,188] [7218  ] [main]  in.alethea.swat.datamgr.testcases.TestSuite  - Config file:swatpackages/LTE/browsing/suiteinfo.xml
+INFO  : [2012-05-24 18:47:18,188] [7218  ] [main]  in.alethea.swat.datamgr.testcases.AbstractTestModel  - Config file:swatpackages/LTE/browsing/suiteinfo.xml
+INFO  : [2012-05-24 18:47:18,189] [7219  ] [main]  in.alethea.swat.datamgr.xml.XmlConverter  - Reading XML file:swatpackages/LTE/browsing/suiteinfo.xml
+INFO  : [2012-05-24 18:47:18,195] [7225  ] [main]  in.alethea.swat.datamgr.testcases.TestCase  - Config file:swatpackages/LTE/browsing/browsing_lowcpu.py
+INFO  : [2012-05-24 18:47:18,195] [7225  ] [main]  in.alethea.swat.datamgr.testcases.AbstractTestModel  - Config file:swatpackages/LTE/browsing/browsing_lowcpu.py
+INFO  : [2012-05-24 18:47:18,195] [7225  ] [main]  in.alethea.swat.datamgr.testcases.TestCase  - Test Case props:{packageroot=swatpackages, network_tech=LTE, name=browsing_lowcpu, package=LTE, device_api_version=12.0, suite=browsing, script=swatpackages/LTE/browsing/browsing_lowcpu.py}
+INFO  : [2012-05-24 18:47:18,196] [7226  ] [main]  in.alethea.swat.datamgr.testcases.TestCase  - Config file:swatpackages/LTE/browsing/browsing_lowmem.py
+INFO  : [2012-05-24 18:47:18,196] [7226  ] [main]  in.alethea.swat.datamgr.testcases.AbstractTestModel  - Config file:swatpackages/LTE/browsing/browsing_lowmem.py
+INFO  : [2012-05-24 18:47:18,196] [7226  ] [main]  in.alethea.swat.datamgr.testcases.TestCase  - Test Case props:{packageroot=swatpackages, network_tech=LTE, name=browsing_lowmem, package=LTE, device_api_version=12.0, suite=browsing, script=swatpackages/LTE/browsing/browsing_lowmem.py}
+INFO  : [2012-05-24 18:47:18,196] [7226  ] [main]  in.alethea.swat.datamgr.testcases.TestCase  - Config file:swatpackages/LTE/browsing/browsing_normal.py
+INFO  : [2012-05-24 18:47:18,196] [7226  ] [main]  in.alethea.swat.datamgr.testcases.AbstractTestModel  - Config file:swatpackages/LTE/browsing/browsing_normal.py
+INFO  : [2012-05-24 18:47:18,196] [7226  ] [main]  in.alethea.swat.datamgr.testcases.TestCase  - Test Case props:{packageroot=swatpackages, network_tech=LTE, name=browsing_normal, package=LTE, device_api_version=12.0, suite=browsing, script=swatpackages/LTE/browsing/browsing_normal.py}
+INFO  : [2012-05-24 18:47:18,197] [7227  ] [main]  in.alethea.swat.datamgr.testcases.TestCase  - Config file:swatpackages/LTE/browsing/browsing_lowcpu_NAS.py
+INFO  : [2012-05-24 18:47:18,197] [7227  ] [main]  in.alethea.swat.datamgr.testcases.AbstractTestModel  - Config file:swatpackages/LTE/browsing/browsing_lowcpu_NAS.py
+INFO  : [2012-05-24 18:47:18,197] [7227  ] [main]  in.alethea.swat.datamgr.testcases.TestCase  - Test Case props:{packageroot=swatpackages, network_tech=LTE, name=browsing_lowcpu_NAS, package=LTE, device_api_version=12.0, suite=browsing, script=swatpackages/LTE/browsing/browsing_lowcpu_NAS.py}
+INFO  : [2012-05-24 18:47:18,197] [7227  ] [main]  in.alethea.swat.datamgr.testcases.TestCase  - Config file:swatpackages/LTE/browsing/browsing_lowmem_NAS.py
+INFO  : [2012-05-24 18:47:18,198] [7228  ] [main]  in.alethea.swat.datamgr.testcases.AbstractTestModel  - Config file:swatpackages/LTE/browsing/browsing_lowmem_NAS.py
+INFO  : [2012-05-24 18:47:18,198] [7228  ] [main]  in.alethea.swat.datamgr.testcases.TestCase  - Test Case props:{packageroot=swatpackages, network_tech=LTE, name=browsing_lowmem_NAS, package=LTE, device_api_version=12.0, suite=browsing, script=swatpackages/LTE/browsing/browsing_lowmem_NAS.py}
+INFO  : [2012-05-24 18:47:18,208] [7238  ] [main]  in.alethea.swat.datamgr.testcases.TestCase  - Config file:swatpackages/LTE/browsing/browsing_normal_NAS.py
+INFO  : [2012-05-24 18:47:18,208] [7238  ] [main]  in.alethea.swat.datamgr.testcases.AbstractTestModel  - Config file:swatpackages/LTE/browsing/browsing_normal_NAS.py
+INFO  : [2012-05-24 18:47:18,209] [7239  ] [main]  in.alethea.swat.datamgr.testcases.TestCase  - Test Case props:{packageroot=swatpackages, network_tech=LTE, name=browsing_normal_NAS, package=LTE, device_api_version=12.0, suite=browsing, script=swatpackages/LTE/browsing/browsing_normal_NAS.py}
+INFO  : [2012-05-24 18:47:18,209] [7239  ] [main]  in.alethea.swat.datamgr.testcases.TestCase  - Config file:swatpackages/LTE/browsing/browsing_normal_illegalUE.py
+INFO  : [2012-05-24 18:47:18,209] [7239  ] [main]  in.alethea.swat.datamgr.testcases.AbstractTestModel  - Config file:swatpackages/LTE/browsing/browsing_normal_illegalUE.py
+INFO  : [2012-05-24 18:47:18,209] [7239  ] [main]  in.alethea.swat.datamgr.testcases.TestCase  - Test Case props:{packageroot=swatpackages, network_tech=LTE, name=browsing_normal_illegalUE, package=LTE, device_api_version=12.0, suite=browsing, script=swatpackages/LTE/browsing/browsing_normal_illegalUE.py}
+INFO  : [2012-05-24 18:47:18,209] [7239  ] [main]  in.alethea.swat.datamgr.testcases.TestCase  - Config file:swatpackages/LTE/browsing/browsing_normal_cellbarred.py
+INFO  : [2012-05-24 18:47:18,214] [7244  ] [main]  in.alethea.swat.datamgr.testcases.AbstractTestModel  - Config file:swatpackages/LTE/browsing/browsing_normal_cellbarred.py
+INFO  : [2012-05-24 18:47:18,215] [7245  ] [main]  in.alethea.swat.datamgr.testcases.TestCase  - Test Case props:{packageroot=swatpackages, network_tech=LTE, name=browsing_normal_cellbarred, package=LTE, device_api_version=12.0, suite=browsing, script=swatpackages/LTE/browsing/browsing_normal_cellbarred.py}
+INFO  : [2012-05-24 18:47:18,215] [7245  ] [main]  in.alethea.swat.datamgr.testcases.TestCase  - Config file:swatpackages/LTE/browsing/browsing_normal_power.py
+INFO  : [2012-05-24 18:47:18,215] [7245  ] [main]  in.alethea.swat.datamgr.testcases.AbstractTestModel  - Config file:swatpackages/LTE/browsing/browsing_normal_power.py
+INFO  : [2012-05-24 18:47:18,215] [7245  ] [main]  in.alethea.swat.datamgr.testcases.TestCase  - Test Case props:{packageroot=swatpackages, network_tech=LTE, name=browsing_normal_power, package=LTE, device_api_version=12.0, suite=browsing, script=swatpackages/LTE/browsing/browsing_normal_power.py}
+INFO  : [2012-05-24 18:47:18,215] [7245  ] [main]  in.alethea.swat.datamgr.testcases.TestSuite  - Config file:swatpackages/LTE/multitask scenarios/suiteinfo.xml
+INFO  : [2012-05-24 18:47:18,215] [7245  ] [main]  in.alethea.swat.datamgr.testcases.AbstractTestModel  - Config file:swatpackages/LTE/multitask scenarios/suiteinfo.xml
+INFO  : [2012-05-24 18:47:18,216] [7246  ] [main]  in.alethea.swat.datamgr.xml.XmlConverter  - Reading XML file:swatpackages/LTE/multitask scenarios/suiteinfo.xml
+INFO  : [2012-05-24 18:47:18,224] [7254  ] [main]  in.alethea.swat.datamgr.testcases.TestCase  - Config file:swatpackages/LTE/multitask scenarios/multitask_normal.py
+INFO  : [2012-05-24 18:47:18,224] [7254  ] [main]  in.alethea.swat.datamgr.testcases.AbstractTestModel  - Config file:swatpackages/LTE/multitask scenarios/multitask_normal.py
+INFO  : [2012-05-24 18:47:18,224] [7254  ] [main]  in.alethea.swat.datamgr.testcases.TestCase  - Test Case props:{packageroot=swatpackages, network_tech=LTE, name=multitask_normal, package=LTE, device_api_version=12.0, suite=multitask scenarios, script=swatpackages/LTE/multitask scenarios/multitask_normal.py}
+INFO  : [2012-05-24 18:47:18,224] [7254  ] [main]  in.alethea.swat.datamgr.testcases.TestSuite  - Config file:swatpackages/LTE/http file transfer/suiteinfo.xml
+INFO  : [2012-05-24 18:47:18,224] [7254  ] [main]  in.alethea.swat.datamgr.testcases.AbstractTestModel  - Config file:swatpackages/LTE/http file transfer/suiteinfo.xml
+INFO  : [2012-05-24 18:47:18,225] [7255  ] [main]  in.alethea.swat.datamgr.xml.XmlConverter  - Reading XML file:swatpackages/LTE/http file transfer/suiteinfo.xml
+INFO  : [2012-05-24 18:47:18,240] [7270  ] [main]  in.alethea.swat.datamgr.testcases.TestCase  - Config file:swatpackages/LTE/http file transfer/httpdownloadRRC_lowcpu.py
+INFO  : [2012-05-24 18:47:18,240] [7270  ] [main]  in.alethea.swat.datamgr.testcases.AbstractTestModel  - Config file:swatpackages/LTE/http file transfer/httpdownloadRRC_lowcpu.py
+INFO  : [2012-05-24 18:47:18,241] [7271  ] [main]  in.alethea.swat.datamgr.testcases.TestCase  - Test Case props:{packageroot=swatpackages, network_tech=LTE, name=httpdownloadRRC_lowcpu, package=LTE, device_api_version=12.0, suite=http file transfer, script=swatpackages/LTE/http file transfer/httpdownloadRRC_lowcpu.py}
+INFO  : [2012-05-24 18:47:18,241] [7271  ] [main]  in.alethea.swat.datamgr.testcases.TestCase  - Config file:swatpackages/LTE/http file transfer/httpdownloadRRC_lowmem.py
+INFO  : [2012-05-24 18:47:18,249] [7279  ] [main]  in.alethea.swat.datamgr.testcases.AbstractTestModel  - Config file:swatpackages/LTE/http file transfer/httpdownloadRRC_lowmem.py
+INFO  : [2012-05-24 18:47:18,249] [7279  ] [main]  in.alethea.swat.datamgr.testcases.TestCase  - Test Case props:{packageroot=swatpackages, network_tech=LTE, name=httpdownloadRRC_lowmem, package=LTE, device_api_version=12.0, suite=http file transfer, script=swatpackages/LTE/http file transfer/httpdownloadRRC_lowmem.py}
+INFO  : [2012-05-24 18:47:18,249] [7279  ] [main]  in.alethea.swat.datamgr.testcases.TestCase  - Config file:swatpackages/LTE/http file transfer/httpdownloadRRC_normal.py
+INFO  : [2012-05-24 18:47:18,250] [7280  ] [main]  in.alethea.swat.datamgr.testcases.AbstractTestModel  - Config file:swatpackages/LTE/http file transfer/httpdownloadRRC_normal.py
+INFO  : [2012-05-24 18:47:18,250] [7280  ] [main]  in.alethea.swat.datamgr.testcases.TestCase  - Test Case props:{packageroot=swatpackages, network_tech=LTE, name=httpdownloadRRC_normal, package=LTE, device_api_version=12.0, suite=http file transfer, script=swatpackages/LTE/http file transfer/httpdownloadRRC_normal.py}
+INFO  : [2012-05-24 18:47:18,250] [7280  ] [main]  in.alethea.swat.datamgr.testcases.TestCase  - Config file:swatpackages/LTE/http file transfer/httpdownloadNAS_normal.py
+INFO  : [2012-05-24 18:47:18,250] [7280  ] [main]  in.alethea.swat.datamgr.testcases.AbstractTestModel  - Config file:swatpackages/LTE/http file transfer/httpdownloadNAS_normal.py
+INFO  : [2012-05-24 18:47:18,250] [7280  ] [main]  in.alethea.swat.datamgr.testcases.TestCase  - Test Case props:{packageroot=swatpackages, network_tech=LTE, name=httpdownloadNAS_normal, package=LTE, device_api_version=12.0, suite=http file transfer, script=swatpackages/LTE/http file transfer/httpdownloadNAS_normal.py}
+INFO  : [2012-05-24 18:47:18,251] [7281  ] [main]  in.alethea.swat.datamgr.testcases.TestCase  - Config file:swatpackages/LTE/http file transfer/httpdownloadRBcombination_lowcpu.py
+INFO  : [2012-05-24 18:47:18,251] [7281  ] [main]  in.alethea.swat.datamgr.testcases.AbstractTestModel  - Config file:swatpackages/LTE/http file transfer/httpdownloadRBcombination_lowcpu.py
+INFO  : [2012-05-24 18:47:18,251] [7281  ] [main]  in.alethea.swat.datamgr.testcases.TestCase  - Test Case props:{packageroot=swatpackages, network_tech=LTE, name=httpdownloadRBcombination_lowcpu, package=LTE, device_api_version=12.0, suite=http file transfer, script=swatpackages/LTE/http file transfer/httpdownloadRBcombination_lowcpu.py}
+INFO  : [2012-05-24 18:47:18,252] [7282  ] [main]  in.alethea.swat.datamgr.testcases.TestCase  - Config file:swatpackages/LTE/http file transfer/httpdownloadRBcombination_lowmem.py
+INFO  : [2012-05-24 18:47:18,252] [7282  ] [main]  in.alethea.swat.datamgr.testcases.AbstractTestModel  - Config file:swatpackages/LTE/http file transfer/httpdownloadRBcombination_lowmem.py
+INFO  : [2012-05-24 18:47:18,252] [7282  ] [main]  in.alethea.swat.datamgr.testcases.TestCase  - Test Case props:{packageroot=swatpackages, network_tech=LTE, name=httpdownloadRBcombination_lowmem, package=LTE, device_api_version=12.0, suite=http file transfer, script=swatpackages/LTE/http file transfer/httpdownloadRBcombination_lowmem.py}
+INFO  : [2012-05-24 18:47:18,252] [7282  ] [main]  in.alethea.swat.datamgr.testcases.TestCase  - Config file:swatpackages/LTE/http file transfer/httpdownloadRBcombination_normal.py
+INFO  : [2012-05-24 18:47:18,252] [7282  ] [main]  in.alethea.swat.datamgr.testcases.AbstractTestModel  - Config file:swatpackages/LTE/http file transfer/httpdownloadRBcombination_normal.py
+INFO  : [2012-05-24 18:47:18,253] [7283  ] [main]  in.alethea.swat.datamgr.testcases.TestCase  - Test Case props:{packageroot=swatpackages, network_tech=LTE, name=httpdownloadRBcombination_normal, package=LTE, device_api_version=12.0, suite=http file transfer, script=swatpackages/LTE/http file transfer/httpdownloadRBcombination_normal.py}
+INFO  : [2012-05-24 18:47:18,253] [7283  ] [main]  in.alethea.swat.datamgr.testcases.TestCase  - Config file:swatpackages/LTE/http file transfer/httpdownloadDRBmodification_lowcpu.py
+INFO  : [2012-05-24 18:47:18,253] [7283  ] [main]  in.alethea.swat.datamgr.testcases.AbstractTestModel  - Config file:swatpackages/LTE/http file transfer/httpdownloadDRBmodification_lowcpu.py
+INFO  : [2012-05-24 18:47:18,253] [7283  ] [main]  in.alethea.swat.datamgr.testcases.TestCase  - Test Case props:{packageroot=swatpackages, network_tech=LTE, name=httpdownloadDRBmodification_lowcpu, package=LTE, device_api_version=12.0, suite=http file transfer, script=swatpackages/LTE/http file transfer/httpdownloadDRBmodification_lowcpu.py}
+INFO  : [2012-05-24 18:47:18,253] [7283  ] [main]  in.alethea.swat.datamgr.testcases.TestCase  - Config file:swatpackages/LTE/http file transfer/httpdownloadDRBmodification_lowmem.py
+INFO  : [2012-05-24 18:47:18,253] [7283  ] [main]  in.alethea.swat.datamgr.testcases.AbstractTestModel  - Config file:swatpackages/LTE/http file transfer/httpdownloadDRBmodification_lowmem.py
+INFO  : [2012-05-24 18:47:18,254] [7284  ] [main]  in.alethea.swat.datamgr.testcases.TestCase  - Test Case props:{packageroot=swatpackages, network_tech=LTE, name=httpdownloadDRBmodification_lowmem, package=LTE, device_api_version=12.0, suite=http file transfer, script=swatpackages/LTE/http file transfer/httpdownloadDRBmodification_lowmem.py}
+INFO  : [2012-05-24 18:47:18,254] [7284  ] [main]  in.alethea.swat.datamgr.testcases.TestCase  - Config file:swatpackages/LTE/http file transfer/httpdownloadDRBmodification_normal.py
+INFO  : [2012-05-24 18:47:18,254] [7284  ] [main]  in.alethea.swat.datamgr.testcases.AbstractTestModel  - Config file:swatpackages/LTE/http file transfer/httpdownloadDRBmodification_normal.py
+INFO  : [2012-05-24 18:47:18,259] [7289  ] [main]  in.alethea.swat.datamgr.testcases.TestCase  - Test Case props:{packageroot=swatpackages, network_tech=LTE, name=httpdownloadDRBmodification_normal, package=LTE, device_api_version=12.0, suite=http file transfer, script=swatpackages/LTE/http file transfer/httpdownloadDRBmodification_normal.py}
+INFO  : [2012-05-24 18:47:18,259] [7289  ] [main]  in.alethea.swat.datamgr.testcases.TestCase  - Config file:swatpackages/LTE/http file transfer/httpupload_lowcpu.py
+INFO  : [2012-05-24 18:47:18,259] [7289  ] [main]  in.alethea.swat.datamgr.testcases.AbstractTestModel  - Config file:swatpackages/LTE/http file transfer/httpupload_lowcpu.py
+INFO  : [2012-05-24 18:47:18,260] [7290  ] [main]  in.alethea.swat.datamgr.testcases.TestCase  - Test Case props:{packageroot=swatpackages, network_tech=LTE, name=httpupload_lowcpu, package=LTE, device_api_version=12.0, suite=http file transfer, script=swatpackages/LTE/http file transfer/httpupload_lowcpu.py}
+INFO  : [2012-05-24 18:47:18,260] [7290  ] [main]  in.alethea.swat.datamgr.testcases.TestCase  - Config file:swatpackages/LTE/http file transfer/httpupload_lowmem.py
+INFO  : [2012-05-24 18:47:18,260] [7290  ] [main]  in.alethea.swat.datamgr.testcases.AbstractTestModel  - Config file:swatpackages/LTE/http file transfer/httpupload_lowmem.py
+INFO  : [2012-05-24 18:47:18,260] [7290  ] [main]  in.alethea.swat.datamgr.testcases.TestCase  - Test Case props:{packageroot=swatpackages, network_tech=LTE, name=httpupload_lowmem, package=LTE, device_api_version=12.0, suite=http file transfer, script=swatpackages/LTE/http file transfer/httpupload_lowmem.py}
+INFO  : [2012-05-24 18:47:18,260] [7290  ] [main]  in.alethea.swat.datamgr.testcases.TestCase  - Config file:swatpackages/LTE/http file transfer/httpupload_normal.py
+INFO  : [2012-05-24 18:47:18,260] [7290  ] [main]  in.alethea.swat.datamgr.testcases.AbstractTestModel  - Config file:swatpackages/LTE/http file transfer/httpupload_normal.py
+INFO  : [2012-05-24 18:47:18,261] [7291  ] [main]  in.alethea.swat.datamgr.testcases.TestCase  - Test Case props:{packageroot=swatpackages, network_tech=LTE, name=httpupload_normal, package=LTE, device_api_version=12.0, suite=http file transfer, script=swatpackages/LTE/http file transfer/httpupload_normal.py}
+INFO  : [2012-05-24 18:47:18,261] [7291  ] [main]  in.alethea.swat.datamgr.testcases.TestSuite  - Config file:swatpackages/LTE/alethea_connectivity/suiteinfo.xml
+INFO  : [2012-05-24 18:47:18,266] [7296  ] [main]  in.alethea.swat.datamgr.testcases.AbstractTestModel  - Config file:swatpackages/LTE/alethea_connectivity/suiteinfo.xml
+INFO  : [2012-05-24 18:47:18,266] [7296  ] [main]  in.alethea.swat.datamgr.xml.XmlConverter  - Reading XML file:swatpackages/LTE/alethea_connectivity/suiteinfo.xml
+INFO  : [2012-05-24 18:47:18,271] [7301  ] [main]  in.alethea.swat.datamgr.testcases.TestCase  - Config file:swatpackages/LTE/alethea_connectivity/alethea_brcm1.py
+INFO  : [2012-05-24 18:47:18,271] [7301  ] [main]  in.alethea.swat.datamgr.testcases.AbstractTestModel  - Config file:swatpackages/LTE/alethea_connectivity/alethea_brcm1.py
+INFO  : [2012-05-24 18:47:18,271] [7301  ] [main]  in.alethea.swat.datamgr.testcases.TestCase  - Test Case props:{packageroot=swatpackages, network_tech=LTE, name=alethea_brcm1, package=LTE, device_api_version=12.0, suite=alethea_connectivity, script=swatpackages/LTE/alethea_connectivity/alethea_brcm1.py}
+INFO  : [2012-05-24 18:47:18,271] [7301  ] [main]  in.alethea.swat.datamgr.testcases.TestCase  - Config file:swatpackages/LTE/alethea_connectivity/alethea_brcm2.py
+INFO  : [2012-05-24 18:47:18,271] [7301  ] [main]  in.alethea.swat.datamgr.testcases.AbstractTestModel  - Config file:swatpackages/LTE/alethea_connectivity/alethea_brcm2.py
+INFO  : [2012-05-24 18:47:18,272] [7302  ] [main]  in.alethea.swat.datamgr.testcases.TestCase  - Test Case props:{packageroot=swatpackages, network_tech=LTE, name=alethea_brcm2, package=LTE, device_api_version=12.0, suite=alethea_connectivity, script=swatpackages/LTE/alethea_connectivity/alethea_brcm2.py}
+INFO  : [2012-05-24 18:47:18,272] [7302  ] [main]  in.alethea.swat.datamgr.testcases.TestCase  - Config file:swatpackages/LTE/alethea_connectivity/alethea_brcm3.py
+INFO  : [2012-05-24 18:47:18,272] [7302  ] [main]  in.alethea.swat.datamgr.testcases.AbstractTestModel  - Config file:swatpackages/LTE/alethea_connectivity/alethea_brcm3.py
+INFO  : [2012-05-24 18:47:18,272] [7302  ] [main]  in.alethea.swat.datamgr.testcases.TestCase  - Test Case props:{packageroot=swatpackages, network_tech=LTE, name=alethea_brcm3, package=LTE, device_api_version=12.0, suite=alethea_connectivity, script=swatpackages/LTE/alethea_connectivity/alethea_brcm3.py}
+INFO  : [2012-05-24 18:47:18,273] [7303  ] [main]  in.alethea.swat.datamgr.testcases.TestCase  - Config file:swatpackages/LTE/alethea_connectivity/alethea_brcm4.py
+INFO  : [2012-05-24 18:47:18,273] [7303  ] [main]  in.alethea.swat.datamgr.testcases.AbstractTestModel  - Config file:swatpackages/LTE/alethea_connectivity/alethea_brcm4.py
+INFO  : [2012-05-24 18:47:18,273] [7303  ] [main]  in.alethea.swat.datamgr.testcases.TestCase  - Test Case props:{packageroot=swatpackages, network_tech=LTE, name=alethea_brcm4, package=LTE, device_api_version=12.0, suite=alethea_connectivity, script=swatpackages/LTE/alethea_connectivity/alethea_brcm4.py}
+INFO  : [2012-05-24 18:47:18,273] [7303  ] [main]  in.alethea.swat.datamgr.testcases.TestCase  - Config file:swatpackages/LTE/alethea_connectivity/alethea_brcm5.py
+INFO  : [2012-05-24 18:47:18,273] [7303  ] [main]  in.alethea.swat.datamgr.testcases.AbstractTestModel  - Config file:swatpackages/LTE/alethea_connectivity/alethea_brcm5.py
+INFO  : [2012-05-24 18:47:18,274] [7304  ] [main]  in.alethea.swat.datamgr.testcases.TestCase  - Test Case props:{packageroot=swatpackages, network_tech=LTE, name=alethea_brcm5, package=LTE, device_api_version=12.0, suite=alethea_connectivity, script=swatpackages/LTE/alethea_connectivity/alethea_brcm5.py}
+INFO  : [2012-05-24 18:47:18,274] [7304  ] [main]  in.alethea.swat.datamgr.testcases.TestCase  - Config file:swatpackages/LTE/alethea_connectivity/alethea_brcm6.py
+INFO  : [2012-05-24 18:47:18,274] [7304  ] [main]  in.alethea.swat.datamgr.testcases.AbstractTestModel  - Config file:swatpackages/LTE/alethea_connectivity/alethea_brcm6.py
+INFO  : [2012-05-24 18:47:18,274] [7304  ] [main]  in.alethea.swat.datamgr.testcases.TestCase  - Test Case props:{packageroot=swatpackages, network_tech=LTE, name=alethea_brcm6, package=LTE, device_api_version=12.0, suite=alethea_connectivity, script=swatpackages/LTE/alethea_connectivity/alethea_brcm6.py}
+INFO  : [2012-05-24 18:47:18,284] [7314  ] [main]  in.alethea.swat.datamgr.testcases.TestCase  - Config file:swatpackages/LTE/alethea_connectivity/alethea_brcm7.py
+INFO  : [2012-05-24 18:47:18,284] [7314  ] [main]  in.alethea.swat.datamgr.testcases.AbstractTestModel  - Config file:swatpackages/LTE/alethea_connectivity/alethea_brcm7.py
+INFO  : [2012-05-24 18:47:18,285] [7315  ] [main]  in.alethea.swat.datamgr.testcases.TestCase  - Test Case props:{packageroot=swatpackages, network_tech=LTE, name=alethea_brcm7, package=LTE, device_api_version=12.0, suite=alethea_connectivity, script=swatpackages/LTE/alethea_connectivity/alethea_brcm7.py}
+INFO  : [2012-05-24 18:47:18,395] [7425  ] [main]  in.alethea.swat.datamgr.testcases.TestPackageRoot  - Confile file:userpackages/UserPackageConfig.xml
+INFO  : [2012-05-24 18:47:18,396] [7426  ] [main]  in.alethea.swat.datamgr.testcases.AbstractTestModel  - Config file:userpackages/UserPackageConfig.xml
+WARN  : [2012-05-24 18:47:18,396] [7426  ] [main]  in.alethea.swat.datamgr.datastore.FileSystemAdapter  - Config file not found, may be new file needed:userpackages/UserPackageConfig.xml
+INFO  : [2012-05-24 18:47:19,860] [8890  ] [main]  in.alethea.swat.datamgr.testcases.AbstractTestModel  - Config file:plans/PlansInfo.xml
+WARN  : [2012-05-24 18:47:19,860] [8890  ] [main]  in.alethea.swat.datamgr.datastore.FileSystemAdapter  - Config file not found, may be new file needed:plans/PlansInfo.xml
+INFO  : [2012-05-24 18:47:19,860] [8890  ] [main]  in.alethea.swat.datamgr.testcases.TestPlanRoot  - Config file:plans/PlansInfo.xml
+INFO  : [2012-05-24 18:47:20,213] [9243  ] [main]  inalethea.swat.tmg.DeviceManager.AdbMonkeyRunnerDeviceManager  - Adb path:~/android/sdk/android-sdk-linux_x86/platform-tools/adb
+WARN  : [2012-05-24 18:47:20,213] [9243  ] [main]  inalethea.swat.tmg.DeviceManager.AdbMonkeyRunnerDeviceManager  - adb path is not valid, please check Preferences.
+ERROR : [2012-05-24 18:47:20,218] [9248  ] [main]  in.alethea.swat.gui.views.DevicesView  - unable to get the devices from monkey runner
+inalethea.swat.tmg.DeviceManager.TmgDeviceExceptionContainer$TmgDeviceManagerCreationException: 9:Problem in creating AdbBackend, check ADB path
+	at inalethea.swat.tmg.DeviceManager.AdbMonkeyRunnerDeviceManager.<init>(AdbMonkeyRunnerDeviceManager.java:41)
+	at inalethea.swat.tmg.DeviceManager.AdbMonkeyRunnerDeviceManager.getInstance(AdbMonkeyRunnerDeviceManager.java:69)
+	at in.alethea.swat.gui.views.DevicesView.createPartControl(DevicesView.java:77)
+	at org.eclipse.ui.internal.ViewReference.createPartHelper(ViewReference.java:375)
+	at org.eclipse.ui.internal.ViewReference.createPart(ViewReference.java:229)
+	at org.eclipse.ui.internal.WorkbenchPartReference.getPart(WorkbenchPartReference.java:595)
+	at org.eclipse.ui.internal.PartPane.setVisible(PartPane.java:313)
+	at org.eclipse.ui.internal.ViewPane.setVisible(ViewPane.java:534)
+	at org.eclipse.ui.internal.presentations.PresentablePart.setVisible(PresentablePart.java:180)
+	at org.eclipse.ui.internal.presentations.util.PresentablePartFolder.select(PresentablePartFolder.java:270)
+	at org.eclipse.ui.internal.presentations.util.LeftToRightTabOrder.select(LeftToRightTabOrder.java:65)
+	at org.eclipse.ui.internal.presentations.util.TabbedStackPresentation.selectPart(TabbedStackPresentation.java:473)
+	at org.eclipse.ui.internal.PartStack.refreshPresentationSelection(PartStack.java:1245)
+	at org.eclipse.ui.internal.PartStack.setSelection(PartStack.java:1198)
+	at org.eclipse.ui.internal.PartStack.showPart(PartStack.java:1597)
+	at org.eclipse.ui.internal.PartStack.createControl(PartStack.java:643)
+	at org.eclipse.ui.internal.PartStack.createControl(PartStack.java:570)
+	at org.eclipse.ui.internal.PartSashContainer.createControl(PartSashContainer.java:568)
+	at org.eclipse.ui.internal.PerspectiveHelper.activate(PerspectiveHelper.java:272)
+	at org.eclipse.ui.internal.Perspective.onActivate(Perspective.java:981)
+	at org.eclipse.ui.internal.WorkbenchPage.onActivate(WorkbenchPage.java:2714)
+	at org.eclipse.ui.internal.WorkbenchWindow$28.run(WorkbenchWindow.java:3030)
+	at org.eclipse.swt.custom.BusyIndicator.showWhile(BusyIndicator.java:70)
+	at org.eclipse.ui.internal.WorkbenchWindow.setActivePage(WorkbenchWindow.java:3011)
+	at org.eclipse.ui.internal.WorkbenchWindow.busyOpenPage(WorkbenchWindow.java:799)
+	at org.eclipse.ui.internal.Workbench$23.runWithException(Workbench.java:1229)
+	at org.eclipse.ui.internal.StartupThreading$StartupRunnable.run(StartupThreading.java:31)
+	at org.eclipse.swt.widgets.RunnableLock.run(RunnableLock.java:35)
+	at org.eclipse.swt.widgets.Synchronizer.runAsyncMessages(Synchronizer.java:135)
+	at org.eclipse.swt.widgets.Display.runAsyncMessages(Display.java:3563)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3212)
+	at org.eclipse.ui.application.WorkbenchAdvisor.openWindows(WorkbenchAdvisor.java:803)
+	at org.eclipse.ui.internal.Workbench$33.runWithException(Workbench.java:1600)
+	at org.eclipse.ui.internal.StartupThreading$StartupRunnable.run(StartupThreading.java:31)
+	at org.eclipse.swt.widgets.RunnableLock.run(RunnableLock.java:35)
+	at org.eclipse.swt.widgets.Synchronizer.runAsyncMessages(Synchronizer.java:135)
+	at org.eclipse.swt.widgets.Display.runAsyncMessages(Display.java:3563)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3212)
+	at org.eclipse.ui.internal.Workbench.runUI(Workbench.java:2609)
+	at org.eclipse.ui.internal.Workbench.access$4(Workbench.java:2499)
+	at org.eclipse.ui.internal.Workbench$7.run(Workbench.java:679)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:332)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:668)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:149)
+	at in.alethea.swat.gui.Application.start(Application.java:56)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:196)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:110)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:79)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:344)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:179)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:616)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:622)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:577)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1410)
+ERROR : [2012-05-24 18:47:25,173] [14203 ] [main]  in.alethea.swat.gui.dialog.SwatMessageDialog  - AdbPath is wrong..Please change the path and restart the tool

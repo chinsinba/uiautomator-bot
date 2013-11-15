@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<MasterConfig baseDir="." toolVersion="">
-	<!--DB details for saving the campaign history -->
-	<Database update="" userName="" isExternal="" pwd="" port=""
-		name="" ipAddress="" pageSize="200" />
+<BbatConfig toolVersion="">
+	<Database update="true" userName="myName" isExternal="true" pwd="rterter" port="1010"
+		name="bbatDefa" ipAddress="10.1.1.1" pageSize="200" />
 
-	<User name="" email="" />
+	<User name="dghwsdg" email="dkhks@hj.com" />
 
-	<!--LiceneceKey -->
-	<Licence key="" />
+	<Licence key="sdfhsgdjsgdkjg09090" />
 
-	<Android adbPath="" cpuReportInterval="10" androidPath="" />
+	<Android sdkPath ="sgdhsvdh/sdhahgsdfvh/dhagshd"/>
 	
-	<Workspace path = ""/>
+	<Workspace uiAutomator = "dsghds/dagshdg" monKey="davsdgsj/sagdhs"/>
 
-</MasterConfig>
+</BbatConfig>
