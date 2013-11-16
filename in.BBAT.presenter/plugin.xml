@@ -481,5 +481,17 @@
    <extension
          point="org.eclipse.ui.bindings">
    </extension>
+   <extension
+         id="MACAC"
+         point="org.eclipse.core.runtime.products">
+      <product
+            application="in.BBAT.presenter.application"
+            name="BBAT">
+         <property
+               name="appName"
+               value="BBAT">
+         </property>
+      </product>
+   </extension>
 
 </plugin>

@@ -4,6 +4,7 @@ Bundle-Name: Gui
 Bundle-SymbolicName: in.BBAT.abstrakt.presenter
 Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: in.bbat.abstrakt.gui.Activator
+Eclipse-BundleShape: dir
 Require-Bundle: in.BBAT.TestRunner,
  org.eclipse.ui,
  org.eclipse.core.runtime,

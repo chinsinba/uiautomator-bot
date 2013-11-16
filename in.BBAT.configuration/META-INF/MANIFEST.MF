@@ -4,6 +4,7 @@ Bundle-Name: Configuration
 Bundle-SymbolicName: in.BBAT.configuration
 Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: in.bbat.configuration.Activator
+Eclipse-BundleShape: dir
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  in.BBAT.log4j;bundle-version="1.0.0"

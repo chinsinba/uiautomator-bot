@@ -4,8 +4,6 @@ import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
-import in.BBAT.data.model.Entities.TestProjectEntity;
-import in.bbat.configuration.ConfigXml;
 
 import javax.persistence.EntityManager;
 
@@ -93,14 +91,11 @@ public class MineManager {
 
 
 	public void startDBServer(String ipAddress, int port, String userName, String password) throws UnknownHostException, Exception {
-
 		System.setProperty("derby.drda.startNetworkServer", "true");
 		server = new NetworkServerControl(InetAddress.getByName(ipAddress),port,userName,password);
 		PrintWriter consoleWriter = new PrintWriter(System.out, true);
 		server.start(consoleWriter);
 	}
-
-
 
 	public  void stopDBServer() throws UnknownHostException, Exception {
 		if(server!=null)
@@ -111,5 +106,4 @@ public class MineManager {
 			}
 		}
 	}
-
 }
