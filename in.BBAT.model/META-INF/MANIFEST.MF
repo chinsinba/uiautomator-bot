@@ -4,7 +4,8 @@ Bundle-Name: datamgr.db
 Bundle-SymbolicName: in.BBAT.dataMine
 Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: in.BBAT.dataMine.Activator
-Require-Bundle: org.eclipse.core.runtime
+Require-Bundle: org.eclipse.core.runtime,
+ in.BBAT.configuration;bundle-version="1.0.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Import-Package: javax.persistence,
  org.eclipse.persistence.config,
