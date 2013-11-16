@@ -1,13 +1,13 @@
 package in.bbat.presenter;
 
 import in.BBAT.abstrakt.presenter.device.model.TestDeviceManager;
-import in.BBAT.abstrakt.presenter.pkg.model.ITempConstants;
 import in.bbat.abstrakt.gui.ApplicationHelper;
 import in.bbat.configuration.ConfigXml;
-import in.bbat.utility.AndroidSdkUtility;
+import in.bbat.logger.BBATLogger;
 
 import java.net.UnknownHostException;
 
+import org.apache.log4j.Logger;
 import org.eclipse.equinox.app.IApplication;
 import org.eclipse.equinox.app.IApplicationContext;
 import org.eclipse.swt.widgets.Display;
@@ -19,6 +19,7 @@ import org.eclipse.ui.PlatformUI;
  */
 public class Application implements IApplication {
 
+	private static Logger LOG = BBATLogger.getLogger(Application.class.getName());
 	/* (non-Javadoc)
 	 * @see org.eclipse.equinox.app.IApplication#start(org.eclipse.equinox.app.IApplicationContext)
 	 */
@@ -26,6 +27,7 @@ public class Application implements IApplication {
 		Display display = PlatformUI.createDisplay();
 		try {
 			try {
+				LOG.info("Initialize Db");
 				ApplicationHelper.initializeDb();
 				TestDeviceManager.init(ConfigXml.getInstance().getAndroid_AdbPath());
 			} catch (UnknownHostException e) {

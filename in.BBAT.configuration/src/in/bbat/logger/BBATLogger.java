@@ -1,6 +1,9 @@
 package in.bbat.logger;
 
 
+import in.bbat.configuration.Activator;
+import in.bbat.utility.BBATPluginUtility;
+
 import java.io.File;
 
 import org.apache.log4j.Logger;
@@ -14,8 +17,8 @@ import org.apache.log4j.PropertyConfigurator;
 public class BBATLogger {
 
 	static {
-		System.setProperty("User.home",System.getProperty("user.dir") + File.separator + "logproperties");
-		PropertyConfigurator.configure("logproperties" + File.separator + "log4j.properties");
+		System.setProperty("User.home",System.getProperty("user.dir") + File.separator + "logs");
+		PropertyConfigurator.configure(BBATPluginUtility.getInstance().getPluginDir(Activator.PLUGIN_ID) + File.separator + "log4j.properties");
 	}
 
 	/**
