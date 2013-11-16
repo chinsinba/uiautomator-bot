@@ -48,8 +48,8 @@ public class CreateTestCaseWizard extends Wizard {
 			input = new FileEditorInput(newTestCase.getIFile());
 			try
 			{
-				IDE.openEditor(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage(), newTestCase.getIFile());
-//				PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().openEditor(input, "org.eclipse.jdt.ui.CompilationUnitEditor");
+//				IDE.openEditor(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage(), newTestCase.getIFile());
+				PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().openEditor(input, "org.eclipse.jdt.ui.CompilationUnitEditor");
 			} catch (PartInitException e)
 			{
 			}
