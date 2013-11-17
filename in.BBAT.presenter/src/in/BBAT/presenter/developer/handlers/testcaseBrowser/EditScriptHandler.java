@@ -34,6 +34,9 @@ public class EditScriptHandler extends AbstractTestCaseBrowserHandler {
 
 	@Override
 	public boolean isEnabled(List<?> object) {
+		if(object==null){
+			return false;
+		}
 		if(!object.isEmpty())
 		{
 			if(object.size()==1)

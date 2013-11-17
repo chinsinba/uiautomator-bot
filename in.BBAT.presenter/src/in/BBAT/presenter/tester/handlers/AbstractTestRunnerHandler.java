@@ -27,6 +27,9 @@ public abstract class AbstractTestRunnerHandler extends BBATHandler {
 	}
 
 	private List<?> getSelectedList() {
+		if( PlatformUI.getWorkbench().getActiveWorkbenchWindow()==null){
+			return null;
+		}
 		TestRunnerView view  = (TestRunnerView) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().findView(TestRunnerView.ID);
 		List<?> list = null;
 		if(view == null){

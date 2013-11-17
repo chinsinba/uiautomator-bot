@@ -29,6 +29,9 @@ public abstract class AbstractTestCaseBrowserHandler extends BBATHandler {
 	}
 
 	private List<?> getSelectedList() {
+		if((TestCaseBrowserView) PlatformUI.getWorkbench().getActiveWorkbenchWindow()==null){
+			return null;
+		}
 		TestCaseBrowserView view  = (TestCaseBrowserView) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().findView(TestCaseBrowserView.ID);
 		ISelection selection = view.getSelectedElements();
 		List<?> list = null;

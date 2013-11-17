@@ -25,7 +25,7 @@ public class UiAutoTestCaseJar {
 	private static final String BUILD_FILE = "build.xml";
 	
 
-	private static final String TEMP_FOLDER_PATH ="/home/syed/Documents/test";
+	private static final String TEMP_FOLDER_PATH =System.getProperty("user.dir")+Path.SEPARATOR+"temp" ;
 	private static final String ANDROID_SDK_TOOLS = ConfigXml.getInstance().getAndroid_SdkPath()+Path.SEPARATOR+"tools";
 	private static final String CREATE_UI_PROJECT_COMMAND = "/android create uitest-project -n "+JAR_NAME+" -t 6 -p "+TEMP_FOLDER_PATH;
 
@@ -43,7 +43,7 @@ public class UiAutoTestCaseJar {
 		} 
 		catch (FileNotFoundException e2)
 		{
-			e2.printStackTrace();
+			LOG.error(e2);
 		}
 
 		temp.mkdirs();
@@ -60,7 +60,7 @@ public class UiAutoTestCaseJar {
 			}
 
 		} catch (IOException e1) {
-			e1.printStackTrace();
+			LOG.error(e1);
 		}
 		try {
 			Process p = Runtime.getRuntime().exec(ANDROID_SDK_TOOLS+CREATE_UI_PROJECT_COMMAND);

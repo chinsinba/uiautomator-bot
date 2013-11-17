@@ -29,6 +29,9 @@ public abstract class AbstractDeviceViewHandler  extends BBATHandler{
 	}
 
 	private List<?> getSelectedList() {
+		if(PlatformUI.getWorkbench().getActiveWorkbenchWindow()==null){
+			return null;
+		}
 		DeveloperDeviceView view  = (DeveloperDeviceView) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().findView(DeveloperDeviceView.ID);
 		ISelection selection = view.getSelectedElements();
 		List<?> list = null;
