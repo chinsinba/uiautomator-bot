@@ -1,7 +1,9 @@
 package in.BBAT.presenter.wizards.pages;
 
 import in.BBAT.abstrakt.presenter.pkg.model.TestProjectModel;
+import in.bbat.logger.BBATLogger;
 
+import org.apache.log4j.Logger;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
@@ -14,6 +16,8 @@ import org.eclipse.swt.widgets.Text;
 public class CreateTestSuitePage extends CreatePage {
 
 	private TestProjectModel parentProj;
+	private static final Logger LOG = BBATLogger.getLogger(CreateTestSuitePage.class.getName());
+	
 
 	public CreateTestSuitePage(String pageName,TestProjectModel project) {
 		super(pageName);

@@ -5,6 +5,7 @@ import in.BBAT.abstrakt.presenter.device.model.AndroidDevice;
 import in.BBAT.abstrakt.presenter.pkg.model.AbstractProjectTree;
 import in.BBAT.abstrakt.presenter.pkg.model.TestCaseModel;
 import in.BBAT.abstrakt.presenter.run.model.TestRunCaseModel;
+import in.bbat.logger.BBATLogger;
 import in.bbat.presenter.internal.DeviceTestRun;
 import in.bbat.presenter.internal.TestRunExecutionManager;
 import in.bbat.presenter.views.BBATViewPart;
@@ -14,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.Viewer;
@@ -22,7 +24,7 @@ import org.eclipse.swt.dnd.TransferData;
 import org.eclipse.ui.PlatformUI;
 
 public class TestCaseDropListener extends ViewerDropAdapter {
-
+	private static final Logger LOG = BBATLogger.getLogger(TestCaseDropListener.class.getName());
 	public TestCaseDropListener(Viewer viewer) {
 		super(viewer);
 		// TODO Auto-generated constructor stub
@@ -64,7 +66,7 @@ public class TestCaseDropListener extends ViewerDropAdapter {
 		try {
 			testRunView.refresh();
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOG.error(e);
 		}
 		return false;
 	}

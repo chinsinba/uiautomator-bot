@@ -19,7 +19,7 @@ import org.eclipse.ui.PlatformUI;
  */
 public class Application implements IApplication {
 
-	private static Logger LOG = BBATLogger.getLogger(Application.class.getName());
+	private static final Logger LOG = BBATLogger.getLogger(Application.class.getName());
 	/* (non-Javadoc)
 	 * @see org.eclipse.equinox.app.IApplication#start(org.eclipse.equinox.app.IApplicationContext)
 	 */
@@ -31,9 +31,10 @@ public class Application implements IApplication {
 				ApplicationHelper.initializeDb();
 				TestDeviceManager.init(ConfigXml.getInstance().getAndroid_AdbPath());
 			} catch (UnknownHostException e) {
-				e.printStackTrace();
+				LOG.error(e);
+				
 			} catch (Exception e) {
-				e.printStackTrace();
+				LOG.error(e);
 			}
 			int returnCode = PlatformUI.createAndRunWorkbench(display, new ApplicationWorkbenchAdvisor());
 

@@ -1,13 +1,16 @@
 package in.bbat.presenter.views.tester;
 
+import in.bbat.logger.BBATLogger;
 import in.bbat.presenter.internal.DeviceTestRun;
 import in.bbat.presenter.internal.TestRunExecutionManager;
 
+import org.apache.log4j.Logger;
 import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.Viewer;
 
 public class DeviceTestRunContentProvider implements ITreeContentProvider {
 
+	private static final Logger LOG = BBATLogger.getLogger(DeviceTestRunContentProvider.class.getName());
 	@Override
 	public void dispose() {
 		// TODO Auto-generated method stub

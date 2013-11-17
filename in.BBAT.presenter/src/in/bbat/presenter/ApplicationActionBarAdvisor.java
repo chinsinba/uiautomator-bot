@@ -1,5 +1,8 @@
 package in.bbat.presenter;
 
+import in.bbat.logger.BBATLogger;
+
+import org.apache.log4j.Logger;
 import org.eclipse.ui.application.ActionBarAdvisor;
 import org.eclipse.ui.application.IActionBarConfigurer;
 
@@ -10,6 +13,7 @@ import org.eclipse.ui.application.IActionBarConfigurer;
  */
 public class ApplicationActionBarAdvisor extends ActionBarAdvisor {
 
+	private static final Logger LOG = BBATLogger.getLogger(ApplicationActionBarAdvisor.class.getName());
 	// Actions - important to allocate these only in makeActions, and then use
 	// them
 	// in the fill methods. This ensures that the actions aren't recreated

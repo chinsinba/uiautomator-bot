@@ -2,6 +2,7 @@ package in.BBAT.presenter.history.handlers;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.ui.PlatformUI;
@@ -9,12 +10,14 @@ import org.eclipse.ui.PlatformUI;
 import in.BBAT.abstrakt.presenter.pkg.model.AbstractProjectTree;
 import in.BBAT.abstrakt.presenter.run.model.TestRunModel;
 import in.BBAT.presenter.developer.handlers.BBATHandler;
+import in.bbat.logger.BBATLogger;
 import in.bbat.presenter.views.BBATViewPart;
 import in.bbat.presenter.views.developer.TestCaseBrowserView;
 import in.bbat.presenter.views.history.TestRunHistoryView;
 
 public class DeleteTestRunHandler extends AbstractTestRunBrowserHandler {
 
+	private static final Logger LOG = BBATLogger.getLogger(DeleteTestRunHandler.class.getName());
 	@Override
 	public Object run(ExecutionEvent event, List<?> selectedObjects) {
 		if(!MessageDialog.openQuestion(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(), "Delete","Do you want to delete ?"))
@@ -24,7 +27,7 @@ public class DeleteTestRunHandler extends AbstractTestRunBrowserHandler {
 			try {
 				((TestRunModel)pkgObj).delete();
 			} catch (Exception e) {
-				e.printStackTrace();
+				LOG.error(e);
 			}
 		}
 
@@ -32,7 +35,7 @@ public class DeleteTestRunHandler extends AbstractTestRunBrowserHandler {
 		try {
 			view.refresh();
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOG.error(e);
 		}
 		return null;
 	}

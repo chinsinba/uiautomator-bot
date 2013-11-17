@@ -1,5 +1,8 @@
 package in.bbat.presenter.views.tester;
 
+import in.bbat.logger.BBATLogger;
+
+import org.apache.log4j.Logger;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.TreeViewerColumn;
 import org.eclipse.swt.SWT;
@@ -16,6 +19,7 @@ import org.eclipse.swt.widgets.TreeColumn;
  */
 public class BBATTreeViewer extends TreeViewer {
 
+	private static final Logger LOG = BBATLogger.getLogger(BBATTreeViewer.class.getName());
 	/**
 	 * This constructor is used to create a treeviewer.
 	 * NOTE: The size of <var>titles</var> array, <var>bounds</var> and <var>columnHeaderImage</var> array should be same.

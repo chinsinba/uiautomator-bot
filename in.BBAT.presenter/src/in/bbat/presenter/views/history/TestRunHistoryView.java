@@ -6,8 +6,10 @@ import in.BBAT.abstrakt.presenter.run.model.TestRunModel;
 import in.BBAT.presenter.contentProviders.TestRunHistoryContentProvider;
 import in.BBAT.presenter.labelProviders.TestRunHistoryLabelProvider;
 import in.bbat.abstrakt.gui.BBATImageManager;
+import in.bbat.logger.BBATLogger;
 import in.bbat.presenter.views.BBATViewPart;
 
+import org.apache.log4j.Logger;
 import org.eclipse.jface.layout.TreeColumnLayout;
 import org.eclipse.jface.viewers.ColumnWeightData;
 import org.eclipse.jface.viewers.DoubleClickEvent;
@@ -22,6 +24,7 @@ import org.eclipse.swt.widgets.TreeColumn;
 public class TestRunHistoryView extends BBATViewPart {
 
 	public static final String ID="in.BBAT.presenter.history.TestRunHistoryView";
+	private static final Logger LOG = BBATLogger.getLogger(TestRunHistoryView.class.getName());
 	private TreeViewer viewer;
 	@Override
 	public void refresh() throws Exception {
@@ -47,7 +50,7 @@ public class TestRunHistoryView extends BBATViewPart {
 		try {
 			viewer.setInput(TestRunManager.getInstance());
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOG.error(e);
 		}
 		viewer.addDoubleClickListener(new IDoubleClickListener() {
 
@@ -66,7 +69,7 @@ public class TestRunHistoryView extends BBATViewPart {
 						TestRunInfoView view  = (TestRunInfoView) BBATViewPart.openView(TestRunInfoView.ID);
 						view.setInput(((TestDeviceRunModel) sel));
 					} catch (Exception e) {
-						e.printStackTrace();
+						LOG.error(e);
 					}
 				}
 			}

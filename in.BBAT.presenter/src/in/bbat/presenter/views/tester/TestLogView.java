@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import in.BBAT.abstrakt.presenter.device.model.AndroidDevice;
+import in.bbat.logger.BBATLogger;
 import in.bbat.presenter.Activator;
 import in.bbat.presenter.views.BBATViewPart;
 
+import org.apache.log4j.Logger;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.swt.widgets.Composite;
 
@@ -16,6 +18,7 @@ import com.android.ddmlib.logcat.LogCatMessage;
 public class TestLogView extends BBATViewPart {
 
 	public final static String ID = "in.BBAT.presenter.tester.AndroidLogView";
+	private static final Logger LOG = BBATLogger.getLogger(TestLogView.class.getName());
 	private LogCatPanel panel;
 
 	@Override

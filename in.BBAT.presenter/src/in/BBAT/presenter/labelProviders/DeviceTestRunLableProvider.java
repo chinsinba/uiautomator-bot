@@ -1,8 +1,10 @@
 package in.BBAT.presenter.labelProviders;
 
 import in.BBAT.abstrakt.presenter.run.model.TestRunCaseModel;
+import in.bbat.logger.BBATLogger;
 import in.bbat.presenter.internal.DeviceTestRun;
 
+import org.apache.log4j.Logger;
 import org.eclipse.jface.viewers.ITableLabelProvider;
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.swt.graphics.Image;
@@ -10,7 +12,7 @@ import org.eclipse.swt.graphics.Image;
 public class DeviceTestRunLableProvider extends LabelProvider implements
 ITableLabelProvider {
 
-
+	private static final Logger LOG = BBATLogger.getLogger(DeviceTestRunLableProvider.class.getName());
 	public DeviceTestRunLableProvider() {
 		// TODO Auto-generated constructor stub
 	}

@@ -1,5 +1,8 @@
 package in.bbat.presenter.views.tester;
 
+import in.bbat.logger.BBATLogger;
+
+import org.apache.log4j.Logger;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.action.IMenuCreator;
@@ -10,6 +13,8 @@ import org.eclipse.swt.widgets.Event;
 
 public class RemoveDeviceRunCaseAction implements IAction {
 
+	private static final Logger LOG = BBATLogger.getLogger(RemoveDeviceRunCaseAction.class.getName());
+	
 	@Override
 	public void addPropertyChangeListener(IPropertyChangeListener listener) {
 		// TODO Auto-generated method stub

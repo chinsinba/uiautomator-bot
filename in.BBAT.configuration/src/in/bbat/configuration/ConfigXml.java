@@ -1,6 +1,7 @@
 package in.bbat.configuration;
 
 
+import in.bbat.logger.BBATLogger;
 import in.bbat.utility.AndroidSdkUtility;
 import in.bbat.utility.BBATPluginUtility;
 
@@ -15,7 +16,9 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
+import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.Path;
+
 
 
 /**
@@ -25,7 +28,7 @@ import org.eclipse.core.runtime.Path;
  */
 public class ConfigXml {
 
-
+	private static final Logger LOG = BBATLogger.getLogger(ConfigXml.class.getName());
 	public final static String CONFIG_XML ="BBAT.xml";
 	/**
 	 * Object corresponding to the root element in the masterConfig.xml
@@ -66,9 +69,9 @@ public class ConfigXml {
 		try {
 			init();
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+			LOG.error(e);
 		} catch (JAXBException e) {
-			e.printStackTrace();
+			LOG.error(e);
 		}
 		if(instance_==null)
 			throw new NullPointerException("The init() method should be called once before using this method");

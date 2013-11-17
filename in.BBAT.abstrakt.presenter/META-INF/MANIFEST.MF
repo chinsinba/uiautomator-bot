@@ -14,7 +14,8 @@ Require-Bundle: in.BBAT.TestRunner,
  org.eclipse.jdt.core,
  in.BBAT.monkey.libs,
  org.eclipse.jdt.launching;bundle-version="3.7.0",
- in.BBAT.configuration;bundle-version="1.0.0"
+ in.BBAT.configuration;bundle-version="1.0.0",
+ in.BBAT.log4j;bundle-version="1.0.0"
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: in.bbat.abstrakt.gui,

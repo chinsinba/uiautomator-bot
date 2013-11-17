@@ -1,18 +1,22 @@
 package in.BBAT.testRunner.runner;
 
+import in.BBAT.TestRunner.device.TestDevice;
 import in.bbat.configuration.ConfigXml;
+import in.bbat.logger.BBATLogger;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.eclipse.ant.core.AntRunner;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.Path;
 
 public class UiAutoTestCaseJar {
 
+	private static final Logger LOG = BBATLogger.getLogger(UiAutoTestCaseJar.class.getName());
 	private String jarPath;
 	private File jarFile;
 	private static final String JAR_NAME = "BBAT";
@@ -62,9 +66,9 @@ public class UiAutoTestCaseJar {
 			Process p = Runtime.getRuntime().exec(ANDROID_SDK_TOOLS+CREATE_UI_PROJECT_COMMAND);
 			p.waitFor();
 		} catch (IOException e) {
-			e.printStackTrace();
+			LOG.error(e);
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOG.error(e);
 		}
 
 		createJar(TEMP_FOLDER_PATH);
@@ -91,7 +95,7 @@ public class UiAutoTestCaseJar {
 
 			runner.run();
 		} catch (CoreException e) {
-			e.printStackTrace();
+			LOG.error(e);
 		}
 	}
 

@@ -3,9 +3,12 @@ package in.BBAT.TestRunner.device;
 import in.BBAT.testRunner.runner.IUiAutomatorListener;
 import in.BBAT.testRunner.runner.UiAutoTestCaseJar;
 import in.BBAT.testRunner.runner.internal.UIAutomatorRunner;
+import in.bbat.logger.BBATLogger;
 
 import java.io.IOException;
 import java.util.List;
+
+import org.apache.log4j.Logger;
 
 import com.android.chimpchat.core.IChimpDevice;
 import com.android.ddmlib.AdbCommandRejectedException;
@@ -22,6 +25,7 @@ import com.android.ddmlib.testrunner.ITestRunListener;
 
 
 public class TestDevice implements IAndroidDevice {
+	private static final Logger LOG = BBATLogger.getLogger(TestDevice.class.getName());
 	public static final int UIAUTOMATOR_MIN_API_LEVEL = 16;
 	private boolean active;
 	private IDevice monkeyDevice;
@@ -66,13 +70,13 @@ public class TestDevice implements IAndroidDevice {
 		try {
 			monkeyDevice.executeShellCommand(cmd, new NullOutputReceiver(),0);
 		} catch (TimeoutException e) {
-			e.printStackTrace();
+			LOG.error(e);
 		} catch (AdbCommandRejectedException e) {
-			e.printStackTrace();
+			LOG.error(e);
 		} catch (ShellCommandUnresponsiveException e) {
-			e.printStackTrace();
+			LOG.error(e);
 		} catch (IOException e) {
-			e.printStackTrace();
+			LOG.error(e);
 		}
 	}
 
@@ -126,13 +130,13 @@ public class TestDevice implements IAndroidDevice {
 		try {
 			monkeyDevice.pushFile(jar.getJarPath(),UIAUTOMATOR_JAR_PATH);
 		} catch (SyncException e) {
-			e.printStackTrace();
+			LOG.error(e);
 		} catch (IOException e) {
-			e.printStackTrace();
+			LOG.error(e);
 		} catch (AdbCommandRejectedException e) {
-			e.printStackTrace();
+			LOG.error(e);
 		} catch (TimeoutException e) {
-			e.printStackTrace();
+			LOG.error(e);
 		}
 	}
 
@@ -142,13 +146,13 @@ public class TestDevice implements IAndroidDevice {
 		try {
 			runner.run(listener);
 		} catch (TimeoutException e) {
-			e.printStackTrace();
+			LOG.error(e);
 		} catch (AdbCommandRejectedException e) {
-			e.printStackTrace();
+			LOG.error(e);
 		} catch (ShellCommandUnresponsiveException e) {
-			e.printStackTrace();
+			LOG.error(e);
 		} catch (IOException e) {
-			e.printStackTrace();
+			LOG.error(e);
 		}
 	}
 
@@ -164,11 +168,11 @@ public class TestDevice implements IAndroidDevice {
 		try {
 			return monkeyDevice.getScreenshot();
 		} catch (TimeoutException e) {
-			e.printStackTrace();
+			LOG.error(e);
 		} catch (AdbCommandRejectedException e) {
-			e.printStackTrace();
+			LOG.error(e);
 		} catch (IOException e) {
-			e.printStackTrace();
+			LOG.error(e);
 		}
 		return null;
 	}

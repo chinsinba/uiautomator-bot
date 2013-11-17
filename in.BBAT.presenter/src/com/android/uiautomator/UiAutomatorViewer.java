@@ -75,7 +75,7 @@ public class UiAutomatorViewer extends ApplicationWindow {
             window.setBlockOnOpen(true);
             window.open();
         } catch (Exception e) {
-            e.printStackTrace();
+            LOG.error(e);
         } finally {
             DebugBridge.terminate();
         }

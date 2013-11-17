@@ -4,9 +4,11 @@ import in.BBAT.abstrakt.presenter.pkg.model.TestProjectModel;
 import in.BBAT.abstrakt.presenter.pkg.model.TestSuiteModel;
 import in.BBAT.dataMine.manager.MineManager;
 import in.BBAT.presenter.wizards.pages.CreateTestSuitePage;
+import in.bbat.logger.BBATLogger;
 import in.bbat.presenter.views.BBATViewPart;
 import in.bbat.presenter.views.developer.TestCaseBrowserView;
 
+import org.apache.log4j.Logger;
 import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.ui.PlatformUI;
 
@@ -16,6 +18,8 @@ public class CreateTestSuiteWizard extends Wizard {
 
 	private TestProjectModel parent;
 
+	private static final Logger LOG = BBATLogger.getLogger(CreateTestSuiteWizard.class.getName());
+	
 	public CreateTestSuiteWizard(TestProjectModel testProjectModel) {
 		this.parent = testProjectModel;
 	}
@@ -32,10 +36,10 @@ public class CreateTestSuiteWizard extends Wizard {
 			try {
 				view.refresh();
 			} catch (Exception e) {
-				e.printStackTrace();
+				LOG.error(e);
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOG.error(e);
 		}
 		return true;
 	}

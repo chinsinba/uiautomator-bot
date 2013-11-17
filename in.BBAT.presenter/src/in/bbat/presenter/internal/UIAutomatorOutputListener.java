@@ -1,5 +1,6 @@
 package in.bbat.presenter.internal;
 
+import org.apache.log4j.Logger;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IViewPart;
 import org.eclipse.ui.PartInitException;
@@ -8,10 +9,12 @@ import org.eclipse.ui.PlatformUI;
 import in.BBAT.abstrakt.presenter.run.model.AutomatorLogModel;
 import in.BBAT.abstrakt.presenter.run.model.TestRunInstanceModel;
 import in.BBAT.testRunner.runner.IUiAutomatorListener;
+import in.bbat.logger.BBATLogger;
 import in.bbat.presenter.views.tester.AutomatorLogView;
 
 public class UIAutomatorOutputListener implements IUiAutomatorListener {
 
+	private static final Logger LOG = BBATLogger.getLogger(UIAutomatorOutputListener.class.getName());
 	private TestRunInstanceModel runInstance;
 
 	public UIAutomatorOutputListener(TestRunInstanceModel runInstance) {
@@ -36,7 +39,7 @@ public class UIAutomatorOutputListener implements IUiAutomatorListener {
 						((AutomatorLogView)autoLogView).refresh();
 					}
 				} catch (Exception e) {
-					e.printStackTrace();
+					LOG.error(e);
 				}
 
 			}

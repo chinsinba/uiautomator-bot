@@ -3,15 +3,19 @@ package in.bbat.presenter.internal;
 
 import in.BBAT.abstrakt.presenter.run.model.TestRunModel;
 import in.BBAT.testRunner.runner.UiAutoTestCaseJar;
+import in.bbat.logger.BBATLogger;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import org.apache.log4j.Logger;
+
 
 public class TestRunExecutor {
 
+	private static final Logger LOG = BBATLogger.getLogger(TestRunExecutor.class.getName());
 	private Set<DeviceTestRun> deviceTestRuns;
 	private TestRunModel testRun;
 

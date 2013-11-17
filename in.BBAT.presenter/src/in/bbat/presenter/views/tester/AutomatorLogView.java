@@ -4,8 +4,10 @@ import in.BBAT.abstrakt.presenter.run.model.AutomatorLogModel;
 import in.BBAT.abstrakt.presenter.run.model.TestRunInstanceModel;
 import in.BBAT.abstrakt.presenter.run.model.TestStatus;
 import in.BBAT.presenter.labelProviders.AutoLogLabelProvider;
+import in.bbat.logger.BBATLogger;
 import in.bbat.presenter.views.BBATViewPart;
 
+import org.apache.log4j.Logger;
 import org.eclipse.jface.layout.TableColumnLayout;
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.ColumnWeightData;
@@ -29,7 +31,8 @@ import org.eclipse.swt.widgets.Text;
 public class AutomatorLogView extends BBATViewPart {
 
 	private TableViewer viewer;
-
+	private static final Logger LOG = BBATLogger.getLogger(AutomatorLogView.class.getName());
+	
 	private AutoLogFilter filter;
 
 	private Text searchText;

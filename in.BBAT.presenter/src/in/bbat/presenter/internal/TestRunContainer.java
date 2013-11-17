@@ -5,6 +5,7 @@ import in.BBAT.abstrakt.presenter.device.model.IDeviceModelChangeListener;
 import in.BBAT.abstrakt.presenter.device.model.TestDeviceManager;
 import in.BBAT.abstrakt.presenter.pkg.model.TestCaseModel;
 import in.BBAT.abstrakt.presenter.run.model.TestRunCaseModel;
+import in.bbat.logger.BBATLogger;
 import in.bbat.presenter.views.BBATViewPart;
 import in.bbat.presenter.views.tester.TestRunnerView;
 
@@ -13,11 +14,13 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.apache.log4j.Logger;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.PlatformUI;
 
 public class TestRunContainer {
 
+	private static final Logger LOG = BBATLogger.getLogger(TestRunContainer.class.getName());
 	private List<TestRunCaseModel> testRunCases = new ArrayList<TestRunCaseModel>();
 	private Set<DeviceTestRun> deviceTestRuns = new HashSet<DeviceTestRun>();
 
@@ -99,7 +102,7 @@ public class TestRunContainer {
 					try {
 						testRunView.refresh();
 					} catch (Exception e) {
-						e.printStackTrace();
+						LOG.error(e);
 					}					
 				}
 			});

@@ -1,17 +1,20 @@
 package in.bbat.presenter.views.tester;
 
+import org.apache.log4j.Logger;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.swt.widgets.Composite;
 
 import com.android.ddmlib.IDevice;
 import com.android.ddmuilib.logcat.LogCatPanel;
 
+import in.bbat.logger.BBATLogger;
 import in.bbat.presenter.Activator;
 import in.bbat.presenter.views.BBATViewPart;
 
 public class DeviceLogView extends BBATViewPart {
 
 	public static final String ID = "in.BBAT.presenter.tester.deviceLogView";
+	private static final Logger LOG = BBATLogger.getLogger(DeviceLogView.class.getName());
 	private LogCatPanel panel;
 	@Override
 	public void refresh() throws Exception {

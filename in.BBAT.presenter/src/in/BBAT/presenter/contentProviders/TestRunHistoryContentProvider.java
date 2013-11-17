@@ -4,14 +4,17 @@ import in.BBAT.abstrakt.presenter.run.model.TestDeviceRunModel;
 import in.BBAT.abstrakt.presenter.run.model.TestRunInstanceModel;
 import in.BBAT.abstrakt.presenter.run.model.TestRunManager;
 import in.BBAT.abstrakt.presenter.run.model.TestRunModel;
+import in.bbat.logger.BBATLogger;
 
 import javax.lang.model.element.Element;
 
+import org.apache.log4j.Logger;
 import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.Viewer;
 
 public class TestRunHistoryContentProvider implements ITreeContentProvider {
 
+	private static final Logger LOG = BBATLogger.getLogger(TestRunHistoryContentProvider.class.getName());
 	@Override
 	public void dispose() {
 		// TODO Auto-generated method stub
@@ -35,7 +38,7 @@ public class TestRunHistoryContentProvider implements ITreeContentProvider {
 			try {
 				return ((TestRunManager) parentElement).getTestRuns().toArray();
 			} catch (Exception e) {
-				e.printStackTrace();
+				LOG.error(e);
 			}
 		}
 
@@ -43,7 +46,7 @@ public class TestRunHistoryContentProvider implements ITreeContentProvider {
 			try {
 				return ((TestRunModel) parentElement).getChildren().toArray();
 			} catch (Exception e) {
-				e.printStackTrace();
+				LOG.error(e);
 			}
 		}
 		return null;
@@ -61,7 +64,7 @@ public class TestRunHistoryContentProvider implements ITreeContentProvider {
 			try {
 				return false;
 			} catch (Exception e) {
-				e.printStackTrace();
+				LOG.error(e);
 			}
 		}
 		

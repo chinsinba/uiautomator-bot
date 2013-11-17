@@ -1,5 +1,8 @@
 package in.BBAT.presenter.wizards.pages;
 
+import in.bbat.logger.BBATLogger;
+
+import org.apache.log4j.Logger;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
@@ -14,6 +17,8 @@ public abstract class CreatePage extends WizardPage{
 	private boolean nameValid;
 	private boolean descValid;
 
+	private static final Logger LOG = BBATLogger.getLogger(CreatePage.class.getName());
+	
 	protected CreatePage(String pageName) {
 		super(pageName);
 		setTitle(pageName);

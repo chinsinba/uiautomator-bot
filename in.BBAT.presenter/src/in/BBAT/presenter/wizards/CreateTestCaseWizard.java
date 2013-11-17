@@ -3,9 +3,11 @@ package in.BBAT.presenter.wizards;
 import in.BBAT.abstrakt.presenter.pkg.model.TestCaseModel;
 import in.BBAT.abstrakt.presenter.pkg.model.TestSuiteModel;
 import in.BBAT.presenter.wizards.pages.CreateTestCasePage;
+import in.bbat.logger.BBATLogger;
 import in.bbat.presenter.views.BBATViewPart;
 import in.bbat.presenter.views.developer.TestCaseBrowserView;
 
+import org.apache.log4j.Logger;
 import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.PartInitException;
@@ -15,6 +17,7 @@ import org.eclipse.ui.part.FileEditorInput;
 
 public class CreateTestCaseWizard extends Wizard {
 
+	private static final Logger LOG = BBATLogger.getLogger(CreateTestCaseWizard.class.getName());
 
 	private CreateTestCasePage caseCreationPage;
 
@@ -41,7 +44,7 @@ public class CreateTestCaseWizard extends Wizard {
 			try {
 				view.refresh();
 			} catch (Exception e) {
-				e.printStackTrace();
+				LOG.error(e);
 			}
 			
 			IEditorInput input=null;
@@ -54,7 +57,7 @@ public class CreateTestCaseWizard extends Wizard {
 			{
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOG.error(e);
 		}
 
 		return true;

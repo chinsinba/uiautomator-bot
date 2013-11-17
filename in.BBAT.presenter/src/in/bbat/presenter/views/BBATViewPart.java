@@ -1,6 +1,9 @@
 package in.bbat.presenter.views;
 
 
+import in.bbat.logger.BBATLogger;
+
+import org.apache.log4j.Logger;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.Viewer;
@@ -11,6 +14,7 @@ import org.eclipse.ui.part.ViewPart;
 
 public abstract class BBATViewPart extends ViewPart {
 
+	private static final Logger LOG = BBATLogger.getLogger(BBATViewPart.class.getName());
 	public void addMenuManager(Viewer viewer){
 
 		final MenuManager menuManager = new MenuManager();

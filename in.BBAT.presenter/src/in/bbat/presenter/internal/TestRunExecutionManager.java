@@ -1,15 +1,18 @@
 package in.bbat.presenter.internal;
 
 import in.BBAT.abstrakt.presenter.run.model.TestRunCaseModel;
+import in.bbat.logger.BBATLogger;
 
 import java.util.List;
 import java.util.Set;
 
+import org.apache.log4j.Logger;
 import org.eclipse.swt.widgets.Display;
 
 
 public class TestRunExecutionManager {
 
+	private static final Logger LOG = BBATLogger.getLogger(TestRunExecutionManager.class.getName());
 	private static TestRunExecutionManager instance;
 	private TestRunContainer runContainer;
 	private boolean executing = false;

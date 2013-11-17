@@ -1,5 +1,8 @@
 package in.BBAT.presenter.wizards.pages;
 
+import in.bbat.logger.BBATLogger;
+
+import org.apache.log4j.Logger;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
@@ -14,6 +17,7 @@ public class NameAndDescriptionComponent {
 	private Text nameText;
 	private Text descText;
 
+	private static final Logger LOG = BBATLogger.getLogger(NameAndDescriptionComponent.class.getName());
 	public NameAndDescriptionComponent(Composite parent) {
 		Group group = new Group(parent, SWT.BORDER);
 		group.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));

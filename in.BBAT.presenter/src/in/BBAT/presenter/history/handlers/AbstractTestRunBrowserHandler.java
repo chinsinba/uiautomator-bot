@@ -2,17 +2,20 @@ package in.BBAT.presenter.history.handlers;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.PlatformUI;
 
 import in.BBAT.presenter.developer.handlers.BBATHandler;
+import in.bbat.logger.BBATLogger;
 import in.bbat.presenter.views.developer.TestCaseBrowserView;
 import in.bbat.presenter.views.history.TestRunHistoryView;
 
 public abstract class AbstractTestRunBrowserHandler extends BBATHandler {
 
+	private static final Logger LOG = BBATLogger.getLogger(AbstractTestRunBrowserHandler.class.getName());
 	@Override
 	public Object run(ExecutionEvent event) {
 		return run(event, getSelectedList());

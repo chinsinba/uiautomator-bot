@@ -4,8 +4,10 @@ import in.BBAT.abstrakt.presenter.pkg.model.TestProjectManager;
 import in.BBAT.presenter.DND.listeners.TestCaseDragListener;
 import in.BBAT.presenter.contentProviders.TestCaseBrowserContentProvider;
 import in.BBAT.presenter.labelProviders.TestCaseLabelProvider;
+import in.bbat.logger.BBATLogger;
 import in.bbat.presenter.views.BBATViewPart;
 
+import org.apache.log4j.Logger;
 import org.eclipse.jface.util.LocalSelectionTransfer;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.TreeViewer;
@@ -19,7 +21,8 @@ import org.eclipse.swt.widgets.Composite;
 
 public class TestCaseBrowserView extends BBATViewPart {
 	public static final String ID = "in.BBAT.presenter.developer.testcaseBrowserView";
-
+	private static final Logger LOG = BBATLogger.getLogger(TestCaseBrowserView.class.getName());
+	
 	private TreeViewer viewer;
 
 	private PShelf testCaseShelf;
@@ -46,7 +49,7 @@ public class TestCaseBrowserView extends BBATViewPart {
 		try {
 			viewer.setInput(TestProjectManager.getInstance().getTestProjects());
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOG.error(e);
 		}
 		addMenuManager(viewer);
 		createDragSupport();

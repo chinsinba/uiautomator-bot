@@ -7,10 +7,12 @@ import java.util.List;
 import in.BBAT.abstrakt.gui.model.AbstractTreeModel;
 import in.BBAT.abstrakt.presenter.pkg.model.AbstractProjectTree;
 import in.BBAT.abstrakt.presenter.run.model.TestRunCaseModel;
+import in.bbat.logger.BBATLogger;
 import in.bbat.presenter.internal.DeviceTestRun;
 import in.bbat.presenter.views.BBATViewPart;
 import in.bbat.presenter.views.tester.TestRunnerView;
 
+import org.apache.log4j.Logger;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.Viewer;
@@ -18,6 +20,7 @@ import org.eclipse.ui.PlatformUI;
 
 public class TestDeviceRunCaseDropListener extends TestRunDropListener{
 
+	private static final Logger LOG = BBATLogger.getLogger(TestDeviceRunCaseDropListener.class.getName());
 	private DeviceTestRun devTestRun;
 
 	public TestDeviceRunCaseDropListener(Viewer viewer,DeviceTestRun devTestRun) {
@@ -48,7 +51,7 @@ public class TestDeviceRunCaseDropListener extends TestRunDropListener{
 	try {
 		testRunView.refresh();
 	} catch (Exception e) {
-		e.printStackTrace();
+		LOG.error(e);
 	}
 	return true;
 	}

@@ -2,10 +2,12 @@ package in.bbat.presenter.internal;
 
 import in.BBAT.abstrakt.presenter.run.model.TestRunInstanceModel;
 import in.BBAT.abstrakt.presenter.run.model.TestStatus;
+import in.bbat.logger.BBATLogger;
 import in.bbat.presenter.views.tester.TestRunnerView;
 
 import java.util.Map;
 
+import org.apache.log4j.Logger;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.PlatformUI;
 
@@ -13,7 +15,8 @@ import com.android.ddmlib.testrunner.ITestRunListener;
 import com.android.ddmlib.testrunner.TestIdentifier;
 
 public class TestCaseExecutionListener implements ITestRunListener {
-
+	
+	private static final Logger LOG = BBATLogger.getLogger(TestCaseExecutionListener.class.getName());
 	private TestRunInstanceModel runCase;
 	private DeviceTestRun deviceRun;
 	private TestStatus status = TestStatus.PASS;
@@ -74,7 +77,7 @@ public class TestCaseExecutionListener implements ITestRunListener {
 				try {
 					view.refresh();
 				} catch (Exception e) {
-					e.printStackTrace();
+					LOG.error(e);
 				}		
 
 			}

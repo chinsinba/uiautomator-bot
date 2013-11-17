@@ -5,8 +5,10 @@ import in.BBAT.abstrakt.presenter.device.model.IDeviceModelChangeListener;
 import in.BBAT.abstrakt.presenter.device.model.TestDeviceManager;
 import in.BBAT.presenter.DND.listeners.DeviceDragListener;
 import in.BBAT.presenter.labelProviders.DeviceViewLabelProvider;
+import in.bbat.logger.BBATLogger;
 import in.bbat.presenter.views.BBATViewPart;
 
+import org.apache.log4j.Logger;
 import org.eclipse.jface.util.LocalSelectionTransfer;
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.ISelection;
@@ -19,6 +21,7 @@ import org.eclipse.swt.widgets.Display;
 
 public class DeveloperDeviceView extends BBATViewPart {
 
+	private static final Logger LOG = BBATLogger.getLogger(DeveloperDeviceView.class.getName());
 	public static final String ID = "in.BBAT.presenter.developer.deviceView";
 	private TableViewer viewer;
 

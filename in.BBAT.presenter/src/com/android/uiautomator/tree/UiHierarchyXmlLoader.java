@@ -16,10 +16,14 @@
 
 package com.android.uiautomator.tree;
 
+import org.apache.log4j.Logger;
 import org.eclipse.swt.graphics.Rectangle;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
+
+import in.BBAT.presenter.contentProviders.TestCaseBrowserContentProvider;
+import in.bbat.logger.BBATLogger;
 
 import java.io.File;
 import java.io.IOException;
@@ -35,7 +39,7 @@ public class UiHierarchyXmlLoader {
 
     private BasicTreeNode mRootNode;
     private List<Rectangle> mNafNodes;
-
+    private static final Logger LOG = BBATLogger.getLogger(UiHierarchyXmlLoader.class.getName());
     public UiHierarchyXmlLoader() {
     }
 
@@ -53,10 +57,10 @@ public class UiHierarchyXmlLoader {
         try {
             parser = factory.newSAXParser();
         } catch (ParserConfigurationException e) {
-            e.printStackTrace();
+            LOG.error(e);
             return null;
         } catch (SAXException e) {
-            e.printStackTrace();
+            LOG.error(e);
             return null;
         }
         // handler class for SAX parser to receiver standard parsing events:
@@ -127,10 +131,10 @@ public class UiHierarchyXmlLoader {
         try {
             parser.parse(new File(xmlPath), handler);
         } catch (SAXException e) {
-            e.printStackTrace();
+            LOG.error(e);
             return null;
         } catch (IOException e) {
-            e.printStackTrace();
+            LOG.error(e);
             return null;
         }
         return mRootNode;

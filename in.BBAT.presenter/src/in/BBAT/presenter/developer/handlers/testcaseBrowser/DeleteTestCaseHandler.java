@@ -1,18 +1,21 @@
 package in.BBAT.presenter.developer.handlers.testcaseBrowser;
 
 import in.BBAT.abstrakt.presenter.pkg.model.AbstractProjectTree;
+import in.bbat.logger.BBATLogger;
 import in.bbat.presenter.internal.TestRunExecutionManager;
 import in.bbat.presenter.views.BBATViewPart;
 import in.bbat.presenter.views.developer.TestCaseBrowserView;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.ui.PlatformUI;
 
 public class DeleteTestCaseHandler extends AbstractTestCaseBrowserHandler {
 
+	private static final Logger LOG = BBATLogger.getLogger(DeleteTestCaseHandler.class.getName());
 	@Override
 	public Object run(ExecutionEvent event, List<?> selectedObjects) {
 
@@ -23,7 +26,7 @@ public class DeleteTestCaseHandler extends AbstractTestCaseBrowserHandler {
 			try {
 				((AbstractProjectTree)pkgObj).delete();
 			} catch (Exception e) {
-				e.printStackTrace();
+				LOG.error(e);
 			}
 		}
 
@@ -31,7 +34,7 @@ public class DeleteTestCaseHandler extends AbstractTestCaseBrowserHandler {
 		try {
 			view.refresh();
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOG.error(e);
 		}
 		return null;
 	}

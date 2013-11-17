@@ -8,6 +8,7 @@ import java.io.File;
 
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
+import org.eclipse.core.runtime.Path;
 /**
  * This class is the implementation of the Log4j logging mechanism.
  * As of now the entire application uses this logger for logging.
@@ -17,8 +18,8 @@ import org.apache.log4j.PropertyConfigurator;
 public class BBATLogger {
 
 	static {
-		System.setProperty("User.home",System.getProperty("user.dir") + File.separator + "logs");
-		PropertyConfigurator.configure(BBATPluginUtility.getInstance().getPluginDir(Activator.PLUGIN_ID) + File.separator + "log4j.properties");
+		System.setProperty("User.home",System.getProperty("user.dir") + Path.SEPARATOR+ "logs");
+		PropertyConfigurator.configure(BBATPluginUtility.getInstance().getPluginDir(Activator.PLUGIN_ID) + Path.SEPARATOR + "log4j.properties");
 	}
 
 	/**

@@ -16,6 +16,8 @@
 
 package in.bbat.presenter.views.tester;
 
+import in.bbat.logger.BBATLogger;
+
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -28,6 +30,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
+import org.apache.log4j.Logger;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.dialogs.MessageDialog;
@@ -218,6 +221,8 @@ public final class LogCatPanel implements ILogCatBufferChangeListener {
 	private int mDeletedLogCount;
 
 	private List<LogCatMessage> originalMessages;
+	
+	private static final Logger LOG = BBATLogger.getLogger(LogCatPanel.class.getName());
 	/**
 	 * Construct a logcat panel.
 	 * @param prefStore preference store where UI preferences will be saved

@@ -1,17 +1,20 @@
 package in.BBAT.presenter.tester.handlers;
 
 import in.BBAT.abstrakt.presenter.run.model.TestRunCaseModel;
+import in.bbat.logger.BBATLogger;
 import in.bbat.presenter.internal.DeviceTestRun;
 import in.bbat.presenter.internal.TestRunExecutionManager;
 import in.bbat.presenter.views.tester.TestRunnerView;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.ui.PlatformUI;
 
 public class RemoveTestRunCaseHandler extends AbstractTestRunnerHandler {
 
+	private static final Logger LOG = BBATLogger.getLogger(RemoveTestRunCaseHandler.class.getName());
 	@Override
 	public Object run(ExecutionEvent event, List<?> selectedObjects) {
 		for (Object runCase : selectedObjects) {
@@ -28,7 +31,7 @@ public class RemoveTestRunCaseHandler extends AbstractTestRunnerHandler {
 			view.refresh();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LOG.error(e);
 		}
 		return null;
 	}

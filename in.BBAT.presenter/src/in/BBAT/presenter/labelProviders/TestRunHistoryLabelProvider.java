@@ -7,13 +7,16 @@ import java.util.Date;
 import in.BBAT.abstrakt.presenter.run.model.TestDeviceRunModel;
 import in.BBAT.abstrakt.presenter.run.model.TestRunModel;
 import in.BBAT.data.model.Entities.TestRunEntity;
+import in.bbat.logger.BBATLogger;
 
+import org.apache.log4j.Logger;
 import org.eclipse.jface.viewers.ITableLabelProvider;
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.swt.graphics.Image;
 
 public class TestRunHistoryLabelProvider extends LabelProvider implements ITableLabelProvider{
 
+	private static final Logger LOG = BBATLogger.getLogger(TestRunHistoryLabelProvider.class.getName());
 	@Override
 	public Image getColumnImage(Object element, int columnIndex) {
 		if(element instanceof TestDeviceRunModel)

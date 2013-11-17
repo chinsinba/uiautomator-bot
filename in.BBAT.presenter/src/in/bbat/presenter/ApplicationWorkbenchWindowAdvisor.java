@@ -1,5 +1,6 @@
 package in.bbat.presenter;
 
+import in.bbat.logger.BBATLogger;
 import in.bbat.presenter.perstpectives.DeveloperPerspective;
 import in.bbat.presenter.perstpectives.HistoryPerspective;
 import in.bbat.presenter.perstpectives.ReporterPerspective;
@@ -9,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.dynamichelpers.IExtensionChangeHandler;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.ui.IPerspectiveDescriptor;
@@ -22,6 +24,7 @@ import org.eclipse.ui.application.WorkbenchWindowAdvisor;
 
 public class ApplicationWorkbenchWindowAdvisor extends WorkbenchWindowAdvisor {
 
+	private static final Logger LOG = BBATLogger.getLogger(ApplicationWorkbenchWindowAdvisor.class.getName());
 	public ApplicationWorkbenchWindowAdvisor(IWorkbenchWindowConfigurer configurer) {
 		super(configurer);
 	}

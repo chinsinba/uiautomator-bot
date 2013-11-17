@@ -11,6 +11,7 @@ import in.BBAT.presenter.labelProviders.DeviceTestRunLableProvider;
 import in.BBAT.presenter.labelProviders.TestRunInfoLabelProvider;
 import in.BBAT.presenter.labelProviders.TestRunnerLableProvider;
 import in.bbat.abstrakt.gui.BBATImageManager;
+import in.bbat.logger.BBATLogger;
 import in.bbat.presenter.internal.DeviceTestRun;
 import in.bbat.presenter.internal.TestRunExecutionManager;
 import in.bbat.presenter.views.BBATViewPart;
@@ -19,6 +20,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IMenuListener;
 import org.eclipse.jface.action.IMenuManager;
@@ -61,6 +63,7 @@ import com.android.ddmlib.logcat.LogCatMessage;
 public class TestRunnerView extends BBATViewPart {
 
 	public static final String ID = "in.BBAT.presenter.tester.TestRunnerView";
+	private static final Logger LOG = BBATLogger.getLogger(TestRunnerView.class.getName());
 	private TableViewer commonTestCaseViewer;
 	private TreeViewer testDeviceViewer;
 	public static CTabFolder testRunFolder;
@@ -141,12 +144,12 @@ public class TestRunnerView extends BBATViewPart {
 						view.bufferChanged(((TestRunInstanceModel)sel).getDeviceLogsFromDB(), new ArrayList<LogCatMessage>());
 					}
 				} catch (Exception e) {
-					e.printStackTrace();
+					LOG.error(e);
 				}	
 				try {
 					PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().showView(TestLogView.ID);
 				} catch (PartInitException e) {
-					e.printStackTrace();
+					LOG.error(e);
 				}
 			}
 		});
@@ -196,7 +199,7 @@ public class TestRunnerView extends BBATViewPart {
 		try {
 			commonTestCaseViewer.setInput(TestRunExecutionManager.getInstance().getTestRunCases());
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOG.error(e);
 		}
 		createDropSupportForTestCases();
 		getViewSite().setSelectionProvider(commonTestCaseViewer);
@@ -290,7 +293,7 @@ public class TestRunnerView extends BBATViewPart {
 		try {
 			deviceTestCaseViewer.setInput(run.getCases());
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOG.error(e);
 		}
 		addMenu(deviceTestCaseViewer);
 		deviceRunItem.setControl(comp);
@@ -319,7 +322,7 @@ public class TestRunnerView extends BBATViewPart {
 				try {
 					refresh();
 				} catch (Exception e) {
-					e.printStackTrace();
+					LOG.error(e);
 				}
 			}
 
@@ -455,7 +458,7 @@ public class TestRunnerView extends BBATViewPart {
 		try {
 			refresh();
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOG.error(e);
 		}
 	}
 

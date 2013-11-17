@@ -1,7 +1,10 @@
 package in.BBAT.presenter.DND.listeners;
 
+import in.bbat.logger.BBATLogger;
+
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.eclipse.jface.util.LocalSelectionTransfer;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.TableViewer;
@@ -11,6 +14,7 @@ import org.eclipse.swt.dnd.DragSourceListener;
 
 public class DeviceDragListener implements DragSourceListener{
 
+	private static final Logger LOG = BBATLogger.getLogger(DeviceDragListener.class.getName());
 	private Viewer viewer;
 
 	public DeviceDragListener(TableViewer viewer) {

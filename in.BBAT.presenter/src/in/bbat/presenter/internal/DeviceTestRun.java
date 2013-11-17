@@ -9,12 +9,14 @@ import in.BBAT.abstrakt.presenter.run.model.TestStatus;
 import in.BBAT.testRunner.runner.TestRunner;
 import in.BBAT.testRunner.runner.UiAutoTestCaseJar;
 import in.bbat.abstrakt.gui.BBATImageManager;
+import in.bbat.logger.BBATLogger;
 import in.bbat.presenter.views.tester.TestRunnerView;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
@@ -30,6 +32,7 @@ import com.android.uiautomator.MonkeyRecorderFrame;
 
 public class DeviceTestRun {
 
+	private static final Logger LOG = BBATLogger.getLogger(DeviceTestRun.class.getName());
 	private AndroidDevice device;
 	private List<TestRunCaseModel> testCases = new ArrayList<TestRunCaseModel>();
 	private ArrayList<TestRunInstanceModel> testRunInstances = new ArrayList<TestRunInstanceModel>();
@@ -157,7 +160,7 @@ public class DeviceTestRun {
 					try {
 						((TestRunnerView)autoLogView).refresh();
 					} catch (Exception e) {
-						e.printStackTrace();
+						LOG.error(e);
 					}
 				}
 			}

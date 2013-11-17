@@ -4,12 +4,14 @@ import in.BBAT.abstrakt.presenter.run.model.TestDeviceRunModel;
 import in.BBAT.abstrakt.presenter.run.model.TestRunInstanceModel;
 import in.BBAT.presenter.labelProviders.HistoryTestRunInfoLabelProvider;
 import in.bbat.abstrakt.gui.BBATImageManager;
+import in.bbat.logger.BBATLogger;
 import in.bbat.presenter.views.BBATViewPart;
 import in.bbat.presenter.views.tester.AutomatorLogView;
 import in.bbat.presenter.views.tester.TestLogView;
 
 import java.util.ArrayList;
 
+import org.apache.log4j.Logger;
 import org.eclipse.jface.layout.TableColumnLayout;
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.ColumnWeightData;
@@ -34,7 +36,8 @@ import com.android.ddmlib.logcat.LogCatMessage;
 public class TestRunInfoView extends BBATViewPart {
 
 	public static final String ID = "in.BBAT.presenter.history.TestRunInstanceView";
-
+	private static final Logger LOG = BBATLogger.getLogger(TestRunInfoView.class.getName());
+	
 	private CTabFolder testRunFolder;
 	private CTabItem testRunItem;
 	private TableViewer viewer;
@@ -78,12 +81,12 @@ public class TestRunInfoView extends BBATViewPart {
 						((AutomatorLogView)autoLogView).setInput((TestRunInstanceModel)sel);
 					}
 				} catch (Exception e) {
-					e.printStackTrace();
+					LOG.error(e);
 				}	
 				try {
 					PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().showView(HistoryDeviceLogView.ID);
 				} catch (PartInitException e) {
-					e.printStackTrace();
+					LOG.error(e);
 				}
 			}
 		});

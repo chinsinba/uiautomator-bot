@@ -6,6 +6,7 @@ import freemarker.template.TemplateException;
 import in.BBAT.data.model.Entities.TestCaseEntity;
 import in.BBAT.data.model.Entities.TestSuiteEntity;
 import in.bbat.abstrakt.gui.BBATImageManager;
+import in.bbat.logger.BBATLogger;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -17,6 +18,7 @@ import java.io.Writer;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.swt.graphics.Image;
@@ -30,6 +32,7 @@ public class TestCaseModel extends AbstractProjectTree{
 
 	public final static String JAVA = ".java";
 
+	private static final Logger LOG = BBATLogger.getLogger(TestCaseModel.class.getName());
 	public IFile testCaseFile;
 
 
@@ -123,7 +126,7 @@ public class TestCaseModel extends AbstractProjectTree{
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		} catch (TemplateException e) {
-			e.printStackTrace();
+			LOG.error(e);
 		}
 		//String packDecl = "package "+getParent().getParent().getName()+"."+getParent().getName()+";\n\n";
 		//packDecl +="import com.android.uiautomator.core.*;\nimport com.android.uiautomator.testrunner.*;\n\n";
@@ -133,7 +136,7 @@ public class TestCaseModel extends AbstractProjectTree{
 		//		try {
 		//			getIFile().setContents(st,0, null);
 		//		} catch (CoreException e) {
-		//			e.printStackTrace();
+		//			LOG.error(e);
 		//		}
 
 	}

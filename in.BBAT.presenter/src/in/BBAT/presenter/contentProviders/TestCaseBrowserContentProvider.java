@@ -1,14 +1,17 @@
 package in.BBAT.presenter.contentProviders;
 
 import in.BBAT.abstrakt.gui.model.IGUITreeNode;
+import in.bbat.logger.BBATLogger;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.Viewer;
 
 public class TestCaseBrowserContentProvider implements ITreeContentProvider {
 
+	private static final Logger LOG = BBATLogger.getLogger(TestCaseBrowserContentProvider.class.getName());
 	@Override
 	public void dispose() {
 		// TODO Auto-generated method stub
@@ -33,7 +36,7 @@ public class TestCaseBrowserContentProvider implements ITreeContentProvider {
 			try {
 				return ((IGUITreeNode) parentElement).getChildren().toArray();
 			} catch (Exception e) {
-				e.printStackTrace();
+				LOG.error(e);
 			}
 		}
 
@@ -56,7 +59,7 @@ public class TestCaseBrowserContentProvider implements ITreeContentProvider {
 				if (((IGUITreeNode) parentElement).getChildren() == null)
 					return false;
 			} catch (Exception e) {
-				e.printStackTrace();
+				LOG.error(e);
 			}
 		}		return true;
 	}
