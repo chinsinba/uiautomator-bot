@@ -1,5 +1,9 @@
 package in.BBAT.presenter.labelProviders;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import in.BBAT.abstrakt.presenter.run.model.TestDeviceRunModel;
 import in.BBAT.abstrakt.presenter.run.model.TestRunModel;
 import in.BBAT.data.model.Entities.TestRunEntity;
@@ -39,9 +43,13 @@ public class TestRunHistoryLabelProvider extends LabelProvider implements ITable
 			case 0:
 				return ((TestDeviceRunModel) element).getDeviceName();
 			case 1:
+				DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+				Date date = new Date(((TestDeviceRunModel) element).getStartTime().getTime());
+				return dateFormat.format(date);
+			case 2:
 				return ((TestDeviceRunModel) element).getStatus();
 
-			case 2:
+			case 3:
 				return  String.valueOf(((TestDeviceRunModel) element).getTimeTaken()/1000f);
 			}
 		}

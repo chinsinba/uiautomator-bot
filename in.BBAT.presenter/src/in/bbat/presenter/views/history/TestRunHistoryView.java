@@ -82,18 +82,24 @@ public class TestRunHistoryView extends BBATViewPart {
 		TreeColumn col = new TreeColumn(viewer.getTree(), SWT.LEFT);
 		col.setText("TestRun");
 		col.setImage(BBATImageManager.getInstance().getImage(BBATImageManager.ANDROID_DEVICE));
-		lay.setColumnData(col, new ColumnWeightData(50));
+		lay.setColumnData(col, new ColumnWeightData(40));
+		
+		
+		col = new TreeColumn(viewer.getTree(), SWT.LEFT);
+		col.setText("Date");
+		comp.setLayout(lay);
+		lay.setColumnData(col, new ColumnWeightData(20));
 
 		col = new TreeColumn(viewer.getTree(), SWT.LEFT);
 		col.setText("Status");
 		comp.setLayout(lay);
-		lay.setColumnData(col, new ColumnWeightData(35));
+		lay.setColumnData(col, new ColumnWeightData(20));
 
 		col = new TreeColumn(viewer.getTree(), SWT.LEFT);
 		col.setText("Time(s)");
 		col.setImage(BBATImageManager.getInstance().getImage(BBATImageManager.TIME));
 		comp.setLayout(lay);
-		lay.setColumnData(col, new ColumnWeightData(15));
+		lay.setColumnData(col, new ColumnWeightData(20));
 
 		/*col = new TreeColumn(viewer.getTree(), SWT.LEFT);
 		col.setText("FAIL");

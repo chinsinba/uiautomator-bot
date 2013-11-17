@@ -93,4 +93,10 @@ public class TestDeviceRunModel extends AbstractTreeModel {
 		return getEndTime().getTime()-getStartTime().getTime();
 	}
 
+	public String	convertTimeToHH_MM_SS(long miliseconds){
+		long second = (miliseconds / 1000) % 60;
+		long minute = (miliseconds / (1000 * 60)) % 60;
+		long hour = (miliseconds / (1000 * 60 * 60)) % 24;
+		return String.format("%02d:%02d:%02d", hour, minute, second);
+	}
 }
