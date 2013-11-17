@@ -59,7 +59,7 @@ ITableLabelProvider {
 			case 2:
 				return String.valueOf(((DeviceTestRun) element).noOfPassedCases());
 			case 3:
-				return String.valueOf(((DeviceTestRun) element).noOfFailedCases());
+				return String.valueOf(((DeviceTestRun) element).noOfFailedCases()+((DeviceTestRun) element).noOfErrorCases());
 			case 4:
 				return ((DeviceTestRun) element).getStatus().getStatus();
 			default:

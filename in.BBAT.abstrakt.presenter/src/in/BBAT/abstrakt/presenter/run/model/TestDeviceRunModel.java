@@ -87,6 +87,9 @@ public class TestDeviceRunModel extends AbstractTreeModel {
 	}
 
 	public long getTimeTaken(){
+		if(getEndTime()== null){
+			return 0;
+		}
 		return getEndTime().getTime()-getStartTime().getTime();
 	}
 

@@ -25,8 +25,12 @@ public abstract class AbstractTestRunnerHandler extends BBATHandler {
 
 	private List<?> getSelectedList() {
 		TestRunnerView view  = (TestRunnerView) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().findView(TestRunnerView.ID);
-		ISelection selection = view.getSelectedElements();
 		List<?> list = null;
+		if(view == null){
+			return list;
+		}
+		ISelection selection = view.getSelectedElements();
+		
 		if(selection instanceof IStructuredSelection)
 		{
 			list = ((IStructuredSelection) selection).toList();

@@ -240,6 +240,10 @@ public class DeviceTestRun {
 
 	}
 
+	public int noOfErrorCases(){
+		return getCount(TestStatus.ERROR.getStatus());
+	}
+
 	public List<String> getDistinctScriptPaths(){
 		List<String> testScriptPaths = new ArrayList<String>();
 
