@@ -18,6 +18,7 @@ public class StopTestRunHandler extends AbstractTestRunnerHandler {
 
 	@Override
 	public Object run(ExecutionEvent event) {
+		LOG.info("Stop test run execution");
 		TestRunExecutionManager.getInstance().stopRun();
 		return null;
 	}

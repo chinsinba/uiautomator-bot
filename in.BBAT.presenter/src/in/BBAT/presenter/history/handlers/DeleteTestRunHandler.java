@@ -20,15 +20,16 @@ public class DeleteTestRunHandler extends AbstractTestRunBrowserHandler {
 	private static final Logger LOG = BBATLogger.getLogger(DeleteTestRunHandler.class.getName());
 	@Override
 	public Object run(ExecutionEvent event, List<?> selectedObjects) {
+
+		LOG.info("Delete test run ");
 		if(!MessageDialog.openQuestion(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(), "Delete","Do you want to delete ?"))
 			return null;
-
-		for(Object pkgObj :selectedObjects){
-			try {
+		try {
+			for(Object pkgObj :selectedObjects){
 				((TestRunModel)pkgObj).delete();
-			} catch (Exception e) {
-				LOG.error(e);
 			}
+		} catch (Exception e) {
+			LOG.error(e);
 		}
 
 		BBATViewPart view = (BBATViewPart) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().findView(TestRunHistoryView.ID);

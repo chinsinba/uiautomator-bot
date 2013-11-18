@@ -1,7 +1,6 @@
 package in.BBAT.presenter.wizards;
 
 import in.BBAT.abstrakt.presenter.pkg.model.TestProjectModel;
-import in.BBAT.dataMine.manager.MineManager;
 import in.BBAT.presenter.wizards.pages.CreateTestProjectPage;
 import in.bbat.logger.BBATLogger;
 import in.bbat.presenter.views.BBATViewPart;
@@ -18,6 +17,7 @@ public class CreateTestProjectWizard extends Wizard {
 	private static final Logger LOG = BBATLogger.getLogger(CreateTestProjectWizard.class.getName());
 	@Override
 	public boolean performFinish() {
+		LOG.info("Creating test Project : " + projCreationPage.getName());
 		TestProjectModel newTestProject = null;
 		try {
 			newTestProject = new TestProjectModel(projCreationPage.getName());
@@ -25,9 +25,7 @@ public class CreateTestProjectWizard extends Wizard {
 			LOG.error(e);
 		}
 		newTestProject.setDescription(projCreationPage.getDescription());
-//		MineManager.getInstance().beginTransaction();
 		newTestProject.save();
-//		MineManager.getInstance().commitTransaction();
 
 		BBATViewPart view = (BBATViewPart) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().findView(TestCaseBrowserView.ID);
 		try {

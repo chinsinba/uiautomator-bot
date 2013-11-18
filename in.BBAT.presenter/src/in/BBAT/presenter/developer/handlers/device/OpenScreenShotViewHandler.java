@@ -11,7 +11,6 @@ import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 
-import com.android.monkeyrunner.recorder.MonkeyRecorder;
 
 public class OpenScreenShotViewHandler extends BBATHandler {
 
@@ -19,6 +18,7 @@ public class OpenScreenShotViewHandler extends BBATHandler {
 	@Override
 	public Object run(ExecutionEvent event) {
 
+		LOG.info("Open screen shot ui automator view");
 		try {
 			PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().showView(ScreenShotView.ID);
 		} catch (PartInitException e) {

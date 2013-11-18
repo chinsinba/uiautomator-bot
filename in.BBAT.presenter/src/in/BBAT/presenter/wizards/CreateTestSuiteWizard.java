@@ -26,6 +26,8 @@ public class CreateTestSuiteWizard extends Wizard {
 
 	@Override
 	public boolean performFinish() {
+		
+		LOG.info("Create test suite: " +suiteCreationPage.getName());
 		try {
 			TestSuiteModel newTestSuite = new TestSuiteModel(parent, suiteCreationPage.getName());
 			newTestSuite.setDescription(suiteCreationPage.getDescription());

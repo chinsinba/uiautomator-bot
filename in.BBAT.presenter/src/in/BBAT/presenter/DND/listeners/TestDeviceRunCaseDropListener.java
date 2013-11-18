@@ -29,33 +29,32 @@ public class TestDeviceRunCaseDropListener extends TestRunDropListener{
 	}
 
 	@Override
-	public boolean performDrop(Object data) {	Object testObj=null;
-	List<TestRunCaseModel> tempList = new ArrayList<TestRunCaseModel>();
+	public boolean performDrop(Object data) {	
 
-	if(data instanceof ISelection){
-		/*Multiple selection is allowed
-		 */
-		Iterator<IStructuredSelection> iterator = ((IStructuredSelection) data).iterator();
-		while(iterator.hasNext())
-		{
-			testObj = iterator.next();
-			if(testObj instanceof AbstractProjectTree){
-				addToTestCaseList((AbstractTreeModel) testObj, tempList);
+		Object testObj=null;
+		List<TestRunCaseModel> tempList = new ArrayList<TestRunCaseModel>();
+
+		if(data instanceof ISelection){
+			/*Multiple selection is allowed
+			 */
+			Iterator<IStructuredSelection> iterator = ((IStructuredSelection) data).iterator();
+			while(iterator.hasNext())
+			{
+				testObj = iterator.next();
+				if(testObj instanceof AbstractProjectTree){
+					addToTestCaseList((AbstractTreeModel) testObj, tempList);
+				}
 			}
 		}
+
+		((DeviceTestRun) devTestRun).addTestCases(tempList);
+
+		BBATViewPart testRunView = (BBATViewPart) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().findView(TestRunnerView.ID);
+		try {
+			testRunView.refresh();
+		} catch (Exception e) {
+			LOG.error(e);
+		}
+		return true;
 	}
-
-	((DeviceTestRun) devTestRun).addTestCases(tempList);
-
-	BBATViewPart testRunView = (BBATViewPart) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().findView(TestRunnerView.ID);
-	try {
-		testRunView.refresh();
-	} catch (Exception e) {
-		LOG.error(e);
-	}
-	return true;
-	}
-
-
-
 }

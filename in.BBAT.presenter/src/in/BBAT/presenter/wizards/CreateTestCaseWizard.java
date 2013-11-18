@@ -12,7 +12,6 @@ import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
-import org.eclipse.ui.ide.IDE;
 import org.eclipse.ui.part.FileEditorInput;
 
 public class CreateTestCaseWizard extends Wizard {
@@ -34,8 +33,9 @@ public class CreateTestCaseWizard extends Wizard {
 	}
 	@Override
 	public boolean performFinish() {
-
+		LOG.info("Creating test case : "+caseCreationPage.getName());
 		try {
+
 			TestCaseModel newTestCase = new TestCaseModel(parent, caseCreationPage.getName());
 			newTestCase.setDescription(caseCreationPage.getDescription());
 			newTestCase.save();
@@ -46,15 +46,16 @@ public class CreateTestCaseWizard extends Wizard {
 			} catch (Exception e) {
 				LOG.error(e);
 			}
-			
+
 			IEditorInput input=null;
 			input = new FileEditorInput(newTestCase.getIFile());
 			try
 			{
-//				IDE.openEditor(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage(), newTestCase.getIFile());
+				//				IDE.openEditor(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage(), newTestCase.getIFile());
 				PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().openEditor(input, "org.eclipse.jdt.ui.CompilationUnitEditor");
 			} catch (PartInitException e)
 			{
+				LOG.error(e);
 			}
 		} catch (Exception e) {
 			LOG.error(e);
@@ -62,9 +63,9 @@ public class CreateTestCaseWizard extends Wizard {
 
 		return true;
 	}
-	
+
 	private void createContents() {
-		
+
 	}
 
 }

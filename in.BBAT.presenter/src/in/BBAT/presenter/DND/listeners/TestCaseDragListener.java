@@ -12,6 +12,7 @@ import org.eclipse.swt.dnd.DragSourceEvent;
 import org.eclipse.swt.dnd.DragSourceListener;
 
 public class TestCaseDragListener implements DragSourceListener{
+	
 	private static final Logger LOG = BBATLogger.getLogger(TestCaseDragListener.class.getName());
 	private TreeViewer viewer;
 

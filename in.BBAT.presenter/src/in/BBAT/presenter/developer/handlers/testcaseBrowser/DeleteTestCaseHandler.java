@@ -19,17 +19,16 @@ public class DeleteTestCaseHandler extends AbstractTestCaseBrowserHandler {
 	@Override
 	public Object run(ExecutionEvent event, List<?> selectedObjects) {
 
+		LOG.info("Delete test case ");
 		if(!MessageDialog.openQuestion(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(), "Delete","Do you want to delete ?"))
 			return null;
-
-		for(Object pkgObj :selectedObjects){
-			try {
+		try {
+			for(Object pkgObj :selectedObjects){
 				((AbstractProjectTree)pkgObj).delete();
-			} catch (Exception e) {
-				LOG.error(e);
 			}
+		} catch (Exception e) {
+			LOG.error(e);
 		}
-
 		BBATViewPart view = (BBATViewPart) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().findView(TestCaseBrowserView.ID);
 		try {
 			view.refresh();

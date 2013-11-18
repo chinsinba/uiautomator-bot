@@ -17,6 +17,8 @@ public class RemoveTestRunCaseHandler extends AbstractTestRunnerHandler {
 	private static final Logger LOG = BBATLogger.getLogger(RemoveTestRunCaseHandler.class.getName());
 	@Override
 	public Object run(ExecutionEvent event, List<?> selectedObjects) {
+		
+		LOG.info("Remove test run case ");
 		for (Object runCase : selectedObjects) {
 			for(DeviceTestRun run: TestRunExecutionManager.getInstance().getSelectedDevices()){
 				run.removeCase((TestRunCaseModel) runCase);
@@ -30,7 +32,6 @@ public class RemoveTestRunCaseHandler extends AbstractTestRunnerHandler {
 		try {
 			view.refresh();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			LOG.error(e);
 		}
 		return null;

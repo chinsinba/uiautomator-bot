@@ -24,6 +24,7 @@ import org.eclipse.swt.dnd.TransferData;
 import org.eclipse.ui.PlatformUI;
 
 public class TestCaseDropListener extends ViewerDropAdapter {
+	
 	private static final Logger LOG = BBATLogger.getLogger(TestCaseDropListener.class.getName());
 	public TestCaseDropListener(Viewer viewer) {
 		super(viewer);
@@ -32,10 +33,9 @@ public class TestCaseDropListener extends ViewerDropAdapter {
 
 	@Override
 	public boolean performDrop(Object data) {
+		
 		Object testObj=null;
 		List<TestRunCaseModel> tempList = new ArrayList<TestRunCaseModel>();
-
-
 
 		if(data instanceof ISelection){
 			/*Multiple selection is allowed

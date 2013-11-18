@@ -12,6 +12,7 @@ public class ExportScriptsHandler extends AbstractTestCaseBrowserHandler {
 	private static final Logger LOG = BBATLogger.getLogger(ExportScriptsHandler.class.getName());
 	@Override
 	public Object run(ExecutionEvent event, List<?> selectedObjects) {
+		LOG.info("Export scripts ");
 		return null;
 	}
 

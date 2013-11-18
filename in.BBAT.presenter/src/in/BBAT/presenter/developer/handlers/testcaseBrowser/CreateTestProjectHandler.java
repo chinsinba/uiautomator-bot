@@ -16,10 +16,11 @@ public class CreateTestProjectHandler extends AbstractTestCaseBrowserHandler {
 	@Override
 	public Object run(ExecutionEvent event, List<?> selectedObjects) {
 
+		LOG.info("open new Test project wizard");
 		WizardDialog dialog = new WizardDialog(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(), new CreateTestProjectWizard());
 		dialog.setPageSize(300,300);
 		dialog.open();
-
+		LOG.info("Created test project");
 		return null;
 	}
 

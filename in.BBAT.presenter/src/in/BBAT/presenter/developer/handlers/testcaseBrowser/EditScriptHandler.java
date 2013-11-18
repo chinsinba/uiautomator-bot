@@ -19,6 +19,7 @@ public class EditScriptHandler extends AbstractTestCaseBrowserHandler {
 	@Override
 	public Object run(ExecutionEvent event, List<?> selectedObjects) {
 
+		LOG.info("Edit script");
 		IEditorInput input=null;
 		input = new FileEditorInput(((TestCaseModel) selectedObjects.get(0)).getIFile());
 		try
@@ -27,6 +28,7 @@ public class EditScriptHandler extends AbstractTestCaseBrowserHandler {
 			PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().openEditor(input, "org.eclipse.jdt.ui.CompilationUnitEditor");
 		} catch (PartInitException e)
 		{
+			LOG.error(e);
 		}
 		return null;
 	}

@@ -18,6 +18,7 @@ public class OpenDeviceLogsHandler extends AbstractDeviceViewHandler {
 	private static final Logger LOG = BBATLogger.getLogger(OpenDeviceLogsHandler.class.getName());
 	@Override
 	public Object run(ExecutionEvent event, List<?> selectedObjects) {
+		LOG.info("Open device logs view");
 		DeviceLogView view;
 		try {
 			view  = (DeviceLogView) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().showView(DeviceLogView.ID);

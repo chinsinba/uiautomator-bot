@@ -16,11 +16,16 @@ public class CreateTestCaseHandler extends AbstractTestCaseBrowserHandler {
 	private static final Logger LOG = BBATLogger.getLogger(CreateTestCaseHandler.class.getName());
 	@Override
 	public Object run(ExecutionEvent event, List<?> selectedObjects) {
+
+		LOG.info("open new Test Case wizard");
 		WizardDialog dialog = new WizardDialog(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(), new CreateTestCaseWizard((TestSuiteModel) selectedObjects.get(0)));
 		dialog.setPageSize(300,300);
 		dialog.open();
-		if(!selectedObjects.isEmpty()){}
+		if(!selectedObjects.isEmpty())
+		{
 
+		}
+		LOG.info("Created test Case");
 		return null;
 	}
 

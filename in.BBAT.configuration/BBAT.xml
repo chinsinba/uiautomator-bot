@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <BbatConfig toolVersion="0.0.1">
 	<Database update="false" userName="app" isExternal="true" pwd="app" port="1527"
-		name="sample_new1" ipAddress="127.0.0.1" pageSize="200" />
+		name="BBAT_DATA" ipAddress="127.0.0.1" pageSize="200" />
 
 	<User name="dghwsdg" email="dkhks@hj.com" />
 

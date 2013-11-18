@@ -15,6 +15,8 @@ public class RemoveAllTestRunCaseHandler extends AbstractTestRunnerHandler {
 	private static final Logger LOG = BBATLogger.getLogger(RemoveAllTestRunCaseHandler.class.getName());
 	@Override
 	public Object run(ExecutionEvent event, List<?> selectedObjects) {
+		
+		LOG.info("Remove all test runs");
 		TestRunExecutionManager.getInstance().clearTestRunCases();
 		TestRunExecutionManager.getInstance().clearTestDevices();
 		TestRunnerView view  = (TestRunnerView) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().findView(TestRunnerView.ID);

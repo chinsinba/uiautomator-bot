@@ -27,7 +27,7 @@ public class Application implements IApplication {
 		Display display = PlatformUI.createDisplay();
 		try {
 			try {
-				LOG.info("Initialize Db");
+				LOG.info("Started....");
 				ApplicationHelper.initializeDb();
 				TestDeviceManager.init(ConfigXml.getInstance().getAndroid_AdbPath());
 			} catch (UnknownHostException e) {

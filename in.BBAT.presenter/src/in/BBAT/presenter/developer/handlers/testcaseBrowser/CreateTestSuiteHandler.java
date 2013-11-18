@@ -16,10 +16,11 @@ public class CreateTestSuiteHandler extends AbstractTestCaseBrowserHandler {
 	private static final Logger LOG = BBATLogger.getLogger(CreateTestSuiteHandler.class.getName());
 	@Override
 	public Object run(ExecutionEvent event, List<?> selectedObjects) {
-
+		LOG.info("open new Test Suite wizard");
 		WizardDialog dialog = new WizardDialog(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(), new CreateTestSuiteWizard((TestProjectModel) selectedObjects.get(0)));
 		dialog.setPageSize(300,300);
 		dialog.open();
+		LOG.info("Created Test Suite");
 		return null;
 	}
 

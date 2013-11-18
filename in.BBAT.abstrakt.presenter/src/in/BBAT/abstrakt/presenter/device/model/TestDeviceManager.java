@@ -3,14 +3,15 @@ package in.BBAT.abstrakt.presenter.device.model;
 import in.BBAT.TestRunner.device.AdbBridgeManager;
 import in.BBAT.TestRunner.device.IAndroidDevice;
 import in.BBAT.TestRunner.device.IDeviceConnectionListener;
+import in.bbat.logger.BBATLogger;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.android.monkeyrunner.MonkeyDevice;
-import com.android.monkeyrunner.recorder.MonkeyRecorder;
+import org.apache.log4j.Logger;
+
 
 
 public class TestDeviceManager  implements IDeviceConnectionListener{
@@ -18,6 +19,8 @@ public class TestDeviceManager  implements IDeviceConnectionListener{
 
 	private static TestDeviceManager instance;
 
+	private static final Logger LOG = BBATLogger.getLogger(TestDeviceManager.class.getName());
+	
 	private Map<IAndroidDevice, AndroidDevice> iDeviceMap = new HashMap<IAndroidDevice, AndroidDevice>();
 
 	private List<IDeviceModelChangeListener> listners = new ArrayList<IDeviceModelChangeListener>();
@@ -78,7 +81,9 @@ public class TestDeviceManager  implements IDeviceConnectionListener{
 	}
 
 	public static void init(String adbLocation) {
+		LOG.info("Initialize device manager with ADB: " + adbLocation );
 		AdbBridgeManager.init(adbLocation);		
+		LOG.info("Initialized device manager");
 	}
 
 	public void addDeviceModelChangeListener(IDeviceModelChangeListener listener){
