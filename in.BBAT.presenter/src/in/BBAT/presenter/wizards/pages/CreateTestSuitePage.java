@@ -20,7 +20,7 @@ public class CreateTestSuitePage extends CreatePage {
 	
 
 	public CreateTestSuitePage(String pageName,TestProjectModel project) {
-		super(pageName);
+		super(pageName,project);
 		this.parentProj = project;
 	}
 

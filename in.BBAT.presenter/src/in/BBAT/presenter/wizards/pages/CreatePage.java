@@ -1,5 +1,9 @@
 package in.BBAT.presenter.wizards.pages;
 
+import java.util.List;
+
+import in.BBAT.abstrakt.gui.model.AbstractTreeModel;
+import in.BBAT.abstrakt.presenter.pkg.model.AbstractProjectTree;
 import in.bbat.logger.BBATLogger;
 
 import org.apache.log4j.Logger;
@@ -18,16 +22,17 @@ public abstract class CreatePage extends WizardPage{
 	private boolean descValid;
 
 	private static final Logger LOG = BBATLogger.getLogger(CreatePage.class.getName());
-	
-	protected CreatePage(String pageName) {
+	private AbstractProjectTree parent;
+
+	protected CreatePage(String pageName,AbstractProjectTree parent) {
 		super(pageName);
 		setTitle(pageName);
-		
+		this.parent = parent;
 	}
 
 	@Override
 	public void createControl(Composite parent) {
-//		getContainer().getShell().setSize(500, 500);
+		//		getContainer().getShell().setSize(500, 500);
 		parent.setLayout(new GridLayout(1,false));
 		createUpperArea(parent);
 		nameDescComp = new NameAndDescriptionComponent(parent);
@@ -36,13 +41,17 @@ public abstract class CreatePage extends WizardPage{
 			public void modifyText(ModifyEvent e) {
 				String className = "[\\p{L}_$][\\p{L}\\p{N}_$]*";
 				boolean matches = ((Text)e.getSource()).getText().matches(className);
-				System.out.println(matches);
+
 				if(!matches){
 					setMessage("Not a valid name",WizardPage.ERROR);
 					nameValid= false;
 				}
+				if(isDuplicate( ((Text)e.getSource()).getText())){
+					setMessage("Name already exists",WizardPage.ERROR);
+					nameValid= false;
+				}
 				else{
-					setMessage("Create a new TestCase", WizardPage.INFORMATION);
+					setMessage("Create a New Test Case", WizardPage.INFORMATION);
 					nameValid = true;
 				}
 				pageComplete();
@@ -81,4 +90,19 @@ public abstract class CreatePage extends WizardPage{
 		return nameDescComp.getName();
 	}
 
+	private boolean isDuplicate(String enteredName){
+		if(parent!=null){
+			try {
+				List<AbstractTreeModel> children = parent.getChildren();
+				for(AbstractTreeModel model : children){
+					if(model.getName().equalsIgnoreCase(enteredName)){
+						return true;
+					}
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return false;
+	}
 }

@@ -12,7 +12,7 @@ public class CreateTestProjectPage extends CreatePage {
 	private static final Logger LOG = BBATLogger.getLogger(CreateTestProjectPage.class.getName());
 	
 	public CreateTestProjectPage(String pageName) {
-		super(pageName);
+		super(pageName,null);
 	}
 
 	protected void createUpperArea(Composite parent) {

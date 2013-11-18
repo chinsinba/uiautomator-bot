@@ -18,8 +18,9 @@ public class CreateTestCasePage extends CreatePage {
 
 	private static final Logger LOG = BBATLogger.getLogger(CreateTestCasePage.class.getName());
 	
+	
 	public CreateTestCasePage(String pageName,TestSuiteModel suite) {
-		super(pageName);
+		super(pageName,suite);
 		this.parentSuite = suite;
 	}
 
