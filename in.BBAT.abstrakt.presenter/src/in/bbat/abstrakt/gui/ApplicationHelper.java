@@ -5,7 +5,7 @@ import java.net.UnknownHostException;
 import org.apache.log4j.Logger;
 
 import in.BBAT.dataMine.manager.MineManager;
-import in.bbat.configuration.ConfigXml;
+import in.bbat.configuration.BBATConfigXml;
 import in.bbat.logger.BBATLogger;
 
 public class ApplicationHelper {
@@ -13,11 +13,11 @@ public class ApplicationHelper {
 
 	public static void initializeDb() throws UnknownHostException, Exception{
 		LOG.info("Starting database");
-		MineManager.getInstance().startDBServer(ConfigXml.getInstance().getDatabase_IpAddress(),ConfigXml.getInstance().getDatabase_Port(),ConfigXml.getInstance().getDatabase_UserName(),ConfigXml.getInstance().getDatabase_Pwd());
+		MineManager.getInstance().startDBServer(BBATConfigXml.getInstance().getDatabase_IpAddress(),BBATConfigXml.getInstance().getDatabase_Port(),BBATConfigXml.getInstance().getDatabase_UserName(),BBATConfigXml.getInstance().getDatabase_Pwd());
 		LOG.info("Database started");
 		
 		LOG.info("Initializing database");
-		MineManager.getInstance().createDb(ConfigXml.getInstance().getDatabase_Name(),ConfigXml.getInstance().getDatabase_IpAddress(),ConfigXml.getInstance().getDatabase_Port(),ConfigXml.getInstance().getDatabase_UserName(),ConfigXml.getInstance().getDatabase_Pwd());
+		MineManager.getInstance().createDb(BBATConfigXml.getInstance().getDatabase_Name(),BBATConfigXml.getInstance().getDatabase_IpAddress(),BBATConfigXml.getInstance().getDatabase_Port(),BBATConfigXml.getInstance().getDatabase_UserName(),BBATConfigXml.getInstance().getDatabase_Pwd());
 		LOG.info("Initialized database");
 	}
 }

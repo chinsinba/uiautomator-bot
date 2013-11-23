@@ -1,7 +1,7 @@
 package in.BBAT.testRunner.runner;
 
 import in.BBAT.TestRunner.device.TestDevice;
-import in.bbat.configuration.ConfigXml;
+import in.bbat.configuration.BBATConfigXml;
 import in.bbat.logger.BBATLogger;
 
 import java.io.File;
@@ -26,7 +26,7 @@ public class UiAutoTestCaseJar {
 	
 
 	private static final String TEMP_FOLDER_PATH =System.getProperty("user.dir")+Path.SEPARATOR+"temp" ;
-	private static final String ANDROID_SDK_TOOLS = ConfigXml.getInstance().getAndroid_SdkPath()+Path.SEPARATOR+"tools";
+	private static final String ANDROID_SDK_TOOLS = BBATConfigXml.getInstance().getAndroid_SdkPath()+Path.SEPARATOR+"tools";
 	private static final String CREATE_UI_PROJECT_COMMAND = "/android create uitest-project -n "+JAR_NAME+" -t 6 -p "+TEMP_FOLDER_PATH;
 
 	

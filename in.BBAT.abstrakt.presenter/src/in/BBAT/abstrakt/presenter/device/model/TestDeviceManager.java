@@ -1,6 +1,7 @@
 package in.BBAT.abstrakt.presenter.device.model;
 
 import in.BBAT.TestRunner.device.AdbBridgeManager;
+import in.BBAT.TestRunner.device.DeviceException;
 import in.BBAT.TestRunner.device.IAndroidDevice;
 import in.BBAT.TestRunner.device.IDeviceConnectionListener;
 import in.bbat.logger.BBATLogger;
@@ -80,7 +81,7 @@ public class TestDeviceManager  implements IDeviceConnectionListener{
 	public void deviceChanged(IAndroidDevice device, int changeMask) {
 	}
 
-	public static void init(String adbLocation) {
+	public static void init(String adbLocation) throws DeviceException {
 		LOG.info("Initialize device manager with ADB: " + adbLocation );
 		AdbBridgeManager.init(adbLocation);		
 		LOG.info("Initialized device manager");

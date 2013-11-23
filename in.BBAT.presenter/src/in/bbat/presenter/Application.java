@@ -1,8 +1,9 @@
 package in.bbat.presenter;
 
+import in.BBAT.TestRunner.device.DeviceException;
 import in.BBAT.abstrakt.presenter.device.model.TestDeviceManager;
 import in.bbat.abstrakt.gui.ApplicationHelper;
-import in.bbat.configuration.ConfigXml;
+import in.bbat.configuration.BBATConfigXml;
 import in.bbat.logger.BBATLogger;
 
 import java.net.UnknownHostException;
@@ -10,6 +11,7 @@ import java.net.UnknownHostException;
 import org.apache.log4j.Logger;
 import org.eclipse.equinox.app.IApplication;
 import org.eclipse.equinox.app.IApplicationContext;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.PlatformUI;
@@ -26,16 +28,7 @@ public class Application implements IApplication {
 	public Object start(IApplicationContext context) {
 		Display display = PlatformUI.createDisplay();
 		try {
-			try {
-				LOG.info("Started....");
-				ApplicationHelper.initializeDb();
-				TestDeviceManager.init(ConfigXml.getInstance().getAndroid_AdbPath());
-			} catch (UnknownHostException e) {
-				LOG.error(e);
-				
-			} catch (Exception e) {
-				LOG.error(e);
-			}
+			
 			int returnCode = PlatformUI.createAndRunWorkbench(display, new ApplicationWorkbenchAdvisor());
 
 			if (returnCode == PlatformUI.RETURN_RESTART) {

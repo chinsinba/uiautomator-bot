@@ -26,20 +26,20 @@ import org.eclipse.core.runtime.Path;
  * It uses JAXB to read and write the bbat.Xml. 
  * @author syed
  */
-public class ConfigXml {
+public class BBATConfigXml {
 
-	private static final Logger LOG = BBATLogger.getLogger(ConfigXml.class.getName());
+	private static final Logger LOG = BBATLogger.getLogger(BBATConfigXml.class.getName());
 	public final static String CONFIG_XML ="BBAT.xml";
 	/**
 	 * Object corresponding to the root element in the masterConfig.xml
 	 */
 	private  BbatConfig masterConfig_;
 
-	private static ConfigXml instance_;
+	private static BBATConfigXml instance_;
 	private String bbatConfigFilePath;
 	private JAXBContext context;
 
-	private ConfigXml(final String bbatConfigFilePath) throws JAXBException, FileNotFoundException{
+	private BBATConfigXml(final String bbatConfigFilePath) throws JAXBException, FileNotFoundException{
 		masterConfig_ = new BbatConfig();
 		context = JAXBContext.newInstance(BbatConfig.class);
 		Unmarshaller um = context.createUnmarshaller();
@@ -57,15 +57,15 @@ public class ConfigXml {
 	public static void init() throws JAXBException, FileNotFoundException {
 		if(instance_!=null)
 			return;
-		instance_ = new ConfigXml(BBATPluginUtility.getInstance().getPluginDir(Activator.PLUGIN_ID)+Path.SEPARATOR+CONFIG_XML);
+		instance_ = new BBATConfigXml(BBATPluginUtility.getInstance().getPluginDir(Activator.PLUGIN_ID)+Path.SEPARATOR+CONFIG_XML);
 	}
 	/**
-	 * This method will return the {@link ConfigXml} object reference;
+	 * This method will return the {@link BBATConfigXml} object reference;
 	 * <br><b>NOTE: This method will throw {@link NullPointerException} if the class has not been initialized.
 	 * Call init() method once to initialize the class</b>
 	 * @return
 	 */
-	public static ConfigXml getInstance(){
+	public static BBATConfigXml getInstance(){
 		try {
 			init();
 		} catch (FileNotFoundException e) {

@@ -35,7 +35,6 @@ public class CreateTestCaseWizard extends Wizard {
 	public boolean performFinish() {
 		LOG.info("Creating test case : "+caseCreationPage.getName());
 		try {
-
 			TestCaseModel newTestCase = new TestCaseModel(parent, caseCreationPage.getName());
 			newTestCase.setDescription(caseCreationPage.getDescription());
 			newTestCase.save();
@@ -47,12 +46,9 @@ public class CreateTestCaseWizard extends Wizard {
 				LOG.error(e);
 			}
 
-			IEditorInput input=null;
-			input = new FileEditorInput(newTestCase.getIFile());
 			try
 			{
-				//				IDE.openEditor(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage(), newTestCase.getIFile());
-				PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().openEditor(input, "org.eclipse.jdt.ui.CompilationUnitEditor");
+				newTestCase.openEditor();
 			} catch (PartInitException e)
 			{
 				LOG.error(e);

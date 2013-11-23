@@ -5,11 +5,11 @@ import java.io.FilenameFilter;
 
 import org.eclipse.core.runtime.Path;
 
-import in.bbat.configuration.ConfigXml;
+import in.bbat.configuration.BBATConfigXml;
 
 public class AndroidSdkUtility {
 
-	public  final static  String  ANDROID_SDK = ConfigXml.getInstance().getAndroid_SdkPath();
+	public  final static  String  ANDROID_SDK = BBATConfigXml.getInstance().getAndroid_SdkPath();
 	public  final static  String PLATFORM = "platforms";
 	public  final static  String  UNIX_ADB ="adb";
 	public  final static  String  WINDOWS_ADB ="adb.exe";

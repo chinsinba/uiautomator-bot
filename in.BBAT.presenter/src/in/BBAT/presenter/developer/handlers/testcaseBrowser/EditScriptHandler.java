@@ -20,14 +20,9 @@ public class EditScriptHandler extends AbstractTestCaseBrowserHandler {
 	public Object run(ExecutionEvent event, List<?> selectedObjects) {
 
 		LOG.info("Edit script");
-		IEditorInput input=null;
-		input = new FileEditorInput(((TestCaseModel) selectedObjects.get(0)).getIFile());
-		try
-		{
-//			IDE.openEditor(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage(),((TestCaseModel) selectedObjects.get(0)).getIFile());
-			PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().openEditor(input, "org.eclipse.jdt.ui.CompilationUnitEditor");
-		} catch (PartInitException e)
-		{
+		try {
+			((TestCaseModel) selectedObjects.get(0)).openEditor();
+		} catch (Exception e) {
 			LOG.error(e);
 		}
 		return null;

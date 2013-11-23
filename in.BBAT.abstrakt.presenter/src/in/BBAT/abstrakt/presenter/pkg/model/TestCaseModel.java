@@ -22,6 +22,10 @@ import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.ui.IEditorInput;
+import org.eclipse.ui.PartInitException;
+import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.part.FileEditorInput;
 
 /**
  * 
@@ -139,6 +143,19 @@ public class TestCaseModel extends AbstractProjectTree{
 		//			LOG.error(e);
 		//		}
 
+	}
+	
+	public void openEditor() throws Exception{
+		IEditorInput input=null;
+		input = new FileEditorInput(getIFile());
+		try
+		{
+			PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().openEditor(input, "org.eclipse.jdt.ui.CompilationUnitEditor");
+		} catch (PartInitException e)
+		{
+			LOG.error(e);
+			throw new Exception("Failled to open java editor");
+		}
 	}
 
 }

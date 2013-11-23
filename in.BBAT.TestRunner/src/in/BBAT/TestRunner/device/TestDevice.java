@@ -40,7 +40,7 @@ public class TestDevice implements IAndroidDevice {
 
 	public TestDevice(IDevice device) {
 		this.monkeyDevice = device;
-		chimpDevice = AdbBridgeManager.getInstance().getAdbBackend().waitForConnection(10000, device.getSerialNumber());
+//		chimpDevice = AdbBridgeManager.getInstance().getAdbBackend().waitForConnection(10000, device.getSerialNumber());
 	}
 
 	@Override

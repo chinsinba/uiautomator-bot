@@ -1,18 +1,25 @@
 package in.bbat.presenter;
 
+import in.BBAT.TestRunner.device.DeviceException;
+import in.BBAT.abstrakt.presenter.device.model.TestDeviceManager;
+import in.bbat.abstrakt.gui.ApplicationHelper;
+import in.bbat.configuration.BBATConfigXml;
 import in.bbat.logger.BBATLogger;
 import in.bbat.presenter.perstpectives.DeveloperPerspective;
 import in.bbat.presenter.perstpectives.HistoryPerspective;
 import in.bbat.presenter.perstpectives.ReporterPerspective;
 import in.bbat.presenter.perstpectives.TesterPerspective;
 
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.dynamichelpers.IExtensionChangeHandler;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.preference.IPreferenceStore;
+import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.ui.IPerspectiveDescriptor;
 import org.eclipse.ui.IPerspectiveRegistry;
 import org.eclipse.ui.IWorkbenchPreferenceConstants;
@@ -39,7 +46,7 @@ public class ApplicationWorkbenchWindowAdvisor extends WorkbenchWindowAdvisor {
 		IPreferenceStore prefStore = PlatformUI.getPreferenceStore();
 
 		prefStore.setValue(IWorkbenchPreferenceConstants.PERSPECTIVE_BAR_EXTRAS,DeveloperPerspective.ID+","+TesterPerspective.ID+","+HistoryPerspective.ID+","+ReporterPerspective.ID);
-		
+
 		//		configurer.setInitialSize(new Point(800, 600));
 		configurer.setShowCoolBar(true);
 		configurer.setShowStatusLine(true);
@@ -57,6 +64,22 @@ public class ApplicationWorkbenchWindowAdvisor extends WorkbenchWindowAdvisor {
 
 	@Override
 	public void postWindowCreate() {
+		try {
+			LOG.info("Started....");
+			ApplicationHelper.initializeDb();
+			TestDeviceManager.init(BBATConfigXml.getInstance().getAndroid_AdbPath());
+		} catch (UnknownHostException e) {
+			LOG.error(e);
+			MessageDialog.openError(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(), "Error", "Unable to connect to DB");
+
+		}catch (DeviceException e) {
+			LOG.error(e);
+			MessageDialog.openError(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(), "Error", "Please check the android path");
+		}
+		catch (Exception e) {
+			LOG.error(e);
+		}
+
 		removeUnWantedPerspectives();
 	}
 

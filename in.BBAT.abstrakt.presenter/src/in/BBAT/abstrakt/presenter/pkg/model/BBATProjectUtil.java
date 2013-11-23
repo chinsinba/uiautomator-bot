@@ -1,7 +1,7 @@
 package in.BBAT.abstrakt.presenter.pkg.model;
 
 
-import in.bbat.configuration.ConfigXml;
+import in.bbat.configuration.BBATConfigXml;
 import in.bbat.logger.BBATLogger;
 
 import java.io.File;
@@ -67,8 +67,8 @@ public class BBATProjectUtil {
 				javaProject.setOutputLocation(binFolder.getFullPath(), null);
 
 				List<IClasspathEntry> entries = new ArrayList<IClasspathEntry>();
-				entries.add(JavaCore.newLibraryEntry(new Path(ConfigXml.getInstance().getAndroid_AndroidJarPath()), null, null));
-				entries.add(JavaCore.newLibraryEntry(new Path(ConfigXml.getInstance().getAndroid_UiAutomatorPath()), null, null));
+				entries.add(JavaCore.newLibraryEntry(new Path(BBATConfigXml.getInstance().getAndroid_AndroidJarPath()), null, null));
+				entries.add(JavaCore.newLibraryEntry(new Path(BBATConfigXml.getInstance().getAndroid_UiAutomatorPath()), null, null));
 				entries.add(JavaCore.newSourceEntry(project.getFullPath()));
 				IVMInstall vmInstall = JavaRuntime.getDefaultVMInstall();
 				LibraryLocation[] locations = JavaRuntime.getLibraryLocations(vmInstall);

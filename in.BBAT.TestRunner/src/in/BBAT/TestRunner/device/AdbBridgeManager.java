@@ -29,8 +29,9 @@ public class AdbBridgeManager {
 
 	private AdbBackend adbBackend;
 
-	private AdbBridgeManager(String adbLocation) {
+	private AdbBridgeManager(String adbLocation) throws DeviceException {
 		if (!(new File(adbLocation).canExecute())) {
+			throw new DeviceException("Could not find the adb");
 		}
 
 		adbBackend = new AdbBackend(adbLocation,false);
@@ -41,7 +42,7 @@ public class AdbBridgeManager {
 		}
 	}
 
-	public static void init(String adbLocation){
+	public static void init(String adbLocation) throws DeviceException{
 		if (manager == null) {
 			manager = new AdbBridgeManager(adbLocation);
 		}
@@ -93,12 +94,6 @@ public class AdbBridgeManager {
 		public void deviceChanged(IDevice arg0, int changeMask) {
 
 		}
-	}
-
-
-	public static void main(String[] args) {
-		AdbBridgeManager.init("/home/syed/Documents/android-sdk-linux/platform-tools/adb");
-		AdbBridgeManager.getInstance();	
 	}
 
 	public List<IDeviceConnectionListener> getConnectionListeners() {
