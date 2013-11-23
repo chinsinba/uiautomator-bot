@@ -5,22 +5,21 @@ import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import in.BBAT.data.model.Entities.TestCaseEntity;
 import in.BBAT.data.model.Entities.TestSuiteEntity;
+import in.bbat.abstrakt.gui.Activator;
 import in.bbat.abstrakt.gui.BBATImageManager;
 import in.bbat.logger.BBATLogger;
+import in.bbat.utility.BBATPluginUtility;
 
-import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.PartInitException;
@@ -113,8 +112,7 @@ public class TestCaseModel extends AbstractProjectTree{
 
 		Configuration cfgFtl =new Configuration();
 		try {
-			cfgFtl.setDirectoryForTemplateLoading(new File(
-					"/home/syed/Documents/BlackAndro/BBAT/in.BBAT.abstrakt.presenter/lib/"));
+			cfgFtl.setDirectoryForTemplateLoading(new File(BBATPluginUtility.getInstance().getPluginDir(Activator.PLUGIN_ID)+Path.SEPARATOR+"lib"+Path.SEPARATOR));
 			Template testCaseTemplate = cfgFtl.getTemplate("testcase.ftl");
 			Map<String, Object> data = new HashMap<String, Object>();
 			data.put("package_name", getParent().getParent().getName()+"."+getParent().getName());
@@ -128,20 +126,10 @@ public class TestCaseModel extends AbstractProjectTree{
 			}
 
 		} catch (IOException e1) {
-			e1.printStackTrace();
+			LOG.error(e1);
 		} catch (TemplateException e) {
 			LOG.error(e);
 		}
-		//String packDecl = "package "+getParent().getParent().getName()+"."+getParent().getName()+";\n\n";
-		//packDecl +="import com.android.uiautomator.core.*;\nimport com.android.uiautomator.testrunner.*;\n\n";
-		//		packDecl+="public class "+getName()+" extends UiAutomatorTestCase {\n\n";
-		//		packDecl+="/** "+getDescription()+"\n*/\n\tpublic void test"+getName()+"()throws UiObjectNotFoundException{\n}\n}";
-		//		InputStream st = new ByteArrayInputStream(packDecl.getBytes());
-		//		try {
-		//			getIFile().setContents(st,0, null);
-		//		} catch (CoreException e) {
-		//			LOG.error(e);
-		//		}
 
 	}
 	
