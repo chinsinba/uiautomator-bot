@@ -1,5 +1,7 @@
 package in.bbat.presenter.views.developer;
 
+import java.util.List;
+
 import in.BBAT.abstrakt.presenter.device.model.AndroidDevice;
 import in.BBAT.abstrakt.presenter.device.model.IDeviceModelChangeListener;
 import in.BBAT.abstrakt.presenter.device.model.TestDeviceManager;
@@ -32,8 +34,15 @@ public class DeveloperDeviceView extends BBATViewPart {
 		viewer.setContentProvider(new ArrayContentProvider());
 		viewer.setLabelProvider(new DeviceViewLabelProvider());
 		// Provide the input to the ContentProvider
+		List<AndroidDevice> devices = null;
+		try{
 		TestDeviceManager.getInstance().addDeviceModelChangeListener(new DeviceModelListener());
-		viewer.setInput(TestDeviceManager.getInstance().getDevices());
+		devices = TestDeviceManager.getInstance().getDevices();
+		viewer.setInput(devices);
+		}catch(Exception e){
+			LOG.error(e);
+		}
+		
 		addMenuManager(viewer);
 		getViewSite().setSelectionProvider(viewer);
 		createDragSupport();

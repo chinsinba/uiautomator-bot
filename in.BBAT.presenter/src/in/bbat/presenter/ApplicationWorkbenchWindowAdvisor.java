@@ -10,6 +10,7 @@ import in.bbat.presenter.perstpectives.HistoryPerspective;
 import in.bbat.presenter.perstpectives.ReporterPerspective;
 import in.bbat.presenter.perstpectives.TesterPerspective;
 
+import java.io.File;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -19,6 +20,8 @@ import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.dynamichelpers.IExtensionChangeHandler;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.preference.IPreferenceStore;
+import org.eclipse.swt.custom.BusyIndicator;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.ui.IPerspectiveDescriptor;
 import org.eclipse.ui.IPerspectiveRegistry;
@@ -28,6 +31,8 @@ import org.eclipse.ui.application.ActionBarAdvisor;
 import org.eclipse.ui.application.IActionBarConfigurer;
 import org.eclipse.ui.application.IWorkbenchWindowConfigurer;
 import org.eclipse.ui.application.WorkbenchWindowAdvisor;
+
+import com.android.SdkConstants;
 
 public class ApplicationWorkbenchWindowAdvisor extends WorkbenchWindowAdvisor {
 
@@ -53,6 +58,31 @@ public class ApplicationWorkbenchWindowAdvisor extends WorkbenchWindowAdvisor {
 		configurer.setTitle("BBAT");
 		configurer.setShowPerspectiveBar(true);
 		configurer.setShowProgressIndicator(true);
+		BusyIndicator.showWhile(Display.getCurrent(), new Runnable() {
+
+			@Override
+			public void run() {
+				initialize();				
+			}
+		});
+
+	}
+
+	private void initialize() {
+		try {
+			LOG.info("Started....");
+			ApplicationHelper.initializeDb();
+			TestDeviceManager.init(BBATConfigXml.getInstance().getAndroid_AdbPath());
+		} catch (UnknownHostException e) {
+			LOG.error(e);
+			MessageDialog.openError(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(), "Error", "Unable to connect to DB");
+
+		}catch (DeviceException e) {
+			LOG.error(e);
+		}
+		catch (Exception e) {
+			LOG.error(e);
+		}
 	}
 
 	public static final String[] IGNORE_PERSPECTIVES = new String[] {
@@ -64,26 +94,107 @@ public class ApplicationWorkbenchWindowAdvisor extends WorkbenchWindowAdvisor {
 
 	@Override
 	public void postWindowCreate() {
-		try {
-			LOG.info("Started....");
-			ApplicationHelper.initializeDb();
-			TestDeviceManager.init(BBATConfigXml.getInstance().getAndroid_AdbPath());
-		} catch (UnknownHostException e) {
-			LOG.error(e);
-			MessageDialog.openError(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(), "Error", "Unable to connect to DB");
-
-		}catch (DeviceException e) {
-			LOG.error(e);
-			MessageDialog.openError(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(), "Error", "Please check the android path");
-		}
-		catch (Exception e) {
-			LOG.error(e);
-		}
 
 		removeUnWantedPerspectives();
+
+		String errorMessage = validateAndroidSdkLocation(BBATConfigXml.getInstance().getAndroid_SdkPath());
+
+		if(errorMessage!=null){
+			MessageDialog.openError(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(),
+					"SDK Error", errorMessage);
+		}
 	}
 
+	private String validateAndroidSdkLocation(String osSdkLocation) {
+		
+		if (osSdkLocation == null || osSdkLocation.trim().length() == 0) {
+			return "Location of the Android SDK has not been setup in the preferences.";
+		}
 
+		if (!osSdkLocation.endsWith(File.separator)) {
+			osSdkLocation = osSdkLocation + File.separator;
+		}
+
+		File osSdkFolder = new File(osSdkLocation);
+		if (osSdkFolder.isDirectory() == false) {
+			return "Could not find SDK at: "+osSdkLocation;
+		}
+
+		String osTools = osSdkLocation + SdkConstants.OS_SDK_TOOLS_FOLDER;
+		File toolsFolder = new File(osTools);
+		if (toolsFolder.isDirectory() == false) {
+			return "Could not find folder"+ SdkConstants.FD_TOOLS +"inside SDK "+osSdkLocation;
+
+		}
+
+		// check that we have both the tools component and the platform-tools component.
+		String platformTools = osSdkLocation + SdkConstants.OS_SDK_PLATFORM_TOOLS_FOLDER;
+		if (checkFolder(platformTools) == false) {
+			return 	"SDK Platform Tools component is missing!\n" +
+					"Please use the SDK Manager to install it.";
+		}
+
+		String tools = osSdkLocation + SdkConstants.OS_SDK_TOOLS_FOLDER;
+		if (checkFolder(tools) == false) {
+			return 	"SDK Tools component is missing!\n" +
+					"Please use the SDK Manager to install it.";
+		}
+
+		// check the path to various tools we use to make sure nothing is missing. This is
+		// not meant to be exhaustive.
+		String[] filesToCheck = new String[] {
+				osSdkLocation + getOsRelativeAdb(),
+				osSdkLocation + getOsRelativeEmulator()
+		};
+		for (String file : filesToCheck) {
+			if (checkFile(file) == false) {
+				return "Could not find file :"+ file;
+			}
+		}
+
+		return null;
+	}
+
+	public static String getOsRelativeAdb() {
+		return SdkConstants.OS_SDK_PLATFORM_TOOLS_FOLDER + SdkConstants.FN_ADB;
+	}
+
+	/** Returns the zipalign path relative to the sdk folder */
+	public static String getOsRelativeZipAlign() {
+		return SdkConstants.OS_SDK_TOOLS_FOLDER + SdkConstants.FN_ZIPALIGN;
+	}
+
+	/** Returns the emulator path relative to the sdk folder */
+	public static String getOsRelativeEmulator() {
+		return SdkConstants.OS_SDK_TOOLS_FOLDER + SdkConstants.FN_EMULATOR;
+	}
+	/**
+	 * Checks if a path reference a valid existing file.
+	 * @param osPath the os path to check.
+	 * @return true if the file exists and is, in fact, a file.
+	 */
+	private boolean checkFile(String osPath) {
+		File file = new File(osPath);
+		if (file.isFile() == false) {
+			return false;
+		}
+
+		return true;
+	}
+
+	/**
+	 * Checks if a path reference a valid existing folder.
+	 * @param osPath the os path to check.
+	 * @return true if the folder exists and is, in fact, a folder.
+	 */
+	private boolean checkFolder(String osPath) {
+		File file = new File(osPath);
+		if (file.isDirectory() == false) {
+			return false;
+		}
+
+		return true;
+	}
 
 	/**
 	 * Removes the unwanted perspectives from your RCP application

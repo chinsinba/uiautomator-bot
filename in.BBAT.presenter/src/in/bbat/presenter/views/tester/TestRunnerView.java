@@ -269,7 +269,11 @@ public class TestRunnerView extends BBATViewPart {
 			}
 		});
 		createDeviceRunColumns(comp);
+		try{
 		testDeviceViewer.setInput(TestRunExecutionManager.getInstance());
+		}catch(Exception e){
+			LOG.error(e);
+		}
 		testRunItem.setControl(comp);
 		tabFolder.setSelection(testRunItem);
 		createDropSupportForDevice();

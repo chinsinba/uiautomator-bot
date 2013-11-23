@@ -7,7 +7,7 @@
 
 	<Licence key="sdfhsgdjsgdkjg09090" />
 
-	<Android sdkPath ="/home/syed/Documents/Android_SDK_21/sdk/"/>
+	<Android sdkPath ="/home/syed/Documents/Android_SDK_21/sdk1/"/>
 	
 	<Workspace uiAutomator = "/home/syed/Documents/Macac" monKey="davsdgsj/sagdhs"/>
 
