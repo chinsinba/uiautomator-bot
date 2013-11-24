@@ -1,18 +1,24 @@
 package in.bbat.presenter;
 
 
+import in.BBAT.abstrakt.presenter.pkg.model.BBATProjectUtil;
+import in.BBAT.testRunner.runner.FileUtils;
 import in.bbat.configuration.BBATConfigXml;
+import in.bbat.logger.BBATLogger;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 
 import javax.xml.bind.JAXBException;
 
+import org.apache.log4j.Logger;
 import org.eclipse.jface.dialogs.IMessageProvider;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.window.ApplicationWindow;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.BusyIndicator;
 import org.eclipse.swt.events.FocusEvent;
 import org.eclipse.swt.events.FocusListener;
 import org.eclipse.swt.events.ModifyEvent;
@@ -26,6 +32,7 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.DirectoryDialog;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Layout;
 import org.eclipse.swt.widgets.Listener;
@@ -56,8 +63,10 @@ public class SettingsWindow extends ApplicationWindow  {
 	private Text dbPortText;
 	private Form form;
 	private ArrayList<TextModifyListener> listeners = new ArrayList<SettingsWindow.TextModifyListener>();
+	private Text wkspcPathText;
+	private Button browseWkspcPathButton;
 
-
+	private static final Logger LOG = BBATLogger.getLogger(SettingsWindow.class.getName());
 	public SettingsWindow(Shell parentShell) {
 		super(parentShell);
 	}
@@ -70,7 +79,7 @@ public class SettingsWindow extends ApplicationWindow  {
 
 	@Override
 	protected Control createContents(Composite parent) {
-	
+
 		parent.setLayout(new GridLayout());
 		FormToolkit confToolkit = new FormToolkit(parent.getDisplay());
 
@@ -163,7 +172,7 @@ public class SettingsWindow extends ApplicationWindow  {
 
 
 	private void createButtons(FormToolkit confToolkit, Form form) {
-		
+
 		Composite rightComp = confToolkit.createComposite(form.getBody(),SWT.WRAP);
 		GridLayout repLayout = new GridLayout(2, true);
 		rightComp.setLayout(repLayout);
@@ -213,19 +222,37 @@ public class SettingsWindow extends ApplicationWindow  {
 
 
 	protected boolean saveDeviceSettings() {
-		if(!validateDeviceSettings())
+		if(!validateSettings())
 		{
 			return false;
 		}
 		form.setMessage("", IMessageProvider.NONE);
 
 		BBATConfigXml.getInstance().setAndroid_SdkPath(sdkPathText.getText().trim());
+		copyScriptsFromOlderWorkspace(BBATConfigXml.getInstance().getWkspc_UiAutomator(),wkspcPathText.getText().trim());
 
 		return true;
 
 	}
 
-	private boolean validateDeviceSettings() {
+	private void copyScriptsFromOlderWorkspace(String oldWkspcPath, String newWkspcPath) {
+		final File oldUiautoWkspc = new File(oldWkspcPath);
+		final File newUiautoWkspc = new File(newWkspcPath);
+		BusyIndicator.showWhile(Display.getDefault(), new Runnable() {
+			@Override
+			public void run() {
+				try {
+					FileUtils.copyFolder(oldUiautoWkspc, newUiautoWkspc);
+				} catch (IOException e) {
+					LOG.error(e);
+				}	
+			}
+		});
+		BBATProjectUtil.getInstance().deleteProject();
+		BBATConfigXml.getInstance().setWkspc_UiAutomator(newWkspcPath);
+	}
+
+	private boolean validateSettings() {
 
 		if(sdkPathText.getText().isEmpty()){
 			form.setMessage("Android: SDK path cannot be Empty", IMessageProvider.ERROR);
@@ -239,6 +266,12 @@ public class SettingsWindow extends ApplicationWindow  {
 				return false;
 			}
 		}
+		
+		if(wkspcPathText.getText().isEmpty()){
+			form.setMessage("UiAutomator scripts path cannot be empty", IMessageProvider.ERROR);
+			return false;
+		}
+				
 		return true;
 	}
 
@@ -276,17 +309,25 @@ public class SettingsWindow extends ApplicationWindow  {
 		Composite devClentComp = confToolkit.createComposite(deviceSettingSection);
 		devClentComp.setLayout(new GridLayout(3,false));
 		devClentComp.setLayoutData(new GridData(GridData.FILL_BOTH));
-		
-		confToolkit.createLabel(devClentComp, "Android SDK Path : ");
-	/*	Composite adbComp = confToolkit.createComposite(devClentComp);
-		adbComp.setLayout(new GridLayout(2,false));
-		adbComp.setLayoutData(new GridData(GridData.FILL_BOTH));*/
-		sdkPathText = confToolkit.createText(devClentComp,BBATConfigXml.getInstance().getAndroid_SdkPath(),SWT.BORDER|SWT.READ_ONLY);
-		sdkPathText.setToolTipText(sdkPathText.getText());
-		sdkPathText.setLayoutData(new GridData(GridData.FILL_BOTH));
-		browseSDKPathButton = confToolkit.createButton(devClentComp, "Browse", SWT.PUSH);
-		addListnerForBrowseButton( browseSDKPathButton, sdkPathText);
-		addTextFocuslisteners(sdkPathText);
+
+		{
+			confToolkit.createLabel(devClentComp, "Android SDK Path : ");
+			sdkPathText = confToolkit.createText(devClentComp,BBATConfigXml.getInstance().getAndroid_SdkPath(),SWT.BORDER|SWT.READ_ONLY);
+			sdkPathText.setToolTipText(sdkPathText.getText());
+			sdkPathText.setLayoutData(new GridData(GridData.FILL_BOTH));
+			browseSDKPathButton = confToolkit.createButton(devClentComp, "Browse", SWT.PUSH);
+			addListnerForBrowseButton( browseSDKPathButton, sdkPathText);
+			addTextFocuslisteners(sdkPathText);
+		}
+		{
+			confToolkit.createLabel(devClentComp, "UIAutomator scripts path : ");
+			wkspcPathText = confToolkit.createText(devClentComp,BBATConfigXml.getInstance().getWkspc_UiAutomator(),SWT.BORDER|SWT.READ_ONLY);
+			wkspcPathText.setToolTipText(wkspcPathText.getText());
+			wkspcPathText.setLayoutData(new GridData(GridData.FILL_BOTH));
+			browseWkspcPathButton = confToolkit.createButton(devClentComp, "Browse", SWT.PUSH);
+			addListnerForBrowseButton( browseWkspcPathButton, wkspcPathText);
+			addTextFocuslisteners(wkspcPathText);
+		}
 
 		confToolkit.createLabel(devClentComp, "Data Port : ");
 		dbPortText =confToolkit.createText(devClentComp,String.valueOf(BBATConfigXml.getInstance().getDatabase_Port()),SWT.BORDER);

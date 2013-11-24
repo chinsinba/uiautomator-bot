@@ -257,6 +257,19 @@ public class BBATProjectUtil {
 		return true;
 	}
 
+	
+	public void deleteProject(){
+		IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
+		IProject project = root.getProject(UIAUTO_PROJECT_NAME);
+		try {
+			if(project.exists()){
+				project.delete(true, new NullProgressMonitor());
+			}
+		}catch(Exception e){
+			LOG.error(e);
+		}
+	}
+	
 	/**
 	 * Class declared public only for test suite.
 	 * 
