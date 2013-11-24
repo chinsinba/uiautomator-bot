@@ -95,7 +95,7 @@ public class AutomatorLogView extends BBATViewPart {
 				try {
 					refresh();
 				} catch (Exception e1) {
-					e1.printStackTrace();
+					LOG.error(e1);
 				}
 			}
 		});

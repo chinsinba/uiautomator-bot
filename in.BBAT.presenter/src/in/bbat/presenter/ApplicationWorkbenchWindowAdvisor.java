@@ -22,7 +22,6 @@ import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.swt.custom.BusyIndicator;
 import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.ui.IPerspectiveDescriptor;
 import org.eclipse.ui.IPerspectiveRegistry;
 import org.eclipse.ui.IWorkbenchPreferenceConstants;
@@ -105,7 +104,7 @@ public class ApplicationWorkbenchWindowAdvisor extends WorkbenchWindowAdvisor {
 		}
 	}
 
-	private String validateAndroidSdkLocation(String osSdkLocation) {
+	public static String validateAndroidSdkLocation(String osSdkLocation) {
 		
 		if (osSdkLocation == null || osSdkLocation.trim().length() == 0) {
 			return "Location of the Android SDK has not been setup in the preferences.";
@@ -151,7 +150,6 @@ public class ApplicationWorkbenchWindowAdvisor extends WorkbenchWindowAdvisor {
 				return "Could not find file :"+ file;
 			}
 		}
-
 		return null;
 	}
 
@@ -173,12 +171,11 @@ public class ApplicationWorkbenchWindowAdvisor extends WorkbenchWindowAdvisor {
 	 * @param osPath the os path to check.
 	 * @return true if the file exists and is, in fact, a file.
 	 */
-	private boolean checkFile(String osPath) {
+	private static boolean checkFile(String osPath) {
 		File file = new File(osPath);
 		if (file.isFile() == false) {
 			return false;
 		}
-
 		return true;
 	}
 
@@ -187,7 +184,7 @@ public class ApplicationWorkbenchWindowAdvisor extends WorkbenchWindowAdvisor {
 	 * @param osPath the os path to check.
 	 * @return true if the folder exists and is, in fact, a folder.
 	 */
-	private boolean checkFolder(String osPath) {
+	private static boolean checkFolder(String osPath) {
 		File file = new File(osPath);
 		if (file.isDirectory() == false) {
 			return false;

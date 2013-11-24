@@ -257,6 +257,11 @@
          <menu
                label="File">
             <command
+                  commandId="in.BBAT.presenter.Setting"
+                  label="Configure"
+                  style="push">
+            </command>
+            <command
                   commandId="org.eclipse.ui.file.exit"
                   label="Exit">
             </command>
@@ -422,6 +427,10 @@
             id="in.BBAT.presenter.history.deleteTestRun"
             name="Delete TestRun">
       </command>
+      <command
+            id="in.BBAT.presenter.Setting"
+            name="Setting">
+      </command>
    </extension>
    <extension
          point="org.eclipse.ui.handlers">
@@ -476,6 +485,10 @@
       <handler
             class="in.BBAT.presenter.history.handlers.DeleteTestRunHandler"
             commandId="in.BBAT.presenter.history.deleteTestRun">
+      </handler>
+      <handler
+            class="in.bbat.presenter.SettingsHandler"
+            commandId="in.BBAT.presenter.Setting">
       </handler>
    </extension>
    <extension

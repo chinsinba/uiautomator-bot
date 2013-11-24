@@ -1,14 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <BbatConfig toolVersion="0.0.1">
-	<Database update="false" userName="app" isExternal="true" pwd="app" port="1527"
-		name="BBAT_DATA" ipAddress="127.0.0.1" pageSize="200" />
-
-	<User name="dghwsdg" email="dkhks@hj.com" />
-
-	<Licence key="sdfhsgdjsgdkjg09090" />
-
-	<Android sdkPath ="/home/syed/Documents/Android_SDK_21/sdk1/"/>
-	
-	<Workspace uiAutomator = "/home/syed/Documents/Macac" monKey="davsdgsj/sagdhs"/>
-
+    <Database userName="app" update="false" pwd="app" port="1572" pageSize="200" name="BBAT_DATA" isExternal="true" ipAddress="127.0.0.1"/>
+    <User name="dghwsdg" email="dkhks@hj.com"/>
+    <Licence key="sdfhsgdjsgdkjg09090"/>
+    <Android sdkPath="/home/syed/Documents/Android_SDK_21/sdk"/>
+    <Workspace uiAutomator="/home/syed/Documents/Macac" monKey="davsdgsj/sagdhs"/>
 </BbatConfig>
