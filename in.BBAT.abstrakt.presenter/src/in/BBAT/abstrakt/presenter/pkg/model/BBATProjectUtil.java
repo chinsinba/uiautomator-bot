@@ -1,6 +1,5 @@
 package in.BBAT.abstrakt.presenter.pkg.model;
 
-
 import in.bbat.configuration.BBATConfigXml;
 import in.bbat.logger.BBATLogger;
 
