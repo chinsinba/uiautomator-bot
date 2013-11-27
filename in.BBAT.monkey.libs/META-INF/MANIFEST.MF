@@ -59,4 +59,3 @@ Export-Package: com.android,
  org.kxml2.wap.wv,
  org.xmlpull.v1
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Require-Bundle: org.eclipse.ui;bundle-version="3.105.0"

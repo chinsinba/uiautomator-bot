@@ -52,7 +52,7 @@ public class ApplicationWorkbenchWindowAdvisor extends WorkbenchWindowAdvisor {
 		prefStore.setValue(IWorkbenchPreferenceConstants.PERSPECTIVE_BAR_EXTRAS,DeveloperPerspective.ID+","+TesterPerspective.ID+","+HistoryPerspective.ID+","+ReporterPerspective.ID);
 
 		//		configurer.setInitialSize(new Point(800, 600));
-		configurer.setShowCoolBar(true);
+		configurer.setShowCoolBar(false);
 		configurer.setShowStatusLine(true);
 		configurer.setTitle("BBAT");
 		configurer.setShowPerspectiveBar(true);
@@ -89,7 +89,7 @@ public class ApplicationWorkbenchWindowAdvisor extends WorkbenchWindowAdvisor {
 		"org.eclipse.jdt.ui.JavaPerspective", "org.eclipse.jdt.ui.JavaHierarchyPerspective",
 		"org.eclipse.jdt.ui.JavaBrowsingPerspective", "org.eclipse.mylyn.tasks.ui.perspectives.planning",
 		"org.eclipse.pde.ui.PDEPerspective", "org.eclipse.team.cvs.ui.cvsPerspective",
-		"org.eclipse.ui.resourcePerspective", }; 
+		"org.eclipse.ui.resourcePerspective","org.eclipse.team.ui.TeamSynchronizingPerspective" }; 
 
 	@Override
 	public void postWindowCreate() {
