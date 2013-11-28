@@ -15,8 +15,8 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.ui.ide,
  in.BBAT.configuration;bundle-version="1.0.0",
  org.eclipse.jdt.ui,
- in.BBAT.log4j;bundle-version="1.0.0",
- org.eclipse.ui.forms
+ org.eclipse.ui.forms,
+ org.apache.log4j
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ClassPath: .
