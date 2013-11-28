@@ -49,7 +49,7 @@
             class="in.bbat.presenter.views.developer.DeveloperDeviceView"
             icon="icons/Android_device.png"
             id="in.BBAT.presenter.developer.deviceView"
-            name="Device"
+            name="Test Device Browser"
             restorable="true">
       </view>
       <view
@@ -87,7 +87,7 @@
       <view
             class="in.bbat.presenter.views.tester.AutomatorLogView"
             id="in.BBAT.presenter.tester.AutoLogView"
-            name="UIAutoMator Logs"
+            name="UIAutomator Logs"
             restorable="true">
       </view>
       <view
@@ -111,7 +111,7 @@
       <view
             class="in.bbat.presenter.views.history.HistoryAutoLogView"
             id="in.BBAT.presenter.history.AutoLogView"
-            name="UI Automator Logs"
+            name="UIAutomator Logs"
             restorable="true">
       </view>
       <view
