@@ -6,6 +6,7 @@ import in.BBAT.presenter.DND.listeners.TestCaseDragListener;
 import in.BBAT.presenter.contentProviders.TestCaseBrowserContentProvider;
 import in.BBAT.presenter.labelProviders.TestCaseLabelProvider;
 import in.bbat.logger.BBATLogger;
+import in.bbat.presenter.perstpectives.DeveloperPerspective;
 import in.bbat.presenter.views.BBATViewPart;
 
 import org.apache.log4j.Logger;
@@ -22,11 +23,12 @@ import org.eclipse.swt.dnd.DND;
 import org.eclipse.swt.dnd.Transfer;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.ui.PlatformUI;
 
 public class TestCaseBrowserView extends BBATViewPart {
 	public static final String ID = "in.BBAT.presenter.developer.testcaseBrowserView";
 	private static final Logger LOG = BBATLogger.getLogger(TestCaseBrowserView.class.getName());
-	
+
 	private TreeViewer viewer;
 
 	private PShelf testCaseShelf;
@@ -50,9 +52,13 @@ public class TestCaseBrowserView extends BBATViewPart {
 		viewer.setLabelProvider(new TestCaseLabelProvider());
 		viewer.setAutoExpandLevel(2);
 		viewer.addDoubleClickListener(new IDoubleClickListener() {
-			
+
 			@Override
 			public void doubleClick(DoubleClickEvent event) {
+				if(!PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getPerspective()
+						.getId().equalsIgnoreCase(DeveloperPerspective.ID)){
+					return;
+				}
 				Object sel = ((IStructuredSelection)event.getSelection()).getFirstElement();
 				if(sel instanceof TestCaseModel){
 					try {
@@ -63,7 +69,7 @@ public class TestCaseBrowserView extends BBATViewPart {
 				}
 			}
 		});
-		
+
 		// Provide the input to the ContentProvider
 		try {
 			viewer.setInput(TestProjectManager.getInstance().getTestProjects());
@@ -72,8 +78,8 @@ public class TestCaseBrowserView extends BBATViewPart {
 		}
 		addMenuManager(viewer);
 		createDragSupport();
-		
-		
+
+
 		{
 			monkeyShelfItem = new PShelfItem(testCaseShelf, SWT.NONE);
 			monkeyShelfItem.setText("MonkeyRunner");
@@ -87,7 +93,7 @@ public class TestCaseBrowserView extends BBATViewPart {
 	public void setFocus() {
 		viewer.getControl().setFocus();
 	}
-	
+
 	@Override
 	public void refresh() throws Exception {
 		viewer.setInput(TestProjectManager.getInstance().getTestProjects());
@@ -98,12 +104,12 @@ public class TestCaseBrowserView extends BBATViewPart {
 	public ISelection getSelectedElements() {
 		return viewer.getSelection();
 	}
-	
+
 	protected void createDragSupport() 
 	{
 		int operations = DND.DROP_COPY| DND.DROP_MOVE;
 		Transfer[] transferTypes = new Transfer[]{LocalSelectionTransfer.getTransfer()};
 		viewer.addDragSupport(operations, transferTypes, new TestCaseDragListener(viewer));
 	}
-	
+
 }

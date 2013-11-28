@@ -10,6 +10,7 @@ import org.eclipse.ui.PlatformUI;
 
 import in.BBAT.presenter.developer.handlers.BBATHandler;
 import in.bbat.logger.BBATLogger;
+import in.bbat.presenter.perstpectives.DeveloperPerspective;
 import in.bbat.presenter.views.developer.TestCaseBrowserView;
 
 public abstract class AbstractTestCaseBrowserHandler extends BBATHandler {
@@ -24,7 +25,10 @@ public abstract class AbstractTestCaseBrowserHandler extends BBATHandler {
 	public boolean isEnabled() {
 
 		List<?> list = getSelectedList();
-
+		if(!PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().
+				getPerspective().getId().equalsIgnoreCase(DeveloperPerspective.ID)){
+			return false;
+		}
 		return isEnabled(list);
 	}
 

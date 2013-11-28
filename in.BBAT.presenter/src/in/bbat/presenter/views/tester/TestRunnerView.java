@@ -108,6 +108,7 @@ public class TestRunnerView extends BBATViewPart {
 
 		form.setWeights(new int[]{50,50});
 		createDropSupport();
+		getViewSite().setSelectionProvider(commonTestCaseViewer);
 	}
 
 	private void createDeviceRunViewerTabs(Composite innerleft) {
