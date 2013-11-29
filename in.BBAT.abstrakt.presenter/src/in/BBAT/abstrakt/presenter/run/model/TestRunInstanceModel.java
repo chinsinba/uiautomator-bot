@@ -217,7 +217,7 @@ public class TestRunInstanceModel extends AbstractTreeModel {
 	}
 
 	public void exportLogs(String exportDirectory,boolean zip) throws IOException{
-		File exportDir = new File(exportDirectory+Path.SEPARATOR+"Logs");
+		File exportDir = new File(exportDirectory+Path.SEPARATOR+"Logs"+Path.SEPARATOR+getTestCaseEntity().getName()+"_"+((TestRunInfoEntity)getEntity()).getId());
 		exportDir.mkdirs();
 		exportDeviceLogs(exportDir.getAbsolutePath());
 		exportUIAutoLogs(exportDir.getAbsolutePath());
