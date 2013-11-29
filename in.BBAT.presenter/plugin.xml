@@ -205,7 +205,7 @@
                minimized="false"
                ratio="0.50f"
                relationship="right"
-               relative="in.alethea.swat.gui.AndroidLogView"
+               relative="in.BBAT.presenter.tester.AndroidLogView"
                visible="false">
          </view>
          <view
