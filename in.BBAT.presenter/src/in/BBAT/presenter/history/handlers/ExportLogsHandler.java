@@ -6,7 +6,7 @@ import org.eclipse.core.commands.ExecutionEvent;
 
 import in.BBAT.presenter.developer.handlers.BBATHandler;
 
-public class ExportLogs extends BBATHandler {
+public class ExportLogsHandler extends BBATHandler {
 
 	@Override
 	public Object run(ExecutionEvent event, List<?> selectedObjects) {

@@ -510,7 +510,7 @@
             commandId="in.BBAT.presenter.Setting">
       </handler>
       <handler
-            class="in.BBAT.presenter.history.handlers.ExportLogs"
+            class="in.BBAT.presenter.history.handlers.ExportLogsHandler"
             commandId="in.BBAT.presenter.history.exportLogs">
       </handler>
    </extension>
