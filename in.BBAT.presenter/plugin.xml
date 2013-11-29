@@ -448,7 +448,7 @@
       </command>
       <command
             id="in.BBAT.presenter.history.exportLogs"
-            name="Export Logs">
+            name="Export Testcase Logs ">
       </command>
    </extension>
    <extension

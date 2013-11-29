@@ -48,12 +48,13 @@ public class TestRunInfoView extends BBATViewPart {
 
 	@Override
 	public ISelection getSelectedElements() {
-		return null;
+		return viewer.getSelection();
 	}
 
 	@Override
 	public void createPartControl(Composite parent) {
 		createRunInstannceViewer(parent);
+		addMenuManager(viewer);
 	}
 
 	private void createRunInstannceViewer(Composite innerRight) {

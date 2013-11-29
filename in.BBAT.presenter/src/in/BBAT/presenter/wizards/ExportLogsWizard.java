@@ -1,6 +1,7 @@
 package in.BBAT.presenter.wizards;
 
 import java.io.IOException;
+import java.util.List;
 
 import in.BBAT.abstrakt.presenter.run.model.TestRunInstanceModel;
 import in.BBAT.presenter.wizards.pages.ExportTestcaseLogsWizardPage;
@@ -10,10 +11,10 @@ import org.eclipse.swt.custom.BusyIndicator;
 import org.eclipse.swt.widgets.Display;
 
 public class ExportLogsWizard  extends Wizard{
-	private TestRunInstanceModel testRunInstance;
+	private List<TestRunInstanceModel> testRunInstances;
 	private ExportTestcaseLogsWizardPage page;
-	public ExportLogsWizard(TestRunInstanceModel testRunInstance) {
-		this.testRunInstance = testRunInstance;
+	public ExportLogsWizard(List<TestRunInstanceModel> testRunInstances) {
+		this.testRunInstances = testRunInstances;
 	}
 
 	@Override
@@ -29,7 +30,10 @@ public class ExportLogsWizard  extends Wizard{
 			@Override
 			public void run() {
 				try {
-					testRunInstance.exportLogs(page.getZipFilePath(), page.createZip());
+					for (TestRunInstanceModel model : testRunInstances) {
+						model.exportLogs(page.getZipFilePath(), page.createZip());
+					}
+
 				} catch (IOException e) {
 					e.printStackTrace();
 				}

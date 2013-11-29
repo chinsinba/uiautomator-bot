@@ -16,13 +16,12 @@
       <plugin id="in.BBAT.abstrakt.presenter"/>
       <plugin id="in.BBAT.configuration"/>
       <plugin id="in.BBAT.dataMine"/>
-      <plugin id="in.BBAT.log4j"/>
       <plugin id="in.BBAT.monkey.libs"/>
       <plugin id="in.BBAT.presenter"/>
       <plugin id="in.BBAT.reporter"/>
       <plugin id="javax.activation"/>
       <plugin id="javax.annotation"/>
-      <plugin id="javax.inject"/>
+      <plugin id="javax.inject" fragment=""/>
       <plugin id="javax.mail"/>
       <plugin id="javax.persistence"/>
       <plugin id="javax.servlet"/>
@@ -51,30 +50,30 @@
       <plugin id="org.eclipse.core.variables"/>
       <plugin id="org.eclipse.debug.core"/>
       <plugin id="org.eclipse.debug.ui"/>
-      <plugin id="org.eclipse.e4.core.commands"/>
-      <plugin id="org.eclipse.e4.core.contexts"/>
-      <plugin id="org.eclipse.e4.core.di"/>
-      <plugin id="org.eclipse.e4.core.di.extensions"/>
-      <plugin id="org.eclipse.e4.core.services"/>
-      <plugin id="org.eclipse.e4.ui.bindings"/>
-      <plugin id="org.eclipse.e4.ui.css.core"/>
-      <plugin id="org.eclipse.e4.ui.css.swt"/>
-      <plugin id="org.eclipse.e4.ui.css.swt.theme"/>
-      <plugin id="org.eclipse.e4.ui.di"/>
-      <plugin id="org.eclipse.e4.ui.model.workbench"/>
-      <plugin id="org.eclipse.e4.ui.services"/>
-      <plugin id="org.eclipse.e4.ui.widgets"/>
-      <plugin id="org.eclipse.e4.ui.workbench"/>
-      <plugin id="org.eclipse.e4.ui.workbench.addons.swt"/>
-      <plugin id="org.eclipse.e4.ui.workbench.renderers.swt"/>
-      <plugin id="org.eclipse.e4.ui.workbench.swt"/>
-      <plugin id="org.eclipse.e4.ui.workbench3"/>
+      <plugin id="org.eclipse.e4.core.commands" fragment=""/>
+      <plugin id="org.eclipse.e4.core.contexts" fragment=""/>
+      <plugin id="org.eclipse.e4.core.di" fragment=""/>
+      <plugin id="org.eclipse.e4.core.di.extensions" fragment=""/>
+      <plugin id="org.eclipse.e4.core.services" fragment=""/>
+      <plugin id="org.eclipse.e4.ui.bindings" fragment=""/>
+      <plugin id="org.eclipse.e4.ui.css.core" fragment=""/>
+      <plugin id="org.eclipse.e4.ui.css.swt" fragment=""/>
+      <plugin id="org.eclipse.e4.ui.css.swt.theme" fragment=""/>
+      <plugin id="org.eclipse.e4.ui.di" fragment=""/>
+      <plugin id="org.eclipse.e4.ui.model.workbench" fragment=""/>
+      <plugin id="org.eclipse.e4.ui.services" fragment=""/>
+      <plugin id="org.eclipse.e4.ui.widgets" fragment=""/>
+      <plugin id="org.eclipse.e4.ui.workbench" fragment=""/>
+      <plugin id="org.eclipse.e4.ui.workbench.addons.swt" fragment=""/>
+      <plugin id="org.eclipse.e4.ui.workbench.renderers.swt" fragment=""/>
+      <plugin id="org.eclipse.e4.ui.workbench.swt" fragment=""/>
+      <plugin id="org.eclipse.e4.ui.workbench3" fragment=""/>
       <plugin id="org.eclipse.emf.common"/>
       <plugin id="org.eclipse.emf.ecore"/>
       <plugin id="org.eclipse.emf.ecore.change"/>
       <plugin id="org.eclipse.emf.ecore.xmi"/>
       <plugin id="org.eclipse.equinox.app"/>
-      <plugin id="org.eclipse.equinox.bidi"/>
+      <plugin id="org.eclipse.equinox.bidi" fragment=""/>
       <plugin id="org.eclipse.equinox.common"/>
       <plugin id="org.eclipse.equinox.ds"/>
       <plugin id="org.eclipse.equinox.event"/>
