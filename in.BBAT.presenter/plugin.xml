@@ -378,6 +378,15 @@
                style="push">
          </command>
       </menuContribution>
+      <menuContribution
+            allPopups="false"
+            locationURI="popup:in.BBAT.presenter.history.TestRunInstanceView">
+         <command
+               commandId="in.BBAT.presenter.history.exportLogs"
+               label="Export Logs"
+               style="push">
+         </command>
+      </menuContribution>
    </extension>
    <extension
          point="org.eclipse.ui.commands">
@@ -437,6 +446,10 @@
             id="in.BBAT.presenter.Setting"
             name="Setting">
       </command>
+      <command
+            id="in.BBAT.presenter.history.exportLogs"
+            name="Export Logs">
+      </command>
    </extension>
    <extension
          point="org.eclipse.ui.handlers">
@@ -495,6 +508,10 @@
       <handler
             class="in.bbat.presenter.SettingsHandler"
             commandId="in.BBAT.presenter.Setting">
+      </handler>
+      <handler
+            class="in.BBAT.presenter.history.handlers.ExportLogs"
+            commandId="in.BBAT.presenter.history.exportLogs">
       </handler>
    </extension>
    <extension
