@@ -12,10 +12,14 @@ import in.BBAT.data.model.Entities.TestRunInfoEntity;
 import in.BBAT.dataMine.manager.LogsMineManager;
 import in.bbat.abstrakt.gui.BBATImageManager;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.core.runtime.Path;
 import org.eclipse.swt.graphics.Image;
 
 import com.android.ddmlib.Log.LogLevel;
@@ -54,18 +58,18 @@ public class TestRunInstanceModel extends AbstractTreeModel {
 		if(getStatus().equals(TestStatus.PASS.getStatus())){
 			return BBATImageManager.getInstance().getImage(BBATImageManager.PASS);
 		}
-		
+
 		if(getStatus().equals(TestStatus.FAIL.getStatus())){
 			return BBATImageManager.getInstance().getImage(BBATImageManager.FAIL);
 		}
 		if(getStatus().equals(TestStatus.EXECUTING.getStatus())){
 			return BBATImageManager.getInstance().getImage(BBATImageManager.EXECUTING);
 		}
-		
+
 		if(getStatus().equals(TestStatus.NOTEXECUTED.getStatus())){
 			return BBATImageManager.getInstance().getImage(BBATImageManager.TESTCASE_GIF_16);
 		}
-		
+
 		return BBATImageManager.getInstance().getImage(BBATImageManager.TESTCASE_GIF_16);
 	}
 
@@ -153,7 +157,7 @@ public class TestRunInstanceModel extends AbstractTreeModel {
 		return ((TestRunInfoEntity)getEntity()).getTestCase();
 	}
 
-	
+
 	public String getCompleteScriptName(){
 		return getTestCaseModel().getCompleteScriptName();
 	}
@@ -180,5 +184,47 @@ public class TestRunInstanceModel extends AbstractTreeModel {
 			logs.add(log);
 		}
 		return logs;
+	}
+
+	public void exportUIAutoLogs(String autoLogPath) throws IOException{
+		FileWriter autoFw = new FileWriter(autoLogPath+Path.SEPARATOR+"UIautomator.log");
+		for( AutomatorLogEntity entity :LogsMineManager.getAutoLogs((TestRunInfoEntity) getEntity())){
+			autoFw.write(entity.getMessage()+"\n");
+		}
+		autoFw.close();
+	}
+
+	public void exportDeviceLogs(String deviceLogPath) throws IOException{
+		FileWriter devicefr = new FileWriter(deviceLogPath+Path.SEPARATOR+"Device.log");
+		for( TestDeviceLogEntity entity :LogsMineManager.getDeviceLogs((TestRunInfoEntity) getEntity())){
+			StringBuffer buffer = new StringBuffer(entity.getmLogLevel());
+			buffer.append(" ");
+			buffer.append(entity.getmPid());
+			buffer.append(" ");
+			buffer.append(entity.getmTid());
+			buffer.append(" ");
+			buffer.append(entity.getmAppName());
+			buffer.append(" ");
+			buffer.append(entity.getmTag());
+			buffer.append(" ");
+			buffer.append(entity.getmTime());
+			buffer.append(" ");
+			buffer.append( entity.getmMessage());
+			buffer.append("\n");
+			devicefr.write(buffer.toString());
+		}
+		devicefr.close();
+	}
+
+	public void exportLogs(String exportDirectory,boolean zip) throws IOException{
+		File exportDir = new File(exportDirectory+Path.SEPARATOR+"Logs");
+		exportDir.mkdirs();
+		exportDeviceLogs(exportDir.getAbsolutePath());
+		exportUIAutoLogs(exportDir.getAbsolutePath());
+		exportScript(exportDir.getAbsolutePath());
+	}
+	
+	public void exportScript(String deviceLogPath){
+		
 	}
 }
