@@ -31,7 +31,9 @@ public class OpenDeviceLogsHandler extends AbstractDeviceViewHandler {
 
 	@Override
 	public boolean isEnabled(List<?> object) {
-		// TODO Auto-generated method stub
+		if(object.isEmpty()){
+			return false;
+		}
 		return true;
 	}
 
