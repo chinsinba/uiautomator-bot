@@ -45,5 +45,9 @@ public abstract class AbstractEntity implements IBBATEntity {
 	public void removeChild(IBBATEntity childEntity) {
 		
 	}
+
+	public int getId() {
+		return 0;
+	}
 	
 }

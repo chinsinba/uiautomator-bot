@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?pde version="3.5"?>
 
-<product name="BBAT" id="in.BBAT.presenter.MACAC" application="in.BBAT.presenter.application" useFeatures="false" includeLaunchers="true">
+<product name="BBAT" uid="BBAT" id="in.BBAT.presenter.MACAC" application="in.BBAT.presenter.application" useFeatures="false" includeLaunchers="true">
 
    <configIni use="default">
    </configIni>
@@ -12,6 +12,12 @@
 
    <plugins>
       <plugin id="com.ibm.icu"/>
+      <plugin id="com.instantiations.assist.eclipse.fragment.jdt" fragment="true"/>
+      <plugin id="com.instantiations.assist.eclipse.fragment.jdt.core" fragment="true"/>
+      <plugin id="com.instantiations.assist.eclipse.fragment.swt" fragment="true"/>
+      <plugin id="com.instantiations.assist.eclipse.fragment.ui.ide" fragment="true"/>
+      <plugin id="com.instantiations.assist.eclipse.fragment.ui.workbench" fragment="true"/>
+      <plugin id="com.instantiations.assist.eclipse.fragment.ui.workbench.texteditor" fragment="true"/>
       <plugin id="in.BBAT.TestRunner"/>
       <plugin id="in.BBAT.abstrakt.presenter"/>
       <plugin id="in.BBAT.configuration"/>
@@ -20,18 +26,13 @@
       <plugin id="in.BBAT.presenter"/>
       <plugin id="in.BBAT.reporter"/>
       <plugin id="javax.activation"/>
-      <plugin id="javax.annotation"/>
-      <plugin id="javax.inject" fragment=""/>
       <plugin id="javax.mail"/>
       <plugin id="javax.persistence"/>
       <plugin id="javax.servlet"/>
-      <plugin id="javax.xml"/>
+      <plugin id="javax.transaction" fragment="true"/>
       <plugin id="org.apache.ant"/>
-      <plugin id="org.apache.batik.css"/>
-      <plugin id="org.apache.batik.util"/>
-      <plugin id="org.apache.batik.util.gui"/>
+      <plugin id="org.apache.log4j"/>
       <plugin id="org.eclipse.ant.core"/>
-      <plugin id="org.eclipse.birt.jetty.overlay" fragment="true"/>
       <plugin id="org.eclipse.compare"/>
       <plugin id="org.eclipse.compare.core"/>
       <plugin id="org.eclipse.core.commands"/>
@@ -46,37 +47,13 @@
       <plugin id="org.eclipse.core.jobs"/>
       <plugin id="org.eclipse.core.resources"/>
       <plugin id="org.eclipse.core.runtime"/>
+      <plugin id="org.eclipse.core.runtime.compatibility.auth"/>
       <plugin id="org.eclipse.core.runtime.compatibility.registry" fragment="true"/>
       <plugin id="org.eclipse.core.variables"/>
       <plugin id="org.eclipse.debug.core"/>
       <plugin id="org.eclipse.debug.ui"/>
-      <plugin id="org.eclipse.e4.core.commands" fragment=""/>
-      <plugin id="org.eclipse.e4.core.contexts" fragment=""/>
-      <plugin id="org.eclipse.e4.core.di" fragment=""/>
-      <plugin id="org.eclipse.e4.core.di.extensions" fragment=""/>
-      <plugin id="org.eclipse.e4.core.services" fragment=""/>
-      <plugin id="org.eclipse.e4.ui.bindings" fragment=""/>
-      <plugin id="org.eclipse.e4.ui.css.core" fragment=""/>
-      <plugin id="org.eclipse.e4.ui.css.swt" fragment=""/>
-      <plugin id="org.eclipse.e4.ui.css.swt.theme" fragment=""/>
-      <plugin id="org.eclipse.e4.ui.di" fragment=""/>
-      <plugin id="org.eclipse.e4.ui.model.workbench" fragment=""/>
-      <plugin id="org.eclipse.e4.ui.services" fragment=""/>
-      <plugin id="org.eclipse.e4.ui.widgets" fragment=""/>
-      <plugin id="org.eclipse.e4.ui.workbench" fragment=""/>
-      <plugin id="org.eclipse.e4.ui.workbench.addons.swt" fragment=""/>
-      <plugin id="org.eclipse.e4.ui.workbench.renderers.swt" fragment=""/>
-      <plugin id="org.eclipse.e4.ui.workbench.swt" fragment=""/>
-      <plugin id="org.eclipse.e4.ui.workbench3" fragment=""/>
-      <plugin id="org.eclipse.emf.common"/>
-      <plugin id="org.eclipse.emf.ecore"/>
-      <plugin id="org.eclipse.emf.ecore.change"/>
-      <plugin id="org.eclipse.emf.ecore.xmi"/>
       <plugin id="org.eclipse.equinox.app"/>
-      <plugin id="org.eclipse.equinox.bidi" fragment=""/>
       <plugin id="org.eclipse.equinox.common"/>
-      <plugin id="org.eclipse.equinox.ds"/>
-      <plugin id="org.eclipse.equinox.event"/>
       <plugin id="org.eclipse.equinox.p2.core"/>
       <plugin id="org.eclipse.equinox.p2.engine"/>
       <plugin id="org.eclipse.equinox.p2.metadata"/>
@@ -85,7 +62,9 @@
       <plugin id="org.eclipse.equinox.preferences"/>
       <plugin id="org.eclipse.equinox.registry"/>
       <plugin id="org.eclipse.equinox.security"/>
-      <plugin id="org.eclipse.equinox.util"/>
+      <plugin id="org.eclipse.equinox.servletbridge.extensionbundle" fragment="true"/>
+      <plugin id="org.eclipse.equinox.transforms.hook" fragment="true"/>
+      <plugin id="org.eclipse.equinox.weaving.hook" fragment="true"/>
       <plugin id="org.eclipse.help"/>
       <plugin id="org.eclipse.jdt.compiler.apt" fragment="true"/>
       <plugin id="org.eclipse.jdt.compiler.tool" fragment="true"/>
@@ -100,6 +79,7 @@
       <plugin id="org.eclipse.ltk.core.refactoring"/>
       <plugin id="org.eclipse.ltk.ui.refactoring"/>
       <plugin id="org.eclipse.nebula.widgets.pshelf"/>
+      <plugin id="org.eclipse.net4j.jms.api"/>
       <plugin id="org.eclipse.orbit.mongodb"/>
       <plugin id="org.eclipse.osgi"/>
       <plugin id="org.eclipse.osgi.services"/>
@@ -107,10 +87,10 @@
       <plugin id="org.eclipse.persistence.asm"/>
       <plugin id="org.eclipse.persistence.core"/>
       <plugin id="org.eclipse.persistence.jpa"/>
+      <plugin id="org.eclipse.persistence.jpa.equinox.weaving" fragment="true"/>
       <plugin id="org.eclipse.persistence.jpa.jpql"/>
       <plugin id="org.eclipse.persistence.nosql" fragment="true"/>
       <plugin id="org.eclipse.persistence.oracle" fragment="true"/>
-      <plugin id="org.eclipse.persistence.oracle.nosql" fragment="true"/>
       <plugin id="org.eclipse.search"/>
       <plugin id="org.eclipse.swt"/>
       <plugin id="org.eclipse.swt.gtk.linux.x86_64" fragment="true"/>
@@ -128,9 +108,7 @@
       <plugin id="org.eclipse.ui.views.properties.tabbed"/>
       <plugin id="org.eclipse.ui.workbench"/>
       <plugin id="org.eclipse.ui.workbench.texteditor"/>
-      <plugin id="org.w3c.css.sac"/>
-      <plugin id="org.w3c.dom.smil"/>
-      <plugin id="org.w3c.dom.svg"/>
+      <plugin id="org.eclipse.xtext.logging" fragment="true"/>
    </plugins>
 
 

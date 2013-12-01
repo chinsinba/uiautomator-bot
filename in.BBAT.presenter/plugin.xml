@@ -135,7 +135,7 @@
                closeable="false"
                id="in.BBAT.presenter.developer.testcaseBrowserView"
                minimized="false"
-               ratio="0.20f"
+               ratio="0.30f"
                relationship="left"
                relative="org.eclipse.ui.editorss">
          </view>
@@ -152,22 +152,6 @@
                minimized="false"
                ratio="0.50f"
                relationship="left"
-               relative="org.eclipse.ui.editorss"
-               visible="false">
-         </view>
-         <view
-               id="in.BBAT.presenter.developer.uitreeView"
-               minimized="false"
-               ratio="0.70f"
-               relationship="bottom"
-               relative="in.BBAT.presenter.developer.screenShotView"
-               visible="false">
-         </view>
-         <view
-               id="in.BBAT.presenter.developer.nodeDetailView"
-               minimized="false"
-               ratio="0.70f"
-               relationship="bottom"
                relative="org.eclipse.ui.editorss"
                visible="false">
          </view>
@@ -303,11 +287,24 @@
                label="Edit"
                style="push">
          </command>
+         <separator
+               name="in.BBAT.presenter.separator2"
+               visible="true">
+         </separator>
          <command
                commandId="in.BBAT.presenter.testCase.export"
                label="Export"
                style="push">
          </command>
+         <command
+               commandId="in.BBAT.presenter.testCase.import"
+               label="Import"
+               style="push">
+         </command>
+         <separator
+               name="in.BBAT.presenter.separator3"
+               visible="true">
+         </separator>
          <command
                commandId="in.BBAT.presenter.testCase.deleteElement"
                icon="icons/delete.gif"
@@ -450,6 +447,10 @@
             id="in.BBAT.presenter.history.exportLogs"
             name="Export Testcase Logs ">
       </command>
+      <command
+            id="in.BBAT.presenter.testCase.import"
+            name="Import">
+      </command>
    </extension>
    <extension
          point="org.eclipse.ui.handlers">
@@ -512,6 +513,10 @@
       <handler
             class="in.BBAT.presenter.history.handlers.ExportLogsHandler"
             commandId="in.BBAT.presenter.history.exportLogs">
+      </handler>
+      <handler
+            class="in.BBAT.presenter.developer.handlers.testcaseBrowser.ImportScriptsHandler"
+            commandId="in.BBAT.presenter.testCase.import">
       </handler>
    </extension>
    <extension

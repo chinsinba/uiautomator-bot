@@ -1,5 +1,7 @@
 package in.bbat.presenter.views.developer;
 
+import in.BBAT.abstrakt.gui.model.AbstractTreeModel;
+import in.BBAT.abstrakt.gui.model.IGUITreeNode;
 import in.BBAT.abstrakt.presenter.pkg.model.TestCaseModel;
 import in.BBAT.abstrakt.presenter.pkg.model.TestProjectManager;
 import in.BBAT.presenter.DND.listeners.TestCaseDragListener;
@@ -13,6 +15,7 @@ import org.apache.log4j.Logger;
 import org.eclipse.jface.util.LocalSelectionTransfer;
 import org.eclipse.jface.viewers.DoubleClickEvent;
 import org.eclipse.jface.viewers.IDoubleClickListener;
+import org.eclipse.jface.viewers.IElementComparer;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.TreeViewer;
@@ -51,6 +54,24 @@ public class TestCaseBrowserView extends BBATViewPart {
 		viewer.setContentProvider(new TestCaseBrowserContentProvider());
 		viewer.setLabelProvider(new TestCaseLabelProvider());
 		viewer.setAutoExpandLevel(2);
+		/*viewer.setComparer(new IElementComparer() {
+
+			@Override
+			public int hashCode(Object element) {
+					return element.hashCode();
+			}
+
+			@Override
+			public boolean equals(Object a, Object b) {
+				if(a instanceof TestProjectManager ||b instanceof TestProjectManager){
+					return true;
+				}
+				if(((AbstractTreeModel)a).getId() == ((AbstractTreeModel)b).getId()){
+					return true;
+				}
+				return false;
+			}
+		});*/
 		viewer.addDoubleClickListener(new IDoubleClickListener() {
 
 			@Override
@@ -72,7 +93,7 @@ public class TestCaseBrowserView extends BBATViewPart {
 
 		// Provide the input to the ContentProvider
 		try {
-			viewer.setInput(TestProjectManager.getInstance().getTestProjects());
+			viewer.setInput(TestProjectManager.getInstance());
 		} catch (Exception e) {
 			LOG.error(e);
 		}
@@ -96,7 +117,7 @@ public class TestCaseBrowserView extends BBATViewPart {
 
 	@Override
 	public void refresh() throws Exception {
-		viewer.setInput(TestProjectManager.getInstance().getTestProjects());
+		//		viewer.setInput(TestProjectManager.getInstance());
 		viewer.refresh();
 	}
 

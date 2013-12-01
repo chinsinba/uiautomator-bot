@@ -1,6 +1,7 @@
 package in.BBAT.presenter.contentProviders;
 
 import in.BBAT.abstrakt.gui.model.IGUITreeNode;
+import in.BBAT.abstrakt.presenter.pkg.model.TestProjectManager;
 import in.bbat.logger.BBATLogger;
 
 import java.util.List;
@@ -14,19 +15,16 @@ public class TestCaseBrowserContentProvider implements ITreeContentProvider {
 	private static final Logger LOG = BBATLogger.getLogger(TestCaseBrowserContentProvider.class.getName());
 	@Override
 	public void dispose() {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public Object[] getElements(Object inputElement) {
-		// TODO Auto-generated method stub
 		return getChildren(inputElement);
 	}
 
@@ -40,9 +38,14 @@ public class TestCaseBrowserContentProvider implements ITreeContentProvider {
 			}
 		}
 
-		List<IGUITreeNode> children = (List<IGUITreeNode>) parentElement;
-		if (children != null)
-			return children.toArray();
+		if(parentElement instanceof TestProjectManager){
+			try {
+				return ((TestProjectManager) parentElement).getTestProjects().toArray();
+			} catch (Exception e) {
+				LOG.error(e);
+			}
+		}
+
 		return null;
 	}
 
@@ -54,6 +57,10 @@ public class TestCaseBrowserContentProvider implements ITreeContentProvider {
 
 	@Override
 	public boolean hasChildren(Object parentElement) {
+
+		if(parentElement instanceof TestProjectManager){
+			return true;
+		}
 		if(parentElement instanceof IGUITreeNode){
 			try {
 				if (((IGUITreeNode) parentElement).getChildren() == null)
