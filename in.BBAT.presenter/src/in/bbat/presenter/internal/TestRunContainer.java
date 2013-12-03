@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.PlatformUI;
 
@@ -103,7 +104,8 @@ public class TestRunContainer {
 						testRunView.refresh();
 					} catch (Exception e) {
 						LOG.error(e);
-					}					
+					}		
+					MessageDialog.openInformation(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(), "Device Removed", "Device disconnected.");
 				}
 			});
 
