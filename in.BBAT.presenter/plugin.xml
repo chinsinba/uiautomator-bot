@@ -320,7 +320,7 @@
          <command
                commandId="in.BBAT.presenter.device.openScreenShot"
                icon="icons/screenshot.png"
-               label="UiAutoamtor"
+               label="UiAutomator"
                style="push"
                tooltip="opens UI automator viewer">
          </command>
