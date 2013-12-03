@@ -47,4 +47,21 @@ public class ExecuteTestRunHandler extends AbstractTestRunnerHandler {
 		return false;
 	}
 
+	private String enabled() {
+		if(TestRunExecutionManager.getInstance().getSelectedDevices().isEmpty()){
+			return "Please select test devices.";
+		}
+		if(TestRunExecutionManager.getInstance().getTestRunCases().isEmpty())
+		{
+			return "Please add test cases";
+		}
+		if(!TestRunExecutionManager.getInstance().deviceContainsTestCases())
+		{
+			return "Please add test cases";
+		}
+		if(TestRunExecutionManager.getInstance().isExecuting())
+			return "Test run is currently running";
+
+		return null;
+	}
 }
