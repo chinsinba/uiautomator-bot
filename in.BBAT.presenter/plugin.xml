@@ -102,6 +102,7 @@
       </view>
       <view
             class="in.bbat.presenter.views.history.TestRunInfoView"
+            icon="icons/Android_device.png"
             id="in.BBAT.presenter.history.TestRunInstanceView"
             name="Device Run"
             restorable="true">

@@ -253,7 +253,7 @@ public class TestRunnerView extends BBATViewPart {
 				if(obj  instanceof DeviceTestRun){
 					DeviceTestRun run = (DeviceTestRun) obj;
 					setRunViewerInput(run);
-//					createDeviceItem(tabFolder,run);
+					//					createDeviceItem(tabFolder,run);
 				}
 			}
 		});
@@ -271,13 +271,70 @@ public class TestRunnerView extends BBATViewPart {
 		});
 		createDeviceRunColumns(comp);
 		try{
-		testDeviceViewer.setInput(TestRunExecutionManager.getInstance());
+			testDeviceViewer.setInput(TestRunExecutionManager.getInstance());
 		}catch(Exception e){
 			LOG.error(e);
 		}
+		addMenu2DeviceRun(testDeviceViewer);
 		testRunItem.setControl(comp);
 		tabFolder.setSelection(testRunItem);
 		createDropSupportForDevice();
+	}
+
+	private void addMenu2DeviceRun(final TreeViewer viewer) {
+
+
+		final Action removeAction = new Action("Remove") {
+			@Override
+			public void run() {
+				IStructuredSelection sel =(IStructuredSelection) viewer.getSelection();
+				List<?> selectedObjs = sel.toList();
+				for(Object obj : selectedObjs){
+					TestRunExecutionManager.getInstance().removeDevice((DeviceTestRun)obj);	
+				}
+				try {
+					refresh();
+				} catch (Exception e) {
+					LOG.error(e);
+				}
+			}
+
+			@Override
+			public boolean isEnabled() {
+
+				if(TestRunExecutionManager.getInstance().isExecuting()){
+					return false;
+				}
+				IStructuredSelection sel =(IStructuredSelection) viewer.getSelection();
+				List<?> selectedObjs = sel.toList();
+
+				if(selectedObjs.isEmpty()){
+					return false;
+				}
+				for(Object obj : selectedObjs){
+
+					if(!(obj instanceof DeviceTestRun)){
+						return false;
+					}
+
+				}
+				return true;
+			}
+
+
+		};
+		final MenuManager menuManager = new MenuManager();
+		menuManager.setRemoveAllWhenShown(true);
+		menuManager.addMenuListener(new IMenuListener() {
+
+			@Override
+			public void menuAboutToShow(IMenuManager manager) {
+				removeAction.setEnabled(removeAction.isEnabled());
+				manager.add(removeAction);
+			}
+		});
+		viewer.getControl().setMenu(menuManager.createContextMenu(viewer.getControl()));
+
 	}
 
 	private void createDeviceItem(CTabFolder tabFolder,DeviceTestRun run) {
@@ -321,6 +378,7 @@ public class TestRunnerView extends BBATViewPart {
 			public void run() {
 				IStructuredSelection sel =(IStructuredSelection) viewer.getSelection();
 				List<?> selectedObjs = sel.toList();
+				
 				for(Object obj : selectedObjs){
 					deviceTestRun.removeCase((TestRunCaseModel) obj);	
 				}
@@ -333,7 +391,18 @@ public class TestRunnerView extends BBATViewPart {
 
 			@Override
 			public boolean isEnabled() {
-				return !TestRunExecutionManager.getInstance().isExecuting();
+
+				if(TestRunExecutionManager.getInstance().isExecuting()){
+					return false;
+				}
+				
+				IStructuredSelection sel =(IStructuredSelection) viewer.getSelection();
+				List<?> selectedObjs = sel.toList();
+				if(selectedObjs.isEmpty()){
+					return false;
+				}
+				
+				return true;
 			}
 		};
 		final MenuManager menuManager = new MenuManager();
