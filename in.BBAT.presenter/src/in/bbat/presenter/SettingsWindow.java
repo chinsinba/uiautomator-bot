@@ -236,6 +236,8 @@ public class SettingsWindow extends ApplicationWindow  {
 	}
 
 	private void copyScriptsFromOlderWorkspace(String oldWkspcPath, String newWkspcPath) {
+		if(oldWkspcPath.equalsIgnoreCase(newWkspcPath))
+			return;
 		final File oldUiautoWkspc = new File(oldWkspcPath);
 		final File newUiautoWkspc = new File(newWkspcPath);
 		BusyIndicator.showWhile(Display.getDefault(), new Runnable() {
@@ -266,12 +268,12 @@ public class SettingsWindow extends ApplicationWindow  {
 				return false;
 			}
 		}
-		
+
 		if(wkspcPathText.getText().isEmpty()){
 			form.setMessage("UiAutomator scripts path cannot be empty", IMessageProvider.ERROR);
 			return false;
 		}
-				
+
 		return true;
 	}
 
