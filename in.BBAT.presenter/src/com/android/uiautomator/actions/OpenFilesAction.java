@@ -40,7 +40,7 @@ public class OpenFilesAction extends Action {
 
     @Override
     public ImageDescriptor getImageDescriptor() {
-        return ImageHelper.loadImageDescriptorFromResource("images/open-folder.png");
+        return ImageHelper.loadImageDescriptorFromResource("icons/open-folder.png");
     }
 
     @Override

@@ -34,7 +34,7 @@ public class ToggleNafAction extends Action {
 
     @Override
     public ImageDescriptor getImageDescriptor() {
-        return ImageHelper.loadImageDescriptorFromResource("images/warning.png");
+        return ImageHelper.loadImageDescriptorFromResource("icons/warning.png");
     }
 
     @Override

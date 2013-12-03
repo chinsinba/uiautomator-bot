@@ -319,7 +319,7 @@
             locationURI="toolbar:in.BBAT.presenter.developer.deviceView">
          <command
                commandId="in.BBAT.presenter.device.openScreenShot"
-               icon="icons/alt_window_16.gif"
+               icon="icons/screenshot.png"
                label="UiAutoamtor"
                style="push"
                tooltip="opens UI automator viewer">
