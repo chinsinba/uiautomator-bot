@@ -95,6 +95,7 @@
       </view>
       <view
             class="in.bbat.presenter.views.history.TestRunHistoryView"
+            icon="icons/run.png"
             id="in.BBAT.presenter.history.TestRunHistoryView"
             name="Test Runs"
             restorable="true">
