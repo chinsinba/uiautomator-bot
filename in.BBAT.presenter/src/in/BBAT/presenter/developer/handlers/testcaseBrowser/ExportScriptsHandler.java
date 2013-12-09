@@ -26,6 +26,14 @@ public class ExportScriptsHandler extends AbstractTestCaseBrowserHandler {
 
 	@Override
 	public boolean isEnabled(List<?> object) {
+		if(object==null){
+			return false;
+		}
+		
+		if(object.isEmpty()){
+			return false;
+		}
+		
 		return true;
 	}
 }

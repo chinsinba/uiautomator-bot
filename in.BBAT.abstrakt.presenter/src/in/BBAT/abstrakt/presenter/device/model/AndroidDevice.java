@@ -101,7 +101,7 @@ public class AndroidDevice implements IGUITreeNode{
 		return iDevice.isUIAutomatorSupported();
 	}
 
-	public void installApk() {
+	public void installApk() throws Exception {
 		iDevice.installPackage();		
 	}
 }

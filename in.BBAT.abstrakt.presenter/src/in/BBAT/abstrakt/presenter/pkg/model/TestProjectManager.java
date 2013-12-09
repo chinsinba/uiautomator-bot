@@ -33,7 +33,7 @@ public class TestProjectManager {
 		return models;
 	}
 
-	public void importProject() throws Exception{
+	public void importProject(String testProjectPath) throws Exception{
 
 	}
 

@@ -29,6 +29,7 @@ public class CreateTestCaseWizard extends Wizard {
 		caseCreationPage = new CreateTestCasePage("TestCase",parent);
 		addPage(caseCreationPage);
 	}
+	
 	@Override
 	public boolean performFinish() {
 		LOG.info("Creating test case : "+caseCreationPage.getName());
