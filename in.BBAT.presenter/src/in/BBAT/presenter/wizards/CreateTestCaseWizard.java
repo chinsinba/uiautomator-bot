@@ -9,10 +9,8 @@ import in.bbat.presenter.views.developer.TestCaseBrowserView;
 
 import org.apache.log4j.Logger;
 import org.eclipse.jface.wizard.Wizard;
-import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
-import org.eclipse.ui.part.FileEditorInput;
 
 public class CreateTestCaseWizard extends Wizard {
 
@@ -38,7 +36,6 @@ public class CreateTestCaseWizard extends Wizard {
 			TestCaseModel newTestCase = new TestCaseModel(parent, caseCreationPage.getName());
 			newTestCase.setDescription(caseCreationPage.getDescription());
 			newTestCase.save();
-			newTestCase.createContents();
 			BBATViewPart view = (BBATViewPart) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().findView(TestCaseBrowserView.ID);
 			try {
 				view.refresh();

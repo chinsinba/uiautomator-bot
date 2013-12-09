@@ -146,4 +146,9 @@ public class TestCaseModel extends AbstractProjectTree{
 		}
 	}
 
+	@Override
+	public void save() {
+		super.save();
+		createContents();
+	}
 }
