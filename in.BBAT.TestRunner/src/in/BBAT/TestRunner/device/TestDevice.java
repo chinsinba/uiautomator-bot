@@ -212,4 +212,9 @@ public class TestDevice implements IAndroidDevice {
 	public IChimpDevice getChimpDevice() {
 		return chimpDevice;
 	}
+
+	@Override
+	public void installPackage() {
+//		monkeyDevice.installPackage(arg0, arg1, arg2)
+	}
 }

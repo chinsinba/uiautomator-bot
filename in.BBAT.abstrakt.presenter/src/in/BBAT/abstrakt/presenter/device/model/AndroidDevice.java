@@ -94,10 +94,14 @@ public class AndroidDevice implements IGUITreeNode{
 	@Override
 	public void setParent(IGUITreeNode parent) {
 		// TODO Auto-generated method stub
-		
+
 	}
-	
+
 	public boolean isUIAutomatorSupported(){
 		return iDevice.isUIAutomatorSupported();
+	}
+
+	public void installApk() {
+		iDevice.installPackage();		
 	}
 }

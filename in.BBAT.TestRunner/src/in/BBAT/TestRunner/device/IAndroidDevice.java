@@ -47,5 +47,7 @@ public interface IAndroidDevice {
 	
 	IChimpDevice getChimpDevice();
 
+	void installPackage();
+
 
 }
