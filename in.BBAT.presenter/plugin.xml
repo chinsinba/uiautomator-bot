@@ -364,6 +364,11 @@
                label="Open Log view"
                style="push">
          </command>
+         <command
+               commandId="in.BBAT.presenter.device.installApk"
+               label="Install APK"
+               style="push">
+         </command>
       </menuContribution>
       <menuContribution
             allPopups="false"
@@ -451,6 +456,10 @@
             id="in.BBAT.presenter.testCase.import"
             name="Import">
       </command>
+      <command
+            id="in.BBAT.presenter.device.installApk"
+            name="Install APK">
+      </command>
    </extension>
    <extension
          point="org.eclipse.ui.handlers">
@@ -517,6 +526,10 @@
       <handler
             class="in.BBAT.presenter.developer.handlers.testcaseBrowser.ImportScriptsHandler"
             commandId="in.BBAT.presenter.testCase.import">
+      </handler>
+      <handler
+            class="in.BBAT.presenter.developer.handlers.device.InstallApkHandler"
+            commandId="in.BBAT.presenter.device.installApk">
       </handler>
    </extension>
    <extension

@@ -9,7 +9,6 @@ import java.util.List;
 
 public class TestProjectManager {
 
-
 	private static TestProjectManager instance;
 
 	private TestProjectManager()
@@ -38,7 +37,4 @@ public class TestProjectManager {
 
 	}
 
-	public void exportProject() throws Exception{
-
-	}
 }
