@@ -3,6 +3,7 @@ package in.BBAT.abstrakt.presenter.pkg.model;
 import in.BBAT.data.model.Entities.AbstractEntity;
 import in.BBAT.data.model.Entities.TestProjectEntity;
 import in.BBAT.data.model.Entities.TestSuiteEntity;
+import in.BBAT.dataMine.manager.JaxbExportImport;
 import in.bbat.abstrakt.gui.BBATImageManager;
 
 import java.io.File;
@@ -80,6 +81,7 @@ public class TestProjectModel extends AbstractProjectTree {
 	}
 
 	public void export(String dirPath) throws Exception{
-
+		JaxbExportImport exp = new JaxbExportImport(dirPath, (TestProjectEntity) getEntity());
+		exp.export();
 	}
 }

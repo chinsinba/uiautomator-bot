@@ -15,6 +15,7 @@ import in.bbat.presenter.views.developer.DeveloperDeviceView;
 public abstract class AbstractDeviceViewHandler  extends BBATHandler{
 
 	private static final Logger LOG = BBATLogger.getLogger(AbstractDeviceViewHandler.class.getName());
+	
 	@Override
 	public Object run(ExecutionEvent event) {
 		return run(event, getSelectedList());

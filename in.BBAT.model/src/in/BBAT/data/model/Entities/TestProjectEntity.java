@@ -13,26 +13,44 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.OrderColumn;
 import javax.persistence.TableGenerator;
+import javax.persistence.Transient;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlType;
 
 @Entity
 @NamedQueries({
 	@NamedQuery(name="TestProjectEntity.findAll",query="SELECT testProj FROM TestProjectEntity testProj ORDER BY testProj.id")
 	//@NamedQuery(name="TestProjectEntity.findTestCase",query="SELECT testcase FROM TestProjectEntity testcase ORDER BY testcase.id")
 })
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "", propOrder = {
+		"testSuites"
+})
+@XmlRootElement(name = "TestProjectEntity")
 public class TestProjectEntity extends AbstractEntity {
 
 	@Id
 	@TableGenerator(name = "TestProject", table = "ID_GENERATOR", pkColumnName = "GEN_NAME", valueColumnName = "GEN_VAL", allocationSize=1)
 	@GeneratedValue(generator = "TestProject")
+	@XmlTransient
 	private int id;
 
+	@XmlAttribute(required = true)
 	private String description;
 
 	@OneToOne
+	@XmlTransient
 	private UserEntity createdBy;
-	
+
+	@XmlAttribute(required = true)
 	private String name;
 
+	@XmlElement(name="TestSuiteEntity",required=true)
 	@OneToMany(mappedBy="testProject",fetch = FetchType.LAZY, cascade = { CascadeType.ALL })
 	@OrderColumn
 	private List<TestSuiteEntity> testSuites;
@@ -40,7 +58,7 @@ public class TestProjectEntity extends AbstractEntity {
 	public TestProjectEntity(String projectName) {
 		this.name = projectName;
 	}
-	
+
 	public TestProjectEntity() {
 		// TODO Auto-generated constructor stub
 	}
@@ -75,7 +93,7 @@ public class TestProjectEntity extends AbstractEntity {
 	public void removeChild(IBBATEntity childEntity) {
 		removeTestSuite((TestSuiteEntity) childEntity);
 	}
-	
+
 	public UserEntity getCreatedBy() {
 		return createdBy;
 	}
