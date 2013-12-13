@@ -60,7 +60,7 @@ public class ScreenshotAction extends Action {
 
     @Override
     public ImageDescriptor getImageDescriptor() {
-        return ImageHelper.loadImageDescriptorFromResource("images/screenshot.png");
+        return ImageHelper.loadImageDescriptorFromResource("icons/screenshot.png");
     }
 
     @Override

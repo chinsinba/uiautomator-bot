@@ -33,7 +33,7 @@ public class ExpandAllAction extends Action {
 
     @Override
     public ImageDescriptor getImageDescriptor() {
-        return ImageHelper.loadImageDescriptorFromResource("images/expandall.png");
+        return ImageHelper.loadImageDescriptorFromResource("icons/expandall.png");
     }
 
     @Override

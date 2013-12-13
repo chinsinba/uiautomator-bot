@@ -16,10 +16,8 @@ public class DeviceViewLabelProvider extends LabelProvider implements ITableLabe
 	@Override
 	public Image getColumnImage(Object element, int columnIndex) {
 
-	/*	switch (columnIndex) {
-		case 0:
-			return  BBATImageManager.getInstance().getImage(BBATImageManager.ANDROID_DEVICE);
-		}*/
+		if(element instanceof AndroidDevice)
+			return ((AndroidDevice) element).getImage();
 		return null;
 	}
 

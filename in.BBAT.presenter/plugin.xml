@@ -56,6 +56,7 @@
       <view
             allowMultiple="false"
             class="in.bbat.presenter.views.developer.ScreenShotView"
+            icon="icons/screenshot.png"
             id="in.BBAT.presenter.developer.screenShotView"
             name="UI Automator View"
             restorable="true">
@@ -95,12 +96,14 @@
       </view>
       <view
             class="in.bbat.presenter.views.history.TestRunHistoryView"
+            icon="icons/run.png"
             id="in.BBAT.presenter.history.TestRunHistoryView"
             name="Test Runs"
             restorable="true">
       </view>
       <view
             class="in.bbat.presenter.views.history.TestRunInfoView"
+            icon="icons/Android_device.png"
             id="in.BBAT.presenter.history.TestRunInstanceView"
             name="Device Run"
             restorable="true">
@@ -317,8 +320,8 @@
             locationURI="toolbar:in.BBAT.presenter.developer.deviceView">
          <command
                commandId="in.BBAT.presenter.device.openScreenShot"
-               icon="icons/alt_window_16.gif"
-               label="UiAutoamtor"
+               icon="icons/screenshot.png"
+               label="UiAutomator"
                style="push"
                tooltip="opens UI automator viewer">
          </command>

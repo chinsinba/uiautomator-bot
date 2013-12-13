@@ -4,6 +4,7 @@ import in.BBAT.TestRunner.device.IAndroidDevice;
 import in.BBAT.abstrakt.gui.model.IGUITreeNode;
 import in.BBAT.data.model.Entities.TestDeviceEntity;
 import in.BBAT.dataMine.manager.DeviceMineManager;
+import in.bbat.abstrakt.gui.BBATImageManager;
 
 import java.util.List;
 
@@ -41,7 +42,7 @@ public class AndroidDevice implements IGUITreeNode{
 
 	@Override
 	public Image getImage() {
-		return null;
+		return BBATImageManager.getInstance().getImage(BBATImageManager.ANDROID_DEVICE);
 	}
 
 	@Override
