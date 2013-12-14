@@ -3,6 +3,7 @@ package in.BBAT.testRunner.runner;
 import in.BBAT.TestRunner.device.TestDevice;
 import in.bbat.configuration.BBATConfigXml;
 import in.bbat.logger.BBATLogger;
+import in.bbat.utility.FileUtils;
 
 import java.io.File;
 import java.io.FileNotFoundException;

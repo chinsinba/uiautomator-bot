@@ -29,11 +29,18 @@ public class ExportScriptsHandler extends AbstractTestCaseBrowserHandler {
 		if(object==null){
 			return false;
 		}
-		
+
 		if(object.isEmpty()){
 			return false;
 		}
-		
+
+		for(Object obj : object){
+			if(! (obj instanceof TestProjectModel))
+			{
+				return false;
+			}
+		}
+
 		return true;
 	}
 }

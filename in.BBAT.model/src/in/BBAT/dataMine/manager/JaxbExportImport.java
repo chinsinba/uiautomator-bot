@@ -35,7 +35,7 @@ public class JaxbExportImport {
 		{
 			Marshaller marshaller = context.createMarshaller();
 			marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
-			writer = new FileWriter(exportPath+Path.SEPARATOR+entity.getName());
+			writer = new FileWriter(exportPath+Path.SEPARATOR+entity.getName()+".bbat");
 			marshaller.marshal(entity, writer);
 		} 
 		finally

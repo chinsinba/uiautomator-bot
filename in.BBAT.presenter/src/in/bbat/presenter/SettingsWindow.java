@@ -2,9 +2,9 @@ package in.bbat.presenter;
 
 
 import in.BBAT.abstrakt.presenter.pkg.model.BBATProjectUtil;
-import in.BBAT.testRunner.runner.FileUtils;
 import in.bbat.configuration.BBATConfigXml;
 import in.bbat.logger.BBATLogger;
+import in.bbat.utility.FileUtils;
 
 import java.io.File;
 import java.io.IOException;
