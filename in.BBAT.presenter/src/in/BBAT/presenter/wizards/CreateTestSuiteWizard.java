@@ -29,11 +29,7 @@ public class CreateTestSuiteWizard extends Wizard {
 		
 		LOG.info("Create test suite: " +suiteCreationPage.getName());
 		try {
-			TestSuiteModel newTestSuite = new TestSuiteModel(parent, suiteCreationPage.getName());
-			newTestSuite.setDescription(suiteCreationPage.getDescription());
-//			MineManager.getInstance().beginTransaction();
-			newTestSuite.save();
-//			MineManager.getInstance().commitTransaction();
+			TestSuiteModel newTestSuite = TestSuiteModel.create(parent, suiteCreationPage.getName(), suiteCreationPage.getDescription());
 			BBATViewPart view = (BBATViewPart) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().findView(TestCaseBrowserView.ID);
 			try {
 				view.refresh();

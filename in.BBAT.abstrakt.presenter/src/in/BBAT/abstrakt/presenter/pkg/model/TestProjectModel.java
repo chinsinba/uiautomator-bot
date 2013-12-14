@@ -9,15 +9,10 @@ import in.bbat.utility.FileUtils;
 import in.bbat.utility.ZipFiles;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipFile;
 
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.swt.graphics.Image;
-import org.eclipse.ui.internal.wizards.datatransfer.ZipFileExporter;
-import org.eclipse.ui.wizards.datatransfer.ZipFileStructureProvider;
 
 /**
  * 
@@ -87,24 +82,31 @@ public class TestProjectModel extends AbstractProjectTree {
 		BBATProjectUtil.getInstance().deletePack(folder);
 	}
 
+	public static TestProjectModel create(String name, String description) throws Exception{
+		TestProjectModel model = new TestProjectModel(name);
+		model.setDescription(description);
+		model.save();
+		return model;
+	}
+
 	public void export(String dirPath) throws Exception{
 		//create temporary file
 		String tempFilePath ="temp"+System.currentTimeMillis()+Path.SEPARATOR+"project";
 		File tempFile = new File(tempFilePath);
 		tempFile.mkdirs();
-		
+
 		//export xml
-		JaxbExportImport exp = new JaxbExportImport(tempFile.getAbsolutePath(), (TestProjectEntity) getEntity());
-		exp.export();
-		
+		JaxbExportImport exp = new JaxbExportImport();
+		exp.export(tempFile.getAbsolutePath(), (TestProjectEntity) getEntity());
+
 		//expport the project and scripts
 		File proj = new File(tempFile.getAbsolutePath()+Path.SEPARATOR+getName());
 		proj.mkdirs();
 		FileUtils.copyFolder(new File(getResourcePath()), proj);
-		
+
 		//zip exported artifacts
 		ZipFiles.zipDirectory(tempFile, dirPath+Path.SEPARATOR+getName()+".dat");
-		
+
 		//delete temporary file
 		FileUtils.delete(tempFile);
 

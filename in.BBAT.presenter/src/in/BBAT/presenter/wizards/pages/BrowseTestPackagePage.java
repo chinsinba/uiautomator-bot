@@ -61,7 +61,7 @@ public class BrowseTestPackagePage extends WizardPage{
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				FileDialog exportDialog = new FileDialog(getShell(),SWT.SAVE);
-				exportDialog.setFilterExtensions(new String[] {"*.zip"});
+				exportDialog.setFilterExtensions(new String[] {"*.dat"});
 				String destinationPath = exportDialog.open();
 				if (destinationPath != null) {
 					exportPathText.setText(destinationPath);

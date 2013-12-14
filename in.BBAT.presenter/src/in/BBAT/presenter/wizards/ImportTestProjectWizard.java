@@ -3,9 +3,12 @@ package in.BBAT.presenter.wizards;
 import in.BBAT.abstrakt.presenter.pkg.model.TestProjectManager;
 import in.BBAT.presenter.wizards.pages.BrowseTestPackagePage;
 import in.bbat.logger.BBATLogger;
+import in.bbat.presenter.views.BBATViewPart;
+import in.bbat.presenter.views.developer.TestCaseBrowserView;
 
 import org.apache.log4j.Logger;
 import org.eclipse.jface.wizard.Wizard;
+import org.eclipse.ui.PlatformUI;
 
 public class ImportTestProjectWizard extends Wizard {
 
@@ -22,6 +25,13 @@ public class ImportTestProjectWizard extends Wizard {
 	public boolean performFinish() {
 		try {
 			projMgr.importProject(page0.getPath());
+		} catch (Exception e) {
+			LOG.error(e);
+		}
+		
+		BBATViewPart view = (BBATViewPart) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().findView(TestCaseBrowserView.ID);
+		try {
+			view.refresh();
 		} catch (Exception e) {
 			LOG.error(e);
 		}

@@ -10,6 +10,11 @@ import java.io.OutputStream;
 
 public class FileUtils {
 
+	/**
+	 * deletes the file or folder recursively
+	 * @param file
+	 * @throws IOException
+	 */
 	public static void delete(File file)
 			throws IOException{
 

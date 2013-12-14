@@ -20,13 +20,10 @@ public class CreateTestProjectWizard extends Wizard {
 		LOG.info("Creating test Project : " + projCreationPage.getName());
 		TestProjectModel newTestProject = null;
 		try {
-			newTestProject = new TestProjectModel(projCreationPage.getName());
+			newTestProject = TestProjectModel.create(projCreationPage.getName(), projCreationPage.getDescription()); 
 		} catch (Exception e) {
 			LOG.error(e);
 		}
-		newTestProject.setDescription(projCreationPage.getDescription());
-		newTestProject.save();
-
 		BBATViewPart view = (BBATViewPart) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().findView(TestCaseBrowserView.ID);
 		try {
 			view.refresh();

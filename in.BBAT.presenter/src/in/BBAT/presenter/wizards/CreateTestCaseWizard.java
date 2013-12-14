@@ -29,14 +29,12 @@ public class CreateTestCaseWizard extends Wizard {
 		caseCreationPage = new CreateTestCasePage("TestCase",parent);
 		addPage(caseCreationPage);
 	}
-	
+
 	@Override
 	public boolean performFinish() {
 		LOG.info("Creating test case : "+caseCreationPage.getName());
 		try {
-			TestCaseModel newTestCase = new TestCaseModel(parent, caseCreationPage.getName());
-			newTestCase.setDescription(caseCreationPage.getDescription());
-			newTestCase.save();
+			TestCaseModel newTestCase = TestCaseModel.create(parent, caseCreationPage.getName(),caseCreationPage.getDescription()); 
 			BBATViewPart view = (BBATViewPart) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().findView(TestCaseBrowserView.ID);
 			try {
 				view.refresh();

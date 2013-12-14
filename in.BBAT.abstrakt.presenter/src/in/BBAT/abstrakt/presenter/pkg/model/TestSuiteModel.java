@@ -65,4 +65,10 @@ public class TestSuiteModel extends AbstractProjectTree{
 		BBATProjectUtil.getInstance().linkSuite(getResourcePath());
 	}
 
+	public static TestSuiteModel create(TestProjectModel parent, String name, String description) throws Exception{
+		TestSuiteModel newTestSuite = new TestSuiteModel(parent, name);
+		newTestSuite.setDescription(description);
+		newTestSuite.save();
+		return newTestSuite;
+	}
 }

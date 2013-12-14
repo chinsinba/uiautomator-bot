@@ -117,7 +117,7 @@ public class TestCaseBrowserView extends BBATViewPart {
 
 	@Override
 	public void refresh() throws Exception {
-		//		viewer.setInput(TestProjectManager.getInstance());
+		viewer.setInput(TestProjectManager.getInstance());
 		viewer.refresh();
 	}
 

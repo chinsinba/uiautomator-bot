@@ -151,4 +151,11 @@ public class TestCaseModel extends AbstractProjectTree{
 		super.save();
 		createContents();
 	}
+	
+	public static TestCaseModel create(TestSuiteModel suite,String name, String description) throws Exception{
+		TestCaseModel newTestCase = new TestCaseModel(suite, name);
+		newTestCase.setDescription(description);
+		newTestCase.save();
+		return newTestCase;
+	}
 }
