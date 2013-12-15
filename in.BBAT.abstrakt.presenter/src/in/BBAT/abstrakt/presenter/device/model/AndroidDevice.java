@@ -102,7 +102,7 @@ public class AndroidDevice implements IGUITreeNode{
 		return iDevice.isUIAutomatorSupported();
 	}
 
-	public void installApk() throws Exception {
-		iDevice.installPackage();		
+	public void installApk(String apkPath) throws Exception {
+		iDevice.installPackage(apkPath);		
 	}
 }

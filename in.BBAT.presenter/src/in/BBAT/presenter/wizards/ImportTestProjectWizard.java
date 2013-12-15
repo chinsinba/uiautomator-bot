@@ -7,6 +7,7 @@ import in.bbat.presenter.views.BBATViewPart;
 import in.bbat.presenter.views.developer.TestCaseBrowserView;
 
 import org.apache.log4j.Logger;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.ui.PlatformUI;
 
@@ -26,7 +27,9 @@ public class ImportTestProjectWizard extends Wizard {
 		try {
 			projMgr.importProject(page0.getPath());
 		} catch (Exception e) {
+			MessageDialog.openError(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(), "Import Error", e.getMessage());
 			LOG.error(e);
+			return false;
 		}
 		
 		BBATViewPart view = (BBATViewPart) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().findView(TestCaseBrowserView.ID);

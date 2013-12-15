@@ -116,7 +116,7 @@ public class TestRunnerView extends BBATViewPart {
 		CTabFolder testRunFolder = new CTabFolder(innerleft, SWT.TOP|SWT.BORDER);
 		executionViewItem = new CTabItem(testRunFolder, SWT.None);
 		executionViewItem.setText("Execution View");
-		Composite comp = new Composite(testRunFolder, SWT.BORDER);
+		Composite comp = new Composite(testRunFolder, SWT.NONE);
 
 		deviceRunInfoViewer = new TableViewer(comp, SWT.MULTI | SWT.H_SCROLL| SWT.V_SCROLL);
 		deviceRunInfoViewer.setContentProvider(new ArrayContentProvider());
@@ -187,10 +187,10 @@ public class TestRunnerView extends BBATViewPart {
 	private void createTestRunViewer(Composite innerRight) {
 
 		CTabFolder testRunFolder = new CTabFolder(innerRight, SWT.TOP|SWT.BORDER);
-		testRunItem = new CTabItem(testRunFolder, SWT.BORDER);
+		testRunItem = new CTabItem(testRunFolder, SWT.NONE);
 		testRunItem.setText("Common Test Cases");
 		testRunItem.setImage(BBATImageManager.getInstance().getImage(BBATImageManager.TESTCASE_GIF_16));
-		Composite comp = new Composite(testRunFolder, SWT.BORDER);
+		Composite comp = new Composite(testRunFolder, SWT.NONE);
 		commonTestCaseViewer = new TableViewer(comp, SWT.MULTI | SWT.H_SCROLL| SWT.V_SCROLL);
 		commonTestCaseViewer.setContentProvider(new ArrayContentProvider());
 		commonTestCaseViewer.getTable().setLinesVisible(true);
@@ -210,9 +210,9 @@ public class TestRunnerView extends BBATViewPart {
 	}
 
 	public void createTestDeviceTab(AndroidDevice testDevice, List<TestRunInstanceModel> input){
-		CTabItem testRunItem = new CTabItem(testRunFolder, SWT.BORDER);
+		CTabItem testRunItem = new CTabItem(testRunFolder, SWT.NONE);
 		testRunItem.setText("Test Devices");
-		Composite comp = new Composite(testRunFolder, SWT.BORDER);
+		Composite comp = new Composite(testRunFolder, SWT.NONE);
 		Button button = new Button(comp, SWT.PUSH);
 		button.setText("Hello");
 		button.addSelectionListener(new SelectionAdapter() {
@@ -235,10 +235,10 @@ public class TestRunnerView extends BBATViewPart {
 
 	private void createDeviceRun(SashForm form) {
 		final CTabFolder tabFolder = new CTabFolder(form, SWT.TOP|SWT.BORDER);
-		CTabItem testRunItem = new CTabItem(tabFolder, SWT.BORDER);
+		CTabItem testRunItem = new CTabItem(tabFolder, SWT.NONE);
 		testRunItem.setText("Test Devices");
 		testRunItem.setImage(BBATImageManager.getInstance().getImage(BBATImageManager.ANDROID_DEVICE));
-		Composite comp = new Composite(tabFolder, SWT.BORDER);
+		Composite comp = new Composite(tabFolder, SWT.NONE);
 		testDeviceViewer = new TreeViewer(comp, SWT.H_SCROLL| SWT.V_SCROLL);
 		testDeviceViewer.getTree().setHeaderVisible(true);
 		testDeviceViewer.getTree().setLinesVisible(true);
@@ -343,9 +343,9 @@ public class TestRunnerView extends BBATViewPart {
 			deviceTestRun =null;
 		}
 		deviceTestRun = run;
-		deviceRunItem = new CTabItem(tabFolder, SWT.BORDER);
+		deviceRunItem = new CTabItem(tabFolder, SWT.NONE);
 		deviceRunItem.setText(run.getDevice().getName());
-		Composite comp = new Composite(tabFolder, SWT.BORDER);
+		Composite comp = new Composite(tabFolder, SWT.NONE);
 		deviceTestCaseViewer = new TableViewer(comp, SWT.MULTI | SWT.H_SCROLL| SWT.V_SCROLL);
 		deviceTestCaseViewer.setContentProvider(new ArrayContentProvider());
 		deviceTestCaseViewer.getTable().setLinesVisible(true);

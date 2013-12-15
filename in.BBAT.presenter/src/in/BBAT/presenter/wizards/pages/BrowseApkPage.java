@@ -20,12 +20,15 @@ public class BrowseApkPage extends WizardPage {
 	private Composite container;
 	private Label nameLabel;
 	private Button browseDirButton;
-	private Text exportPathText;
+	private Text apkPathText;
 	private String labelText;
-	protected String selctedProject;
+	protected String selctedApk;
 	
-	protected BrowseApkPage(String pageName) {
+	public  BrowseApkPage(String pageName,String labelText, String description) {
 		super(pageName);
+		setTitle(pageName);
+		setDescription(description);
+		this.labelText = labelText;
 	}
 
 	@Override
@@ -37,9 +40,9 @@ public class BrowseApkPage extends WizardPage {
 
 		nameLabel = new Label(container, SWT.NONE);
 		nameLabel.setText(labelText);
-		exportPathText = new Text(container, SWT.BORDER | SWT.READ_ONLY);
+		apkPathText = new Text(container, SWT.BORDER | SWT.READ_ONLY);
 		GridData gdzipFileText = new GridData(GridData.FILL_HORIZONTAL);
-		exportPathText.setLayoutData(gdzipFileText);
+		apkPathText.setLayoutData(gdzipFileText);
 
 		browseDirButton = new Button(container, SWT.PUSH);
 		GridData gdzipFilePathButton = new GridData(GridData.FILL);
@@ -47,7 +50,7 @@ public class BrowseApkPage extends WizardPage {
 		browseDirButton.setText(" Browse... ");
 		addListnerForBrowseButton();
 		ModifyListener listner = modifyListner();
-		exportPathText.addModifyListener(listner);
+		apkPathText.addModifyListener(listner);
 		setControl(container);
 		setPageComplete(false);
 
@@ -62,7 +65,7 @@ public class BrowseApkPage extends WizardPage {
 				exportDialog.setFilterExtensions(new String[] {"*.apk"});
 				String destinationPath = exportDialog.open();
 				if (destinationPath != null) {
-					exportPathText.setText(destinationPath);
+					apkPathText.setText(destinationPath);
 				}
 			}
 
@@ -77,7 +80,7 @@ public class BrowseApkPage extends WizardPage {
 			@Override
 			public void modifyText(ModifyEvent e) {
 				if (validateText()) {
-					selctedProject = exportPathText.getText();
+					selctedApk = apkPathText.getText();
 					setPageComplete(true);
 				} else {
 					setPageComplete(false);
@@ -89,7 +92,7 @@ public class BrowseApkPage extends WizardPage {
 	}
 
 	public boolean validateText() {
-		if (exportPathText.getText().isEmpty()) {
+		if (apkPathText.getText().isEmpty()) {
 			setErrorMessage("Folder Path is Empty");
 			return false;
 		} 
@@ -100,7 +103,7 @@ public class BrowseApkPage extends WizardPage {
 	}
 
 	public String getPath(){
-		return selctedProject;
+		return selctedApk;
 	}
 
 }

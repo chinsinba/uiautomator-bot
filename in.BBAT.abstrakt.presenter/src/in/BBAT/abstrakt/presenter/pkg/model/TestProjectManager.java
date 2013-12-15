@@ -66,13 +66,13 @@ public class TestProjectManager {
 
 		if(bbatFilePath.isEmpty())
 		{
-			throw new Exception("This is not a project");
+			throw new Exception("This is not a valid project");
 		}
 		JaxbExportImport jaxbImport = new JaxbExportImport();
 		TestProjectEntity projEntity = jaxbImport.imp0rt(bbatFilePath);
 		for(TestProjectModel model : getTestProjects()){
 			if(model.getName().equals(projEntity.getName())){
-				throw new Exception("Project with this name already exists.");
+				throw new Exception("Project with name ["+projEntity.getName()+"] already exists.");
 			}
 		}
 

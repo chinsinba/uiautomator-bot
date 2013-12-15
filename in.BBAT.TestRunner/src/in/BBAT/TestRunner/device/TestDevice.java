@@ -13,6 +13,7 @@ import org.apache.log4j.Logger;
 import com.android.chimpchat.core.IChimpDevice;
 import com.android.ddmlib.AdbCommandRejectedException;
 import com.android.ddmlib.IDevice;
+import com.android.ddmlib.InstallException;
 import com.android.ddmlib.NullOutputReceiver;
 import com.android.ddmlib.RawImage;
 import com.android.ddmlib.ShellCommandUnresponsiveException;
@@ -214,7 +215,7 @@ public class TestDevice implements IAndroidDevice {
 	}
 
 	@Override
-	public void installPackage() {
-//		monkeyDevice.installPackage(arg0, arg1, arg2)
+	public void installPackage(String apkPath) throws Exception {
+		monkeyDevice.installPackage(apkPath, true);
 	}
 }

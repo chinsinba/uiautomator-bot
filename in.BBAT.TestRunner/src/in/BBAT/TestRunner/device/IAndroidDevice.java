@@ -47,7 +47,11 @@ public interface IAndroidDevice {
 	
 	IChimpDevice getChimpDevice();
 
-	void installPackage();
+	/**
+	 * 
+	 * @param apkPath
+	 */
+	void installPackage(String apkPath)throws Exception;
 
 
 }
