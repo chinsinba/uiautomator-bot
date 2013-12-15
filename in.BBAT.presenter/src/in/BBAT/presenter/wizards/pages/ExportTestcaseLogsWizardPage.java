@@ -55,8 +55,10 @@ public class ExportTestcaseLogsWizardPage extends WizardPage {
 		ModifyListener listner = modifyListner();
 		zipFileText.addModifyListener(listner);
 
+		new Label(container, SWT.None);
 		createZipChkboxButton = new Button(container, SWT.CHECK);
-		createZipChkboxButton.setText("Create Zip file");
+		createZipChkboxButton.setText("Zip");
+		createZipChkboxButton.setSelection(true);
 
 		setControl(container);
 		setPageComplete(false);
