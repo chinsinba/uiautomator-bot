@@ -11,6 +11,8 @@ import in.BBAT.data.model.Entities.TestDeviceRunEntity;
 import in.BBAT.data.model.Entities.TestRunInfoEntity;
 import in.BBAT.dataMine.manager.LogsMineManager;
 import in.bbat.abstrakt.gui.BBATImageManager;
+import in.bbat.utility.FileUtils;
+import in.bbat.utility.ZipFiles;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -217,14 +219,26 @@ public class TestRunInstanceModel extends AbstractTreeModel {
 	}
 
 	public void exportLogs(String exportDirectory,boolean zip) throws IOException{
-		File exportDir = new File(exportDirectory+Path.SEPARATOR+"Logs"+Path.SEPARATOR+getTestCaseEntity().getName()+"_"+((TestRunInfoEntity)getEntity()).getId());
+
+		String tempFilePath ="temp"+System.currentTimeMillis();
+		File tempFile = new File(tempFilePath);
+		tempFile.mkdirs();
+
+		File exportDir = new File(tempFile.getAbsolutePath()+Path.SEPARATOR+getTestCaseEntity().getName()+"_"+((TestRunInfoEntity)getEntity()).getId());
 		exportDir.mkdirs();
 		exportDeviceLogs(exportDir.getAbsolutePath());
 		exportUIAutoLogs(exportDir.getAbsolutePath());
 		exportScript(exportDir.getAbsolutePath());
+
+		if(zip)
+			ZipFiles.zipDirectory(tempFile, exportDirectory+Path.SEPARATOR+getTestCaseEntity().getName()+"_"+((TestRunInfoEntity)getEntity()).getId()+".zip");
+		else
+			FileUtils.copyFolder(tempFile, new File(exportDirectory));
+
+		FileUtils.delete(tempFile);
+
 	}
-	
+
 	public void exportScript(String deviceLogPath){
-		
 	}
 }
