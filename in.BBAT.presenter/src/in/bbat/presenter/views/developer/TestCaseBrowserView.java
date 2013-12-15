@@ -1,7 +1,5 @@
 package in.bbat.presenter.views.developer;
 
-import in.BBAT.abstrakt.gui.model.AbstractTreeModel;
-import in.BBAT.abstrakt.gui.model.IGUITreeNode;
 import in.BBAT.abstrakt.presenter.pkg.model.TestCaseModel;
 import in.BBAT.abstrakt.presenter.pkg.model.TestProjectManager;
 import in.BBAT.presenter.DND.listeners.TestCaseDragListener;
@@ -15,16 +13,12 @@ import org.apache.log4j.Logger;
 import org.eclipse.jface.util.LocalSelectionTransfer;
 import org.eclipse.jface.viewers.DoubleClickEvent;
 import org.eclipse.jface.viewers.IDoubleClickListener;
-import org.eclipse.jface.viewers.IElementComparer;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.TreeViewer;
-import org.eclipse.nebula.widgets.pshelf.PShelf;
-import org.eclipse.nebula.widgets.pshelf.PShelfItem;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.dnd.DND;
 import org.eclipse.swt.dnd.Transfer;
-import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.PlatformUI;
 
@@ -34,22 +28,22 @@ public class TestCaseBrowserView extends BBATViewPart {
 
 	private TreeViewer viewer;
 
-	private PShelf testCaseShelf;
+//	private PShelf testCaseShelf;
 
-	private PShelfItem automatorShelfItem;
+//	private PShelfItem automatorShelfItem;
 
-	private PShelfItem monkeyShelfItem;
+//	private PShelfItem monkeyShelfItem;
 
 	/**
 	 * This is a callback that will allow us to create the viewer and initialize
 	 * it.
 	 */
 	public void createPartControl(Composite parent) {
-		testCaseShelf = new PShelf(parent, SWT.NONE);
+		/*testCaseShelf = new PShelf(parent, SWT.NONE);
 		automatorShelfItem = new PShelfItem(testCaseShelf, SWT.NONE);
 		automatorShelfItem.setText("UIAutomator");
-		automatorShelfItem.getBody().setLayout(new FillLayout());	
-		viewer = new TreeViewer(automatorShelfItem.getBody(), SWT.MULTI | SWT.H_SCROLL
+		automatorShelfItem.getBody().setLayout(new FillLayout());*/	
+		viewer = new TreeViewer(parent, SWT.MULTI | SWT.H_SCROLL
 				| SWT.V_SCROLL);
 		viewer.setContentProvider(new TestCaseBrowserContentProvider());
 		viewer.setLabelProvider(new TestCaseLabelProvider());
@@ -101,11 +95,12 @@ public class TestCaseBrowserView extends BBATViewPart {
 		createDragSupport();
 
 
-		{
+		/*{
 			monkeyShelfItem = new PShelfItem(testCaseShelf, SWT.NONE);
 			monkeyShelfItem.setText("MonkeyRunner");
 			monkeyShelfItem.getBody().setLayout(new FillLayout());	
 		}
+		 */
 	}
 
 	/**
