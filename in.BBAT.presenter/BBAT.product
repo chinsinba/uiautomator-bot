@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?pde version="3.5"?>
 
-<product name="BBAT" uid="BBAT" id="in.BBAT.presenter.MACAC" application="in.BBAT.presenter.application" useFeatures="false" includeLaunchers="true">
+<product name="BBAT" id="in.BBAT.presenter.BBAT" application="in.BBAT.presenter.application" version="1.0.0.qualifier" useFeatures="true" includeLaunchers="true">
 
    <configIni use="default">
    </configIni>
@@ -110,6 +110,10 @@
       <plugin id="org.eclipse.ui.workbench.texteditor"/>
       <plugin id="org.eclipse.xtext.logging" fragment="true"/>
    </plugins>
+
+   <features>
+      <feature id="in.BBAT.feature" version="1.0.0.qualifier"/>
+   </features>
 
 
 </product>

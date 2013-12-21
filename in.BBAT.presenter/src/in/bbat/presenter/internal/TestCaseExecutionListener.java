@@ -5,17 +5,25 @@ import in.BBAT.abstrakt.presenter.run.model.TestStatus;
 import in.bbat.logger.BBATLogger;
 import in.bbat.presenter.views.tester.TestRunnerView;
 
+import java.io.File;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
+import org.eclipse.core.runtime.Path;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.graphics.ImageData;
+import org.eclipse.swt.graphics.ImageLoader;
+import org.eclipse.swt.graphics.PaletteData;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.PlatformUI;
 
+import com.android.ddmlib.RawImage;
 import com.android.ddmlib.testrunner.ITestRunListener;
 import com.android.ddmlib.testrunner.TestIdentifier;
 
 public class TestCaseExecutionListener implements ITestRunListener {
-	
+
 	private static final Logger LOG = BBATLogger.getLogger(TestCaseExecutionListener.class.getName());
 	private TestRunInstanceModel runCase;
 	private DeviceTestRun deviceRun;
@@ -29,7 +37,6 @@ public class TestCaseExecutionListener implements ITestRunListener {
 
 	@Override
 	public void testEnded(TestIdentifier arg0, Map<String, String> arg1) {
-		System.out.println("pass");
 	}
 
 	@Override	
@@ -39,6 +46,7 @@ public class TestCaseExecutionListener implements ITestRunListener {
 		if(arg0.ordinal() == ITestRunListener.TestFailure.ERROR.ordinal())
 			status=TestStatus.ERROR;
 
+		processScreenshot(deviceRun.getDevice().getiDevice().getScreenshot(),status);
 	}
 
 	@Override
@@ -46,12 +54,15 @@ public class TestCaseExecutionListener implements ITestRunListener {
 		runCase.setTimeTaken(timeTaken);
 		runCase.setStatus(status.getStatus());
 		runCase.update();
+		processScreenshot(deviceRun.getDevice().getiDevice().getScreenshot(),status);
 		refresh();
+
 	}
 
 	@Override
 	public void testRunFailed(String arg0) {
 		status = TestStatus.ERROR;
+		processScreenshot(deviceRun.getDevice().getiDevice().getScreenshot(),status);
 	}
 
 	@Override
@@ -82,5 +93,17 @@ public class TestCaseExecutionListener implements ITestRunListener {
 
 			}
 		});
+	}
+
+	public void processScreenshot(RawImage rawImage,TestStatus status) {
+
+		PaletteData palette = new PaletteData(rawImage.getRedMask(),rawImage.getGreenMask(),rawImage.getBlueMask());
+		ImageData imageData = new ImageData(rawImage.width, rawImage.height,rawImage.bpp, palette, 1, rawImage.data);
+		ImageLoader loader = new ImageLoader();
+		loader.data = new ImageData[] { imageData };
+		File f = new File(System.getProperty("user.home")+Path.SEPARATOR+"BBAT_Data"+Path.SEPARATOR+"ScreenShots"+Path.SEPARATOR+runCase.getName()+runCase.getId());
+		f.mkdirs();
+		loader.save(f.getAbsolutePath()+Path.SEPARATOR+status.getStatus()+".png", SWT.IMAGE_PNG);
+		Image screenshot = new Image(Display.getDefault(), imageData);
 	}
 }

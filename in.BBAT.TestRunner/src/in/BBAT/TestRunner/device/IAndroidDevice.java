@@ -53,5 +53,7 @@ public interface IAndroidDevice {
 	 */
 	void installPackage(String apkPath)throws Exception;
 
+	void setScreenShotListener(IScreenShotListener listener);
+	IScreenShotListener getScreenShotListener();
 
 }

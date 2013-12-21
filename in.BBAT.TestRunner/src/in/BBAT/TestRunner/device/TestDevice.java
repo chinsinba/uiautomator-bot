@@ -34,14 +34,15 @@ public class TestDevice implements IAndroidDevice {
 	private ILogListener listener;
 	private LogCatReceiverTask logReciever;
 	private IChimpDevice chimpDevice;
+	private IScreenShotListener screenShotListener;
 
-	
+
 
 	public final static String UIAUTOMATOR_JAR_PATH = "/data/local/tmp/BBAT.jar";
 
 	public TestDevice(IDevice device) {
 		this.monkeyDevice = device;
-//		chimpDevice = AdbBridgeManager.getInstance().getAdbBackend().waitForConnection(10000, device.getSerialNumber());
+		//		chimpDevice = AdbBridgeManager.getInstance().getAdbBackend().waitForConnection(10000, device.getSerialNumber());
 	}
 
 	@Override
@@ -143,8 +144,12 @@ public class TestDevice implements IAndroidDevice {
 
 	@Override
 	public void executeTestCase(String testCaseName,IUiAutomatorListener uiAutoListener,ITestRunListener... listener) {
+
+		ScreenShotThread screenShotThread = new ScreenShotThread();
+
 		UIAutomatorRunner runner = new UIAutomatorRunner(testCaseName, monkeyDevice,uiAutoListener);
 		try {
+			screenShotThread.start();
 			runner.run(listener);
 		} catch (TimeoutException e) {
 			LOG.error(e);
@@ -155,8 +160,32 @@ public class TestDevice implements IAndroidDevice {
 		} catch (IOException e) {
 			LOG.error(e);
 		}
+		screenShotThread.stopThread();
+
 	}
 
+	class ScreenShotThread extends Thread
+	{
+		boolean stop = true;
+		public void stopThread(){
+			stop = false;
+		}
+		@Override
+		public void run() {
+			while(stop){
+				try {
+					Thread.sleep(2000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				RawImage image = getScreenshot();
+				if(screenShotListener !=null)
+					screenShotListener.processScreenshot(image);
+
+			}
+		}
+
+	}
 	@Override
 	public String getName() {
 		// TODO Auto-generated method stub
@@ -209,7 +238,7 @@ public class TestDevice implements IAndroidDevice {
 	public void getProperties(){
 		getMonkeyDevice().getProperties();
 	}
-	
+
 	public IChimpDevice getChimpDevice() {
 		return chimpDevice;
 	}
@@ -217,5 +246,13 @@ public class TestDevice implements IAndroidDevice {
 	@Override
 	public void installPackage(String apkPath) throws Exception {
 		monkeyDevice.installPackage(apkPath, true);
+	}
+
+	public IScreenShotListener getScreenShotListener() {
+		return screenShotListener;
+	}
+
+	public void setScreenShotListener(IScreenShotListener screenShotListener) {
+		this.screenShotListener = screenShotListener;
 	}
 }

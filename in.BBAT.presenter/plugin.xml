@@ -539,7 +539,7 @@
          point="org.eclipse.ui.bindings">
    </extension>
    <extension
-         id="MACAC"
+         id="product"
          point="org.eclipse.core.runtime.products">
       <product
             application="in.BBAT.presenter.application"

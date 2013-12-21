@@ -6,16 +6,17 @@ Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: in.bbat.presenter.Activator
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
- in.BBAT.abstrakt.presenter;bundle-version="1.0.0",
- in.BBAT.dataMine;bundle-version="1.0.0",
  in.BBAT.TestRunner;bundle-version="1.0.0",
- org.eclipse.core.resources,
- in.BBAT.monkey.libs;bundle-version="1.0.0",
- org.eclipse.ui.ide,
+ in.BBAT.abstrakt.presenter;bundle-version="1.0.0",
  in.BBAT.configuration;bundle-version="1.0.0",
- org.eclipse.jdt.ui,
- org.eclipse.ui.forms,
- org.apache.log4j
+ in.BBAT.dataMine;bundle-version="1.0.0",
+ in.BBAT.monkey.libs;bundle-version="1.0.0",
+ in.BBAT.reporter;bundle-version="1.0.0",
+ org.apache.log4j;bundle-version="1.2.15",
+ org.eclipse.jdt.ui;bundle-version="3.7.2",
+ org.eclipse.ui.forms;bundle-version="3.5.101",
+ org.eclipse.ui.ide;bundle-version="3.7.0",
+ org.eclipse.core.resources;bundle-version="3.7.101"
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ClassPath: .

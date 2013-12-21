@@ -21,6 +21,8 @@ import org.eclipse.core.runtime.dynamichelpers.IExtensionChangeHandler;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.swt.custom.BusyIndicator;
+import org.eclipse.swt.graphics.Point;
+import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IPerspectiveDescriptor;
 import org.eclipse.ui.IPerspectiveRegistry;
@@ -57,6 +59,8 @@ public class ApplicationWorkbenchWindowAdvisor extends WorkbenchWindowAdvisor {
 		configurer.setTitle("BBAT");
 		configurer.setShowPerspectiveBar(true);
 		configurer.setShowProgressIndicator(true);
+		Rectangle localRectangle = Display.getCurrent().getBounds();
+		configurer.setInitialSize(new Point(localRectangle.width, localRectangle.height));
 		BusyIndicator.showWhile(Display.getCurrent(), new Runnable() {
 
 			@Override
@@ -105,7 +109,7 @@ public class ApplicationWorkbenchWindowAdvisor extends WorkbenchWindowAdvisor {
 	}
 
 	public static String validateAndroidSdkLocation(String osSdkLocation) {
-		
+
 		if (osSdkLocation == null || osSdkLocation.trim().length() == 0) {
 			return "Location of the Android SDK has not been setup in the preferences.";
 		}

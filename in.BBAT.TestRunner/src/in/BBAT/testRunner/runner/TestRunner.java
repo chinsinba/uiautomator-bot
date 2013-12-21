@@ -2,6 +2,7 @@ package in.BBAT.testRunner.runner;
 
 import in.BBAT.TestRunner.device.IAndroidDevice;
 import in.BBAT.TestRunner.device.ILogListener;
+import in.BBAT.TestRunner.device.IScreenShotListener;
 
 import com.android.ddmlib.testrunner.ITestRunListener;
 /**
@@ -29,8 +30,8 @@ public class TestRunner implements ITestRunner{
 	}
 
 	@Override
-	public void execute(String testCaseClassName, ITestRunListener testCaseExecutionListener, ILogListener deviceLogListener,IUiAutomatorListener autoListener) {
-		preRun(deviceLogListener);
+	public void execute(String testCaseClassName, ITestRunListener testCaseExecutionListener, ILogListener deviceLogListener,IUiAutomatorListener autoListener, IScreenShotListener listener) {
+		preRun(deviceLogListener,listener);
 
 		run(testCaseClassName,testCaseExecutionListener,autoListener);
 
@@ -39,6 +40,7 @@ public class TestRunner implements ITestRunner{
 
 	private void postRun() {
 		testDevice.stopLogging();
+		
 	}
 
 	public void execute(String className, String testMethodName) {
@@ -48,10 +50,12 @@ public class TestRunner implements ITestRunner{
 	/**
 	 * Initialises the loggers
 	 * @param deviceLogListener 
+	 * @param listener 
 	 */
-	private void preRun(ILogListener deviceLogListener) {
+	private void preRun(ILogListener deviceLogListener, IScreenShotListener screenShotListener) {
 		testDevice.setLogListener(deviceLogListener);
 		testDevice.startLogging();
+		testDevice.setScreenShotListener(screenShotListener);
 	}
 
 	@Override

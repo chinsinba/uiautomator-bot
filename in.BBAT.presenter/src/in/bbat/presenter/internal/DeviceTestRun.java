@@ -110,7 +110,8 @@ public class DeviceTestRun {
 					testRunCase.setStartTime(System.currentTimeMillis());
 					testRunCase.setStatus(TestStatus.EXECUTING.getStatus());
 					testRunCase.update();
-					runner.execute(testRunCase.getCompleteScriptName(), new TestCaseExecutionListener(testRunCase, DeviceTestRun.this), new DeviceLogListener(testRunCase),new UIAutomatorOutputListener(testRunCase));
+					DeviceLogListener deviceLogListener = new DeviceLogListener(testRunCase);
+					runner.execute(testRunCase.getCompleteScriptName(), new TestCaseExecutionListener(testRunCase, DeviceTestRun.this), deviceLogListener,new UIAutomatorOutputListener(testRunCase),deviceLogListener);
 					testRunCase.setEndTime(System.currentTimeMillis());
 					testRunCase.update();
 				}
