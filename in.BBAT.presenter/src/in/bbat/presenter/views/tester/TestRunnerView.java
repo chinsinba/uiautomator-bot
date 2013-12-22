@@ -22,6 +22,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.eclipse.jface.action.Action;
+import org.eclipse.jface.action.IContributionItem;
 import org.eclipse.jface.action.IMenuListener;
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.MenuManager;
@@ -52,11 +53,13 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TreeColumn;
 import org.eclipse.ui.IViewPart;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.menus.CommandContributionItem;
 
 import com.android.ddmlib.logcat.LogCatMessage;
 
@@ -86,6 +89,12 @@ public class TestRunnerView extends BBATViewPart {
 			deviceRunInfoViewer.refresh();
 		if(deviceTestCaseViewer !=null)
 			deviceTestCaseViewer.refresh();
+		IContributionItem[] items = getViewSite().getActionBars().getToolBarManager().getItems();
+		for(IContributionItem item : items){
+			if(item instanceof CommandContributionItem){
+				item.update();
+			}
+		}
 	}
 
 	@Override
@@ -108,6 +117,7 @@ public class TestRunnerView extends BBATViewPart {
 
 		form.setWeights(new int[]{50,50});
 		createDropSupport();
+
 		getViewSite().setSelectionProvider(commonTestCaseViewer);
 	}
 
@@ -378,7 +388,7 @@ public class TestRunnerView extends BBATViewPart {
 			public void run() {
 				IStructuredSelection sel =(IStructuredSelection) viewer.getSelection();
 				List<?> selectedObjs = sel.toList();
-				
+
 				for(Object obj : selectedObjs){
 					deviceTestRun.removeCase((TestRunCaseModel) obj);	
 				}
@@ -395,13 +405,13 @@ public class TestRunnerView extends BBATViewPart {
 				if(TestRunExecutionManager.getInstance().isExecuting()){
 					return false;
 				}
-				
+
 				IStructuredSelection sel =(IStructuredSelection) viewer.getSelection();
 				List<?> selectedObjs = sel.toList();
 				if(selectedObjs.isEmpty()){
 					return false;
 				}
-				
+
 				return true;
 			}
 		};
@@ -519,6 +529,7 @@ public class TestRunnerView extends BBATViewPart {
 	public void clearRunViewerInput(){
 		deviceRunInfoViewer.setInput(Collections.EMPTY_LIST);
 		deviceRunInfoViewer.refresh();
+
 	}
 
 	public void clearDeviceRunItem(){
@@ -536,5 +547,22 @@ public class TestRunnerView extends BBATViewPart {
 		}
 	}
 
+	public static void refreshView()
+	{
+		Display.getDefault().asyncExec(new Runnable() {
+
+			@Override
+			public void run() {
+				BBATViewPart testRunView = (BBATViewPart) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().findView(TestRunnerView.ID);
+				try {
+					testRunView.refresh();
+				} catch (Exception e) {
+					LOG.error(e);
+				}
+
+
+			}
+		});
+	}
 
 }

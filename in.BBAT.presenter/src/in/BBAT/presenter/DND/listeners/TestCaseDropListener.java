@@ -62,12 +62,7 @@ public class TestCaseDropListener extends ViewerDropAdapter {
 			run.addTestCases(tempList);
 		}
 
-		BBATViewPart testRunView = (BBATViewPart) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().findView(TestRunnerView.ID);
-		try {
-			testRunView.refresh();
-		} catch (Exception e) {
-			LOG.error(e);
-		}
+		TestRunnerView.refreshView();
 		return false;
 	}
 

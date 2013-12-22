@@ -4,6 +4,8 @@ package in.bbat.presenter.internal;
 import in.BBAT.abstrakt.presenter.run.model.TestRunModel;
 import in.BBAT.testRunner.runner.UiAutoTestCaseJar;
 import in.bbat.logger.BBATLogger;
+import in.bbat.presenter.views.BBATViewPart;
+import in.bbat.presenter.views.tester.TestRunnerView;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -11,6 +13,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
+import org.eclipse.ui.PlatformUI;
 
 
 public class TestRunExecutor {
@@ -63,6 +66,7 @@ public class TestRunExecutor {
 				testRun.update();
 				TestRunExecutionManager.getInstance().setExecuting(false);
 			}
+			TestRunnerView.refreshView();
 		}
 
 	}
