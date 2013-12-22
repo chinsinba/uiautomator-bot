@@ -104,6 +104,5 @@ public class TestCaseExecutionListener implements ITestRunListener {
 		File f = new File(System.getProperty("user.home")+Path.SEPARATOR+"BBAT_Data"+Path.SEPARATOR+"ScreenShots"+Path.SEPARATOR+runCase.getName()+runCase.getId());
 		f.mkdirs();
 		loader.save(f.getAbsolutePath()+Path.SEPARATOR+status.getStatus()+".png", SWT.IMAGE_PNG);
-		Image screenshot = new Image(Display.getDefault(), imageData);
 	}
 }

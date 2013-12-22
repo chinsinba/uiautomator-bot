@@ -138,7 +138,7 @@
                closeable="false"
                id="in.BBAT.presenter.developer.testcaseBrowserView"
                minimized="false"
-               ratio="0.30f"
+               ratio="0.20f"
                relationship="left"
                relative="org.eclipse.ui.editorss">
          </view>

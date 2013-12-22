@@ -4,6 +4,7 @@ package in.bbat.configuration;
 import in.bbat.logger.BBATLogger;
 import in.bbat.utility.AndroidSdkUtility;
 import in.bbat.utility.BBATPluginUtility;
+import in.bbat.utility.DefaultValueSetter;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -119,10 +120,25 @@ public class BBATConfigXml {
 	 * @return
 	 *     possible object is
 	 *     {@link String }
+	 * @throws IOException 
+	 * @throws JAXBException 
 	 *     
 	 */
-	public String getAndroid_SdkPath() {
-		return masterConfig_.getAndroid().getSdkPath();
+	public String getAndroid_SdkPath()  {
+		if(masterConfig_.getAndroid().getSdkPath()==null ||masterConfig_.getAndroid().getSdkPath().isEmpty()){
+			try {
+				DefaultValueSetter.initializeSDKPath();
+			} catch (JAXBException e) {
+				return null;
+			} catch (IOException e) {
+				return null;
+			}
+			return masterConfig_.getAndroid().getSdkPath();
+		}
+		if(DefaultValueSetter.isValidSDK(masterConfig_.getAndroid().getSdkPath())){
+			return masterConfig_.getAndroid().getSdkPath();
+		}
+		return null;
 	}
 
 	/**
@@ -137,15 +153,15 @@ public class BBATConfigXml {
 		masterConfig_.getAndroid().setSdkPath(value);
 	}
 
-	
+
 	public String getAndroid_UiAutomatorPath(){
 		return AndroidSdkUtility.getUiautopath();
 	}
-	
+
 	public String getAndroid_AndroidJarPath(){
 		return AndroidSdkUtility.getAndropath();
 	}
-	
+
 	public String getAndroid_AdbPath(){
 		return AndroidSdkUtility.getADBpath();
 	}
@@ -174,247 +190,267 @@ public class BBATConfigXml {
 	}
 
 
-    /**
-     * Gets the value of the ipAddress property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getDatabase_IpAddress() {
-        return masterConfig_.getDatabase().getIpAddress();
-    }
+	/**
+	 * Gets the value of the ipAddress property.
+	 * 
+	 * @return
+	 *     possible object is
+	 *     {@link String }
+	 *     
+	 */
+	public String getDatabase_IpAddress() {
+		return masterConfig_.getDatabase().getIpAddress();
+	}
 
-    /**
-     * Sets the value of the ipAddress property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setDatabase_IpAddress(String value) {
-    	masterConfig_.getDatabase().setIpAddress(value);
-    }
+	/**
+	 * Sets the value of the ipAddress property.
+	 * 
+	 * @param value
+	 *     allowed object is
+	 *     {@link String }
+	 *     
+	 */
+	public void setDatabase_IpAddress(String value) {
+		masterConfig_.getDatabase().setIpAddress(value);
+	}
 
-    /**
-     * Gets the value of the isExternal property.
-     * 
-     */
-    public boolean database_isExternal() {
-        return masterConfig_.getDatabase().isIsExternal();
-    }
+	/**
+	 * Gets the value of the isExternal property.
+	 * 
+	 */
+	public boolean database_isExternal() {
+		return masterConfig_.getDatabase().isIsExternal();
+	}
 
-    /**
-     * Sets the value of the isExternal property.
-     * 
-     */
-    public void setDatabase_IsExternal(boolean value) {
-    	masterConfig_.getDatabase().setIsExternal(value);
-    }
+	/**
+	 * Sets the value of the isExternal property.
+	 * 
+	 */
+	public void setDatabase_IsExternal(boolean value) {
+		masterConfig_.getDatabase().setIsExternal(value);
+	}
 
-    /**
-     * Gets the value of the name property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getDatabase_Name() {
-        return masterConfig_.getDatabase().getName();
-    }
+	/**
+	 * Gets the value of the name property.
+	 * 
+	 * @return
+	 *     possible object is
+	 *     {@link String }
+	 *     
+	 */
+	public String getDatabase_Name() {
+		if( masterConfig_.getDatabase().getName()==null|| masterConfig_.getDatabase().getName().isEmpty()){
+			try {
+				DefaultValueSetter.initializeDataBasePath();
+			} catch (JAXBException e) {
+				return null;
+			} catch (IOException e) {
+				return null;
+			}
+		}
 
-    /**
-     * Sets the value of the name property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setDatabase_Name(String value) {
-    	masterConfig_.getDatabase().setName(value);
-    }
+		return masterConfig_.getDatabase().getName();
+	}
 
-    /**
-     * Gets the value of the pageSize property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link int }
-     *     
-     */
-    public int getDatabase_PageSize() {
-        return masterConfig_.getDatabase().getPageSize();
-    }
+	/**
+	 * Sets the value of the name property.
+	 * 
+	 * @param value
+	 *     allowed object is
+	 *     {@link String }
+	 *     
+	 */
+	public void setDatabase_Name(String value) {
+		masterConfig_.getDatabase().setName(value);
+	}
 
-    /**
-     * Sets the value of the pageSize property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link int }
-     *     
-     */
-    public void setDatabase_PageSize(int value) {
-    	masterConfig_.getDatabase().setPageSize(value);;
-    }
+	/**
+	 * Gets the value of the pageSize property.
+	 * 
+	 * @return
+	 *     possible object is
+	 *     {@link int }
+	 *     
+	 */
+	public int getDatabase_PageSize() {
+		return masterConfig_.getDatabase().getPageSize();
+	}
 
-    /**
-     * Gets the value of the port property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link int }
-     *     
-     */
-    public int getDatabase_Port() {
-        return masterConfig_.getDatabase().getPort();
-    }
+	/**
+	 * Sets the value of the pageSize property.
+	 * 
+	 * @param value
+	 *     allowed object is
+	 *     {@link int }
+	 *     
+	 */
+	public void setDatabase_PageSize(int value) {
+		masterConfig_.getDatabase().setPageSize(value);;
+	}
 
-    /**
-     * Sets the value of the port property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link int }
-     *     
-     */
-    public void setDatabase_Port(int value) {
-    	masterConfig_.getDatabase().setPort(value);
-    }
+	/**
+	 * Gets the value of the port property.
+	 * 
+	 * @return
+	 *     possible object is
+	 *     {@link int }
+	 *     
+	 */
+	public int getDatabase_Port() {
+		return masterConfig_.getDatabase().getPort();
+	}
 
-    /**
-     * Gets the value of the pwd property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getDatabase_Pwd() {
-        return masterConfig_.getDatabase().getPwd();
-    }
+	/**
+	 * Sets the value of the port property.
+	 * 
+	 * @param value
+	 *     allowed object is
+	 *     {@link int }
+	 *     
+	 */
+	public void setDatabase_Port(int value) {
+		masterConfig_.getDatabase().setPort(value);
+	}
 
-    /**
-     * Sets the value of the pwd property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setDatabase_Pwd(String value) {
-    	masterConfig_.getDatabase().setPwd(value);
-    }
+	/**
+	 * Gets the value of the pwd property.
+	 * 
+	 * @return
+	 *     possible object is
+	 *     {@link String }
+	 *     
+	 */
+	public String getDatabase_Pwd() {
+		return masterConfig_.getDatabase().getPwd();
+	}
 
-    /**
-     * Gets the value of the update property.
-     * 
-     */
-    public boolean database_isUpdate() {
-        return masterConfig_.getDatabase().isUpdate();
-    }
+	/**
+	 * Sets the value of the pwd property.
+	 * 
+	 * @param value
+	 *     allowed object is
+	 *     {@link String }
+	 *     
+	 */
+	public void setDatabase_Pwd(String value) {
+		masterConfig_.getDatabase().setPwd(value);
+	}
 
-    /**
-     * Sets the value of the update property.
-     * 
-     */
-    public void setDatabase_Update(boolean value) {
-        masterConfig_.getDatabase().setUpdate(value);
-    }
+	/**
+	 * Gets the value of the update property.
+	 * 
+	 */
+	public boolean database_isUpdate() {
+		return masterConfig_.getDatabase().isUpdate();
+	}
 
-    /**
-     * Gets the value of the userName property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getDatabase_UserName() {
-        return masterConfig_.getDatabase().getUserName();
-    }
+	/**
+	 * Sets the value of the update property.
+	 * 
+	 */
+	public void setDatabase_Update(boolean value) {
+		masterConfig_.getDatabase().setUpdate(value);
+	}
 
-    /**
-     * Sets the value of the userName property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setDatabase_UserName(String value) {
-        masterConfig_.getDatabase().setUserName(value);
-    }
-	
-    
-    public String getLicence_Key() {
-        return masterConfig_.getLicence().getKey();
-    }
+	/**
+	 * Gets the value of the userName property.
+	 * 
+	 * @return
+	 *     possible object is
+	 *     {@link String }
+	 *     
+	 */
+	public String getDatabase_UserName() {
+		return masterConfig_.getDatabase().getUserName();
+	}
 
-    /**
-     * Sets the value of the licence key property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setLicence_Key(String value) {
-       masterConfig_.getLicence().setKey(value);
-    }
+	/**
+	 * Sets the value of the userName property.
+	 * 
+	 * @param value
+	 *     allowed object is
+	 *     {@link String }
+	 *     
+	 */
+	public void setDatabase_UserName(String value) {
+		masterConfig_.getDatabase().setUserName(value);
+	}
 
-    /**
-     * Gets the value of the monKey property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getWkspc_MonKey() {
-        return masterConfig_.getWorkspace().getMonKey();
-    }
 
-    /**
-     * Sets the value of the monKey property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setWkspc_MonKey(String value) {
-       masterConfig_.getWorkspace().setMonKey(value);
-    }
+	public String getLicence_Key() {
+		return masterConfig_.getLicence().getKey();
+	}
 
-    /**
-     * Gets the value of the uiAutomator property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getWkspc_UiAutomator() {
-        return masterConfig_.getWorkspace().getUiAutomator();
-    }
+	/**
+	 * Sets the value of the licence key property.
+	 * 
+	 * @param value
+	 *     allowed object is
+	 *     {@link String }
+	 *     
+	 */
+	public void setLicence_Key(String value) {
+		masterConfig_.getLicence().setKey(value);
+	}
 
-    /**
-     * Sets the value of the uiAutomator property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setWkspc_UiAutomator(String value) {
-        masterConfig_.getWorkspace().setUiAutomator(value);
-    }
-	
+	/**
+	 * Gets the value of the monKey property.
+	 * 
+	 * @return
+	 *     possible object is
+	 *     {@link String }
+	 *     
+	 */
+	public String getWkspc_MonKey() {
+		return masterConfig_.getWorkspace().getMonKey();
+	}
+
+	/**
+	 * Sets the value of the monKey property.
+	 * 
+	 * @param value
+	 *     allowed object is
+	 *     {@link String }
+	 *     
+	 */
+	public void setWkspc_MonKey(String value) {
+		masterConfig_.getWorkspace().setMonKey(value);
+	}
+
+	/**
+	 * Gets the value of the uiAutomator property.
+	 * 
+	 * @return
+	 *     possible object is
+	 *     {@link String }
+	 *     
+	 */
+	public String getWkspc_UiAutomator() {
+		if(masterConfig_.getWorkspace().getUiAutomator()==null||masterConfig_.getWorkspace().getUiAutomator().isEmpty()){
+
+			try {
+				DefaultValueSetter.initializeUIAutoWorkspace();
+			} catch (JAXBException e) {
+				return null;
+			} catch (IOException e) {
+				return null;
+			}
+		}
+		return masterConfig_.getWorkspace().getUiAutomator();
+	}
+
+	/**
+	 * Sets the value of the uiAutomator property.
+	 * 
+	 * @param value
+	 *     allowed object is
+	 *     {@link String }
+	 *     
+	 */
+	public void setWkspc_UiAutomator(String value) {
+		masterConfig_.getWorkspace().setUiAutomator(value);
+	}
+
 	private static String convertToCorrectProgramFilesPath(String pathString) {
 		final String PROGRAM_FILES = "Program Files";
 		String newPath=pathString.replace(PROGRAM_FILES, "progra~1");

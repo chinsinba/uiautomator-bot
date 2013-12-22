@@ -11,10 +11,7 @@ public class AndroidSdkUtility {
 
 	public  final static  String  ANDROID_SDK = BBATConfigXml.getInstance().getAndroid_SdkPath();
 	public  final static  String PLATFORM = "platforms";
-	public  final static  String  UNIX_ADB ="adb";
-	public  final static  String  WINDOWS_ADB ="adb.exe";
 	
-	public  final static  String PLATFORM_TOOLS = "platform-tools";
 	public  final static  String UIAUTOMATOR_JAR ="uiautomator.jar";
 	public  final static  String ANDROID_JAR ="android.jar";
 
@@ -60,7 +57,7 @@ public class AndroidSdkUtility {
 	}
 
 	public static String getADBpath(){
-		return ANDROID_SDK+Path.SEPARATOR+PLATFORM_TOOLS+Path.SEPARATOR+UNIX_ADB;
+		return DefaultValueSetter.getAdbPath();
 	}
 
 }

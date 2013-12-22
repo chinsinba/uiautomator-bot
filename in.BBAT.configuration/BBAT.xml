@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <BbatConfig toolVersion="0.0.1">
-    <Database userName="app" update="false" pwd="app" port="1572" pageSize="200" name="BBAT_DATA" isExternal="true" ipAddress="127.0.0.1"/>
+    <Database userName="app" update="false" pwd="app" port="1572" pageSize="200" name="/home/syed/.bbat/data" isExternal="true" ipAddress="127.0.0.1"/>
     <User name="dghwsdg" email="dkhks@hj.com"/>
     <Licence key="sdfhsgdjsgdkjg09090"/>
     <Android sdkPath="/home/syed/Documents/Android_SDK_21/sdk"/>
-    <Workspace uiAutomator="/home/syed/Documents/UIautomator" monKey="davsdgsj/sagdhs"/>
+    <Workspace uiAutomator="/home/syed/.bbat/UIAutoTestCases" monKey="davsdgsj/sagdhs"/>
 </BbatConfig>

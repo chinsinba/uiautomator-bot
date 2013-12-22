@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Reporter
-Bundle-SymbolicName: in.BBAT.reporter
+Bundle-SymbolicName: in.BBAT.reporter;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: in.bbat.reporter.Activator
 Require-Bundle: org.eclipse.ui,
