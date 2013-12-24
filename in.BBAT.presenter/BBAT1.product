@@ -24,7 +24,7 @@
    </plugins>
 
    <features>
-      <feature id="in.BBAT.feature" version="1.0.0.qualifier"/>
+      <feature id="com.example.mail.app" version="1.0.0.qualifier"/>
    </features>
 
 
