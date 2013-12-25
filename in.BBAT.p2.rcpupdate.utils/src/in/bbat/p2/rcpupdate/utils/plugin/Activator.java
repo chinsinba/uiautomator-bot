@@ -9,7 +9,7 @@ import org.osgi.framework.BundleContext;
 public class Activator extends AbstractUIPlugin {
 
 	// The plug-in ID
-	public static final String PLUGIN_ID = "org.eclipselabs.p2.rcpupdate.utils"; //$NON-NLS-1$
+	public static final String PLUGIN_ID = "in.BBAT.p2.rcpupdate.utils"; //$NON-NLS-1$
 
 	// The shared instance
 	private static Activator plugin;
