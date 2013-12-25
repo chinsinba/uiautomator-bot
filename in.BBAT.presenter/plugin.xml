@@ -372,6 +372,11 @@
                label="Install APK"
                style="push">
          </command>
+         <command
+               commandId="in.BBAT.presenter.device.details"
+               label="Details"
+               style="push">
+         </command>
       </menuContribution>
       <menuContribution
             allPopups="false"
@@ -463,6 +468,10 @@
             id="in.BBAT.presenter.device.installApk"
             name="Install APK">
       </command>
+      <command
+            id="in.BBAT.presenter.device.details"
+            name="Device Details">
+      </command>
    </extension>
    <extension
          point="org.eclipse.ui.handlers">
@@ -533,6 +542,10 @@
       <handler
             class="in.BBAT.presenter.developer.handlers.device.InstallApkHandler"
             commandId="in.BBAT.presenter.device.installApk">
+      </handler>
+      <handler
+            class="in.BBAT.presenter.developer.handlers.device.DeviceDetailsHandler"
+            commandId="in.BBAT.presenter.device.details">
       </handler>
    </extension>
    <extension
