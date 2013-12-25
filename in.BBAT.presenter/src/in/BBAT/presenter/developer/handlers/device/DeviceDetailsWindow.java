@@ -63,7 +63,7 @@ public class DeviceDetailsWindow extends ApplicationWindow {
 
 		getShell().setText("Device Details");
 		getShell().setMaximized(true);
-		parent.setSize(600,600);
+		parent.setSize(600,700);
 	}
 
 	class PropertyLabelProvider  extends LabelProvider implements ITableLabelProvider
