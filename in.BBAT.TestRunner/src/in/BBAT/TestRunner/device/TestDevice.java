@@ -7,6 +7,7 @@ import in.bbat.logger.BBATLogger;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.log4j.Logger;
 
@@ -235,8 +236,8 @@ public class TestDevice implements IAndroidDevice {
 		return getApiLevel() >= UIAUTOMATOR_MIN_API_LEVEL;
 	}
 
-	public void getProperties(){
-		getMonkeyDevice().getProperties();
+	public Map<String, String> getProperties(){
+		return getMonkeyDevice().getProperties();
 	}
 
 	public IChimpDevice getChimpDevice() {

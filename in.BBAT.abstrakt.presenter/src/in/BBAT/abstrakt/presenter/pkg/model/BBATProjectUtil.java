@@ -71,12 +71,6 @@ public class BBATProjectUtil {
 				}
 				//add libs to project class pathproject
 				javaProject.setRawClasspath(entries.toArray(new IClasspathEntry[entries.size()]), null);
-				/*try {
-					FileUtils.copyFolder(project.getFile(".classpath").getRawLocation().toFile(), new File(ITempConstants.USERWKSPC+"/.classpath"));
-					FileUtils.copyFolder(project.getFile(".project").getRawLocation().toFile(), new File(ITempConstants.USERWKSPC+"/.project"));
-				} catch (IOException e) {
-					LOG.error(e);
-				}*/
 			}
 		} catch (CoreException e1) {
 			e1.printStackTrace();
@@ -96,19 +90,7 @@ public class BBATProjectUtil {
 		} catch (Exception e1) {
 			LOG.error(e1);
 		}
-		/*ProjectRecord record = new ProjectRecord(new File(ITempConstants.USERWKSPC+"/.project"));
-
-		try {
-			createExistingProject(record, new NullProgressMonitor());
-		} catch (InvocationTargetException e2) {
-			e2.printStackTrace();
-		}
-
-		try {
-			pro.refreshLocal(IResource.DEPTH_INFINITE,new NullProgressMonitor());
-		} catch (CoreException e) {
-			LOG.error(e);
-		}*/
+		
 		setProject(pro);
 	}
 
@@ -228,147 +210,4 @@ public class BBATProjectUtil {
 		}
 	}
 	
-	/*private boolean createExistingProject(final ProjectRecord record,IProgressMonitor monitor) throws InvocationTargetException {
-		String projectName = record.getProjectName();
-		final IWorkspace workspace = ResourcesPlugin.getWorkspace();
-		project = workspace.getRoot().getProject(projectName);
-		if (record.description == null) {
-			// error case
-			record.description = workspace.newProjectDescription(projectName);
-			IPath locationPath = new Path(record.projectSystemFile
-					.getAbsolutePath());
-
-			// If it is under the root use the default location
-			if (Platform.getLocation().isPrefixOf(locationPath)) {
-				record.description.setLocation(null);
-			} else {
-				record.description.setLocation(locationPath);
-			}
-		} else {
-			record.description.setName(projectName);
-		}
-
-		if(!project.isOpen()){
-			try {
-				if(!project.exists()){
-					project.create(record.description, new NullProgressMonitor());
-				}
-				project.open(IResource.BACKGROUND_REFRESH, new NullProgressMonitor());
-			} catch (CoreException e1) {
-				e1.printStackTrace();
-			}
-		}	
-		setProject(project);
-
-		return true;
-	}
-
-	
-
-	
-	/**
-	 * Class declared public only for test suite.
-	 * 
-	 *//*
-	public class ProjectRecord {
-		File projectSystemFile;
-
-		Object projectArchiveFile;
-
-		String projectName;
-
-		Object parent;
-
-		int level;
-
-		boolean hasConflicts;
-
-		IProjectDescription description;
-
-		*//**
-		 * Create a record for a project based on the info in the file.
-		 * 
-		 * @param file
-		 *//*
-		ProjectRecord(File file) {
-			projectSystemFile = file;
-			setProjectName();
-		}
-
-		*//**
-		 * @param file
-		 * 		The Object representing the .project file
-		 * @param parent
-		 * 		The parent folder of the .project file
-		 * @param level
-		 * 		The number of levels deep in the provider the file is
-		 *//*
-		ProjectRecord(Object file, Object parent, int level) {
-			this.projectArchiveFile = file;
-			this.parent = parent;
-			this.level = level;
-			setProjectName();
-		}
-
-		*//**
-		 * Set the name of the project based on the projectFile.
-		 *//*
-		private void setProjectName() {
-			try {
-
-				// If we don't have the project name try again
-				if (projectName == null) {
-					IPath path = new Path(projectSystemFile.getPath());
-					// if the file is in the default location, use the directory
-					// name as the project name
-					if (isDefaultLocation(path)) {
-						projectName = path.segment(path.segmentCount() - 2);
-						description = IDEWorkbenchPlugin.getPluginWorkspace()
-								.newProjectDescription(projectName);
-					} else {
-						description = IDEWorkbenchPlugin.getPluginWorkspace()
-								.loadProjectDescription(path);
-						projectName = description.getName();
-					}
-
-				}
-			} catch (CoreException e) {
-				// no good couldn't get the name
-			}
-		}
-
-		*//**
-		 * Returns whether the given project description file path is in the
-		 * default location for a project
-		 * 
-		 * @param path
-		 * 		The path to examine
-		 * @return Whether the given path is the default location for a project
-		 *//*
-		private boolean isDefaultLocation(IPath path) {
-			// The project description file must at least be within the project,
-			// which is within the workspace location
-			if (path.segmentCount() < 2)
-				return false;
-			return path.removeLastSegments(2).toFile().equals(
-					Platform.getLocation().toFile());
-		}
-
-		*//**
-		 * Get the name of the project
-		 * 
-		 * @return String
-		 *//*
-		public String getProjectName() {
-			return projectName;
-		}
-
-
-		*//**
-		 * @return Returns the hasConflicts.
-		 *//*
-		public boolean hasConflicts() {
-			return hasConflicts;
-		}
-	}*/
 }

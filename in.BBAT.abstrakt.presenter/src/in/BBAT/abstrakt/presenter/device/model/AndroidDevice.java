@@ -7,6 +7,7 @@ import in.BBAT.dataMine.manager.DeviceMineManager;
 import in.bbat.abstrakt.gui.BBATImageManager;
 
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.swt.graphics.Image;
 
@@ -104,5 +105,9 @@ public class AndroidDevice implements IGUITreeNode{
 
 	public void installApk(String apkPath) throws Exception {
 		iDevice.installPackage(apkPath);		
+	}
+
+	public Map<String, String> getProperties() {
+		return iDevice.getProperties();
 	}
 }

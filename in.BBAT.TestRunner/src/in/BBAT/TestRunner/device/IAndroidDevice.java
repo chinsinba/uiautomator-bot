@@ -1,5 +1,7 @@
 package in.BBAT.TestRunner.device;
 
+import java.util.Map;
+
 import in.BBAT.testRunner.runner.IUiAutomatorListener;
 import in.BBAT.testRunner.runner.UiAutoTestCaseJar;
 
@@ -43,7 +45,7 @@ public interface IAndroidDevice {
 	
 	boolean isUIAutomatorSupported();
 
-	void getProperties();
+	Map<String, String> getProperties();
 	
 	IChimpDevice getChimpDevice();
 
