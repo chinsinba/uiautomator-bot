@@ -1,13 +1,13 @@
 package in.bbat.presenter;
 
 import in.bbat.logger.BBATLogger;
+import in.bbat.p2.rcpupdate.utils.P2Util;
 import in.bbat.presenter.perstpectives.DeveloperPerspective;
 
 import org.apache.log4j.Logger;
 import org.eclipse.ui.application.IWorkbenchWindowConfigurer;
 import org.eclipse.ui.application.WorkbenchAdvisor;
 import org.eclipse.ui.application.WorkbenchWindowAdvisor;
-import org.eclipselabs.p2.rcpupdate.utils.P2Util;
 
 public class ApplicationWorkbenchAdvisor extends WorkbenchAdvisor {
 
