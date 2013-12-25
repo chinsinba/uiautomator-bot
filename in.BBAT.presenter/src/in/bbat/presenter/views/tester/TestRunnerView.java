@@ -10,6 +10,7 @@ import in.BBAT.presenter.DND.listeners.TestRunDropListener;
 import in.BBAT.presenter.labelProviders.DeviceTestRunLableProvider;
 import in.BBAT.presenter.labelProviders.TestRunInfoLabelProvider;
 import in.BBAT.presenter.labelProviders.TestRunnerLableProvider;
+import in.BBAT.presenter.wizards.ExportLogsWizard;
 import in.bbat.abstrakt.gui.BBATImageManager;
 import in.bbat.logger.BBATLogger;
 import in.bbat.presenter.internal.DeviceTestRun;
@@ -41,6 +42,7 @@ import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.Viewer;
+import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CTabFolder;
 import org.eclipse.swt.custom.CTabItem;
@@ -71,7 +73,7 @@ public class TestRunnerView extends BBATViewPart {
 	private TreeViewer testDeviceViewer;
 	public static CTabFolder testRunFolder;
 	private CTabItem testRunItem;
-	private TableViewer deviceRunInfoViewer;
+	private TableViewer executionViewer;
 	private CTabItem deviceRunItem;
 	private TableViewer deviceTestCaseViewer;
 	private DeviceTestRun deviceTestRun;
@@ -85,8 +87,8 @@ public class TestRunnerView extends BBATViewPart {
 		commonTestCaseViewer.refresh();
 		if(testDeviceViewer!=null)
 			testDeviceViewer.refresh();
-		if(deviceRunInfoViewer!=null)
-			deviceRunInfoViewer.refresh();
+		if(executionViewer!=null)
+			executionViewer.refresh();
 		if(deviceTestCaseViewer !=null)
 			deviceTestCaseViewer.refresh();
 		IContributionItem[] items = getViewSite().getActionBars().getToolBarManager().getItems();
@@ -128,11 +130,11 @@ public class TestRunnerView extends BBATViewPart {
 		executionViewItem.setText("Execution View");
 		Composite comp = new Composite(testRunFolder, SWT.NONE);
 
-		deviceRunInfoViewer = new TableViewer(comp, SWT.MULTI | SWT.H_SCROLL| SWT.V_SCROLL);
-		deviceRunInfoViewer.setContentProvider(new ArrayContentProvider());
-		deviceRunInfoViewer.getTable().setLinesVisible(true);
-		deviceRunInfoViewer.getTable().setHeaderVisible(true);
-		deviceRunInfoViewer.addDoubleClickListener(new IDoubleClickListener() {
+		executionViewer = new TableViewer(comp, SWT.MULTI | SWT.H_SCROLL| SWT.V_SCROLL);
+		executionViewer.setContentProvider(new ArrayContentProvider());
+		executionViewer.getTable().setLinesVisible(true);
+		executionViewer.getTable().setHeaderVisible(true);
+		executionViewer.addDoubleClickListener(new IDoubleClickListener() {
 
 			@Override
 			public void doubleClick(DoubleClickEvent event) {
@@ -165,11 +167,58 @@ public class TestRunnerView extends BBATViewPart {
 			}
 		});
 
-		createRunColumns(comp, deviceRunInfoViewer);
-		deviceRunInfoViewer.setLabelProvider(new TestRunInfoLabelProvider());
+		createRunColumns(comp, executionViewer);
+		executionViewer.setLabelProvider(new TestRunInfoLabelProvider());
 		executionViewItem.setImage(BBATImageManager.getInstance().getImage(BBATImageManager.EXECUTING));
 		executionViewItem.setControl(comp);
+		createExecutionViewActions(executionViewer);
 		testRunFolder.setSelection(executionViewItem);
+
+	}
+
+	private void createExecutionViewActions(final TableViewer viewer) {
+		final Action removeAction = new Action("Export Logs") {
+			@Override
+			public void run() {
+
+				IStructuredSelection sel =(IStructuredSelection) viewer.getSelection();
+				List<?> selectedObjs = sel.toList();
+				WizardDialog dialog = new WizardDialog(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(), new ExportLogsWizard((List<TestRunInstanceModel>) selectedObjs));
+				dialog.open();
+				try {
+					refresh();
+				} catch (Exception e) {
+					LOG.error(e);
+				}
+			}
+
+			@Override
+			public boolean isEnabled() {
+
+
+				IStructuredSelection sel =(IStructuredSelection) viewer.getSelection();
+				List<?> selectedObjs = sel.toList();
+
+				if(selectedObjs.isEmpty()){
+					return false;
+				}
+
+				return true;
+			}
+
+
+		};
+		final MenuManager menuManager = new MenuManager();
+		menuManager.setRemoveAllWhenShown(true);
+		menuManager.addMenuListener(new IMenuListener() {
+
+			@Override
+			public void menuAboutToShow(IMenuManager manager) {
+				removeAction.setEnabled(removeAction.isEnabled());
+				manager.add(removeAction);
+			}
+		});
+		viewer.getControl().setMenu(menuManager.createContextMenu(viewer.getControl()));
 
 	}
 
@@ -522,13 +571,13 @@ public class TestRunnerView extends BBATViewPart {
 
 	public void setRunViewerInput(DeviceTestRun execRun){
 		executionViewItem.setText(execRun.getDevice().getName());
-		deviceRunInfoViewer.setInput(execRun.getRunInstances());
-		deviceRunInfoViewer.refresh();
+		executionViewer.setInput(execRun.getRunInstances());
+		executionViewer.refresh();
 	}
 
 	public void clearRunViewerInput(){
-		deviceRunInfoViewer.setInput(Collections.EMPTY_LIST);
-		deviceRunInfoViewer.refresh();
+		executionViewer.setInput(Collections.EMPTY_LIST);
+		executionViewer.refresh();
 
 	}
 
