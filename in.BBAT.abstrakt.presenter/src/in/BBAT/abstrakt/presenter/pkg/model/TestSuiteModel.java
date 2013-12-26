@@ -62,7 +62,7 @@ public class TestSuiteModel extends AbstractProjectTree{
 
 	@Override
 	public void linkToProject() {
-		BBATProjectUtil.getInstance().linkSuite(getResourcePath());
+		getProject().linkSuite(getResourcePath());
 	}
 
 	public static TestSuiteModel create(TestProjectModel parent, String name, String description) throws Exception{
@@ -70,5 +70,10 @@ public class TestSuiteModel extends AbstractProjectTree{
 		newTestSuite.setDescription(description);
 		newTestSuite.save();
 		return newTestSuite;
+	}
+
+	@Override
+	public BBATProject getProject() {
+		return ((TestProjectModel)getParent()).getProject();
 	}
 }

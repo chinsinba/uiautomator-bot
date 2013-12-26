@@ -97,4 +97,6 @@ public abstract class AbstractProjectTree extends AbstractTreeModel implements I
 	public void setResourcePath(String resourcePath) {
 		this.resourcePath = resourcePath;
 	}
+	
+	public abstract BBATProject getProject();
 }

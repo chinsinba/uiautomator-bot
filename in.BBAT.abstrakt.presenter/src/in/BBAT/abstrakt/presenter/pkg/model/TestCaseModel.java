@@ -88,12 +88,12 @@ public class TestCaseModel extends AbstractProjectTree{
 
 	@Override
 	public void linkToProject() {
-		testCaseFile = BBATProjectUtil.getInstance().linkScript(getTestScriptPath());
+		testCaseFile = getProject().linkScript(getTestScriptPath());
 	}
 
 	@Override
 	public void deLinkFromProject() {
-		BBATProjectUtil.getInstance().deleteLink(getIFile());
+		getProject().deleteLink(getIFile());
 	}
 
 	public IFile getIFile(){
@@ -157,5 +157,10 @@ public class TestCaseModel extends AbstractProjectTree{
 		newTestCase.setDescription(description);
 		newTestCase.save();
 		return newTestCase;
+	}
+	
+	@Override
+	public BBATProject getProject() {
+		return ((TestSuiteModel)getParent()).getProject();
 	}
 }

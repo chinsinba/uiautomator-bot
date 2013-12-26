@@ -26,27 +26,27 @@ import org.eclipse.jdt.launching.IVMInstall;
 import org.eclipse.jdt.launching.JavaRuntime;
 import org.eclipse.jdt.launching.LibraryLocation;
 
-public class BBATProjectUtil {
+public class BBATProject {
 
-	private static BBATProjectUtil instance;
+	private static BBATProject instance;
 
 	private IProject project;
-	private static final Logger LOG = BBATLogger.getLogger(BBATProjectUtil.class.getName());
-	private final static String UIAUTO_PROJECT_NAME = "Macac";
-	private BBATProjectUtil(){
-		initializeBBATProject();
+	private static final Logger LOG = BBATLogger.getLogger(BBATProject.class.getName());
+
+	public BBATProject(String projName){
+		initializeBBATProject(projName);
 	}
 
-	public static BBATProjectUtil getInstance(){
+	/*public static BBATProjectUtil getInstance(){
 		if(instance==null)
 			instance = new BBATProjectUtil();
 		return instance;
-	}
+	}*/
 
-	private IProject project()  throws Exception{
+	private IProject project(String projName)  throws Exception{
 
 		IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
-		IProject project = root.getProject(UIAUTO_PROJECT_NAME);
+		 project = root.getProject(projName);
 		try {
 			if(!project.exists()){
 				project.create(null);
@@ -81,17 +81,16 @@ public class BBATProjectUtil {
 	}
 
 
-	private void initializeBBATProject() {
+	private void initializeBBATProject(String projName) {
 
 		IProject pro =null;
 		try {
-			pro = 	project();
+			pro = 	project(projName);
 			pro.refreshLocal(IResource.DEPTH_INFINITE,new NullProgressMonitor());
 		} catch (Exception e1) {
 			LOG.error(e1);
 		}
-		
-		setProject(pro);
+
 	}
 
 	/**
@@ -105,7 +104,7 @@ public class BBATProjectUtil {
 		int len =seg.length;
 
 
-		IFile scriptIfile = getProject().getFile(Path.SEPARATOR+seg[len-3]+Path.SEPARATOR+seg[len-2]+Path.SEPARATOR+seg[len-1]);
+		IFile scriptIfile = project.getFile(Path.SEPARATOR+seg[len-3]+Path.SEPARATOR+seg[len-2]+Path.SEPARATOR+seg[len-1]);
 		try {
 			if(!scriptIfile.isLinked())
 				scriptIfile.createLink(locationPath, IResource.NONE, null);
@@ -113,7 +112,7 @@ public class BBATProjectUtil {
 			return scriptIfile;
 		}
 		try {
-			getProject().refreshLocal(IResource.DEPTH_INFINITE,new NullProgressMonitor());
+			project.refreshLocal(IResource.DEPTH_INFINITE,new NullProgressMonitor());
 		} catch (CoreException e) {
 			LOG.error(e);
 		}
@@ -126,7 +125,7 @@ public class BBATProjectUtil {
 		IFolder packFolder = null;
 		String[] seg = locationPath.segments();
 		int len =seg.length;
-		packFolder = getProject().getFolder(Path.SEPARATOR+seg[len-2]+Path.SEPARATOR+seg[len-1]);	
+		packFolder = project.getFolder(Path.SEPARATOR+seg[len-2]+Path.SEPARATOR+seg[len-1]);	
 		if(!packFolder.isLinked()){
 			try {
 				packFolder.createLink(locationPath, IResource.DEPTH_INFINITE, null);
@@ -135,7 +134,7 @@ public class BBATProjectUtil {
 			}
 		}
 		try {
-			getProject().refreshLocal(IResource.DEPTH_INFINITE,new NullProgressMonitor());
+			project.refreshLocal(IResource.DEPTH_INFINITE,new NullProgressMonitor());
 		} catch (CoreException e) {
 			LOG.error(e);
 		}
@@ -149,7 +148,7 @@ public class BBATProjectUtil {
 		IFolder packFolder = null;
 		String[] seg = locationPath.segments();
 		int len =seg.length;
-		packFolder = getProject().getFolder(Path.SEPARATOR+seg[len-1]);	
+		packFolder = project.getFolder(Path.SEPARATOR+seg[len-1]);	
 		if(!packFolder.isLinked()){
 			try {
 				packFolder.createLink(locationPath, IResource.DEPTH_INFINITE, null);
@@ -157,9 +156,9 @@ public class BBATProjectUtil {
 				LOG.error(e);
 			}
 		}
-		
+
 		try {
-			getProject().refreshLocal(IResource.DEPTH_INFINITE,new NullProgressMonitor());
+			project.refreshLocal(IResource.DEPTH_INFINITE,new NullProgressMonitor());
 		} catch (CoreException e) {
 			LOG.error(e);
 		}
@@ -189,18 +188,16 @@ public class BBATProjectUtil {
 	}
 
 
-	public IProject getProject() {
+	/*public IProject getProject() {
 		return project;
 	}
 
 	public void setProject(IProject project) {
 		this.project = project;
-	}
+	}*/
 
-	
+
 	public void deleteProject(){
-		IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
-		IProject project = root.getProject(UIAUTO_PROJECT_NAME);
 		try {
 			if(project.exists()){
 				project.delete(true, new NullProgressMonitor());
@@ -209,5 +206,10 @@ public class BBATProjectUtil {
 			LOG.error(e);
 		}
 	}
-	
+
+	public void delete() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

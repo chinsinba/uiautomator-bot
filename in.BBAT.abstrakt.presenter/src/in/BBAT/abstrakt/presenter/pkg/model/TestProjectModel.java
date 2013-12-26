@@ -22,6 +22,8 @@ import org.eclipse.swt.graphics.Image;
 public class TestProjectModel extends AbstractProjectTree {
 
 	private IFolder folder ;
+	private BBATProject project;
+
 	protected TestProjectModel(TestProjectEntity entity) throws Exception {
 		super(null,entity, entity.getName(),false);
 	}
@@ -74,12 +76,14 @@ public class TestProjectModel extends AbstractProjectTree {
 
 	@Override
 	public void linkToProject() {
-		folder =BBATProjectUtil.getInstance().linkPackage(getResourcePath());
+
+		project = new BBATProject(getName());
+		project.linkPackage(getResourcePath());
 	}
 
 	@Override
 	public void deLinkFromProject() {
-		BBATProjectUtil.getInstance().deletePack(folder);
+		project.deleteProject();
 	}
 
 	public static TestProjectModel create(String name, String description,int apiLevel) throws Exception{
@@ -119,5 +123,10 @@ public class TestProjectModel extends AbstractProjectTree {
 		//delete temporary file
 		FileUtils.delete(tempFile);
 
+	}
+
+	@Override
+	public BBATProject getProject() {
+		return project;		
 	}
 }

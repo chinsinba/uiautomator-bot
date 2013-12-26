@@ -1,7 +1,7 @@
 package in.bbat.presenter;
 
 
-import in.BBAT.abstrakt.presenter.pkg.model.BBATProjectUtil;
+import in.BBAT.abstrakt.presenter.pkg.model.BBATProject;
 import in.bbat.configuration.BBATConfigXml;
 import in.bbat.logger.BBATLogger;
 import in.bbat.utility.FileUtils;
@@ -247,7 +247,7 @@ public class SettingsWindow extends ApplicationWindow  {
 				}	
 			}
 		});
-		BBATProjectUtil.getInstance().deleteProject();
+//		BBATProject.getInstance().deleteProject();
 		BBATConfigXml.getInstance().setWkspc_UiAutomator(newWkspcPath);
 	}
 
