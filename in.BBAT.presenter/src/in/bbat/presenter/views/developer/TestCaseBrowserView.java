@@ -8,6 +8,7 @@ import in.BBAT.presenter.labelProviders.TestCaseLabelProvider;
 import in.bbat.logger.BBATLogger;
 import in.bbat.presenter.perstpectives.DeveloperPerspective;
 import in.bbat.presenter.views.BBATViewPart;
+import in.bbat.presenter.views.tester.TestRunnerView;
 
 import org.apache.log4j.Logger;
 import org.eclipse.jface.util.LocalSelectionTransfer;
@@ -20,6 +21,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.dnd.DND;
 import org.eclipse.swt.dnd.Transfer;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.PlatformUI;
 
 public class TestCaseBrowserView extends BBATViewPart {
@@ -128,4 +130,22 @@ public class TestCaseBrowserView extends BBATViewPart {
 		viewer.addDragSupport(operations, transferTypes, new TestCaseDragListener(viewer));
 	}
 
+	
+	public static void refreshView()
+	{
+		Display.getDefault().asyncExec(new Runnable() {
+
+			@Override
+			public void run() {
+				BBATViewPart view = (BBATViewPart) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().findView(ID);
+				try {
+					view.refresh();
+				} catch (Exception e) {
+					LOG.error(e);
+				}
+
+
+			}
+		});
+	}
 }

@@ -602,7 +602,7 @@ public class TestRunnerView extends BBATViewPart {
 
 			@Override
 			public void run() {
-				BBATViewPart testRunView = (BBATViewPart) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().findView(TestRunnerView.ID);
+				BBATViewPart testRunView = (BBATViewPart) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().findView(ID);
 				try {
 					testRunView.refresh();
 				} catch (Exception e) {

@@ -3,12 +3,10 @@ package in.BBAT.presenter.wizards;
 import in.BBAT.abstrakt.presenter.pkg.model.TestProjectModel;
 import in.BBAT.presenter.wizards.pages.CreateTestProjectPage;
 import in.bbat.logger.BBATLogger;
-import in.bbat.presenter.views.BBATViewPart;
 import in.bbat.presenter.views.developer.TestCaseBrowserView;
 
 import org.apache.log4j.Logger;
 import org.eclipse.jface.wizard.Wizard;
-import org.eclipse.ui.PlatformUI;
 
 public class CreateTestProjectWizard extends Wizard {
 
@@ -20,16 +18,11 @@ public class CreateTestProjectWizard extends Wizard {
 		LOG.info("Creating test Project : " + projCreationPage.getName());
 		TestProjectModel newTestProject = null;
 		try {
-			newTestProject = TestProjectModel.create(projCreationPage.getName(), projCreationPage.getDescription()); 
+			newTestProject = TestProjectModel.create(projCreationPage.getProjName(), projCreationPage.getDeskription(), Integer.parseInt(projCreationPage.getApiLevel())); 
 		} catch (Exception e) {
 			LOG.error(e);
 		}
-		BBATViewPart view = (BBATViewPart) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().findView(TestCaseBrowserView.ID);
-		try {
-			view.refresh();
-		} catch (Exception e) {
-			LOG.error(e);
-		}
+		TestCaseBrowserView.refreshView();
 		return true;
 	}
 	

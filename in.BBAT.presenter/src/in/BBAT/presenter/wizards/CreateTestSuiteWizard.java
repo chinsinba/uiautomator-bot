@@ -19,23 +19,18 @@ public class CreateTestSuiteWizard extends Wizard {
 	private TestProjectModel parent;
 
 	private static final Logger LOG = BBATLogger.getLogger(CreateTestSuiteWizard.class.getName());
-	
+
 	public CreateTestSuiteWizard(TestProjectModel testProjectModel) {
 		this.parent = testProjectModel;
 	}
 
 	@Override
 	public boolean performFinish() {
-		
+
 		LOG.info("Create test suite: " +suiteCreationPage.getName());
 		try {
-			TestSuiteModel newTestSuite = TestSuiteModel.create(parent, suiteCreationPage.getName(), suiteCreationPage.getDescription());
-			BBATViewPart view = (BBATViewPart) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().findView(TestCaseBrowserView.ID);
-			try {
-				view.refresh();
-			} catch (Exception e) {
-				LOG.error(e);
-			}
+			TestSuiteModel.create(parent, suiteCreationPage.getSuiteName(), suiteCreationPage.getDeskription());
+			TestCaseBrowserView.refreshView();
 		} catch (Exception e) {
 			LOG.error(e);
 		}

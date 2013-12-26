@@ -82,11 +82,20 @@ public class TestProjectModel extends AbstractProjectTree {
 		BBATProjectUtil.getInstance().deletePack(folder);
 	}
 
-	public static TestProjectModel create(String name, String description) throws Exception{
+	public static TestProjectModel create(String name, String description,int apiLevel) throws Exception{
 		TestProjectModel model = new TestProjectModel(name);
 		model.setDescription(description);
+		model.setApiLevel(apiLevel);
 		model.save();
 		return model;
+	}
+
+	public void setApiLevel(int apiLevel) {
+		((TestProjectEntity)getEntity()).setApiLevel(apiLevel);		
+	}
+
+	public int getApiLevel(){
+		return ((TestProjectEntity)getEntity()).getApiLevel();		
 	}
 
 	public void export(String dirPath) throws Exception{

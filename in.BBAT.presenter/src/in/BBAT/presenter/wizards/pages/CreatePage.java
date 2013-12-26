@@ -100,7 +100,7 @@ public abstract class CreatePage extends WizardPage{
 					}
 				}
 			} catch (Exception e) {
-				e.printStackTrace();
+				LOG.error(e);
 			}
 		}
 		return false;

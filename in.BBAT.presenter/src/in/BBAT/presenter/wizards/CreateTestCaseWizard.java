@@ -34,13 +34,8 @@ public class CreateTestCaseWizard extends Wizard {
 	public boolean performFinish() {
 		LOG.info("Creating test case : "+caseCreationPage.getName());
 		try {
-			TestCaseModel newTestCase = TestCaseModel.create(parent, caseCreationPage.getName(),caseCreationPage.getDescription()); 
-			BBATViewPart view = (BBATViewPart) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().findView(TestCaseBrowserView.ID);
-			try {
-				view.refresh();
-			} catch (Exception e) {
-				LOG.error(e);
-			}
+			TestCaseModel newTestCase = TestCaseModel.create(parent, caseCreationPage.getCaseName(),caseCreationPage.getDeskription()); 
+			TestCaseBrowserView.refreshView();
 
 			try
 			{

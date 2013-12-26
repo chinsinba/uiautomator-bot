@@ -2,6 +2,7 @@ package in.BBAT.presenter.tester.handlers;
 
 import in.bbat.logger.BBATLogger;
 import in.bbat.presenter.internal.TestRunExecutionManager;
+import in.bbat.presenter.views.tester.TestRunnerView;
 
 import java.util.List;
 
@@ -20,6 +21,7 @@ public class StopTestRunHandler extends AbstractTestRunnerHandler {
 	public Object run(ExecutionEvent event) {
 		LOG.info("Stop test run execution");
 		TestRunExecutionManager.getInstance().stopRun();
+		TestRunnerView.refreshView();
 		return null;
 	}
 
