@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<persistence version="2.0"
-	xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" version="1.0">
 	<persistence-unit name="BBATDATA" transaction-type="RESOURCE_LOCAL">
+		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
 		<class>in.BBAT.data.model.Entities.TestCaseEntity</class>
 		<class>in.BBAT.data.model.Entities.TestRunInfoEntity</class>
 		<class>in.BBAT.data.model.Entities.TestSuiteEntity</class>
@@ -15,16 +14,13 @@
 		<class>in.BBAT.data.model.Entities.TestDeviceLogEntity</class>
 		<class>in.BBAT.data.model.Entities.AutomatorLogEntity</class>
 		<properties>
-			<!--<property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.EmbeddedDriver" 
-				/> -->
-			<!--<property name="javax.persistence.jdbc.url" value="jdbc:derby:/home/nirav/temp/testdata01;create=true" 
-				/> -->
-			<!--<property name="javax.persistence.jdbc.user" value="app" /> -->
-			<!--<property name="javax.persistence.jdbc.password" value="app" /> -->
-			<!--<property name="eclipselink.ddl-generation.output-mode" value="database"></property> -->
-			<!-- <property name="eclipselink.target-database" value="DERBY" /> -->
-
-			<!-- Logging -->
+			<property name="eclipselink.target-database" value="DERBY" />
+			<property name="eclipselink.ddl-generation" value="create-tables" />
+			<property name="eclipselink.jdbc.driver" value="org.apache.derby.jdbc.ClientDriver" />
+			<!-- property name="eclipselink.jdbc.url" value="jdbc:derby://localhost:1527//home/syed/.bbat/xyzvsvsg;create=true" /-->
+			<property name="eclipselink.jdbc.user" value="APP" />
+			<property name="eclipselink.jdbc.password" value="APP" />
+			<property name="eclipselink.ddl-generation.output-mode"	value="database" />
 			<property name="eclipselink.logging.level" value="FINE" />
 			<property name="eclipselink.logging.timestamp" value="false" />
 			<property name="eclipselink.logging.session" value="false" />

@@ -32,8 +32,14 @@ public class MineManager {
 	}
 
 	public  void createDb(String dbName,String ipAddress, int port, String userName, String password) throws Exception {
+		if(isDBPresent())
+			return;
 		String DB_ADDRESS =ipAddress+":"+port;
-		MineManagerHelper.init(UNIT_NAME, true, true, DB_ADDRESS + Path.SEPARATOR + dbName,userName,password);
+		MineManagerHelper.init(UNIT_NAME, false, true, DB_ADDRESS + Path.SEPARATOR + dbName,userName,password);
+	}
+
+	private boolean isDBPresent() {
+		return false;
 	}
 
 	public  void connectDB(String dbName) throws Exception {

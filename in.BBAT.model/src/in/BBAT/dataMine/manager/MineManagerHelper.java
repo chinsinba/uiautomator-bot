@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 import org.eclipse.persistence.config.PersistenceUnitProperties;
 import org.eclipse.persistence.jpa.PersistenceProvider;
@@ -23,21 +24,22 @@ public class MineManagerHelper {
 		return emFactory;
 	}
 
-	private  void getPropertiesCreateTable(Map<String, Object> properties) {
+	/*private  void getPropertiesCreateTable(Map<String, Object> properties) {
 		properties.put(PersistenceUnitProperties.DDL_GENERATION,
 				PersistenceUnitProperties.CREATE_OR_EXTEND);
 		properties.put(PersistenceUnitProperties.DDL_GENERATION_MODE,
 				PersistenceUnitProperties.DDL_DATABASE_GENERATION);
 		properties.put(PersistenceUnitProperties.CLASSLOADER,
 				Activator.getClassLoader());
-	}
+	}*/
 
 	private  void getPropertiesExistingTable(
 			Map<String, Object> properties) {
 		properties.put(PersistenceUnitProperties.CLASSLOADER,
 				Activator.getClassLoader());
 
-		properties.put(PersistenceUnitProperties.TARGET_DATABASE, "DERBY");
+
+		//		properties.put(PersistenceUnitProperties.TARGET_DATABASE, "DERBY");
 	}
 
 	private MineManagerHelper(String persistenceUnitName,
@@ -45,20 +47,21 @@ public class MineManagerHelper {
 		Map<String, Object> properties = new HashMap<String, Object>();
 
 		getPropertiesExistingTable(properties);
-
-		if (createTable) {
+		String url;
+		url = "jdbc:derby://" + dbPath + ";create=true";
+		properties.put(PersistenceUnitProperties.JDBC_URL, url);
+		/*if (createTable) {
 			getPropertiesCreateTable(properties);
-		}
+		}*/
 
-		if (networkDb) {
+		/*	if (networkDb) {
 			DerbyMineProperties.getPropertiesClient(properties, dbPath,dbUserName,dbPassword);
 		} else {
 			DerbyMineProperties.getPropertiesEmbedded(properties, dbPath,dbUserName,dbPassword);
-		}
+		}*/
 
-		emFactory = new PersistenceProvider().createEntityManagerFactory(
-				persistenceUnitName, properties);
-		}
+		emFactory = new PersistenceProvider().createEntityManagerFactory(persistenceUnitName, properties);
+	}
 
 	public static MineManagerHelper getInstance() 
 	{
@@ -67,7 +70,7 @@ public class MineManagerHelper {
 			"Call init method before calling this"*/
 			return null;
 		}
-		
+
 		return emHelp;
 	}
 
