@@ -105,7 +105,7 @@ public class DeviceTestRun {
 				TestRunner runner = new TestRunner(jar,getDevice().getiDevice());
 				for (TestRunInstanceModel testRunCase : getRunInstances()) {
 					if(isStopped()){
-						return Status.OK_STATUS;
+						break;
 					}
 					testRunCase.setStartTime(System.currentTimeMillis());
 					testRunCase.setStatus(TestStatus.EXECUTING.getStatus());
