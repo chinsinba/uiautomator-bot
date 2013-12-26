@@ -154,12 +154,12 @@ public class BBATConfigXml {
 	}
 
 
-	public String getAndroid_UiAutomatorPath(){
-		return AndroidSdkUtility.getUiautopath();
+	public String getAndroid_UiAutomatorPath(int apiLevel){
+		return AndroidSdkUtility.getUiautopath(apiLevel);
 	}
 
-	public String getAndroid_AndroidJarPath(){
-		return AndroidSdkUtility.getAndropath();
+	public String getAndroid_AndroidJarPath(int apiLevel){
+		return AndroidSdkUtility.getAndropath(apiLevel);
 	}
 
 	public String getAndroid_AdbPath(){

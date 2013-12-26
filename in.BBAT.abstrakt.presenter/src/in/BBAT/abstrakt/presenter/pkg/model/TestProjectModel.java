@@ -32,8 +32,8 @@ public class TestProjectModel extends AbstractProjectTree {
 		super(null,entity, entity.getName(),createResource);
 	}
 
-	public TestProjectModel(String projectName) throws Exception {
-		this(new TestProjectEntity(projectName),true);
+	public TestProjectModel(String projectName,int apiLevel) throws Exception {
+		this(new TestProjectEntity(projectName,apiLevel),true);
 	}
 
 	@Override
@@ -77,7 +77,7 @@ public class TestProjectModel extends AbstractProjectTree {
 	@Override
 	public void linkToProject() {
 
-		project = new BBATProject(getName());
+		project = new BBATProject(getName(),getApiLevel());
 		project.linkPackage(getResourcePath());
 	}
 
@@ -87,7 +87,7 @@ public class TestProjectModel extends AbstractProjectTree {
 	}
 
 	public static TestProjectModel create(String name, String description,int apiLevel) throws Exception{
-		TestProjectModel model = new TestProjectModel(name);
+		TestProjectModel model = new TestProjectModel(name,apiLevel);
 		model.setDescription(description);
 		model.setApiLevel(apiLevel);
 		model.save();

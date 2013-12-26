@@ -58,8 +58,9 @@ public class TestProjectEntity extends AbstractEntity {
 	@OrderColumn
 	private List<TestSuiteEntity> testSuites;
 
-	public TestProjectEntity(String projectName) {
+	public TestProjectEntity(String projectName,int apiLevel) {
 		this.name = projectName;
+		this.apiLevel = apiLevel;
 	}
 
 	public TestProjectEntity() {

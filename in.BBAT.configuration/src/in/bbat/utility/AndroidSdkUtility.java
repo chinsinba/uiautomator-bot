@@ -11,20 +11,20 @@ public class AndroidSdkUtility {
 
 	public  final static  String  ANDROID_SDK = BBATConfigXml.getInstance().getAndroid_SdkPath();
 	public  final static  String PLATFORM = "platforms";
-	
+
 	public  final static  String UIAUTOMATOR_JAR ="uiautomator.jar";
 	public  final static  String ANDROID_JAR ="android.jar";
 
-	public static String getUiautopath() {
-		return getJarPath(UIAUTOMATOR_JAR);
+	public static String getUiautopath(int apiLevel) {
+		return getJarPath(UIAUTOMATOR_JAR,apiLevel);
 	}
 
-	private static String getJarPath(String uiautomatorJar) {
-		String temp = getTheLatestPlatformAvailable(uiautomatorJar);
-		return ANDROID_SDK+Path.SEPARATOR+PLATFORM+Path.SEPARATOR+temp+Path.SEPARATOR+uiautomatorJar;
+	private static String getJarPath(String uiautomatorJar,int apiLevel) {
+		String temp = getTheLatestPlatformAvailable(uiautomatorJar,apiLevel);
+		return ANDROID_SDK+Path.SEPARATOR+PLATFORM+Path.SEPARATOR+"android-"+apiLevel+Path.SEPARATOR+uiautomatorJar;
 	}
 
-	private static String getTheLatestPlatformAvailable(final String jarName) {
+	private static String getTheLatestPlatformAvailable(final String jarName,int apiLevel) {
 		File andPlatForm_ = new File(ANDROID_SDK+Path.SEPARATOR+PLATFORM+Path.SEPARATOR);
 		String temp= "";
 		if(andPlatForm_.exists()){
@@ -52,8 +52,8 @@ public class AndroidSdkUtility {
 		return temp;
 	}
 
-	public static String getAndropath() {
-		return getJarPath(ANDROID_JAR);
+	public static String getAndropath(int apiLevel) {
+		return getJarPath(ANDROID_JAR,apiLevel);
 	}
 
 	public static String getADBpath(){

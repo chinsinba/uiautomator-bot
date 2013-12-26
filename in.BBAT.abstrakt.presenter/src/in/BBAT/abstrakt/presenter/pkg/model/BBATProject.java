@@ -28,25 +28,18 @@ import org.eclipse.jdt.launching.LibraryLocation;
 
 public class BBATProject {
 
-	private static BBATProject instance;
-
 	private IProject project;
 	private static final Logger LOG = BBATLogger.getLogger(BBATProject.class.getName());
-
-	public BBATProject(String projName){
-		initializeBBATProject(projName);
+	int apiLevel ;
+	public BBATProject(String projName, int apiLevel){
+		this.apiLevel = apiLevel;
+		initializeBBATProject(projName,apiLevel);
 	}
-
-	/*public static BBATProjectUtil getInstance(){
-		if(instance==null)
-			instance = new BBATProjectUtil();
-		return instance;
-	}*/
 
 	private IProject project(String projName)  throws Exception{
 
 		IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
-		 project = root.getProject(projName);
+		project = root.getProject(projName);
 		try {
 			if(!project.exists()){
 				project.create(null);
@@ -61,8 +54,8 @@ public class BBATProject {
 				javaProject.setOutputLocation(binFolder.getFullPath(), null);
 
 				List<IClasspathEntry> entries = new ArrayList<IClasspathEntry>();
-				entries.add(JavaCore.newLibraryEntry(new Path(BBATConfigXml.getInstance().getAndroid_AndroidJarPath()), null, null));
-				entries.add(JavaCore.newLibraryEntry(new Path(BBATConfigXml.getInstance().getAndroid_UiAutomatorPath()), null, null));
+				entries.add(JavaCore.newLibraryEntry(new Path(BBATConfigXml.getInstance().getAndroid_AndroidJarPath(apiLevel)), null, null));
+				entries.add(JavaCore.newLibraryEntry(new Path(BBATConfigXml.getInstance().getAndroid_UiAutomatorPath(apiLevel)), null, null));
 				entries.add(JavaCore.newSourceEntry(project.getFullPath()));
 				IVMInstall vmInstall = JavaRuntime.getDefaultVMInstall();
 				LibraryLocation[] locations = JavaRuntime.getLibraryLocations(vmInstall);
@@ -73,7 +66,7 @@ public class BBATProject {
 				javaProject.setRawClasspath(entries.toArray(new IClasspathEntry[entries.size()]), null);
 			}
 		} catch (CoreException e1) {
-			e1.printStackTrace();
+			LOG.error(e1);
 		}
 
 		return project;
@@ -81,7 +74,7 @@ public class BBATProject {
 	}
 
 
-	private void initializeBBATProject(String projName) {
+	private void initializeBBATProject(String projName, int apiLevel) {
 
 		IProject pro =null;
 		try {
@@ -209,7 +202,7 @@ public class BBATProject {
 
 	public void delete() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }
