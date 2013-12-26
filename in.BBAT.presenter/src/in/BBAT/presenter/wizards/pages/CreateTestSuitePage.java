@@ -34,7 +34,7 @@ public class CreateTestSuitePage extends WizardPage {
 	private boolean nameValid;
 	private boolean descValid;
 
-	private AbstractProjectTree parent;
+	
 
 	@Override
 	public void createControl(Composite parent) {
@@ -96,9 +96,9 @@ public class CreateTestSuitePage extends WizardPage {
 	}
 
 	private boolean isDuplicate(String enteredName){
-		if(parent!=null){
+		if(parentProj!=null){
 			try {
-				List<AbstractTreeModel> children = parent.getChildren();
+				List<AbstractTreeModel> children = parentProj.getChildren();
 				for(AbstractTreeModel model : children){
 					if(model.getName().equalsIgnoreCase(enteredName)){
 						return true;

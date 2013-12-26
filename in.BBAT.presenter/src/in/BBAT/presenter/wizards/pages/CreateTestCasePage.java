@@ -27,7 +27,6 @@ public class CreateTestCasePage extends WizardPage {
 	private boolean nameValid;
 	private boolean descValid;
 
-	private AbstractProjectTree parent;
 
 	private static final Logger LOG = BBATLogger.getLogger(CreateTestCasePage.class.getName());
 
@@ -98,9 +97,9 @@ public class CreateTestCasePage extends WizardPage {
 	}
 
 	private boolean isDuplicate(String enteredName){
-		if(parent!=null){
+		if(parentSuite!=null){
 			try {
-				List<AbstractTreeModel> children = parent.getChildren();
+				List<AbstractTreeModel> children = parentSuite.getChildren();
 				for(AbstractTreeModel model : children){
 					if(model.getName().equalsIgnoreCase(enteredName)){
 						return true;
