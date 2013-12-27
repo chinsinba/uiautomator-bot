@@ -22,7 +22,7 @@ import javax.persistence.TableGenerator;
  */
 @Entity
 @NamedQueries({
-	@NamedQuery(name="TestRunEntity.findAll",query="SELECT testcase FROM TestRunEntity testcase ORDER BY testcase.id")
+	@NamedQuery(name="TestRunEntity.findAll",query="SELECT testcase FROM TestRunEntity testcase ORDER BY testcase.id Desc")
 })
 public class TestRunEntity extends AbstractEntity{
 

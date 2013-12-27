@@ -1,8 +1,10 @@
 package in.bbat.presenter.views.history;
 
+import in.BBAT.abstrakt.presenter.run.model.AutomatorLogModel;
 import in.BBAT.abstrakt.presenter.run.model.TestDeviceRunModel;
 import in.BBAT.abstrakt.presenter.run.model.TestRunManager;
 import in.BBAT.abstrakt.presenter.run.model.TestRunModel;
+import in.BBAT.data.model.Entities.TestRunEntity;
 import in.BBAT.presenter.contentProviders.TestRunHistoryContentProvider;
 import in.BBAT.presenter.labelProviders.TestRunHistoryLabelProvider;
 import in.bbat.abstrakt.gui.BBATImageManager;
@@ -17,8 +19,15 @@ import org.eclipse.jface.viewers.IDoubleClickListener;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.TreeViewer;
+import org.eclipse.jface.viewers.Viewer;
+import org.eclipse.jface.viewers.ViewerFilter;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.ModifyEvent;
+import org.eclipse.swt.events.ModifyListener;
+import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.TreeColumn;
 
 public class TestRunHistoryView extends BBATViewPart {
@@ -26,6 +35,8 @@ public class TestRunHistoryView extends BBATViewPart {
 	public static final String ID="in.BBAT.presenter.history.TestRunHistoryView";
 	private static final Logger LOG = BBATLogger.getLogger(TestRunHistoryView.class.getName());
 	private TreeViewer viewer;
+	private Text searchText;
+	private TestRunFilter filter;
 	@Override
 	public void refresh() throws Exception {
 		viewer.refresh();
@@ -39,13 +50,54 @@ public class TestRunHistoryView extends BBATViewPart {
 
 	@Override
 	public void createPartControl(Composite parent) {
-		viewer = new TreeViewer(parent, SWT.MULTI | SWT.H_SCROLL| SWT.V_SCROLL);
+		GridLayout layout = new GridLayout();
+		parent.setLayout(layout);
+		parent.setLayoutData(new GridData(GridData.FILL_BOTH));
+		createTextFilter(parent);
+
+		createTestRunTree(parent);
+
+		filter = new TestRunFilter();
+		viewer.addFilter(filter);
+		addMenuManager(viewer);
+
+	}
+
+
+	private void createTextFilter(Composite parent) {
+		Composite comp1 = new Composite(parent, SWT.BORDER);
+		comp1.setLayout(new GridLayout(1,false));
+		comp1.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+
+		searchText = new Text(comp1, SWT.BORDER);
+		searchText.setMessage("Search for Test runs");
+		searchText.setLayoutData(new GridData(GridData.FILL_BOTH));
+		searchText.addModifyListener(new ModifyListener() {
+
+			@Override
+			public void modifyText(ModifyEvent e) {
+				filter.setSearchText(searchText.getText());
+				try {
+					refresh();
+				} catch (Exception e1) {
+					LOG.error(e1);
+				}
+			}
+		});
+
+	}
+
+	private void createTestRunTree(Composite parent) {
+		Composite comp1 = new Composite(parent, SWT.NONE);
+		comp1.setLayout(new GridLayout(1,false));
+		comp1.setLayoutData(new GridData(GridData.FILL_BOTH));
+		viewer = new TreeViewer(comp1, SWT.MULTI | SWT.H_SCROLL| SWT.V_SCROLL);
 		viewer.getTree().setHeaderVisible(true);
 		viewer.getTree().setLinesVisible(true);
 		viewer.setContentProvider(new TestRunHistoryContentProvider());
 		viewer.setLabelProvider(new TestRunHistoryLabelProvider());
 		viewer.setAutoExpandLevel(1);
-		createDeviceRunColumns(parent);
+		createDeviceRunColumns(comp1);
 		// Provide the input to the ContentProvider
 		try {
 			viewer.setInput(TestRunManager.getInstance());
@@ -62,7 +114,7 @@ public class TestRunHistoryView extends BBATViewPart {
 				}
 				if(sel instanceof TestDeviceRunModel){
 
-					
+
 					BBATViewPart.hideView(HistoryDeviceLogView.ID);
 					BBATViewPart.hideView(HistoryAutoLogView.ID);
 					try {
@@ -74,9 +126,6 @@ public class TestRunHistoryView extends BBATViewPart {
 				}
 			}
 		});
-
-		addMenuManager(viewer);
-
 	}
 	private void createDeviceRunColumns(Composite comp) {
 		TreeColumnLayout lay = new TreeColumnLayout();
@@ -86,8 +135,8 @@ public class TestRunHistoryView extends BBATViewPart {
 		col.setText("TestRun");
 		col.setImage(BBATImageManager.getInstance().getImage(BBATImageManager.ANDROID_DEVICE));
 		lay.setColumnData(col, new ColumnWeightData(40));
-		
-		
+
+
 		col = new TreeColumn(viewer.getTree(), SWT.LEFT);
 		col.setText("Date");
 		comp.setLayout(lay);
@@ -121,4 +170,34 @@ public class TestRunHistoryView extends BBATViewPart {
 
 	}
 
+
+	class TestRunFilter extends ViewerFilter
+	{
+
+		private String searchString ="";
+
+		public void setSearchText(String s)
+		{
+			this.searchString = ".*" + s.trim().toLowerCase() + ".*";
+		}
+
+		@Override
+		public boolean select(Viewer viewer, Object parentElement,Object element) {
+			if(searchString==null || searchString.isEmpty())
+				return true;
+
+			if(element instanceof TestRunModel){
+
+				if(("RUN_"+((TestRunEntity)((TestRunModel) element).getEntity()).getId()).toLowerCase().matches(searchString)){
+					return true;
+				}
+			}
+			if(element instanceof TestDeviceRunModel)
+			{
+				return true;
+			}
+			return false;
+		}
+
+	}
 }
