@@ -23,14 +23,14 @@ public class UiAutoTestCaseJar {
 	private String jarPath;
 	private File jarFile;
 	private static final String JAR_NAME = "BBAT";
-	private static final String SRC = "src";
-	private static final String BIN = "bin";
-	private static final String BUILD_FILE = "build.xml";
+	private static final String SRC = SdkConstants.FD_SOURCES;
+	private static final String BIN = SdkConstants.FD_OUTPUT;
+	private static final String BUILD_FILE = SdkConstants.FN_BUILD_XML;
 	
 
 	private static final String TEMP_FOLDER_PATH =System.getProperty("user.dir")+Path.SEPARATOR+"temp" ;
 	private static final String ANDROID_SDK_TOOLS = BBATConfigXml.getInstance().getAndroid_SdkPath()+Path.SEPARATOR+SdkConstants.OS_SDK_TOOLS_FOLDER;
-	private static final String CREATE_UI_PROJECT_COMMAND = "/android create uitest-project -n "+JAR_NAME+" -t 6 -p "+TEMP_FOLDER_PATH;
+	private static final String CREATE_UI_PROJECT_COMMAND = "/"+SdkConstants.androidCmdName()+" create uitest-project -n "+JAR_NAME+" -t 6 -p "+TEMP_FOLDER_PATH;
 
 	
 	public UiAutoTestCaseJar(List<String> testScriptPaths){
