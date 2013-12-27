@@ -46,6 +46,8 @@ public class TestDeviceEntity extends AbstractEntity {
 	private String apiLevel;
 
 	private String modelName;
+	
+	private String manufacturer;
 
 	public String getDeviceId() {
 		return deviceId;
@@ -85,5 +87,13 @@ public class TestDeviceEntity extends AbstractEntity {
 
 	public void setModelName(String modelName) {
 		this.modelName = modelName;
+	}
+
+	public String getManufacturer() {
+		return manufacturer;
+	}
+
+	public void setManufacturer(String manufacturer) {
+		this.manufacturer = manufacturer;
 	}
 }

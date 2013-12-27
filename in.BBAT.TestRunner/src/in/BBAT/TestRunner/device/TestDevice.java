@@ -146,11 +146,11 @@ public class TestDevice implements IAndroidDevice {
 	@Override
 	public void executeTestCase(String testCaseName,IUiAutomatorListener uiAutoListener,ITestRunListener... listener) {
 
-		ScreenShotThread screenShotThread = new ScreenShotThread();
+//		ScreenShotThread screenShotThread = new ScreenShotThread();
 
 		UIAutomatorRunner runner = new UIAutomatorRunner(testCaseName, monkeyDevice,uiAutoListener);
 		try {
-			screenShotThread.start();
+//			screenShotThread.start();
 			runner.run(listener);
 		} catch (TimeoutException e) {
 			LOG.error(e);
@@ -161,7 +161,7 @@ public class TestDevice implements IAndroidDevice {
 		} catch (IOException e) {
 			LOG.error(e);
 		}
-		screenShotThread.stopThread();
+//		screenShotThread.stopThread();
 
 	}
 
