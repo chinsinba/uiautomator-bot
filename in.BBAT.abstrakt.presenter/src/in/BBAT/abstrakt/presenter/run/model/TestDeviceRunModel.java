@@ -1,13 +1,18 @@
 package in.BBAT.abstrakt.presenter.run.model;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.Timestamp;
 
+import org.eclipse.core.runtime.Path;
 import org.eclipse.swt.graphics.Image;
 
 import in.BBAT.abstrakt.gui.model.AbstractTreeModel;
 import in.BBAT.abstrakt.gui.model.IGUITreeNode;
 import in.BBAT.abstrakt.presenter.device.model.AndroidDevice;
+import in.BBAT.abstrakt.presenter.device.model.DeviceDetails;
 import in.BBAT.data.model.Entities.AbstractEntity;
+import in.BBAT.data.model.Entities.TestDeviceEntity;
 import in.BBAT.data.model.Entities.TestDeviceRunEntity;
 import in.BBAT.data.model.Entities.TestRunEntity;
 import in.BBAT.data.model.Entities.TestRunInfoEntity;
@@ -36,6 +41,120 @@ public class TestDeviceRunModel extends AbstractTreeModel {
 	@Override
 	public String getLabel() {
 		return null;
+	}
+
+	public void exportDeviceDetails(String path) throws IOException{
+		FileWriter devicefr = new FileWriter(path+Path.SEPARATOR+"Device_details.txt");
+		TestDeviceEntity device = ((TestDeviceRunEntity)getEntity()).getDevice();
+		StringBuffer buffer = new StringBuffer(DeviceDetails.BUILD_BOARD);
+		buffer.append(" = ");
+		buffer.append(device.getBuild_board());
+		buffer.append(" \n ");
+
+		buffer.append(DeviceDetails.BUILD_BRAND);
+		buffer.append(" = ");
+		buffer.append(device.getBuild_brand());
+		buffer.append(" \n ");
+
+		buffer.append(DeviceDetails.BUILD_CPU_ABI);
+		buffer.append(" = ");
+		buffer.append(device.getBuild_cpu_abi());
+		buffer.append(" \n ");
+
+		buffer.append(DeviceDetails.BUILD_CPU_ABI2);
+		buffer.append(" = ");
+		buffer.append(device.getBuild_cpu_abi2());
+		buffer.append(" \n ");
+
+		buffer.append(DeviceDetails.BUILD_DEVICE);
+		buffer.append(" = ");
+		buffer.append(device.getBuild_device());
+		buffer.append(" \n ");
+
+		buffer.append(DeviceDetails.BUILD_DISPLAY);
+		buffer.append(" = ");
+		buffer.append(device.getBuild_display());
+		buffer.append(" \n ");
+
+		buffer.append(DeviceDetails.BUILD_FINGERPRINT);
+		buffer.append(" = ");
+		buffer.append(device.getBuild_fingerprint());
+		buffer.append(" \n ");
+
+		buffer.append(DeviceDetails.BUILD_HARDWARE);
+		buffer.append(" = ");
+		buffer.append(device.getBuild_hardware());
+		buffer.append(" \n ");
+
+		buffer.append(DeviceDetails.BUILD_HOST);
+		buffer.append(" = ");
+		buffer.append(device.getBuild_host());
+		buffer.append(" \n ");
+
+		buffer.append(DeviceDetails.BUILD_ID);
+		buffer.append(" = ");
+		buffer.append(device.getBuild_id());
+		buffer.append(" \n ");
+
+		buffer.append(DeviceDetails.BUILD_MANUFACTURER);
+		buffer.append(" = ");
+		buffer.append(device.getBuild_manufacturer());
+		buffer.append(" \n ");
+
+		buffer.append(DeviceDetails.BUILD_MODEL);
+		buffer.append(" = ");
+		buffer.append(device.getBuild_model());
+		buffer.append(" \n ");
+
+		buffer.append(DeviceDetails.BUILD_PRODUCT);
+		buffer.append(" = ");
+		buffer.append(device.getBuild_product());
+		buffer.append(" \n ");
+
+		buffer.append(DeviceDetails.BUILD_RADIO);
+		buffer.append(" = ");
+		buffer.append(device.getBuild_radio());
+		buffer.append(" \n ");
+
+		buffer.append(DeviceDetails.BUILD_TAGS);
+		buffer.append(" = ");
+		buffer.append(device.getBuild_tags());
+		buffer.append(" \n ");
+
+		buffer.append(DeviceDetails.BUILD_TYPE);
+		buffer.append(" = ");
+		buffer.append(device.getBuild_type());
+		buffer.append(" \n ");
+
+		buffer.append(DeviceDetails.BUILD_USER);
+		buffer.append(" = ");
+		buffer.append(device.getBuild_user());
+		buffer.append(" \n ");
+
+		buffer.append(DeviceDetails.VERSION_CODENAME);
+		buffer.append(" = ");
+		buffer.append(device.getVersion_codename());
+		buffer.append(" \n ");
+
+		buffer.append(DeviceDetails.VERSION_INCREMENTAL);
+		buffer.append(" = ");
+		buffer.append(device.getVersion_incremental(	));
+		buffer.append(" \n ");
+
+		buffer.append(DeviceDetails.VERSION_RELEASE);
+		buffer.append(" = ");
+		buffer.append(device.getVersion_release());
+		buffer.append(" \n ");
+
+		buffer.append(DeviceDetails.VERSION_SDK);
+		buffer.append(" = ");
+		buffer.append(device.getVersion_sdk());
+		buffer.append(" \n ");
+
+		devicefr.write(buffer.toString());
+		devicefr.close();
+
+
 	}
 
 	public Image getImage() {

@@ -8,7 +8,6 @@ import in.BBAT.presenter.labelProviders.TestCaseLabelProvider;
 import in.bbat.logger.BBATLogger;
 import in.bbat.presenter.perstpectives.DeveloperPerspective;
 import in.bbat.presenter.views.BBATViewPart;
-import in.bbat.presenter.views.tester.TestRunnerView;
 
 import org.apache.log4j.Logger;
 import org.eclipse.jface.util.LocalSelectionTransfer;
@@ -23,6 +22,7 @@ import org.eclipse.swt.dnd.Transfer;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.PlatformUI;
+
 
 public class TestCaseBrowserView extends BBATViewPart {
 	public static final String ID = "in.BBAT.presenter.developer.testcaseBrowserView";

@@ -189,13 +189,11 @@ public class TestDevice implements IAndroidDevice {
 	}
 	@Override
 	public String getName() {
-		// TODO Auto-generated method stub
 		return monkeyDevice.getName();
 	}
 
 	@Override
 	public RawImage getScreenshot() {
-		// TODO Auto-generated method stub
 		try {
 			return monkeyDevice.getScreenshot();
 		} catch (TimeoutException e) {
@@ -255,5 +253,10 @@ public class TestDevice implements IAndroidDevice {
 
 	public void setScreenShotListener(IScreenShotListener screenShotListener) {
 		this.screenShotListener = screenShotListener;
+	}
+
+	@Override
+	public String getPropertyValue(String property) {
+		return getMonkeyDevice().getProperty(property);
 	}
 }

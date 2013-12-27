@@ -229,6 +229,7 @@ public class TestRunInstanceModel extends AbstractTreeModel {
 		exportDeviceLogs(exportDir.getAbsolutePath());
 		exportUIAutoLogs(exportDir.getAbsolutePath());
 		exportScript(exportDir.getAbsolutePath());
+		exportDeviceDetails(exportDir.getAbsolutePath());
 
 		if(zip)
 			ZipFiles.zipDirectory(tempFile, exportDirectory+Path.SEPARATOR+getTestCaseEntity().getName()+"_"+((TestRunInfoEntity)getEntity()).getId()+".zip");
@@ -237,6 +238,10 @@ public class TestRunInstanceModel extends AbstractTreeModel {
 
 		FileUtils.delete(tempFile);
 
+	}
+
+	private void exportDeviceDetails(String absolutePath) throws IOException {
+		((TestDeviceRunModel)getParent()).exportDeviceDetails(absolutePath);
 	}
 
 	public void exportScript(String deviceLogPath){

@@ -53,9 +53,11 @@ import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TreeColumn;
 import org.eclipse.ui.IViewPart;
@@ -113,16 +115,15 @@ public class TestRunnerView extends BBATViewPart {
 	public void createPartControl(Composite parent) {
 
 		SashForm form = createSash(parent);
-
 		createDeviceViewer(form);
 		createDeviceRunViewerTabs(form);
 
 		form.setWeights(new int[]{50,50});
 		createDropSupport();
-
 		getViewSite().setSelectionProvider(commonTestCaseViewer);
 	}
 
+	
 	private void createDeviceRunViewerTabs(Composite innerleft) {
 
 		CTabFolder testRunFolder = new CTabFolder(innerleft, SWT.TOP|SWT.BORDER);

@@ -47,6 +47,8 @@ public interface IAndroidDevice {
 
 	Map<String, String> getProperties();
 	
+	String getPropertyValue(String property);
+	
 	IChimpDevice getChimpDevice();
 
 	/**
@@ -56,6 +58,7 @@ public interface IAndroidDevice {
 	void installPackage(String apkPath)throws Exception;
 
 	void setScreenShotListener(IScreenShotListener listener);
+	
 	IScreenShotListener getScreenShotListener();
 
 }
