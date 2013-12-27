@@ -70,7 +70,7 @@ public class DeviceDetailsWindow extends ApplicationWindow {
 	}
 
 	private void createTextFilter(Composite parent) {
-		Composite comp1 = new Composite(parent, SWT.BORDER);
+		Composite comp1 = new Composite(parent, SWT.NONE);
 		comp1.setLayout(new FillLayout());
 		comp1.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
