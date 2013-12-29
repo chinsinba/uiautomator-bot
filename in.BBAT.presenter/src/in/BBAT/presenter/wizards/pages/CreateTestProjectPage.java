@@ -3,7 +3,7 @@ package in.BBAT.presenter.wizards.pages;
 import in.BBAT.abstrakt.gui.model.AbstractTreeModel;
 import in.BBAT.abstrakt.presenter.pkg.model.TestProjectManager;
 import in.BBAT.abstrakt.presenter.pkg.model.TestProjectModel;
-import in.bbat.configuration.BBATConfigXml;
+import in.bbat.configuration.BBATProperties;
 import in.bbat.logger.BBATLogger;
 import in.bbat.utility.AndroidSdkUtility;
 
@@ -142,8 +142,8 @@ public class CreateTestProjectPage extends WizardPage {
 		sp.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				uiAutoJarTextPath.setText(BBATConfigXml.getInstance().getAndroid_UiAutomatorPath(Integer.valueOf(sp.getText())));
-				androidTextPath.setText(BBATConfigXml.getInstance().getAndroid_AndroidJarPath((Integer.valueOf(sp.getText()))));
+				uiAutoJarTextPath.setText(BBATProperties.getInstance().getAndroid_UiAutomatorPath(Integer.valueOf(sp.getText())));
+				androidTextPath.setText(BBATProperties.getInstance().getAndroid_AndroidJarPath((Integer.valueOf(sp.getText()))));
 			}
 
 		});
@@ -151,14 +151,14 @@ public class CreateTestProjectPage extends WizardPage {
 		uiUatoJar.setText("Uiautomator Jar Path :");
 
 		uiAutoJarTextPath = new Text(comp, SWT.BORDER|SWT.READ_ONLY);
-		uiAutoJarTextPath.setText(BBATConfigXml.getInstance().getAndroid_UiAutomatorPath(Integer.valueOf(sp.getText())));
+		uiAutoJarTextPath.setText(BBATProperties.getInstance().getAndroid_UiAutomatorPath(Integer.valueOf(sp.getText())));
 		uiAutoJarTextPath.setLayoutData(new GridData(GridData.FILL_BOTH));
 
 		Label androidJar = new Label(comp, SWT.NULL);
 		androidJar.setText("Android Jar Path :");
 
 		androidTextPath = new Text(comp, SWT.BORDER|SWT.READ_ONLY);
-		androidTextPath.setText(BBATConfigXml.getInstance().getAndroid_AndroidJarPath((Integer.valueOf(sp.getText()))));
+		androidTextPath.setText(BBATProperties.getInstance().getAndroid_AndroidJarPath((Integer.valueOf(sp.getText()))));
 		androidTextPath.setLayoutData(new GridData(GridData.FILL_BOTH));
 		/*GridData gd = new GridData(GridData.FILL_BOTH);
 		gd.grabExcessVerticalSpace = true;

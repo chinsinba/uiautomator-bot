@@ -2,7 +2,7 @@ package in.BBAT.abstrakt.presenter.pkg.model;
 
 import in.BBAT.abstrakt.gui.model.AbstractTreeModel;
 import in.BBAT.data.model.Entities.AbstractEntity;
-import in.bbat.configuration.BBATConfigXml;
+import in.bbat.configuration.BBATProperties;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -27,7 +27,7 @@ public abstract class AbstractProjectTree extends AbstractTreeModel implements I
 		if(parent!=null)
 			this.setResourcePath(parent.getPath()+Path.SEPARATOR+resourceName);
 		else {
-			this.setResourcePath(BBATConfigXml.getInstance().getWkspc_UiAutomator()+Path.SEPARATOR+resourceName);
+			this.setResourcePath(BBATProperties.getInstance().getWkspc_UiAutomator()+Path.SEPARATOR+resourceName);
 		}
 		if(createResources){
 			createFiles();

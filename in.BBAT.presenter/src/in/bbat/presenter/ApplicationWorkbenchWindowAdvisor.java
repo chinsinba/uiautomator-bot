@@ -3,7 +3,7 @@ package in.bbat.presenter;
 import in.BBAT.TestRunner.device.DeviceException;
 import in.BBAT.abstrakt.presenter.device.model.TestDeviceManager;
 import in.bbat.abstrakt.gui.ApplicationHelper;
-import in.bbat.configuration.BBATConfigXml;
+import in.bbat.configuration.BBATProperties;
 import in.bbat.logger.BBATLogger;
 import in.bbat.presenter.perstpectives.DeveloperPerspective;
 import in.bbat.presenter.perstpectives.HistoryPerspective;
@@ -75,7 +75,7 @@ public class ApplicationWorkbenchWindowAdvisor extends WorkbenchWindowAdvisor {
 		try {
 			LOG.info("Started....");
 			ApplicationHelper.initializeDb();
-			TestDeviceManager.init(BBATConfigXml.getInstance().getAndroid_AdbPath());
+			TestDeviceManager.init(BBATProperties.getInstance().getAndroid_AdbPath());
 		} catch (UnknownHostException e) {
 			LOG.error(e);
 			MessageDialog.openError(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(), "Error", "Unable to connect to DB");
@@ -100,7 +100,7 @@ public class ApplicationWorkbenchWindowAdvisor extends WorkbenchWindowAdvisor {
 
 		removeUnWantedPerspectives();
 
-		String errorMessage = validateAndroidSdkLocation(BBATConfigXml.getInstance().getAndroid_SdkPath());
+		String errorMessage = validateAndroidSdkLocation(BBATProperties.getInstance().getAndroid_SdkPath());
 
 		if(errorMessage!=null){
 			MessageDialog.openError(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(),

@@ -50,7 +50,7 @@
             class="in.bbat.presenter.views.developer.DeveloperDeviceView"
             icon="icons/Android_device.png"
             id="in.BBAT.presenter.developer.deviceView"
-            name="Test Device Browser"
+            name="Connected Devices"
             restorable="true">
       </view>
       <view
@@ -290,6 +290,11 @@
                label="Edit"
                style="push">
          </command>
+         <command
+               commandId="in.BBAT.presenter.testCase.TestElementDetails"
+               label="Details"
+               style="push">
+         </command>
          <separator
                name="in.BBAT.presenter.separator2"
                visible="true">
@@ -472,6 +477,10 @@
             id="in.BBAT.presenter.device.details"
             name="Device Details">
       </command>
+      <command
+            id="in.BBAT.presenter.testCase.TestElementDetails"
+            name="Test Details">
+      </command>
    </extension>
    <extension
          point="org.eclipse.ui.handlers">
@@ -546,6 +555,10 @@
       <handler
             class="in.BBAT.presenter.developer.handlers.device.DeviceDetailsHandler"
             commandId="in.BBAT.presenter.device.details">
+      </handler>
+      <handler
+            class="in.BBAT.presenter.developer.handlers.testcaseBrowser.TestDetailsHandler"
+            commandId="in.BBAT.presenter.testCase.TestElementDetails">
       </handler>
    </extension>
    <extension

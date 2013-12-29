@@ -2,7 +2,8 @@ package in.bbat.presenter;
 
 
 import in.BBAT.abstrakt.presenter.pkg.model.BBATProject;
-import in.bbat.configuration.BBATConfigXml;
+import in.bbat.configuration.BBATProperties;
+import in.bbat.configuration.BBATProperties;
 import in.bbat.logger.BBATLogger;
 import in.bbat.utility.FileUtils;
 
@@ -206,10 +207,8 @@ public class SettingsWindow extends ApplicationWindow  {
 		if(!saveDeviceSettings())
 			return;
 		try {
-			BBATConfigXml.getInstance().save();
+			BBATProperties.getInstance().save();
 			form.setMessage("Updated all changes.", IMessageProvider.INFORMATION);
-		} catch (JAXBException e) {
-			form.setMessage("Failled to update the changes.", IMessageProvider.ERROR);
 		} catch (IOException e) {
 			form.setMessage("Failled to update the changes.", IMessageProvider.ERROR);
 		}
@@ -225,8 +224,8 @@ public class SettingsWindow extends ApplicationWindow  {
 		}
 		form.setMessage("", IMessageProvider.NONE);
 
-		BBATConfigXml.getInstance().setAndroid_SdkPath(sdkPathText.getText().trim());
-		copyScriptsFromOlderWorkspace(BBATConfigXml.getInstance().getWkspc_UiAutomator(),wkspcPathText.getText().trim());
+		BBATProperties.getInstance().setAndroid_SdkPath(sdkPathText.getText().trim());
+		copyScriptsFromOlderWorkspace(BBATProperties.getInstance().getWkspc_UiAutomator(),wkspcPathText.getText().trim());
 
 		return true;
 
@@ -247,8 +246,8 @@ public class SettingsWindow extends ApplicationWindow  {
 				}	
 			}
 		});
-//		BBATProject.getInstance().deleteProject();
-		BBATConfigXml.getInstance().setWkspc_UiAutomator(newWkspcPath);
+		BBATProject.deleteAllProjects();
+		BBATProperties.getInstance().setWkspc_UiAutomator(newWkspcPath);
 	}
 
 	private boolean validateSettings() {
@@ -280,7 +279,7 @@ public class SettingsWindow extends ApplicationWindow  {
 		}
 
 		form.setMessage("", IMessageProvider.NONE);
-		BBATConfigXml.getInstance().setDatabase_Port(Integer.parseInt(dbPortText.getText().trim()));
+		BBATProperties.getInstance().setDatabase_Port(Integer.parseInt(dbPortText.getText().trim()));
 
 		return true;
 	}
@@ -311,7 +310,7 @@ public class SettingsWindow extends ApplicationWindow  {
 
 		{
 			confToolkit.createLabel(devClentComp, "Android SDK Path : ");
-			sdkPathText = confToolkit.createText(devClentComp,BBATConfigXml.getInstance().getAndroid_SdkPath(),SWT.BORDER|SWT.READ_ONLY);
+			sdkPathText = confToolkit.createText(devClentComp,BBATProperties.getInstance().getAndroid_SdkPath(),SWT.BORDER|SWT.READ_ONLY);
 			sdkPathText.setToolTipText(sdkPathText.getText());
 			sdkPathText.setLayoutData(new GridData(GridData.FILL_BOTH));
 			browseSDKPathButton = confToolkit.createButton(devClentComp, "Browse", SWT.PUSH);
@@ -320,7 +319,7 @@ public class SettingsWindow extends ApplicationWindow  {
 		}
 		{
 			confToolkit.createLabel(devClentComp, "UIAutomator scripts path : ");
-			wkspcPathText = confToolkit.createText(devClentComp,BBATConfigXml.getInstance().getWkspc_UiAutomator(),SWT.BORDER|SWT.READ_ONLY);
+			wkspcPathText = confToolkit.createText(devClentComp,BBATProperties.getInstance().getWkspc_UiAutomator(),SWT.BORDER|SWT.READ_ONLY);
 			wkspcPathText.setToolTipText(wkspcPathText.getText());
 			wkspcPathText.setLayoutData(new GridData(GridData.FILL_BOTH));
 			browseWkspcPathButton = confToolkit.createButton(devClentComp, "Browse", SWT.PUSH);
@@ -328,7 +327,7 @@ public class SettingsWindow extends ApplicationWindow  {
 			addTextFocuslisteners(wkspcPathText);
 		}
 
-//		createPortComponent(confToolkit, devClentComp);
+		//		createPortComponent(confToolkit, devClentComp);
 
 
 		deviceSettingSection.setClient(devClentComp);
@@ -337,7 +336,7 @@ public class SettingsWindow extends ApplicationWindow  {
 	private void createPortComponent(FormToolkit confToolkit,
 			Composite devClentComp) {
 		confToolkit.createLabel(devClentComp, "Data Port : ");
-		dbPortText =confToolkit.createText(devClentComp,String.valueOf(BBATConfigXml.getInstance().getDatabase_Port()),SWT.BORDER);
+		dbPortText =confToolkit.createText(devClentComp,String.valueOf(BBATProperties.getInstance().getDatabase_Port()),SWT.BORDER);
 		dbPortText.setToolTipText(dbPortText.getText());
 		dbPortText.setLayoutData(new GridData(GridData.FILL_BOTH));
 		addNumberFilter(dbPortText);

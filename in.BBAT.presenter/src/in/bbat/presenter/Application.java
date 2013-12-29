@@ -3,7 +3,6 @@ package in.bbat.presenter;
 import in.BBAT.TestRunner.device.DeviceException;
 import in.BBAT.abstrakt.presenter.device.model.TestDeviceManager;
 import in.bbat.abstrakt.gui.ApplicationHelper;
-import in.bbat.configuration.BBATConfigXml;
 import in.bbat.logger.BBATLogger;
 
 import java.net.UnknownHostException;

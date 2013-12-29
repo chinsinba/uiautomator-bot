@@ -6,7 +6,7 @@ import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.Path;
 
 import in.BBAT.dataMine.manager.MineManager;
-import in.bbat.configuration.BBATConfigXml;
+import in.bbat.configuration.BBATProperties;
 import in.bbat.logger.BBATLogger;
 
 public class ApplicationHelper {
@@ -16,7 +16,7 @@ public class ApplicationHelper {
 		
 		
 		LOG.info("Initializing database");
-		MineManager.getInstance().createDb(BBATConfigXml.getInstance().getDatabase_Name(),BBATConfigXml.getInstance().getDatabase_IpAddress(),BBATConfigXml.getInstance().getDatabase_Port(),BBATConfigXml.getInstance().getDatabase_UserName(),BBATConfigXml.getInstance().getDatabase_Pwd(),false);
+		MineManager.getInstance().createDb(BBATProperties.getInstance().getDatabase_Name(),BBATProperties.getInstance().getDatabase_IpAddress(),BBATProperties.getInstance().getDatabase_Port(),BBATProperties.getInstance().getDatabase_UserName(),BBATProperties.getInstance().getDatabase_Pwd(),false);
 		
 		LOG.info("Initialized database");
 	}

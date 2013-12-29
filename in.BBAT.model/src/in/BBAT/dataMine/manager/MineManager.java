@@ -1,6 +1,7 @@
 package in.BBAT.dataMine.manager;
 
-import in.bbat.configuration.BBATConfigXml;
+import in.bbat.configuration.BBATProperties;
+import in.bbat.configuration.BBATProperties;
 import in.bbat.logger.BBATLogger;
 
 import java.io.PrintWriter;
@@ -38,7 +39,7 @@ public class MineManager {
 	public  void createDb(String dbName,String ipAddress, int port, String userName, String password,boolean networkDB) throws Exception {
 		if(networkDB){
 			LOG.info("Starting database");
-			startDBServer(BBATConfigXml.getInstance().getDatabase_IpAddress(),BBATConfigXml.getInstance().getDatabase_Port(),BBATConfigXml.getInstance().getDatabase_UserName(),BBATConfigXml.getInstance().getDatabase_Pwd());
+			startDBServer(BBATProperties.getInstance().getDatabase_IpAddress(),BBATProperties.getInstance().getDatabase_Port(),BBATProperties.getInstance().getDatabase_UserName(),BBATProperties.getInstance().getDatabase_Pwd());
 			LOG.info("Database started");
 		}
 		if(isDBPresent())

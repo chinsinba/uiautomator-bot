@@ -138,6 +138,7 @@ public class TestRunInfoView extends BBATViewPart {
 	}
 
 	public void setInput(TestDeviceRunModel sel) throws Exception{
+		
 		testRunItem.setText(sel.getDeviceName());
 		viewer.setInput(sel.getChildren());
 		viewer.refresh();

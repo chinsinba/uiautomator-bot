@@ -1,6 +1,6 @@
 package in.bbat.utility;
 
-import in.bbat.configuration.BBATConfigXml;
+import in.bbat.configuration.BBATProperties;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -27,16 +27,16 @@ public class DefaultValueSetter
 	public final static String UIWKSPCNAME ="UIAutoTestCases";
 	public final static String DATA ="data";
 
-	public static void initializeSDKPath() throws JAXBException, IOException
+	public static String initializeSDKPath() throws JAXBException, IOException
 	{
 
 		IScopeContext[] arrayOfIScopeContext = { InstanceScope.INSTANCE, DefaultScope.INSTANCE };
 		String sdkPathFromPreference = Platform.getPreferencesService().getString(ADT_PLUGIN_PREFERENCE, ADT_SDK_PREFERENCE_KEY, null, arrayOfIScopeContext);
 		if ((sdkPathFromPreference != null) && (isValidSDK(sdkPathFromPreference)))
 		{
-			BBATConfigXml.getInstance().setAndroid_SdkPath(sdkPathFromPreference);
-			BBATConfigXml.getInstance().save();
-			return;
+			/*BBATConfigXml.getInstance().setAndroid_SdkPath(sdkPathFromPreference);
+			BBATConfigXml.getInstance().save();*/
+			return sdkPathFromPreference;
 		}
 		String homeDirPath = System.getProperty(USER_HOME_PROPERTY);
 		if (homeDirPath != null)
@@ -52,8 +52,9 @@ public class DefaultValueSetter
 						FileInputStream localFileInputStream = new FileInputStream(ddmsConfigFile);
 						localProperties.load(localFileInputStream);
 						sdkPathFromPreference = (String)localProperties.get("lastSdkPath");
-						BBATConfigXml.getInstance().setAndroid_SdkPath(sdkPathFromPreference);
-						BBATConfigXml.getInstance().save();
+						/*BBATConfigXml.getInstance().setAndroid_SdkPath(sdkPathFromPreference);
+						BBATConfigXml.getInstance().save();*/
+						return sdkPathFromPreference;
 
 				}
 				catch (IOException localIOException)
@@ -62,6 +63,7 @@ public class DefaultValueSetter
 				}
 			}
 		}
+		return sdkPathFromPreference;
 	}
 
 	public static boolean isValidSDK(String paramString)
@@ -79,22 +81,24 @@ public class DefaultValueSetter
 	}
 
 
-	public static void initializeUIAutoWorkspace() throws JAXBException, IOException{
+	public static String initializeUIAutoWorkspace() throws JAXBException, IOException{
 		String s = System.getProperty(USER_HOME_PROPERTY)+Path.SEPARATOR+DATA_FOLDER+Path.SEPARATOR+UIWKSPCNAME;
-		BBATConfigXml.getInstance().setWkspc_UiAutomator(s);
-		BBATConfigXml.getInstance().save();
+		/*BBATConfigXml.getInstance().setWkspc_UiAutomator(s);
+		BBATConfigXml.getInstance().save();*/
+		return s;
 	}
 
-	public static void initializeDataBasePath() throws JAXBException, IOException{
+	public static String initializeDataBasePath() throws JAXBException, IOException{
 		String s = System.getProperty(USER_HOME_PROPERTY)+Path.SEPARATOR+DATA_FOLDER+Path.SEPARATOR+DATA;
-		BBATConfigXml.getInstance().setDatabase_Name(s);
-		BBATConfigXml.getInstance().save();
+	/*	BBATConfigXml.getInstance().setDatabase_Name(s);
+		BBATConfigXml.getInstance().save();*/
+		return s;
 	}
 
 
 	public static String getAdbPath()
 	{
-		File localFile1 = new File(BBATConfigXml.getInstance().getAndroid_SdkPath(), PLATFORM_TOOLS);
+		File localFile1 = new File(BBATProperties.getInstance().getAndroid_SdkPath(), PLATFORM_TOOLS);
 		File localFile2 = new File(localFile1, UNIX_ADB);
 		if (!localFile2.exists())
 			localFile2 = new File(localFile1, WINDOWS_ADB);

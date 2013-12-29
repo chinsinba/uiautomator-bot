@@ -1,6 +1,6 @@
 package in.BBAT.abstrakt.presenter.pkg.model;
 
-import in.bbat.configuration.BBATConfigXml;
+import in.bbat.configuration.BBATProperties;
 import in.bbat.logger.BBATLogger;
 
 import java.io.File;
@@ -54,8 +54,8 @@ public class BBATProject {
 				javaProject.setOutputLocation(binFolder.getFullPath(), null);
 
 				List<IClasspathEntry> entries = new ArrayList<IClasspathEntry>();
-				entries.add(JavaCore.newLibraryEntry(new Path(BBATConfigXml.getInstance().getAndroid_AndroidJarPath(apiLevel)), null, null));
-				entries.add(JavaCore.newLibraryEntry(new Path(BBATConfigXml.getInstance().getAndroid_UiAutomatorPath(apiLevel)), null, null));
+				entries.add(JavaCore.newLibraryEntry(new Path(BBATProperties.getInstance().getAndroid_AndroidJarPath(apiLevel)), null, null));
+				entries.add(JavaCore.newLibraryEntry(new Path(BBATProperties.getInstance().getAndroid_UiAutomatorPath(apiLevel)), null, null));
 				entries.add(JavaCore.newSourceEntry(project.getFullPath()));
 				IVMInstall vmInstall = JavaRuntime.getDefaultVMInstall();
 				LibraryLocation[] locations = JavaRuntime.getLibraryLocations(vmInstall);
@@ -197,6 +197,18 @@ public class BBATProject {
 			}
 		}catch(Exception e){
 			LOG.error(e);
+		}
+	}
+
+	public static void  deleteAllProjects(){
+		IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
+		IProject[] projects = root.getProjects();
+		for(IProject pro : projects){
+			try {
+				pro.delete(true, new NullProgressMonitor());
+			} catch (CoreException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 

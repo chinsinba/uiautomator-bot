@@ -5,11 +5,11 @@ import java.io.FilenameFilter;
 
 import org.eclipse.core.runtime.Path;
 
-import in.bbat.configuration.BBATConfigXml;
+import in.bbat.configuration.BBATProperties;
 
 public class AndroidSdkUtility {
 
-	public  final static  String  ANDROID_SDK = BBATConfigXml.getInstance().getAndroid_SdkPath();
+	public  final static  String  ANDROID_SDK = BBATProperties.getInstance().getAndroid_SdkPath();
 	public  final static  String PLATFORM = "platforms";
 
 	public  final static  String UIAUTOMATOR_JAR ="uiautomator.jar";

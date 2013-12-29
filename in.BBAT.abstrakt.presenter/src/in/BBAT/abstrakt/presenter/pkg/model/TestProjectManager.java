@@ -5,7 +5,7 @@ import in.BBAT.data.model.Entities.TestProjectEntity;
 import in.BBAT.data.model.Entities.TestSuiteEntity;
 import in.BBAT.dataMine.manager.JaxbExportImport;
 import in.BBAT.dataMine.manager.ProjectMineManager;
-import in.bbat.configuration.BBATConfigXml;
+import in.bbat.configuration.BBATProperties;
 import in.bbat.utility.FileUtils;
 import in.bbat.utility.ZipFiles;
 
@@ -84,7 +84,7 @@ public class TestProjectManager {
 			}
 		}
 		FileUtils.delete(new File(bbatFilePath));
-		FileUtils.copyFolder(new File(tempFile.getAbsolutePath()),new File(BBATConfigXml.getInstance().getWkspc_UiAutomator()));
+		FileUtils.copyFolder(new File(tempFile.getAbsolutePath()),new File(BBATProperties.getInstance().getWkspc_UiAutomator()));
 
 		FileUtils.delete(tempFile);
 	}
