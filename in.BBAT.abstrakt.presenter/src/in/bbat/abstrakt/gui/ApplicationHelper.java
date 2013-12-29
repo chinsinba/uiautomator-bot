@@ -13,12 +13,10 @@ public class ApplicationHelper {
 	private static final Logger LOG = BBATLogger.getLogger(ApplicationHelper.class.getName());
 
 	public static void initializeDb() throws UnknownHostException, Exception{
-		LOG.info("Starting database");
-		MineManager.getInstance().startDBServer(BBATConfigXml.getInstance().getDatabase_IpAddress(),BBATConfigXml.getInstance().getDatabase_Port(),BBATConfigXml.getInstance().getDatabase_UserName(),BBATConfigXml.getInstance().getDatabase_Pwd());
-		LOG.info("Database started");
+		
 		
 		LOG.info("Initializing database");
-		MineManager.getInstance().createDb(BBATConfigXml.getInstance().getDatabase_Name(),BBATConfigXml.getInstance().getDatabase_IpAddress(),BBATConfigXml.getInstance().getDatabase_Port(),BBATConfigXml.getInstance().getDatabase_UserName(),BBATConfigXml.getInstance().getDatabase_Pwd());
+		MineManager.getInstance().createDb(BBATConfigXml.getInstance().getDatabase_Name(),BBATConfigXml.getInstance().getDatabase_IpAddress(),BBATConfigXml.getInstance().getDatabase_Port(),BBATConfigXml.getInstance().getDatabase_UserName(),BBATConfigXml.getInstance().getDatabase_Pwd(),false);
 		
 		LOG.info("Initialized database");
 	}

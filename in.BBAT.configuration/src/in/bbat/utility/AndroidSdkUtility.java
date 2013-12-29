@@ -60,4 +60,60 @@ public class AndroidSdkUtility {
 		return DefaultValueSetter.getAdbPath();
 	}
 
+	public static int[] availablePlatforms(){
+		File andPlatForm_ = new File(ANDROID_SDK+Path.SEPARATOR+PLATFORM+Path.SEPARATOR);
+		String temp= "";
+		int[] apiLevel = null ;
+		if(andPlatForm_.exists()){
+			String[] foldNames = andPlatForm_.list(new FilenameFilter() {
+				@Override
+				public boolean accept(File file, String fileName) {
+					if(fileName.matches("android-"+"(\\d)+"))
+					{
+						return true;
+					}
+					return false;
+				}
+			});
+			apiLevel = new int[foldNames.length];
+			for(int i=0;i<foldNames.length;i++)
+			{
+				apiLevel[i]=Integer.parseInt(foldNames[i].replaceAll("android-", ""));
+			}
+		}
+		return apiLevel;
+
+	}
+
+	public static boolean isPlatformPresent(int apiLevel){
+		int[] availablePlatforms = availablePlatforms();
+		for(int i =0;i<availablePlatforms.length;i++){
+			if(apiLevel ==availablePlatforms[i])
+				return true;
+		}
+		return false;
+	}
+
+	public static int maximumApiLevel(){
+		int max =0;
+		int[] availablePlatforms = availablePlatforms();
+		for(int i =0;i<availablePlatforms.length;i++){
+			if(availablePlatforms[i]>max)
+				max =availablePlatforms[i];
+		}
+		return max;
+	}
+	
+	
+	public static boolean isUiAutoSupportingPlatformPresent(){
+		int uiAuto =16;
+		int[] availablePlatforms = availablePlatforms();
+		for(int i =0;i<availablePlatforms.length;i++){
+			if(availablePlatforms[i]>=uiAuto)
+				return true;
+		}
+		return false;
+	}
+	
+
 }

@@ -1,5 +1,8 @@
 package in.BBAT.dataMine.manager;
 
+import in.bbat.configuration.BBATConfigXml;
+import in.bbat.logger.BBATLogger;
+
 import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -8,6 +11,7 @@ import java.net.UnknownHostException;
 import javax.persistence.EntityManager;
 
 import org.apache.derby.drda.NetworkServerControl;
+import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.Path;
 
 /**
@@ -19,7 +23,7 @@ public class MineManager {
 	private static NetworkServerControl server;
 	private static final String UNIT_NAME ="BBATDATA";
 	private static MineManager instance_;
-
+	private static final Logger LOG = BBATLogger.getLogger(MineManager.class.getName());
 	private MineManager(){
 
 	}
@@ -31,11 +35,20 @@ public class MineManager {
 		return instance_;
 	}
 
-	public  void createDb(String dbName,String ipAddress, int port, String userName, String password) throws Exception {
+	public  void createDb(String dbName,String ipAddress, int port, String userName, String password,boolean networkDB) throws Exception {
+		if(networkDB){
+			LOG.info("Starting database");
+			startDBServer(BBATConfigXml.getInstance().getDatabase_IpAddress(),BBATConfigXml.getInstance().getDatabase_Port(),BBATConfigXml.getInstance().getDatabase_UserName(),BBATConfigXml.getInstance().getDatabase_Pwd());
+			LOG.info("Database started");
+		}
 		if(isDBPresent())
 			return;
 		String DB_ADDRESS =ipAddress+":"+port;
-		MineManagerHelper.init(UNIT_NAME, false, true, DB_ADDRESS + Path.SEPARATOR + dbName,userName,password);
+		if(networkDB)
+			MineManagerHelper.init(UNIT_NAME, false, networkDB, DB_ADDRESS + Path.SEPARATOR + dbName,userName,password);
+		else {
+			MineManagerHelper.init(UNIT_NAME, false, networkDB, dbName,userName,password);
+		}
 	}
 
 	private boolean isDBPresent() {
@@ -43,8 +56,8 @@ public class MineManager {
 	}
 
 	public  void connectDB(String dbName) throws Exception {
-//		String DB_ADDRESS =ConfigXml.getInstance().getDatabase_IpAddress()+":"+ConfigXml.getInstance().getDatabase_Port();
-//		MineManagerHelper.init(UNIT_NAME, false, true, DB_ADDRESS + Path.SEPARATOR + dbName,"app","app");
+		//		String DB_ADDRESS =ConfigXml.getInstance().getDatabase_IpAddress()+":"+ConfigXml.getInstance().getDatabase_Port();
+		//		MineManagerHelper.init(UNIT_NAME, false, true, DB_ADDRESS + Path.SEPARATOR + dbName,"app","app");
 	}
 
 	public  void abortTransaction()

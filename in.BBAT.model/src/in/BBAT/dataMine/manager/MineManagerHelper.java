@@ -48,7 +48,10 @@ public class MineManagerHelper {
 
 		getPropertiesExistingTable(properties);
 		String url;
+		if(networkDb)
 		url = "jdbc:derby://" + dbPath + ";create=true";
+		else
+			url = "jdbc:derby:" + dbPath + ";create=true";
 		properties.put(PersistenceUnitProperties.JDBC_URL, url);
 		/*if (createTable) {
 			getPropertiesCreateTable(properties);

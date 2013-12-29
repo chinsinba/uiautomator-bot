@@ -201,8 +201,8 @@ public class SettingsWindow extends ApplicationWindow  {
 	}
 
 	protected void saveConfigurationsToFile() {
-		if(!saveDbSettings())
-			return;
+		/*if(!saveDbSettings())
+			return;*/
 		if(!saveDeviceSettings())
 			return;
 		try {
@@ -328,15 +328,20 @@ public class SettingsWindow extends ApplicationWindow  {
 			addTextFocuslisteners(wkspcPathText);
 		}
 
+//		createPortComponent(confToolkit, devClentComp);
+
+
+		deviceSettingSection.setClient(devClentComp);
+	}
+
+	private void createPortComponent(FormToolkit confToolkit,
+			Composite devClentComp) {
 		confToolkit.createLabel(devClentComp, "Data Port : ");
 		dbPortText =confToolkit.createText(devClentComp,String.valueOf(BBATConfigXml.getInstance().getDatabase_Port()),SWT.BORDER);
 		dbPortText.setToolTipText(dbPortText.getText());
 		dbPortText.setLayoutData(new GridData(GridData.FILL_BOTH));
 		addNumberFilter(dbPortText);
 		addTextFocuslisteners(dbPortText);
-
-
-		deviceSettingSection.setClient(devClentComp);
 	}
 
 	public void addNumberFilter(Text text)
