@@ -2,16 +2,17 @@ package in.BBAT.presenter.history.handlers;
 
 import in.BBAT.abstrakt.presenter.run.model.TestRunModel;
 import in.bbat.logger.BBATLogger;
-import in.bbat.presenter.views.BBATViewPart;
 import in.bbat.presenter.views.history.TestRunHistoryView;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.commands.ExecutionEvent;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jface.dialogs.MessageDialog;
-import org.eclipse.swt.custom.BusyIndicator;
-import org.eclipse.swt.widgets.Display;
+import org.eclipse.jface.dialogs.ProgressMonitorDialog;
+import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.ui.PlatformUI;
 
 public class DeleteTestRunHandler extends AbstractTestRunBrowserHandler {
@@ -23,27 +24,37 @@ public class DeleteTestRunHandler extends AbstractTestRunBrowserHandler {
 		LOG.info("Delete test run ");
 		if(!MessageDialog.openQuestion(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(), "Delete","Do you want to delete ?"))
 			return null;
-		BusyIndicator.showWhile(Display.getDefault(), new Runnable() {
-
-			@Override
-			public void run() {
-				try {
-					for(Object pkgObj :selectedObjects){
-						((TestRunModel)pkgObj).delete();
-					}
-				} catch (Exception e) {
-					LOG.error(e);
-				}				
-			}
-		});
-
-
-		BBATViewPart view = (BBATViewPart) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().findView(TestRunHistoryView.ID);
 		try {
-			view.refresh();
-		} catch (Exception e) {
+			ProgressMonitorDialog progressDialog = new ProgressMonitorDialog(null);
+			progressDialog.run(true, true, new IRunnableWithProgress() {
+
+				@Override
+				public void run(IProgressMonitor monitor) throws InvocationTargetException, InterruptedException {
+					try {
+						monitor.beginTask("Deleting ...", selectedObjects.size());
+						for(Object pkgObj :selectedObjects){
+							if(monitor.isCanceled()){
+								break;
+							}
+							monitor.setTaskName("Deleting "+((TestRunModel)pkgObj).getLabel() );
+							((TestRunModel)pkgObj).delete();
+							TestRunHistoryView.refreshView();
+							monitor.worked(1);
+						}
+						monitor.done();
+					} catch (Exception e) {
+						LOG.error(e);
+					}			
+				}
+
+			});
+		} catch (InvocationTargetException e) {
+			LOG.error(e);
+		} catch (InterruptedException e) {
 			LOG.error(e);
 		}
+
+		
 		return null;
 	}
 

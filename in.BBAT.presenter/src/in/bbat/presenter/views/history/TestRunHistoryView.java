@@ -1,10 +1,8 @@
 package in.bbat.presenter.views.history;
 
-import in.BBAT.abstrakt.presenter.run.model.AutomatorLogModel;
 import in.BBAT.abstrakt.presenter.run.model.TestDeviceRunModel;
 import in.BBAT.abstrakt.presenter.run.model.TestRunManager;
 import in.BBAT.abstrakt.presenter.run.model.TestRunModel;
-import in.BBAT.data.model.Entities.TestRunEntity;
 import in.BBAT.presenter.contentProviders.TestRunHistoryContentProvider;
 import in.BBAT.presenter.labelProviders.TestRunHistoryLabelProvider;
 import in.bbat.abstrakt.gui.BBATImageManager;
@@ -29,6 +27,7 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.TreeColumn;
+import org.eclipse.ui.PlatformUI;
 
 public class TestRunHistoryView extends BBATViewPart {
 
@@ -188,7 +187,7 @@ public class TestRunHistoryView extends BBATViewPart {
 
 			if(element instanceof TestRunModel){
 
-				if(("RUN_"+((TestRunEntity)((TestRunModel) element).getEntity()).getId()).toLowerCase().matches(searchString)){
+				if((((TestRunModel) element).getLabel()).toLowerCase().matches(searchString)){
 					return true;
 				}
 			}
@@ -199,5 +198,14 @@ public class TestRunHistoryView extends BBATViewPart {
 			return false;
 		}
 
+	}
+
+	public static void refreshView(){
+		BBATViewPart view = (BBATViewPart) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().findView(ID);
+		try {
+			view.refresh();
+		} catch (Exception e) {
+			LOG.error(e);
+		}
 	}
 }

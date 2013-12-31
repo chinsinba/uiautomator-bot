@@ -26,9 +26,14 @@ public class TestRunModel extends AbstractTreeModel {
 
 	@Override
 	public String getLabel() {
-		return null;
+		return getName();
 	}
 
+	@Override
+	public String getName() {
+		return "RUN_"+getEntity().getId();
+	}
+	
 	@Override
 	public Image getImage() {
 		return null;
