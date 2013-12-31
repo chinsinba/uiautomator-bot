@@ -121,14 +121,14 @@ public class TestRunInstanceModel extends AbstractTreeModel {
 
 	}
 
-	public void addDeviceLog(DeviceLogModel log){
+/*	public void addDeviceLog(DeviceLogModel log){
 		deviceLogs.add(log);
 	}
 
 
 	public List<DeviceLogModel> getDeviceLogs(){
 		return deviceLogs;
-	}
+	}*/
 
 	public List<AutomatorLogModel> getAutoLogs(){
 		return autoLogs;

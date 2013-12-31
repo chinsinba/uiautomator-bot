@@ -44,7 +44,7 @@ public class DeviceLogListener implements ILogListener, IScreenShotListener{
 			tempLogCatMessageList.add(message);
 			DeviceLogModel log  = new DeviceLogModel(testRunCase,message);
 			log.save();
-			testRunCase.addDeviceLog(log);
+//			testRunCase.addDeviceLog(log);
 		}
 	}
 

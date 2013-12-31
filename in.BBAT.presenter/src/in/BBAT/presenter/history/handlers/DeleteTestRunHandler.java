@@ -31,12 +31,13 @@ public class DeleteTestRunHandler extends AbstractTestRunBrowserHandler {
 				@Override
 				public void run(IProgressMonitor monitor) throws InvocationTargetException, InterruptedException {
 					try {
-						monitor.beginTask("Deleting ...", selectedObjects.size());
+						monitor.beginTask("Deleting ...", selectedObjects.size()*2);
 						for(Object pkgObj :selectedObjects){
 							if(monitor.isCanceled()){
 								break;
 							}
-							monitor.setTaskName("Deleting "+((TestRunModel)pkgObj).getLabel() );
+							monitor.setTaskName("Deleting  test run :"+((TestRunModel)pkgObj).getLabel() );
+							monitor.worked(1);
 							((TestRunModel)pkgObj).delete();
 							TestRunHistoryView.refreshView();
 							monitor.worked(1);
