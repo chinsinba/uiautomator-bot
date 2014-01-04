@@ -97,6 +97,9 @@ public class TestCaseExecutionListener implements ITestRunListener {
 
 	public void processScreenshot(RawImage rawImage,TestStatus status) {
 
+		if(rawImage==null){
+			return;
+		}
 		PaletteData palette = new PaletteData(rawImage.getRedMask(),rawImage.getGreenMask(),rawImage.getBlueMask());
 		ImageData imageData = new ImageData(rawImage.width, rawImage.height,rawImage.bpp, palette, 1, rawImage.data);
 		ImageLoader loader = new ImageLoader();
