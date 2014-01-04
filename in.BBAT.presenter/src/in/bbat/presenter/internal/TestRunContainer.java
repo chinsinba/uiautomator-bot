@@ -97,7 +97,13 @@ public class TestRunContainer {
 		public void deviceRemoved(AndroidDevice device) {
 			removeDeviceRun(device);
 			TestRunnerView.refreshView();
-			MessageDialog.openInformation(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(), "Device Removed", "Device disconnected.");
+			Display.getDefault().asyncExec(new Runnable() {
+				@Override
+				public void run() {
+					MessageDialog.openInformation(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(), "Device Removed", "Device disconnected.");					
+				}
+			});
+
 
 		}
 

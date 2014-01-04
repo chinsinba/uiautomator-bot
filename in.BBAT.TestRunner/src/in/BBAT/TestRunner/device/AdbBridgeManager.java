@@ -101,7 +101,7 @@ public class AdbBridgeManager {
 			boolean changeClientList = ((changeMask & IDevice.CHANGE_CLIENT_LIST) != 0);
 			@SuppressWarnings("unused")
 			boolean changeBuild = ((changeMask & IDevice.CHANGE_BUILD_INFO) != 0);
-			System.out.println(device.getState());
+//			System.out.println(device.getState());
 			IAndroidDevice iAndroidDevice = iDeviceMap.get(device);
 			for(IDeviceConnectionListener listener :connectionListeners){
 				listener.deviceChanged(iAndroidDevice, changeMask);
