@@ -21,7 +21,7 @@ public class TestDeviceManager  implements IDeviceConnectionListener{
 	private static TestDeviceManager instance;
 
 	private static final Logger LOG = BBATLogger.getLogger(TestDeviceManager.class.getName());
-	
+
 	private Map<IAndroidDevice, AndroidDevice> iDeviceMap = new HashMap<IAndroidDevice, AndroidDevice>();
 
 	private List<IDeviceModelChangeListener> listners = new ArrayList<IDeviceModelChangeListener>();
@@ -79,6 +79,11 @@ public class TestDeviceManager  implements IDeviceConnectionListener{
 
 	@Override
 	public void deviceChanged(IAndroidDevice device, int changeMask) {
+		AndroidDevice dev = iDeviceMap.get(device);
+		for(IDeviceModelChangeListener listnr : listners)
+		{
+			listnr.deviceAdded(dev);
+		}
 	}
 
 	public static void init(String adbLocation) throws DeviceException {

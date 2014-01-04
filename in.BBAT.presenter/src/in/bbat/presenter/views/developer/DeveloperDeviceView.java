@@ -11,15 +11,20 @@ import in.bbat.logger.BBATLogger;
 import in.bbat.presenter.views.BBATViewPart;
 
 import org.apache.log4j.Logger;
+import org.eclipse.jface.layout.TableColumnLayout;
 import org.eclipse.jface.util.LocalSelectionTransfer;
 import org.eclipse.jface.viewers.ArrayContentProvider;
+import org.eclipse.jface.viewers.ColumnWeightData;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.TableViewer;
+import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.dnd.DND;
 import org.eclipse.swt.dnd.Transfer;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.TableColumn;
 
 public class DeveloperDeviceView extends BBATViewPart {
 
@@ -31,32 +36,62 @@ public class DeveloperDeviceView extends BBATViewPart {
 	@Override
 	public void createPartControl(Composite parent) {
 		viewer = new TableViewer(parent, SWT.H_SCROLL| SWT.V_SCROLL);
+		viewer.getTable().setLinesVisible(true);
+		//		viewer.getTable().setHeaderVisible(true);
+		createRunColumns(parent, viewer);
 		viewer.setContentProvider(new ArrayContentProvider());
 		viewer.setLabelProvider(new DeviceViewLabelProvider());
 		// Provide the input to the ContentProvider
 		List<AndroidDevice> devices = null;
 		try{
-		TestDeviceManager.getInstance().addDeviceModelChangeListener(new DeviceModelListener());
-		devices = TestDeviceManager.getInstance().getDevices();
-		viewer.setInput(devices);
+			TestDeviceManager.getInstance().addDeviceModelChangeListener(new DeviceModelListener());
+			devices = TestDeviceManager.getInstance().getDevices();
+			viewer.setInput(devices);
 		}catch(Exception e){
 			LOG.error(e);
 		}
-		
+
 		addMenuManager(viewer);
 		getViewSite().setSelectionProvider(viewer);
 		createDragSupport();
 	}
 
+	private void createRunColumns(Composite parent, TableViewer viewer2) {
+
+		String[] titles = { "","" };
+		int[] bounds = { 60,40};
+
+		TableColumnLayout layout = new TableColumnLayout();
+		parent.setLayout(layout);
+
+		TableViewerColumn col =createTableViewerColumn(viewer,null, titles[0],bounds[0]);
+		layout.setColumnData(col.getColumn(), new ColumnWeightData(bounds[0]));
+
+		TableViewerColumn col1 = createTableViewerColumn(viewer, null, titles[1],bounds[1]);
+		layout.setColumnData(col1.getColumn(), new ColumnWeightData(bounds[1]));
+	}
+
+	private TableViewerColumn createTableViewerColumn(TableViewer viewer,
+			Image imag, String titles, int bounds) {
+		final TableViewerColumn viewerColumn = new TableViewerColumn(viewer,
+				SWT.NONE);
+		final TableColumn column = viewerColumn.getColumn();
+		column.setText(titles);
+		column.setToolTipText(titles);
+		column.setWidth(bounds);
+		column.setResizable(true);
+		column.setMoveable(true);
+		return viewerColumn;
+	}
+
 	@Override
 	public void setFocus() {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	protected void createDragSupport() {
-		
+
 		int operations = DND.DROP_COPY| DND.DROP_MOVE;
 		Transfer[] transferTypes = new Transfer[]{LocalSelectionTransfer.getTransfer()};
 		viewer.addDragSupport(operations, transferTypes, new DeviceDragListener(viewer));
@@ -80,7 +115,7 @@ public class DeveloperDeviceView extends BBATViewPart {
 			Display.getDefault().asyncExec(new Runnable() {
 				@Override
 				public void run() {
-					refresh();	
+					DeveloperDeviceView.this.refresh();	
 				}
 			});
 		}
@@ -90,13 +125,19 @@ public class DeveloperDeviceView extends BBATViewPart {
 		public void deviceRemoved(AndroidDevice device) {
 			refreshInUIThread();
 		}
+
+
+		@Override
+		public void refresh(AndroidDevice device) {
+			refreshInUIThread();			
+		}
 	}
 
 	@Override
 	public ISelection getSelectedElements() {
 		return viewer.getSelection();
 	}
-	
-	
-	
+
+
+
 }

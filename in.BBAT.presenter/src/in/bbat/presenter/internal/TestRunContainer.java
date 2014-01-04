@@ -55,7 +55,7 @@ public class TestRunContainer {
 
 	public void clearDeviceRuns(){
 		for(DeviceTestRun run : deviceTestRuns){
-//			run.clear();
+			//			run.clear();
 		}
 		deviceTestRuns.clear();
 	}
@@ -96,18 +96,13 @@ public class TestRunContainer {
 		@Override
 		public void deviceRemoved(AndroidDevice device) {
 			removeDeviceRun(device);
-			Display.getDefault().asyncExec(new Runnable() {
-				@Override
-				public void run() {
-					BBATViewPart testRunView = (BBATViewPart) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().findView(TestRunnerView.ID);
-					try {
-						testRunView.refresh();
-					} catch (Exception e) {
-						LOG.error(e);
-					}		
-					MessageDialog.openInformation(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(), "Device Removed", "Device disconnected.");
-				}
-			});
+			TestRunnerView.refreshView();
+			MessageDialog.openInformation(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(), "Device Removed", "Device disconnected.");
+
+		}
+
+		@Override
+		public void refresh(AndroidDevice device) {
 
 		}
 	}

@@ -1,7 +1,6 @@
 package in.BBAT.presenter.labelProviders;
 
 import in.BBAT.abstrakt.presenter.device.model.AndroidDevice;
-import in.bbat.abstrakt.gui.BBATImageManager;
 import in.bbat.logger.BBATLogger;
 import in.bbat.presenter.internal.DeviceTestRun;
 
@@ -16,15 +15,31 @@ public class DeviceViewLabelProvider extends LabelProvider implements ITableLabe
 	@Override
 	public Image getColumnImage(Object element, int columnIndex) {
 
-		if(element instanceof AndroidDevice)
-			return ((AndroidDevice) element).getImage();
+		if(element instanceof AndroidDevice){
+			switch (columnIndex) {
+			case 0:
+				return ((AndroidDevice) element).getImage();
+			case 1:
+				return null;
+			default:
+				break;
+			}
+		}
 		return null;
 	}
 
 	@Override
 	public String getColumnText(Object element, int columnIndex) {
-		if(element instanceof AndroidDevice)
-			return ((AndroidDevice) element).getLabel();
+		if(element instanceof AndroidDevice){
+			switch (columnIndex) {
+			case 0:
+				return ((AndroidDevice) element).getLabel();
+			case 1:
+				return ((AndroidDevice) element).getiDevice().getMonkeyDevice().getState().toString();
+			default:
+				break;
+			}
+		}
 		if(element  instanceof DeviceTestRun){
 			switch (columnIndex) {
 			case 0:
@@ -35,7 +50,6 @@ public class DeviceViewLabelProvider extends LabelProvider implements ITableLabe
 				break;
 			}
 		}
-
 		return element.toString();
 	}
 }

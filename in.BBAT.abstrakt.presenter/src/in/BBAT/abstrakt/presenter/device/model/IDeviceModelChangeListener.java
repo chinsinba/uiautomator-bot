@@ -7,4 +7,6 @@ public interface IDeviceModelChangeListener {
 	
 	void deviceRemoved(AndroidDevice device);
 	
+	void refresh(AndroidDevice device);
+	
 }

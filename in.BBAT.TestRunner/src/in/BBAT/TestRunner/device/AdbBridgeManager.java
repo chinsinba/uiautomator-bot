@@ -1,5 +1,6 @@
 package in.BBAT.TestRunner.device;
 
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -91,8 +92,20 @@ public class AdbBridgeManager {
 		}
 
 		@Override
-		public void deviceChanged(IDevice arg0, int changeMask) {
+		public void deviceChanged(IDevice device, int changeMask) {
 
+			// See if these need to be used or not.
+			@SuppressWarnings("unused")
+			boolean changeState = ((changeMask & IDevice.CHANGE_STATE) != 0);
+			@SuppressWarnings("unused")
+			boolean changeClientList = ((changeMask & IDevice.CHANGE_CLIENT_LIST) != 0);
+			@SuppressWarnings("unused")
+			boolean changeBuild = ((changeMask & IDevice.CHANGE_BUILD_INFO) != 0);
+			System.out.println(device.getState());
+			IAndroidDevice iAndroidDevice = iDeviceMap.get(device);
+			for(IDeviceConnectionListener listener :connectionListeners){
+				listener.deviceChanged(iAndroidDevice, changeMask);
+			}
 		}
 	}
 

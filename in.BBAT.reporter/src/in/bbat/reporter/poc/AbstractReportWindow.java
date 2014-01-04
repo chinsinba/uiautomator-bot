@@ -32,7 +32,6 @@ public abstract class AbstractReportWindow extends ApplicationWindow {
 		getShell().setMaximized(true);
 		parent.setSize(new Point(localRectangle.width-200, localRectangle.height));
 	}
-	abstract protected String getWindowTitle();
 
 
 	@Override
@@ -67,4 +66,6 @@ public abstract class AbstractReportWindow extends ApplicationWindow {
 	protected abstract Map getParameters();
 
 	protected abstract String getReportName();
+	
+	abstract protected String getWindowTitle();
 }
