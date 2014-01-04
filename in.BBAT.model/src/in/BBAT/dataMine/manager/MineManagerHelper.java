@@ -2,9 +2,11 @@ package in.BBAT.dataMine.manager;
 
 import in.BBAT.dataMine.Activator;
 
+import java.sql.Connection;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
@@ -118,4 +120,15 @@ public class MineManagerHelper {
 			emHelp = null;
 		}
 	}
+	
+	public Connection getConnection(){
+		
+		EntityManager createEntityManager = emFactory.createEntityManager();
+		createEntityManager.getTransaction().begin();
+		Connection con = createEntityManager.unwrap(java.sql.Connection.class);
+		createEntityManager.getTransaction().commit();
+		return con;
+				
+	}
 }
+
