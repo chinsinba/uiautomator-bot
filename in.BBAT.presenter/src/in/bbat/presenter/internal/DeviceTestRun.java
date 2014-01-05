@@ -102,11 +102,14 @@ public class DeviceTestRun {
 		Job testRunJob = new Job(testDeviceRun.getDeviceName()) {
 			@Override
 			protected IStatus run(IProgressMonitor monitor) {
+				monitor.beginTask("Executing "+testDeviceRun.getDeviceName(),getRunInstances().size()+2);
+				monitor.worked(1);
 				TestRunner runner = new TestRunner(jar,getDevice().getiDevice());
 				for (TestRunInstanceModel testRunCase : getRunInstances()) {
 					if(isStopped()){
 						break;
 					}
+					monitor.worked(1);
 					testRunCase.setStartTime(System.currentTimeMillis());
 					testRunCase.setStatus(TestStatus.EXECUTING.getStatus());
 					testRunCase.update();
@@ -120,6 +123,7 @@ public class DeviceTestRun {
 				testRun.setEndTime(new Timestamp(System.currentTimeMillis()));
 				testRun.update();
 				updateStatus(TestStatus.EXECUTED);
+				monitor.done(); 
 				return Status.OK_STATUS;
 			}
 		};

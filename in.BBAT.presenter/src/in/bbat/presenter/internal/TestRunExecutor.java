@@ -34,15 +34,21 @@ public class TestRunExecutor {
 	}
 
 	public void run() {
-		Job job = new Job("Uiautomator") {
+		Job job = new Job("Test Run Execution") {
 			@Override
 			protected IStatus run(IProgressMonitor monitor) {
+				monitor.beginTask("Create Uiautomator jar", deviceTestRuns.size()+2);
+				monitor.worked(1);
 				UiAutoTestCaseJar jar = new UiAutoTestCaseJar(getTestScriptPaths());
+				monitor.worked(1);
+				
 				DeviceRunListener listener = new DeviceRunListener(deviceTestRuns.size());
 				for (DeviceTestRun deviceRun : deviceTestRuns) {
+					monitor.worked(1);
 					deviceRun.addListener(listener);
 					deviceRun.execute(jar,testRun);
 				}
+				monitor.done();
 				return Status.OK_STATUS;
 			}
 		};
