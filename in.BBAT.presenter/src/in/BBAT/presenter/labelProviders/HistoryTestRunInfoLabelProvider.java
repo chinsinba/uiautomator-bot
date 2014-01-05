@@ -36,7 +36,9 @@ ITableLabelProvider {
 			case 3:
 				return ((TestRunInstanceModel) element).getStatus();
 			case 4:
-				return String.valueOf(((TestRunInstanceModel) element).getTimeTaken()/1000f);			default:
+				return String.valueOf(((TestRunInstanceModel) element).getTimeTaken()/1000f);			
+				
+			default:
 					break;
 			}
 		}

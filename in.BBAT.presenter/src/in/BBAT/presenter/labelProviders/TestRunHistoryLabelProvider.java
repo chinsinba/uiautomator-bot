@@ -3,6 +3,7 @@ package in.BBAT.presenter.labelProviders;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 import in.BBAT.abstrakt.presenter.run.model.TestDeviceRunModel;
 import in.BBAT.abstrakt.presenter.run.model.TestRunModel;
@@ -35,9 +36,7 @@ public class TestRunHistoryLabelProvider extends LabelProvider implements ITable
 		if(element instanceof TestRunModel){
 			switch (columnIndex) {
 			case 0:
-				String s= "RUN_"+((TestRunEntity)((TestRunModel) element).getEntity()).getId();
-
-				return s/*+" ["+ ((TestRunModel) element).getStartTime() +"]"*/;
+				return ((TestRunModel) element).getLabel();
 			}			
 		}
 		if(element instanceof TestDeviceRunModel)
@@ -46,6 +45,7 @@ public class TestRunHistoryLabelProvider extends LabelProvider implements ITable
 			case 0:
 				return ((TestDeviceRunModel) element).getDeviceName();
 			case 1:
+
 				DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 				Date date = new Date(((TestDeviceRunModel) element).getStartTime().getTime());
 				return dateFormat.format(date);
@@ -53,7 +53,11 @@ public class TestRunHistoryLabelProvider extends LabelProvider implements ITable
 				return ((TestDeviceRunModel) element).getStatus();
 
 			case 3:
-				return  String.valueOf(((TestDeviceRunModel) element).getTimeTaken()/1000f);
+				long timeInmilis =((TestDeviceRunModel) element).getTimeTaken();
+				return  String.format("%d : %d : %d ",TimeUnit.MILLISECONDS.toHours(timeInmilis),
+						TimeUnit.MILLISECONDS.toMinutes(timeInmilis) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(timeInmilis)),
+						TimeUnit.MILLISECONDS.toSeconds(timeInmilis) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(timeInmilis))
+						);
 			}
 		}
 		return null;

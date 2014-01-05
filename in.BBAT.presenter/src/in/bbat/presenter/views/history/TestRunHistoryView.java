@@ -148,7 +148,7 @@ public class TestRunHistoryView extends BBATViewPart {
 		lay.setColumnData(col, new ColumnWeightData(20));
 
 		col = new TreeColumn(viewer.getTree(), SWT.LEFT);
-		col.setText("Time(s)");
+		col.setText("Time");
 		col.setImage(BBATImageManager.getInstance().getImage(BBATImageManager.TIME));
 		comp.setLayout(lay);
 		lay.setColumnData(col, new ColumnWeightData(20));
