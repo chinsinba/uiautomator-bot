@@ -252,6 +252,9 @@ public class DeviceTestRun {
 		return getCount(TestStatus.ERROR.getStatus());
 	}
 
+	public int noOfExecutedCases(){
+		return noOfErrorCases()+noOfFailedCases()+noOfPassedCases();
+	}
 	public List<String> getDistinctScriptPaths(){
 		List<String> testScriptPaths = new ArrayList<String>();
 

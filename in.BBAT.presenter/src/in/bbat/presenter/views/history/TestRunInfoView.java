@@ -1,7 +1,9 @@
 package in.bbat.presenter.views.history;
 
+import in.BBAT.abstrakt.gui.model.AbstractTreeModel;
 import in.BBAT.abstrakt.presenter.run.model.TestDeviceRunModel;
 import in.BBAT.abstrakt.presenter.run.model.TestRunInstanceModel;
+import in.BBAT.abstrakt.presenter.run.model.TestStatus;
 import in.BBAT.presenter.labelProviders.HistoryTestRunInfoLabelProvider;
 import in.bbat.abstrakt.gui.BBATImageManager;
 import in.bbat.logger.BBATLogger;
@@ -10,6 +12,7 @@ import in.bbat.presenter.views.tester.AutomatorLogView;
 import in.bbat.presenter.views.tester.TestLogView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.eclipse.jface.layout.TableColumnLayout;
@@ -26,6 +29,7 @@ import org.eclipse.swt.custom.CTabFolder;
 import org.eclipse.swt.custom.CTabItem;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.ui.IViewPart;
 import org.eclipse.ui.PartInitException;
@@ -37,7 +41,7 @@ public class TestRunInfoView extends BBATViewPart {
 
 	public static final String ID = "in.BBAT.presenter.history.TestRunInstanceView";
 	private static final Logger LOG = BBATLogger.getLogger(TestRunInfoView.class.getName());
-	
+
 	private CTabFolder testRunFolder;
 	private CTabItem testRunItem;
 	private TableViewer viewer;
@@ -72,7 +76,10 @@ public class TestRunInfoView extends BBATViewPart {
 			public void doubleClick(DoubleClickEvent event) {
 				try {
 					Object sel = ((IStructuredSelection)event.getSelection()).getFirstElement();
-
+					if(((TestRunInstanceModel)sel).getStatus().equalsIgnoreCase(TestStatus.NOTEXECUTED.toString())){
+						return ;
+					}
+					
 					BBATViewPart.hideView(HistoryDeviceLogView.ID);
 					TestLogView view  = (TestLogView) BBATViewPart.openView(HistoryDeviceLogView.ID);
 					view.bufferChanged(((TestRunInstanceModel)sel).getDeviceLogsFromDB(), new ArrayList<LogCatMessage>());
@@ -137,11 +144,26 @@ public class TestRunInfoView extends BBATViewPart {
 		return viewerColumn;
 	}
 
-	public void setInput(TestDeviceRunModel sel) throws Exception{
-		
-		testRunItem.setText(sel.getDeviceName());
-		viewer.setInput(sel.getChildren());
+	public void setInput(final TestDeviceRunModel sel) throws Exception{
+		final List<AbstractTreeModel> children = sel.getChildren();
+		viewer.setInput(children);
 		viewer.refresh();
+
+		Display.getDefault().asyncExec(new Runnable() {
+
+			@Override
+			public void run() {
+				int count =0;
+				for(AbstractTreeModel mod : children){
+					if(!((TestRunInstanceModel)mod).getStatus().equalsIgnoreCase(TestStatus.NOTEXECUTED.toString())){
+						count++;
+					}
+				}
+				testRunItem.setText(sel.getDeviceName() +"("+count+"/"+children.size()+")");				
+			}
+		});
+
+
 
 	}
 
