@@ -1,6 +1,5 @@
 package in.BBAT.testRunner.runner;
 
-import in.BBAT.TestRunner.device.TestDevice;
 import in.bbat.configuration.BBATProperties;
 import in.bbat.logger.BBATLogger;
 import in.bbat.utility.FileUtils;

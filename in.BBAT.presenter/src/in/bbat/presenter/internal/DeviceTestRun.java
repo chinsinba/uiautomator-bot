@@ -99,7 +99,7 @@ public class DeviceTestRun {
 		updateStatus(TestStatus.EXECUTING);
 		testDeviceRun.setStartTime(System.currentTimeMillis());
 		testDeviceRun.update();
-		Job testRunJob = new Job("Execute") {
+		Job testRunJob = new Job(testDeviceRun.getDeviceName()) {
 			@Override
 			protected IStatus run(IProgressMonitor monitor) {
 				TestRunner runner = new TestRunner(jar,getDevice().getiDevice());

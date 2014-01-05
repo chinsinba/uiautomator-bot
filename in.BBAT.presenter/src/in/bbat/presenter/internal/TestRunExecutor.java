@@ -13,6 +13,10 @@ import java.util.List;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.ui.PlatformUI;
 
 
@@ -30,12 +34,20 @@ public class TestRunExecutor {
 	}
 
 	public void run() {
-		UiAutoTestCaseJar jar = new UiAutoTestCaseJar(getTestScriptPaths());
-		DeviceRunListener listener = new DeviceRunListener(deviceTestRuns.size());
-		for (DeviceTestRun deviceRun : deviceTestRuns) {
-			deviceRun.addListener(listener);
-			deviceRun.execute(jar,testRun);
-		}
+		Job job = new Job("Uiautomator") {
+			@Override
+			protected IStatus run(IProgressMonitor monitor) {
+				UiAutoTestCaseJar jar = new UiAutoTestCaseJar(getTestScriptPaths());
+				DeviceRunListener listener = new DeviceRunListener(deviceTestRuns.size());
+				for (DeviceTestRun deviceRun : deviceTestRuns) {
+					deviceRun.addListener(listener);
+					deviceRun.execute(jar,testRun);
+				}
+				return Status.OK_STATUS;
+			}
+		};
+		job.schedule();
+		
 	}
 
 	public List<String> getTestScriptPaths() {

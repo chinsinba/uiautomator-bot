@@ -4,6 +4,7 @@ import in.bbat.logger.BBATLogger;
 import in.bbat.presenter.internal.TestRunExecutionManager;
 import in.bbat.presenter.views.tester.AutomatorLogView;
 import in.bbat.presenter.views.tester.TestLogView;
+import in.bbat.presenter.views.tester.TestRunnerView;
 
 import java.util.List;
 
@@ -29,6 +30,7 @@ public class ExecuteTestRunHandler extends AbstractTestRunnerHandler {
 			PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().hideView(view);
 
 		TestRunExecutionManager.getInstance().execute();
+		TestRunnerView.refreshView();
 		return null;
 
 	}
