@@ -89,7 +89,7 @@ public class DeviceTestRun {
 
 	public void execute(final UiAutoTestCaseJar jar,final TestRunModel testRun) {
 		
-		Job testRunJob = new Job(testDeviceRun.getDeviceName()) {
+		Job testRunJob = new Job("Execution on device") {
 			@Override
 			protected IStatus run(IProgressMonitor monitor) {
 				preExecute(testRun);
