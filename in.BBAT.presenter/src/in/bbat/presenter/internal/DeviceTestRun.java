@@ -88,20 +88,11 @@ public class DeviceTestRun {
 	}
 
 	public void execute(final UiAutoTestCaseJar jar,final TestRunModel testRun) {
-		reset();
-		testDeviceRun = new TestDeviceRunModel(testRun, getDevice());
-		testDeviceRun.save();
-		createRunInstances();
-		for(IDeviceRunExecutionlistener l :listener){
-			l.deviceRunExecutionStarted(DeviceTestRun.this);
-		}
-		setStopped(false);
-		updateStatus(TestStatus.EXECUTING);
-		testDeviceRun.setStartTime(System.currentTimeMillis());
-		testDeviceRun.update();
+		
 		Job testRunJob = new Job(testDeviceRun.getDeviceName()) {
 			@Override
 			protected IStatus run(IProgressMonitor monitor) {
+				preExecute(testRun);
 				monitor.beginTask("Executing "+testDeviceRun.getDeviceName(),getRunInstances().size()+2);
 				monitor.worked(1);
 				TestRunner runner = new TestRunner(jar,getDevice().getiDevice());
@@ -141,6 +132,20 @@ public class DeviceTestRun {
 			public void awake(IJobChangeEvent event) {}
 			public void aboutToRun(IJobChangeEvent event) {}
 		});
+	}
+
+	private void preExecute(final TestRunModel testRun) {
+		reset();
+		testDeviceRun = new TestDeviceRunModel(testRun, getDevice());
+		testDeviceRun.save();
+		createRunInstances();
+		for(IDeviceRunExecutionlistener l :listener){
+			l.deviceRunExecutionStarted(DeviceTestRun.this);
+		}
+		setStopped(false);
+		updateStatus(TestStatus.EXECUTING);
+		testDeviceRun.setStartTime(System.currentTimeMillis());
+		testDeviceRun.update();
 	}
 
 	private void reset() {
