@@ -1,5 +1,6 @@
 package in.BBAT.presenter.history.handlers;
 
+import in.BBAT.abstrakt.presenter.run.model.TestDeviceRunModel;
 import in.BBAT.abstrakt.presenter.run.model.TestRunModel;
 import in.bbat.logger.BBATLogger;
 import in.bbat.presenter.views.history.TestRunHistoryView;
@@ -55,7 +56,7 @@ public class DeleteTestRunHandler extends AbstractTestRunBrowserHandler {
 			LOG.error(e);
 		}
 
-		
+
 		return null;
 	}
 
@@ -68,6 +69,10 @@ public class DeleteTestRunHandler extends AbstractTestRunBrowserHandler {
 			for (Object object : selectedObjects) {
 				if(!(sample.getClass() == object.getClass()))
 				{
+					return false;
+				}
+
+				if(sample instanceof TestDeviceRunModel){
 					return false;
 				}
 			}
