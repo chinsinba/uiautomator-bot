@@ -25,6 +25,9 @@ public class DeviceDetailsHandler extends AbstractDeviceViewHandler{
 
 	@Override
 	public boolean isEnabled(List<?> object) {
+		if(object.isEmpty()){
+			return false;
+		}
 		return true;
 	}
 
