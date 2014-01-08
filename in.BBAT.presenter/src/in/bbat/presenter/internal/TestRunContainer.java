@@ -82,6 +82,7 @@ public class TestRunContainer {
 	public void removeDeviceRun(AndroidDevice device) {
 		DeviceTestRun run = getDeviceRun(device);
 		if(run!=null){
+			run.stop();
 			removeDeviceRun(run);
 		}
 	}
