@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry exported="true" kind="lib" path="libs/jsonlib.jar"/>
+	<classpathentry exported="true" kind="lib" path="libs/bcprov-jdk14-1.38.jar"/>
+	<classpathentry exported="true" kind="lib" path="libs/commons-codec-1.8.jar"/>
+	<classpathentry exported="true" kind="lib" path="libs/commons-io-2.4.jar"/>
+	<classpathentry exported="true" kind="lib" path="libs/commons-logging-1.1.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="libs/httpclient-4.2.5.jar"/>
+	<classpathentry exported="true" kind="lib" path="libs/httpcore-4.2.4.jar"/>
+	<classpathentry exported="true" kind="lib" path="libs/httpmime-4.2.5.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
+	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

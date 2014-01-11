@@ -4,12 +4,13 @@ import in.BBAT.abstrakt.presenter.run.model.TestRunInstanceModel;
 import in.bbat.logger.BBATLogger;
 
 import org.apache.log4j.Logger;
+import org.eclipse.jface.viewers.ITableColorProvider;
 import org.eclipse.jface.viewers.ITableLabelProvider;
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.swt.graphics.Image;
 
 public class TestRunInfoLabelProvider extends LabelProvider implements
-ITableLabelProvider {
+ITableLabelProvider{
 
 	private static final Logger LOG = BBATLogger.getLogger(TestRunInfoLabelProvider.class.getName());
 	@Override
@@ -44,5 +45,6 @@ ITableLabelProvider {
 
 		return null;
 	}
+	
 
 }

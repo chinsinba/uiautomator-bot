@@ -30,6 +30,12 @@ public class BBATProperties {
 	public static final String BBAT_COMPANY ="BBAT.USER.COMPANY";
 	public static final String BBAT_DESIGNATION ="BBAT.USER.DESIGNATION";
 
+	public static final String LICENSE_ACTIVATION_ENC="license.activation.enc";
+	public static final String USER_ID = "user.id";
+	public static final String USER_INITIAL_VERSION="user.initial.version";
+	public static final String USER_CURRENT_VERSION="user.version";
+	public static final String USER_CREATED_ON="user.created.on";
+	
 	public static final String UIAUOTOMATOR_PATH ="BBAT.UIAUTOMATOR.PATH";
 
 	private static final String FILE = "bbat.properties";
