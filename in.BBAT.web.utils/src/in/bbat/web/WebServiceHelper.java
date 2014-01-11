@@ -51,16 +51,16 @@ public class WebServiceHelper
 		HttpConnectionParams.setConnectionTimeout(basicHttpParams, 20000);
 		HttpConnectionParams.setSoTimeout(basicHttpParams, 20000);
 		DefaultHttpClient defaultHttpClient = new DefaultHttpClient(basicClientConnectionManager, basicHttpParams);
-		String host = "127.0.0.1";//PreferenceServiceUtil.getValue("com.littleeyelabs.eclipseide.littleeye.proxy.host");
-		int port = 8080;//PreferenceServiceUtil.getIntValue("com.littleeyelabs.eclipseide.littleeye.proxy.port");
-		String protocol = "http";//PreferenceServiceUtil.getValue("com.littleeyelabs.eclipseide.littleeye.proxy.protocol");
+		String host = "";//PreferenceServiceUtil.getValue("com.littleeyelabs.eclipseide.littleeye.proxy.host");
+		int port = 0;//PreferenceServiceUtil.getIntValue("com.littleeyelabs.eclipseide.littleeye.proxy.port");
+		String protocol = "";//PreferenceServiceUtil.getValue("com.littleeyelabs.eclipseide.littleeye.proxy.protocol");
 		if ((host != null) && (!host.isEmpty()) && (protocol != null) && (!protocol.isEmpty()) && (port > 0))
 		{
 			HttpHost httpHost = new HttpHost(host, port, protocol);
 			defaultHttpClient.getParams().setParameter("http.route.default-proxy", httpHost);
 		}
-		String userName = "syed";//PreferenceServiceUtil.getValue("com.littleeyelabs.eclipseide.littleeye.proxy.username");
-		String pwd = "mehtab";//PreferenceServiceUtil.getValue("com.littleeyelabs.eclipseide.littleeye.proxy.password");
+		String userName = "";//PreferenceServiceUtil.getValue("com.littleeyelabs.eclipseide.littleeye.proxy.username");
+		String pwd = "";//PreferenceServiceUtil.getValue("com.littleeyelabs.eclipseide.littleeye.proxy.password");
 		if ((userName != null) && (!(userName).trim().isEmpty()))
 		{
 			defaultHttpClient.getCredentialsProvider().setCredentials(new AuthScope(host, port), new NTCredentials(userName, pwd, "", ""));
@@ -73,25 +73,24 @@ public class WebServiceHelper
 		return defaultHttpClient;
 	}
 
-	static String executeAndGetResponse(HttpClient paramHttpClient, HttpPost paramHttpPost)
-			throws WebServiceException
-			{
-		StringBuilder localStringBuilder = new StringBuilder();
+	static String executeAndGetResponse(HttpClient paramHttpClient, HttpPost paramHttpPost)throws WebServiceException
+	{
+		StringBuilder response = new StringBuilder();
 		try
 		{
 			HttpResponse localHttpResponse = paramHttpClient.execute(paramHttpPost);
 			BufferedReader localBufferedReader = new BufferedReader(new InputStreamReader(localHttpResponse.getEntity().getContent()));
 			String str;
 			while ((str = localBufferedReader.readLine()) != null)
-				localStringBuilder.append(str);
+				response.append(str);
 		}
 		catch (Exception localException)
 		{
 			//      LOG.E("WebServiceHelper", "Could not read the server's output:" + localException.getMessage() + "," + localException.getClass().getName() + ". The Server's response was:" + localStringBuilder.toString(), localException);
 			throw new WebServiceException("Could not read the server's output:" + localException.getMessage() + "," + localException.getClass().getName(), localException);
 		}
-		return localStringBuilder.toString();
-			}
+		return response.toString();
+	}
 
 	private static void login(HttpClient paramHttpClient)throws ClientProtocolException, IOException
 	{
@@ -99,14 +98,14 @@ public class WebServiceHelper
 		propMap.put("username", "bbat");
 		propMap.put("password", "enthupreneurs");
 		HttpPost localHttpPost = new HttpPost("http://worm.bbat.in/g2ui/login");
-		ArrayList localArrayList = new ArrayList();
+		ArrayList nameValPairList = new ArrayList();
 		Iterator localIterator = propMap.keySet().iterator();
 		while (localIterator.hasNext())
 		{
 			String key = (String)localIterator.next();
-			localArrayList.add(new BasicNameValuePair(key, (String)propMap.get(key)));
+			nameValPairList.add(new BasicNameValuePair(key, (String)propMap.get(key)));
 		}
-		localHttpPost.setEntity(new UrlEncodedFormEntity(localArrayList, "UTF-8"));
+		localHttpPost.setEntity(new UrlEncodedFormEntity(nameValPairList, "UTF-8"));
 		Object localObject = paramHttpClient.execute(localHttpPost);
 		EntityUtils.consume(((HttpResponse)localObject).getEntity());
 	}
