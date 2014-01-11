@@ -125,8 +125,7 @@ public class LicenseClient
     return localJSONObject2;
   }
 
-  public JSONObject checkoutLicense(LicenseInfo paramLicenseInfo)
-    throws WebServiceException
+  public JSONObject checkoutLicense(LicenseInfo paramLicenseInfo) throws WebServiceException
   {
     JSONObject localJSONObject1 = new JSONObject();
     try

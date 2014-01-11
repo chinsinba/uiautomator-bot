@@ -4,10 +4,12 @@ import java.util.List;
 
 import in.BBAT.presenter.developer.handlers.BBATHandler;
 import in.bbat.logger.BBATLogger;
+import in.bbat.presenter.dialogs.ActivationCodeDialog;
 import in.bbat.presenter.views.developer.ScreenShotView;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.commands.ExecutionEvent;
+import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 
@@ -18,12 +20,15 @@ public class OpenScreenShotViewHandler extends BBATHandler {
 	@Override
 	public Object run(ExecutionEvent event) {
 
+		ActivationCodeDialog d = new ActivationCodeDialog(new Shell());
+		d.open();
 		LOG.info("Open screen shot ui automator view");
 		try {
 			PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().showView(ScreenShotView.ID);
 		} catch (PartInitException e) {
 			LOG.error(e);
 		}
+		
 		return null;
 	}
 	

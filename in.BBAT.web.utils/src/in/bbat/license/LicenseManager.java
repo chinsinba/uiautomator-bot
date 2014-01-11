@@ -318,13 +318,13 @@ public class LicenseManager
 		{
 			if (paramLicenseInfo == null)
 				return null;
-			JSONObject localJSONObject = LicenseClient.getInstance().checkoutLicense(paramLicenseInfo);
-			if (localJSONObject.getString("status").equals("success"))
+			JSONObject response = LicenseClient.getInstance().checkoutLicense(paramLicenseInfo);
+			if (response.getString("status").equals("success"))
 			{
-				storeLicenseInfo(localJSONObject);
+				storeLicenseInfo(response);
 				createLicenseLockFile();
 				serverRechable = true;
-				return parseLicenseJson(localJSONObject.getJSONObject("license"));
+				return parseLicenseJson(response.getJSONObject("license"));
 			}
 		}
 		catch (Exception localException)
