@@ -1,9 +1,13 @@
 package in.bbat.abstrakt.gui;
 
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.eclipse.core.runtime.Path;
+import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.swt.graphics.Image;
 
 /**
@@ -30,8 +34,8 @@ public class BBATImageManager
 	public static final String ERROR ="error.png";
 	public static final String EXECUTING ="execute.gif";
 	public static final String TIME ="time.png";
-	
-	
+
+
 	/**
 	 * Every new image should be added in to the
 	 *  <Variable>imageMap</Variable> via the add method.
@@ -71,11 +75,15 @@ public class BBATImageManager
 	 */
 	private void addImage(String imageId, String imageName)
 	{
-		imageMap.put(imageId,Activator.getImageDescriptor(imageLocation+"/"+imageName).createImage());
+		imageMap.put(imageId,Activator.getImageDescriptor(imageLocation+Path.SEPARATOR+imageName).createImage());
 	}
 
 	public Image getImage(String imageId)
 	{
 		return imageMap.get(imageId);
+	}
+
+	public Image createImage(String absoluteImagePath) throws Exception{
+		return ImageDescriptor.createFromURL(new URL(absoluteImagePath)).createImage();
 	}
 }

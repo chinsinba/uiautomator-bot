@@ -2,6 +2,7 @@ package in.bbat.configuration;
 
 import in.bbat.utility.AndroidSdkUtility;
 import in.bbat.utility.DefaultValueSetter;
+import in.bbat.utility.IBBATConstants;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -11,6 +12,8 @@ import java.io.IOException;
 import java.util.Properties;
 
 import javax.xml.bind.JAXBException;
+
+import org.eclipse.core.runtime.Path;
 
 public class BBATProperties {
 
@@ -35,7 +38,9 @@ public class BBATProperties {
 	public static final String USER_INITIAL_VERSION="user.initial.version";
 	public static final String USER_CURRENT_VERSION="user.version";
 	public static final String USER_CREATED_ON="user.created.on";
-	
+
+	public static final String SCREEN_SHOT_DIR="screenshot.dir";
+
 	public static final String UIAUOTOMATOR_PATH ="BBAT.UIAUTOMATOR.PATH";
 
 	private static final String FILE = "bbat.properties";
@@ -323,4 +328,11 @@ public class BBATProperties {
 		bbatProperty.store(new FileOutputStream(FILE), "");		
 	}
 
+	public String getScreenShotDirectory(){
+		return bbatProperty.getProperty(SCREEN_SHOT_DIR, System.getProperty("user.home")+Path.SEPARATOR+IBBATConstants.BBAT_HIDDEN_FOLDER+Path.SEPARATOR+IBBATConstants.SCREEN_SHOTS+Path.SEPARATOR);
+	}
+
+	public void setScreenShotDirectory(String screenShotDir){
+		bbatProperty.setProperty(SCREEN_SHOT_DIR, screenShotDir);
+	}
 }

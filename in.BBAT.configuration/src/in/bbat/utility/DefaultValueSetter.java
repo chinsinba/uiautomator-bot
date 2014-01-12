@@ -17,41 +17,36 @@ import org.eclipse.core.runtime.preferences.InstanceScope;
 
 public class DefaultValueSetter
 {
-	private static final String USER_HOME_PROPERTY = "user.home";
-	private static final String ADT_SDK_PREFERENCE_KEY = "com.android.ide.eclipse.adt.sdk";
-	private static final String ADT_PLUGIN_PREFERENCE = "com.android.ide.eclipse.adt";
-	public  final static  String PLATFORM_TOOLS = "platform-tools";
-	public  final static  String  UNIX_ADB ="adb";
-	public  final static  String  WINDOWS_ADB ="adb.exe";
-	public final static String DATA_FOLDER =".bbat";
+	
+	/*public final static String DATA_FOLDER =".bbat";
 	public final static String UIWKSPCNAME ="UIAutoTestCases";
-	public final static String DATA ="data";
+	public final static String DATA ="data";*/
 
 	public static String initializeSDKPath() throws JAXBException, IOException
 	{
 
 		IScopeContext[] arrayOfIScopeContext = { InstanceScope.INSTANCE, DefaultScope.INSTANCE };
-		String sdkPathFromPreference = Platform.getPreferencesService().getString(ADT_PLUGIN_PREFERENCE, ADT_SDK_PREFERENCE_KEY, null, arrayOfIScopeContext);
+		String sdkPathFromPreference = Platform.getPreferencesService().getString(IBBATConstants.ADT_PLUGIN_PREFERENCE, IBBATConstants.ADT_SDK_PREFERENCE_KEY, null, arrayOfIScopeContext);
 		if ((sdkPathFromPreference != null) && (isValidSDK(sdkPathFromPreference)))
 		{
 			/*BBATConfigXml.getInstance().setAndroid_SdkPath(sdkPathFromPreference);
 			BBATConfigXml.getInstance().save();*/
 			return sdkPathFromPreference;
 		}
-		String homeDirPath = System.getProperty(USER_HOME_PROPERTY);
+		String homeDirPath = System.getProperty(IBBATConstants.USER_HOME_PROPERTY);
 		if (homeDirPath != null)
 		{
-			File androidHiddenFile = new File(homeDirPath, ".android");
+			File androidHiddenFile = new File(homeDirPath, IBBATConstants.ANDROID_FOLDER);
 			if ((androidHiddenFile.exists()) && (androidHiddenFile.isDirectory()))
 			{
-				File ddmsConfigFile = new File(androidHiddenFile, "ddms.cfg");
+				File ddmsConfigFile = new File(androidHiddenFile, IBBATConstants.DDMS_CFG);
 				if (ddmsConfigFile.exists())
 					try
 				{
 						Properties localProperties = new Properties();
 						FileInputStream localFileInputStream = new FileInputStream(ddmsConfigFile);
 						localProperties.load(localFileInputStream);
-						sdkPathFromPreference = (String)localProperties.get("lastSdkPath");
+						sdkPathFromPreference = (String)localProperties.get(IBBATConstants.LAST_SDK_PATH);
 						/*BBATConfigXml.getInstance().setAndroid_SdkPath(sdkPathFromPreference);
 						BBATConfigXml.getInstance().save();*/
 						return sdkPathFromPreference;
@@ -73,7 +68,7 @@ public class DefaultValueSetter
 		File localFile1 = new File(paramString);
 		if ((localFile1.exists()) && (localFile1.isDirectory()))
 		{
-			File localFile2 = new File(localFile1 , Path.SEPARATOR+"tools"+Path.SEPARATOR+"lib" + Path.SEPARATOR + "ddmlib.jar");
+			File localFile2 = new File(localFile1 , Path.SEPARATOR+IBBATConstants.TOOLS+Path.SEPARATOR+IBBATConstants.LIB + Path.SEPARATOR + IBBATConstants.DDM_LIB_JAR);
 			if ((localFile2 != null) && (localFile2.exists()))
 				return true;
 		}
@@ -82,15 +77,15 @@ public class DefaultValueSetter
 
 
 	public static String initializeUIAutoWorkspace() throws JAXBException, IOException{
-		String s = System.getProperty(USER_HOME_PROPERTY)+Path.SEPARATOR+DATA_FOLDER+Path.SEPARATOR+UIWKSPCNAME;
+		String s = System.getProperty(IBBATConstants.USER_HOME_PROPERTY)+Path.SEPARATOR+IBBATConstants.BBAT_HIDDEN_FOLDER+Path.SEPARATOR+IBBATConstants.UIWKSPCNAME;
 		/*BBATConfigXml.getInstance().setWkspc_UiAutomator(s);
 		BBATConfigXml.getInstance().save();*/
 		return s;
 	}
 
 	public static String initializeDataBasePath() throws JAXBException, IOException{
-		String s = System.getProperty(USER_HOME_PROPERTY)+Path.SEPARATOR+DATA_FOLDER+Path.SEPARATOR+DATA;
-	/*	BBATConfigXml.getInstance().setDatabase_Name(s);
+		String s = System.getProperty(IBBATConstants.USER_HOME_PROPERTY)+Path.SEPARATOR+IBBATConstants.BBAT_HIDDEN_FOLDER+Path.SEPARATOR+IBBATConstants.DATA;
+		/*	BBATConfigXml.getInstance().setDatabase_Name(s);
 		BBATConfigXml.getInstance().save();*/
 		return s;
 	}
@@ -98,10 +93,10 @@ public class DefaultValueSetter
 
 	public static String getAdbPath()
 	{
-		File localFile1 = new File(BBATProperties.getInstance().getAndroid_SdkPath(), PLATFORM_TOOLS);
-		File localFile2 = new File(localFile1, UNIX_ADB);
+		File localFile1 = new File(BBATProperties.getInstance().getAndroid_SdkPath(), IBBATConstants.PLATFORM_TOOLS);
+		File localFile2 = new File(localFile1, IBBATConstants.UNIX_ADB);
 		if (!localFile2.exists())
-			localFile2 = new File(localFile1, WINDOWS_ADB);
+			localFile2 = new File(localFile1, IBBATConstants.WINDOWS_ADB);
 		return localFile2.exists() ? localFile2.getAbsolutePath() : null;
 	}
 }

@@ -156,6 +156,10 @@ public class TestRunnerView extends BBATViewPart {
 						BBATViewPart.hideView(TestLogView.ID);
 						TestLogView view =  (TestLogView) BBATViewPart.openView(TestLogView.ID);
 						view.bufferChanged(((TestRunInstanceModel)sel).getDeviceLogsFromDB(), new ArrayList<LogCatMessage>());
+						
+						ScreenShotView shotView =  (ScreenShotView) BBATViewPart.openView(ScreenShotView.ID);
+						shotView.setInput((TestRunInstanceModel)sel);
+						
 					}
 				} catch (Exception e) {
 					LOG.error(e);

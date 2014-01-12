@@ -17,6 +17,7 @@ import in.BBAT.data.model.Entities.TestDeviceRunEntity;
 import in.BBAT.data.model.Entities.TestRunEntity;
 import in.BBAT.data.model.Entities.TestRunInfoEntity;
 import in.bbat.abstrakt.gui.BBATImageManager;
+import in.bbat.configuration.BBATProperties;
 
 public class TestDeviceRunModel extends AbstractTreeModel {
 
@@ -217,5 +218,10 @@ public class TestDeviceRunModel extends AbstractTreeModel {
 		long minute = (miliseconds / (1000 * 60)) % 60;
 		long hour = (miliseconds / (1000 * 60 * 60)) % 24;
 		return String.format("%02d:%02d:%02d", hour, minute, second);
+	}
+	
+	public String getScreenShotDir()
+	{
+		return ((TestRunModel)getParent()).getScreenShotDir() + Path.SEPARATOR +getDeviceName();
 	}
 }

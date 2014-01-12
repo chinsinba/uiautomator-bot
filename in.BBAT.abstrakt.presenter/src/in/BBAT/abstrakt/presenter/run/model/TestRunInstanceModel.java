@@ -11,6 +11,7 @@ import in.BBAT.data.model.Entities.TestDeviceRunEntity;
 import in.BBAT.data.model.Entities.TestRunInfoEntity;
 import in.BBAT.dataMine.manager.LogsMineManager;
 import in.bbat.abstrakt.gui.BBATImageManager;
+import in.bbat.configuration.BBATProperties;
 import in.bbat.utility.FileUtils;
 import in.bbat.utility.ZipFiles;
 
@@ -22,7 +23,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.core.runtime.Path;
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.graphics.ImageData;
+import org.eclipse.swt.graphics.ImageLoader;
+import org.eclipse.swt.graphics.PaletteData;
 
 import com.android.ddmlib.Log.LogLevel;
 import com.android.ddmlib.logcat.LogCatMessage;
@@ -121,7 +126,7 @@ public class TestRunInstanceModel extends AbstractTreeModel {
 
 	}
 
-/*	public void addDeviceLog(DeviceLogModel log){
+	/*	public void addDeviceLog(DeviceLogModel log){
 		deviceLogs.add(log);
 	}
 
@@ -230,6 +235,7 @@ public class TestRunInstanceModel extends AbstractTreeModel {
 		exportUIAutoLogs(exportDir.getAbsolutePath());
 		exportScript(exportDir.getAbsolutePath());
 		exportDeviceDetails(exportDir.getAbsolutePath());
+		exportScreenShot(exportDir.getAbsolutePath());
 
 		if(zip)
 			ZipFiles.zipDirectory(tempFile, exportDirectory+Path.SEPARATOR+getTestCaseEntity().getName()+"_"+((TestRunInfoEntity)getEntity()).getId()+".zip");
@@ -246,4 +252,25 @@ public class TestRunInstanceModel extends AbstractTreeModel {
 
 	public void exportScript(String deviceLogPath){
 	}
+
+	public void exportScreenShot(String exportDir) throws IOException{
+
+		FileUtils.copyFolder(new File(getScreenShotDir()), new File(exportDir));
+	}
+
+
+	public String getScreenShotDir()
+	{
+		return ((TestDeviceRunModel)getParent()).getScreenShotDir() + Path.SEPARATOR +getTestCaseEntity().getName()+"_"+getId();
+	}
+
+	public void saveScreenShot(ImageData imageData, String imageName){
+		ImageData scaledImageData = imageData/*.scaledTo(300, 500)*/;
+		ImageLoader loader = new ImageLoader();
+		loader.data = new ImageData[] { scaledImageData };
+		File f = new File(getScreenShotDir());
+		f.mkdirs();
+		loader.save(f.getAbsolutePath()+Path.SEPARATOR+imageName+".png", SWT.IMAGE_PNG);
+	}
+
 }

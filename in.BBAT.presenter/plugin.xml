@@ -129,6 +129,12 @@
             name="Device logs"
             restorable="true">
       </view>
+      <view
+            class="in.bbat.presenter.views.tester.ScreenShotView"
+            id="in.BBAT.presenter.tester.screenShots"
+            name="ScreenShot"
+            restorable="true">
+      </view>
    </extension>
    <extension
          point="org.eclipse.ui.perspectiveExtensions">

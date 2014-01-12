@@ -6,7 +6,9 @@ import in.BBAT.abstrakt.gui.model.AbstractTreeModel;
 import in.BBAT.data.model.Entities.AbstractEntity;
 import in.BBAT.data.model.Entities.TestDeviceRunEntity;
 import in.BBAT.data.model.Entities.TestRunEntity;
+import in.bbat.configuration.BBATProperties;
 
+import org.eclipse.core.runtime.Path;
 import org.eclipse.swt.graphics.Image;
 
 /**
@@ -57,6 +59,11 @@ public class TestRunModel extends AbstractTreeModel {
 
 	public void setEndTime(Timestamp endtiTime) {
 		((TestRunEntity)getEntity()).setEndtiTime(endtiTime);
+	}
+	
+	public String getScreenShotDir()
+	{
+		return BBATProperties.getInstance().getScreenShotDirectory()+Path.SEPARATOR+getName();
 	}
 
 }
