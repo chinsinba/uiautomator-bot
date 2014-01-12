@@ -100,6 +100,12 @@ public class ApplicationWorkbenchWindowAdvisor extends WorkbenchWindowAdvisor {
 
 		removeUnWantedPerspectives();
 
+		if(BBATProperties.getInstance().getAndroid_SdkPath()==null ||BBATProperties.getInstance().getAndroid_SdkPath().isEmpty())
+		{
+			SettingsWindow window = new SettingsWindow(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell());
+			window.open();
+		}
+
 		String errorMessage = validateAndroidSdkLocation(BBATProperties.getInstance().getAndroid_SdkPath());
 
 		if(errorMessage!=null){

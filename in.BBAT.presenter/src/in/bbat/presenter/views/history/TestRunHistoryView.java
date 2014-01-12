@@ -65,7 +65,7 @@ public class TestRunHistoryView extends BBATViewPart {
 
 
 	private void createTextFilter(Composite parent) {
-		Composite comp1 = new Composite(parent, SWT.BORDER);
+		Composite comp1 = new Composite(parent, SWT.NONE);
 		comp1.setLayout(new GridLayout(1,false));
 		comp1.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
@@ -88,8 +88,8 @@ public class TestRunHistoryView extends BBATViewPart {
 	}
 
 	private void createTestRunTree(Composite parent) {
-		Composite comp1 = new Composite(parent, SWT.NONE);
-		comp1.setLayout(new GridLayout(1,false));
+		Composite comp1 = new Composite(parent, SWT.BORDER);
+		comp1.setLayout(new GridLayout());
 		comp1.setLayoutData(new GridData(GridData.FILL_BOTH));
 		viewer = new TreeViewer(comp1, SWT.MULTI | SWT.H_SCROLL| SWT.V_SCROLL);
 		viewer.getTree().setHeaderVisible(true);

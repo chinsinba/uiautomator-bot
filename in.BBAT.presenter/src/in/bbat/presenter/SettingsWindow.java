@@ -309,7 +309,7 @@ public class SettingsWindow extends ApplicationWindow  {
 		devClentComp.setLayoutData(new GridData(GridData.FILL_BOTH));
 
 		{
-			confToolkit.createLabel(devClentComp, "Android SDK Path : ");
+			confToolkit.createLabel(devClentComp, "* Android SDK Path : ");
 			sdkPathText = confToolkit.createText(devClentComp,BBATProperties.getInstance().getAndroid_SdkPath(),SWT.BORDER|SWT.READ_ONLY);
 			sdkPathText.setToolTipText(sdkPathText.getText());
 			sdkPathText.setLayoutData(new GridData(GridData.FILL_BOTH));
@@ -318,7 +318,7 @@ public class SettingsWindow extends ApplicationWindow  {
 			addTextFocuslisteners(sdkPathText);
 		}
 		{
-			confToolkit.createLabel(devClentComp, "UIAutomator scripts path : ");
+			confToolkit.createLabel(devClentComp, "* UIAutomator scripts path : ");
 			wkspcPathText = confToolkit.createText(devClentComp,BBATProperties.getInstance().getWkspc_UiAutomator(),SWT.BORDER|SWT.READ_ONLY);
 			wkspcPathText.setToolTipText(wkspcPathText.getText());
 			wkspcPathText.setLayoutData(new GridData(GridData.FILL_BOTH));
