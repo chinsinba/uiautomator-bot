@@ -131,12 +131,14 @@
       </view>
       <view
             class="in.bbat.presenter.views.tester.ScreenShotView"
+            icon="icons/screenshotview.png"
             id="in.BBAT.presenter.tester.screenShots"
             name="ScreenShots"
             restorable="true">
       </view>
       <view
             class="in.bbat.presenter.views.history.ScreenShotHistoryView"
+            icon="icons/screenshotview.png"
             id="in.BBAT.presenter.history.screenShotsView"
             name="ScreenShots"
             restorable="true">
