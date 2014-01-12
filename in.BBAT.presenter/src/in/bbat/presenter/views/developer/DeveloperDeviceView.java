@@ -59,7 +59,7 @@ public class DeveloperDeviceView extends BBATViewPart {
 	private void createRunColumns(Composite parent, TableViewer viewer2) {
 
 		String[] titles = { "","" };
-		int[] bounds = { 60,40};
+		int[] bounds = { 72,28};
 
 		TableColumnLayout layout = new TableColumnLayout();
 		parent.setLayout(layout);
