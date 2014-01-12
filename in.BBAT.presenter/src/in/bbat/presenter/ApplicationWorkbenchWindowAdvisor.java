@@ -9,6 +9,9 @@ import in.bbat.presenter.perstpectives.DeveloperPerspective;
 import in.bbat.presenter.perstpectives.HistoryPerspective;
 import in.bbat.presenter.perstpectives.ReporterPerspective;
 import in.bbat.presenter.perstpectives.TesterPerspective;
+import in.bbat.presenter.views.BBATViewPart;
+import in.bbat.presenter.views.developer.DeveloperDeviceView;
+import in.bbat.presenter.views.developer.TestCaseBrowserView;
 
 import java.io.File;
 import java.net.UnknownHostException;
@@ -62,20 +65,33 @@ public class ApplicationWorkbenchWindowAdvisor extends WorkbenchWindowAdvisor {
 		Rectangle localRectangle = Display.getCurrent().getBounds();
 		configurer.setInitialSize(new Point(localRectangle.width, localRectangle.height));
 		BusyIndicator.showWhile(Display.getCurrent(), new Runnable() {
-
 			@Override
 			public void run() {
 				initialize();				
 			}
 		});
+	}
 
+	@Override
+	public void postWindowOpen() {
+		
 	}
 
 	private void initialize() {
 		try {
 			LOG.info("Started....");
-			ApplicationHelper.initializeDb();
+
 			TestDeviceManager.init(BBATProperties.getInstance().getAndroid_AdbPath());
+			ApplicationHelper.initializeDb();
+			TestCaseBrowserView.refreshView();
+
+			BBATViewPart view = (BBATViewPart) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().findView(DeveloperDeviceView.ID);
+			try {
+				view.refresh();
+			} catch (Exception e) {
+				LOG.error(e);
+			}
+
 		} catch (UnknownHostException e) {
 			LOG.error(e);
 			MessageDialog.openError(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(), "Error", "Unable to connect to DB");
