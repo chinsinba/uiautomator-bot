@@ -79,14 +79,20 @@ public class TestRunInfoView extends BBATViewPart {
 					if(((TestRunInstanceModel)sel).getStatus().equalsIgnoreCase(TestStatus.NOTEXECUTED.toString())){
 						return ;
 					}
-					
+
 					BBATViewPart.hideView(HistoryDeviceLogView.ID);
 					TestLogView view  = (TestLogView) BBATViewPart.openView(HistoryDeviceLogView.ID);
 					view.bufferChanged(((TestRunInstanceModel)sel).getDeviceLogsFromDB(), new ArrayList<LogCatMessage>());
 
+					BBATViewPart.hideView(HistoryAutoLogView.ID);
 					IViewPart autoLogView =  BBATViewPart.openView(HistoryAutoLogView.ID);
 					if(autoLogView!= null){
 						((AutomatorLogView)autoLogView).setInput((TestRunInstanceModel)sel);
+					}
+					BBATViewPart.hideView(ScreenShotHistoryView.ID);
+					IViewPart scrShtView = BBATViewPart.openView(ScreenShotHistoryView.ID);
+					if(scrShtView!= null){
+						((ScreenShotHistoryView)scrShtView).setInput((TestRunInstanceModel)sel);
 					}
 				} catch (Exception e) {
 					LOG.error(e);

@@ -117,6 +117,7 @@ public class TestRunHistoryView extends BBATViewPart {
 
 					BBATViewPart.hideView(HistoryDeviceLogView.ID);
 					BBATViewPart.hideView(HistoryAutoLogView.ID);
+					BBATViewPart.hideView(ScreenShotHistoryView.ID);
 					try {
 						TestRunInfoView view  = (TestRunInfoView) BBATViewPart.openView(TestRunInfoView.ID);
 						view.setInput(((TestDeviceRunModel) sel));

@@ -132,7 +132,13 @@
       <view
             class="in.bbat.presenter.views.tester.ScreenShotView"
             id="in.BBAT.presenter.tester.screenShots"
-            name="ScreenShot"
+            name="ScreenShots"
+            restorable="true">
+      </view>
+      <view
+            class="in.bbat.presenter.views.history.ScreenShotHistoryView"
+            id="in.BBAT.presenter.history.screenShotsView"
+            name="ScreenShots"
             restorable="true">
       </view>
    </extension>
@@ -242,6 +248,14 @@
                minimized="false"
                relationship="bottom"
                relative="in.BBAT.presenter.history.TestRunInstanceView"
+               visible="false">
+         </view>
+         <view
+               id="in.BBAT.presenter.history.screenShotsView"
+               minimized="true"
+               ratio=".50f"
+               relationship="right"
+               relative="in.BBAT.presenter.history.AutoLogView"
                visible="false">
          </view>
       </perspectiveExtension>
