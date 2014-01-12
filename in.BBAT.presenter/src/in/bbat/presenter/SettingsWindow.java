@@ -213,7 +213,10 @@ public class SettingsWindow extends ApplicationWindow  {
 			form.setMessage("Failled to update the changes.", IMessageProvider.ERROR);
 		}
 		close();
-		MessageDialog.openInformation(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(), "Restart", "You will need to restart the tool for the settings changes to take effect.");
+		boolean openQuestion = MessageDialog.openQuestion(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(), "Restart", "You will need to restart the tool for the settings changes to take effect.");
+		if(openQuestion){
+			PlatformUI.getWorkbench().restart();
+		}
 	}
 
 
@@ -333,8 +336,7 @@ public class SettingsWindow extends ApplicationWindow  {
 		deviceSettingSection.setClient(devClentComp);
 	}
 
-	private void createPortComponent(FormToolkit confToolkit,
-			Composite devClentComp) {
+	private void createPortComponent(FormToolkit confToolkit,Composite devClentComp) {
 		confToolkit.createLabel(devClentComp, "Data Port : ");
 		dbPortText =confToolkit.createText(devClentComp,String.valueOf(BBATProperties.getInstance().getDatabase_Port()),SWT.BORDER);
 		dbPortText.setToolTipText(dbPortText.getText());
