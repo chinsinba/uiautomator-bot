@@ -4,6 +4,7 @@ import java.io.File;
 
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.ScrolledComposite;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.ImageData;
 import org.eclipse.swt.layout.GridData;
@@ -34,11 +35,23 @@ public class ScreenShotView extends BBATViewPart {
 
 	@Override
 	public void createPartControl(Composite parent) {
-		GridLayout layout = new GridLayout();
+
+		ScrolledComposite sc = new ScrolledComposite( parent, SWT.H_SCROLL | SWT.V_SCROLL );
+		GridData layoutData = new GridData( GridData.FILL_BOTH );
+		layoutData.horizontalSpan = 2;
+//		layoutData.heightHint = 400;
+		sc.setLayoutData( layoutData );
+
+		imageLabel = new Label( sc, SWT.NONE );
+		/*ImageData i = new ImageData("/home/syed/.bbat/screenShots/RUN_1/emulator-5554/TestMe_1/ERROR.png");
+		imageLabel.setImage( new Image(Display.getDefault(), i) );*/
+		
+		sc.setContent( imageLabel );
+		/*GridLayout layout = new GridLayout();
 		parent.setLayout(layout);
 		parent.setLayoutData(new GridData(GridData.FILL_BOTH));
 		imageLabel = new Label(parent, SWT.BORDER);
-		imageLabel.setLayoutData(new GridData(GridData.FILL_BOTH));
+		imageLabel.setLayoutData(new GridData(GridData.FILL_BOTH));*/
 	}
 
 	private void createScreenShot() throws Exception {
@@ -49,6 +62,7 @@ public class ScreenShotView extends BBATViewPart {
 				File[] listFiles = scrShotDir.listFiles();
 				ImageData image = new ImageData(listFiles[0].getAbsolutePath()).scaledTo(200, 300);
 				imageLabel.setImage(new Image(Display.getDefault(), image));
+				imageLabel.setSize( imageLabel.computeSize( SWT.DEFAULT, SWT.DEFAULT ));
 			}
 
 		}

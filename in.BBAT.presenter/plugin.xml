@@ -255,7 +255,7 @@
          <view
                id="in.BBAT.presenter.history.screenShotsView"
                minimized="true"
-               ratio=".50f"
+               ratio=".70f"
                relationship="right"
                relative="in.BBAT.presenter.history.AutoLogView"
                visible="false">

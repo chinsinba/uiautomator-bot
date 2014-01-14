@@ -123,7 +123,7 @@ public class TestRunnerView extends BBATViewPart {
 		getViewSite().setSelectionProvider(commonTestCaseViewer);
 	}
 
-	
+
 	private void createDeviceRunViewerTabs(Composite innerleft) {
 
 		CTabFolder testRunFolder = new CTabFolder(innerleft, SWT.TOP|SWT.BORDER);
@@ -140,7 +140,7 @@ public class TestRunnerView extends BBATViewPart {
 			@Override
 			public void doubleClick(DoubleClickEvent event) {
 				try {
-					Object sel = ((IStructuredSelection)event.getSelection()).getFirstElement();
+					final Object sel = ((IStructuredSelection)event.getSelection()).getFirstElement();
 					((TestRunInstanceModel)sel).setShowLogs(true);
 
 					if(((TestRunInstanceModel)sel).getStatus().equalsIgnoreCase(TestStatus.NOTEXECUTED.getStatus()))
@@ -149,26 +149,53 @@ public class TestRunnerView extends BBATViewPart {
 					}
 
 					if(!((TestRunInstanceModel)sel).getStatus().equalsIgnoreCase(TestStatus.EXECUTING.getStatus())){
-						IViewPart autoLogView =  BBATViewPart.openView(AutomatorLogView.ID);
-						if(autoLogView!= null){
-							((AutomatorLogView)autoLogView).setInput((TestRunInstanceModel)sel);
-						}
-						BBATViewPart.hideView(TestLogView.ID);
-						TestLogView view =  (TestLogView) BBATViewPart.openView(TestLogView.ID);
-						view.bufferChanged(((TestRunInstanceModel)sel).getDeviceLogsFromDB(), new ArrayList<LogCatMessage>());
-						
-						ScreenShotView shotView =  (ScreenShotView) BBATViewPart.openView(ScreenShotView.ID);
-						shotView.setInput((TestRunInstanceModel)sel);
-						
+						Display.getDefault().asyncExec(new Runnable() {
+
+							@Override
+							public void run() {
+								try {
+									BBATViewPart.hideView(TestLogView.ID);
+									TestLogView view =  (TestLogView) BBATViewPart.openView(TestLogView.ID);
+									view.bufferChanged(((TestRunInstanceModel)sel).getDeviceLogsFromDB(), new ArrayList<LogCatMessage>());
+								}catch (Exception e) {
+									LOG.error(e);
+								}
+
+							}
+						});
+						Display.getDefault().asyncExec(new Runnable() {
+							@Override
+							public void run() {
+								try {
+									BBATViewPart.hideView(AutomatorLogView.ID);
+									AutomatorLogView autoLogView =  (AutomatorLogView)BBATViewPart.openView(AutomatorLogView.ID);
+									if(autoLogView!= null){
+										autoLogView.setInput((TestRunInstanceModel)sel);
+									}	
+								} catch (Exception e) {
+									LOG.error(e);
+								}
+							}
+						});
+
+						Display.getDefault().asyncExec(new Runnable() {
+
+							@Override
+							public void run() {
+								try {
+									BBATViewPart.hideView(ScreenShotView.ID);
+									ScreenShotView shotView =  (ScreenShotView) BBATViewPart.openView(ScreenShotView.ID);
+									shotView.setInput((TestRunInstanceModel)sel);
+								} catch (Exception e) {
+									LOG.error(e);
+								}
+
+							}
+						});
 					}
 				} catch (Exception e) {
 					LOG.error(e);
 				}	
-				try {
-					PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().showView(TestLogView.ID);
-				} catch (PartInitException e) {
-					LOG.error(e);
-				}
 			}
 		});
 

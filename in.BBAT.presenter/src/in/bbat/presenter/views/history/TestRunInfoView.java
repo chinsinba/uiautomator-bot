@@ -74,29 +74,55 @@ public class TestRunInfoView extends BBATViewPart {
 
 			@Override
 			public void doubleClick(DoubleClickEvent event) {
-				try {
-					Object sel = ((IStructuredSelection)event.getSelection()).getFirstElement();
-					if(((TestRunInstanceModel)sel).getStatus().equalsIgnoreCase(TestStatus.NOTEXECUTED.toString())){
-						return ;
-					}
 
-					BBATViewPart.hideView(HistoryDeviceLogView.ID);
-					TestLogView view  = (TestLogView) BBATViewPart.openView(HistoryDeviceLogView.ID);
-					view.bufferChanged(((TestRunInstanceModel)sel).getDeviceLogsFromDB(), new ArrayList<LogCatMessage>());
+				final Object sel = ((IStructuredSelection)event.getSelection()).getFirstElement();
+				if(((TestRunInstanceModel)sel).getStatus().equalsIgnoreCase(TestStatus.NOTEXECUTED.toString())){
+					return ;
+				}
 
-					BBATViewPart.hideView(HistoryAutoLogView.ID);
-					IViewPart autoLogView =  BBATViewPart.openView(HistoryAutoLogView.ID);
-					if(autoLogView!= null){
-						((AutomatorLogView)autoLogView).setInput((TestRunInstanceModel)sel);
+				Display.getDefault().asyncExec(new Runnable() {
+					@Override
+					public void run() {
+						try {
+							BBATViewPart.hideView(HistoryDeviceLogView.ID);
+							TestLogView view  = (TestLogView) BBATViewPart.openView(HistoryDeviceLogView.ID);
+							view.bufferChanged(((TestRunInstanceModel)sel).getDeviceLogsFromDB(), new ArrayList<LogCatMessage>());
+						} catch (Exception e) {
+							LOG.error(e);
+						}	
 					}
-					BBATViewPart.hideView(ScreenShotHistoryView.ID);
-					IViewPart scrShtView = BBATViewPart.openView(ScreenShotHistoryView.ID);
-					if(scrShtView!= null){
-						((ScreenShotHistoryView)scrShtView).setInput((TestRunInstanceModel)sel);
+				});
+
+				Display.getDefault().asyncExec(new Runnable() {
+
+					@Override
+					public void run() {
+						try{
+							BBATViewPart.hideView(HistoryAutoLogView.ID);
+							IViewPart autoLogView =  BBATViewPart.openView(HistoryAutoLogView.ID);
+							if(autoLogView!= null){
+								((AutomatorLogView)autoLogView).setInput((TestRunInstanceModel)sel);
+							}
+						} catch (Exception e) {
+							LOG.error(e);
+						}	
 					}
-				} catch (Exception e) {
-					LOG.error(e);
-				}	
+				});
+
+				Display.getDefault().asyncExec(new Runnable() {
+					public void run() {
+						try{
+							BBATViewPart.hideView(ScreenShotHistoryView.ID);
+							IViewPart scrShtView = BBATViewPart.openView(ScreenShotHistoryView.ID);
+							if(scrShtView!= null){
+								((ScreenShotHistoryView)scrShtView).setInput((TestRunInstanceModel)sel);
+							}
+						} catch (Exception e) {
+							LOG.error(e);
+						}	
+					}
+				});
+
 				try {
 					PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().showView(HistoryDeviceLogView.ID);
 				} catch (PartInitException e) {
