@@ -16,16 +16,16 @@
 		<properties>
 			<property name="eclipselink.target-database" value="DERBY" />
 			<property name="eclipselink.ddl-generation" value="create-or-extend-tables" />
-			<property name="eclipselink.jdbc.driver" value="org.apache.derby.jdbc.EmbeddedDriver" />
+			<!-- property name="eclipselink.jdbc.driver" value="org.apache.derby.jdbc.EmbeddedDriver" /-->
 			<!-- property name="eclipselink.jdbc.url" value="jdbc:derby://localhost:1527//home/syed/.bbat/xyzvsvsg;create=true" /-->
 			<property name="eclipselink.jdbc.user" value="APP" />
 			<property name="eclipselink.jdbc.password" value="APP" />
 			<property name="eclipselink.ddl-generation.output-mode"	value="database" />
-			<property name="eclipselink.logging.level" value="FINE" />
+			<property name="eclipselink.logging.level" value="OFF" />
 			<property name="eclipselink.logging.timestamp" value="false" />
 			<property name="eclipselink.logging.session" value="false" />
 			<property name="eclipselink.logging.thread" value="false" />
-			<property name="eclipselink.query-results-cache" value="false" />
+			<property name="eclipselink.query-results-cache" value="true" />
 			<property name="eclipselink.cache.shared.default" value="false" />
 			<property name="eclipselink.cache.size.default" value="0" />
 			<property name="eclipselink.cache.type.default" value="None" />

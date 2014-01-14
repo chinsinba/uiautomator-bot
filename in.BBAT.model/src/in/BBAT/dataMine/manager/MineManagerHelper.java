@@ -26,22 +26,11 @@ public class MineManagerHelper {
 		return emFactory;
 	}
 
-	/*private  void getPropertiesCreateTable(Map<String, Object> properties) {
-		properties.put(PersistenceUnitProperties.DDL_GENERATION,
-				PersistenceUnitProperties.CREATE_OR_EXTEND);
-		properties.put(PersistenceUnitProperties.DDL_GENERATION_MODE,
-				PersistenceUnitProperties.DDL_DATABASE_GENERATION);
-		properties.put(PersistenceUnitProperties.CLASSLOADER,
-				Activator.getClassLoader());
-	}*/
-
 	private  void getPropertiesExistingTable(
 			Map<String, Object> properties) {
 		properties.put(PersistenceUnitProperties.CLASSLOADER,
 				Activator.getClassLoader());
 
-
-		//		properties.put(PersistenceUnitProperties.TARGET_DATABASE, "DERBY");
 	}
 
 	private MineManagerHelper(String persistenceUnitName,
@@ -50,20 +39,15 @@ public class MineManagerHelper {
 
 		getPropertiesExistingTable(properties);
 		String url;
-		if(networkDb)
-		url = "jdbc:derby://" + dbPath + ";create=true";
-		else
+		if(networkDb){
+			url = "jdbc:derby://" + dbPath + ";create=true";
+			properties.put(PersistenceUnitProperties.JDBC_DRIVER, "org.apache.derby.jdbc.ClientDriver");
+		}
+		else{
 			url = "jdbc:derby:" + dbPath + ";create=true";
+			properties.put(PersistenceUnitProperties.JDBC_DRIVER, "org.apache.derby.jdbc.EmbeddedDriver");
+		}
 		properties.put(PersistenceUnitProperties.JDBC_URL, url);
-		/*if (createTable) {
-			getPropertiesCreateTable(properties);
-		}*/
-
-		/*	if (networkDb) {
-			DerbyMineProperties.getPropertiesClient(properties, dbPath,dbUserName,dbPassword);
-		} else {
-			DerbyMineProperties.getPropertiesEmbedded(properties, dbPath,dbUserName,dbPassword);
-		}*/
 
 		emFactory = new PersistenceProvider().createEntityManagerFactory(persistenceUnitName, properties);
 	}
@@ -120,15 +104,15 @@ public class MineManagerHelper {
 			emHelp = null;
 		}
 	}
-	
+
 	public Connection getConnection(){
-		
+
 		EntityManager createEntityManager = emFactory.createEntityManager();
 		createEntityManager.getTransaction().begin();
 		Connection con = createEntityManager.unwrap(java.sql.Connection.class);
 		createEntityManager.getTransaction().commit();
 		return con;
-				
+
 	}
 }
 

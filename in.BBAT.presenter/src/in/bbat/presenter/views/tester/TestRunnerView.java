@@ -51,6 +51,8 @@ import org.eclipse.swt.dnd.DND;
 import org.eclipse.swt.dnd.Transfer;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.graphics.Font;
+import org.eclipse.swt.graphics.FontData;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
@@ -127,6 +129,7 @@ public class TestRunnerView extends BBATViewPart {
 	private void createDeviceRunViewerTabs(Composite innerleft) {
 
 		CTabFolder testRunFolder = new CTabFolder(innerleft, SWT.TOP|SWT.BORDER);
+		testRunFolder.setSimple(false);
 		executionViewItem = new CTabItem(testRunFolder, SWT.None);
 		executionViewItem.setText("Execution View");
 		Composite comp = new Composite(testRunFolder, SWT.NONE);
@@ -278,6 +281,7 @@ public class TestRunnerView extends BBATViewPart {
 	private void createTestRunViewer(Composite innerRight) {
 
 		CTabFolder testRunFolder = new CTabFolder(innerRight, SWT.TOP|SWT.BORDER);
+		testRunFolder.setSimple(false);
 		testRunItem = new CTabItem(testRunFolder, SWT.NONE);
 		testRunItem.setText("Common Test Cases");
 		testRunItem.setImage(BBATImageManager.getInstance().getImage(BBATImageManager.TESTCASE_GIF_16));
@@ -302,7 +306,7 @@ public class TestRunnerView extends BBATViewPart {
 
 	public void createTestDeviceTab(AndroidDevice testDevice, List<TestRunInstanceModel> input){
 		CTabItem testRunItem = new CTabItem(testRunFolder, SWT.NONE);
-		testRunItem.setText("Test Devices");
+		testRunItem.setText("Device Runs");
 		Composite comp = new Composite(testRunFolder, SWT.NONE);
 		Button button = new Button(comp, SWT.PUSH);
 		button.setText("Hello");
@@ -326,6 +330,7 @@ public class TestRunnerView extends BBATViewPart {
 
 	private void createDeviceRun(SashForm form) {
 		final CTabFolder tabFolder = new CTabFolder(form, SWT.TOP|SWT.BORDER);
+		tabFolder.setSimple(false);
 		CTabItem testRunItem = new CTabItem(tabFolder, SWT.NONE);
 		testRunItem.setText("Test Devices");
 		testRunItem.setImage(BBATImageManager.getInstance().getImage(BBATImageManager.ANDROID_DEVICE));
