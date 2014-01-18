@@ -59,11 +59,13 @@ public class CreateTestProjectPage extends WizardPage {
 			@Override
 			public void modifyText(ModifyEvent e) {
 				String className = "[\\p{L}_$][\\p{L}\\p{N}_$]*";
+				
 				boolean matches = ((Text)e.getSource()).getText().matches(className);
 
 				if(!matches){
 					setMessage("Not a valid name",WizardPage.ERROR);
 					nameValid= false;
+					return;
 				}
 				if(isDuplicate( ((Text)e.getSource()).getText())){
 					setMessage("Name already exists",WizardPage.ERROR);
@@ -137,7 +139,9 @@ public class CreateTestProjectPage extends WizardPage {
 		sp.setIncrement(1);
 		sp.setMinimum(16);
 		sp.setMaximum(AndroidSdkUtility.maximumApiLevel());
-
+		if(AndroidSdkUtility.maximumApiLevel()>16){
+			sp.setSelection(AndroidSdkUtility.maximumApiLevel());
+		}
 
 		sp.addSelectionListener(new SelectionAdapter() {
 			@Override

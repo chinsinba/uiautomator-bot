@@ -5,8 +5,10 @@ import java.io.File;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.ScrolledComposite;
+import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.ImageData;
+import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
@@ -40,6 +42,7 @@ public class ScreenShotView extends BBATViewPart {
 		GridData layoutData = new GridData( GridData.FILL_BOTH );
 		layoutData.horizontalSpan = 2;
 //		layoutData.heightHint = 400;
+		sc.setBackground(new Color(Display.getDefault(), new RGB(255,255,255)));
 		sc.setLayoutData( layoutData );
 
 		imageLabel = new Label( sc, SWT.NONE );

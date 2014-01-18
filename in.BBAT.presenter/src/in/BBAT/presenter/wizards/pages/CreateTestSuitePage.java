@@ -51,6 +51,7 @@ public class CreateTestSuitePage extends WizardPage {
 				if(!matches){
 					setMessage("Invalid test suite name",WizardPage.ERROR);
 					nameValid= false;
+					return;
 				}
 				if(isDuplicate( ((Text)e.getSource()).getText())){
 					setMessage("Test suite with name "+((Text)e.getSource()).getText()+" exists",WizardPage.ERROR);

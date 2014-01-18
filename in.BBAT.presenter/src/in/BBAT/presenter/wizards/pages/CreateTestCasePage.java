@@ -56,6 +56,7 @@ public class CreateTestCasePage extends WizardPage {
 				if(isDuplicate( ((Text)e.getSource()).getText())){
 					setMessage("Name already exists",WizardPage.ERROR);
 					nameValid= false;
+					return;
 				}
 				else{
 					setMessage("Wizard to create Test Case", WizardPage.INFORMATION);
