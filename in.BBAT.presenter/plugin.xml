@@ -602,5 +602,24 @@
          </property>
       </product>
    </extension>
+   <extension
+         point="org.eclipse.ui.activities">
+      <activity
+            id="in.BBAT.presenter.hideActivity"
+            name="Hide Activity">
+      </activity>
+      <activityPatternBinding
+            activityId="in.BBAT.presenter.hideActivity"
+            pattern="org.eclipse.search.*">
+      </activityPatternBinding>
+      <activityPatternBinding
+            activityId="in.BBAT.presenter.hideActivity"
+            pattern="org.eclipse.jdt.ui.*">
+      </activityPatternBinding>
+      <activityPatternBinding
+            activityId="in.BBAT.presenter.hideActivity"
+            pattern="org.eclipse.debug.ui.*">
+      </activityPatternBinding>
+   </extension>
 
 </plugin>
