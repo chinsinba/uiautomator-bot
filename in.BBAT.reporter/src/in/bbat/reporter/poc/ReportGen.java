@@ -1,5 +1,7 @@
 package in.bbat.reporter.poc;
 import in.BBAT.dataMine.manager.MineManagerHelper;
+import in.bbat.reporter.Activator;
+import in.bbat.utility.BBATPluginUtility;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -7,6 +9,8 @@ import java.io.FileNotFoundException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Map;
+
+import org.eclipse.core.runtime.Path;
 
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -27,7 +31,7 @@ public class ReportGen {
 
 			//Loading my jasper file
 			JasperReport jasperReport = null;
-			jasperReport = (JasperReport) JRLoader.loadObject(new FileInputStream(new File("/home/syed/Documents/report1.jasper")));
+			jasperReport = (JasperReport) JRLoader.loadObject(new FileInputStream(BBATPluginUtility.getInstance().getPluginDir(Activator.PLUGIN_ID)+Path.SEPARATOR+"reports"+Path.SEPARATOR+reportName));
 
 			//Filling the report with data from
 			//the database based on the parameters passed.

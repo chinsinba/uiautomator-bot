@@ -23,8 +23,11 @@ public abstract class AbstractTestRunInfoHandler extends BBATHandler {
 
 	@Override
 	public boolean isEnabled() {
-
-		List<?> list = getSelectedList();
+		List<?> list =null;
+		try{
+			list = getSelectedList();
+		}catch (Exception e) {
+		}
 
 		return isEnabled(list);
 	}

@@ -6,6 +6,7 @@ import in.BBAT.presenter.developer.handlers.BBATHandler;
 import in.bbat.logger.BBATLogger;
 import in.bbat.presenter.dialogs.ActivationCodeDialog;
 import in.bbat.presenter.views.developer.ScreenShotView;
+import in.bbat.reporter.poc.DeviceRunWindow;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.commands.ExecutionEvent;
@@ -20,8 +21,8 @@ public class OpenScreenShotViewHandler extends BBATHandler {
 	@Override
 	public Object run(ExecutionEvent event) {
 
-		ActivationCodeDialog d = new ActivationCodeDialog(new Shell());
-		d.open();
+		/*ActivationCodeDialog d = new ActivationCodeDialog(new Shell());
+		d.open();*/
 		LOG.info("Open screen shot ui automator view");
 		try {
 			PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().showView(ScreenShotView.ID);

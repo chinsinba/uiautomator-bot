@@ -289,17 +289,17 @@
                label="New">
             <command
                   commandId="in.BBAT.presenter.testCase.CreateTestCase"
-                  label="TestCase"
+                  label="Test Case"
                   style="push">
             </command>
             <command
                   commandId="in.BBAT.presenter.testCase.CreateSuite"
-                  label="TestSuite"
+                  label="Test Suite"
                   style="push">
             </command>
             <command
                   commandId="in.BBAT.presenter.testCase.CreateProject"
-                  label="TestProject"
+                  label="Test Project"
                   style="push">
             </command>
          </menu>
@@ -424,6 +424,15 @@
                style="push">
          </command>
       </menuContribution>
+      <menuContribution
+            allPopups="false"
+            locationURI="toolbar:in.BBAT.presenter.history.TestRunInstanceView">
+         <command
+               commandId="in.BBAT.presenter.history.deviceRunReport"
+               label="Summary"
+               style="push">
+         </command>
+      </menuContribution>
    </extension>
    <extension
          point="org.eclipse.ui.commands">
@@ -503,6 +512,10 @@
             id="in.BBAT.presenter.testCase.TestElementDetails"
             name="Test Details">
       </command>
+      <command
+            id="in.BBAT.presenter.history.deviceRunReport"
+            name="Device Run Report">
+      </command>
    </extension>
    <extension
          point="org.eclipse.ui.handlers">
@@ -581,6 +594,10 @@
       <handler
             class="in.BBAT.presenter.developer.handlers.testcaseBrowser.TestDetailsHandler"
             commandId="in.BBAT.presenter.testCase.TestElementDetails">
+      </handler>
+      <handler
+            class="in.BBAT.presenter.history.handlers.DeviceRunSummaryReportHandler"
+            commandId="in.BBAT.presenter.history.deviceRunReport">
       </handler>
    </extension>
    <extension

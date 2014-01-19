@@ -10,6 +10,7 @@ import in.bbat.logger.BBATLogger;
 import in.bbat.presenter.views.BBATViewPart;
 import in.bbat.presenter.views.tester.AutomatorLogView;
 import in.bbat.presenter.views.tester.TestLogView;
+import in.bbat.utils.ITestConstants;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -138,7 +139,7 @@ public class TestRunInfoView extends BBATViewPart {
 	}
 
 	public void createColumns(final Composite parent, final TableViewer viewer) {
-		String[] titles = { "TestCase","TestSuite","Project","Status","Time(s)" };
+		String[] titles = {  ITestConstants.TESTCASE, ITestConstants.TESTSUITE, ITestConstants.TESTPROJECT,"Status","Time(s)" };
 		int[] bounds = { 25,25,25,12,13 };
 
 		TableColumnLayout layout = new TableColumnLayout();

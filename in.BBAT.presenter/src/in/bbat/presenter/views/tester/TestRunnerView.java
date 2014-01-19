@@ -16,6 +16,7 @@ import in.bbat.logger.BBATLogger;
 import in.bbat.presenter.internal.DeviceTestRun;
 import in.bbat.presenter.internal.TestRunExecutionManager;
 import in.bbat.presenter.views.BBATViewPart;
+import in.bbat.utils.ITestConstants;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -258,8 +259,8 @@ public class TestRunnerView extends BBATViewPart {
 	}
 
 	public void createRunColumns(final Composite parent, final TableViewer viewer) {
-		String[] titles = { "TestCase","TestSuite","Project","Status" };
-		int[] bounds = { 25,25,25,25 };
+		String[] titles = { ITestConstants.TESTCASE, ITestConstants.TESTSUITE, ITestConstants.TESTPROJECT,"Status" };
+		int[] bounds = { 30,25,25,20 };
 
 		TableColumnLayout layout = new TableColumnLayout();
 		parent.setLayout(layout);
@@ -564,8 +565,8 @@ public class TestRunnerView extends BBATViewPart {
 
 
 	public void createColumns(final Composite parent, final TableViewer viewer) {
-		String[] titles = { "TestCase","TestSuite","Project" };
-		int[] bounds = { 25,25,25,25 };
+		String[] titles = {  ITestConstants.TESTCASE, ITestConstants.TESTSUITE, ITestConstants.TESTPROJECT };
+		int[] bounds = { 40,30,30 };
 
 		TableColumnLayout layout = new TableColumnLayout();
 		parent.setLayout(layout);
