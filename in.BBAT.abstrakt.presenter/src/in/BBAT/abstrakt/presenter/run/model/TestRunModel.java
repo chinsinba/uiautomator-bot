@@ -1,5 +1,6 @@
 package in.BBAT.abstrakt.presenter.run.model;
 
+import java.io.File;
 import java.sql.Timestamp;
 
 import in.BBAT.abstrakt.gui.model.AbstractTreeModel;
@@ -7,6 +8,7 @@ import in.BBAT.data.model.Entities.AbstractEntity;
 import in.BBAT.data.model.Entities.TestDeviceRunEntity;
 import in.BBAT.data.model.Entities.TestRunEntity;
 import in.bbat.configuration.BBATProperties;
+import in.bbat.utility.FileUtils;
 
 import org.eclipse.core.runtime.Path;
 import org.eclipse.swt.graphics.Image;
@@ -35,7 +37,7 @@ public class TestRunModel extends AbstractTreeModel {
 	public String getName() {
 		return "RUN_"+getEntity().getId();
 	}
-	
+
 	@Override
 	public Image getImage() {
 		return null;
@@ -60,10 +62,20 @@ public class TestRunModel extends AbstractTreeModel {
 	public void setEndTime(Timestamp endtiTime) {
 		((TestRunEntity)getEntity()).setEndtiTime(endtiTime);
 	}
-	
+
 	public String getScreenShotDir()
 	{
 		return BBATProperties.getInstance().getScreenShotDirectory()+Path.SEPARATOR+getName();
+	}
+	@Override
+	public void delete() throws Exception {
+		try{
+			super.delete();
+		}
+		catch (Exception e) {
+			return;
+		}
+		FileUtils.delete(new File(BBATProperties.getInstance().getScreenShotDirectory()+Path.SEPARATOR+getName()));
 	}
 
 }
