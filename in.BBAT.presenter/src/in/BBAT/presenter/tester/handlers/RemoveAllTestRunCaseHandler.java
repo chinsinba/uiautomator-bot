@@ -2,6 +2,11 @@ package in.BBAT.presenter.tester.handlers;
 
 import in.bbat.logger.BBATLogger;
 import in.bbat.presenter.internal.TestRunExecutionManager;
+import in.bbat.presenter.views.BBATViewPart;
+import in.bbat.presenter.views.tester.AutomatorLogView;
+import in.bbat.presenter.views.tester.DeviceLogView;
+import in.bbat.presenter.views.tester.ScreenShotView;
+import in.bbat.presenter.views.tester.TestLogView;
 import in.bbat.presenter.views.tester.TestRunnerView;
 
 import java.util.List;
@@ -15,10 +20,14 @@ public class RemoveAllTestRunCaseHandler extends AbstractTestRunnerHandler {
 	private static final Logger LOG = BBATLogger.getLogger(RemoveAllTestRunCaseHandler.class.getName());
 	@Override
 	public Object run(ExecutionEvent event, List<?> selectedObjects) {
-		
+
 		LOG.info("Remove all test runs");
 		TestRunExecutionManager.getInstance().clearTestRunCases();
 		TestRunExecutionManager.getInstance().clearTestDevices();
+		BBATViewPart.hideView(AutomatorLogView.ID);
+		BBATViewPart.hideView(ScreenShotView.ID);
+		BBATViewPart.hideView(DeviceLogView.ID);
+		BBATViewPart.hideView(TestLogView.ID);
 		TestRunnerView view  = (TestRunnerView) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().findView(TestRunnerView.ID);
 		try {
 			view.clearRunViewerInput();
