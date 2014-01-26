@@ -80,9 +80,11 @@ public class TestDeviceManager  implements IDeviceConnectionListener{
 	@Override
 	public void deviceChanged(IAndroidDevice device, int changeMask) {
 		AndroidDevice dev = iDeviceMap.get(device);
+		dev.updateDeviceDetails(device);
 		for(IDeviceModelChangeListener listnr : listners)
 		{
 			listnr.deviceAdded(dev);
+			
 		}
 	}
 
