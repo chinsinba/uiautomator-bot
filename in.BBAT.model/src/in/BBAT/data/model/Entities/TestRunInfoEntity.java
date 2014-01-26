@@ -58,6 +58,9 @@ public class TestRunInfoEntity extends AbstractEntity {
 	@OrderColumn
 	private TestDeviceRunEntity testDeviceRun;;
 	
+	@OneToMany(mappedBy="runinfo", fetch = FetchType.LAZY, cascade = { CascadeType.ALL })
+	@OrderColumn
+	private List<TestCaseParameterEntity> testCaseParams;
 	
 	@OneToMany(mappedBy="testRunInfo", fetch = FetchType.LAZY, cascade = { CascadeType.ALL })
 	@OrderColumn
@@ -142,5 +145,13 @@ public class TestRunInfoEntity extends AbstractEntity {
 
 	public void setAutoLogs(List<AutomatorLogEntity> autoLogs) {
 		this.autoLogs = autoLogs;
+	}
+
+	public List<TestCaseParameterEntity> getTestCaseParams() {
+		return testCaseParams;
+	}
+
+	public void setTestCaseParams(List<TestCaseParameterEntity> testCaseParams) {
+		this.testCaseParams = testCaseParams;
 	}
 }

@@ -31,6 +31,9 @@ public class TestCaseParameterEntity extends AbstractEntity {
 	@ManyToOne
 	private TestCaseEntity cases;
 	
+	@ManyToOne
+	private TestRunInfoEntity runinfo;
+	
 	public int getId() {
 		return id;
 	}
@@ -61,6 +64,14 @@ public class TestCaseParameterEntity extends AbstractEntity {
 
 	public void setCases(TestCaseEntity cases) {
 		this.cases = cases;
+	}
+
+	public TestRunInfoEntity getRuninfo() {
+		return runinfo;
+	}
+
+	public void setRuninfo(TestRunInfoEntity runinfo) {
+		this.runinfo = runinfo;
 	}
 
 }
