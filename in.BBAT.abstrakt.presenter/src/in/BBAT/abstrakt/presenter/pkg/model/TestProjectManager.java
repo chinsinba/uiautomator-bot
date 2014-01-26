@@ -24,6 +24,7 @@ import org.eclipse.ui.wizards.datatransfer.ZipFileStructureProvider;
 public class TestProjectManager {
 
 	private static TestProjectManager instance;
+	private List<TestProjectModel> models;
 
 	private TestProjectManager()
 	{
@@ -39,7 +40,10 @@ public class TestProjectManager {
 	}
 
 	public List<TestProjectModel> getTestProjects() throws Exception{
-		List<TestProjectModel> models = new ArrayList<TestProjectModel>();
+		if(models!=null){
+			return models;
+		}
+		models = new ArrayList<TestProjectModel>();
 		for(TestProjectEntity entity: ProjectMineManager.getAllTesPackages()){
 			TestProjectModel model = new TestProjectModel(entity);
 			models.add(model);

@@ -2,6 +2,7 @@ package in.BBAT.presenter.contentProviders;
 
 import in.BBAT.abstrakt.gui.model.IGUITreeNode;
 import in.BBAT.abstrakt.presenter.pkg.model.TestProjectManager;
+import in.BBAT.abstrakt.presenter.pkg.model.TestProjectModel;
 import in.bbat.logger.BBATLogger;
 
 import java.util.List;
@@ -30,6 +31,7 @@ public class TestCaseBrowserContentProvider implements ITreeContentProvider {
 
 	@Override
 	public Object[] getChildren(Object parentElement) {
+
 		if(parentElement instanceof IGUITreeNode){
 			try {
 				return ((IGUITreeNode) parentElement).getChildren().toArray();
@@ -44,6 +46,11 @@ public class TestCaseBrowserContentProvider implements ITreeContentProvider {
 			} catch (Exception e) {
 				LOG.error(e);
 			}
+		}
+
+		if(parentElement instanceof List<?> )
+		{
+			return ((List) parentElement).toArray();
 		}
 
 		return null;

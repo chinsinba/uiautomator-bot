@@ -89,7 +89,7 @@ public class TestCaseBrowserView extends BBATViewPart {
 
 		// Provide the input to the ContentProvider
 		try {
-			viewer.setInput(TestProjectManager.getInstance());
+			viewer.setInput(TestProjectManager.getInstance().getTestProjects());
 		} catch (Exception e) {
 			LOG.error(e);
 		}
@@ -114,7 +114,7 @@ public class TestCaseBrowserView extends BBATViewPart {
 
 	@Override
 	public void refresh() throws Exception {
-		viewer.setInput(TestProjectManager.getInstance());
+//		viewer.setInput(TestProjectManager.getInstance());
 		viewer.refresh();
 	}
 

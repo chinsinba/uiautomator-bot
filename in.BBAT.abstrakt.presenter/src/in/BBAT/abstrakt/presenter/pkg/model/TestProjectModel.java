@@ -85,12 +85,19 @@ public class TestProjectModel extends AbstractProjectTree {
 	public void deLinkFromProject() {
 		project.deleteProject();
 	}
+	
+	@Override
+	public void deleteResource() throws Exception {
+		super.deleteResource();
+		TestProjectManager.getInstance().getTestProjects().remove(this);
+	}
 
 	public static TestProjectModel create(String name, String description,int apiLevel) throws Exception{
 		TestProjectModel model = new TestProjectModel(name,apiLevel);
 		model.setDescription(description);
 		model.setApiLevel(apiLevel);
 		model.save();
+		TestProjectManager.getInstance().getTestProjects().add(model);
 		return model;
 	}
 

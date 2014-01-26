@@ -156,11 +156,18 @@ public class TestCaseModel extends AbstractProjectTree{
 		TestCaseModel newTestCase = new TestCaseModel(suite, name);
 		newTestCase.setDescription(description);
 		newTestCase.save();
+		suite.addChild(newTestCase);
 		return newTestCase;
 	}
 	
 	@Override
 	public BBATProject getProject() {
 		return ((TestSuiteModel)getParent()).getProject();
+	}
+	
+	@Override
+	public void deleteResource() throws Exception {
+		super.deleteResource();
+		getParent().removeChild(this);
 	}
 }
