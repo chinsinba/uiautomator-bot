@@ -143,6 +143,13 @@
             name="ScreenShots"
             restorable="true">
       </view>
+      <view
+            class="in.bbat.presenter.views.tester.ExecutionView"
+            icon="icons/execute.gif"
+            id="in.BBAT.presenter.tester.TestExecutionView"
+            name="Execution View"
+            restorable="true">
+      </view>
    </extension>
    <extension
          point="org.eclipse.ui.perspectiveExtensions">
@@ -193,11 +200,17 @@
                visible="true">
          </view>
          <view
+               id="in.BBAT.presenter.tester.TestExecutionView"
+               minimized="false"
+               relationship="right"
+               relative="in.BBAT.presenter.tester.TestRunnerView"
+               visible="false">
+         </view>
+         <view
                closeable="true"
                id="in.BBAT.presenter.tester.AndroidLogView"
                minimized="false"
-               ratio="0.50f"
-               relationship="bottom"
+               relationship="stack"
                relative="in.BBAT.presenter.tester.TestRunnerView"
                visible="false">
          </view>
@@ -205,8 +218,8 @@
                id="in.BBAT.presenter.tester.AutoLogView"
                minimized="false"
                ratio="0.50f"
-               relationship="right"
-               relative="in.BBAT.presenter.tester.AndroidLogView"
+               relationship="bottom"
+               relative="in.BBAT.presenter.tester.TestExecutionView"
                visible="false">
          </view>
          <view

@@ -78,7 +78,7 @@ public class TestRunnerView extends BBATViewPart {
 	private TreeViewer testDeviceViewer;
 	public static CTabFolder testRunFolder;
 	private CTabItem testRunItem;
-	private TableViewer executionViewer;
+	//	private TableViewer executionViewer;
 	private CTabItem deviceRunItem;
 	private TableViewer deviceTestCaseViewer;
 	private DeviceTestRun deviceTestRun;
@@ -92,10 +92,21 @@ public class TestRunnerView extends BBATViewPart {
 		commonTestCaseViewer.refresh();
 		if(testDeviceViewer!=null)
 			testDeviceViewer.refresh();
-		if(executionViewer!=null)
-			executionViewer.refresh();
+		/*	if(executionViewer!=null)
+			executionViewer.refresh();*/
 		if(deviceTestCaseViewer !=null)
 			deviceTestCaseViewer.refresh();
+		{
+			try {
+				IViewPart findView = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().findView(ExecutionView.ID);
+				if(findView !=null){
+					((ExecutionView)findView).refresh();
+				}
+			} catch (PartInitException e) {
+				e.printStackTrace();
+			}
+		}
+
 		IContributionItem[] items = getViewSite().getActionBars().getToolBarManager().getItems();
 		for(IContributionItem item : items){
 			if(item instanceof CommandContributionItem){
@@ -119,15 +130,15 @@ public class TestRunnerView extends BBATViewPart {
 
 		SashForm form = createSash(parent);
 		createDeviceViewer(form);
-		createDeviceRunViewerTabs(form);
+		//		createDeviceRunViewerTabs(form);
 
-		form.setWeights(new int[]{50,50});
+		//		form.setWeights(new int[]{50,50});
 		createDropSupport();
 		getViewSite().setSelectionProvider(commonTestCaseViewer);
 	}
 
 
-	private void createDeviceRunViewerTabs(Composite innerleft) {
+	/*private void createDeviceRunViewerTabs(Composite innerleft) {
 
 		CTabFolder testRunFolder = new CTabFolder(innerleft, SWT.TOP|SWT.BORDER);
 		testRunFolder.setSimple(false);
@@ -210,9 +221,9 @@ public class TestRunnerView extends BBATViewPart {
 		createExecutionViewActions(executionViewer);
 		testRunFolder.setSelection(executionViewItem);
 
-	}
+	}*/
 
-	private void createExecutionViewActions(final TableViewer viewer) {
+	/*private void createExecutionViewActions(final TableViewer viewer) {
 		final Action removeAction = new Action("Export Logs") {
 			@Override
 			public void run() {
@@ -256,9 +267,9 @@ public class TestRunnerView extends BBATViewPart {
 		});
 		viewer.getControl().setMenu(menuManager.createContextMenu(viewer.getControl()));
 
-	}
+	}*/
 
-	public void createRunColumns(final Composite parent, final TableViewer viewer) {
+	/*public void createRunColumns(final Composite parent, final TableViewer viewer) {
 		String[] titles = { ITestConstants.TESTCASE, ITestConstants.TESTSUITE, ITestConstants.TESTPROJECT,"Status" };
 		int[] bounds = { 30,25,25,20 };
 
@@ -277,7 +288,7 @@ public class TestRunnerView extends BBATViewPart {
 		TableViewerColumn col3 = createTableViewerColumn(viewer, null, titles[3],bounds[3]);
 		layout.setColumnData(col3.getColumn(), new ColumnWeightData(bounds[3]));
 
-	}
+	}*/
 
 	private void createTestRunViewer(Composite innerRight) {
 
@@ -349,7 +360,18 @@ public class TestRunnerView extends BBATViewPart {
 				Object obj = selection.getFirstElement();
 				if(obj  instanceof DeviceTestRun){
 					DeviceTestRun run = (DeviceTestRun) obj;
-					setRunViewerInput(run);
+
+					if(run.getStatus().toString().equalsIgnoreCase(TestStatus.NOTEXECUTED.toString())){
+						return;
+					}
+					//					setRunViewerInput(run);
+					try {
+						ExecutionView view = (ExecutionView) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().showView(ExecutionView.ID);
+						view.setRunViewerInput(run);
+					} catch (PartInitException e) {
+						e.printStackTrace();
+					}
+
 					//					createDeviceItem(tabFolder,run);
 				}
 			}
@@ -607,7 +629,7 @@ public class TestRunnerView extends BBATViewPart {
 		return viewerColumn;
 	}
 
-	public void setRunViewerInput(DeviceTestRun execRun){
+	/*	public void setRunViewerInput(DeviceTestRun execRun){
 		executionViewItem.setText(execRun.getDevice().getName());
 		executionViewer.setInput(execRun.getRunInstances());
 		executionViewer.refresh();
@@ -617,7 +639,7 @@ public class TestRunnerView extends BBATViewPart {
 		executionViewer.setInput(Collections.EMPTY_LIST);
 		executionViewer.refresh();
 
-	}
+	}*/
 
 	public void clearDeviceRunItem(){
 		if(deviceRunItem!=null){

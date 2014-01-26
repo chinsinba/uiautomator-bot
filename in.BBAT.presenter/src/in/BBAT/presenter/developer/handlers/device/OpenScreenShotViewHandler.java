@@ -1,17 +1,13 @@
 package in.BBAT.presenter.developer.handlers.device;
 
-import java.util.List;
-
 import in.BBAT.presenter.developer.handlers.BBATHandler;
 import in.bbat.logger.BBATLogger;
-import in.bbat.presenter.dialogs.ActivationCodeDialog;
 import in.bbat.presenter.views.developer.ScreenShotView;
-import in.bbat.reporter.poc.DeviceRunWindow;
-import in.bbat.utils.Snippet;
+
+import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.commands.ExecutionEvent;
-import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 
@@ -24,7 +20,6 @@ public class OpenScreenShotViewHandler extends BBATHandler {
 
 		/*ActivationCodeDialog d = new ActivationCodeDialog(new Shell());
 		d.open();*/
-		Snippet.main();
 		LOG.info("Open screen shot ui automator view");
 		try {
 			PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().showView(ScreenShotView.ID);

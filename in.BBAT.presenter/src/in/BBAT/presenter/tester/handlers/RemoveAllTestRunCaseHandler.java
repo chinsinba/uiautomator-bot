@@ -5,6 +5,7 @@ import in.bbat.presenter.internal.TestRunExecutionManager;
 import in.bbat.presenter.views.BBATViewPart;
 import in.bbat.presenter.views.tester.AutomatorLogView;
 import in.bbat.presenter.views.tester.DeviceLogView;
+import in.bbat.presenter.views.tester.ExecutionView;
 import in.bbat.presenter.views.tester.ScreenShotView;
 import in.bbat.presenter.views.tester.TestLogView;
 import in.bbat.presenter.views.tester.TestRunnerView;
@@ -28,9 +29,10 @@ public class RemoveAllTestRunCaseHandler extends AbstractTestRunnerHandler {
 		BBATViewPart.hideView(ScreenShotView.ID);
 		BBATViewPart.hideView(DeviceLogView.ID);
 		BBATViewPart.hideView(TestLogView.ID);
+		BBATViewPart.hideView(ExecutionView.ID);
 		TestRunnerView view  = (TestRunnerView) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().findView(TestRunnerView.ID);
 		try {
-			view.clearRunViewerInput();
+//			view.clearRunViewerInput();
 			view.clearDeviceRunItem();
 			view.refresh();
 		} catch (Exception e) {
