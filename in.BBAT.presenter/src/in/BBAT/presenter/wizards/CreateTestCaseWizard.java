@@ -34,7 +34,7 @@ public class CreateTestCaseWizard extends Wizard {
 	public boolean performFinish() {
 		LOG.info("Creating test case : "+caseCreationPage.getName());
 		try {
-			TestCaseModel newTestCase = TestCaseModel.create(parent, caseCreationPage.getCaseName(),caseCreationPage.getDeskription()); 
+			TestCaseModel newTestCase = TestCaseModel.create(parent, caseCreationPage.getCaseName().trim(),caseCreationPage.getDeskription().trim()); 
 			TestCaseBrowserView.refreshView();
 
 			try

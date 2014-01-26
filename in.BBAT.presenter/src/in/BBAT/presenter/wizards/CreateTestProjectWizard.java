@@ -18,7 +18,7 @@ public class CreateTestProjectWizard extends Wizard {
 		LOG.info("Creating test Project : " + projCreationPage.getName());
 		TestProjectModel newTestProject = null;
 		try {
-			newTestProject = TestProjectModel.create(projCreationPage.getProjName(), projCreationPage.getDeskription(), Integer.parseInt(projCreationPage.getApiLevel())); 
+			newTestProject = TestProjectModel.create(projCreationPage.getProjName().trim(), projCreationPage.getDeskription().trim(), Integer.parseInt(projCreationPage.getApiLevel())); 
 		} catch (Exception e) {
 			LOG.error(e);
 		}

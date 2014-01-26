@@ -46,16 +46,20 @@ public class CreateTestSuitePage extends WizardPage {
 			@Override
 			public void modifyText(ModifyEvent e) {
 				String className = "[\\p{L}_$][\\p{L}\\p{N}_$]*";
-				boolean matches = ((Text)e.getSource()).getText().matches(className);
+				boolean matches = ((Text)e.getSource()).getText().trim().matches(className);
 
 				if(!matches){
 					setMessage("Invalid test suite name",WizardPage.ERROR);
 					nameValid= false;
+					pageComplete();
 					return;
+					
 				}
-				if(isDuplicate( ((Text)e.getSource()).getText())){
+				if(isDuplicate(((Text)e.getSource()).getText().trim())){
 					setMessage("Test suite with name "+((Text)e.getSource()).getText()+" exists",WizardPage.ERROR);
 					nameValid= false;
+					pageComplete();
+					return;
 				}
 				else{
 					setMessage("Wizard to create Test Suite", WizardPage.INFORMATION);
@@ -68,7 +72,7 @@ public class CreateTestSuitePage extends WizardPage {
 		nameDescComp.getDescText().addModifyListener(new ModifyListener() {
 			@Override
 			public void modifyText(ModifyEvent e) {
-				if(!((Text)e.getSource()).getText().isEmpty())	
+				if(!((Text)e.getSource()).getText().trim().isEmpty())	
 				{
 					descValid = true;
 				}

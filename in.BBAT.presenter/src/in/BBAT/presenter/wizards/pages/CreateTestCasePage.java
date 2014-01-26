@@ -47,15 +47,18 @@ public class CreateTestCasePage extends WizardPage {
 			@Override
 			public void modifyText(ModifyEvent e) {
 				String className = "[\\p{L}_$][\\p{L}\\p{N}_$]*";
-				boolean matches = ((Text)e.getSource()).getText().matches(className);
+				boolean matches = ((Text)e.getSource()).getText().trim().matches(className);
 
 				if(!matches){
 					setMessage("Invalid  Test case name",WizardPage.ERROR);
 					nameValid= false;
+					pageComplete();
+					return;
 				}
-				if(isDuplicate( ((Text)e.getSource()).getText())){
+				if(isDuplicate(((Text)e.getSource()).getText().trim())){
 					setMessage("Name already exists",WizardPage.ERROR);
 					nameValid= false;
+					pageComplete();
 					return;
 				}
 				else{
@@ -69,7 +72,7 @@ public class CreateTestCasePage extends WizardPage {
 		nameDescComp.getDescText().addModifyListener(new ModifyListener() {
 			@Override
 			public void modifyText(ModifyEvent e) {
-				if(!((Text)e.getSource()).getText().isEmpty())	
+				if(!((Text)e.getSource()).getText().trim().isEmpty())	
 				{
 					descValid = true;
 				}
