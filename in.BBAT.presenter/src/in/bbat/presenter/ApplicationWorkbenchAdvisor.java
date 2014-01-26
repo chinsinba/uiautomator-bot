@@ -17,6 +17,7 @@ public class ApplicationWorkbenchAdvisor extends WorkbenchAdvisor {
 	public WorkbenchWindowAdvisor createWorkbenchWindowAdvisor(
 			IWorkbenchWindowConfigurer configurer) {
 		PlatformUI.getPreferenceStore().setValue(IWorkbenchPreferenceConstants.SHOW_TRADITIONAL_STYLE_TABS, false);
+		PlatformUI.getPreferenceStore().setValue(IWorkbenchPreferenceConstants.SHOW_MEMORY_MONITOR, true);
 		return new ApplicationWorkbenchWindowAdvisor(configurer);
 	}
 

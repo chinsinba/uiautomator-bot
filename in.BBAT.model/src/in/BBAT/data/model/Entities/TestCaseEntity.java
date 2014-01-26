@@ -3,14 +3,19 @@ package in.BBAT.data.model.Entities;
 
 
 import java.sql.Timestamp;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.OrderColumn;
 import javax.persistence.TableGenerator;
 import javax.persistence.Version;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -58,6 +63,10 @@ public class TestCaseEntity extends AbstractEntity {
 	private UserEntity createdBy;
 
 
+	@OneToMany(mappedBy="cases", fetch = FetchType.LAZY, cascade = { CascadeType.ALL })
+	@OrderColumn
+	private List<TestCaseParameterEntity> testCaseParams;
+	
 	public TestCaseEntity(TestSuiteEntity testSuiteEntity, String testCaseName) {
 		this.name = testCaseName;
 		this.suite = testSuiteEntity;
@@ -125,5 +134,13 @@ public class TestCaseEntity extends AbstractEntity {
 
 	public void setSuite(TestSuiteEntity suite) {
 		this.suite = suite;
+	}
+
+	public List<TestCaseParameterEntity> getTestCaseParams() {
+		return testCaseParams;
+	}
+
+	public void setTestCaseParams(List<TestCaseParameterEntity> testCaseParams) {
+		this.testCaseParams = testCaseParams;
 	}
 }
