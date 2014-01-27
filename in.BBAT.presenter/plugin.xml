@@ -159,7 +159,7 @@
                closeable="false"
                id="in.BBAT.presenter.developer.testcaseBrowserView"
                minimized="false"
-               ratio="0.20f"
+               ratio="0.21f"
                relationship="left"
                relative="org.eclipse.ui.editorss">
          </view>
@@ -186,7 +186,7 @@
                closeable="false"
                id="in.BBAT.presenter.developer.testcaseBrowserView"
                minimized="false"
-               ratio="0.20f"
+               ratio="0.21f"
                relationship="left"
                relative="org.eclipse.ui.editorss">
          </view>
@@ -365,6 +365,12 @@
                style="push"
                tooltip="opens UI automator viewer">
          </command>
+         <command
+               commandId="in.BBAT.presenter.device.connectWifi"
+               icon="icons/w.png"
+               label="Connect via WiFi"
+               style="push">
+         </command>
       </menuContribution>
       <menuContribution
             allPopups="false"
@@ -529,6 +535,10 @@
             id="in.BBAT.presenter.history.deviceRunReport"
             name="Device Run Report">
       </command>
+      <command
+            id="in.BBAT.presenter.device.connectWifi"
+            name="Connect via WiFi">
+      </command>
    </extension>
    <extension
          point="org.eclipse.ui.handlers">
@@ -611,6 +621,10 @@
       <handler
             class="in.BBAT.presenter.history.handlers.DeviceRunSummaryReportHandler"
             commandId="in.BBAT.presenter.history.deviceRunReport">
+      </handler>
+      <handler
+            class="in.BBAT.presenter.developer.handlers.device.ConnectDeficeViaWifiHandler"
+            commandId="in.BBAT.presenter.device.connectWifi">
       </handler>
    </extension>
    <extension
