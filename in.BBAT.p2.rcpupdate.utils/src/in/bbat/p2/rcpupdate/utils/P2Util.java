@@ -10,6 +10,7 @@ import java.net.URISyntaxException;
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.SubMonitor;
@@ -45,7 +46,7 @@ public class P2Util {
 
 				@Override
 				public void run(IProgressMonitor monitor) throws InvocationTargetException, InterruptedException {
-					execute(new AccumulatingProgressMonitor(monitor, Display.getDefault()));
+					execute(new NullProgressMonitor());
 				}
 
 			});
@@ -115,23 +116,25 @@ public class P2Util {
 
 	public static void execute( IProgressMonitor monitor) {
 
-		BundleContext bundleContext = Activator.getDefault().getBundle().getBundleContext();
-		ServiceReference reference = bundleContext.getServiceReference(IProvisioningAgent.SERVICE_NAME);
-		if (reference == null) {
-			Activator.log(new Status(IStatus.ERROR, Activator.PLUGIN_ID,
-					"No provisioning agent found.  This application is not set up for updates."));
-			return;
-		}
-
-		final IProvisioningAgent agent = (IProvisioningAgent) bundleContext.getService(reference);
-		final String REPOSITORY_LOC = 
-				System.getProperty("UpdateHandler.Repo", 
-						"/home/syed/Desktop/Backup_Desktop/BLACKANDRO/repository/");
+		
 		Job j = new Job("Update Job") {
 			private boolean doInstall = false;
 
 			@Override
 			protected IStatus run(final IProgressMonitor monitor) {
+				
+				BundleContext bundleContext = Activator.getDefault().getBundle().getBundleContext();
+				ServiceReference reference = bundleContext.getServiceReference(IProvisioningAgent.SERVICE_NAME);
+				if (reference == null) {
+					Activator.log(new Status(IStatus.ERROR, Activator.PLUGIN_ID,
+							"No provisioning agent found.  This application is not set up for updates."));
+					return Status.CANCEL_STATUS;
+				}
+
+				final IProvisioningAgent agent = (IProvisioningAgent) bundleContext.getService(reference);
+				final String REPOSITORY_LOC = 
+						System.getProperty("UpdateHandler.Repo", 
+								"/home/syed/Desktop/Backup_Desktop/BLACKANDRO/repository/");
 
 				/* 1. Prepare update plumbing */
 

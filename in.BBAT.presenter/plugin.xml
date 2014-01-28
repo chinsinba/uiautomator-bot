@@ -448,6 +448,7 @@
             locationURI="toolbar:in.BBAT.presenter.history.TestRunInstanceView">
          <command
                commandId="in.BBAT.presenter.history.deviceRunReport"
+               icon="icons/reporter.png"
                label="Summary"
                style="push">
          </command>
