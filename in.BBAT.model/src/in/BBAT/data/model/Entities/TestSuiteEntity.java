@@ -67,6 +67,9 @@ public class TestSuiteEntity extends AbstractEntity  {
 	@OrderColumn
 	private List<TestCaseEntity> testCases;
 
+	@XmlAttribute(required = true)
+	private boolean library;
+	
 	public TestSuiteEntity(TestProjectEntity testProject, String name) {
 
 		this.name = name;
@@ -165,6 +168,14 @@ public class TestSuiteEntity extends AbstractEntity  {
 
 	public void setTestProject(TestProjectEntity testProject) {
 		this.testProject = testProject;
+	}
+
+	public boolean isLibrary() {
+		return library;
+	}
+
+	public void setLibrary(boolean library) {
+		this.library = library;
 	}
 
 }
