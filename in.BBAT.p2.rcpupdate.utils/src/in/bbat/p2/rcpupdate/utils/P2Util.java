@@ -126,7 +126,7 @@ public class P2Util {
 		final IProvisioningAgent agent = (IProvisioningAgent) bundleContext.getService(reference);
 		final String REPOSITORY_LOC = 
 				System.getProperty("UpdateHandler.Repo", 
-						"http://10.1.1.127:8080/SWAT/repository/");
+						"/home/syed/Desktop/Backup_Desktop/BLACKANDRO/repository/");
 		Job j = new Job("Update Job") {
 			private boolean doInstall = false;
 
