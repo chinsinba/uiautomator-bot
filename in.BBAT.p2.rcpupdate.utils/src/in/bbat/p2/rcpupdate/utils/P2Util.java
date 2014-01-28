@@ -45,7 +45,7 @@ public class P2Util {
 
 				@Override
 				public void run(IProgressMonitor monitor) throws InvocationTargetException, InterruptedException {
-					doCheckForUpdates(new AccumulatingProgressMonitor(monitor, Display.getDefault()));
+					execute(new AccumulatingProgressMonitor(monitor, Display.getDefault()));
 				}
 
 			});
