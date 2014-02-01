@@ -59,7 +59,6 @@ public class TestRunInfoEntity extends AbstractEntity {
 	private TestDeviceRunEntity testDeviceRun;;
 	
 	@OneToMany(mappedBy="runinfo", fetch = FetchType.LAZY, cascade = { CascadeType.ALL })
-	@OrderColumn
 	private List<TestCaseParameterEntity> testCaseParams;
 	
 	@OneToMany(mappedBy="testRunInfo", fetch = FetchType.LAZY, cascade = { CascadeType.ALL })
