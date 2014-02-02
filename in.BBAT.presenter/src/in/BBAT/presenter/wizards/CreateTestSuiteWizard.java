@@ -18,10 +18,17 @@ public class CreateTestSuiteWizard extends Wizard {
 
 	private TestProjectModel parent;
 
+	private TestSuiteModel suiteModel; 
+
 	private static final Logger LOG = BBATLogger.getLogger(CreateTestSuiteWizard.class.getName());
 
 	public CreateTestSuiteWizard(TestProjectModel testProjectModel) {
 		this.parent = testProjectModel;
+	}
+
+	public CreateTestSuiteWizard(TestProjectModel testProjectModel, TestSuiteModel model) {
+		this(testProjectModel);
+		this.suiteModel = model;
 	}
 
 	@Override
@@ -39,7 +46,13 @@ public class CreateTestSuiteWizard extends Wizard {
 
 	@Override
 	public void addPages() {
-		suiteCreationPage = new CreateTestSuitePage("TestSuite",parent);
+		if(suiteModel!=null)
+		{
+			suiteCreationPage = new CreateTestSuitePage("TestSuite",parent,suiteModel);
+		}
+		else {
+			suiteCreationPage = new CreateTestSuitePage("TestSuite",parent);
+		}
 		addPage(suiteCreationPage);
 	}
 

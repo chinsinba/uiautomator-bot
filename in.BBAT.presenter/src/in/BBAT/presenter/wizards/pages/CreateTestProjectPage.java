@@ -46,7 +46,13 @@ public class CreateTestProjectPage extends WizardPage {
 
 	private Text androidTextPath;
 
+	private TestProjectModel project;
 
+	public CreateTestProjectPage(String pageName,TestProjectModel project) {
+		this(pageName);
+		this.project =project;
+
+	}
 	//	private AbstractProjectTree parent;
 
 	@Override
@@ -54,7 +60,13 @@ public class CreateTestProjectPage extends WizardPage {
 		//		getContainer().getShell().setSize(500, 500);
 		parent.setLayout(new GridLayout(1,false));
 		createUpperArea(parent);
-		nameDescComp = new NameAndDescriptionComponent(parent);
+		if(project!=null){
+			nameDescComp = new NameAndDescriptionComponent(parent,project.getName(),project.getDescription(),false);
+		}
+		else
+		{
+			nameDescComp = new NameAndDescriptionComponent(parent,"","",true);
+		}
 		nameDescComp.getNameText().addModifyListener( new ModifyListener() {
 			@Override
 			public void modifyText(ModifyEvent e) {
@@ -143,7 +155,12 @@ public class CreateTestProjectPage extends WizardPage {
 		sp.setMinimum(16);
 		sp.setMaximum(AndroidSdkUtility.maximumApiLevel());
 		if(AndroidSdkUtility.maximumApiLevel()>16){
-			sp.setSelection(AndroidSdkUtility.maximumApiLevel());
+			if(project==null)
+				sp.setSelection(AndroidSdkUtility.maximumApiLevel());
+			else {
+				sp.setSelection(project.getApiLevel());	
+				sp.setEnabled(false);	
+			}
 		}
 
 		sp.addSelectionListener(new SelectionAdapter() {

@@ -1,11 +1,11 @@
 package in.BBAT.presenter.wizards.pages;
 
-import java.util.List;
-
 import in.BBAT.abstrakt.gui.model.AbstractTreeModel;
-import in.BBAT.abstrakt.presenter.pkg.model.AbstractProjectTree;
+import in.BBAT.abstrakt.presenter.pkg.model.TestCaseModel;
 import in.BBAT.abstrakt.presenter.pkg.model.TestSuiteModel;
 import in.bbat.logger.BBATLogger;
+
+import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.eclipse.jface.wizard.WizardPage;
@@ -26,6 +26,7 @@ public class CreateTestCasePage extends WizardPage {
 
 	private boolean nameValid;
 	private boolean descValid;
+	private TestCaseModel testCase;
 
 
 	private static final Logger LOG = BBATLogger.getLogger(CreateTestCasePage.class.getName());
@@ -37,12 +38,23 @@ public class CreateTestCasePage extends WizardPage {
 		this.parentSuite = suite;
 	}
 
+	public CreateTestCasePage(String pageName,TestSuiteModel suite,TestCaseModel testcase) {
+		this(pageName, suite);
+		this.testCase = testcase;
+	}
+
 	@Override
 	public void createControl(Composite parent) {
 		//		getContainer().getShell().setSize(500, 500);
 		parent.setLayout(new GridLayout(1,false));
 		createUpperArea(parent);
-		nameDescComp = new NameAndDescriptionComponent(parent);
+		if(testCase!=null){
+			nameDescComp = new NameAndDescriptionComponent(parent,testCase.getName(),testCase.getDescription(),false);
+		}
+		else
+		{
+			nameDescComp = new NameAndDescriptionComponent(parent,"","",true);
+		}
 		nameDescComp.getNameText().addModifyListener( new ModifyListener() {
 			@Override
 			public void modifyText(ModifyEvent e) {

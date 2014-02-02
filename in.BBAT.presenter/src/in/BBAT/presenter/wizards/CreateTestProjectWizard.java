@@ -11,8 +11,18 @@ import org.eclipse.jface.wizard.Wizard;
 public class CreateTestProjectWizard extends Wizard {
 
 	private CreateTestProjectPage projCreationPage;
+	private TestProjectModel prject;
 
 	private static final Logger LOG = BBATLogger.getLogger(CreateTestProjectWizard.class.getName());
+
+	public CreateTestProjectWizard(TestProjectModel model) {
+		this.prject = model;
+	}
+
+	public CreateTestProjectWizard() {
+		// TODO Auto-generated constructor stub
+	}
+
 	@Override
 	public boolean performFinish() {
 		LOG.info("Creating test Project : " + projCreationPage.getName());
@@ -25,12 +35,17 @@ public class CreateTestProjectWizard extends Wizard {
 		TestCaseBrowserView.refreshView();
 		return true;
 	}
-	
+
 	@Override
 	public void addPages() {
-		projCreationPage = new CreateTestProjectPage("TestProject");
+		if(prject!=null){
+			projCreationPage = new CreateTestProjectPage("TestProject",prject);
+		}
+		else{
+			projCreationPage = new CreateTestProjectPage("TestProject");
+		}
 		addPage(projCreationPage);
 	}
-	
+
 
 }

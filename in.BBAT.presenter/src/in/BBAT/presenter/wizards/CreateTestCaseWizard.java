@@ -4,13 +4,11 @@ import in.BBAT.abstrakt.presenter.pkg.model.TestCaseModel;
 import in.BBAT.abstrakt.presenter.pkg.model.TestSuiteModel;
 import in.BBAT.presenter.wizards.pages.CreateTestCasePage;
 import in.bbat.logger.BBATLogger;
-import in.bbat.presenter.views.BBATViewPart;
 import in.bbat.presenter.views.developer.TestCaseBrowserView;
 
 import org.apache.log4j.Logger;
 import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.ui.PartInitException;
-import org.eclipse.ui.PlatformUI;
 
 public class CreateTestCaseWizard extends Wizard {
 
@@ -19,14 +17,24 @@ public class CreateTestCaseWizard extends Wizard {
 	private CreateTestCasePage caseCreationPage;
 
 	private TestSuiteModel parent;
+	private TestCaseModel caseModel;
 
 	public CreateTestCaseWizard(TestSuiteModel suiteModel) {
 		this.parent = suiteModel;
 	}
+	public CreateTestCaseWizard(TestSuiteModel suiteModel,TestCaseModel model) {
+		this(suiteModel);
+		this.caseModel = model;
+
+
+	}
 
 	@Override
 	public void addPages() {
-		caseCreationPage = new CreateTestCasePage("TestCase",parent);
+		if(caseModel!=null)
+			caseCreationPage = new CreateTestCasePage("TestCase",parent,caseModel);
+		else
+			caseCreationPage = new CreateTestCasePage("TestCase",parent);
 		addPage(caseCreationPage);
 	}
 

@@ -3,6 +3,7 @@ package in.BBAT.presenter.wizards.pages;
 import in.BBAT.abstrakt.gui.model.AbstractTreeModel;
 import in.BBAT.abstrakt.presenter.pkg.model.AbstractProjectTree;
 import in.BBAT.abstrakt.presenter.pkg.model.TestProjectModel;
+import in.BBAT.abstrakt.presenter.pkg.model.TestSuiteModel;
 import in.bbat.logger.BBATLogger;
 
 import java.util.List;
@@ -21,6 +22,7 @@ import org.eclipse.swt.widgets.Text;
 public class CreateTestSuitePage extends WizardPage {
 
 	private TestProjectModel parentProj;
+	private TestSuiteModel suite;
 	private static final Logger LOG = BBATLogger.getLogger(CreateTestSuitePage.class.getName());
 
 	public CreateTestSuitePage(String pageName,TestProjectModel project) {
@@ -28,20 +30,30 @@ public class CreateTestSuitePage extends WizardPage {
 		setTitle(pageName);
 		this.parentProj = project;
 	}
-
+	public CreateTestSuitePage(String pageName,TestProjectModel project,TestSuiteModel suite) {
+		this(pageName, project);
+		this.suite = suite;
+	}
+	
 	private NameAndDescriptionComponent nameDescComp;
 
 	private boolean nameValid;
 	private boolean descValid;
 
-	
+
 
 	@Override
 	public void createControl(Composite parent) {
 		//		getContainer().getShell().setSize(500, 500);
 		parent.setLayout(new GridLayout(1,false));
 		createUpperArea(parent);
-		nameDescComp = new NameAndDescriptionComponent(parent);
+		if(suite!=null){
+			nameDescComp = new NameAndDescriptionComponent(parent,suite.getName(),suite.getDescription(),false);
+		}
+		else
+		{
+			nameDescComp = new NameAndDescriptionComponent(parent,"","",true);
+		}
 		nameDescComp.getNameText().addModifyListener( new ModifyListener() {
 			@Override
 			public void modifyText(ModifyEvent e) {
@@ -53,7 +65,7 @@ public class CreateTestSuitePage extends WizardPage {
 					nameValid= false;
 					pageComplete();
 					return;
-					
+
 				}
 				if(isDuplicate(((Text)e.getSource()).getText().trim())){
 					setMessage("Test suite with name "+((Text)e.getSource()).getText()+" exists",WizardPage.ERROR);

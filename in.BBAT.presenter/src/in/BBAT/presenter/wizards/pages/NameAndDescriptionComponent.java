@@ -18,7 +18,9 @@ public class NameAndDescriptionComponent {
 	private Text descText;
 
 	private static final Logger LOG = BBATLogger.getLogger(NameAndDescriptionComponent.class.getName());
-	public NameAndDescriptionComponent(Composite parent) {
+
+
+	public NameAndDescriptionComponent(Composite parent,String name, String description,boolean editable) {
 		Group group = new Group(parent, SWT.BORDER);
 		group.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		group.setLayout(new GridLayout(2, false));
@@ -28,12 +30,20 @@ public class NameAndDescriptionComponent {
 		nameLabel.setText("Name:");
 		setNameText(new Text(group, SWT.BORDER));
 		getNameText().setFocus();
-		
+		if(!editable){
+			getNameText().setText(name);
+			getNameText().setEditable(editable);
+		}
+
 		GridData gdPkgName = new GridData(GridData.FILL_HORIZONTAL);
 		getNameText().setLayoutData(gdPkgName);
 		Label commentLabel = new Label(group, SWT.NULL);
 		commentLabel.setText("Description:");
 		setDescText(new Text(group, SWT.MULTI | SWT.BORDER));
+		if(!editable){
+			getDescText().setText(description);
+			getDescText().setEditable(editable);
+		}
 		GridData gdcommentText = new GridData(GridData.FILL_BOTH);
 		gdcommentText.grabExcessVerticalSpace = true;
 

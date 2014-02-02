@@ -35,7 +35,7 @@ public abstract class CreatePage extends WizardPage{
 		//		getContainer().getShell().setSize(500, 500);
 		parent.setLayout(new GridLayout(1,false));
 		createUpperArea(parent);
-		nameDescComp = new NameAndDescriptionComponent(parent);
+		nameDescComp = new NameAndDescriptionComponent(parent,"","",false);
 		nameDescComp.getNameText().addModifyListener( new ModifyListener() {
 			@Override
 			public void modifyText(ModifyEvent e) {
