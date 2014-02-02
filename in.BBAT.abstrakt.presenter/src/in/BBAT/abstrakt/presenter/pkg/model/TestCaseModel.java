@@ -130,6 +130,7 @@ public class TestCaseModel extends AbstractProjectTree{
 		} catch (TemplateException e) {
 			LOG.error(e);
 		}
+		getProject().refresh();
 
 	}
 	

@@ -212,8 +212,17 @@ public class BBATProject {
 		}
 	}
 
+
+	public void refresh(){
+		try {
+			project.refreshLocal(IResource.DEPTH_INFINITE,new NullProgressMonitor());
+		} catch (CoreException e) {
+			LOG.error(e);
+		}
+
+	}
 	public void delete() {
-		// TODO Auto-generated method stub
+
 
 	}
 
