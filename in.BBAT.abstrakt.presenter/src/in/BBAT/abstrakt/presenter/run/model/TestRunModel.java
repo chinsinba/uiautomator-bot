@@ -20,7 +20,7 @@ import org.eclipse.swt.graphics.Image;
  */
 public class TestRunModel extends AbstractTreeModel {
 
-	protected TestRunModel(TestRunEntity entity) {
+	public TestRunModel(TestRunEntity entity) {
 		super(null,entity);
 	}
 

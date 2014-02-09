@@ -3,8 +3,13 @@ package in.BBAT.abstrakt.presenter.pkg.model;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
+import in.BBAT.abstrakt.presenter.run.model.TestRunModel;
 import in.BBAT.data.model.Entities.TestCaseEntity;
+import in.BBAT.data.model.Entities.TestProjectEntity;
+import in.BBAT.data.model.Entities.TestRunEntity;
 import in.BBAT.data.model.Entities.TestSuiteEntity;
+import in.BBAT.dataMine.manager.ProjectMineManager;
+import in.BBAT.dataMine.manager.TestCaseMineManager;
 import in.bbat.abstrakt.gui.Activator;
 import in.bbat.abstrakt.gui.BBATImageManager;
 import in.bbat.logger.BBATLogger;
@@ -14,7 +19,9 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
@@ -170,5 +177,11 @@ public class TestCaseModel extends AbstractProjectTree{
 	public void deleteResource() throws Exception {
 		super.deleteResource();
 		getParent().removeChild(this);
+	}
+
+	@Override
+	public List<TestRunEntity> getRefTestRunEntities() {
+		List<TestRunEntity> testRuns = TestCaseMineManager.getAllRunsContainingTestCase((TestCaseEntity) getEntity());
+		return testRuns;
 	}
 }

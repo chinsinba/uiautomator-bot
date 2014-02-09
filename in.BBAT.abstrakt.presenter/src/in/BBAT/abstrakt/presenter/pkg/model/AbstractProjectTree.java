@@ -1,11 +1,15 @@
 package in.BBAT.abstrakt.presenter.pkg.model;
 
 import in.BBAT.abstrakt.gui.model.AbstractTreeModel;
+import in.BBAT.abstrakt.presenter.run.model.TestRunModel;
 import in.BBAT.data.model.Entities.AbstractEntity;
+import in.BBAT.data.model.Entities.TestRunEntity;
 import in.bbat.configuration.BBATProperties;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.eclipse.core.runtime.Path;
 
@@ -13,7 +17,7 @@ public abstract class AbstractProjectTree extends AbstractTreeModel implements I
 
 
 	private String resourcePath;
-//	public final static String UI_AUTO_CASE_PATH ="/home/syed/Documents/Macac";
+	//	public final static String UI_AUTO_CASE_PATH ="/home/syed/Documents/Macac";
 
 	/**
 	 * 
@@ -97,6 +101,28 @@ public abstract class AbstractProjectTree extends AbstractTreeModel implements I
 	public void setResourcePath(String resourcePath) {
 		this.resourcePath = resourcePath;
 	}
-	
+
+	/**
+	 * 
+	 * @return java project
+	 */
 	public abstract BBATProject getProject();
+
+	/**
+	 * 
+	 * @return associated testruns 
+	 */
+	public List<TestRunModel> getRefrencedTestRuns(){
+		List<TestRunModel> runModels = new ArrayList<TestRunModel>();
+		List<TestRunEntity> allRunsContainingTestSuite = getRefTestRunEntities();
+		if(allRunsContainingTestSuite !=null){
+			for (TestRunEntity testRunEntity : allRunsContainingTestSuite) {
+				runModels.add(new TestRunModel(testRunEntity));
+			}
+		}
+
+		return runModels;
+	}
+	
+	public abstract List<TestRunEntity> getRefTestRunEntities();
 }

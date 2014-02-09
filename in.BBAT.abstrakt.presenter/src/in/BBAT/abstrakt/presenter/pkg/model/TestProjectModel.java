@@ -1,14 +1,22 @@
 package in.BBAT.abstrakt.presenter.pkg.model;
 
+import in.BBAT.abstrakt.presenter.run.model.TestRunModel;
 import in.BBAT.data.model.Entities.AbstractEntity;
+import in.BBAT.data.model.Entities.TestCaseEntity;
 import in.BBAT.data.model.Entities.TestProjectEntity;
+import in.BBAT.data.model.Entities.TestRunEntity;
 import in.BBAT.data.model.Entities.TestSuiteEntity;
 import in.BBAT.dataMine.manager.JaxbExportImport;
+import in.BBAT.dataMine.manager.ProjectMineManager;
+import in.BBAT.dataMine.manager.SuiteMineManager;
+import in.BBAT.dataMine.manager.TestCaseMineManager;
 import in.bbat.abstrakt.gui.BBATImageManager;
 import in.bbat.utility.FileUtils;
 import in.bbat.utility.ZipFiles;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.runtime.Path;
@@ -135,5 +143,11 @@ public class TestProjectModel extends AbstractProjectTree {
 	@Override
 	public BBATProject getProject() {
 		return project;		
+	}
+
+	@Override
+	public List<TestRunEntity> getRefTestRunEntities() {
+		List<TestRunEntity> testRuns = ProjectMineManager.getAllRunsContainingTestProject((TestProjectEntity) getEntity());
+		return testRuns;
 	}
 }

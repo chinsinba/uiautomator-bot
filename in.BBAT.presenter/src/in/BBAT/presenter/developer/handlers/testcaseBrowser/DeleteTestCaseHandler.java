@@ -1,6 +1,14 @@
 package in.BBAT.presenter.developer.handlers.testcaseBrowser;
 
 import in.BBAT.abstrakt.presenter.pkg.model.AbstractProjectTree;
+import in.BBAT.abstrakt.presenter.run.model.TestRunModel;
+import in.BBAT.data.model.Entities.TestCaseEntity;
+import in.BBAT.data.model.Entities.TestProjectEntity;
+import in.BBAT.data.model.Entities.TestRunEntity;
+import in.BBAT.data.model.Entities.TestSuiteEntity;
+import in.BBAT.dataMine.manager.ProjectMineManager;
+import in.BBAT.dataMine.manager.SuiteMineManager;
+import in.BBAT.dataMine.manager.TestCaseMineManager;
 import in.bbat.logger.BBATLogger;
 import in.bbat.presenter.internal.TestRunExecutionManager;
 import in.bbat.presenter.views.BBATViewPart;
@@ -24,6 +32,17 @@ public class DeleteTestCaseHandler extends AbstractTestCaseBrowserHandler {
 			return null;
 		try {
 			for(Object pkgObj :selectedObjects){
+				List<TestRunModel> refrencedTestRuns = ((AbstractProjectTree)pkgObj).getRefrencedTestRuns();
+				if(!refrencedTestRuns.isEmpty()){
+					StringBuilder runs = new StringBuilder();
+					for (TestRunModel testRunModel : refrencedTestRuns) {
+						runs.append(testRunModel.getName()+"\n");
+					}
+					MessageDialog.openError(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(), 
+							"Referenced Test Runs", ((AbstractProjectTree)pkgObj).getName() + " is part of the test runs  \n"+runs.toString() +
+							"Please delete the test runs first.");
+					continue;
+				}
 				((AbstractProjectTree)pkgObj).delete();
 			}
 		} catch (Exception e) {
