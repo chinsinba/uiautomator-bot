@@ -60,5 +60,7 @@ public interface IAndroidDevice {
 	void setScreenShotListener(IScreenShotListener listener);
 	
 	IScreenShotListener getScreenShotListener();
+	
+	public void removeUIAutomatorJar();
 
 }

@@ -39,7 +39,7 @@ public class TestDevice implements IAndroidDevice {
 
 
 
-	public final static String UIAUTOMATOR_JAR_PATH = "/data/local/tmp/BBAT.jar";
+	
 
 	public TestDevice(IDevice device) {
 		this.monkeyDevice = device;
@@ -131,7 +131,7 @@ public class TestDevice implements IAndroidDevice {
 	@Override
 	public void pushTestJar(UiAutoTestCaseJar jar) {
 		try {
-			monkeyDevice.pushFile(jar.getJarPath(),UIAUTOMATOR_JAR_PATH);
+			monkeyDevice.pushFile(jar.getJarPath(),UiAutoTestCaseJar.UIAUTOMATOR_JAR_PATH);
 		} catch (SyncException e) {
 			LOG.error(e);
 		} catch (IOException e) {
@@ -258,5 +258,21 @@ public class TestDevice implements IAndroidDevice {
 	@Override
 	public String getPropertyValue(String property) {
 		return getMonkeyDevice().getProperty(property);
+	}
+
+	@Override
+	public void removeUIAutomatorJar() {
+		final String cmd ="rm -r "+UiAutoTestCaseJar.UIAUTOMATOR_JAR_PATH;
+		try {
+			monkeyDevice.executeShellCommand(cmd, new NullOutputReceiver(),0);
+		} catch (TimeoutException e) {
+			LOG.error(e);
+		} catch (AdbCommandRejectedException e) {
+			LOG.error(e);
+		} catch (ShellCommandUnresponsiveException e) {
+			LOG.error(e);
+		} catch (IOException e) {
+			LOG.error(e);
+		}
 	}
 }

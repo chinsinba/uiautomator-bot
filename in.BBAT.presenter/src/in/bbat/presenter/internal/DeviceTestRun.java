@@ -111,6 +111,7 @@ public class DeviceTestRun {
 				}
 				testDeviceRun.setEndTime(System.currentTimeMillis());
 				testDeviceRun.update();
+				removeTestJar();
 				testRun.setEndTime(new Timestamp(System.currentTimeMillis()));
 				testRun.update();
 				updateStatus(TestStatus.EXECUTED);
@@ -260,6 +261,11 @@ public class DeviceTestRun {
 	public int noOfExecutedCases(){
 		return noOfErrorCases()+noOfFailedCases()+noOfPassedCases();
 	}
+	
+	public void removeTestJar(){
+		getDevice().removeTestJar();
+	}
+	
 	public List<String> getDistinctScriptPaths(){
 		List<String> testScriptPaths = new ArrayList<String>();
 

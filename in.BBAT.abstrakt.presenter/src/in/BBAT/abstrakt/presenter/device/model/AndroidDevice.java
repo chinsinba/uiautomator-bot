@@ -137,7 +137,7 @@ public class AndroidDevice implements IGUITreeNode{
 	public Map<String, String> getProperties() {
 		return iDevice.getProperties();
 	}
-	
+
 	public void updateDeviceDetails(IAndroidDevice dev){
 		deviceEntity.setDeviceId(dev.getSerialNo());
 		deviceEntity.setBuild_board(dev.getPropertyValue(DeviceDetails.BUILD_BOARD));
@@ -162,5 +162,9 @@ public class AndroidDevice implements IGUITreeNode{
 		deviceEntity.setVersion_release(dev.getPropertyValue(DeviceDetails.VERSION_RELEASE));
 		deviceEntity.setVersion_sdk(dev.getPropertyValue(DeviceDetails.VERSION_SDK));
 		deviceEntity.update();
+	}
+
+	public void removeTestJar() {
+		iDevice.removeUIAutomatorJar();
 	}
 }
