@@ -129,9 +129,9 @@ public class AutomatorLogView extends BBATViewPart {
 	}
 
 	public void setInput(TestRunInstanceModel model){
-		if(model.getStatus().equalsIgnoreCase(TestStatus.EXECUTING.getStatus()))
-			viewer.setInput(model.getAutoLogs());
-		else
+//		if(model.getStatus().equalsIgnoreCase(TestStatus.EXECUTING.getStatus()))
+			/*viewer.setInput(model.getAutoLogs());
+		else*/
 			viewer.setInput(model.getAutoLogsFromDB());
 
 	}

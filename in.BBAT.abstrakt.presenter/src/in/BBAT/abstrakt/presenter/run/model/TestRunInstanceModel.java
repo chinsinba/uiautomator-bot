@@ -13,7 +13,6 @@ import in.BBAT.data.model.Entities.TestDeviceRunEntity;
 import in.BBAT.data.model.Entities.TestRunInfoEntity;
 import in.BBAT.dataMine.manager.LogsMineManager;
 import in.bbat.abstrakt.gui.BBATImageManager;
-import in.bbat.configuration.BBATProperties;
 import in.bbat.utility.FileUtils;
 import in.bbat.utility.ZipFiles;
 
@@ -29,7 +28,6 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.ImageData;
 import org.eclipse.swt.graphics.ImageLoader;
-import org.eclipse.swt.graphics.PaletteData;
 
 import com.android.ddmlib.Log.LogLevel;
 import com.android.ddmlib.logcat.LogCatMessage;
@@ -43,8 +41,6 @@ public class TestRunInstanceModel extends AbstractTreeModel {
 
 	private TestCaseModel testCaseModel ;
 	private boolean showLogs;
-	private List<AutomatorLogModel> autoLogs = new ArrayList<AutomatorLogModel>();
-	private List<DeviceLogModel> deviceLogs = new ArrayList<DeviceLogModel>();
 
 	protected TestRunInstanceModel(TestDeviceRunModel parent,TestRunInfoEntity entity) {
 		super(parent,entity);
@@ -123,10 +119,7 @@ public class TestRunInstanceModel extends AbstractTreeModel {
 		this.showLogs = showLogs;
 	}
 
-	public void addAutoLog(AutomatorLogModel log){
-		autoLogs.add(log);
-
-	}
+	
 
 	/*	public void addDeviceLog(DeviceLogModel log){
 		deviceLogs.add(log);
@@ -137,9 +130,7 @@ public class TestRunInstanceModel extends AbstractTreeModel {
 		return deviceLogs;
 	}*/
 
-	public List<AutomatorLogModel> getAutoLogs(){
-		return autoLogs;
-	}
+	
 
 	public void setTimeTaken(long timeTaken)
 	{

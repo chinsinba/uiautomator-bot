@@ -25,7 +25,7 @@ public class UIAutomatorOutputListener implements IUiAutomatorListener {
 	public void processLine(String line) {
 		AutomatorLogModel log = new AutomatorLogModel(runInstance,line);
 		log.save();
-		runInstance.addAutoLog(log);
+//		runInstance.addAutoLog(log);
 
 
 	/*	Display.getDefault().asyncExec(new Runnable() {
