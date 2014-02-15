@@ -1,5 +1,7 @@
 package in.BBAT.TestRunner.device;
 
+import in.BBAT.TestRunner.Listener.ICpuUsageListener;
+
 public class CpuUsageThread implements Runnable {
 
 	
@@ -13,6 +15,10 @@ public class CpuUsageThread implements Runnable {
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
+		
+	}
+	
+	public void stop(){
 		
 	}
 

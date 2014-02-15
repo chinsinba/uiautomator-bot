@@ -1,5 +1,7 @@
 package in.BBAT.TestRunner.device;
 
+import in.BBAT.TestRunner.Listener.IMemoryUsageListener;
+
 public class MemoryUsageThread implements Runnable {
 
 	private TestDevice device;
@@ -15,4 +17,7 @@ public class MemoryUsageThread implements Runnable {
 
 	}
 
+	public void stop(){
+
+	}
 }

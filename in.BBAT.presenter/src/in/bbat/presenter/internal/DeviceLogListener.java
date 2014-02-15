@@ -1,7 +1,7 @@
 package in.bbat.presenter.internal;
 
-import in.BBAT.TestRunner.device.ILogListener;
-import in.BBAT.TestRunner.device.IScreenShotListener;
+import in.BBAT.TestRunner.Listener.ILogListener;
+import in.BBAT.TestRunner.Listener.IScreenShotListener;
 import in.BBAT.abstrakt.presenter.run.model.DeviceLogModel;
 import in.BBAT.abstrakt.presenter.run.model.TestRunInstanceModel;
 import in.bbat.logger.BBATLogger;

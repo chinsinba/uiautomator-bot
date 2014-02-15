@@ -1,9 +1,9 @@
 package in.BBAT.abstrakt.presenter.device.model;
 
+import in.BBAT.TestRunner.Listener.IAndroidDevice;
+import in.BBAT.TestRunner.Listener.IDeviceConnectionListener;
 import in.BBAT.TestRunner.device.AdbBridgeManager;
 import in.BBAT.TestRunner.device.DeviceException;
-import in.BBAT.TestRunner.device.IAndroidDevice;
-import in.BBAT.TestRunner.device.IDeviceConnectionListener;
 import in.bbat.logger.BBATLogger;
 
 import java.util.ArrayList;

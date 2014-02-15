@@ -1,4 +1,4 @@
-package in.BBAT.TestRunner.device;
+package in.BBAT.TestRunner.Listener;
 
 public interface ICpuUsageListener {
 

@@ -1,9 +1,9 @@
 package in.BBAT.testRunner.runner;
 
-import in.BBAT.TestRunner.device.ICpuUsageListener;
-import in.BBAT.TestRunner.device.ILogListener;
-import in.BBAT.TestRunner.device.IMemoryUsageListener;
-import in.BBAT.TestRunner.device.IScreenShotListener;
+import in.BBAT.TestRunner.Listener.ICpuUsageListener;
+import in.BBAT.TestRunner.Listener.ILogListener;
+import in.BBAT.TestRunner.Listener.IMemoryUsageListener;
+import in.BBAT.TestRunner.Listener.IScreenShotListener;
 
 import com.android.ddmlib.testrunner.ITestRunListener;
 

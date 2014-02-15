@@ -1,6 +1,6 @@
 package in.bbat.presenter.internal;
 
-import in.BBAT.TestRunner.device.ICpuUsageListener;
+import in.BBAT.TestRunner.Listener.ICpuUsageListener;
 import in.BBAT.abstrakt.presenter.device.model.AndroidDevice;
 import in.BBAT.abstrakt.presenter.run.model.TestDeviceRunModel;
 import in.BBAT.abstrakt.presenter.run.model.TestRunCaseModel;
