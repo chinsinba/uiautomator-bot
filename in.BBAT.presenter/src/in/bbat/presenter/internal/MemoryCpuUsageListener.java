@@ -18,13 +18,13 @@ public class MemoryCpuUsageListener implements IMemoryUsageListener,ICpuUsageLis
 
 	@Override
 	public void cpuUsage(int percentUsage, long time) {
+		model.saveMemoryUsage(percentUsage, time);
 
-		
 	}
 
 	@Override
 	public void memoryUsage(int percentUsage, long time) {
-
+		model.saveCpuUsage(percentUsage, time);
 	}
 
 }
