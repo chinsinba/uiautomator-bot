@@ -29,7 +29,7 @@ public class UiAutoTestCaseJar {
 
 	private static final String TEMP_FOLDER_PATH =System.getProperty("user.dir")+Path.SEPARATOR+"temp" ;
 	private static final String ANDROID_SDK_TOOLS = BBATProperties.getInstance().getAndroid_SdkPath()+Path.SEPARATOR+SdkConstants.OS_SDK_TOOLS_FOLDER;
-	private static final String CREATE_UI_PROJECT_COMMAND = "/"+SdkConstants.androidCmdName()+" create uitest-project -n "+JAR_NAME+" -t 1 -p "+TEMP_FOLDER_PATH;
+	private static final String CREATE_UI_PROJECT_COMMAND = "/"+SdkConstants.androidCmdName()+" create uitest-project -n "+JAR_NAME+" -t android-16 -p "+TEMP_FOLDER_PATH;
 
 	public final static String UIAUTOMATOR_JAR =JAR_NAME+".jar";
 	public final static String UIAUTOMATOR_JAR_PATH = "/data/local/tmp/"+UIAUTOMATOR_JAR;
