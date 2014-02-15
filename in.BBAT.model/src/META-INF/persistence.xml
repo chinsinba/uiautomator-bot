@@ -15,6 +15,8 @@
 		<class>in.BBAT.data.model.Entities.TestDeviceLogEntity</class>
 		<class>in.BBAT.data.model.Entities.AutomatorLogEntity</class>
 		<class>in.BBAT.data.model.Entities.TestCaseParameterEntity</class>
+		<class>in.BBAT.data.model.Entities.MemoryEntity</class>
+		<class>in.BBAT.data.model.Entities.CpuUsageEntity</class>
 		<properties>
 			<property name="eclipselink.target-database" value="DERBY" />
 			<property name="eclipselink.ddl-generation" value="create-or-extend-tables" />
