@@ -148,6 +148,8 @@ public class TestDevice implements IAndroidDevice {
 	@Override
 	public void executeTestCase(String testCaseName,IUiAutomatorListener uiAutoListener,IMemoryUsageListener memoryListener,ICpuUsageListener cpuListener,ITestRunListener... listener) {
 
+		this.cpuListener = cpuListener;
+		this.memoryListener = memoryListener;
 		//		ScreenShotThread screenShotThread = new ScreenShotThread();
 
 		UIAutomatorRunner runner = new UIAutomatorRunner(testCaseName, monkeyDevice,uiAutoListener);
@@ -280,28 +282,14 @@ public class TestDevice implements IAndroidDevice {
 
 	@Override
 	public void startMemoryUsageThread() {
-		Thread t = new Thread(new Runnable() {
-
-			@Override
-			public void run() {
-
-			}
-		});
-
+		Thread t = new Thread(new MemoryUsageThread(this, memoryListener));
 		t.start();
 	}
 
 	@Override
 	public void startCpuUsageThread() {
 
-		Thread t = new Thread(new Runnable() {
-
-			@Override
-			public void run() {
-
-			}
-		});
-
+		Thread t = new Thread(new CpuUsageThread(this, cpuListener));
 		t.start();
 	}
 
