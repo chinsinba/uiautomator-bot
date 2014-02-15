@@ -1,7 +1,9 @@
 package in.BBAT.testRunner.runner;
 
 import in.BBAT.TestRunner.device.IAndroidDevice;
+import in.BBAT.TestRunner.device.ICpuUsageListener;
 import in.BBAT.TestRunner.device.ILogListener;
+import in.BBAT.TestRunner.device.IMemoryUsageListener;
 import in.BBAT.TestRunner.device.IScreenShotListener;
 
 import com.android.ddmlib.testrunner.ITestRunListener;
@@ -30,10 +32,10 @@ public class TestRunner implements ITestRunner{
 	}
 
 	@Override
-	public void execute(String testCaseClassName, ITestRunListener testCaseExecutionListener, ILogListener deviceLogListener,IUiAutomatorListener autoListener, IScreenShotListener listener) {
+	public void execute(String testCaseClassName, ITestRunListener testCaseExecutionListener, ILogListener deviceLogListener,IUiAutomatorListener autoListener, IScreenShotListener listener,IMemoryUsageListener memListner,ICpuUsageListener cpuListener) {
 		preRun(deviceLogListener,listener);
 
-		run(testCaseClassName,testCaseExecutionListener,autoListener);
+		run(testCaseClassName,testCaseExecutionListener,autoListener, memListner, cpuListener);
 
 		postRun();
 	}
@@ -74,9 +76,11 @@ public class TestRunner implements ITestRunner{
 	 * Starts the execution of testcases on the devices
 	 * @param testCaseClassName 
 	 * @param testCaseExecutionListener 
+	 * @param cpuListener 
+	 * @param memListner 
 	 */
-	private void run(String testCaseClassName, ITestRunListener testCaseExecutionListener,IUiAutomatorListener autoListener){
-		testDevice.executeTestCase(testCaseClassName,autoListener, testCaseExecutionListener);
+	private void run(String testCaseClassName, ITestRunListener testCaseExecutionListener,IUiAutomatorListener autoListener, IMemoryUsageListener memListner, ICpuUsageListener cpuListener){
+		testDevice.executeTestCase(testCaseClassName,autoListener, memListner,cpuListener,testCaseExecutionListener);
 		waitForCompletion();
 	}
 

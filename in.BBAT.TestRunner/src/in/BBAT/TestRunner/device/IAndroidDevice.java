@@ -31,7 +31,7 @@ public interface IAndroidDevice {
 
 	void pushTestJar(UiAutoTestCaseJar jar);
 
-	void executeTestCase(String testCaseName,IUiAutomatorListener uiAutoListener,ITestRunListener... listener);
+	void executeTestCase(String testCaseName,IUiAutomatorListener uiAutoListener,IMemoryUsageListener memoryListener,ICpuUsageListener cpuListener,ITestRunListener... listener);
 
 	String getName();
 
@@ -62,5 +62,9 @@ public interface IAndroidDevice {
 	IScreenShotListener getScreenShotListener();
 	
 	public void removeUIAutomatorJar();
-
+	
+	public void startMemoryUsageThread();
+	
+	
+	public void startCpuUsageThread();
 }

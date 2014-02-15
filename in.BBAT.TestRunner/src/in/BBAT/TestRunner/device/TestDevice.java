@@ -14,7 +14,6 @@ import org.apache.log4j.Logger;
 import com.android.chimpchat.core.IChimpDevice;
 import com.android.ddmlib.AdbCommandRejectedException;
 import com.android.ddmlib.IDevice;
-import com.android.ddmlib.InstallException;
 import com.android.ddmlib.NullOutputReceiver;
 import com.android.ddmlib.RawImage;
 import com.android.ddmlib.ShellCommandUnresponsiveException;
@@ -27,23 +26,26 @@ import com.android.ddmlib.testrunner.ITestRunListener;
 
 
 public class TestDevice implements IAndroidDevice {
+
 	private static final Logger LOG = BBATLogger.getLogger(TestDevice.class.getName());
 	public static final int UIAUTOMATOR_MIN_API_LEVEL = 16;
 	private boolean active;
 	private IDevice monkeyDevice;
 
 	private ILogListener listener;
+
 	private LogCatReceiverTask logReciever;
+
 	private IChimpDevice chimpDevice;
+
 	private IScreenShotListener screenShotListener;
 
+	private IMemoryUsageListener memoryListener;
 
-
-	
+	private ICpuUsageListener cpuListener;
 
 	public TestDevice(IDevice device) {
 		this.monkeyDevice = device;
-		//		chimpDevice = AdbBridgeManager.getInstance().getAdbBackend().waitForConnection(10000, device.getSerialNumber());
 	}
 
 	@Override
@@ -144,13 +146,13 @@ public class TestDevice implements IAndroidDevice {
 	}
 
 	@Override
-	public void executeTestCase(String testCaseName,IUiAutomatorListener uiAutoListener,ITestRunListener... listener) {
+	public void executeTestCase(String testCaseName,IUiAutomatorListener uiAutoListener,IMemoryUsageListener memoryListener,ICpuUsageListener cpuListener,ITestRunListener... listener) {
 
-//		ScreenShotThread screenShotThread = new ScreenShotThread();
+		//		ScreenShotThread screenShotThread = new ScreenShotThread();
 
 		UIAutomatorRunner runner = new UIAutomatorRunner(testCaseName, monkeyDevice,uiAutoListener);
 		try {
-//			screenShotThread.start();
+			//			screenShotThread.start();
 			runner.run(listener);
 		} catch (TimeoutException e) {
 			LOG.error(e);
@@ -161,7 +163,7 @@ public class TestDevice implements IAndroidDevice {
 		} catch (IOException e) {
 			LOG.error(e);
 		}
-//		screenShotThread.stopThread();
+		//		screenShotThread.stopThread();
 
 	}
 
@@ -274,5 +276,48 @@ public class TestDevice implements IAndroidDevice {
 		} catch (IOException e) {
 			LOG.error(e);
 		}
+	}
+
+	@Override
+	public void startMemoryUsageThread() {
+		Thread t = new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+
+			}
+		});
+
+		t.start();
+	}
+
+	@Override
+	public void startCpuUsageThread() {
+
+		Thread t = new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+
+			}
+		});
+
+		t.start();
+	}
+
+	public IMemoryUsageListener getMemoryListener() {
+		return memoryListener;
+	}
+
+	public void setMemoryListener(IMemoryUsageListener memoryListener) {
+		this.memoryListener = memoryListener;
+	}
+
+	public ICpuUsageListener getCpuListener() {
+		return cpuListener;
+	}
+
+	public void setCpuListener(ICpuUsageListener cpuListener) {
+		this.cpuListener = cpuListener;
 	}
 }
