@@ -19,6 +19,7 @@ public class MemoryCpuUsageListener implements IMemoryUsageListener,ICpuUsageLis
 	@Override
 	public void cpuUsage(int percentUsage, long time) {
 
+		
 	}
 
 	@Override

@@ -7,7 +7,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.TableGenerator;
 
 @Entity
-public class CpuUsageEntity {
+public class CpuUsageEntity  extends AbstractEntity{
 	@Id
 	@TableGenerator(name = "mem_GEN", table = "ID_GENERATOR", pkColumnName = "GEN_NAME", valueColumnName = "GEN_VAL", allocationSize=1)
 	@GeneratedValue(generator = "mem_GEN")
@@ -19,6 +19,17 @@ public class CpuUsageEntity {
 
 	@ManyToOne
 	private TestRunInfoEntity testRunInfo;
+
+	public CpuUsageEntity(TestRunInfoEntity testRunInfo) {
+		this.testRunInfo =testRunInfo;
+	}
+
+	public CpuUsageEntity(TestRunInfoEntity testRunInfo,int percentUse, long time) {
+		this(testRunInfo);
+		this.percent =percentUse;
+		this.time =time;
+	}
+
 
 	public int getId() {
 		return id;

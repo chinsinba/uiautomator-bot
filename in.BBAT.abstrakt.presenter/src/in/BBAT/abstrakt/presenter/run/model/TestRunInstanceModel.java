@@ -5,6 +5,8 @@ import in.BBAT.abstrakt.gui.model.IGUITreeNode;
 import in.BBAT.abstrakt.presenter.pkg.model.TestCaseModel;
 import in.BBAT.data.model.Entities.AbstractEntity;
 import in.BBAT.data.model.Entities.AutomatorLogEntity;
+import in.BBAT.data.model.Entities.CpuUsageEntity;
+import in.BBAT.data.model.Entities.MemoryEntity;
 import in.BBAT.data.model.Entities.TestCaseEntity;
 import in.BBAT.data.model.Entities.TestDeviceLogEntity;
 import in.BBAT.data.model.Entities.TestDeviceRunEntity;
@@ -272,5 +274,16 @@ public class TestRunInstanceModel extends AbstractTreeModel {
 		f.mkdirs();
 		loader.save(f.getAbsolutePath()+Path.SEPARATOR+imageName+".png", SWT.IMAGE_PNG);
 	}
+
+	public void saveMemoryUsage(int percent, long time){
+		MemoryEntity memEntity = new MemoryEntity((TestRunInfoEntity) this.getEntity(),percent,time);
+		memEntity.save();
+	}
+
+	public void saveCpuUsage(int percent, long time){
+		CpuUsageEntity cpuEntity = new CpuUsageEntity((TestRunInfoEntity) this.getEntity(),percent,time);
+		cpuEntity.save();
+	}
+
 
 }
