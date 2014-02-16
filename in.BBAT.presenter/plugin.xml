@@ -290,13 +290,13 @@
                   style="push">
             </command>
             <command
-                  commandId="org.eclipse.ui.file.exit"
-                  label="Exit">
-            </command>
-            <command
                   commandId="in.BBAT.presenter.restart"
                   label="Restart"
                   style="push">
+            </command>
+            <command
+                  commandId="org.eclipse.ui.file.exit"
+                  label="Exit">
             </command>
          </menu>
       </menuContribution>

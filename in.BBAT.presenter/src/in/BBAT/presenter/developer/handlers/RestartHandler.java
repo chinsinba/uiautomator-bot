@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.IHandler;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.ui.PlatformUI;
 
 public class RestartHandler extends BBATHandler implements IHandler {
@@ -16,7 +17,11 @@ public class RestartHandler extends BBATHandler implements IHandler {
 
 	@Override
 	public Object run(ExecutionEvent event) {
-		PlatformUI.getWorkbench().restart();
+		if(MessageDialog.openConfirm(PlatformUI.getWorkbench()
+				.getActiveWorkbenchWindow().getShell(), "Restart",
+				"Do you want to restart ?")){
+			PlatformUI.getWorkbench().restart();
+		}
 		return null;
 	}
 
