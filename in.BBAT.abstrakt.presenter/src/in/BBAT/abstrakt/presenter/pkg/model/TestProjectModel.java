@@ -93,7 +93,7 @@ public class TestProjectModel extends AbstractProjectTree {
 	public void deLinkFromProject() {
 		project.deleteProject();
 	}
-	
+
 	@Override
 	public void deleteResource() throws Exception {
 		super.deleteResource();
@@ -150,4 +150,5 @@ public class TestProjectModel extends AbstractProjectTree {
 		List<TestRunEntity> testRuns = ProjectMineManager.getAllRunsContainingTestProject((TestProjectEntity) getEntity());
 		return testRuns;
 	}
+
 }

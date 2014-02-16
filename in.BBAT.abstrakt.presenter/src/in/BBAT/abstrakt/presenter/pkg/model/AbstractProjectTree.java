@@ -123,6 +123,10 @@ public abstract class AbstractProjectTree extends AbstractTreeModel implements I
 
 		return runModels;
 	}
-	
+
 	public abstract List<TestRunEntity> getRefTestRunEntities();
+
+	public void refresh(){
+		getProject().refresh();		
+	}
 }

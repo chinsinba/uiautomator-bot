@@ -82,7 +82,7 @@ public class TestProjectManager {
 		}
 		FileUtils.delete(new File(bbatFilePath));
 		FileUtils.copyFolder(new File(tempFile.getAbsolutePath()),new File(BBATProperties.getInstance().getWkspc_UiAutomator()));
-
+		proj.refresh();
 		FileUtils.delete(tempFile);
 	}
 

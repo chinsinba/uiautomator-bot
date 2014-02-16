@@ -184,4 +184,5 @@ public class TestCaseModel extends AbstractProjectTree{
 		List<TestRunEntity> testRuns = TestCaseMineManager.getAllRunsContainingTestCase((TestCaseEntity) getEntity());
 		return testRuns;
 	}
+
 }
