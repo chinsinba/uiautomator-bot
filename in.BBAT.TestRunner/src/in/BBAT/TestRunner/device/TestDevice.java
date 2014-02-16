@@ -48,6 +48,8 @@ public class TestDevice implements IAndroidDevice {
 	private IMemoryUsageListener memoryListener;
 
 	private ICpuUsageListener cpuListener;
+	private CpuUsageThread cpuUsageThread;
+	private MemoryUsageThread memoryUsageThread;
 
 	public TestDevice(IDevice device) {
 		this.monkeyDevice = device;
@@ -287,15 +289,26 @@ public class TestDevice implements IAndroidDevice {
 
 	@Override
 	public void startMemoryUsageThread() {
-		Thread t = new Thread(new MemoryUsageThread(this, memoryListener));
+		memoryUsageThread = new MemoryUsageThread(this, memoryListener);
+		Thread t = new Thread(memoryUsageThread);
 		t.start();
 	}
 
 	@Override
 	public void startCpuUsageThread() {
 
-		Thread t = new Thread(new CpuUsageThread(this, cpuListener));
+		cpuUsageThread = new CpuUsageThread(this, cpuListener);
+		Thread t = new Thread(cpuUsageThread);
 		t.start();
+	}
+
+
+	public void stopCpuUsageThread(){
+		cpuUsageThread.stop();
+	}
+
+	public void stopMemoryUsageThread(){
+		memoryUsageThread.stop();
 	}
 
 	public IMemoryUsageListener getMemoryListener() {

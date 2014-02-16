@@ -1,25 +1,23 @@
 package in.BBAT.TestRunner.device;
 
+import in.BBAT.TestRunner.Listener.ICpuUsageListener;
+import in.bbat.logger.BBATLogger;
+
 import java.io.IOException;
 
 import org.apache.log4j.Logger;
 
 import com.android.ddmlib.AdbCommandRejectedException;
 import com.android.ddmlib.MultiLineReceiver;
-import com.android.ddmlib.NullOutputReceiver;
 import com.android.ddmlib.ShellCommandUnresponsiveException;
 import com.android.ddmlib.TimeoutException;
-
-import in.BBAT.TestRunner.Listener.ICpuUsageListener;
-import in.BBAT.testRunner.runner.UiAutoTestCaseJar;
-import in.bbat.logger.BBATLogger;
 
 public class CpuUsageThread implements Runnable {
 
 
 	private TestDevice device;
 	private ICpuUsageListener listener;
-	
+	private boolean stop = false;
 	private static final Logger LOG = BBATLogger.getLogger(CpuUsageThread.class.getName());
 
 	public CpuUsageThread(TestDevice device, ICpuUsageListener listener) {
@@ -55,7 +53,7 @@ public class CpuUsageThread implements Runnable {
 	}
 
 	public void stop(){
-
+		stop = true;
 	}
 
 }

@@ -16,6 +16,7 @@ public class MemoryUsageThread implements Runnable {
 
 	private TestDevice device;
 	private IMemoryUsageListener listener;
+	private boolean stop = false;
 	private static final Logger LOG = BBATLogger.getLogger(MemoryUsageThread.class.getName());
 
 	public MemoryUsageThread(TestDevice device, IMemoryUsageListener listener) {
@@ -52,6 +53,6 @@ public class MemoryUsageThread implements Runnable {
 	}
 
 	public void stop(){
-
+		stop =true;
 	}
 }
