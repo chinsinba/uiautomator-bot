@@ -293,6 +293,11 @@
                   commandId="org.eclipse.ui.file.exit"
                   label="Exit">
             </command>
+            <command
+                  commandId="in.BBAT.presenter.restart"
+                  label="Restart"
+                  style="push">
+            </command>
          </menu>
       </menuContribution>
       <menuContribution
@@ -540,6 +545,10 @@
             id="in.BBAT.presenter.device.connectWifi"
             name="Connect via WiFi">
       </command>
+      <command
+            id="in.BBAT.presenter.restart"
+            name="Restart">
+      </command>
    </extension>
    <extension
          point="org.eclipse.ui.handlers">
@@ -626,6 +635,10 @@
       <handler
             class="in.BBAT.presenter.developer.handlers.device.ConnectDeficeViaWifiHandler"
             commandId="in.BBAT.presenter.device.connectWifi">
+      </handler>
+      <handler
+            class="in.BBAT.presenter.developer.handlers.RestartHandler"
+            commandId="in.BBAT.presenter.restart">
       </handler>
    </extension>
    <extension
