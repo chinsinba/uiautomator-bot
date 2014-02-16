@@ -50,6 +50,8 @@ public abstract class  AbstractTreeModel implements IGUITreeNode {
 	@Override
 	public void addChild(IGUITreeNode childNode) {
 		// the child nodes is really not necessary
+		if(childNodes==null)
+			childNodes = new ArrayList<AbstractTreeModel>();
 		if(!childNodes.contains(childNode)){
 			childNodes.add((AbstractTreeModel) childNode);
 			getEntity().addChild(((AbstractTreeModel)childNode).getEntity());

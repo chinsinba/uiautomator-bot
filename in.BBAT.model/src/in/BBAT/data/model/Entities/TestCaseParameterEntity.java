@@ -31,6 +31,7 @@ public class TestCaseParameterEntity extends AbstractEntity {
 	@ManyToOne
 	private TestCaseEntity cases;
 	
+	@XmlTransient
 	@ManyToOne
 	private TestRunInfoEntity runinfo;
 	

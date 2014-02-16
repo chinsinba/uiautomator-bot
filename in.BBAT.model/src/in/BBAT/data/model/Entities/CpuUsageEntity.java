@@ -20,6 +20,10 @@ public class CpuUsageEntity  extends AbstractEntity{
 	@ManyToOne
 	private TestRunInfoEntity testRunInfo;
 
+	public CpuUsageEntity() {
+		// TODO Auto-generated constructor stub
+	}
+	
 	public CpuUsageEntity(TestRunInfoEntity testRunInfo) {
 		this.testRunInfo =testRunInfo;
 	}
