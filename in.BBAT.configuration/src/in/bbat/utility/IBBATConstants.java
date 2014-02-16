@@ -11,6 +11,9 @@ public interface IBBATConstants {
 	public  final static  String PLATFORM_TOOLS = "platform-tools";
 	public  final static  String  UNIX_ADB ="adb";
 	public  final static  String  WINDOWS_ADB ="adb.exe";
+
+	public  final static  String  UNIX_AAPT ="aapt";
+	public  final static  String  WINDOWS_AAPT ="aapt.exe";
 	public  final static  String  ANDROID_FOLDER =".android";
 	public  final static  String  DDMS_CFG ="ddms.cfg";
 	public  final static  String  LAST_SDK_PATH ="lastSdkPath";

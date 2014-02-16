@@ -72,7 +72,7 @@ public interface IAndroidDevice {
 	 * @param cpuListener
 	 * @param listener
 	 */
-	void executeTestCase(String testCaseName,IUiAutomatorListener uiAutoListener,IMemoryUsageListener memoryListener,ICpuUsageListener cpuListener,ITestRunListener... listener);
+	void executeTestCase(String testCaseName,IUiAutomatorListener uiAutoListener,ITestRunListener... listener);
 
 	/**
 	 * returns device name
@@ -160,4 +160,12 @@ public interface IAndroidDevice {
 	 * 
 	 */
 	public void startCpuUsageThread();
+
+	public void stopCpuUsageThread();
+
+	public void stopMemoryUsageThread();
+
+	void setMemoryListener(IMemoryUsageListener memoryListener);
+
+	void setCpuListener(ICpuUsageListener cpuListener);
 }

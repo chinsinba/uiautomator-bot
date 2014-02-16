@@ -19,7 +19,9 @@ import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Spinner;
 import org.eclipse.swt.widgets.Text;
@@ -47,6 +49,10 @@ public class CreateTestProjectPage extends WizardPage {
 	private Text androidTextPath;
 
 	private TestProjectModel project;
+
+	private Button browseDirButton;
+
+	private Text apkPackageNameText;
 
 	public CreateTestProjectPage(String pageName,TestProjectModel project) {
 		this(pageName);
@@ -108,11 +114,50 @@ public class CreateTestProjectPage extends WizardPage {
 			}
 		});
 
+		createLowerArea(parent);
 		setPageComplete(false);
 
 		setControl(parent);
 	}
 
+	private void createLowerArea(Composite parent) {
+		Composite comp = new Composite(parent, SWT.None);
+		comp.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false));
+		comp.setLayout(new GridLayout(3, false));
+
+		Label nameLabel = new Label(comp, SWT.NULL);
+		nameLabel.setText("APK Package Name :");
+
+		apkPackageNameText = new Text(comp, SWT.BORDER);
+		apkPackageNameText.setLayoutData(new GridData(GridData.FILL_BOTH));
+
+		browseDirButton = new Button(comp, SWT.PUSH);
+		GridData gdzipFilePathButton = new GridData(GridData.FILL);
+		browseDirButton.setLayoutData(gdzipFilePathButton);
+		browseDirButton.setText("Select APK ");
+		addListnerForBrowseButton();
+
+	}
+
+	private void addListnerForBrowseButton() {
+
+		browseDirButton.addSelectionListener(new SelectionListener() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				FileDialog exportDialog = new FileDialog(getShell(),SWT.SAVE);
+				exportDialog.setFilterExtensions(new String[] {"*.apk"});
+				String destinationPath = exportDialog.open();
+				if (destinationPath != null) {
+					
+					apkPackageNameText.setText(destinationPath);
+				}
+			}
+
+			@Override
+			public void widgetDefaultSelected(SelectionEvent e) {
+			}
+		});
+	}
 	public void pageComplete(){
 		setPageComplete(nameValid && descValid);
 	}

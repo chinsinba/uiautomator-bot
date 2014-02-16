@@ -93,10 +93,10 @@ public class DefaultValueSetter
 
 	public static String getAdbPath()
 	{
-		File localFile1 = new File(BBATProperties.getInstance().getAndroid_SdkPath(), IBBATConstants.PLATFORM_TOOLS);
-		File localFile2 = new File(localFile1, IBBATConstants.UNIX_ADB);
-		if (!localFile2.exists())
-			localFile2 = new File(localFile1, IBBATConstants.WINDOWS_ADB);
-		return localFile2.exists() ? localFile2.getAbsolutePath() : null;
+		File platFormToolsDir = new File(BBATProperties.getInstance().getAndroid_SdkPath(), IBBATConstants.PLATFORM_TOOLS);
+		File adbFile = new File(platFormToolsDir, IBBATConstants.UNIX_ADB);
+		if (!adbFile.exists())
+			adbFile = new File(platFormToolsDir, IBBATConstants.WINDOWS_ADB);
+		return adbFile.exists() ? adbFile.getAbsolutePath() : null;
 	}
 }

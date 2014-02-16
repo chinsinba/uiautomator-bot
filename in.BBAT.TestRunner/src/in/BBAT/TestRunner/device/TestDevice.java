@@ -153,10 +153,8 @@ public class TestDevice implements IAndroidDevice {
 	}
 
 	@Override
-	public void executeTestCase(String testCaseName,IUiAutomatorListener uiAutoListener,IMemoryUsageListener memoryListener,ICpuUsageListener cpuListener,ITestRunListener... listener) {
+	public void executeTestCase(String testCaseName,IUiAutomatorListener uiAutoListener,ITestRunListener... listener) {
 
-		this.cpuListener = cpuListener;
-		this.memoryListener = memoryListener;
 		//		ScreenShotThread screenShotThread = new ScreenShotThread();
 
 		UIAutomatorRunner runner = new UIAutomatorRunner(testCaseName, monkeyDevice,uiAutoListener);
@@ -304,17 +302,20 @@ public class TestDevice implements IAndroidDevice {
 
 
 	public void stopCpuUsageThread(){
-		cpuUsageThread.stop();
+		if(cpuUsageThread!=null)
+			cpuUsageThread.stop();
 	}
 
 	public void stopMemoryUsageThread(){
-		memoryUsageThread.stop();
+		if(memoryUsageThread!=null)
+			memoryUsageThread.stop();
 	}
 
 	public IMemoryUsageListener getMemoryListener() {
 		return memoryListener;
 	}
 
+	@Override
 	public void setMemoryListener(IMemoryUsageListener memoryListener) {
 		this.memoryListener = memoryListener;
 	}
@@ -323,6 +324,7 @@ public class TestDevice implements IAndroidDevice {
 		return cpuListener;
 	}
 
+	@Override
 	public void setCpuListener(ICpuUsageListener cpuListener) {
 		this.cpuListener = cpuListener;
 	}

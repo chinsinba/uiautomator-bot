@@ -28,21 +28,22 @@ public class TestRunner implements ITestRunner{
 		this.jar = jar;
 		this.testDevice = device;
 		pushJarToDevice();
-		
+
 	}
 
 	@Override
 	public void execute(String testCaseClassName, ITestRunListener testCaseExecutionListener, ILogListener deviceLogListener,IUiAutomatorListener autoListener, IScreenShotListener listener,IMemoryUsageListener memListner,ICpuUsageListener cpuListener) {
-		preRun(deviceLogListener,listener);
+		preRun(deviceLogListener,listener, memListner, cpuListener);
 
-		run(testCaseClassName,testCaseExecutionListener,autoListener, memListner, cpuListener);
+		run(testCaseClassName,testCaseExecutionListener,autoListener);
 
 		postRun();
 	}
 
 	private void postRun() {
 		testDevice.stopLogging();
-		
+		testDevice.stopCpuUsageThread();
+		testDevice.stopMemoryUsageThread();
 	}
 
 	public void execute(String className, String testMethodName) {
@@ -54,10 +55,12 @@ public class TestRunner implements ITestRunner{
 	 * @param deviceLogListener 
 	 * @param listener 
 	 */
-	private void preRun(ILogListener deviceLogListener, IScreenShotListener screenShotListener) {
+	private void preRun(ILogListener deviceLogListener, IScreenShotListener screenShotListener,IMemoryUsageListener memListner,ICpuUsageListener cpuListener) {
 		testDevice.setLogListener(deviceLogListener);
 		testDevice.startLogging();
 		testDevice.setScreenShotListener(screenShotListener);
+		testDevice.setMemoryListener(memListner);
+		testDevice.setCpuListener(cpuListener);
 	}
 
 	@Override
@@ -79,8 +82,8 @@ public class TestRunner implements ITestRunner{
 	 * @param cpuListener 
 	 * @param memListner 
 	 */
-	private void run(String testCaseClassName, ITestRunListener testCaseExecutionListener,IUiAutomatorListener autoListener, IMemoryUsageListener memListner, ICpuUsageListener cpuListener){
-		testDevice.executeTestCase(testCaseClassName,autoListener, memListner,cpuListener,testCaseExecutionListener);
+	private void run(String testCaseClassName, ITestRunListener testCaseExecutionListener,IUiAutomatorListener autoListener){
+		testDevice.executeTestCase(testCaseClassName,autoListener,testCaseExecutionListener);
 		waitForCompletion();
 	}
 
@@ -95,5 +98,5 @@ public class TestRunner implements ITestRunner{
 	public void setTestArtifacts(TestArtifacts testArtifacts) {
 		this.testArtifacts = testArtifacts;
 	}
-	
+
 }
