@@ -6,6 +6,7 @@ import in.BBAT.abstrakt.presenter.pkg.model.TestProjectModel;
 import in.bbat.configuration.BBATProperties;
 import in.bbat.logger.BBATLogger;
 import in.bbat.utility.AndroidSdkUtility;
+import in.bbat.utils.AndroidXmlParser;
 
 import java.util.List;
 
@@ -148,8 +149,8 @@ public class CreateTestProjectPage extends WizardPage {
 				exportDialog.setFilterExtensions(new String[] {"*.apk"});
 				String destinationPath = exportDialog.open();
 				if (destinationPath != null) {
-					
-					apkPackageNameText.setText(destinationPath);
+
+					apkPackageNameText.setText(	(new AndroidXmlParser().getIntents(destinationPath)));
 				}
 			}
 
