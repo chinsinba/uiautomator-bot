@@ -42,6 +42,7 @@ public class CreateTestProjectPage extends WizardPage {
 
 	private boolean nameValid;
 	private boolean descValid;
+	private boolean apkPackageNameValid;
 
 	private Spinner sp;
 
@@ -131,7 +132,25 @@ public class CreateTestProjectPage extends WizardPage {
 
 		apkPackageNameText = new Text(comp, SWT.BORDER);
 		apkPackageNameText.setLayoutData(new GridData(GridData.FILL_BOTH));
+		apkPackageNameText.addModifyListener(new ModifyListener() {
+			@Override
+			public void modifyText(ModifyEvent e) {
+				if(!((Text)e.getSource()).getText().trim().isEmpty())	
+				{
+					apkPackageNameValid = true;
+				}
+				else
+					apkPackageNameValid = false;
 
+				pageComplete();
+			}
+		});
+		apkPackageNameText.setMessage("Enter package name");
+		
+		if(project!=null){
+			apkPackageNameText.setText(project.getApkPackageName());
+			apkPackageNameText.setEditable(false);
+		}
 		browseDirButton = new Button(comp, SWT.PUSH);
 		GridData gdzipFilePathButton = new GridData(GridData.FILL);
 		browseDirButton.setLayoutData(gdzipFilePathButton);
@@ -160,7 +179,7 @@ public class CreateTestProjectPage extends WizardPage {
 		});
 	}
 	public void pageComplete(){
-		setPageComplete(nameValid && descValid);
+		setPageComplete(nameValid && descValid && apkPackageNameValid);
 	}
 
 	public String getDeskription(){
@@ -169,6 +188,10 @@ public class CreateTestProjectPage extends WizardPage {
 
 	public String getProjName(){
 		return nameDescComp.getName();
+	}
+
+	public String getPackageName(){
+		return apkPackageNameText.getText().trim();
 	}
 
 	public String getApiLevel(){
