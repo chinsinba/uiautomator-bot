@@ -28,7 +28,7 @@ public class CpuUsageThread implements Runnable {
 	@Override
 	public void run() {
 
-		final String cmd ="dumsys cpuinfo";
+		final String cmd ="dumsys cpuinfo " + listener.getPackageName();
 		try {
 			device.getMonkeyDevice().executeShellCommand(cmd, new MultiLineReceiver() {
 				@Override

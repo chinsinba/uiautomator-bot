@@ -3,6 +3,7 @@ package in.bbat.presenter.internal;
 import in.BBAT.TestRunner.Listener.ICpuUsageListener;
 import in.BBAT.TestRunner.Listener.IMemoryUsageListener;
 import in.BBAT.abstrakt.presenter.device.model.AndroidDevice;
+import in.BBAT.abstrakt.presenter.pkg.model.TestProjectModel;
 import in.BBAT.abstrakt.presenter.run.model.TestRunInstanceModel;
 
 public class MemoryCpuUsageListener implements IMemoryUsageListener,ICpuUsageListener {
@@ -25,6 +26,11 @@ public class MemoryCpuUsageListener implements IMemoryUsageListener,ICpuUsageLis
 	@Override
 	public void memoryUsage(int percentUsage, long time) {
 		model.saveCpuUsage(percentUsage, time);
+	}
+
+	@Override
+	public String getPackageName() {
+		return ((TestProjectModel)model.getParent().getParent()).getApkPackageName();
 	}
 
 }

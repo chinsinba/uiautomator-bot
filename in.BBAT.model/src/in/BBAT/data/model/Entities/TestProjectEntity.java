@@ -53,6 +53,9 @@ public class TestProjectEntity extends AbstractEntity {
 	@XmlAttribute(required = true)
 	private int apiLevel;
 	
+	@XmlAttribute(required = true)
+	private String apkPackageName;
+	
 	@XmlElement(name="TestSuiteEntity",required=true)
 	@OneToMany(mappedBy="testProject",fetch = FetchType.LAZY, cascade = { CascadeType.ALL })
 	@OrderColumn
@@ -144,5 +147,13 @@ public class TestProjectEntity extends AbstractEntity {
 
 	public void setApiLevel(int apiLevel) {
 		this.apiLevel = apiLevel;
+	}
+
+	public String getApkPackageName() {
+		return apkPackageName;
+	}
+
+	public void setApkPackageName(String apkPackageName) {
+		this.apkPackageName = apkPackageName;
 	}
 }

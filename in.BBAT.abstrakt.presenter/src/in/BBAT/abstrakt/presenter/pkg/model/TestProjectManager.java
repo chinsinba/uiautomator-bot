@@ -73,7 +73,7 @@ public class TestProjectManager {
 			}
 		}
 
-		TestProjectModel proj = TestProjectModel.create(projEntity.getName(), projEntity.getDescription(),projEntity.getApiLevel());
+		TestProjectModel proj = TestProjectModel.create(projEntity.getName(), projEntity.getDescription(),projEntity.getApiLevel(),projEntity.getApkPackageName());
 		for(TestSuiteEntity suiteEntity : projEntity.getTestSuites()){
 			TestSuiteModel suiteModel = TestSuiteModel.create(proj, suiteEntity.getName(), suiteEntity.getDescription());
 			for(TestCaseEntity caseEntity: suiteEntity.getTestCases()){

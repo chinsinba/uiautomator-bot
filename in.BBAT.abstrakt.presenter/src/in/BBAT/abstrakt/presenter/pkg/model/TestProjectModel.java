@@ -100,14 +100,24 @@ public class TestProjectModel extends AbstractProjectTree {
 		TestProjectManager.getInstance().getTestProjects().remove(this);
 	}
 
-	public static TestProjectModel create(String name, String description,int apiLevel) throws Exception{
+	public static TestProjectModel create(String name, String description,int apiLevel, String apkPkgname) throws Exception{
 		TestProjectModel model = new TestProjectModel(name,apiLevel);
 		model.setDescription(description);
 		model.setApiLevel(apiLevel);
+		model.setApkPackageName(apkPkgname);
 		model.save();
 		TestProjectManager.getInstance().getTestProjects().add(model);
 		return model;
 	}
+
+	public void setApkPackageName(String apkPkgname) {
+		((TestProjectEntity)getEntity()).setApkPackageName(apkPkgname);		
+	}
+	
+	public String getApkPackageName() {
+		return ((TestProjectEntity)getEntity()).getApkPackageName();		
+	}
+
 
 	public void setApiLevel(int apiLevel) {
 		((TestProjectEntity)getEntity()).setApiLevel(apiLevel);		

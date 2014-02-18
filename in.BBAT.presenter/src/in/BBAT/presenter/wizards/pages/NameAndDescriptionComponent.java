@@ -30,6 +30,7 @@ public class NameAndDescriptionComponent {
 		nameLabel.setText("Name:");
 		setNameText(new Text(group, SWT.BORDER));
 		getNameText().setFocus();
+		getNameText().setMessage("Enter Name");
 		if(!editable){
 			getNameText().setText(name);
 			getNameText().setEditable(editable);
@@ -48,7 +49,7 @@ public class NameAndDescriptionComponent {
 		gdcommentText.grabExcessVerticalSpace = true;
 
 		getDescText().setLayoutData(gdcommentText);
-
+		getDescText().setMessage("Enter description");
 
 	}
 
