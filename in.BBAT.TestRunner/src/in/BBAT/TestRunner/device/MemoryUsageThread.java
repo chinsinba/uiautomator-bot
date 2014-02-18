@@ -26,30 +26,31 @@ public class MemoryUsageThread implements Runnable {
 
 	@Override
 	public void run() {
+		while(!stop){
+			String pack = listener!=null ?listener.getPackageName():"";
+			final String cmd ="dumpsys meminfo " + pack;
+			try {
+				device.getMonkeyDevice().executeShellCommand(cmd, new MultiLineReceiver() {
+					@Override
+					public boolean isCancelled() {
+						return false;
+					}
 
-		final String cmd ="dumsys meminfo " + listener.getPackageName();
-		try {
-			device.getMonkeyDevice().executeShellCommand(cmd, new MultiLineReceiver() {
-				@Override
-				public boolean isCancelled() {
-					return false;
-				}
-
-				@Override
-				public void processNewLines(String[] arg0) {
-
-				}
-			},0);
-		} catch (TimeoutException e) {
-			LOG.error(e);
-		} catch (AdbCommandRejectedException e) {
-			LOG.error(e);
-		} catch (ShellCommandUnresponsiveException e) {
-			LOG.error(e);
-		} catch (IOException e) {
-			LOG.error(e);
+					@Override
+					public void processNewLines(String[] arg0) {
+						System.out.println(arg0);
+					}
+				},0);
+			} catch (TimeoutException e) {
+				LOG.error(e);
+			} catch (AdbCommandRejectedException e) {
+				LOG.error(e);
+			} catch (ShellCommandUnresponsiveException e) {
+				LOG.error(e);
+			} catch (IOException e) {
+				LOG.error(e);
+			}
 		}
-
 	}
 
 	public void stop(){

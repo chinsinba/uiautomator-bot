@@ -157,6 +157,8 @@ public class TestDevice implements IAndroidDevice {
 
 		//		ScreenShotThread screenShotThread = new ScreenShotThread();
 
+		startCpuUsageThread();
+		startMemoryUsageThread();
 		UIAutomatorRunner runner = new UIAutomatorRunner(testCaseName, monkeyDevice,uiAutoListener);
 		try {
 			//			screenShotThread.start();
@@ -172,6 +174,8 @@ public class TestDevice implements IAndroidDevice {
 		}
 		//		screenShotThread.stopThread();
 
+		stopCpuUsageThread();
+		stopMemoryUsageThread();
 	}
 
 	class ScreenShotThread extends Thread

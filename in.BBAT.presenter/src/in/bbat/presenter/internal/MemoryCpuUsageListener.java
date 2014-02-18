@@ -2,6 +2,7 @@ package in.bbat.presenter.internal;
 
 import in.BBAT.TestRunner.Listener.ICpuUsageListener;
 import in.BBAT.TestRunner.Listener.IMemoryUsageListener;
+import in.BBAT.abstrakt.gui.model.AbstractTreeModel;
 import in.BBAT.abstrakt.presenter.device.model.AndroidDevice;
 import in.BBAT.abstrakt.presenter.pkg.model.TestProjectModel;
 import in.BBAT.abstrakt.presenter.run.model.TestRunInstanceModel;
@@ -30,7 +31,8 @@ public class MemoryCpuUsageListener implements IMemoryUsageListener,ICpuUsageLis
 
 	@Override
 	public String getPackageName() {
-		return ((TestProjectModel)model.getParent().getParent()).getApkPackageName();
+		AbstractTreeModel parent = model.getTestCaseModel().getParent().getParent();
+		return ((TestProjectModel)parent).getApkPackageName();
 	}
 
 }

@@ -103,8 +103,8 @@ public class AndroidSdkUtility {
 		}
 		return max;
 	}
-	
-	
+
+
 	public static boolean isUiAutoSupportingPlatformPresent(){
 		int uiAuto =16;
 		int[] availablePlatforms = availablePlatforms();
@@ -114,6 +114,15 @@ public class AndroidSdkUtility {
 		}
 		return false;
 	}
+
+	public String getAaptPath(){
+
+		File platFormToolsDir = new File(BBATProperties.getInstance().getAndroid_SdkPath(), IBBATConstants.PLATFORM_TOOLS);
+		File adbFile = new File(platFormToolsDir, IBBATConstants.UNIX_AAPT);
+		if (!adbFile.exists())
+			adbFile = new File(platFormToolsDir, IBBATConstants.WINDOWS_AAPT);
+		return adbFile.exists() ? adbFile.getAbsolutePath() : null;
 	
+	}
 
 }
