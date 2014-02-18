@@ -27,7 +27,7 @@ public class MemoryUsageThread implements Runnable {
 	@Override
 	public void run() {
 
-		final String cmd ="dumsys meminfo";
+		final String cmd ="dumsys meminfo " + listener.getPackageName();
 		try {
 			device.getMonkeyDevice().executeShellCommand(cmd, new MultiLineReceiver() {
 				@Override
