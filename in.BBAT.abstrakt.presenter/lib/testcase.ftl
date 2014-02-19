@@ -47,5 +47,16 @@ public class ${testCase_name} extends UiAutomatorTestCase {
     private void postRun(){
     
     }
+    
+     /**
+        Creates a screen shot this method should not be changed
+        @generated 
+    */
+    public void takeShot(){
+		if(Build.VERSION.SDK_INT<17)
+			return;
+		getUiDevice().takeScreenshot(new File("/data/local/tmp/"+System.currentTimeMillis()+".png"));	
+		Log.i(TAG,"screen shot taken");
+	}
 }
  
