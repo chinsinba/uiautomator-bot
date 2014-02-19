@@ -9,6 +9,7 @@ import in.bbat.abstrakt.gui.BBATImageManager;
 import in.bbat.logger.BBATLogger;
 import in.bbat.presenter.views.BBATViewPart;
 import in.bbat.presenter.views.tester.AutomatorLogView;
+import in.bbat.presenter.views.tester.ScreenShotView;
 import in.bbat.presenter.views.tester.TestLogView;
 import in.bbat.utils.ITestConstants;
 
@@ -80,7 +81,7 @@ public class TestRunInfoView extends BBATViewPart {
 				if(((TestRunInstanceModel)sel).getStatus().equalsIgnoreCase(TestStatus.NOTEXECUTED.toString())){
 					return ;
 				}
-
+				ScreenShotView.selectedTestRuncase((TestRunInstanceModel) sel);
 				Display.getDefault().asyncExec(new Runnable() {
 					@Override
 					public void run() {
