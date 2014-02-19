@@ -1,5 +1,8 @@
 package ${package_name};
 
+import java.io.File;
+
+import android.os.Build;
 import android.util.Log;
 import com.android.uiautomator.core.*;
 import com.android.uiautomator.testrunner.*;
