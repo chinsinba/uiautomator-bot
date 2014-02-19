@@ -168,4 +168,12 @@ public interface IAndroidDevice {
 	void setMemoryListener(IMemoryUsageListener memoryListener);
 
 	void setCpuListener(ICpuUsageListener cpuListener);
+
+	/**
+	 * 
+	 * @param destinationDir
+	 * @param sourceDirInDevice
+	 * @param delete
+	 */
+	void pullScreenShots(String destinationDir, String sourceDirInDevice, boolean delete);
 }

@@ -58,7 +58,12 @@ public class ${testCase_name} extends UiAutomatorTestCase {
     public void takeShot(){
 		if(Build.VERSION.SDK_INT<17)
 			return;
-		getUiDevice().takeScreenshot(new File("/data/local/tmp/"+System.currentTimeMillis()+".png"));	
+		File dir = new File("/data/local/tmp/"+TAG+"/");
+		if(!dir.exists())
+		{
+			dir.mkdirs();
+		}
+		getUiDevice().takeScreenshot(new File(dir,System.currentTimeMillis()+".png"));	
 		Log.i(TAG,"screen shot taken");
 	}
 }

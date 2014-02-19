@@ -108,8 +108,10 @@ public class DeviceTestRun {
 					DeviceLogListener deviceLogListener = new DeviceLogListener(testRunCase);
 					MemoryCpuUsageListener memCpuListener = new MemoryCpuUsageListener(testRunCase, getDevice());
 					runner.execute(testRunCase.getCompleteScriptName(), new TestCaseExecutionListener(testRunCase, DeviceTestRun.this), deviceLogListener,new UIAutomatorOutputListener(testRunCase),deviceLogListener,memCpuListener,memCpuListener);
+					getDevice().pullScreenShotsFromDevice(testRunCase.getScreenShotDir(),testRunCase.getTestCaseModel().getName(),true);
 					testRunCase.setEndTime(System.currentTimeMillis());
 					testRunCase.update();
+					
 				}
 				testDeviceRun.setEndTime(System.currentTimeMillis());
 				testDeviceRun.update();

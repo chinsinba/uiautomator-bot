@@ -8,6 +8,7 @@ import in.BBAT.TestRunner.Listener.IScreenShotListener;
 import in.BBAT.testRunner.runner.IUiAutomatorListener;
 import in.BBAT.testRunner.runner.UiAutoTestCaseJar;
 import in.BBAT.testRunner.runner.internal.UIAutomatorRunner;
+import in.bbat.configuration.BBATProperties;
 import in.bbat.logger.BBATLogger;
 
 import java.io.IOException;
@@ -34,6 +35,7 @@ public class TestDevice implements IAndroidDevice {
 
 	private static final Logger LOG = BBATLogger.getLogger(TestDevice.class.getName());
 	public static final int UIAUTOMATOR_MIN_API_LEVEL = 16;
+	public static final String SCREENSHOT_DIR = "/data/local/tmp/";
 	private boolean active;
 	private IDevice monkeyDevice;
 
@@ -331,5 +333,35 @@ public class TestDevice implements IAndroidDevice {
 	@Override
 	public void setCpuListener(ICpuUsageListener cpuListener) {
 		this.cpuListener = cpuListener;
+	}
+
+	@Override
+	public void pullScreenShots(String destinationDir, String sourceDirInDevice , boolean delete) {
+
+		try {
+			Process exec = Runtime.getRuntime().exec(BBATProperties.getInstance().getAndroid_AdbPath()+" pull "+ SCREENSHOT_DIR+"/"+sourceDirInDevice + " "+ destinationDir);
+			exec.waitFor();
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		if(delete)
+			deleteFolder(SCREENSHOT_DIR+"/"+sourceDirInDevice);
+	}
+
+	public void deleteFolder(String sourceDirectory) {
+		final String cmd ="rm -Rf "+sourceDirectory;
+		try {
+			monkeyDevice.executeShellCommand(cmd, new NullOutputReceiver(),0);
+		} catch (TimeoutException e) {
+			LOG.error(e);
+		} catch (AdbCommandRejectedException e) {
+			LOG.error(e);
+		} catch (ShellCommandUnresponsiveException e) {
+			LOG.error(e);
+		} catch (IOException e) {
+			LOG.error(e);
+		}
 	}
 }

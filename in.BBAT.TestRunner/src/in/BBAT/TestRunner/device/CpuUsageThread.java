@@ -40,7 +40,9 @@ public class CpuUsageThread implements Runnable {
 
 					@Override
 					public void processNewLines(String[] arg0) {
-						System.out.println(arg0);
+						for (int i = 0; i < arg0.length; i++) {
+							System.out.println(arg0[i]);	
+						}
 					}
 				},0);
 			} catch (TimeoutException e) {
