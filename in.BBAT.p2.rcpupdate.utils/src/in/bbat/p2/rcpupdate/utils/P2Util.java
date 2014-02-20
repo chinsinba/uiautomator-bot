@@ -134,7 +134,7 @@ public class P2Util {
 				final IProvisioningAgent agent = (IProvisioningAgent) bundleContext.getService(reference);
 				final String REPOSITORY_LOC = 
 						System.getProperty("UpdateHandler.Repo", 
-								"/home/syed/Desktop/Backup_Desktop/BLACKANDRO/repository/");
+								"file:///home/syed/Desktop/Backup_Desktop/BLACKANDRO/repository/");
 
 				/* 1. Prepare update plumbing */
 
