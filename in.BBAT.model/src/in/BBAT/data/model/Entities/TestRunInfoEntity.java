@@ -75,7 +75,7 @@ public class TestRunInfoEntity extends AbstractEntity {
 	
 	@OneToMany(mappedBy="testRunInfo", fetch = FetchType.LAZY, cascade = { CascadeType.ALL })
 	@OrderColumn
-	private List<MemoryEntity> cpuVals;
+	private List<CpuUsageEntity> cpuVals;
 	
 	public Timestamp getStartTime() {
 		return startTime;
@@ -170,11 +170,11 @@ public class TestRunInfoEntity extends AbstractEntity {
 		this.memVals = memVals;
 	}
 
-	public List<MemoryEntity> getCpuVals() {
+	public List<CpuUsageEntity> getCpuVals() {
 		return cpuVals;
 	}
 
-	public void setCpuVals(List<MemoryEntity> cpuVals) {
+	public void setCpuVals(List<CpuUsageEntity> cpuVals) {
 		this.cpuVals = cpuVals;
 	}
 }
