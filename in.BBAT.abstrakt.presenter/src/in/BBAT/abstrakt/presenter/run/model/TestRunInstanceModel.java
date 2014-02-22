@@ -271,7 +271,7 @@ public class TestRunInstanceModel extends AbstractTreeModel {
 		memEntity.save();
 	}
 
-	public void saveCpuUsage(int percent, long time){
+	public void saveCpuUsage(double percent, long time){
 		CpuUsageEntity cpuEntity = new CpuUsageEntity((TestRunInfoEntity) this.getEntity(),percent,time);
 		cpuEntity.save();
 	}

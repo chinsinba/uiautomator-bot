@@ -27,8 +27,8 @@ public class MemoryUsageThread implements Runnable {
 	@Override
 	public void run() {
 		while(!stop){
-			String pack = listener!=null ?listener.getPackageName():"";
-			final String cmd ="dumpsys meminfo " + pack;
+			final String pack = listener!=null ?listener.getPackageName():"";
+			final String cmd ="dumpsys meminfo ";
 			try {
 				device.getMonkeyDevice().executeShellCommand(cmd, new MultiLineReceiver() {
 					@Override
@@ -38,10 +38,15 @@ public class MemoryUsageThread implements Runnable {
 
 					@Override
 					public void processNewLines(String[] arg0) {
-						for (int i = 0; i < arg0.length; i++) {
-							System.out.println(arg0[i]);	
+						for (String line : arg0) {
+							if(line.contains(pack))
+							{
+								String val = line.substring(0,line.indexOf("kB"));
+								System.out.println(val);
+								listener.memoryUsage(Integer.parseInt(val.trim()), System.currentTimeMillis());
+							}	
 						}
-						
+
 					}
 				},0);
 			} catch (TimeoutException e) {
@@ -52,6 +57,11 @@ public class MemoryUsageThread implements Runnable {
 				LOG.error(e);
 			} catch (IOException e) {
 				LOG.error(e);
+			}
+			try {
+				Thread.sleep(1200);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
 			}
 		}
 	}

@@ -13,7 +13,7 @@ public class CpuUsageEntity  extends AbstractEntity{
 	@GeneratedValue(generator = "mem_GEN")
 	private int id;
 
-	private int percent;
+	private double percent;
 
 	private long time;
 
@@ -28,7 +28,7 @@ public class CpuUsageEntity  extends AbstractEntity{
 		this.testRunInfo =testRunInfo;
 	}
 
-	public CpuUsageEntity(TestRunInfoEntity testRunInfo,int percentUse, long time) {
+	public CpuUsageEntity(TestRunInfoEntity testRunInfo,double percentUse, long time) {
 		this(testRunInfo);
 		this.percent =percentUse;
 		this.time =time;
@@ -51,11 +51,11 @@ public class CpuUsageEntity  extends AbstractEntity{
 		this.testRunInfo = testRunInfo;
 	}
 
-	public int getPercent() {
+	public double getPercent() {
 		return percent;
 	}
 
-	public void setPercent(int percent) {
+	public void setPercent(double percent) {
 		this.percent = percent;
 	}
 
