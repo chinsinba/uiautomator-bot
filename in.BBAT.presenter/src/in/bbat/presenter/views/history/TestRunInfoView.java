@@ -10,6 +10,7 @@ import in.bbat.logger.BBATLogger;
 import in.bbat.presenter.DualAxisDemo2;
 import in.bbat.presenter.views.BBATViewPart;
 import in.bbat.presenter.views.tester.AutomatorLogView;
+import in.bbat.presenter.views.tester.MemoryCPUUsageView;
 import in.bbat.presenter.views.tester.ScreenShotView;
 import in.bbat.presenter.views.tester.TestLogView;
 import in.bbat.utils.ITestConstants;
@@ -87,7 +88,12 @@ public class TestRunInfoView extends BBATViewPart {
 				Display.getDefault().asyncExec(new Runnable() {
 					@Override
 					public void run() {
-						DualAxisDemo2.main(null);
+						try {
+							BBATViewPart.hideView(MemoryCPUUsageView.ID);
+							BBATViewPart.openView(MemoryCPUUsageView.ID);
+						} catch (PartInitException e) {
+							LOG.error(e);
+						}
 					}
 				});
 

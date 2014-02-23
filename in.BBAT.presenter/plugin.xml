@@ -150,6 +150,12 @@
             name="Execution View"
             restorable="true">
       </view>
+      <view
+            class="in.bbat.presenter.views.tester.MemoryCPUUsageView"
+            id="in.BBAT.presenter.tester.MemoryCpuUsageView"
+            name="Memory &amp; CPU usage"
+            restorable="true">
+      </view>
    </extension>
    <extension
          point="org.eclipse.ui.perspectiveExtensions">
