@@ -140,7 +140,7 @@ public class TestCaseModel extends AbstractProjectTree{
 		getProject().refresh();
 
 	}
-	
+
 	public void openEditor() throws Exception{
 		IEditorInput input=null;
 		input = new FileEditorInput(getIFile());
@@ -159,7 +159,7 @@ public class TestCaseModel extends AbstractProjectTree{
 		super.save();
 		createContents();
 	}
-	
+
 	public static TestCaseModel create(TestSuiteModel suite,String name, String description) throws Exception{
 		TestCaseModel newTestCase = new TestCaseModel(suite, name);
 		newTestCase.setDescription(description);
@@ -167,12 +167,12 @@ public class TestCaseModel extends AbstractProjectTree{
 		suite.addChild(newTestCase);
 		return newTestCase;
 	}
-	
+
 	@Override
 	public BBATProject getProject() {
 		return ((TestSuiteModel)getParent()).getProject();
 	}
-	
+
 	@Override
 	public void deleteResource() throws Exception {
 		super.deleteResource();
@@ -184,5 +184,8 @@ public class TestCaseModel extends AbstractProjectTree{
 		List<TestRunEntity> testRuns = TestCaseMineManager.getAllRunsContainingTestCase((TestCaseEntity) getEntity());
 		return testRuns;
 	}
-
+	
+	public boolean hasErrors(){
+		return getProject().hasErrors(testCaseFile);
+	}
 }

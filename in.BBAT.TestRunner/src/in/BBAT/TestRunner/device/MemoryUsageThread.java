@@ -42,7 +42,6 @@ public class MemoryUsageThread implements Runnable {
 							if(line.contains(pack))
 							{
 								String val = line.substring(0,line.indexOf("kB"));
-								System.out.println(val);
 								listener.memoryUsage(Integer.parseInt(val.trim()), System.currentTimeMillis());
 							}	
 						}

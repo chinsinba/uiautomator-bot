@@ -24,7 +24,7 @@ import org.eclipse.swt.dnd.TransferData;
 import org.eclipse.ui.PlatformUI;
 
 public class TestCaseDropListener extends ViewerDropAdapter {
-	
+
 	private static final Logger LOG = BBATLogger.getLogger(TestCaseDropListener.class.getName());
 	public TestCaseDropListener(Viewer viewer) {
 		super(viewer);
@@ -33,7 +33,7 @@ public class TestCaseDropListener extends ViewerDropAdapter {
 
 	@Override
 	public boolean performDrop(Object data) {
-		
+
 		Object testObj=null;
 		List<TestRunCaseModel> tempList = new ArrayList<TestRunCaseModel>();
 
@@ -44,7 +44,7 @@ public class TestCaseDropListener extends ViewerDropAdapter {
 			while(iterator.hasNext())
 			{
 				testObj = iterator.next();
-			/*	if (testObj instanceof AndroidDevice) {
+				/*	if (testObj instanceof AndroidDevice) {
 					TestRunExecutionManager.getInstance().addTestDevice(new DeviceTestRun((AndroidDevice) testObj,TestRunExecutionManager.getInstance().getTestRunCases()));
 				}*/
 				if(testObj instanceof AbstractProjectTree){
@@ -57,7 +57,7 @@ public class TestCaseDropListener extends ViewerDropAdapter {
 		for (TestRunCaseModel testRunCase : tempList) {
 			TestRunExecutionManager.getInstance().addTestRunCase(testRunCase);
 		}
-		
+
 		for(DeviceTestRun run : TestRunExecutionManager.getInstance().getSelectedDevices()){
 			run.addTestCases(tempList);
 		}
@@ -69,6 +69,9 @@ public class TestCaseDropListener extends ViewerDropAdapter {
 	private void addToTestCaseList(AbstractTreeModel testObj,List<TestRunCaseModel> tempList) {
 
 		if (testObj instanceof TestCaseModel) {
+			if(((TestCaseModel) testObj).hasErrors()){
+				return;
+			}
 			tempList.add(new TestRunCaseModel((TestCaseModel) testObj));
 			return;
 		}

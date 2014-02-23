@@ -44,7 +44,6 @@ public class CpuUsageThread implements Runnable {
 							if(line.contains(pack))
 							{
 								String val = line.substring(0,line.indexOf("%"));
-								System.out.println(val);
 								listener.cpuUsage(Double.parseDouble(val.trim()), System.currentTimeMillis());
 							}	
 						}
