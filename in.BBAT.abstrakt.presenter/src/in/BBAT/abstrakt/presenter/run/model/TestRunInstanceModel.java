@@ -119,7 +119,7 @@ public class TestRunInstanceModel extends AbstractTreeModel {
 		this.showLogs = showLogs;
 	}
 
-	
+
 
 	/*	public void addDeviceLog(DeviceLogModel log){
 		deviceLogs.add(log);
@@ -130,7 +130,7 @@ public class TestRunInstanceModel extends AbstractTreeModel {
 		return deviceLogs;
 	}*/
 
-	
+
 
 	public void setTimeTaken(long timeTaken)
 	{
@@ -276,5 +276,12 @@ public class TestRunInstanceModel extends AbstractTreeModel {
 		cpuEntity.save();
 	}
 
+	public List<MemoryEntity> getMemoryUsageValues(){
+		return ((TestRunInfoEntity)getEntity()).getMemVals();
+	}
+
+	public List<CpuUsageEntity> getCpuUsageValues(){
+		return ((TestRunInfoEntity)getEntity()).getCpuVals();
+	}
 
 }

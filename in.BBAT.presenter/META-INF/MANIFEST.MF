@@ -21,5 +21,8 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.nebula.widgets.gallery;bundle-version="0.5.3"
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Bundle-ClassPath: .
+Bundle-ClassPath: .,
+ lib/jcommon-1.0.12.jar,
+ lib/jfreechart-1.0.9.jar,
+ lib/jfreechart-swt-1.0.9.jar
 Import-Package: in.bbat.p2.rcpupdate.utils

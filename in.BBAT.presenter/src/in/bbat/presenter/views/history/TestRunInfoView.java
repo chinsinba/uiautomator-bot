@@ -7,6 +7,8 @@ import in.BBAT.abstrakt.presenter.run.model.TestStatus;
 import in.BBAT.presenter.labelProviders.HistoryTestRunInfoLabelProvider;
 import in.bbat.abstrakt.gui.BBATImageManager;
 import in.bbat.logger.BBATLogger;
+import in.bbat.presenter.DualAxisDemo2;
+import in.bbat.presenter.LineChartDemo6;
 import in.bbat.presenter.views.BBATViewPart;
 import in.bbat.presenter.views.tester.AutomatorLogView;
 import in.bbat.presenter.views.tester.ScreenShotView;
@@ -81,7 +83,15 @@ public class TestRunInfoView extends BBATViewPart {
 				if(((TestRunInstanceModel)sel).getStatus().equalsIgnoreCase(TestStatus.NOTEXECUTED.toString())){
 					return ;
 				}
+
 				ScreenShotView.selectedTestRuncase((TestRunInstanceModel) sel);
+				Display.getDefault().asyncExec(new Runnable() {
+					@Override
+					public void run() {
+						DualAxisDemo2.main(null);
+					}
+				});
+
 				Display.getDefault().asyncExec(new Runnable() {
 					@Override
 					public void run() {
