@@ -152,6 +152,7 @@
       </view>
       <view
             class="in.bbat.presenter.views.tester.MemoryCPUUsageView"
+            icon="icons/mem_cpu_usage.png"
             id="in.BBAT.presenter.tester.MemoryCpuUsageView"
             name="Memory &amp; CPU usage"
             restorable="true">
