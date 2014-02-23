@@ -8,7 +8,6 @@ import in.BBAT.presenter.labelProviders.HistoryTestRunInfoLabelProvider;
 import in.bbat.abstrakt.gui.BBATImageManager;
 import in.bbat.logger.BBATLogger;
 import in.bbat.presenter.DualAxisDemo2;
-import in.bbat.presenter.LineChartDemo6;
 import in.bbat.presenter.views.BBATViewPart;
 import in.bbat.presenter.views.tester.AutomatorLogView;
 import in.bbat.presenter.views.tester.ScreenShotView;

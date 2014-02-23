@@ -81,13 +81,13 @@ public class DualAxisDemo2 extends ApplicationFrame {
 		super(title);
 
 		// create a title...
-		final String chartTitle = "CPU & Memory usage";
+		final String chartTitle = "Memory & CPU usage";
 		final XYDataset dataset = createDataset1();
 
 		final JFreeChart chart = ChartFactory.createTimeSeriesChart(
 				chartTitle, 
 				"Time", 
-				"Memory used (kB)",
+				"Memory usage (kB)",
 				dataset, 
 				true, 
 				true, 
@@ -98,7 +98,7 @@ public class DualAxisDemo2 extends ApplicationFrame {
 		//    legend.setDisplaySeriesShapes(true);
 
 		final XYPlot plot = chart.getXYPlot();
-		final NumberAxis axis2 = new NumberAxis("Cpu usage (%)");
+		final NumberAxis axis2 = new NumberAxis("CPU usage (%)");
 		axis2.setAutoRangeIncludesZero(false);
 		plot.setRangeAxis(1, axis2);
 		plot.setDataset(1, createDataset2());
@@ -131,9 +131,9 @@ public class DualAxisDemo2 extends ApplicationFrame {
 	 *
 	 * @return The dataset.
 	 */
-	private XYDataset createDataset1() {
+	private XYDataset createDataset2() {
 
-		final TimeSeries s1 = new TimeSeries("CPU usage %", Millisecond.class);
+		final TimeSeries s1 = new TimeSeries("CPU", Millisecond.class);
 		for(CpuUsageEntity ent : ScreenShotView.testCase.getCpuUsageValues()){
 			s1.addOrUpdate(new Millisecond(new Date(ent.getTime())), ent.getPercent());
 		}
@@ -150,10 +150,10 @@ public class DualAxisDemo2 extends ApplicationFrame {
 	 *
 	 * @return The dataset.
 	 */
-	private XYDataset createDataset2() {
+	private XYDataset createDataset1() {
 
 
-		final TimeSeries s2 = new TimeSeries("Memory usage kB", Millisecond.class);
+		final TimeSeries s2 = new TimeSeries("Memory", Millisecond.class);
 		for(MemoryEntity ent : ScreenShotView.testCase.getMemoryUsageValues()){
 			s2.addOrUpdate(new Millisecond(new Date(ent.getTime())), ent.getPercent());
 		}
