@@ -8,6 +8,7 @@ import in.BBAT.presenter.labelProviders.TestRunHistoryLabelProvider;
 import in.bbat.abstrakt.gui.BBATImageManager;
 import in.bbat.logger.BBATLogger;
 import in.bbat.presenter.views.BBATViewPart;
+import in.bbat.presenter.views.tester.MemoryCPUUsageView;
 
 import org.apache.log4j.Logger;
 import org.eclipse.jface.layout.TreeColumnLayout;
@@ -114,7 +115,7 @@ public class TestRunHistoryView extends BBATViewPart {
 				}
 				if(sel instanceof TestDeviceRunModel){
 
-
+					BBATViewPart.hideView(MemoryCPUUsageView.ID);
 					BBATViewPart.hideView(HistoryDeviceLogView.ID);
 					BBATViewPart.hideView(HistoryAutoLogView.ID);
 					BBATViewPart.hideView(ScreenShotHistoryView.ID);
