@@ -43,8 +43,14 @@ public class BBATProject {
 
 	private IProject project(String projName)  throws Exception{
 
+
 		IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
 		project = root.getProject(projName);
+		if(project.exists())
+		{
+			//this is a hack 
+			project.delete(true, new NullProgressMonitor());
+		}
 		try {
 			if(!project.exists()){
 				project.create(null);
