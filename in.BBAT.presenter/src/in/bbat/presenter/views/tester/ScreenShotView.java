@@ -1,6 +1,9 @@
 package in.bbat.presenter.views.tester;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.nebula.widgets.gallery.DefaultGalleryGroupRenderer;
@@ -56,7 +59,7 @@ public class ScreenShotView extends BBATViewPart {
 			if(scrShotDir.exists())
 			{
 				File[] listFiles = scrShotDir.listFiles();
-
+				Arrays.sort(listFiles);
 				Gallery gallery = new Gallery(parent, SWT.V_SCROLL | SWT.MULTI);
 
 				// Renderers
@@ -74,7 +77,7 @@ public class ScreenShotView extends BBATViewPart {
 				group.setText("Screen Shots "); //$NON-NLS-1$
 				group.setExpanded(true);
 				for (File file : listFiles) {
-					
+
 					ImageData image = new ImageData(file.getAbsolutePath());
 					Image im = new Image(Display.getDefault(), image);
 
