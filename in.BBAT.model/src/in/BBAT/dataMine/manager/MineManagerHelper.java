@@ -1,6 +1,7 @@
 package in.BBAT.dataMine.manager;
 
 import in.BBAT.dataMine.Activator;
+import in.bbat.configuration.BBATProperties;
 
 import java.sql.Connection;
 import java.util.HashMap;
@@ -28,8 +29,8 @@ public class MineManagerHelper {
 
 	private  void getPropertiesExistingTable(
 			Map<String, Object> properties) {
-		properties.put(PersistenceUnitProperties.CLASSLOADER,
-				Activator.getClassLoader());
+		properties.put(PersistenceUnitProperties.CLASSLOADER,Activator.getClassLoader());
+		properties.put(PersistenceUnitProperties.DDL_GENERATION, PersistenceUnitProperties.CREATE_OR_EXTEND);
 
 	}
 

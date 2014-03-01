@@ -19,7 +19,7 @@
 		<class>in.BBAT.data.model.Entities.CpuUsageEntity</class>
 		<properties>
 			<property name="eclipselink.target-database" value="DERBY" />
-			<property name="eclipselink.ddl-generation" value="create-or-extend-tables" />
+			<!-- <property name="eclipselink.ddl-generation" value="create-or-extend-tables" /> -->
 			<!-- property name="eclipselink.jdbc.driver" value="org.apache.derby.jdbc.EmbeddedDriver" 
 				/ -->
 			<!-- property name="eclipselink.jdbc.url" value="jdbc:derby://localhost:1527//home/syed/.bbat/xyzvsvsg;create=true" 
