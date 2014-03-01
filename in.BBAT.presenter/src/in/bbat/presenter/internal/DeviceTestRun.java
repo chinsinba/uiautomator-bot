@@ -2,6 +2,7 @@ package in.bbat.presenter.internal;
 
 import in.BBAT.TestRunner.Listener.ICpuUsageListener;
 import in.BBAT.abstrakt.presenter.device.model.AndroidDevice;
+import in.BBAT.abstrakt.presenter.pkg.model.TestProjectModel;
 import in.BBAT.abstrakt.presenter.run.model.TestDeviceRunModel;
 import in.BBAT.abstrakt.presenter.run.model.TestRunCaseModel;
 import in.BBAT.abstrakt.presenter.run.model.TestRunInstanceModel;
@@ -15,7 +16,9 @@ import in.bbat.presenter.views.tester.TestRunnerView;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -89,7 +92,7 @@ public class DeviceTestRun {
 	}
 
 	public void execute(final UiAutoTestCaseJar jar,final TestRunModel testRun) {
-		
+
 		Job testRunJob = new Job("Execution on device") {
 			@Override
 			protected IStatus run(IProgressMonitor monitor) {
@@ -111,7 +114,7 @@ public class DeviceTestRun {
 					getDevice().pullScreenShotsFromDevice(testRunCase.getScreenShotDir(),testRunCase.getTestCaseModel().getName(),true);
 					testRunCase.setEndTime(System.currentTimeMillis());
 					testRunCase.update();
-					
+
 				}
 				testDeviceRun.setEndTime(System.currentTimeMillis());
 				testDeviceRun.update();
@@ -265,19 +268,18 @@ public class DeviceTestRun {
 	public int noOfExecutedCases(){
 		return noOfErrorCases()+noOfFailedCases()+noOfPassedCases();
 	}
-	
+
 	public void removeTestJar(){
 		getDevice().removeTestJar();
 	}
-	
+
 	public List<String> getDistinctScriptPaths(){
-		List<String> testScriptPaths = new ArrayList<String>();
+		Set<String> testScriptPaths = new HashSet<String>();
 
 		for(TestRunCaseModel cas: getCases()){
-			if(!testScriptPaths.contains(cas.getTestcase().getTestScriptPath()))
-				testScriptPaths.add(cas.getTestcase().getTestScriptPath());
+			testScriptPaths.add(cas.getTestcase().getTestScriptPath());
 		}
-		return testScriptPaths;
+		return new ArrayList<String>(testScriptPaths);
 	}
 
 	public Image getImage() {
@@ -288,5 +290,18 @@ public class DeviceTestRun {
 			return BBATImageManager.getInstance().getImage(BBATImageManager.PASS);
 
 		return null;
+	}
+
+	public int getMaxApiLevel()
+	{
+		int apiLevel =16;
+		for(TestRunCaseModel cas: getCases())
+		{
+			int tempLevel = ((TestProjectModel)cas.getTestcase().getParent().getParent()).getApiLevel();
+			if( apiLevel < tempLevel){
+				apiLevel =tempLevel;
+			}
+		}
+		return apiLevel;
 	}
 }

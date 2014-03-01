@@ -112,7 +112,6 @@ public class UiAutoTestCaseJar {
 		runner.setBuildFileLocation(tempfolderpath+Path.SEPARATOR+BUILD_FILE);
 		String[] target = {"build"};
 		runner.setExecutionTargets(target);
-		runner.addBuildListener("in.BBAT.testRunner.runner.UiAutoBuildListener");
 		try {
 
 			runner.run();

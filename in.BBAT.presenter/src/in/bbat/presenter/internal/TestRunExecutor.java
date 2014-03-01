@@ -10,6 +10,8 @@ import in.bbat.presenter.views.tester.TestRunnerView;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -18,7 +20,6 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
-import org.eclipse.ui.PlatformUI;
 
 
 public class TestRunExecutor{
@@ -63,15 +64,20 @@ public class TestRunExecutor{
 	}
 
 	private String getTargetId(){
-		return "android-17";
+		Set<Integer> apiLevels = new HashSet<Integer>();
+		for (DeviceTestRun testRunCase : deviceTestRuns) {
+			apiLevels.add(testRunCase.getMaxApiLevel());
+		}
+		Integer max = Collections.max(apiLevels);
+		return "android-"+max;
 	}
 
 	public List<String> getTestScriptPaths() {
-		List<String> testScriptPaths = new ArrayList<String>();
+		Set<String> testScriptPaths = new HashSet<String>();
 		for (DeviceTestRun testRunCase : deviceTestRuns) {
 			testScriptPaths.addAll(testRunCase.getDistinctScriptPaths());
 		}
-		return testScriptPaths;
+		return new ArrayList<String>(testScriptPaths);
 	}
 
 	class DeviceRunListener implements IDeviceRunExecutionlistener
