@@ -5,7 +5,6 @@ import in.BBAT.abstrakt.presenter.run.model.TestRunModel;
 import in.BBAT.testRunner.runner.BuildJarException;
 import in.BBAT.testRunner.runner.UiAutoTestCaseJar;
 import in.bbat.logger.BBATLogger;
-import in.bbat.presenter.views.BBATViewPart;
 import in.bbat.presenter.views.tester.TestRunnerView;
 
 import java.sql.Timestamp;
@@ -46,6 +45,7 @@ public class TestRunExecutor{
 					jar = new UiAutoTestCaseJar(getTestScriptPaths(),getTargetId());
 				} catch (BuildJarException e) {
 					endOfTestRun();
+					LOG.error(e);
 					return Status.CANCEL_STATUS;
 				}
 				monitor.worked(1);

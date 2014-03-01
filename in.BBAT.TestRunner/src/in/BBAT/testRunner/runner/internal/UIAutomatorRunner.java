@@ -1,6 +1,6 @@
 package in.BBAT.testRunner.runner.internal;
 
-import in.BBAT.testRunner.runner.IUiAutomatorListener;
+import in.BBAT.TestRunner.Listener.IUiAutomatorListener;
 import in.BBAT.testRunner.runner.RunnerResultParser;
 
 import java.io.IOException;

@@ -1,9 +1,5 @@
-package in.BBAT.testRunner.runner;
+package in.BBAT.TestRunner.Listener;
 
-import in.BBAT.TestRunner.Listener.ICpuUsageListener;
-import in.BBAT.TestRunner.Listener.ILogListener;
-import in.BBAT.TestRunner.Listener.IMemoryUsageListener;
-import in.BBAT.TestRunner.Listener.IScreenShotListener;
 
 import com.android.ddmlib.testrunner.ITestRunListener;
 

@@ -1,4 +1,4 @@
-package in.BBAT.testRunner.runner;
+package in.BBAT.TestRunner.Listener;
 
 public interface IUiAutomatorListener {
 

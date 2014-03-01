@@ -5,6 +5,8 @@ import in.BBAT.TestRunner.Listener.ICpuUsageListener;
 import in.BBAT.TestRunner.Listener.ILogListener;
 import in.BBAT.TestRunner.Listener.IMemoryUsageListener;
 import in.BBAT.TestRunner.Listener.IScreenShotListener;
+import in.BBAT.TestRunner.Listener.ITestRunner;
+import in.BBAT.TestRunner.Listener.IUiAutomatorListener;
 
 import com.android.ddmlib.testrunner.ITestRunListener;
 /**

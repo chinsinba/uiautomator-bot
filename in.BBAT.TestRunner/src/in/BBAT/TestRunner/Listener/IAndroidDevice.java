@@ -2,7 +2,6 @@ package in.BBAT.TestRunner.Listener;
 
 import java.util.Map;
 
-import in.BBAT.testRunner.runner.IUiAutomatorListener;
 import in.BBAT.testRunner.runner.UiAutoTestCaseJar;
 
 import com.android.chimpchat.core.IChimpDevice;

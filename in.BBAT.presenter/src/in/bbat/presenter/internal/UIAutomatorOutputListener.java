@@ -6,9 +6,9 @@ import org.eclipse.ui.IViewPart;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 
+import in.BBAT.TestRunner.Listener.IUiAutomatorListener;
 import in.BBAT.abstrakt.presenter.run.model.AutomatorLogModel;
 import in.BBAT.abstrakt.presenter.run.model.TestRunInstanceModel;
-import in.BBAT.testRunner.runner.IUiAutomatorListener;
 import in.bbat.logger.BBATLogger;
 import in.bbat.presenter.views.tester.AutomatorLogView;
 
