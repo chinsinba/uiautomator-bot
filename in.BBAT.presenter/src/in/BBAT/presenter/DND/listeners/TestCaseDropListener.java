@@ -16,11 +16,13 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerDropAdapter;
 import org.eclipse.swt.dnd.TransferData;
+import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.ui.PlatformUI;
 
 public class TestCaseDropListener extends ViewerDropAdapter {
@@ -48,7 +50,12 @@ public class TestCaseDropListener extends ViewerDropAdapter {
 					TestRunExecutionManager.getInstance().addTestDevice(new DeviceTestRun((AndroidDevice) testObj,TestRunExecutionManager.getInstance().getTestRunCases()));
 				}*/
 				if(testObj instanceof AbstractProjectTree){
-					addToTestCaseList((AbstractTreeModel) testObj, tempList);
+					List<TestCaseModel> errorCases = new ArrayList<TestCaseModel>();
+					addToTestCaseList((AbstractTreeModel) testObj, tempList, errorCases);
+					if(!errorCases.isEmpty()){
+						MessageDialog.openError(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(),
+								"Test Case Error", "Errors found in following test cases \n"+ errorCases);
+					}
 				}
 			}
 		}
@@ -66,10 +73,11 @@ public class TestCaseDropListener extends ViewerDropAdapter {
 		return false;
 	}
 
-	private void addToTestCaseList(AbstractTreeModel testObj,List<TestRunCaseModel> tempList) {
+	private void addToTestCaseList(AbstractTreeModel testObj,List<TestRunCaseModel> tempList,List<TestCaseModel> errorCases) {
 
 		if (testObj instanceof TestCaseModel) {
 			if(((TestCaseModel) testObj).hasErrors()){
+				errorCases.add((TestCaseModel) testObj);
 				return;
 			}
 			tempList.add(new TestRunCaseModel((TestCaseModel) testObj));
@@ -78,7 +86,7 @@ public class TestCaseDropListener extends ViewerDropAdapter {
 
 		try {
 			for (AbstractTreeModel obj : testObj.getChildren()) {
-				addToTestCaseList(obj, tempList);
+				addToTestCaseList(obj, tempList,errorCases);
 			}
 		} catch (Exception e) {
 		}

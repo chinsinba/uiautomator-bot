@@ -192,4 +192,10 @@ public class TestCaseModel extends AbstractProjectTree{
 	public boolean hasErrors(){
 		return getProject().hasErrors(testCaseFile);
 	}
+	
+	@Override
+	public String toString() {
+		return getName();
+	}
 }
+
