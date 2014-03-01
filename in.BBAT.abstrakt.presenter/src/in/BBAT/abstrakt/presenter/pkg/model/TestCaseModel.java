@@ -73,7 +73,11 @@ public class TestCaseModel extends AbstractProjectTree{
 	}
 	@Override
 	public Image getImage() {
+		if(getProject().hasErrors(getIFile())){
+			return BBATImageManager.getInstance().getImage(BBATImageManager.TESTCASE_ERROR_GIF_8);
+		}
 		return BBATImageManager.getInstance().getImage(BBATImageManager.TESTCASE_GIF_16);
+
 	}
 
 	@Override
@@ -184,7 +188,7 @@ public class TestCaseModel extends AbstractProjectTree{
 		List<TestRunEntity> testRuns = TestCaseMineManager.getAllRunsContainingTestCase((TestCaseEntity) getEntity());
 		return testRuns;
 	}
-	
+
 	public boolean hasErrors(){
 		return getProject().hasErrors(testCaseFile);
 	}

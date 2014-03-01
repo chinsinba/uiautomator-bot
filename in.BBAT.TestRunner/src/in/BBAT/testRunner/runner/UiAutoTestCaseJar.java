@@ -25,86 +25,104 @@ public class UiAutoTestCaseJar {
 	private static final String SRC = SdkConstants.FD_SOURCES;
 	private static final String BIN = SdkConstants.FD_OUTPUT;
 	private static final String BUILD_FILE = SdkConstants.FN_BUILD_XML;
-	
+
 
 	private static final String TEMP_FOLDER_PATH =System.getProperty("user.dir")+Path.SEPARATOR+"temp" ;
 	private static final String ANDROID_SDK_TOOLS = BBATProperties.getInstance().getAndroid_SdkPath()+Path.SEPARATOR+SdkConstants.OS_SDK_TOOLS_FOLDER;
-	private static final String CREATE_UI_PROJECT_COMMAND = "/"+SdkConstants.androidCmdName()+" create uitest-project -n "+JAR_NAME+" -t android-17 -p "+TEMP_FOLDER_PATH;
+	//	private static final String CREATE_UI_PROJECT_COMMAND = "/"+SdkConstants.androidCmdName()+" create uitest-project -n "+JAR_NAME+" -t android-17 -p "+TEMP_FOLDER_PATH;
 
 	public final static String UIAUTOMATOR_JAR =JAR_NAME+".jar";
 	public final static String UIAUTOMATOR_JAR_PATH = "/data/local/tmp/"+UIAUTOMATOR_JAR;
-	
-	
-	public UiAutoTestCaseJar(List<String> testScriptPaths){
+	private String targetId ;
+
+	public UiAutoTestCaseJar(List<String> testScriptPaths, String targetId) throws BuildJarException{
+		this.targetId = targetId;
 		initializeBuildEnvironment(testScriptPaths);
 	}
 
-	private void initializeBuildEnvironment(List<String> testScriptPaths) {
+	private void initializeBuildEnvironment(List<String> testScriptPaths) throws BuildJarException {
 
+		clearFolder(new File(TEMP_FOLDER_PATH));
+		
+		File temp = createTempDir();
+		
+		createPackandCopyTestCases(testScriptPaths, temp);
+		
+		createUiProject();
+		
+		buildBBATJar(TEMP_FOLDER_PATH);
+		
+		setJarFile(new File(TEMP_FOLDER_PATH+Path.SEPARATOR+BIN+Path.SEPARATOR+UIAUTOMATOR_JAR));
+
+	}
+
+	private File createTempDir() {
 		File temp = new File(TEMP_FOLDER_PATH+Path.SEPARATOR+SRC);
-
-		try {
-			clearFolder(new File(TEMP_FOLDER_PATH));
-		} 
-		catch (FileNotFoundException e2)
-		{
-			LOG.error(e2);
-		}
-
 		temp.mkdirs();
+		return temp;
+	}
+
+	private void createUiProject() throws BuildJarException {
+		try {
+			Process p = Runtime.getRuntime().exec(ANDROID_SDK_TOOLS+getCreateUiProjCommand());
+			p.waitFor();
+		} catch (IOException e) {
+			LOG.error(e);
+			throw new BuildJarException("Failled to create UI automator project");
+		} catch (Exception e) {
+			LOG.error(e);
+			throw new BuildJarException("Failled to create UI automator project");
+		}
+	}
+
+	private void createPackandCopyTestCases(List<String> testScriptPaths,
+			File temp) throws BuildJarException {
 		try {
 			for (String testScriptPath : testScriptPaths) {
 				Path path =new Path(testScriptPath);
 				String[] seg = path.segments();
 				int len =seg.length;
-				
+
 				File createPack = new File(temp.getAbsolutePath()+Path.SEPARATOR+seg[len-3]+Path.SEPARATOR+seg[len-2]);
 				createPack.mkdirs();
-				
+
 				FileUtils.copyFolder(new File(testScriptPath), new File(createPack.getAbsolutePath()+Path.SEPARATOR+path.lastSegment()));	
 			}
 
 		} catch (IOException e1) {
 			LOG.error(e1);
-		}
-		try {
-			Process p = Runtime.getRuntime().exec(ANDROID_SDK_TOOLS+CREATE_UI_PROJECT_COMMAND);
-			p.waitFor();
-		} catch (IOException e) {
-			LOG.error(e);
-		} catch (Exception e) {
-			LOG.error(e);
-		}
+			throw new BuildJarException("Build failled: Failed to create initial setup");
 
-		createJar(TEMP_FOLDER_PATH);
-		setJarFile(new File(TEMP_FOLDER_PATH+Path.SEPARATOR+BIN+Path.SEPARATOR+UIAUTOMATOR_JAR));
-
+		}
 	}
 
-	private void clearFolder(File f) throws FileNotFoundException{
+	private void clearFolder(File f) {
 		if (f.isDirectory()) {
 			for (File c : f.listFiles())
 				clearFolder(c);
 		}
-		if (!f.delete())
-			throw new FileNotFoundException("Failed to delete file: " + f);
+		if (!f.delete()){
+			LOG.error("failled to delete file "+ f.getAbsolutePath());
+		}
 	}
 
-	private void createJar(String tempfolderpath) {
+	private void buildBBATJar(String tempfolderpath) throws BuildJarException {
 
 		AntRunner runner = new AntRunner();
 		runner.setBuildFileLocation(tempfolderpath+Path.SEPARATOR+BUILD_FILE);
 		String[] target = {"build"};
 		runner.setExecutionTargets(target);
+		runner.addBuildListener("in.BBAT.testRunner.runner.UiAutoBuildListener");
 		try {
 
 			runner.run();
 		} catch (CoreException e) {
 			LOG.error(e);
+			throw new BuildJarException("Build failled : target id is not matching");
 		}
 	}
 
-	
+
 	public String getJarPath() {
 		return jarPath;
 	}
@@ -120,6 +138,11 @@ public class UiAutoTestCaseJar {
 	public void setJarFile(File jarFile) {
 		this.jarFile = jarFile;
 		setJarPath(jarFile.getAbsolutePath());
+	}
+
+	public String getCreateUiProjCommand()
+	{
+		return "/"+SdkConstants.androidCmdName()+" create uitest-project -n "+JAR_NAME+" -t "+targetId+"  -p "+TEMP_FOLDER_PATH;
 	}
 
 }

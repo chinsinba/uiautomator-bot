@@ -2,6 +2,7 @@ package in.bbat.presenter.internal;
 
 
 import in.BBAT.abstrakt.presenter.run.model.TestRunModel;
+import in.BBAT.testRunner.runner.BuildJarException;
 import in.BBAT.testRunner.runner.UiAutoTestCaseJar;
 import in.bbat.logger.BBATLogger;
 import in.bbat.presenter.views.BBATViewPart;
@@ -20,7 +21,7 @@ import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.ui.PlatformUI;
 
 
-public class TestRunExecutor {
+public class TestRunExecutor{
 
 	private static final Logger LOG = BBATLogger.getLogger(TestRunExecutor.class.getName());
 	private Set<DeviceTestRun> deviceTestRuns;
@@ -39,9 +40,14 @@ public class TestRunExecutor {
 			protected IStatus run(IProgressMonitor monitor) {
 				monitor.beginTask("Create Uiautomator jar", deviceTestRuns.size()+2);
 				monitor.worked(1);
-				UiAutoTestCaseJar jar = new UiAutoTestCaseJar(getTestScriptPaths());
+				UiAutoTestCaseJar jar = null;
+				try {
+					jar = new UiAutoTestCaseJar(getTestScriptPaths(),getTargetId());
+				} catch (BuildJarException e) {
+					return Status.CANCEL_STATUS;
+				}
 				monitor.worked(1);
-				
+
 				DeviceRunListener listener = new DeviceRunListener(deviceTestRuns.size());
 				for (DeviceTestRun deviceRun : deviceTestRuns) {
 					monitor.worked(1);
@@ -53,7 +59,11 @@ public class TestRunExecutor {
 			}
 		};
 		job.schedule();
-		
+
+	}
+
+	private String getTargetId(){
+		return "android-17";
 	}
 
 	public List<String> getTestScriptPaths() {
@@ -88,4 +98,5 @@ public class TestRunExecutor {
 		}
 
 	}
+
 }

@@ -2,6 +2,7 @@ package in.bbat.presenter.perstpectives;
 
 import in.bbat.logger.BBATLogger;
 import in.bbat.presenter.views.BBATViewPart;
+import in.bbat.presenter.views.developer.TestCaseBrowserView;
 import in.bbat.presenter.views.history.TestRunHistoryView;
 import in.bbat.presenter.views.tester.TestRunnerView;
 
@@ -33,6 +34,14 @@ public class BBATPerspectiveListener  implements IPerspectiveListener{
 			} catch (Exception e) {
 				LOG.error(e);
 			}
+			
+			BBATViewPart view1 = (BBATViewPart) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().findView(TestCaseBrowserView.ID);
+			try {
+				view1.refresh();
+			} catch (Exception e) {
+				LOG.error(e);
+			}
+			
 		}
 
 	}

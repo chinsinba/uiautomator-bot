@@ -92,8 +92,9 @@ public class ExecutionView extends BBATViewPart {
 					}
 
 					if(!((TestRunInstanceModel)sel).getStatus().equalsIgnoreCase(TestStatus.EXECUTING.getStatus())){
+						ScreenShotView.selectedTestRuncase((TestRunInstanceModel)sel);
 						Display.getDefault().asyncExec(new Runnable() {
-
+						
 							@Override
 							public void run() {
 								try {
