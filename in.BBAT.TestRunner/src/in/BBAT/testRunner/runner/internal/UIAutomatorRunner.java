@@ -2,6 +2,7 @@ package in.BBAT.testRunner.runner.internal;
 
 import in.BBAT.TestRunner.Listener.IUiAutomatorListener;
 import in.BBAT.testRunner.runner.RunnerResultParser;
+import in.BBAT.testRunner.runner.UiAutoTestCaseJar;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -18,7 +19,7 @@ public class UIAutomatorRunner extends RemoteAndroidTestRunner {
 	IShellEnabledDevice testDevice ;
 	private RunnerResultParser deviceResultReciever;
 	private IUiAutomatorListener autoListener;
-	private final static String UI_AUTO_COMMAND="uiautomator runtest BBAT.jar -c ";
+	private final static String UI_AUTO_COMMAND="uiautomator runtest "+UiAutoTestCaseJar.UIAUTOMATOR_JAR +" -c ";
 	public UIAutomatorRunner(String packageName, IShellEnabledDevice remoteDevice,IUiAutomatorListener listener) {
 		super(packageName, remoteDevice);
 		this.testDevice=remoteDevice;
