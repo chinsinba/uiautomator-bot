@@ -45,6 +45,7 @@ public class TestRunExecutor{
 				try {
 					jar = new UiAutoTestCaseJar(getTestScriptPaths(),getTargetId());
 				} catch (BuildJarException e) {
+					endOfTestRun();
 					return Status.CANCEL_STATUS;
 				}
 				monitor.worked(1);
@@ -96,13 +97,18 @@ public class TestRunExecutor{
 			executingDevRuns-=1;
 			if(executingDevRuns ==0)
 			{
-				testRun.setEndTime(new Timestamp(System.currentTimeMillis()));
-				testRun.update();
-				TestRunExecutionManager.getInstance().setExecuting(false);
+				endOfTestRun();
+				return;
 			}
 			TestRunnerView.refreshView();
 		}
+	}
 
+	private void endOfTestRun() {
+		testRun.setEndTime(new Timestamp(System.currentTimeMillis()));
+		testRun.update();
+		TestRunExecutionManager.getInstance().setExecuting(false);
+		TestRunnerView.refreshView();
 	}
 
 }
