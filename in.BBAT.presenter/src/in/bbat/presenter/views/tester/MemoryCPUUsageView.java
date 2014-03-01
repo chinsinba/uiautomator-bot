@@ -10,6 +10,8 @@ import java.util.Date;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.awt.SWT_AWT;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.ui.IEditorInput;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.part.ViewPart;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
@@ -36,13 +38,12 @@ public class MemoryCPUUsageView extends ViewPart {
 	public void createPartControl(Composite parent) {
 		// TODO Auto-generated method stub
 		// create a title...
-		final String chartTitle = "Memory & CPU usage";
+		final String chartTitle = ScreenShotView.testCase.getTestCaseEntity().getSuite().getTestProject().getApkPackageName();
 		final XYDataset dataset = createDataset1();
-
 		final JFreeChart chart = ChartFactory.createTimeSeriesChart(
 				chartTitle, 
 				"Time", 
-				"Memory usage (kB)",
+				"Memory usage ( MB )",
 				dataset, 
 				true, 
 				true, 
@@ -112,7 +113,7 @@ public class MemoryCPUUsageView extends ViewPart {
 
 		final TimeSeries s2 = new TimeSeries("Memory", Millisecond.class);
 		for(MemoryEntity ent : ScreenShotView.testCase.getMemoryUsageValues()){
-			s2.addOrUpdate(new Millisecond(new Date(ent.getTime())), ent.getPercent());
+			s2.addOrUpdate(new Millisecond(new Date(ent.getTime())), ent.getPercent()/1000f);
 		}
 
 
