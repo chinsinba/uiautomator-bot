@@ -17,54 +17,46 @@ public class ${testCase_name} extends UiAutomatorTestCase {
 
 	private static String TAG = "${testCase_name}";
 	
-	/**
-		Test method.
+	//@generated Do not change this path
+	private static String SCREENSHOTPATH = "/data/local/tmp/"+${testCase_name}.class.getName()+"/";
 	
+	/**
+		@generated 
+		All your test code will go here
 		NOTE: Do not change the method signature
 	*/
 	public void test() throws UiObjectNotFoundException {  
 			Log.i(TAG,"testcase execution started");
 			
-			preRun();
+			takeShot();
 			
 			//CODE:START 
 			
 			
 			//CODE:END
 			
-			postRun();
-			
 			Log.i(TAG,"testcase execution completed");
         }
     
-    /**
-    	Should be called for setting up the test execution environment. 
-    */
-    private void preRun(){
-    
-    }
-    
-    /**
-        Should be called to clean up after testcase execution. 
-    */
-    private void postRun(){
-    
-    }
-    
+       
      /**
-        Creates a screen shot this method should not be changed
         @generated 
-    */
-    public void takeShot(){
+        Creates a screen shot this method should not be changed
+	 */
+	public void takeShot(){
 		if(Build.VERSION.SDK_INT<17)
+		{
+			Log.i(TAG,"Screen shot is not available");
 			return;
-		File dir = new File("/data/local/tmp/"+TAG+"/");
+		}
+
+		File dir = new File(SCREENSHOTPATH);
 		if(!dir.exists())
 		{
 			dir.mkdirs();
 		}
 		getUiDevice().takeScreenshot(new File(dir,System.currentTimeMillis()+".png"));	
-		Log.i(TAG,"screen shot taken");
+		Log.i(TAG,"Screen shot taken");
 	}
 }
  
