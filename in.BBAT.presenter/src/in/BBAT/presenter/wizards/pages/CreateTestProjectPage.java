@@ -82,6 +82,13 @@ public class CreateTestProjectPage extends WizardPage {
 
 				boolean matches = ((Text)e.getSource()).getText().trim().matches(className);
 
+				if(JavaElementValidator.isReserverWord(((Text)e.getSource()).getText().trim())){
+					setMessage("You cannot use java reserved keyword",WizardPage.ERROR);
+					nameValid= false;
+					pageComplete();
+					return;
+				}
+				
 				if(!matches){
 					setMessage("Not a valid name",WizardPage.ERROR);
 					nameValid= false;

@@ -8,6 +8,7 @@ import in.bbat.logger.BBATLogger;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.eclipse.jdt.internal.corext.util.JavaConventionsUtil;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.ModifyEvent;
@@ -61,6 +62,13 @@ public class CreateTestCasePage extends WizardPage {
 				String className = "[\\p{L}_$][\\p{L}\\p{N}_$]*";
 				boolean matches = ((Text)e.getSource()).getText().trim().matches(className);
 
+				if(JavaElementValidator.isReserverWord(((Text)e.getSource()).getText().trim())){
+					setMessage("You cannot use java reserved keyword",WizardPage.ERROR);
+					nameValid= false;
+					pageComplete();
+					return;
+				}
+				
 				if(!matches){
 					setMessage("Invalid  Test case name",WizardPage.ERROR);
 					nameValid= false;

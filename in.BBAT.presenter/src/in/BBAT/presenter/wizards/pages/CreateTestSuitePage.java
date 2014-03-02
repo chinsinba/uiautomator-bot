@@ -34,7 +34,7 @@ public class CreateTestSuitePage extends WizardPage {
 		this(pageName, project);
 		this.suite = suite;
 	}
-	
+
 	private NameAndDescriptionComponent nameDescComp;
 
 	private boolean nameValid;
@@ -59,6 +59,13 @@ public class CreateTestSuitePage extends WizardPage {
 			public void modifyText(ModifyEvent e) {
 				String className = "[\\p{L}_$][\\p{L}\\p{N}_$]*";
 				boolean matches = ((Text)e.getSource()).getText().trim().matches(className);
+
+				if(JavaElementValidator.isReserverWord(((Text)e.getSource()).getText().trim())){
+					setMessage("You cannot use java reserved keyword",WizardPage.ERROR);
+					nameValid= false;
+					pageComplete();
+					return;
+				}
 
 				if(!matches){
 					setMessage("Invalid test suite name",WizardPage.ERROR);
