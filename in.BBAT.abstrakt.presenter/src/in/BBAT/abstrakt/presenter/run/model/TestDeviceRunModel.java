@@ -224,4 +224,10 @@ public class TestDeviceRunModel extends AbstractTreeModel {
 	{
 		return ((TestRunModel)getParent()).getScreenShotDir() + Path.SEPARATOR +getDeviceName();
 	}
+	
+	@Override
+	public String getName() {
+		// TODO Auto-generated method stub
+		return getDeviceName();
+	}
 }

@@ -194,6 +194,7 @@ public class TestRunInfoView extends BBATViewPart {
 	}
 
 	public void setInput(final TestDeviceRunModel sel) throws Exception{
+		setPartName(sel.getName());
 		final List<AbstractTreeModel> children = sel.getChildren();
 		viewer.setInput(children);
 		viewer.refresh();
@@ -208,7 +209,7 @@ public class TestRunInfoView extends BBATViewPart {
 						count++;
 					}
 				}
-				testRunItem.setText(sel.getDeviceName() +"("+count+"/"+children.size()+")");				
+				testRunItem.setText("Test Cases"+"("+count+"/"+children.size()+")");				
 			}
 		});
 
