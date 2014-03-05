@@ -12,6 +12,8 @@ import org.eclipse.nebula.widgets.gallery.Gallery;
 import org.eclipse.nebula.widgets.gallery.GalleryItem;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.ScrolledComposite;
+import org.eclipse.swt.events.MouseEvent;
+import org.eclipse.swt.events.MouseListener;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.ImageData;
@@ -26,6 +28,7 @@ import org.eclipse.swt.widgets.Label;
 import in.BBAT.abstrakt.presenter.run.model.TestRunCaseModel;
 import in.BBAT.abstrakt.presenter.run.model.TestRunInstanceModel;
 import in.bbat.abstrakt.gui.BBATImageManager;
+import in.bbat.presenter.dialogs.FrameInspectionWindow;
 import in.bbat.presenter.views.BBATViewPart;
 
 public class ScreenShotView extends BBATViewPart {
@@ -61,7 +64,26 @@ public class ScreenShotView extends BBATViewPart {
 				File[] listFiles = scrShotDir.listFiles();
 				Arrays.sort(listFiles);
 				Gallery gallery = new Gallery(parent, SWT.V_SCROLL | SWT.MULTI);
+				gallery.addMouseListener(new MouseListener() {
+					public void mouseUp(MouseEvent e) {
+					}
+					public void mouseDown(MouseEvent e) {
+					}
 
+					public void mouseDoubleClick(MouseEvent e) {
+						GalleryItem[] selection = ((Gallery)e.getSource()).getSelection();
+						if(selection==null || selection.length==0){
+							return;
+						}
+						Image image = selection[0].getImage();
+						if(image == null){
+							return;
+						}
+						FrameInspectionWindow window = new FrameInspectionWindow(image); 			
+						window.open();
+						window.loadImage();	
+					}
+				});
 				// Renderers
 				DefaultGalleryGroupRenderer gr = new DefaultGalleryGroupRenderer();
 				gr.setMinMargin(2);
