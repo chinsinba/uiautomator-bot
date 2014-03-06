@@ -379,7 +379,7 @@ public class TestRunnerView extends BBATViewPart {
 		}catch(Exception e){
 			LOG.error(e);
 		}
-		
+
 		addMenu2DeviceRun(testDeviceViewer);
 		testRunItem.setControl(comp);
 		deviceRunTabFolder.setSelection(testRunItem);
@@ -470,6 +470,23 @@ public class TestRunnerView extends BBATViewPart {
 
 			@Override
 			public boolean isEnabled() {
+
+				if(TestRunExecutionManager.getInstance().isExecuting()){
+					return false;
+				}
+				IStructuredSelection sel =(IStructuredSelection) viewer.getSelection();
+				List<?> selectedObjs = sel.toList();
+
+				if(selectedObjs.isEmpty()){
+					return false;
+				}
+				for(Object obj : selectedObjs){
+
+					if(!(obj instanceof DeviceTestRun)){
+						return false;
+					}
+
+				}
 				return true;
 			}
 
