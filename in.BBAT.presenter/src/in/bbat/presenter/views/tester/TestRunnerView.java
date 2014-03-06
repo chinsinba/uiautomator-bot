@@ -83,6 +83,7 @@ public class TestRunnerView extends BBATViewPart {
 	private TableViewer deviceTestCaseViewer;
 	private DeviceTestRun deviceTestRun;
 	private CTabItem executionViewItem;
+	private CTabFolder deviceRunTabFolder;
 
 	public TestRunnerView() {
 	}
@@ -341,52 +342,36 @@ public class TestRunnerView extends BBATViewPart {
 	}
 
 	private void createDeviceRun(SashForm form) {
-		final CTabFolder tabFolder = new CTabFolder(form, SWT.TOP|SWT.BORDER);
-		tabFolder.setSimple(false);
-		CTabItem testRunItem = new CTabItem(tabFolder, SWT.NONE);
+		deviceRunTabFolder = new CTabFolder(form, SWT.TOP|SWT.BORDER);
+		deviceRunTabFolder.setSimple(false);
+		CTabItem testRunItem = new CTabItem(deviceRunTabFolder, SWT.NONE);
 		testRunItem.setText("Test Devices");
 		testRunItem.setImage(BBATImageManager.getInstance().getImage(BBATImageManager.ANDROID_DEVICE));
-		Composite comp = new Composite(tabFolder, SWT.NONE);
+		Composite comp = new Composite(deviceRunTabFolder, SWT.NONE);
 		testDeviceViewer = new TreeViewer(comp, SWT.H_SCROLL| SWT.V_SCROLL);
 		testDeviceViewer.getTree().setHeaderVisible(true);
 		testDeviceViewer.getTree().setLinesVisible(true);
 		testDeviceViewer.setContentProvider(new DeviceTestRunContentProvider());
 		testDeviceViewer.setLabelProvider(new DeviceTestRunLableProvider());
-		testDeviceViewer.addSelectionChangedListener(new ISelectionChangedListener() {
+		/*testDeviceViewer.addSelectionChangedListener(new ISelectionChangedListener() {
 
 			@Override
 			public void selectionChanged(SelectionChangedEvent event) {
 				IStructuredSelection selection  =(IStructuredSelection) event.getSelection();
 				Object obj = selection.getFirstElement();
-				if(obj  instanceof DeviceTestRun){
-					DeviceTestRun run = (DeviceTestRun) obj;
-
-					if(run.getStatus().toString().equalsIgnoreCase(TestStatus.NOTEXECUTED.toString())){
-						return;
-					}
-					//					setRunViewerInput(run);
-					try {
-						ExecutionView view = (ExecutionView) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().showView(ExecutionView.ID);
-						view.setRunViewerInput(run);
-					} catch (PartInitException e) {
-						e.printStackTrace();
-					}
-
-					//					createDeviceItem(tabFolder,run);
-				}
+				openExecutionView(obj);
 			}
-		});
+		});*/
+
 		testDeviceViewer.addDoubleClickListener(new IDoubleClickListener() {
 
 			@Override
 			public void doubleClick(DoubleClickEvent event) {
 				IStructuredSelection selection  =(IStructuredSelection) event.getSelection();
 				Object obj = selection.getFirstElement();
-				if(obj  instanceof DeviceTestRun){
-					DeviceTestRun run = (DeviceTestRun) obj;
-					createDeviceItem(tabFolder,run);
-				}
+				openExecutionView(obj);
 			}
+
 		});
 		createDeviceRunColumns(comp);
 		try{
@@ -394,11 +379,41 @@ public class TestRunnerView extends BBATViewPart {
 		}catch(Exception e){
 			LOG.error(e);
 		}
+		
 		addMenu2DeviceRun(testDeviceViewer);
 		testRunItem.setControl(comp);
-		tabFolder.setSelection(testRunItem);
+		deviceRunTabFolder.setSelection(testRunItem);
 		createDropSupportForDevice();
 	}
+
+
+	private void createDeviceTabItem(final CTabFolder tabFolder, Object obj) {
+		if(obj  instanceof DeviceTestRun){
+			DeviceTestRun run = (DeviceTestRun) obj;
+			createDeviceItem(tabFolder,run);
+		}
+	}
+
+
+	private void openExecutionView(Object obj) {
+		if(obj  instanceof DeviceTestRun){
+			DeviceTestRun run = (DeviceTestRun) obj;
+
+			if(run.getStatus().toString().equalsIgnoreCase(TestStatus.NOTEXECUTED.toString())){
+				return;
+			}
+			//					setRunViewerInput(run);
+			try {
+				ExecutionView view = (ExecutionView) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().showView(ExecutionView.ID);
+				view.setRunViewerInput(run);
+			} catch (PartInitException e) {
+				LOG.error(e);
+			}
+
+			//					createDeviceItem(tabFolder,run);
+		}
+	}
+
 
 	private void addMenu2DeviceRun(final TreeViewer viewer) {
 
@@ -442,6 +457,23 @@ public class TestRunnerView extends BBATViewPart {
 
 
 		};
+
+		final Action editAction = new Action("Edit") {
+
+			@Override
+			public void run() {
+
+				IStructuredSelection sel =(IStructuredSelection) viewer.getSelection();
+				List<?> selectedObjs = sel.toList();
+				createDeviceTabItem(deviceRunTabFolder, selectedObjs.get(0));
+			}
+
+			@Override
+			public boolean isEnabled() {
+				return true;
+			}
+
+		};
 		final MenuManager menuManager = new MenuManager();
 		menuManager.setRemoveAllWhenShown(true);
 		menuManager.addMenuListener(new IMenuListener() {
@@ -449,7 +481,9 @@ public class TestRunnerView extends BBATViewPart {
 			@Override
 			public void menuAboutToShow(IMenuManager manager) {
 				removeAction.setEnabled(removeAction.isEnabled());
+				editAction.setEnabled(editAction.isEnabled());
 				manager.add(removeAction);
+				manager.add(editAction);
 			}
 		});
 		viewer.getControl().setMenu(menuManager.createContextMenu(viewer.getControl()));
