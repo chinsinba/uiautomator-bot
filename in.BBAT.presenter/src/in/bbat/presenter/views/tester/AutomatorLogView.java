@@ -32,7 +32,7 @@ public class AutomatorLogView extends BBATViewPart {
 
 	private TableViewer viewer;
 	private static final Logger LOG = BBATLogger.getLogger(AutomatorLogView.class.getName());
-	
+
 	private AutoLogFilter filter;
 
 	private Text searchText;
@@ -129,10 +129,12 @@ public class AutomatorLogView extends BBATViewPart {
 	}
 
 	public void setInput(TestRunInstanceModel model){
-//		if(model.getStatus().equalsIgnoreCase(TestStatus.EXECUTING.getStatus()))
-			/*viewer.setInput(model.getAutoLogs());
+		//		if(model.getStatus().equalsIgnoreCase(TestStatus.EXECUTING.getStatus()))
+		/*viewer.setInput(model.getAutoLogs());
 		else*/
-			viewer.setInput(model.getAutoLogsFromDB());
+		viewer.setInput(model.getAutoLogsFromDB());
+		setPartName("UiAutomator Logs: "+model.getTestCaseEntity().getName());
+
 
 	}
 

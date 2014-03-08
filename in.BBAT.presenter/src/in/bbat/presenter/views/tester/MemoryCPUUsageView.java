@@ -28,7 +28,7 @@ import org.jfree.data.time.TimeSeriesCollection;
 import org.jfree.data.xy.XYDataset;
 
 public class MemoryCPUUsageView extends ViewPart {
-	
+
 	public static final String ID ="in.BBAT.presenter.tester.MemoryCpuUsageView";
 	public MemoryCPUUsageView() {
 		// TODO Auto-generated constructor stub
@@ -81,7 +81,7 @@ public class MemoryCPUUsageView extends ViewPart {
 		Composite swtAwtComponent = new Composite(parent, SWT.EMBEDDED);
 		java.awt.Frame chartFrame = SWT_AWT.new_Frame(swtAwtComponent);
 		chartFrame.add(chartPanel);
-
+		setPartName("Mem & CPU Usage: "+ScreenShotView.testCase.getTestCaseEntity().getName());
 	}
 
 	/**

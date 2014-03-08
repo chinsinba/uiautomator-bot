@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import in.BBAT.abstrakt.presenter.device.model.AndroidDevice;
+import in.BBAT.abstrakt.presenter.run.model.TestRunInstanceModel;
 import in.bbat.logger.BBATLogger;
 import in.bbat.presenter.Activator;
 import in.bbat.presenter.views.BBATViewPart;
@@ -69,11 +70,16 @@ public class TestLogView extends BBATViewPart {
 		this.panel = panel;
 	}
 
-	public void bufferChanged(List<LogCatMessage> addedMessages, ArrayList<LogCatMessage> deletedMessages){
+	private void bufferChanged(List<LogCatMessage> addedMessages, ArrayList<LogCatMessage> deletedMessages){
 		getPanel().clearBuffer();
 		getPanel().bufferChanged(addedMessages, deletedMessages);
 
 	}
-	
-	
+
+	public void setInput(TestRunInstanceModel testRunInstanceModel) {
+		setName("Device Logs: "+testRunInstanceModel.getTestCaseEntity().getName());
+		bufferChanged((testRunInstanceModel).getDeviceLogsFromDB(), new ArrayList<LogCatMessage>());		
+	}
+
+
 }

@@ -450,16 +450,6 @@
             allPopups="false"
             locationURI="popup:in.BBAT.presenter.history.TestRunInstanceView">
          <command
-               commandId="in.BBAT.presenter.history.exportLogs"
-               label="Export Logs"
-               style="push">
-         </command>
-         <command
-               commandId="in.BBAT.presenter.history.openMemoryCpuUsage"
-               label="Open Memory and Cpu Usage"
-               style="push">
-         </command>
-         <command
                commandId="in.BBAT.presenter.history.openAndroidLogs"
                label="Open Android Logs"
                style="push">
@@ -470,8 +460,22 @@
                style="push">
          </command>
          <command
+               commandId="in.BBAT.presenter.history.openMemoryCpuUsage"
+               label="Open Memory and Cpu Usage"
+               style="push">
+         </command>
+         <command
                commandId="in.BBAT.presenter.history.openScreenShots"
                label="Show Screenshots"
+               style="push">
+         </command>
+         <separator
+               name="in.BBAT.presenter.separator1"
+               visible="true">
+         </separator>
+         <command
+               commandId="in.BBAT.presenter.history.exportLogs"
+               label="Export Logs"
                style="push">
          </command>
       </menuContribution>

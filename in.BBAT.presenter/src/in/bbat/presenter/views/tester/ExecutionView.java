@@ -100,7 +100,7 @@ public class ExecutionView extends BBATViewPart {
 								try {
 									BBATViewPart.hideView(TestLogView.ID);
 									TestLogView view =  (TestLogView) BBATViewPart.openView(TestLogView.ID);
-									view.bufferChanged(((TestRunInstanceModel)sel).getDeviceLogsFromDB(), new ArrayList<LogCatMessage>());
+									view.setInput((TestRunInstanceModel)sel);
 								}catch (Exception e) {
 									LOG.error(e);
 								}

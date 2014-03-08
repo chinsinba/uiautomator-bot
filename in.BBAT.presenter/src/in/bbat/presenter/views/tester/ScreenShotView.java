@@ -130,8 +130,8 @@ public class ScreenShotView extends BBATViewPart {
 
 	@Override
 	public void setFocus() {
-		// TODO Auto-generated method stub
-
+		if(testCase !=null)
+			setPartName("Screenshots: "+testCase.getTestCaseEntity().getName());
 	}
 
 	public void setInput(TestRunInstanceModel runInstance){

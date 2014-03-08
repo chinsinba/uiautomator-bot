@@ -104,7 +104,7 @@ public class TestRunInfoView extends BBATViewPart {
 						try {
 							BBATViewPart.hideView(HistoryDeviceLogView.ID);
 							TestLogView view  = (TestLogView) BBATViewPart.openView(HistoryDeviceLogView.ID);
-							view.bufferChanged(((TestRunInstanceModel)sel).getDeviceLogsFromDB(), new ArrayList<LogCatMessage>());
+							view.setInput((TestRunInstanceModel)sel);
 						} catch (Exception e) {
 							LOG.error(e);
 						}	

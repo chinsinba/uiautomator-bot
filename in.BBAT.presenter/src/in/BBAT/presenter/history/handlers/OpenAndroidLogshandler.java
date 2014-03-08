@@ -26,7 +26,8 @@ public class OpenAndroidLogshandler extends AbstractTestRunInfoHandler {
 				try {
 					BBATViewPart.hideView(HistoryDeviceLogView.ID);
 					TestLogView view  = (TestLogView) BBATViewPart.openView(HistoryDeviceLogView.ID);
-					view.bufferChanged(((TestRunInstanceModel)selectedObjects.get(0)).getDeviceLogsFromDB(), new ArrayList<LogCatMessage>());
+					view.setInput((TestRunInstanceModel)selectedObjects.get(0));
+//					view.bufferChanged(((TestRunInstanceModel)selectedObjects.get(0)).getDeviceLogsFromDB(), new ArrayList<LogCatMessage>());
 				} catch (Exception e) {
 					LOG.error(e);
 				}	
