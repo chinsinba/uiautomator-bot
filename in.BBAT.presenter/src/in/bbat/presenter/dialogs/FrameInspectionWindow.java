@@ -27,7 +27,7 @@ public class FrameInspectionWindow extends ApplicationWindow {
 	 * @param imageFilePath 
 	 */ 	
 	public FrameInspectionWindow(Image imageFilePath) { 		
-		super(new Shell()); 	
+		super(new Shell());
 		this.image = imageFilePath;
 		createActions(); 		
 		addToolBar(SWT.FLAT | SWT.WRAP); 		
@@ -167,14 +167,8 @@ public class FrameInspectionWindow extends ApplicationWindow {
 	@Override 	
 	protected void configureShell(Shell newShell) { 		
 		super.configureShell(newShell); 		
-		newShell.setText("Application Window"); 	
+		newShell.setText("Inspect Screenshot"); 	
+		newShell.setSize(500,600);
 	}	
 
-	/** 	 
-	 * Return the initial size of the window. 	 
-	 */ 	
-	@Override 	
-	protected Point getInitialSize() { 		
-		return new Point(Display.getDefault().getBounds().width-100,Display.getDefault().getBounds().height-100); 	
-	}
-} 
+}
