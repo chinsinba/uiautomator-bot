@@ -455,8 +455,8 @@
                style="push">
          </command>
          <command
-               commandId="in.BBAT.presenter.history.openUIAutoLogs"
-               label="Open UIAutomator Logs"
+               commandId="in.BBAT.presenter.history.openMemoryCpuUsage"
+               label="Open Memory and Cpu Usage"
                style="push">
          </command>
          <command
