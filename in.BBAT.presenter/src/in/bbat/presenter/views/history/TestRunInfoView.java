@@ -3,6 +3,7 @@ package in.bbat.presenter.views.history;
 import in.BBAT.abstrakt.gui.model.AbstractTreeModel;
 import in.BBAT.abstrakt.presenter.run.model.TestDeviceRunModel;
 import in.BBAT.abstrakt.presenter.run.model.TestRunInstanceModel;
+import in.BBAT.abstrakt.presenter.run.model.TestRunModel;
 import in.BBAT.abstrakt.presenter.run.model.TestStatus;
 import in.BBAT.presenter.labelProviders.HistoryTestRunInfoLabelProvider;
 import in.bbat.abstrakt.gui.BBATImageManager;
@@ -194,7 +195,7 @@ public class TestRunInfoView extends BBATViewPart {
 	}
 
 	public void setInput(final TestDeviceRunModel sel) throws Exception{
-		setPartName(sel.getName());
+		setPartName(((TestRunModel)sel.getParent()).getName()+" : "+sel.getName());
 		final List<AbstractTreeModel> children = sel.getChildren();
 		viewer.setInput(children);
 		viewer.refresh();

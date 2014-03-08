@@ -454,6 +454,26 @@
                label="Export Logs"
                style="push">
          </command>
+         <command
+               commandId="in.BBAT.presenter.history.openUIAutoLogs"
+               label="Open UIAutomator Logs"
+               style="push">
+         </command>
+         <command
+               commandId="in.BBAT.presenter.history.openAndroidLogs"
+               label="Open Android Logs"
+               style="push">
+         </command>
+         <command
+               commandId="in.BBAT.presenter.history.openUIAutoLogs"
+               label="Open UiAutomator Logs"
+               style="push">
+         </command>
+         <command
+               commandId="in.BBAT.presenter.history.openScreenShots"
+               label="Show Screenshots"
+               style="push">
+         </command>
       </menuContribution>
       <menuContribution
             allPopups="false"
@@ -556,6 +576,22 @@
             id="in.BBAT.presenter.restart"
             name="Restart">
       </command>
+      <command
+            id="in.BBAT.presenter.history.openMemoryCpuUsage"
+            name="Open Memory CPU usage">
+      </command>
+      <command
+            id="in.BBAT.presenter.history.openAndroidLogs"
+            name="Open Device Logs">
+      </command>
+      <command
+            id="in.BBAT.presenter.history.openScreenShots"
+            name="Open Screen Shots">
+      </command>
+      <command
+            id="in.BBAT.presenter.history.openUIAutoLogs"
+            name="Open UIAutomator Logs">
+      </command>
    </extension>
    <extension
          point="org.eclipse.ui.handlers">
@@ -646,6 +682,22 @@
       <handler
             class="in.BBAT.presenter.developer.handlers.RestartHandler"
             commandId="in.BBAT.presenter.restart">
+      </handler>
+      <handler
+            class="in.BBAT.presenter.history.handlers.OpenAndroidLogshandler"
+            commandId="in.BBAT.presenter.history.openAndroidLogs">
+      </handler>
+      <handler
+            class="in.BBAT.presenter.history.handlers.OpenUIAutomatorLogsHandler"
+            commandId="in.BBAT.presenter.history.openUIAutoLogs">
+      </handler>
+      <handler
+            class="in.BBAT.presenter.history.handlers.OpenMemoryCPUUsageHandler"
+            commandId="in.BBAT.presenter.history.openMemoryCpuUsage">
+      </handler>
+      <handler
+            class="in.BBAT.presenter.history.handlers.OpenScreenShotsHandler"
+            commandId="in.BBAT.presenter.history.openScreenShots">
       </handler>
    </extension>
    <extension
