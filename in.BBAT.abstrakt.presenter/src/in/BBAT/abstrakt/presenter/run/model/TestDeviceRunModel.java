@@ -166,6 +166,9 @@ public class TestDeviceRunModel extends AbstractTreeModel {
 		if(getStatus().equalsIgnoreCase(TestStatus.EXECUTED.getStatus()))
 			return BBATImageManager.getInstance().getImage(BBATImageManager.PASS);
 
+		if(getStatus().equals(TestStatus.ERROR.getStatus()))
+			return BBATImageManager.getInstance().getImage(BBATImageManager.ERROR);
+
 		return null;
 	}
 
@@ -219,12 +222,12 @@ public class TestDeviceRunModel extends AbstractTreeModel {
 		long hour = (miliseconds / (1000 * 60 * 60)) % 24;
 		return String.format("%02d:%02d:%02d", hour, minute, second);
 	}
-	
+
 	public String getScreenShotDir()
 	{
 		return ((TestRunModel)getParent()).getScreenShotDir() + Path.SEPARATOR +getDeviceName();
 	}
-	
+
 	@Override
 	public String getName() {
 		// TODO Auto-generated method stub

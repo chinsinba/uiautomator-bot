@@ -129,7 +129,11 @@ public class DeveloperDeviceView extends BBATViewPart {
 
 		@Override
 		public void deviceRemoved(AndroidDevice device) {
-			TestRunExecutionManager.getInstance().removeDeviceRun(device);
+			TestRunExecutionManager.getInstance().deviceRemoved(device);
+			if(	TestRunExecutionManager.getInstance().getSelectedDevices().isEmpty())
+			{
+				TestRunExecutionManager.getInstance().setExecuting(false);
+			}
 			TestRunnerView.refreshView();
 			Display.getDefault().asyncExec(new Runnable() {
 				@Override

@@ -121,7 +121,10 @@ public class DeviceTestRun {
 				removeTestJar();
 				testRun.setEndTime(new Timestamp(System.currentTimeMillis()));
 				testRun.update();
-				updateStatus(TestStatus.EXECUTED);
+				if(stopped)
+					updateStatus(TestStatus.ERROR);
+				else
+					updateStatus(TestStatus.EXECUTED);
 				monitor.done(); 
 				return Status.OK_STATUS;
 			}
@@ -210,6 +213,7 @@ public class DeviceTestRun {
 	}
 
 	public void stop(){
+		System.err.println("stopped ");
 		setStopped(true);
 	}
 
@@ -289,6 +293,8 @@ public class DeviceTestRun {
 		if(getStatus().equals(TestStatus.EXECUTED))
 			return BBATImageManager.getInstance().getImage(BBATImageManager.PASS);
 
+		if(getStatus().equals(TestStatus.ERROR))
+			return BBATImageManager.getInstance().getImage(BBATImageManager.ERROR);
 		return null;
 	}
 

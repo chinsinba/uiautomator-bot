@@ -107,8 +107,8 @@ public class TestRunExecutionManager {
 		return false;
 	}
 
-	public void removeDeviceRun(AndroidDevice device) {
-		runContainer.removeDeviceRun(device);		
+	public void deviceRemoved(AndroidDevice device) {
+		runContainer.deviceRemoved(device);		
 	}
 
 }

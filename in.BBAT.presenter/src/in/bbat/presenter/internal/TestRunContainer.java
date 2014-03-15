@@ -79,7 +79,7 @@ public class TestRunContainer {
 		}
 	}
 
-	public void removeDeviceRun(AndroidDevice device) {
+	public void deviceRemoved(AndroidDevice device) {
 		DeviceTestRun run = getDeviceRun(device);
 		if(run!=null){
 			run.stop();
@@ -87,7 +87,7 @@ public class TestRunContainer {
 		}
 	}
 
-	private class DeviceModelListener implements IDeviceModelChangeListener
+	/*private class DeviceModelListener implements IDeviceModelChangeListener
 	{
 		@Override
 		public void deviceAdded(AndroidDevice device) {
@@ -95,7 +95,7 @@ public class TestRunContainer {
 		}
 
 		@Override
-		public void deviceRemoved(AndroidDevice device) {/*
+		public void deviceRemoved(AndroidDevice device) {
 			removeDeviceRun(device);
 			TestRunnerView.refreshView();
 			Display.getDefault().asyncExec(new Runnable() {
@@ -106,11 +106,11 @@ public class TestRunContainer {
 			});
 
 
-		*/}
+		}
 
 		@Override
 		public void refresh(AndroidDevice device) {
 
 		}
-	}
+	}*/
 }
