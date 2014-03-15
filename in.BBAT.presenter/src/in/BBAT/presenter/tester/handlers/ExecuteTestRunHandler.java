@@ -2,7 +2,9 @@ package in.BBAT.presenter.tester.handlers;
 
 import in.bbat.logger.BBATLogger;
 import in.bbat.presenter.internal.TestRunExecutionManager;
+import in.bbat.presenter.views.BBATViewPart;
 import in.bbat.presenter.views.tester.AutomatorLogView;
+import in.bbat.presenter.views.tester.ExecutionView;
 import in.bbat.presenter.views.tester.ScreenShotView;
 import in.bbat.presenter.views.tester.TestLogView;
 import in.bbat.presenter.views.tester.TestRunnerView;
@@ -22,18 +24,10 @@ public class ExecuteTestRunHandler extends AbstractTestRunnerHandler {
 	public Object run(ExecutionEvent event, List<?> selectedObjects) {
 		LOG.info("Execute test run ");
 
-		IViewPart autoLogView =  PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().findView(AutomatorLogView.ID);
-		if(autoLogView!=null)
-			PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().hideView(autoLogView);
-
-		TestLogView view  = (TestLogView) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().findView(TestLogView.ID);
-		if(view!=null)
-			PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().hideView(view);
-
-
-		ScreenShotView shotView  = (ScreenShotView) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().findView(ScreenShotView.ID);
-		if(shotView!=null)
-			PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().hideView(shotView);
+		BBATViewPart.hideView(TestLogView.ID);
+		BBATViewPart.hideView(AutomatorLogView.ID);
+		BBATViewPart.hideView(ScreenShotView.ID);
+		BBATViewPart.hideView(ExecutionView.ID);
 
 		TestRunExecutionManager.getInstance().execute();
 		TestRunnerView.refreshView();

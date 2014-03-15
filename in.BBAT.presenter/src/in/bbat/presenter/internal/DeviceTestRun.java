@@ -213,7 +213,6 @@ public class DeviceTestRun {
 	}
 
 	public void stop(){
-		System.err.println("stopped ");
 		setStopped(true);
 	}
 
