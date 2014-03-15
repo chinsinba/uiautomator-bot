@@ -168,7 +168,7 @@ public class FrameInspectionWindow extends ApplicationWindow {
 	protected void configureShell(Shell newShell) { 		
 		super.configureShell(newShell); 		
 		newShell.setText("Inspect Screenshot"); 	
-		newShell.setSize(500,600);
+		newShell.setSize(500,Display.getDefault().getBounds().height);
 	}	
 
 }
