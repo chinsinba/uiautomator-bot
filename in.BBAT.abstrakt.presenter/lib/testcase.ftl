@@ -26,7 +26,7 @@ public class ${testCase_name} extends UiAutomatorTestCase {
 		NOTE: Do not change the method signature
 	*/
 	public void test() throws UiObjectNotFoundException {  
-			Log.i(TAG,"testcase execution started");
+			System.out.println("testcase execution started");
 			
 			takeShot();
 			
@@ -35,7 +35,7 @@ public class ${testCase_name} extends UiAutomatorTestCase {
 			
 			//CODE:END
 			
-			Log.i(TAG,"testcase execution completed");
+			System.out.println("testcase execution completed");
         }
     
        
@@ -46,7 +46,7 @@ public class ${testCase_name} extends UiAutomatorTestCase {
 	public void takeShot(){
 		if(Build.VERSION.SDK_INT<17)
 		{
-			Log.i(TAG,"Screen shot is not available");
+			System.out.println("Screen shot is not available");
 			return;
 		}
 
@@ -56,7 +56,7 @@ public class ${testCase_name} extends UiAutomatorTestCase {
 			dir.mkdirs();
 		}
 		getUiDevice().takeScreenshot(new File(dir,System.currentTimeMillis()+".png"));	
-		Log.i(TAG,"Screen shot taken");
+		System.out.println("Screen shot taken");
 	}
 }
  
