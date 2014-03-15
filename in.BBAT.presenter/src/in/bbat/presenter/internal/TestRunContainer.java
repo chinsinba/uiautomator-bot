@@ -26,7 +26,7 @@ public class TestRunContainer {
 	private Set<DeviceTestRun> deviceTestRuns = new HashSet<DeviceTestRun>();
 
 	public TestRunContainer() {
-		TestDeviceManager.getInstance().addDeviceModelChangeListener(new DeviceModelListener());
+//		TestDeviceManager.getInstance().addDeviceModelChangeListener(new DeviceModelListener());
 	}
 
 	public List<TestRunCaseModel> getTestRunCases(){
@@ -95,7 +95,7 @@ public class TestRunContainer {
 		}
 
 		@Override
-		public void deviceRemoved(AndroidDevice device) {
+		public void deviceRemoved(AndroidDevice device) {/*
 			removeDeviceRun(device);
 			TestRunnerView.refreshView();
 			Display.getDefault().asyncExec(new Runnable() {
@@ -106,7 +106,7 @@ public class TestRunContainer {
 			});
 
 
-		}
+		*/}
 
 		@Override
 		public void refresh(AndroidDevice device) {

@@ -57,18 +57,17 @@ public class TestDeviceManager  implements IDeviceConnectionListener{
 	@Override
 	public void deviceDisconnected(IAndroidDevice device) {
 		AndroidDevice dev =iDeviceMap.get(device);
-		iDeviceMap.remove(device);
 		for(IDeviceModelChangeListener listnr : listners)
 		{
 			listnr.deviceRemoved(dev);
 		}
+		iDeviceMap.remove(device);
 
 	}
 
 	@Override
 	public void deviceConnected(IAndroidDevice device) {
 		AndroidDevice dev = new AndroidDevice(device);
-
 		iDeviceMap.put(device, dev);
 		for(IDeviceModelChangeListener listnr : listners)
 		{

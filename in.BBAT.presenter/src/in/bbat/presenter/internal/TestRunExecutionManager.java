@@ -1,5 +1,6 @@
 package in.bbat.presenter.internal;
 
+import in.BBAT.abstrakt.presenter.device.model.AndroidDevice;
 import in.BBAT.abstrakt.presenter.run.model.TestRunCaseModel;
 import in.bbat.logger.BBATLogger;
 
@@ -104,6 +105,10 @@ public class TestRunExecutionManager {
 		}
 
 		return false;
+	}
+
+	public void removeDeviceRun(AndroidDevice device) {
+		runContainer.removeDeviceRun(device);		
 	}
 
 }

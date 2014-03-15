@@ -8,9 +8,13 @@ import in.BBAT.abstrakt.presenter.device.model.TestDeviceManager;
 import in.BBAT.presenter.DND.listeners.DeviceDragListener;
 import in.BBAT.presenter.labelProviders.DeviceViewLabelProvider;
 import in.bbat.logger.BBATLogger;
+import in.bbat.presenter.internal.TestRunContainer;
+import in.bbat.presenter.internal.TestRunExecutionManager;
 import in.bbat.presenter.views.BBATViewPart;
+import in.bbat.presenter.views.tester.TestRunnerView;
 
 import org.apache.log4j.Logger;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.layout.TableColumnLayout;
 import org.eclipse.jface.util.LocalSelectionTransfer;
 import org.eclipse.jface.viewers.ArrayContentProvider;
@@ -25,6 +29,7 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.TableColumn;
+import org.eclipse.ui.PlatformUI;
 
 public class DeveloperDeviceView extends BBATViewPart {
 
@@ -108,6 +113,7 @@ public class DeveloperDeviceView extends BBATViewPart {
 		@Override
 		public void deviceAdded(AndroidDevice device) {
 			refreshInUIThread();
+
 		}
 
 
@@ -123,6 +129,14 @@ public class DeveloperDeviceView extends BBATViewPart {
 
 		@Override
 		public void deviceRemoved(AndroidDevice device) {
+			TestRunExecutionManager.getInstance().removeDeviceRun(device);
+			TestRunnerView.refreshView();
+			Display.getDefault().asyncExec(new Runnable() {
+				@Override
+				public void run() {
+					MessageDialog.openInformation(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(), "Device Removed", "Device disconnected.");					
+				}
+			});
 			refreshInUIThread();
 		}
 
