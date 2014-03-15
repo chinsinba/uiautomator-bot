@@ -52,6 +52,7 @@ public class MemoryUsageThread implements Runnable {
 				LOG.error(e);
 			} catch (AdbCommandRejectedException e) {
 				LOG.error(e);
+				stop();
 			} catch (ShellCommandUnresponsiveException e) {
 				LOG.error(e);
 			} catch (IOException e) {
