@@ -25,11 +25,16 @@ public abstract class AbstractTestCaseBrowserHandler extends BBATHandler {
 	public boolean isEnabled() {
 
 		List<?> list = getSelectedList();
-		if(!PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().
-				getPerspective().getId().equalsIgnoreCase(DeveloperPerspective.ID)){
+		if(!canBeEnabled())
+			return false;
+		return isEnabled(list);
+	}
+
+	protected boolean canBeEnabled() {
+		if(!PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getPerspective().getId().equalsIgnoreCase(DeveloperPerspective.ID)){
 			return false;
 		}
-		return isEnabled(list);
+		return true;
 	}
 
 	private List<?> getSelectedList() {

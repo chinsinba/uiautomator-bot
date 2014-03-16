@@ -44,6 +44,11 @@ public class TestDetailsHandler extends AbstractTestCaseBrowserHandler {
 	}
 
 	@Override
+	protected boolean canBeEnabled() {
+		return true;
+	}
+
+	@Override
 	public boolean isEnabled(List<?> object) {
 		if(!object.isEmpty())
 		{
