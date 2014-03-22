@@ -76,7 +76,7 @@ public class TestCaseModel extends AbstractProjectTree{
 		if(getProject().hasErrors(getIFile())){
 			return BBATImageManager.getInstance().getImage(BBATImageManager.TESTCASE_ERROR_GIF_8);
 		}
-		if(((TestSuiteModel)getParent()).isHelper()){
+		if(isHelper()){
 			return BBATImageManager.getInstance().getImage(BBATImageManager.LIBRARY_CLASS_GIF_16);
 		}
 		return BBATImageManager.getInstance().getImage(BBATImageManager.TESTCASE_GIF_16);
@@ -170,7 +170,7 @@ public class TestCaseModel extends AbstractProjectTree{
 	@Override
 	public void save() {
 		super.save();
-		createContents(((TestSuiteModel)getParent()).isHelper());
+		createContents(isHelper());
 	}
 
 	public static TestCaseModel create(TestSuiteModel suite,String name, String description) throws Exception{
@@ -205,6 +205,10 @@ public class TestCaseModel extends AbstractProjectTree{
 	@Override
 	public String toString() {
 		return getName();
+	}
+
+	public boolean isHelper() {
+		return ((TestSuiteModel)getParent()).isHelper();
 	}
 }
 

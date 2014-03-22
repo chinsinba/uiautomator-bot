@@ -81,7 +81,7 @@ public class TestCaseDropListener extends ViewerDropAdapter {
 				errorCases.add((TestCaseModel) testObj);
 				return;
 			}
-			if(testObj.isHelper()){
+			if(((TestCaseModel) testObj).isHelper()){
 				return ;
 			}
 
