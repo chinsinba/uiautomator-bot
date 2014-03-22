@@ -4,6 +4,7 @@ import in.BBAT.abstrakt.gui.model.AbstractTreeModel;
 import in.BBAT.abstrakt.presenter.device.model.AndroidDevice;
 import in.BBAT.abstrakt.presenter.pkg.model.AbstractProjectTree;
 import in.BBAT.abstrakt.presenter.pkg.model.TestCaseModel;
+import in.BBAT.abstrakt.presenter.pkg.model.TestSuiteModel;
 import in.BBAT.abstrakt.presenter.run.model.TestRunCaseModel;
 import in.bbat.logger.BBATLogger;
 import in.bbat.presenter.internal.DeviceTestRun;
@@ -80,12 +81,20 @@ public class TestCaseDropListener extends ViewerDropAdapter {
 				errorCases.add((TestCaseModel) testObj);
 				return;
 			}
+			if(testObj.isHelper()){
+				return ;
+			}
+
 			tempList.add(new TestRunCaseModel((TestCaseModel) testObj));
 			return;
 		}
 
 		try {
 			for (AbstractTreeModel obj : testObj.getChildren()) {
+				if(obj instanceof TestSuiteModel){
+					if(((TestSuiteModel) obj).isHelper())
+						continue;
+				}
 				addToTestCaseList(obj, tempList,errorCases);
 			}
 		} catch (Exception e) {

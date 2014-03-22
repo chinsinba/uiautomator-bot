@@ -76,6 +76,9 @@ public class TestCaseModel extends AbstractProjectTree{
 		if(getProject().hasErrors(getIFile())){
 			return BBATImageManager.getInstance().getImage(BBATImageManager.TESTCASE_ERROR_GIF_8);
 		}
+		if(((TestSuiteModel)getParent()).isHelper()){
+			return BBATImageManager.getInstance().getImage(BBATImageManager.LIBRARY_CLASS_GIF_16);
+		}
 		return BBATImageManager.getInstance().getImage(BBATImageManager.TESTCASE_GIF_16);
 
 	}

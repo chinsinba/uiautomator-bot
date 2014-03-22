@@ -103,4 +103,8 @@ public abstract class  AbstractTreeModel implements IGUITreeNode {
 
 	protected abstract AbstractTreeModel getChild(AbstractEntity childEntity)throws Exception ;
 	//	protected abstract IGUITreeNode produceParent(AbstractEntity childEntties );
+
+	public boolean isHelper() {
+		return getParent().isHelper();
+	}
 }

@@ -35,6 +35,8 @@ public class BBATImageManager
 	public static final String EXECUTING ="execute.gif";
 	public static final String TIME ="time.png";
 	public static final String TESTCASE_ERROR_GIF_8 ="error_co.gif";
+	public static final String LIBRARY_CLASS_GIF_16 ="library_class.gif";
+	public static final String LIBRARY_TESTSUITE_GIF_16 ="library_package.gif";
 
 
 	/**
@@ -54,6 +56,8 @@ public class BBATImageManager
 		addImage(EXECUTING, EXECUTING);
 		addImage(TIME, TIME);
 		addImage(TESTCASE_ERROR_GIF_8, TESTCASE_ERROR_GIF_8);
+		addImage(LIBRARY_CLASS_GIF_16, LIBRARY_CLASS_GIF_16);
+		addImage(LIBRARY_TESTSUITE_GIF_16, LIBRARY_TESTSUITE_GIF_16);
 	}
 
 	/**

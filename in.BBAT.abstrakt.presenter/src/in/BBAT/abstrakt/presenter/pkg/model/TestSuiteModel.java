@@ -42,6 +42,8 @@ public class TestSuiteModel extends AbstractProjectTree{
 
 	@Override
 	public Image getImage() {
+		if(isHelper())
+			return BBATImageManager.getInstance().getImage(BBATImageManager.LIBRARY_TESTSUITE_GIF_16);
 		return BBATImageManager.getInstance().getImage(BBATImageManager.TESTSUITE_GIF_16);
 	}
 
