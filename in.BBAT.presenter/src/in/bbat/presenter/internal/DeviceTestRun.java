@@ -3,6 +3,7 @@ package in.bbat.presenter.internal;
 import in.BBAT.TestRunner.Listener.ICpuUsageListener;
 import in.BBAT.abstrakt.presenter.device.model.AndroidDevice;
 import in.BBAT.abstrakt.presenter.pkg.model.TestProjectModel;
+import in.BBAT.abstrakt.presenter.pkg.model.TestSuiteModel;
 import in.BBAT.abstrakt.presenter.run.model.TestDeviceRunModel;
 import in.BBAT.abstrakt.presenter.run.model.TestRunCaseModel;
 import in.BBAT.abstrakt.presenter.run.model.TestRunInstanceModel;
@@ -276,6 +277,20 @@ public class DeviceTestRun {
 		getDevice().removeTestJar();
 	}
 
+	public  List<String> getDistinctLibraryClassPaths() throws Exception{
+		Set<TestProjectModel> testProjs = new HashSet<TestProjectModel>();
+		for(TestRunCaseModel cas: getCases()){
+			testProjs.add(cas.getProject());	
+		}
+
+		List<String> testScriptPaths = new ArrayList<String>();
+		for(TestProjectModel proj: testProjs){
+			testScriptPaths.addAll(proj.getLibraryScriptpaths());
+		}
+
+		return testScriptPaths;
+	}
+
 	public List<String> getDistinctScriptPaths(){
 		Set<String> testScriptPaths = new HashSet<String>();
 
@@ -296,6 +311,7 @@ public class DeviceTestRun {
 			return BBATImageManager.getInstance().getImage(BBATImageManager.ERROR);
 		return null;
 	}
+
 
 	public int getMaxApiLevel()
 	{

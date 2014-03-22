@@ -47,6 +47,10 @@ public class TestRunExecutor{
 					endOfTestRun();
 					LOG.error(e);
 					return Status.CANCEL_STATUS;
+				} catch (Exception e) {
+					endOfTestRun();
+					LOG.error(e);
+					return Status.CANCEL_STATUS;
 				}
 				monitor.worked(1);
 
@@ -73,10 +77,11 @@ public class TestRunExecutor{
 		return "android-"+max;
 	}
 
-	public List<String> getTestScriptPaths() {
+	public List<String> getTestScriptPaths() throws Exception {
 		Set<String> testScriptPaths = new HashSet<String>();
 		for (DeviceTestRun testRunCase : deviceTestRuns) {
 			testScriptPaths.addAll(testRunCase.getDistinctScriptPaths());
+			testScriptPaths.addAll(testRunCase.getDistinctLibraryClassPaths());
 		}
 		return new ArrayList<String>(testScriptPaths);
 	}

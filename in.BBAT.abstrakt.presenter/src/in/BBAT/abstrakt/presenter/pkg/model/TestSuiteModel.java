@@ -1,5 +1,6 @@
 package in.BBAT.abstrakt.presenter.pkg.model;
 
+import in.BBAT.abstrakt.gui.model.AbstractTreeModel;
 import in.BBAT.abstrakt.presenter.run.model.TestRunModel;
 import in.BBAT.data.model.Entities.AbstractEntity;
 import in.BBAT.data.model.Entities.TestCaseEntity;
@@ -102,4 +103,11 @@ public class TestSuiteModel extends AbstractProjectTree{
 		return ((TestSuiteEntity)getEntity()).isLibrary();
 	}
 
+	public List<String> getScriptPaths() throws Exception {
+		List<String> scripts = new ArrayList<String>();
+		for(AbstractTreeModel caseModel : getChildren()){
+			scripts.add(((TestCaseModel)caseModel).getTestScriptPath());
+		}
+		return scripts;
+	}
 }
