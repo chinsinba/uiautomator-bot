@@ -40,7 +40,7 @@ public class NameAndDescriptionComponent {
 		getNameText().setLayoutData(gdPkgName);
 		Label commentLabel = new Label(group, SWT.NULL);
 		commentLabel.setText("Description:");
-		setDescText(new Text(group, SWT.MULTI | SWT.BORDER));
+		setDescText(new Text(group, SWT.MULTI | SWT.BORDER |SWT.WRAP));
 		if(!editable){
 			getDescText().setText(description);
 			getDescText().setEditable(editable);

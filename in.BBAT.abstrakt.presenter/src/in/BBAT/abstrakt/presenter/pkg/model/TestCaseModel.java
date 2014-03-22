@@ -119,12 +119,18 @@ public class TestCaseModel extends AbstractProjectTree{
 		return getParent().getParent().getName()+"."+getParent().getName()+"."+getName();
 	}
 
-	public void createContents() {
-
+	public void createContents(boolean isLibraryCase) {
+		final String testCaseTemplateName ="testcase.ftl";
+		final String libClassTemplateName ="libraryClass.ftl";
+		String template = testCaseTemplateName;
+		if(isLibraryCase)
+		{
+			template = libClassTemplateName;
+		}
 		Configuration cfgFtl =new Configuration();
 		try {
 			cfgFtl.setDirectoryForTemplateLoading(new File(BBATPluginUtility.getInstance().getPluginDir(Activator.PLUGIN_ID)+Path.SEPARATOR+"lib"+Path.SEPARATOR));
-			Template testCaseTemplate = cfgFtl.getTemplate("testcase.ftl");
+			Template testCaseTemplate = cfgFtl.getTemplate(template);
 			Map<String, Object> data = new HashMap<String, Object>();
 			data.put("package_name", getParent().getParent().getName()+"."+getParent().getName());
 			data.put("testCase_name", getName());
@@ -161,7 +167,7 @@ public class TestCaseModel extends AbstractProjectTree{
 	@Override
 	public void save() {
 		super.save();
-		createContents();
+		createContents(((TestSuiteModel)getParent()).isHelper());
 	}
 
 	public static TestCaseModel create(TestSuiteModel suite,String name, String description) throws Exception{
@@ -192,7 +198,7 @@ public class TestCaseModel extends AbstractProjectTree{
 	public boolean hasErrors(){
 		return getProject().hasErrors(testCaseFile);
 	}
-	
+
 	@Override
 	public String toString() {
 		return getName();

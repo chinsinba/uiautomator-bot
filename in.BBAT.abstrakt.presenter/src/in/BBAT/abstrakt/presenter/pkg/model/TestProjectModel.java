@@ -100,20 +100,27 @@ public class TestProjectModel extends AbstractProjectTree {
 		TestProjectManager.getInstance().getTestProjects().remove(this);
 	}
 
-	public static TestProjectModel create(String name, String description,int apiLevel, String apkPkgname) throws Exception{
+	public static TestProjectModel create(String name, String description,int apiLevel, String apkPkgname, boolean createHelperSuite) throws Exception{
 		TestProjectModel model = new TestProjectModel(name,apiLevel);
 		model.setDescription(description);
 		model.setApiLevel(apiLevel);
 		model.setApkPackageName(apkPkgname);
 		model.save();
+		if(createHelperSuite)
+			createHelperSuite(model);
 		TestProjectManager.getInstance().getTestProjects().add(model);
 		return model;
+	}
+
+	private static void createHelperSuite(TestProjectModel model) throws Exception {
+		TestSuiteModel.create(model, "helper", "This suite will have all the helper and utility classes. \n" +
+				"This can also be used for creating pameterized test cases. The classes in this suite cannot be run as testcases. ", true);
 	}
 
 	public void setApkPackageName(String apkPkgname) {
 		((TestProjectEntity)getEntity()).setApkPackageName(apkPkgname);		
 	}
-	
+
 	public String getApkPackageName() {
 		return ((TestProjectEntity)getEntity()).getApkPackageName();		
 	}

@@ -27,8 +27,8 @@ public class TestSuiteModel extends AbstractProjectTree{
 	}
 
 
-	public TestSuiteModel(TestProjectModel parent,String name) throws Exception{
-		this(parent,new TestSuiteEntity((TestProjectEntity) parent.getEntity(),name),true);
+	public TestSuiteModel(TestProjectModel parent,String name,boolean isHelper) throws Exception{
+		this(parent,new TestSuiteEntity((TestProjectEntity) parent.getEntity(),name,isHelper),true);
 	}
 
 	public String getName() {
@@ -71,8 +71,8 @@ public class TestSuiteModel extends AbstractProjectTree{
 		getProject().linkSuite(getResourcePath());
 	}
 
-	public static TestSuiteModel create(TestProjectModel parent, String name, String description) throws Exception{
-		TestSuiteModel newTestSuite = new TestSuiteModel(parent, name);
+	public static TestSuiteModel create(TestProjectModel parent, String name, String description, boolean isHelper) throws Exception{
+		TestSuiteModel newTestSuite = new TestSuiteModel(parent, name,isHelper);
 		newTestSuite.setDescription(description);
 		newTestSuite.save();
 		parent.addChild(newTestSuite);
@@ -94,6 +94,10 @@ public class TestSuiteModel extends AbstractProjectTree{
 	public List<TestRunEntity> getRefTestRunEntities() {
 		List<TestRunEntity> testRuns = SuiteMineManager.getAllRunsContainingTestSuite((TestSuiteEntity) getEntity());
 		return testRuns;
+	}
+
+	public boolean isHelper() {
+		return ((TestSuiteEntity)getEntity()).isLibrary();
 	}
 
 }

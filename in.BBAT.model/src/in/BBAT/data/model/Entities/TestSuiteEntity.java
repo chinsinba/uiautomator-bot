@@ -69,11 +69,12 @@ public class TestSuiteEntity extends AbstractEntity  {
 
 	@XmlAttribute(required = true)
 	private boolean library;
-	
-	public TestSuiteEntity(TestProjectEntity testProject, String name) {
+
+	public TestSuiteEntity(TestProjectEntity testProject, String name, boolean isHelper) {
 
 		this.name = name;
 		this.testProject = testProject;
+		this.library = isHelper;
 	}
 
 	public TestSuiteEntity() {

@@ -73,9 +73,9 @@ public class TestProjectManager {
 			}
 		}
 
-		TestProjectModel proj = TestProjectModel.create(projEntity.getName(), projEntity.getDescription(),projEntity.getApiLevel(),projEntity.getApkPackageName());
+		TestProjectModel proj = TestProjectModel.create(projEntity.getName(), projEntity.getDescription(),projEntity.getApiLevel(),projEntity.getApkPackageName(),false);
 		for(TestSuiteEntity suiteEntity : projEntity.getTestSuites()){
-			TestSuiteModel suiteModel = TestSuiteModel.create(proj, suiteEntity.getName(), suiteEntity.getDescription());
+			TestSuiteModel suiteModel = TestSuiteModel.create(proj, suiteEntity.getName(), suiteEntity.getDescription(),suiteEntity.isLibrary());
 			for(TestCaseEntity caseEntity: suiteEntity.getTestCases()){
 				TestCaseModel.create(suiteModel, caseEntity.getName(), caseEntity.getDescription());
 			}

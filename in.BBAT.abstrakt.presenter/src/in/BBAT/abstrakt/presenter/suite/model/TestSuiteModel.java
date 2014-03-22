@@ -20,10 +20,10 @@ public class TestSuiteModel  extends AbstractTreeModel{
 	}
 
 
-	public TestSuiteModel(){
+	/*public TestSuiteModel(){
 		super(null,new TestSuiteEntity(null,""));
 	}
-
+*/
 	@Override
 	public String getLabel() {
 		return getName();

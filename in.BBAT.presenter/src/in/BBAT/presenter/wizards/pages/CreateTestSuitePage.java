@@ -15,7 +15,9 @@ import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
@@ -39,6 +41,7 @@ public class CreateTestSuitePage extends WizardPage {
 
 	private boolean nameValid;
 	private boolean descValid;
+	private Button helperSuiteCheckButton;
 
 
 
@@ -54,6 +57,8 @@ public class CreateTestSuitePage extends WizardPage {
 		{
 			nameDescComp = new NameAndDescriptionComponent(parent,"","",true);
 		}
+		createLibraryCheckArea(parent);
+
 		nameDescComp.getNameText().addModifyListener( new ModifyListener() {
 			@Override
 			public void modifyText(ModifyEvent e) {
@@ -106,6 +111,18 @@ public class CreateTestSuitePage extends WizardPage {
 
 		setControl(parent);
 	}
+	private void createLibraryCheckArea(Composite parent) {
+		Group group = new Group(parent, SWT.BORDER);
+		group.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false));
+		group.setLayout(new GridLayout(2, false));
+
+		new Label(group, SWT.None).setText("Is this a helper test suite ?");
+		helperSuiteCheckButton = new Button(group, SWT.CHECK);
+		if(suite!=null){
+			helperSuiteCheckButton.setSelection(suite.isHelper());
+			helperSuiteCheckButton.setEnabled(false);
+		}
+	}
 
 	public void pageComplete(){
 		setPageComplete(nameValid && descValid);
@@ -149,6 +166,9 @@ public class CreateTestSuitePage extends WizardPage {
 		gd.grabExcessVerticalSpace = true;
 		valueText.setLayoutData(gd);
 
+	}
+	public boolean isHelper() {
+		return helperSuiteCheckButton.getSelection();
 	}
 
 }

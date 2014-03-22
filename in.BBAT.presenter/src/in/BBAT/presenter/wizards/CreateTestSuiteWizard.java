@@ -36,7 +36,7 @@ public class CreateTestSuiteWizard extends Wizard {
 
 		LOG.info("Create test suite: " +suiteCreationPage.getName());
 		try {
-			TestSuiteModel.create(parent, suiteCreationPage.getSuiteName().trim(), suiteCreationPage.getDeskription().trim());
+			TestSuiteModel.create(parent, suiteCreationPage.getSuiteName().trim(), suiteCreationPage.getDeskription().trim(),suiteCreationPage.isHelper());
 			TestCaseBrowserView.refreshView();
 		} catch (Exception e) {
 			LOG.error(e);
