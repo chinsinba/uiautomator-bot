@@ -80,8 +80,8 @@ public abstract class AbstractProjectTree extends AbstractTreeModel implements I
 			for (File c : f.listFiles())
 				deleteFolder(c);
 		}
-		if (!f.delete())
-			throw new FileNotFoundException("Failed to delete file: " + f);
+		f.delete();
+		//			throw new FileNotFoundException("Failed to delete file: " + f);
 	}
 
 	@Override
