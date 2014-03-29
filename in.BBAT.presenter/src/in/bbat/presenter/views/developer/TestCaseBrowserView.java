@@ -50,6 +50,7 @@ public class TestCaseBrowserView extends BBATViewPart {
 		viewer.setContentProvider(new TestCaseBrowserContentProvider());
 		viewer.setLabelProvider(new TestCaseLabelProvider());
 		viewer.setAutoExpandLevel(2);
+		viewer.setSorter(new TestCaseBrowserSorter());
 		/*viewer.setComparer(new IElementComparer() {
 
 			@Override
