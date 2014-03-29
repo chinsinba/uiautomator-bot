@@ -2,6 +2,7 @@ package in.bbat.presenter.views.developer;
 
 import in.BBAT.abstrakt.presenter.pkg.model.TestCaseModel;
 import in.BBAT.abstrakt.presenter.pkg.model.TestProjectManager;
+import in.BBAT.abstrakt.presenter.pkg.model.TestSuiteModel;
 import in.BBAT.presenter.DND.listeners.TestCaseDragListener;
 import in.BBAT.presenter.contentProviders.TestCaseBrowserContentProvider;
 import in.BBAT.presenter.labelProviders.TestCaseLabelProvider;
@@ -16,6 +17,8 @@ import org.eclipse.jface.viewers.IDoubleClickListener;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.TreeViewer;
+import org.eclipse.jface.viewers.Viewer;
+import org.eclipse.jface.viewers.ViewerFilter;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.dnd.DND;
 import org.eclipse.swt.dnd.Transfer;
@@ -30,11 +33,11 @@ public class TestCaseBrowserView extends BBATViewPart {
 
 	private TreeViewer viewer;
 
-//	private PShelf testCaseShelf;
+	//	private PShelf testCaseShelf;
 
-//	private PShelfItem automatorShelfItem;
+	//	private PShelfItem automatorShelfItem;
 
-//	private PShelfItem monkeyShelfItem;
+	//	private PShelfItem monkeyShelfItem;
 
 	/**
 	 * This is a callback that will allow us to create the viewer and initialize
@@ -51,6 +54,7 @@ public class TestCaseBrowserView extends BBATViewPart {
 		viewer.setLabelProvider(new TestCaseLabelProvider());
 		viewer.setAutoExpandLevel(2);
 		viewer.setSorter(new TestCaseBrowserSorter());
+		viewer.addFilter(new HelperSuiteFilter());
 		/*viewer.setComparer(new IElementComparer() {
 
 			@Override
@@ -115,7 +119,7 @@ public class TestCaseBrowserView extends BBATViewPart {
 
 	@Override
 	public void refresh() throws Exception {
-//		viewer.setInput(TestProjectManager.getInstance());
+		//		viewer.setInput(TestProjectManager.getInstance());
 		viewer.refresh();
 	}
 
@@ -131,7 +135,25 @@ public class TestCaseBrowserView extends BBATViewPart {
 		viewer.addDragSupport(operations, transferTypes, new TestCaseDragListener(viewer));
 	}
 
-	
+
+	class HelperSuiteFilter extends ViewerFilter
+	{
+
+
+		@Override
+		public boolean select(Viewer viewer, Object parentElement,Object element) {
+
+			if(element instanceof TestSuiteModel){
+
+				if(((TestSuiteModel) element).isHelper() && ((TestSuiteModel) element).getName().equalsIgnoreCase(TestSuiteModel.BBAT_UTILITY)){
+					return false;
+				}
+			}
+			return true;
+		}
+
+	}
+
 	public static void refreshView()
 	{
 		Display.getDefault().asyncExec(new Runnable() {
