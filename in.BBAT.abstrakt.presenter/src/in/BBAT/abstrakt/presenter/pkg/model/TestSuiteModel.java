@@ -19,6 +19,9 @@ import org.eclipse.swt.graphics.Image;
 
 public class TestSuiteModel extends AbstractProjectTree{
 
+	
+	public final static String BBAT_UTILITY ="BBAT_Utility";
+	
 	protected TestSuiteModel(TestProjectModel parent,TestSuiteEntity entity) throws Exception {
 		super(parent,entity,entity.getName(),false);
 	}

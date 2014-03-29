@@ -6,6 +6,7 @@ import android.os.Build;
 import android.util.Log;
 import com.android.uiautomator.core.*;
 import com.android.uiautomator.testrunner.*;
+import static ${utility_import}.*;
 
 /**
 ${description}
@@ -17,9 +18,6 @@ public class ${testCase_name} extends UiAutomatorTestCase {
 
 	private static String TAG = "${testCase_name}";
 	
-	//@generated Do not change this path
-	private static String SCREENSHOTPATH = "/data/local/tmp/"+${testCase_name}.class.getName()+"/";
-	
 	/**
 		@generated 
 		All your test code will go here
@@ -27,36 +25,13 @@ public class ${testCase_name} extends UiAutomatorTestCase {
 	*/
 	public void test() throws UiObjectNotFoundException {  
 			System.out.println("testcase execution started");
-			
-			takeShot();
-			
+			//takeScreenShot();
 			//CODE:START 
 			
 			
 			//CODE:END
-			
 			System.out.println("testcase execution completed");
         }
     
-       
-     /**
-        @generated 
-        Creates a screen shot this method should not be changed
-	 */
-	public void takeShot(){
-		if(Build.VERSION.SDK_INT<17)
-		{
-			System.out.println("Screen shot is not available");
-			return;
-		}
-
-		File dir = new File(SCREENSHOTPATH);
-		if(!dir.exists())
-		{
-			dir.mkdirs();
-		}
-		getUiDevice().takeScreenshot(new File(dir,System.currentTimeMillis()+".png"));	
-		System.out.println("Screen shot taken");
-	}
 }
  

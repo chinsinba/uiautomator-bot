@@ -2,6 +2,7 @@ package in.bbat.presenter.internal;
 
 import in.BBAT.TestRunner.Listener.ICpuUsageListener;
 import in.BBAT.abstrakt.presenter.device.model.AndroidDevice;
+import in.BBAT.abstrakt.presenter.pkg.model.TestCaseModel;
 import in.BBAT.abstrakt.presenter.pkg.model.TestProjectModel;
 import in.BBAT.abstrakt.presenter.pkg.model.TestSuiteModel;
 import in.BBAT.abstrakt.presenter.run.model.TestDeviceRunModel;
@@ -112,7 +113,7 @@ public class DeviceTestRun {
 					DeviceLogListener deviceLogListener = new DeviceLogListener(testRunCase);
 					MemoryCpuUsageListener memCpuListener = new MemoryCpuUsageListener(testRunCase, getDevice());
 					runner.execute(testRunCase.getCompleteScriptName(), new TestCaseExecutionListener(testRunCase, DeviceTestRun.this), deviceLogListener,new UIAutomatorOutputListener(testRunCase),deviceLogListener,memCpuListener,memCpuListener);
-					getDevice().pullScreenShotsFromDevice(testRunCase.getScreenShotDir(),testRunCase.getTestCaseModel().getName(),true);
+					getDevice().pullScreenShotsFromDevice(testRunCase.getScreenShotDir(),TestCaseModel.BBATUTILITY_CLASS_NAME,true);
 					testRunCase.setEndTime(System.currentTimeMillis());
 					testRunCase.update();
 

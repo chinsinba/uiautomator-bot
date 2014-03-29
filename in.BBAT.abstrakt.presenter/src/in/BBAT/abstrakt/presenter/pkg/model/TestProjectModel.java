@@ -114,8 +114,9 @@ public class TestProjectModel extends AbstractProjectTree {
 	}
 
 	private static void createHelperSuite(TestProjectModel model) throws Exception {
-		TestSuiteModel.create(model, "helper", "This suite will have all the helper and utility classes. \n" +
+		TestSuiteModel helperSuite = TestSuiteModel.create(model, TestSuiteModel.BBAT_UTILITY, "This suite will have all the helper and utility classes. \n" +
 				"This can also be used for creating pameterized test cases. The classes in this suite cannot be run as testcases. ", true);
+		TestCaseModel.createHelper(helperSuite);
 	}
 
 	public void setApkPackageName(String apkPkgname) {

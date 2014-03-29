@@ -168,7 +168,7 @@ public class AndroidDevice implements IGUITreeNode{
 		iDevice.removeUIAutomatorJar();
 	}
 	
-	public void pullScreenShotsFromDevice(String destinationDir, String testcaseName, boolean deleteSourceAfterPull){
-		iDevice.pullScreenShots(destinationDir, testcaseName,deleteSourceAfterPull);
+	public void pullScreenShotsFromDevice(String destinationDir, String dirName, boolean deleteSourceAfterPull){
+		iDevice.pullScreenShots(destinationDir, dirName,deleteSourceAfterPull);
 	}
 }

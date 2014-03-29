@@ -41,6 +41,14 @@ import org.eclipse.ui.part.FileEditorInput;
 public class TestCaseModel extends AbstractProjectTree{
 
 	public final static String JAVA = ".java";
+	
+	final static String UTILITY_TEMPLATE ="utility.ftl";
+	
+	final static String TESTCASE_TEMPLATE ="testcase.ftl";
+	
+	final static String LIBRARY_TEMPLATE ="libraryClass.ftl";
+
+	public final static String BBATUTILITY_CLASS_NAME ="BBATUtility";
 
 	private static final Logger LOG = BBATLogger.getLogger(TestCaseModel.class.getName());
 	public IFile testCaseFile;
@@ -123,14 +131,18 @@ public class TestCaseModel extends AbstractProjectTree{
 	}
 
 	public void createContents(boolean isLibraryCase) {
-		final String testCaseTemplateName ="testcase.ftl";
-		final String libClassTemplateName ="libraryClass.ftl";
-		String template = testCaseTemplateName;
+		
+		String template = TESTCASE_TEMPLATE;
 		if(isLibraryCase)
 		{
-			template = libClassTemplateName;
+			template = LIBRARY_TEMPLATE;
 		}
-		Configuration cfgFtl =new Configuration();
+		fillContents(template);
+	}
+
+	private void fillContents(String template) {
+		
+		Configuration cfgFtl = new Configuration();
 		try {
 			cfgFtl.setDirectoryForTemplateLoading(new File(BBATPluginUtility.getInstance().getPluginDir(Activator.PLUGIN_ID)+Path.SEPARATOR+"lib"+Path.SEPARATOR));
 			Template testCaseTemplate = cfgFtl.getTemplate(template);
@@ -138,6 +150,7 @@ public class TestCaseModel extends AbstractProjectTree{
 			data.put("package_name", getParent().getParent().getName()+"."+getParent().getName());
 			data.put("testCase_name", getName());
 			data.put("description", getDescription());
+			data.put("utility_import", getParent().getParent().getName()+"."+TestSuiteModel.BBAT_UTILITY+"."+TestCaseModel.BBATUTILITY_CLASS_NAME);
 			Writer fileWriter = new FileWriter(new File(getTestScriptPath()));
 			try {
 				testCaseTemplate.process(data, fileWriter);
@@ -151,7 +164,11 @@ public class TestCaseModel extends AbstractProjectTree{
 			LOG.error(e);
 		}
 		getProject().refresh();
+	}
 
+	public void createHelperContents()
+	{
+		fillContents(UTILITY_TEMPLATE);
 	}
 
 	public void openEditor() throws Exception{
@@ -179,6 +196,12 @@ public class TestCaseModel extends AbstractProjectTree{
 		newTestCase.save();
 		suite.addChild(newTestCase);
 		return newTestCase;
+	}
+
+	public static  TestCaseModel createHelper(TestSuiteModel suite) throws Exception{
+		TestCaseModel testCase = create(suite, BBATUTILITY_CLASS_NAME, "Utility for screenshots ");
+		testCase.createHelperContents();
+		return testCase;
 	}
 
 	@Override
