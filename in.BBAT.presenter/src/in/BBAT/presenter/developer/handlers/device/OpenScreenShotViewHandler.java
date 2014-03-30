@@ -11,6 +11,8 @@ import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 
+import com.android.uiautomator.UiAutomatorViewer;
+
 
 public class OpenScreenShotViewHandler extends BBATHandler {
 
@@ -21,12 +23,14 @@ public class OpenScreenShotViewHandler extends BBATHandler {
 		/*ActivationCodeDialog d = new ActivationCodeDialog(new Shell());
 		d.open();*/
 		LOG.info("Open screen shot ui automator view");
-		try {
-			PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().showView(ScreenShotView.ID);
-		} catch (PartInitException e) {
-			LOG.error(e);
-		}
+//		try {
+//			PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().showView(ScreenShotView.ID);
+//		} catch (PartInitException e) {
+//			LOG.error(e);
+//		}
 		
+		UiAutomatorViewer window = new UiAutomatorViewer(); 			
+		window.open(); 
 		return null;
 	}
 	

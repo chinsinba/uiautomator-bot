@@ -1,5 +1,8 @@
 package in.BBAT.presenter.developer.handlers.device;
 
+import in.BBAT.abstrakt.presenter.pkg.model.TestProjectManager;
+import in.BBAT.presenter.wizards.ImportTestProjectWizard;
+import in.BBAT.presenter.wizards.WifiConnectingWizard;
 import in.bbat.configuration.BBATProperties;
 import in.bbat.logger.BBATLogger;
 import in.bbat.presenter.dialogs.IPAdressAndPortDialog;
@@ -11,6 +14,7 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.jface.window.Window;
+import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.swt.custom.BusyIndicator;
 import org.eclipse.ui.PlatformUI;
 
@@ -24,7 +28,10 @@ public class ConnectDeficeViaWifiHandler extends AbstractDeviceViewHandler {
 
 		LOG.info("Connect device over Wifi");
 
-		IPAdressAndPortDialog connectDeviceDialog = new IPAdressAndPortDialog(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell());
+		WizardDialog dialog = new WizardDialog(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(), 
+				new WifiConnectingWizard());
+		dialog.open();
+		/*	IPAdressAndPortDialog connectDeviceDialog = new IPAdressAndPortDialog(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell());
 		int returnedCode = connectDeviceDialog.open();
 		if(returnedCode == Window.OK){
 			deviceIPAddress = connectDeviceDialog.getIpAddress();
@@ -42,7 +49,7 @@ public class ConnectDeficeViaWifiHandler extends AbstractDeviceViewHandler {
 					}
 				}
 			});
-		}
+		}*/
 		return null;
 	}
 
