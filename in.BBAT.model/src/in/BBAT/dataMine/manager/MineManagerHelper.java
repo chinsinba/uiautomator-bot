@@ -28,9 +28,10 @@ public class MineManagerHelper {
 	}
 
 	private  void getPropertiesExistingTable(
-			Map<String, Object> properties) {
+			Map<String, Object> properties, boolean createTable) {
 		properties.put(PersistenceUnitProperties.CLASSLOADER,Activator.getClassLoader());
-		properties.put(PersistenceUnitProperties.DDL_GENERATION, PersistenceUnitProperties.CREATE_OR_EXTEND);
+		if(createTable)
+			properties.put(PersistenceUnitProperties.DDL_GENERATION, PersistenceUnitProperties.CREATE_OR_EXTEND);
 
 	}
 
@@ -38,7 +39,7 @@ public class MineManagerHelper {
 			boolean createTable, boolean networkDb, String dbPath,String dbUserName,String dbPassword)throws Exception {
 		Map<String, Object> properties = new HashMap<String, Object>();
 
-		getPropertiesExistingTable(properties);
+		getPropertiesExistingTable(properties, createTable);
 		String url;
 		if(networkDb){
 			url = "jdbc:derby://" + dbPath + ";create=true";

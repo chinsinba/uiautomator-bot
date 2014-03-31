@@ -1,5 +1,6 @@
 package in.BBAT.dataMine.manager;
 
+import in.bbat.configuration.BBATInternalProperties;
 import in.bbat.configuration.BBATProperties;
 import in.bbat.configuration.BBATProperties;
 import in.bbat.logger.BBATLogger;
@@ -37,7 +38,7 @@ public class MineManager {
 		return instance_;
 	}
 
-	public  void createDb(String dbName,String ipAddress, int port, String userName, String password,boolean networkDB) throws Exception {
+	public  void createDb(String dbName,String ipAddress, int port, String userName, String password,boolean networkDB, boolean createTables) throws Exception {
 		if(networkDB){
 			LOG.info("Starting database");
 			startDBServer(BBATProperties.getInstance().getDatabase_IpAddress(),BBATProperties.getInstance().getDatabase_Port(),BBATProperties.getInstance().getDatabase_UserName(),BBATProperties.getInstance().getDatabase_Pwd());
@@ -47,9 +48,14 @@ public class MineManager {
 			return;
 		String DB_ADDRESS =ipAddress+":"+port;
 		if(networkDB)
-			MineManagerHelper.init(UNIT_NAME, false, networkDB, DB_ADDRESS + Path.SEPARATOR + dbName,userName,password);
+			MineManagerHelper.init(UNIT_NAME, createTables, networkDB, DB_ADDRESS + Path.SEPARATOR + dbName,userName,password);
 		else {
-			MineManagerHelper.init(UNIT_NAME, false, networkDB, dbName,userName,password);
+			MineManagerHelper.init(UNIT_NAME, createTables, networkDB, dbName,userName,password);
+
+			if(createTables){
+				BBATInternalProperties.getInstance().setDatabaseCreate(false);
+				BBATInternalProperties.getInstance().save();
+			}
 		}
 	}
 
