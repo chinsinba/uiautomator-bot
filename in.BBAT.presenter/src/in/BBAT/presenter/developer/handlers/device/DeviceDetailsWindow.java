@@ -14,6 +14,7 @@ import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerFilter;
+import org.eclipse.jface.viewers.ViewerSorter;
 import org.eclipse.jface.window.ApplicationWindow;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.ModifyEvent;
@@ -62,10 +63,13 @@ public class DeviceDetailsWindow extends ApplicationWindow {
 		devDetailsViewer.getTable().setLinesVisible(true);
 		devDetailsViewer.getTable().setHeaderVisible(true);
 		createRunColumns(comp, devDetailsViewer);
+		devDetailsViewer.setSorter(new DeviceDetailsSorter());
 		devDetailsViewer.setInput(propertySet);
 		devDetailsViewer.setLabelProvider(new PropertyLabelProvider());
 		filter = new DeviceDetailsFilter();
 		devDetailsViewer.addFilter(filter);
+
+
 		devDetailsViewer.getTable().setFocus();
 	}
 
@@ -147,6 +151,22 @@ public class DeviceDetailsWindow extends ApplicationWindow {
 		}
 
 	}
+
+	class DeviceDetailsSorter extends ViewerSorter
+	{
+
+		@Override
+		public int compare(Viewer viewer, Object mapEntry1, Object mapEntry2) {
+
+			Entry<String, String> entry1 = (Map.Entry<String, String>)mapEntry1;
+			Entry<String, String> entry2 = (Map.Entry<String, String>)mapEntry2;
+			if(entry1.getKey().compareTo(entry2.getKey())>0){
+				return 1;
+			}
+			return -1;
+		}
+	}
+
 
 	class PropertyLabelProvider  extends LabelProvider implements ITableLabelProvider
 	{
