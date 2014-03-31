@@ -51,7 +51,7 @@ public abstract class AbstractEntity implements IBBATEntity {
 	}
 
 
-	public void saveAll(List<Object> objectList){
+	public void saveAll(List<? extends Object> objectList){
 		MineManager.getInstance().persistAll(objectList);
 	}
 }
