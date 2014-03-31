@@ -298,29 +298,40 @@ public class TestRunInstanceModel extends AbstractTreeModel {
 	public void saveDeviceLogsInBatch(LogCatMessage message){
 
 		DeviceLogModel log  = new DeviceLogModel(this,message);
-		deviceLogs.add(log);
-
-		if(deviceLogs.size()>10){
-			getEntity().saveAll(deviceLogs);
-			deviceLogs.clear();
+		synchronized (deviceLogs) {
+			deviceLogs.add(log);
+			if(deviceLogs.size()>10){
+				getEntity().saveAll(deviceLogs);
+				deviceLogs.clear();
+			}
 		}
+
 	}
 
 	public void flushAll(){
-		getEntity().saveAll(autoLogs);
-		getEntity().saveAll(deviceLogs);
-		autoLogs.clear();
-		deviceLogs.clear();
+		synchronized (autoLogs) {
+			getEntity().saveAll(autoLogs);
+			autoLogs.clear();
+		}
+
+		synchronized (deviceLogs) {
+			getEntity().saveAll(deviceLogs);
+			deviceLogs.clear();
+		}
+
 	}
 
 
 	public void saveUIAutoLogsInBatch(String line){
 		AutomatorLogModel log = new AutomatorLogModel(this,line);
-		autoLogs.add(log);
-		if(autoLogs.size()>10){
-			getEntity().saveAll(autoLogs);
-			autoLogs.clear();
+		synchronized (log) {
+			autoLogs.add(log);
+			if(autoLogs.size()>10){
+				getEntity().saveAll(autoLogs);
+				autoLogs.clear();
+			}
 		}
+
 	}
 
 }
