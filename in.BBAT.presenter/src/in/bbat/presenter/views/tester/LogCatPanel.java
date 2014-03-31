@@ -16,6 +16,7 @@
 
 package in.bbat.presenter.views.tester;
 
+import in.BBAT.abstrakt.presenter.run.model.TestRunInstanceModel;
 import in.bbat.logger.BBATLogger;
 
 import java.io.BufferedWriter;
@@ -68,6 +69,7 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
+import org.eclipse.swt.widgets.DirectoryDialog;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.FileDialog;
@@ -221,7 +223,7 @@ public final class LogCatPanel implements ILogCatBufferChangeListener {
 	private int mDeletedLogCount;
 
 	private List<LogCatMessage> originalMessages;
-	
+
 	private static final Logger LOG = BBATLogger.getLogger(LogCatPanel.class.getName());
 	/**
 	 * Construct a logcat panel.
@@ -408,11 +410,11 @@ public final class LogCatPanel implements ILogCatBufferChangeListener {
 	private void createViews(Composite parent) {
 		mSash = createSash(parent);
 
-//		createListOfFilters(mSash);
+		//		createListOfFilters(mSash);
 		createLogTableView(mSash);
 
-//		boolean showFilters = mPrefStore.getBoolean(DISPLAY_FILTERS_COLUMN_PREFKEY);
-//		updateFiltersColumn(showFilters);
+		//		boolean showFilters = mPrefStore.getBoolean(DISPLAY_FILTERS_COLUMN_PREFKEY);
+		//		updateFiltersColumn(showFilters);
 	}
 
 	private SashForm createSash(Composite parent) {
@@ -769,10 +771,15 @@ public final class LogCatPanel implements ILogCatBufferChangeListener {
 			return;
 		}
 
-		/* obtain list of selected messages */
+		try {
+			model.exportDeviceLogs(fName);
+		} catch (IOException e) {
+			LOG.error(e);
+		}
+		/* obtain list of selected messages 
 		final List<LogCatMessage> selectedMessages = getSelectedLogCatMessages();
 
-		/* save messages to file in a different (non UI) thread */
+		 save messages to file in a different (non UI) thread 
 		Thread t = new Thread(new Runnable() {
 			@Override
 			public void run() {
@@ -805,7 +812,7 @@ public final class LogCatPanel implements ILogCatBufferChangeListener {
 			}
 		});
 		t.setName("Saving selected items to logfile..");
-		t.start();
+		t.start();*/
 	}
 
 	/**
@@ -813,22 +820,22 @@ public final class LogCatPanel implements ILogCatBufferChangeListener {
 	 * @return path to target file, null if user canceled the dialog
 	 */
 	private String getLogFileTargetLocation() {
-		FileDialog fd = new FileDialog(Display.getCurrent().getActiveShell(), SWT.SAVE);
+		DirectoryDialog fd = new DirectoryDialog(Display.getCurrent().getActiveShell(), SWT.SAVE);
 
 		fd.setText("Save Log..");
-		fd.setFileName("log.txt");
+		//		fd.setFileName("log.txt");
 
 		if (mLogFileExportFolder == null) {
 			mLogFileExportFolder = System.getProperty("user.home");
 		}
 		fd.setFilterPath(mLogFileExportFolder);
-
+		/*
 		fd.setFilterNames(new String[] {
 				"Text Files (*.txt)"
 		});
 		fd.setFilterExtensions(new String[] {
 				"*.txt"
-		});
+		});*/
 
 		String fName = fd.open();
 		if (fName != null) {
@@ -1023,7 +1030,7 @@ public final class LogCatPanel implements ILogCatBufferChangeListener {
 				}
 			}
 		};
-*/
+		 */
 		final Action findAction = new Action("Find...") {
 			@Override
 			public void run() {
@@ -1032,7 +1039,7 @@ public final class LogCatPanel implements ILogCatBufferChangeListener {
 		};
 
 		final MenuManager mgr = new MenuManager();
-//		mgr.add(filterAction);
+		//		mgr.add(filterAction);
 		mgr.add(findAction);
 		final Menu menu = mgr.createContextMenu(table);
 
@@ -1603,6 +1610,8 @@ public final class LogCatPanel implements ILogCatBufferChangeListener {
 
 	private FindDialog mFindDialog;
 	private LogcatFindTarget mFindTarget = new LogcatFindTarget();
+
+	private TestRunInstanceModel model;
 	public void showFindDialog() {
 		if (mFindDialog != null) {
 			// if the dialog is already displayed
@@ -1622,5 +1631,9 @@ public final class LogCatPanel implements ILogCatBufferChangeListener {
 
 	public Table getmTable() {
 		return mTable;
+	}
+
+	public void setTestRunInstance(TestRunInstanceModel testRunInstanceModel) {
+		model = testRunInstanceModel;		
 	}
 }

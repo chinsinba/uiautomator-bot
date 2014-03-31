@@ -53,6 +53,7 @@ public class AutomatorLogView extends BBATViewPart {
 
 	private Text searchText;
 	private TestRunInstanceModel selectedModel;
+	private String mLogFileExportFolder;
 
 	private static final String IMAGE_SAVE_LOG_TO_FILE = "save.png";
 
@@ -142,7 +143,7 @@ public class AutomatorLogView extends BBATViewPart {
 		if (fName == null) {
 			return;
 		}
-		
+
 		try {
 			selectedModel.exportUIAutoLogs(fName);
 		} catch (IOException e) {
@@ -151,19 +152,31 @@ public class AutomatorLogView extends BBATViewPart {
 
 	}
 
-	/**
-	 * Display a {@link FileDialog} to the user and obtain the location for the log file.
-	 * @return path to target file, null if user canceled the dialog
-	 */
 	private String getLogFileTargetLocation() {
 		DirectoryDialog fd = new DirectoryDialog(Display.getCurrent().getActiveShell(), SWT.SAVE);
 
 		fd.setText("Save Log..");
+		//		fd.setFileName("log.txt");
 
-		fd.setFilterPath(System.getProperty("user.home"));
+		if (mLogFileExportFolder == null) {
+			mLogFileExportFolder = System.getProperty("user.home");
+		}
+		fd.setFilterPath(mLogFileExportFolder);
+		/*
+		fd.setFilterNames(new String[] {
+				"Text Files (*.txt)"
+		});
+		fd.setFilterExtensions(new String[] {
+				"*.txt"
+		});*/
 
 		String fName = fd.open();
+		if (fName != null) {
+			mLogFileExportFolder = fd.getFilterPath();  /* save path to restore on future calls */
+		}
+
 		return fName;
+
 	}
 
 

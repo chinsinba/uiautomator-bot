@@ -188,32 +188,41 @@ public class TestRunInstanceModel extends AbstractTreeModel {
 
 	public void exportUIAutoLogs(String autoLogPath) throws IOException{
 		FileWriter autoFw = new FileWriter(autoLogPath+Path.SEPARATOR+"UIautomator.log");
-		for( AutomatorLogEntity entity :LogsMineManager.getAutoLogs((TestRunInfoEntity) getEntity())){
-			autoFw.write(entity.getMessage()+"\n");
+		try{
+			for( AutomatorLogEntity entity :LogsMineManager.getAutoLogs((TestRunInfoEntity) getEntity())){
+				autoFw.write(entity.getMessage()+"\n");
+			}
+		}finally
+		{
+			autoFw.close();	
 		}
-		autoFw.close();
+
 	}
 
 	public void exportDeviceLogs(String deviceLogPath) throws IOException{
 		FileWriter devicefr = new FileWriter(deviceLogPath+Path.SEPARATOR+"Device.log");
-		for( TestDeviceLogEntity entity :LogsMineManager.getDeviceLogs((TestRunInfoEntity) getEntity())){
-			StringBuffer buffer = new StringBuffer(entity.getmLogLevel());
-			buffer.append(" ");
-			buffer.append(entity.getmPid());
-			buffer.append(" ");
-			buffer.append(entity.getmTid());
-			buffer.append(" ");
-			buffer.append(entity.getmAppName());
-			buffer.append(" ");
-			buffer.append(entity.getmTag());
-			buffer.append(" ");
-			buffer.append(entity.getmTime());
-			buffer.append(" ");
-			buffer.append( entity.getmMessage());
-			buffer.append("\n");
-			devicefr.write(buffer.toString());
+
+		try{
+			for( TestDeviceLogEntity entity :LogsMineManager.getDeviceLogs((TestRunInfoEntity) getEntity())){
+				StringBuffer buffer = new StringBuffer(entity.getmLogLevel());
+				buffer.append(" ");
+				buffer.append(entity.getmPid());
+				buffer.append(" ");
+				buffer.append(entity.getmTid());
+				buffer.append(" ");
+				buffer.append(entity.getmAppName());
+				buffer.append(" ");
+				buffer.append(entity.getmTag());
+				buffer.append(" ");
+				buffer.append(entity.getmTime());
+				buffer.append(" ");
+				buffer.append( entity.getmMessage());
+				buffer.append("\n");
+				devicefr.write(buffer.toString());
+			}
+		}finally{
+			devicefr.close();
 		}
-		devicefr.close();
 	}
 
 	public void exportLogs(String exportDirectory,boolean zip) throws IOException{

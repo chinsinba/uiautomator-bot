@@ -78,6 +78,7 @@ public class TestLogView extends BBATViewPart {
 
 	public void setInput(TestRunInstanceModel testRunInstanceModel) {
 		setName("Device Logs: "+testRunInstanceModel.getTestCaseEntity().getName());
+		getPanel().setTestRunInstance(testRunInstanceModel);
 		bufferChanged((testRunInstanceModel).getDeviceLogsFromDB(), new ArrayList<LogCatMessage>());		
 	}
 
