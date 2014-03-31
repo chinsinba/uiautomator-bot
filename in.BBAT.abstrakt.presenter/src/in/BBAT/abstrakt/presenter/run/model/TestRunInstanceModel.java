@@ -42,6 +42,10 @@ public class TestRunInstanceModel extends AbstractTreeModel {
 	private TestCaseModel testCaseModel ;
 	private boolean showLogs;
 
+	private List<DeviceLogModel> deviceLogs = new ArrayList<DeviceLogModel>();
+
+	private List<AutomatorLogModel> autoLogs = new ArrayList<AutomatorLogModel>();
+
 	protected TestRunInstanceModel(TestDeviceRunModel parent,TestRunInfoEntity entity) {
 		super(parent,entity);
 	}
@@ -118,18 +122,6 @@ public class TestRunInstanceModel extends AbstractTreeModel {
 	public void setShowLogs(boolean showLogs) {
 		this.showLogs = showLogs;
 	}
-
-
-
-	/*	public void addDeviceLog(DeviceLogModel log){
-		deviceLogs.add(log);
-	}
-
-
-	public List<DeviceLogModel> getDeviceLogs(){
-		return deviceLogs;
-	}*/
-
 
 
 	public void setTimeTaken(long timeTaken)
@@ -291,6 +283,16 @@ public class TestRunInstanceModel extends AbstractTreeModel {
 
 	public List<CpuUsageEntity> getCpuUsageValues(){
 		return ((TestRunInfoEntity)getEntity()).getCpuVals();
+	}
+
+	public void saveDeviceLog(LogCatMessage message) {
+		DeviceLogModel log  = new DeviceLogModel(this,message);
+		log.save();		
+	}
+
+	public void saveAutoLog(String line) {
+		AutomatorLogModel log = new AutomatorLogModel(this,line);
+		log.save();		
 	}
 
 }

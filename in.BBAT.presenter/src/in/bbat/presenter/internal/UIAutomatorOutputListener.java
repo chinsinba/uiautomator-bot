@@ -23,8 +23,8 @@ public class UIAutomatorOutputListener implements IUiAutomatorListener {
 
 	@Override
 	public void processLine(String line) {
-		AutomatorLogModel log = new AutomatorLogModel(runInstance,line);
-		log.save();
+		runInstance.saveAutoLog(line);
+		
 //		runInstance.addAutoLog(log);
 
 

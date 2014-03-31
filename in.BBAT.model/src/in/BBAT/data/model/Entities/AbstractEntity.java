@@ -26,28 +26,32 @@ public abstract class AbstractEntity implements IBBATEntity {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
-	
+
+
 	@Override
 	public List<? extends AbstractEntity> getChildren() {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
+
 	@Override
 	public void addChild(IBBATEntity childEntity) {
 		// TODO Auto-generated method stub
-		
+
 	}
-	
-	
+
+
 	@Override
 	public void removeChild(IBBATEntity childEntity) {
-		
+
 	}
 
 	public int getId() {
 		return 0;
 	}
-	
+
+
+	public void saveAll(List<Object> objectList){
+		MineManager.getInstance().persistAll(objectList);
+	}
 }

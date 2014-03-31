@@ -30,7 +30,6 @@ public class DeviceLogListener implements ILogListener, IScreenShotListener{
 
 	private static final Logger LOG = BBATLogger.getLogger(DeviceLogListener.class.getName());
 	private TestRunInstanceModel testRunCase;
-	private List<LogCatMessage> tempLogCatMessageList = new ArrayList<LogCatMessage>();
 
 	private int no =0;
 
@@ -41,9 +40,9 @@ public class DeviceLogListener implements ILogListener, IScreenShotListener{
 	@Override
 	public void processLogLine(final List<LogCatMessage> logMessages) {
 		for(LogCatMessage message : logMessages){
-			tempLogCatMessageList.add(message);
-			DeviceLogModel log  = new DeviceLogModel(testRunCase,message);
-			log.save();
+			testRunCase.saveDeviceLog(message);
+			/*DeviceLogModel log  = new DeviceLogModel(testRunCase,message);
+			log.save();*/
 //			testRunCase.addDeviceLog(log);
 		}
 	}

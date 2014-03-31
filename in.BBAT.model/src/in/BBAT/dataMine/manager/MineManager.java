@@ -7,6 +7,7 @@ import in.bbat.logger.BBATLogger;
 import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.util.List;
 
 
 import javax.persistence.EntityManager;
@@ -75,38 +76,54 @@ public class MineManager {
 	public  void persist(Object object)
 	{
 		EntityManager em = MineManagerHelper.getInstance().getEmFactory().createEntityManager();
-		if(em==null)
-		{	
-
+		try{
+			em.getTransaction().begin();
+			em.persist(object);
+			em.getTransaction().commit();
+		}finally
+		{
+			if(em.getTransaction().isActive()){
+				em.getTransaction().rollback();
+			}
+			em.close();
 		}
-		em.getTransaction().begin();
-		em.persist(object);
-		em.getTransaction().commit();
+
 	}
 
 	public  Object merge(Object object)
 	{
 		EntityManager em = MineManagerHelper.getInstance().getEmFactory().createEntityManager();
-		if(em==null)
-		{	
+		Object obj = null;
+		try{
+			em.getTransaction().begin();
+			obj =em.merge(object);
+			em.getTransaction().commit();
+		}finally
+		{
 
+			if(em.getTransaction().isActive()){
+				em.getTransaction().rollback();
+			}
+			em.close();
 		}
-		em.getTransaction().begin();
-		Object obj =em.merge(object);
-		em.getTransaction().commit();
 		return obj;
 	}
 
 	public  void remove(Object object)
 	{
 		EntityManager em = MineManagerHelper.getInstance().getEmFactory().createEntityManager();
-		if(em==null)
-		{	
+		try{
+			em.getTransaction().begin();
+			em.remove(em.merge(object));
+			em.getTransaction().commit();
+		}finally
+		{
 
+			if(em.getTransaction().isActive()){
+				em.getTransaction().rollback();
+			}
+			em.close();
 		}
-		em.getTransaction().begin();
-		em.remove(em.merge(object));
-		em.getTransaction().commit();
 	}
 
 
@@ -125,5 +142,25 @@ public class MineManager {
 			}catch (Exception e) {
 			}
 		}
+	}
+
+	public void persistAll(List<Object> objectList) {
+
+		EntityManager em = MineManagerHelper.getInstance().getEmFactory().createEntityManager();
+		try{
+			em.getTransaction().begin();
+			for (Object object : objectList) {
+				em.persist(object);
+			}
+			em.getTransaction().commit();
+		}finally
+		{
+			if(em.getTransaction().isActive()){
+				em.getTransaction().rollback();
+			}
+			em.close();
+		}
+
+
 	}
 }
