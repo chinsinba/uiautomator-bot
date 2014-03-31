@@ -25,6 +25,11 @@ public class ExportScriptsHandler extends AbstractTestCaseBrowserHandler {
 
 
 	@Override
+	protected boolean canBeEnabled() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+	@Override
 	public boolean isEnabled(List<?> object) {
 		if(object==null){
 			return false;
