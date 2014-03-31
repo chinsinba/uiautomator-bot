@@ -144,7 +144,7 @@ public class MineManager {
 		}
 	}
 
-	public void persistAll(List<Object> objectList) {
+	public void persistAll(List<? extends Object> objectList) {
 
 		EntityManager em = MineManagerHelper.getInstance().getEmFactory().createEntityManager();
 		try{
