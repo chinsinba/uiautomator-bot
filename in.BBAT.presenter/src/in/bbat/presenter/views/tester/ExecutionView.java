@@ -82,6 +82,10 @@ public class ExecutionView extends BBATViewPart {
 
 			@Override
 			public void doubleClick(DoubleClickEvent event) {
+//				run(event);	
+			}
+
+			private void run(DoubleClickEvent event) {
 				try {
 					final Object sel = ((IStructuredSelection)event.getSelection()).getFirstElement();
 					((TestRunInstanceModel)sel).setShowLogs(true);
@@ -139,7 +143,7 @@ public class ExecutionView extends BBATViewPart {
 					}
 				} catch (Exception e) {
 					LOG.error(e);
-				}	
+				}
 			}
 		});
 
