@@ -17,6 +17,10 @@ public class BBATInternalProperties {
 
 	public static final String DATABASE_UPDATE ="DATABASE.UPDATE";
 
+	public static final String TOOL_INSTALLED_VERSION ="TOOL.INSTALLED.VERSION";
+
+	public static final String TOOL_LAST_UPDATED_VERSION ="TOOL.LAST.UPDATED.VERSION";
+
 
 	private static BBATInternalProperties instance;
 
@@ -56,6 +60,14 @@ public class BBATInternalProperties {
 
 	public void save() throws FileNotFoundException, IOException {
 		bbatInternalProperty.store(new FileOutputStream(FILE), "");		
+	}
+
+	public  String getToolInstalledVersion(){
+		return bbatInternalProperty.getProperty(TOOL_INSTALLED_VERSION);
+	}
+
+	public  String getToolLastUpdatedVersion(){
+		return bbatInternalProperty.getProperty(TOOL_LAST_UPDATED_VERSION);
 	}
 
 }
