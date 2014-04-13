@@ -3,7 +3,6 @@ package in.bbat.presenter;
 
 import in.BBAT.abstrakt.presenter.pkg.model.BBATProject;
 import in.bbat.configuration.BBATProperties;
-import in.bbat.configuration.BBATProperties;
 import in.bbat.logger.BBATLogger;
 import in.bbat.utility.FileUtils;
 
@@ -12,7 +11,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 
-import javax.xml.bind.JAXBException;
 
 import org.apache.log4j.Logger;
 import org.eclipse.jface.dialogs.IMessageProvider;

@@ -110,7 +110,7 @@ public class ApplicationWorkbenchWindowAdvisor extends WorkbenchWindowAdvisor {
 		"org.eclipse.jdt.ui.JavaPerspective", "org.eclipse.jdt.ui.JavaHierarchyPerspective",
 		"org.eclipse.jdt.ui.JavaBrowsingPerspective", "org.eclipse.mylyn.tasks.ui.perspectives.planning",
 		"org.eclipse.pde.ui.PDEPerspective", "org.eclipse.team.cvs.ui.cvsPerspective",
-		"org.eclipse.ui.resourcePerspective","org.eclipse.team.ui.TeamSynchronizingPerspective" }; 
+		"org.eclipse.ui.resourcePerspective","org.eclipse.team.ui.TeamSynchronizingPerspective",ReporterPerspective.ID }; 
 
 	@Override
 	public void postWindowCreate() {
