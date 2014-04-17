@@ -44,4 +44,8 @@ public class DeviceLogModel {
 		deviceLog.save();
 	}
 
+	public void saveAll(){
+
+	}
+
 }

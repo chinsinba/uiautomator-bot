@@ -9,9 +9,9 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.PlatformUI;
 
 import in.BBAT.presenter.developer.handlers.BBATHandler;
+import in.BBAT.presenter.perstpectives.DeveloperPerspective;
+import in.BBAT.presenter.views.developer.TestCaseBrowserView;
 import in.bbat.logger.BBATLogger;
-import in.bbat.presenter.perstpectives.DeveloperPerspective;
-import in.bbat.presenter.views.developer.TestCaseBrowserView;
 
 public abstract class AbstractTestCaseBrowserHandler extends BBATHandler {
 

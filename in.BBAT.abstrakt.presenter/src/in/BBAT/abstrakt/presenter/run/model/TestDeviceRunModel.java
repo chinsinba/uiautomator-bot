@@ -7,6 +7,7 @@ import java.sql.Timestamp;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.swt.graphics.Image;
 
+import in.BBAT.abstrakt.gui.BBATImageManager;
 import in.BBAT.abstrakt.gui.model.AbstractTreeModel;
 import in.BBAT.abstrakt.gui.model.IGUITreeNode;
 import in.BBAT.abstrakt.presenter.device.model.AndroidDevice;
@@ -16,7 +17,6 @@ import in.BBAT.data.model.Entities.TestDeviceEntity;
 import in.BBAT.data.model.Entities.TestDeviceRunEntity;
 import in.BBAT.data.model.Entities.TestRunEntity;
 import in.BBAT.data.model.Entities.TestRunInfoEntity;
-import in.bbat.abstrakt.gui.BBATImageManager;
 import in.bbat.configuration.BBATProperties;
 
 public class TestDeviceRunModel extends AbstractTreeModel {

@@ -1,11 +1,11 @@
 package in.BBAT.presenter.developer.handlers.device;
 
 import in.BBAT.abstrakt.presenter.pkg.model.TestProjectManager;
+import in.BBAT.presenter.dialogs.IPAdressAndPortDialog;
 import in.BBAT.presenter.wizards.ImportTestProjectWizard;
 import in.BBAT.presenter.wizards.WifiConnectingWizard;
 import in.bbat.configuration.BBATProperties;
 import in.bbat.logger.BBATLogger;
-import in.bbat.presenter.dialogs.IPAdressAndPortDialog;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;

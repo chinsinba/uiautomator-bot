@@ -1,10 +1,10 @@
 package in.BBAT.presenter.tester.handlers;
 
 import in.BBAT.abstrakt.presenter.run.model.TestRunCaseModel;
+import in.BBAT.presenter.internal.DeviceTestRun;
+import in.BBAT.presenter.internal.TestRunExecutionManager;
+import in.BBAT.presenter.views.tester.TestRunnerView;
 import in.bbat.logger.BBATLogger;
-import in.bbat.presenter.internal.DeviceTestRun;
-import in.bbat.presenter.internal.TestRunExecutionManager;
-import in.bbat.presenter.views.tester.TestRunnerView;
 
 import java.util.List;
 

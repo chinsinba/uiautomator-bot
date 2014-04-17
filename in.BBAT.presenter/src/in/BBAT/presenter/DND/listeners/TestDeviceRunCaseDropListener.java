@@ -7,10 +7,10 @@ import java.util.List;
 import in.BBAT.abstrakt.gui.model.AbstractTreeModel;
 import in.BBAT.abstrakt.presenter.pkg.model.AbstractProjectTree;
 import in.BBAT.abstrakt.presenter.run.model.TestRunCaseModel;
+import in.BBAT.presenter.internal.DeviceTestRun;
+import in.BBAT.presenter.views.BBATViewPart;
+import in.BBAT.presenter.views.tester.TestRunnerView;
 import in.bbat.logger.BBATLogger;
-import in.bbat.presenter.internal.DeviceTestRun;
-import in.bbat.presenter.views.BBATViewPart;
-import in.bbat.presenter.views.tester.TestRunnerView;
 
 import org.apache.log4j.Logger;
 import org.eclipse.jface.viewers.ISelection;

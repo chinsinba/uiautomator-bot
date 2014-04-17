@@ -1,10 +1,10 @@
 package in.BBAT.presenter.history.handlers;
 
 import in.BBAT.abstrakt.presenter.run.model.TestRunInstanceModel;
+import in.BBAT.presenter.views.BBATViewPart;
+import in.BBAT.presenter.views.tester.MemoryCPUUsageView;
+import in.BBAT.presenter.views.tester.ScreenShotView;
 import in.bbat.logger.BBATLogger;
-import in.bbat.presenter.views.BBATViewPart;
-import in.bbat.presenter.views.tester.MemoryCPUUsageView;
-import in.bbat.presenter.views.tester.ScreenShotView;
 
 import java.util.List;
 

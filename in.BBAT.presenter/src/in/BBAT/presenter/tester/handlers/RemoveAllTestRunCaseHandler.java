@@ -1,14 +1,14 @@
 package in.BBAT.presenter.tester.handlers;
 
+import in.BBAT.presenter.internal.TestRunExecutionManager;
+import in.BBAT.presenter.views.BBATViewPart;
+import in.BBAT.presenter.views.tester.AutomatorLogView;
+import in.BBAT.presenter.views.tester.DeviceLogView;
+import in.BBAT.presenter.views.tester.ExecutionView;
+import in.BBAT.presenter.views.tester.ScreenShotView;
+import in.BBAT.presenter.views.tester.TestLogView;
+import in.BBAT.presenter.views.tester.TestRunnerView;
 import in.bbat.logger.BBATLogger;
-import in.bbat.presenter.internal.TestRunExecutionManager;
-import in.bbat.presenter.views.BBATViewPart;
-import in.bbat.presenter.views.tester.AutomatorLogView;
-import in.bbat.presenter.views.tester.DeviceLogView;
-import in.bbat.presenter.views.tester.ExecutionView;
-import in.bbat.presenter.views.tester.ScreenShotView;
-import in.bbat.presenter.views.tester.TestLogView;
-import in.bbat.presenter.views.tester.TestRunnerView;
 
 import java.util.List;
 

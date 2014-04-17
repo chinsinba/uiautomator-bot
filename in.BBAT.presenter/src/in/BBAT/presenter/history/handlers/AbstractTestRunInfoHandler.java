@@ -9,9 +9,9 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.PlatformUI;
 
 import in.BBAT.presenter.developer.handlers.BBATHandler;
+import in.BBAT.presenter.views.history.TestRunHistoryView;
+import in.BBAT.presenter.views.history.TestRunInfoView;
 import in.bbat.logger.BBATLogger;
-import in.bbat.presenter.views.history.TestRunHistoryView;
-import in.bbat.presenter.views.history.TestRunInfoView;
 
 public abstract class AbstractTestRunInfoHandler extends BBATHandler {
 

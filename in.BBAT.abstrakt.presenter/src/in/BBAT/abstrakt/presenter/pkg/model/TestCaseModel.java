@@ -3,6 +3,8 @@ package in.BBAT.abstrakt.presenter.pkg.model;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
+import in.BBAT.abstrakt.gui.Activator;
+import in.BBAT.abstrakt.gui.BBATImageManager;
 import in.BBAT.abstrakt.presenter.run.model.TestRunModel;
 import in.BBAT.data.model.Entities.TestCaseEntity;
 import in.BBAT.data.model.Entities.TestProjectEntity;
@@ -10,8 +12,6 @@ import in.BBAT.data.model.Entities.TestRunEntity;
 import in.BBAT.data.model.Entities.TestSuiteEntity;
 import in.BBAT.dataMine.manager.ProjectMineManager;
 import in.BBAT.dataMine.manager.TestCaseMineManager;
-import in.bbat.abstrakt.gui.Activator;
-import in.bbat.abstrakt.gui.BBATImageManager;
 import in.bbat.logger.BBATLogger;
 import in.bbat.utility.BBATPluginUtility;
 

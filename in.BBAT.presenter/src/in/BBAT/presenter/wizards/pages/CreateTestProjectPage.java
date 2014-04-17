@@ -3,10 +3,10 @@ package in.BBAT.presenter.wizards.pages;
 import in.BBAT.abstrakt.gui.model.AbstractTreeModel;
 import in.BBAT.abstrakt.presenter.pkg.model.TestProjectManager;
 import in.BBAT.abstrakt.presenter.pkg.model.TestProjectModel;
+import in.BBAT.utils.AndroidXmlParser;
 import in.bbat.configuration.BBATProperties;
 import in.bbat.logger.BBATLogger;
 import in.bbat.utility.AndroidSdkUtility;
-import in.bbat.utils.AndroidXmlParser;
 
 import java.util.List;
 

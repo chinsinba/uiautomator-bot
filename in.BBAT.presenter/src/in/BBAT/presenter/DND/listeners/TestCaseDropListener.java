@@ -6,11 +6,11 @@ import in.BBAT.abstrakt.presenter.pkg.model.AbstractProjectTree;
 import in.BBAT.abstrakt.presenter.pkg.model.TestCaseModel;
 import in.BBAT.abstrakt.presenter.pkg.model.TestSuiteModel;
 import in.BBAT.abstrakt.presenter.run.model.TestRunCaseModel;
+import in.BBAT.presenter.internal.DeviceTestRun;
+import in.BBAT.presenter.internal.TestRunExecutionManager;
+import in.BBAT.presenter.views.BBATViewPart;
+import in.BBAT.presenter.views.tester.TestRunnerView;
 import in.bbat.logger.BBATLogger;
-import in.bbat.presenter.internal.DeviceTestRun;
-import in.bbat.presenter.internal.TestRunExecutionManager;
-import in.bbat.presenter.views.BBATViewPart;
-import in.bbat.presenter.views.tester.TestRunnerView;
 
 import java.util.ArrayList;
 import java.util.Iterator;

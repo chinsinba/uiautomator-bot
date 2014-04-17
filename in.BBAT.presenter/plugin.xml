@@ -7,32 +7,32 @@
          point="org.eclipse.core.runtime.applications">
       <application>
          <run
-               class="in.bbat.presenter.Application">
+               class="in.BBAT.presenter.Application">
          </run>
       </application>
    </extension>
    <extension
          point="org.eclipse.ui.perspectives">
       <perspective
-            class="in.bbat.presenter.perstpectives.DeveloperPerspective"
+            class="in.BBAT.presenter.perstpectives.DeveloperPerspective"
             icon="icons/developer.png"
             id="in.BBAT.presenter.perspective.developer"
             name="Developer">
       </perspective>
       <perspective
-            class="in.bbat.presenter.perstpectives.TesterPerspective"
+            class="in.BBAT.presenter.perstpectives.TesterPerspective"
             icon="icons/execute.gif"
             id="in.BBAT.presenter.perspective.tester"
             name="Tester">
       </perspective>
       <perspective
-            class="in.bbat.presenter.perstpectives.ReporterPerspective"
+            class="in.BBAT.presenter.perstpectives.ReporterPerspective"
             icon="icons/reporter.png"
             id="in.BBAT.presenter.perspective.reporter"
             name="Reporter">
       </perspective>
       <perspective
-            class="in.bbat.presenter.perstpectives.HistoryPerspective"
+            class="in.BBAT.presenter.perstpectives.HistoryPerspective"
             icon="icons/history.png"
             id="in.BBAT.presenter.perspective.history"
             name="History">
@@ -41,13 +41,13 @@
    <extension
          point="org.eclipse.ui.views">
       <view
-            class="in.bbat.presenter.views.developer.TestCaseBrowserView"
+            class="in.BBAT.presenter.views.developer.TestCaseBrowserView"
             icon="icons/package.gif"
             id="in.BBAT.presenter.developer.testcaseBrowserView"
             name="TestCase Browser">
       </view>
       <view
-            class="in.bbat.presenter.views.developer.DeveloperDeviceView"
+            class="in.BBAT.presenter.views.developer.DeveloperDeviceView"
             icon="icons/Android_device.png"
             id="in.BBAT.presenter.developer.deviceView"
             name="Connected Devices"
@@ -55,103 +55,103 @@
       </view>
       <view
             allowMultiple="false"
-            class="in.bbat.presenter.views.developer.ScreenShotView"
+            class="in.BBAT.presenter.views.developer.ScreenShotView"
             icon="icons/screenshot.png"
             id="in.BBAT.presenter.developer.screenShotView"
             name="UI Automator View"
             restorable="true">
       </view>
       <view
-            class="in.bbat.presenter.views.developer.UiTreeView"
+            class="in.BBAT.presenter.views.developer.UiTreeView"
             id="in.BBAT.presenter.developer.uitreeView"
             name="UITree"
             restorable="true">
       </view>
       <view
-            class="in.bbat.presenter.views.developer.NodesView"
+            class="in.BBAT.presenter.views.developer.NodesView"
             id="in.BBAT.presenter.developer.nodeDetailView"
             name="Nodes"
             restorable="true">
       </view>
       <view
-            class="in.bbat.presenter.views.tester.TestRunnerView"
+            class="in.BBAT.presenter.views.tester.TestRunnerView"
             icon="icons/execute.png"
             id="in.BBAT.presenter.tester.TestRunnerView"
             name="TestRunner"
             restorable="true">
       </view>
       <view
-            class="in.bbat.presenter.views.tester.TestLogView"
+            class="in.BBAT.presenter.views.tester.TestLogView"
             icon="icons/android.png"
             id="in.BBAT.presenter.tester.AndroidLogView"
             name="Android Logs"
             restorable="true">
       </view>
       <view
-            class="in.bbat.presenter.views.tester.AutomatorLogView"
+            class="in.BBAT.presenter.views.tester.AutomatorLogView"
             icon="icons/logs.png"
             id="in.BBAT.presenter.tester.AutoLogView"
             name="UIAutomator Logs"
             restorable="true">
       </view>
       <view
-            class="in.bbat.presenter.views.history.TestRunHistoryView"
+            class="in.BBAT.presenter.views.history.TestRunHistoryView"
             icon="icons/run.png"
             id="in.BBAT.presenter.history.TestRunHistoryView"
             name="Test Runs"
             restorable="true">
       </view>
       <view
-            class="in.bbat.presenter.views.history.TestRunInfoView"
+            class="in.BBAT.presenter.views.history.TestRunInfoView"
             icon="icons/Android_device.png"
             id="in.BBAT.presenter.history.TestRunInstanceView"
             name="Device Run"
             restorable="true">
       </view>
       <view
-            class="in.bbat.presenter.views.history.HistoryDeviceLogView"
+            class="in.BBAT.presenter.views.history.HistoryDeviceLogView"
             icon="icons/android.png"
             id="in.BBAT.presenter.history.DeviceLogView"
             name="Device Logs"
             restorable="true">
       </view>
       <view
-            class="in.bbat.presenter.views.history.HistoryAutoLogView"
+            class="in.BBAT.presenter.views.history.HistoryAutoLogView"
             icon="icons/logs.png"
             id="in.BBAT.presenter.history.AutoLogView"
             name="UIAutomator Logs"
             restorable="true">
       </view>
       <view
-            class="in.bbat.presenter.views.tester.DeviceLogView"
+            class="in.BBAT.presenter.views.tester.DeviceLogView"
             icon="icons/android.png"
             id="in.BBAT.presenter.tester.deviceLogView"
             name="Device logs"
             restorable="true">
       </view>
       <view
-            class="in.bbat.presenter.views.tester.ScreenShotView"
+            class="in.BBAT.presenter.views.tester.ScreenShotView"
             icon="icons/screenshotview.png"
             id="in.BBAT.presenter.tester.screenShots"
             name="ScreenShots"
             restorable="true">
       </view>
       <view
-            class="in.bbat.presenter.views.history.ScreenShotHistoryView"
+            class="in.BBAT.presenter.views.history.ScreenShotHistoryView"
             icon="icons/screenshotview.png"
             id="in.BBAT.presenter.history.screenShotsView"
             name="ScreenShots"
             restorable="true">
       </view>
       <view
-            class="in.bbat.presenter.views.tester.ExecutionView"
+            class="in.BBAT.presenter.views.tester.ExecutionView"
             icon="icons/execute.gif"
             id="in.BBAT.presenter.tester.TestExecutionView"
             name="Execution View"
             restorable="true">
       </view>
       <view
-            class="in.bbat.presenter.views.tester.MemoryCPUUsageView"
+            class="in.BBAT.presenter.views.tester.MemoryCPUUsageView"
             icon="icons/mem_cpu_usage.png"
             id="in.BBAT.presenter.tester.MemoryCpuUsageView"
             name="Memory &amp; CPU usage"
@@ -652,7 +652,7 @@
             commandId="in.BBAT.presenter.history.deleteTestRun">
       </handler>
       <handler
-            class="in.bbat.presenter.SettingsHandler"
+            class="in.BBAT.presenter.SettingsHandler"
             commandId="in.BBAT.presenter.Setting">
       </handler>
       <handler

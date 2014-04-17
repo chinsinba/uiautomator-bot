@@ -1,8 +1,8 @@
 package in.BBAT.presenter.labelProviders;
 
 import in.BBAT.abstrakt.presenter.device.model.AndroidDevice;
+import in.BBAT.presenter.internal.DeviceTestRun;
 import in.bbat.logger.BBATLogger;
-import in.bbat.presenter.internal.DeviceTestRun;
 
 import org.apache.log4j.Logger;
 import org.eclipse.jface.viewers.ITableLabelProvider;

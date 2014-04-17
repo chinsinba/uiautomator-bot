@@ -9,8 +9,8 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.PlatformUI;
 
 import in.BBAT.presenter.developer.handlers.BBATHandler;
+import in.BBAT.presenter.views.developer.DeveloperDeviceView;
 import in.bbat.logger.BBATLogger;
-import in.bbat.presenter.views.developer.DeveloperDeviceView;
 
 public abstract class AbstractDeviceViewHandler  extends BBATHandler{
 

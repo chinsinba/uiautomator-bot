@@ -1,10 +1,10 @@
 package in.BBAT.presenter.history.handlers;
 
 import in.BBAT.abstrakt.presenter.run.model.TestRunInstanceModel;
+import in.BBAT.presenter.views.BBATViewPart;
+import in.BBAT.presenter.views.history.HistoryDeviceLogView;
+import in.BBAT.presenter.views.tester.TestLogView;
 import in.bbat.logger.BBATLogger;
-import in.bbat.presenter.views.BBATViewPart;
-import in.bbat.presenter.views.history.HistoryDeviceLogView;
-import in.bbat.presenter.views.tester.TestLogView;
 
 import java.util.ArrayList;
 import java.util.List;

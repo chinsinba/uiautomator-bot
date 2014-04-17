@@ -1,8 +1,8 @@
 package in.BBAT.presenter.developer.handlers.device;
 
 import in.BBAT.abstrakt.presenter.device.model.AndroidDevice;
+import in.BBAT.presenter.views.tester.DeviceLogView;
 import in.bbat.logger.BBATLogger;
-import in.bbat.presenter.views.tester.DeviceLogView;
 
 import java.util.List;
 

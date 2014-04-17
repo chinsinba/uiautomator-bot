@@ -3,10 +3,10 @@ package in.BBAT.presenter.wizards;
 import in.BBAT.abstrakt.presenter.pkg.model.TestProjectModel;
 import in.BBAT.abstrakt.presenter.pkg.model.TestSuiteModel;
 import in.BBAT.dataMine.manager.MineManager;
+import in.BBAT.presenter.views.BBATViewPart;
+import in.BBAT.presenter.views.developer.TestCaseBrowserView;
 import in.BBAT.presenter.wizards.pages.CreateTestSuitePage;
 import in.bbat.logger.BBATLogger;
-import in.bbat.presenter.views.BBATViewPart;
-import in.bbat.presenter.views.developer.TestCaseBrowserView;
 
 import org.apache.log4j.Logger;
 import org.eclipse.jface.wizard.Wizard;

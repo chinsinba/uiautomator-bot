@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Gui
 Bundle-SymbolicName: in.BBAT.abstrakt.presenter
 Bundle-Version: 1.0.0.qualifier
-Bundle-Activator: in.bbat.abstrakt.gui.Activator
+Bundle-Activator: in.BBAT.abstrakt.gui.Activator
 Eclipse-BundleShape: dir
 Require-Bundle: in.BBAT.TestRunner,
  org.eclipse.ui,
@@ -18,7 +18,7 @@ Require-Bundle: in.BBAT.TestRunner,
  org.apache.log4j;bundle-version="1.2.15"
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Export-Package: in.bbat.abstrakt.gui,
+Export-Package: in.BBAT.abstrakt.gui,
  in.BBAT.abstrakt.gui.model,
  in.BBAT.abstrakt.presenter.device.model,
  in.BBAT.abstrakt.presenter.pkg.model,

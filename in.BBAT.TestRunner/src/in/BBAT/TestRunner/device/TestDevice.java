@@ -6,8 +6,8 @@ import in.BBAT.TestRunner.Listener.ILogListener;
 import in.BBAT.TestRunner.Listener.IMemoryUsageListener;
 import in.BBAT.TestRunner.Listener.IScreenShotListener;
 import in.BBAT.TestRunner.Listener.IUiAutomatorListener;
-import in.BBAT.testRunner.runner.UiAutoTestCaseJar;
-import in.BBAT.testRunner.runner.internal.UIAutomatorRunner;
+import in.BBAT.TestRunner.runner.UiAutoTestCaseJar;
+import in.BBAT.TestRunner.runner.internal.UIAutomatorRunner;
 import in.bbat.configuration.BBATProperties;
 import in.bbat.logger.BBATLogger;
 

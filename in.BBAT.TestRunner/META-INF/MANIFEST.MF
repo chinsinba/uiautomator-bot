@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: TestRunner
 Bundle-SymbolicName: in.BBAT.TestRunner
 Bundle-Version: 1.0.0.qualifier
-Bundle-Activator: in.bbat.testrunner.Activator
+Bundle-Activator: in.BBAT.TestRunner.Activator
 Bundle-Vendor: ME
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
@@ -14,7 +14,7 @@ Require-Bundle: org.eclipse.ui,
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: .
-Export-Package: in.BBAT.TestRunner.Listener,
+Export-Package: in.BBAT.TestRunner,
+ in.BBAT.TestRunner.Listener,
  in.BBAT.TestRunner.device,
- in.BBAT.testRunner.runner,
- in.bbat.testrunner
+ in.BBAT.TestRunner.runner

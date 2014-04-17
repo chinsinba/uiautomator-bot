@@ -2,8 +2,8 @@ package in.BBAT.presenter.history.handlers;
 
 import in.BBAT.abstrakt.presenter.run.model.TestDeviceRunModel;
 import in.BBAT.abstrakt.presenter.run.model.TestRunModel;
+import in.BBAT.presenter.views.history.TestRunHistoryView;
 import in.bbat.logger.BBATLogger;
-import in.bbat.presenter.views.history.TestRunHistoryView;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;

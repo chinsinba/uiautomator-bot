@@ -28,7 +28,7 @@
 			<property name="eclipselink.jdbc.password" value="APP" />
 			<property name="eclipselink.ddl-generation.output-mode"
 				value="database" />
-			<property name="eclipselink.logging.level" value="OFF" />
+			<property name="eclipselink.logging.level" value="FINE" />
 			<property name="eclipselink.logging.timestamp" value="false" />
 			<property name="eclipselink.logging.session" value="false" />
 			<property name="eclipselink.logging.thread" value="false" />

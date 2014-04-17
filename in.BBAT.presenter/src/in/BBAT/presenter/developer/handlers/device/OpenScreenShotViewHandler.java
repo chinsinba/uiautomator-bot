@@ -1,8 +1,8 @@
 package in.BBAT.presenter.developer.handlers.device;
 
 import in.BBAT.presenter.developer.handlers.BBATHandler;
+import in.BBAT.presenter.views.developer.ScreenShotView;
 import in.bbat.logger.BBATLogger;
-import in.bbat.presenter.views.developer.ScreenShotView;
 
 import java.util.List;
 
