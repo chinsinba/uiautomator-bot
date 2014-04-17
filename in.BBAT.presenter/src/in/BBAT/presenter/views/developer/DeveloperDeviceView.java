@@ -40,7 +40,7 @@ public class DeveloperDeviceView extends BBATViewPart {
 
 	@Override
 	public void createPartControl(Composite parent) {
-		viewer = new TableViewer(parent, SWT.H_SCROLL| SWT.V_SCROLL);
+		viewer = new TableViewer(parent, SWT.H_SCROLL| SWT.V_SCROLL|SWT.FULL_SELECTION);
 		viewer.getTable().setLinesVisible(true);
 		//		viewer.getTable().setHeaderVisible(true);
 		createRunColumns(parent, viewer);

@@ -71,7 +71,7 @@ public class TestRunInfoView extends BBATViewPart {
 		testRunItem = new CTabItem(testRunFolder, SWT.BORDER);
 		testRunItem.setText("Device ");
 		Composite comp = new Composite(testRunFolder, SWT.None);
-		viewer = new TableViewer(comp, SWT.MULTI | SWT.H_SCROLL| SWT.V_SCROLL);
+		viewer = new TableViewer(comp, SWT.MULTI | SWT.H_SCROLL| SWT.V_SCROLL|SWT.FULL_SELECTION);
 		viewer.setContentProvider(new ArrayContentProvider());
 		viewer.getTable().setLinesVisible(true);
 		viewer.getTable().setHeaderVisible(true);

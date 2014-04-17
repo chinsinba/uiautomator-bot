@@ -148,7 +148,7 @@ public class TestRunnerView extends BBATViewPart {
 		testRunItem.setText("Common Test Cases");
 		testRunItem.setImage(BBATImageManager.getInstance().getImage(BBATImageManager.TESTCASE_GIF_16));
 		Composite comp = new Composite(testRunFolder, SWT.NONE);
-		commonTestCaseViewer = new TableViewer(comp, SWT.MULTI | SWT.H_SCROLL| SWT.V_SCROLL);
+		commonTestCaseViewer = new TableViewer(comp, SWT.MULTI | SWT.H_SCROLL| SWT.V_SCROLL|SWT.FULL_SELECTION);
 		commonTestCaseViewer.setContentProvider(new ArrayContentProvider());
 		commonTestCaseViewer.getTable().setLinesVisible(true);
 		commonTestCaseViewer.getTable().setHeaderVisible(true);
@@ -197,7 +197,7 @@ public class TestRunnerView extends BBATViewPart {
 		testRunItem.setText("Test Devices");
 		testRunItem.setImage(BBATImageManager.getInstance().getImage(BBATImageManager.ANDROID_DEVICE));
 		Composite comp = new Composite(deviceRunTabFolder, SWT.NONE);
-		testDeviceViewer = new TreeViewer(comp, SWT.H_SCROLL| SWT.V_SCROLL);
+		testDeviceViewer = new TreeViewer(comp, SWT.H_SCROLL| SWT.V_SCROLL|SWT.FULL_SELECTION);
 		testDeviceViewer.getTree().setHeaderVisible(true);
 		testDeviceViewer.getTree().setLinesVisible(true);
 		testDeviceViewer.setContentProvider(new DeviceTestRunContentProvider());

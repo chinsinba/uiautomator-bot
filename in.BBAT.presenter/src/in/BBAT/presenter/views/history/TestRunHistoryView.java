@@ -92,7 +92,7 @@ public class TestRunHistoryView extends BBATViewPart {
 		Composite comp1 = new Composite(parent, SWT.BORDER);
 		comp1.setLayout(new GridLayout());
 		comp1.setLayoutData(new GridData(GridData.FILL_BOTH));
-		viewer = new TreeViewer(comp1, SWT.MULTI | SWT.H_SCROLL| SWT.V_SCROLL);
+		viewer = new TreeViewer(comp1, SWT.MULTI | SWT.H_SCROLL| SWT.V_SCROLL|SWT.FULL_SELECTION);
 		viewer.getTree().setHeaderVisible(true);
 		viewer.getTree().setLinesVisible(true);
 		viewer.setContentProvider(new TestRunHistoryContentProvider());
