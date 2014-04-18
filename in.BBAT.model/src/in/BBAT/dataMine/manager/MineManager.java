@@ -12,6 +12,7 @@ import java.util.List;
 
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 import org.apache.derby.drda.NetworkServerControl;
 import org.apache.log4j.Logger;
@@ -44,15 +45,13 @@ public class MineManager {
 			startDBServer(BBATProperties.getInstance().getDatabase_IpAddress(),BBATProperties.getInstance().getDatabase_Port(),BBATProperties.getInstance().getDatabase_UserName(),BBATProperties.getInstance().getDatabase_Pwd());
 			LOG.info("Database started");
 		}
-		if(isDBPresent())
-			return;
 		String DB_ADDRESS =ipAddress+":"+port;
 		if(networkDB)
 			MineManagerHelper.init(UNIT_NAME, createTables, networkDB, DB_ADDRESS + Path.SEPARATOR + dbName,userName,password);
 		else {
 			MineManagerHelper.init(UNIT_NAME, createTables, networkDB, dbName,userName,password);
 
-			if(createTables){
+			if(createTables && isDBPresent()){
 				BBATInternalProperties.getInstance().setDatabaseCreate(false);
 				BBATInternalProperties.getInstance().save();
 			}
@@ -60,7 +59,20 @@ public class MineManager {
 	}
 
 	private boolean isDBPresent() {
-		return false;
+
+		List resultList= null;
+		EntityManager em =  MineManagerHelper.getInstance().getEmFactory().createEntityManager();
+		try{
+			Query query = em.createNativeQuery("Select * from TestProjectEntity");
+			resultList = query.getResultList();
+		}catch (Exception e) {
+			if(resultList==null)
+				return false;
+		}finally{
+			em.close();
+		}
+		return true;
+
 	}
 
 	public  void connectDB(String dbName) throws Exception {

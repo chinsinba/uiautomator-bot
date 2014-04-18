@@ -62,10 +62,6 @@ public class TestCaseEntity extends AbstractEntity {
 	@XmlTransient
 	private UserEntity createdBy;
 
-
-	@OneToMany(mappedBy="cases", fetch = FetchType.LAZY, cascade = { CascadeType.ALL })
-	@OrderColumn
-	private List<TestCaseParameterEntity> testCaseParams;
 	
 	public TestCaseEntity(TestSuiteEntity testSuiteEntity, String testCaseName) {
 		this.name = testCaseName;
@@ -136,11 +132,4 @@ public class TestCaseEntity extends AbstractEntity {
 		this.suite = suite;
 	}
 
-	public List<TestCaseParameterEntity> getTestCaseParams() {
-		return testCaseParams;
-	}
-
-	public void setTestCaseParams(List<TestCaseParameterEntity> testCaseParams) {
-		this.testCaseParams = testCaseParams;
-	}
 }

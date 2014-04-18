@@ -14,7 +14,6 @@
 		<class>in.BBAT.data.model.Entities.TestDeviceRunEntity</class>
 		<class>in.BBAT.data.model.Entities.TestDeviceLogEntity</class>
 		<class>in.BBAT.data.model.Entities.AutomatorLogEntity</class>
-		<class>in.BBAT.data.model.Entities.TestCaseParameterEntity</class>
 		<class>in.BBAT.data.model.Entities.MemoryEntity</class>
 		<class>in.BBAT.data.model.Entities.CpuUsageEntity</class>
 		<properties>
