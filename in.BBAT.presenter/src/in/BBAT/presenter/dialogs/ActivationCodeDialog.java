@@ -1,6 +1,7 @@
 package in.BBAT.presenter.dialogs;
 
 import in.BBAT.abstrakt.gui.BBATImageManager;
+import in.bbat.configuration.BBATProperties;
 import in.bbat.license.ActivationCodeValidationException;
 import in.bbat.license.LicenseInfo;
 import in.bbat.license.LicenseManager;
@@ -85,7 +86,7 @@ public class ActivationCodeDialog extends TrayDialog
 		gd.widthHint = labl.computeSize(-1, -1).x;
 		labl.setLayoutData(gd);
 
-		LicenseInfo licenseInfo = LicenseManager.getCurrentLicense();
+		/*LicenseInfo licenseInfo = LicenseManager.getCurrentLicense();
 		if ((licenseInfo != null) && (licenseInfo.isExpired()))
 		{
 			Link  licPurchaseLink = new Link(mainComposite, 16384);
@@ -110,7 +111,7 @@ public class ActivationCodeDialog extends TrayDialog
 			gd.horizontalSpan = 3;
 			gd.widthHint = licPurchaseLink.computeSize(-1, -1).x;
 			licPurchaseLink.setLayoutData(gd);
-		}
+		}*/
 
 		Composite freeTrialComp = new Composite(mainComposite, 0);
 		mainGridLayout = new GridLayout();
@@ -133,7 +134,7 @@ public class ActivationCodeDialog extends TrayDialog
 
 		Label freeTrialLabel = new Label(freeTrialComp, 0);
 		String freeTrialMsg = "";
-		freeTrialMsg = freeTrialMsg + "To get started with your free 3 month trial, please enter the details below.\n\n";
+		freeTrialMsg = freeTrialMsg + "To get started, please enter the details below.\n\n";
 		freeTrialLabel.setText(freeTrialMsg);
 		freeTrialLabel.setAlignment(16777216);
 		gd = new GridData(16777216, 4, true, false);
@@ -179,7 +180,8 @@ public class ActivationCodeDialog extends TrayDialog
 		gd.widthHint = 200;
 		designationText.setLayoutData(gd);
 		final Button freeTrailButton = new Button(freeTrialComp, 8);
-		freeTrailButton.setText("Start 3 month trial!");
+		//		freeTrailButton.setText("Start 3 month trial!");
+		freeTrailButton.setText(" Start ");
 		gd = new GridData(16777216, 4, true, false);
 		gd.horizontalSpan = 2;
 		if (!firstTimeRun)
@@ -193,16 +195,9 @@ public class ActivationCodeDialog extends TrayDialog
 			}
 		});
 
-		Label bbatImageLabel = new Label(mainComposite, 16384);
-		bbatImageLabel.setImage(BBATImageManager.getInstance().getImage(BBATImageManager.ANDROID_DEVICE));
-		gd = new GridData();
-		gd.grabExcessHorizontalSpace = true;
-		gd.grabExcessVerticalSpace = true;
-		gd.horizontalAlignment = 16777216;
-		gd.verticalAlignment = 16777216;
-		gd.verticalSpan = 3;
-		gd.widthHint = bbatImageLabel.computeSize(-1, -1).x;
-		bbatImageLabel.setLayoutData(gd);
+		//		middleImagePart(mainComposite);
+
+
 		freeTrialComp = new Composite(mainComposite, 0);
 		mainGridLayout = new GridLayout();
 		mainGridLayout.numColumns = 1;
@@ -214,6 +209,121 @@ public class ActivationCodeDialog extends TrayDialog
 		gd.horizontalAlignment = 16777216;
 		(freeTrialComp).setLayoutData(gd);
 
+		/*Label actCodeLabel;
+		final Button registerCodeButton = createLicenseCodePart(mainComposite,
+				freeTrialComp, listener);*/
+
+		freeTrailButton.addSelectionListener(new SelectionAdapter()
+		{
+			public void widgetSelected(SelectionEvent paramAnonymousSelectionEvent)
+			{
+				final String email = emailAddressText.getText().trim();
+				final String userName = userNameText.getText().trim();
+				final String companyName = companyText.getText().trim();
+				final String designation = designationText.getText().trim();
+				Matcher emailMatcher = emailPattern.matcher(email);
+				if (!emailMatcher.matches())
+				{
+					emailMatcher = activationCodePattern.matcher(email);
+					if (emailMatcher.matches())
+					{
+						emailAddressText.setText("");
+						activationCodeText.setText(email);
+						//						registerCodeButton.notifyListeners(13, new Event());
+						return;
+					}
+					MessageDialog.openError(Display.getDefault().getActiveShell(), "Oops!", "Please enter a valid email id!");
+					return;
+				}
+				try
+				{
+					emailAddressText.getDisplay().update();
+					BBATProperties.getInstance().setUserCompany(companyName);
+					BBATProperties.getInstance().setUserEmailId(email);
+					BBATProperties.getInstance().save();
+					/*	new ProgressMonitorDialog(mainComposite.getShell()).run(true, false, new IRunnableWithProgress()
+					{
+						public void run(IProgressMonitor paramAnonymous2IProgressMonitor)
+								throws InvocationTargetException, InterruptedException
+								{
+							paramAnonymous2IProgressMonitor.beginTask("Registering your email address...", 0);
+							try
+							{
+								LicenseManager.registerNewTrial(email, userName, companyName, designation);
+							}
+							catch (ActivationCodeValidationException localActivationCodeValidationException)
+							{
+								throw new InvocationTargetException(localActivationCodeValidationException);
+							}
+								}
+					});*/
+					//          LicenseAnalytics.queue("Trial Started");
+					MessageDialog.openInformation(Display.getDefault().getActiveShell(), "Thank you for trying out BBAT!", "Thank you for trying out BBAT! You can now jump right in and start exploring!");
+					okPressed();
+				}catch (Exception e) {
+					// TODO: handle exception
+				}
+				/*catch (InvocationTargetException e)
+				{
+					if (e.getCause().getMessage() == null)
+					{
+						if (askProxyConfiguration(true, email))
+							okPressed();
+					}
+					else
+					{
+						String errMsg = "The Server responded:\n\"" + e.getCause().getMessage() + "\"" + "\n";
+						MessageDialog.openError(Display.getDefault().getActiveShell(), "Oops!", "Could not start your trial as there was an error while connecting to our License server.\n" + errMsg);
+					}
+					if (!emailAddressText.isDisposed())
+					{
+						emailAddressText.setText(email);
+						emailAddressText.getDisplay().update();
+					}
+				}
+				catch (InterruptedException e)
+				{
+					LOG.error( "The email address check operation was interruped!");
+				}*/
+			}
+		});
+		/*if (licenseInfo != null)
+		{
+			actCodeLabel = new Label(freeTrialComp, 1);
+			actCodeLabel.setText("\nYour current activation code is\n" + licenseInfo.getActivationCode());
+			actCodeLabel.setAlignment(16777216);
+			gd = new GridData(4, 4, true, false);
+			gd.grabExcessHorizontalSpace = true;
+			gd.horizontalAlignment = 16777216;
+			actCodeLabel.setLayoutData(gd);
+		}
+		if (firstTimeRun)
+		{
+			final Button checkUsageButton = new Button(mainComposite, SWT.CHECK);
+			gd = new GridData(4, 4, true, false);
+			gd.grabExcessHorizontalSpace = true;
+			gd.horizontalAlignment = 16777216;
+			gd.horizontalSpan = 3;
+			gd.verticalIndent = 20;
+			checkUsageButton.setText("usage statistics collenction as anonymous");
+			checkUsageButton.setFont(JFaceResources.getDialogFont());
+			checkUsageButton.setLayoutData(gd);
+			checkUsageButton.setSelection(true);
+			//      PreferenceUtil.setValue("in.bbat.eclipseide.bbat.collectStatistics.2", true);
+			checkUsageButton.addSelectionListener(new SelectionAdapter()
+			{
+				public void widgetSelected(SelectionEvent paramAnonymousSelectionEvent)
+				{
+					//          PreferenceUtil.setValue("in.bbat.eclipseide.littlebbat.collectStatistics.2", Boolean.toString(localButton3.getSelection()));
+				}
+			});
+		}*/
+		return mainComposite;
+	}
+
+	private Button createLicenseCodePart(final Composite mainComposite,
+			Composite freeTrialComp, Listener listener) {
+		GridData gd;
 		Label actCodeLabel = new Label(freeTrialComp, 0);
 		String actCodeMessage = "If you already have purchased BBAT\n and/or have an activation code,\nplease enter it here";
 		actCodeLabel.setText(actCodeMessage);
@@ -296,107 +406,21 @@ public class ActivationCodeDialog extends TrayDialog
 				}
 			}
 		});
-		freeTrailButton.addSelectionListener(new SelectionAdapter()
-		{
-			public void widgetSelected(SelectionEvent paramAnonymousSelectionEvent)
-			{
-				final String email = emailAddressText.getText().trim();
-				final String userName = userNameText.getText().trim();
-				final String companyName = companyText.getText().trim();
-				final String designation = designationText.getText().trim();
-				Matcher emailMatcher = emailPattern.matcher(email);
-				if (!emailMatcher.matches())
-				{
-					emailMatcher = activationCodePattern.matcher(email);
-					if (emailMatcher.matches())
-					{
-						emailAddressText.setText("");
-						activationCodeText.setText(email);
-						registerCodeButton.notifyListeners(13, new Event());
-						return;
-					}
-					MessageDialog.openError(Display.getDefault().getActiveShell(), "Oops!", "Please enter a valid email id!");
-					return;
-				}
-				try
-				{
-					emailAddressText.getDisplay().update();
-					new ProgressMonitorDialog(mainComposite.getShell()).run(true, false, new IRunnableWithProgress()
-					{
-						public void run(IProgressMonitor paramAnonymous2IProgressMonitor)
-								throws InvocationTargetException, InterruptedException
-								{
-							paramAnonymous2IProgressMonitor.beginTask("Registering your email address...", 0);
-							try
-							{
-								LicenseManager.registerNewTrial(email, userName, companyName, designation);
-							}
-							catch (ActivationCodeValidationException localActivationCodeValidationException)
-							{
-								throw new InvocationTargetException(localActivationCodeValidationException);
-							}
-								}
-					});
-					//          LicenseAnalytics.queue("Trial Started");
-					MessageDialog.openInformation(Display.getDefault().getActiveShell(), "Thank you for trying out BBAT!", "Thank you for trying out BBAT! You can now jump right in and start exploring!");
-					okPressed();
-				}
-				catch (InvocationTargetException e)
-				{
-					if (e.getCause().getMessage() == null)
-					{
-						if (askProxyConfiguration(true, email))
-							okPressed();
-					}
-					else
-					{
-						String errMsg = "The Server responded:\n\"" + e.getCause().getMessage() + "\"" + "\n";
-						MessageDialog.openError(Display.getDefault().getActiveShell(), "Oops!", "Could not start your trial as there was an error while connecting to our License server.\n" + errMsg);
-					}
-					if (!emailAddressText.isDisposed())
-					{
-						emailAddressText.setText(email);
-						emailAddressText.getDisplay().update();
-					}
-				}
-				catch (InterruptedException e)
-				{
-					LOG.error( "The email address check operation was interruped!");
-				}
-			}
-		});
-		if (licenseInfo != null)
-		{
-			actCodeLabel = new Label(freeTrialComp, 1);
-			actCodeLabel.setText("\nYour current activation code is\n" + licenseInfo.getActivationCode());
-			actCodeLabel.setAlignment(16777216);
-			gd = new GridData(4, 4, true, false);
-			gd.grabExcessHorizontalSpace = true;
-			gd.horizontalAlignment = 16777216;
-			actCodeLabel.setLayoutData(gd);
-		}
-		if (firstTimeRun)
-		{
-			final Button checkUsageButton = new Button(mainComposite, SWT.CHECK);
-			gd = new GridData(4, 4, true, false);
-			gd.grabExcessHorizontalSpace = true;
-			gd.horizontalAlignment = 16777216;
-			gd.horizontalSpan = 3;
-			gd.verticalIndent = 20;
-			checkUsageButton.setText("usage statistics collenction as anonymous");
-			checkUsageButton.setFont(JFaceResources.getDialogFont());
-			checkUsageButton.setLayoutData(gd);
-			checkUsageButton.setSelection(true);
-			//      PreferenceUtil.setValue("in.bbat.eclipseide.bbat.collectStatistics.2", true);
-			checkUsageButton.addSelectionListener(new SelectionAdapter()
-			{
-				public void widgetSelected(SelectionEvent paramAnonymousSelectionEvent)
-				{
-					//          PreferenceUtil.setValue("in.bbat.eclipseide.littlebbat.collectStatistics.2", Boolean.toString(localButton3.getSelection()));
-				}
-			});
-		}
-		return mainComposite;
+		return registerCodeButton;
+	}
+
+	private void middleImagePart(final Composite mainComposite) {
+		GridData gd;
+		Label bbatImageLabel = new Label(mainComposite, 16384);
+		bbatImageLabel.setImage(BBATImageManager.getInstance().getImage(BBATImageManager.ANDROID_DEVICE));
+		gd = new GridData();
+		gd.grabExcessHorizontalSpace = true;
+		gd.grabExcessVerticalSpace = true;
+		gd.horizontalAlignment = 16777216;
+		gd.verticalAlignment = 16777216;
+		gd.verticalSpan = 3;
+		gd.widthHint = bbatImageLabel.computeSize(-1, -1).x;
+		bbatImageLabel.setLayoutData(gd);
 	}
 
 	private boolean askProxyConfiguration(boolean paramBoolean, String paramString)

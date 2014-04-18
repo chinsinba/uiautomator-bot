@@ -3,6 +3,7 @@ package in.BBAT.presenter;
 import in.BBAT.TestRunner.device.DeviceException;
 import in.BBAT.abstrakt.gui.ApplicationHelper;
 import in.BBAT.abstrakt.presenter.device.model.TestDeviceManager;
+import in.BBAT.presenter.dialogs.ActivationCodeDialog;
 import in.BBAT.presenter.perstpectives.DeveloperPerspective;
 import in.BBAT.presenter.perstpectives.HistoryPerspective;
 import in.BBAT.presenter.perstpectives.ReporterPerspective;
@@ -129,6 +130,13 @@ public class ApplicationWorkbenchWindowAdvisor extends WorkbenchWindowAdvisor {
 			MessageDialog.openError(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(),
 					"SDK Error", errorMessage);
 		}
+
+		if(BBATProperties.getInstance().getUserEmailId()==null ||BBATProperties.getInstance().getUserEmailId().isEmpty()){
+			ActivationCodeDialog d = new ActivationCodeDialog(new Shell());
+			d.open();
+		}
+
+
 	}
 
 	public static String validateAndroidSdkLocation(String osSdkLocation) {

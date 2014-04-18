@@ -4,6 +4,7 @@ import in.bbat.utility.AndroidSdkUtility;
 import in.bbat.utility.DefaultValueSetter;
 import in.bbat.utility.IBBATConstants;
 
+import java.awt.color.CMMException;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -335,4 +336,22 @@ public class BBATProperties {
 	public void setScreenShotDirectory(String screenShotDir){
 		bbatProperty.setProperty(SCREEN_SHOT_DIR, screenShotDir);
 	}
+
+	public void setUserEmailId(String emailID){
+		bbatProperty.setProperty(BBAT_EMAIL, emailID);
+	}
+
+	public void setUserCompany(String company){
+		bbatProperty.setProperty(BBAT_COMPANY, company);
+	}
+
+
+	public String getUserEmailId(){
+		return bbatProperty.getProperty(BBAT_EMAIL);
+	}
+
+	public String getUserCompany(){
+		return bbatProperty.getProperty(BBAT_COMPANY);
+	}
+
 }
