@@ -49,7 +49,7 @@ public class TestCaseBrowserView extends BBATViewPart {
 		automatorShelfItem.setText("UIAutomator");
 		automatorShelfItem.getBody().setLayout(new FillLayout());*/	
 		viewer = new TreeViewer(parent, SWT.MULTI | SWT.H_SCROLL
-				| SWT.V_SCROLL);
+				| SWT.V_SCROLL|SWT.FULL_SELECTION);
 		viewer.setContentProvider(new TestCaseBrowserContentProvider());
 		viewer.setLabelProvider(new TestCaseLabelProvider());
 		viewer.setAutoExpandLevel(2);

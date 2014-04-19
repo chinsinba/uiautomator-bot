@@ -74,7 +74,7 @@ public class ExecutionView extends BBATViewPart {
 		executionViewItem.setText("Execution View");
 		Composite comp = new Composite(testRunFolder, SWT.NONE);
 
-		executionViewer = new TableViewer(comp, SWT.MULTI | SWT.H_SCROLL| SWT.V_SCROLL);
+		executionViewer = new TableViewer(comp, SWT.MULTI | SWT.H_SCROLL| SWT.V_SCROLL |SWT.FULL_SELECTION);
 		executionViewer.setContentProvider(new ArrayContentProvider());
 		executionViewer.getTable().setLinesVisible(true);
 		executionViewer.getTable().setHeaderVisible(true);
