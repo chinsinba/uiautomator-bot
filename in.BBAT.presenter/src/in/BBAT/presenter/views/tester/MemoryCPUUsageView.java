@@ -38,7 +38,11 @@ public class MemoryCPUUsageView extends ViewPart {
 	public void createPartControl(Composite parent) {
 		// TODO Auto-generated method stub
 		// create a title...
-		final String chartTitle = ScreenShotView.testCase.getTestCaseEntity().getSuite().getTestProject().getApkPackageName();
+		String chartTitle = ScreenShotView.testCase.getTestCaseEntity().getSuite().getTestProject().getApkPackageName();
+		if(chartTitle==null || chartTitle.isEmpty()){
+			chartTitle ="Package is not set ";
+		}
+			
 		final XYDataset dataset = createDataset1();
 		final JFreeChart chart = ChartFactory.createTimeSeriesChart(
 				chartTitle, 
