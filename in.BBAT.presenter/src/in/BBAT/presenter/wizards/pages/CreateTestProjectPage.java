@@ -11,6 +11,7 @@ import in.bbat.utility.AndroidSdkUtility;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.ModifyEvent;
@@ -26,6 +27,7 @@ import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Spinner;
 import org.eclipse.swt.widgets.Text;
+import org.eclipse.ui.PlatformUI;
 
 
 
@@ -42,7 +44,7 @@ public class CreateTestProjectPage extends WizardPage {
 
 	private boolean nameValid;
 	private boolean descValid;
-	private boolean apkPackageNameValid;
+	private boolean apkPackageNameValid = true;
 
 	private Spinner sp;
 
@@ -88,7 +90,7 @@ public class CreateTestProjectPage extends WizardPage {
 					pageComplete();
 					return;
 				}
-				
+
 				if(!matches){
 					setMessage("Not a valid name",WizardPage.ERROR);
 					nameValid= false;
@@ -132,7 +134,7 @@ public class CreateTestProjectPage extends WizardPage {
 	private void createLowerArea(Composite parent) {
 		Composite comp = new Composite(parent, SWT.None);
 		comp.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false));
-		comp.setLayout(new GridLayout(3, false));
+		comp.setLayout(new GridLayout(4, false));
 
 		Label nameLabel = new Label(comp, SWT.NULL);
 		nameLabel.setText("APK Package Name :");
@@ -142,22 +144,35 @@ public class CreateTestProjectPage extends WizardPage {
 		apkPackageNameText.addModifyListener(new ModifyListener() {
 			@Override
 			public void modifyText(ModifyEvent e) {
-				if(!((Text)e.getSource()).getText().trim().isEmpty())	
+				/*if(!((Text)e.getSource()).getText().trim().isEmpty())	
 				{
 					apkPackageNameValid = true;
 				}
 				else
-					apkPackageNameValid = false;
-
+					apkPackageNameValid = false;*/
+				
 				pageComplete();
 			}
 		});
 		apkPackageNameText.setMessage("Enter package name");
-		
+
 		if(project!=null){
 			apkPackageNameText.setText(project.getApkPackageName());
 			apkPackageNameText.setEditable(false);
 		}
+		Button infoButton = new Button(comp, SWT.PUSH);
+		infoButton.setText("?");
+
+		infoButton.addSelectionListener(new SelectionAdapter() {
+
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+
+				MessageDialog.openInformation(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(), "Info","Pakage is required to trace the memory and cpu usage." );
+			}
+		});
+
+
 		browseDirButton = new Button(comp, SWT.PUSH);
 		GridData gdzipFilePathButton = new GridData(GridData.FILL);
 		browseDirButton.setLayoutData(gdzipFilePathButton);
@@ -228,7 +243,7 @@ public class CreateTestProjectPage extends WizardPage {
 		nameLabel.setText("API Level :");
 		sp = new Spinner(comp, SWT.BORDER|SWT.READ_ONLY);
 		sp.setIncrement(1);
-		sp.setMinimum(16);
+		sp.setMinimum(AndroidSdkUtility.minimumApiLevel());
 		sp.setMaximum(AndroidSdkUtility.maximumApiLevel());
 		if(AndroidSdkUtility.maximumApiLevel()>16){
 			if(project==null)

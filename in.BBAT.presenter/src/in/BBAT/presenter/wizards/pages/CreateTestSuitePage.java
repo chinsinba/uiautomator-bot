@@ -112,7 +112,7 @@ public class CreateTestSuitePage extends WizardPage {
 		setControl(parent);
 	}
 	private void createLibraryCheckArea(Composite parent) {
-		Group group = new Group(parent, SWT.BORDER);
+		Group group = new Group(parent, SWT.NONE);
 		group.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false));
 		group.setLayout(new GridLayout(2, false));
 

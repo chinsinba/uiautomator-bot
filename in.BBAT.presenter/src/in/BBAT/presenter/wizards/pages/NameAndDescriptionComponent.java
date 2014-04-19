@@ -21,13 +21,13 @@ public class NameAndDescriptionComponent {
 
 
 	public NameAndDescriptionComponent(Composite parent,String name, String description,boolean editable) {
-		Group group = new Group(parent, SWT.BORDER);
+		Group group = new Group(parent, SWT.NONE);
 		group.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		group.setLayout(new GridLayout(2, false));
 		group.setText("Details");
 
 		Label nameLabel = new Label(group, SWT.NULL);
-		nameLabel.setText("Name:");
+		nameLabel.setText("* Name:");
 		setNameText(new Text(group, SWT.BORDER));
 		getNameText().setFocus();
 		getNameText().setMessage("Enter Name");
@@ -39,7 +39,7 @@ public class NameAndDescriptionComponent {
 		GridData gdPkgName = new GridData(GridData.FILL_HORIZONTAL);
 		getNameText().setLayoutData(gdPkgName);
 		Label commentLabel = new Label(group, SWT.NULL);
-		commentLabel.setText("Description:");
+		commentLabel.setText("* Description:");
 		setDescText(new Text(group, SWT.MULTI | SWT.BORDER |SWT.WRAP));
 		if(!editable){
 			getDescText().setText(description);

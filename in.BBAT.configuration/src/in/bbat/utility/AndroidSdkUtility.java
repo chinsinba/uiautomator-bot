@@ -85,6 +85,18 @@ public class AndroidSdkUtility {
 
 	}
 
+	public static String[] availablePlatformsInString(){
+
+		String[] apis = new String[availablePlatforms().length];
+		int count =0;
+		for(int i : availablePlatforms()){
+			apis[count] =String.valueOf(i);
+			count++;
+		}
+		return apis;
+
+	}
+
 	public static boolean isPlatformPresent(int apiLevel){
 		int[] availablePlatforms = availablePlatforms();
 		for(int i =0;i<availablePlatforms.length;i++){
@@ -102,6 +114,19 @@ public class AndroidSdkUtility {
 				max =availablePlatforms[i];
 		}
 		return max;
+	}
+
+	public static int minimumApiLevel(){
+		int min =0;
+		int[] availablePlatforms = availablePlatforms();
+		if(availablePlatforms.length>0){
+			min = availablePlatforms[0];
+		}
+		for(int i =0;i<availablePlatforms.length;i++){
+			if(availablePlatforms[i]<min)
+				min =availablePlatforms[i];
+		}
+		return min;
 	}
 
 
@@ -122,7 +147,7 @@ public class AndroidSdkUtility {
 		if (!adbFile.exists())
 			adbFile = new File(platFormToolsDir, IBBATConstants.WINDOWS_AAPT);
 		return adbFile.exists() ? adbFile.getAbsolutePath() : null;
-	
+
 	}
 
 }
