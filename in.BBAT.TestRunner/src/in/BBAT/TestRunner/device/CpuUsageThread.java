@@ -28,6 +28,9 @@ public class CpuUsageThread implements Runnable {
 	@Override
 	public void run() {
 
+		if(listener.getPackageName()==null || listener.getPackageName().isEmpty()){
+			return;
+		}
 		while(!stop){
 			final String pack = listener!=null ?listener.getPackageName():"";
 			final String cmd ="dumpsys cpuinfo " ;
