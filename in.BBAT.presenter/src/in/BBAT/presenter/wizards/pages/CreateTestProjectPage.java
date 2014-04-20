@@ -29,6 +29,8 @@ import org.eclipse.swt.widgets.Spinner;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.PlatformUI;
 
+import com.android.xml.AndroidXPathFactory;
+
 
 
 public class CreateTestProjectPage extends WizardPage {
@@ -45,6 +47,7 @@ public class CreateTestProjectPage extends WizardPage {
 	private boolean nameValid;
 	private boolean descValid;
 	private boolean apkPackageNameValid = true;
+	private boolean validApiLevel =true ;
 
 	private Spinner sp;
 
@@ -150,7 +153,7 @@ public class CreateTestProjectPage extends WizardPage {
 				}
 				else
 					apkPackageNameValid = false;*/
-				
+
 				pageComplete();
 			}
 		});
@@ -201,7 +204,7 @@ public class CreateTestProjectPage extends WizardPage {
 		});
 	}
 	public void pageComplete(){
-		setPageComplete(nameValid && descValid && apkPackageNameValid);
+		setPageComplete(nameValid && descValid && apkPackageNameValid && validApiLevel);
 	}
 
 	public String getDeskription(){
@@ -243,8 +246,17 @@ public class CreateTestProjectPage extends WizardPage {
 		nameLabel.setText("API Level :");
 		sp = new Spinner(comp, SWT.BORDER|SWT.READ_ONLY);
 		sp.setIncrement(1);
-		sp.setMinimum(AndroidSdkUtility.minimumApiLevel());
-		sp.setMaximum(AndroidSdkUtility.maximumApiLevel());
+		if(AndroidSdkUtility.minimumApiLevel()>=16){
+			sp.setMinimum(AndroidSdkUtility.minimumApiLevel());
+		}
+		else
+			sp.setMinimum(16);
+
+		if(AndroidSdkUtility.maximumApiLevel()<16)
+			sp.setMaximum(16);
+		else
+			sp.setMaximum(AndroidSdkUtility.maximumApiLevel());
+
 		if(AndroidSdkUtility.maximumApiLevel()>16){
 			if(project==null)
 				sp.setSelection(AndroidSdkUtility.maximumApiLevel());
@@ -257,8 +269,21 @@ public class CreateTestProjectPage extends WizardPage {
 		sp.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
+				if(!AndroidSdkUtility.isPlatformPresent(Integer.valueOf(sp.getText())))
+				{
+					setMessage("Could not find android-"+sp.getText()+" in SDK",WizardPage.ERROR);
+					validApiLevel = false;
+					pageComplete();
+					return;
+				}
+
 				uiAutoJarTextPath.setText(BBATProperties.getInstance().getAndroid_UiAutomatorPath(Integer.valueOf(sp.getText())));
 				androidTextPath.setText(BBATProperties.getInstance().getAndroid_AndroidJarPath((Integer.valueOf(sp.getText()))));
+
+				validApiLevel = true;
+				setMessage(null);
+				pageComplete();
+
 			}
 
 		});

@@ -354,4 +354,8 @@ public class BBATProperties {
 		return bbatProperty.getProperty(BBAT_COMPANY);
 	}
 
+	public void setUserDesignation(String designation){
+		bbatProperty.setProperty(BBAT_DESIGNATION, designation);
+	}
+
 }
