@@ -1,6 +1,6 @@
 package in.BBAT.presenter.history.handlers;
 
-import in.bbat.reporter.poc.DeviceRunWindow;
+//import in.bbat.reporter.poc.DeviceRunWindow;
 
 import java.util.List;
 
@@ -11,8 +11,8 @@ public class DeviceRunSummaryReportHandler extends AbstractTestRunInfoHandler {
 
 	@Override
 	public Object run(ExecutionEvent event, List<?> selectedObjects) {
-		DeviceRunWindow w = new DeviceRunWindow(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell());
-		w.open();
+//		DeviceRunWindow w = new DeviceRunWindow(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell());
+//		w.open();
 		return null;
 	}
 
