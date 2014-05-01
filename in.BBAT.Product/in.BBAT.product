@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?pde version="3.5"?>
+
+<product name="BBAT" uid="BBAT1" id="in.BBAT.presenter.BBAT" application="in.BBAT.presenter.application" version="1.0.0.qualifier" useFeatures="true" includeLaunchers="true">
+
+   <configIni use="default">
+   </configIni>
+
+   <launcherArgs>
+      <vmArgs>-Dosgi.requiredJavaVersion=1.5 -Xms256m -Xmx512m -XX:MaxPermSize=128m</vmArgs>
+      <vmArgsMac>-XstartOnFirstThread -Dorg.eclipse.swt.internal.carbon.smallFonts</vmArgsMac>
+   </launcherArgs>
+
+   <launcher>
+      <solaris/>
+      <win useIco="false">
+         <bmp/>
+      </win>
+   </launcher>
+
+   <vm>
+   </vm>
+
+   <plugins>
+   </plugins>
+
+   <features>
+      <feature id="in.BBAT.feature" version="1.0.0.qualifier"/>
+      <feature id="in.BBAT.p2.rcpupdate" version="1.0.0.qualifier"/>
+   </features>
+
+
+</product>

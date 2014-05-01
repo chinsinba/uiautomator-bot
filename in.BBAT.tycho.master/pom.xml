@@ -6,21 +6,46 @@
 	<version>1.0.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<modules>
-		<module>../in.BBAT.presenter</module>
+		<module>../in.BBAT.Product</module>
 		<module>../in.BBAT.feature</module>
-		<module>../in.BBAT.tycho.updatesite</module>
+		<module>../in.BBAT.configuration</module>
+		<module>../in.BBAT.dataMine</module>
+		<module>../in.BBAT.monkey.libs</module>
+		<module>../in.BBAT.p2.rcpupdate.utils</module>
+		<module>../in.BBAT.presenter</module>
+		<module>../in.BBAT.TestRunner</module>
+		<module>../in.BBAT.web.utils</module>
+		<module>../in.BBAT.abstrakt.presenter</module>
+		<module>../in.BBAT.p2.rcpupdate</module>
+		
 	</modules>
 
 	<properties>
 		<tycho.version>0.19.0</tycho.version>
-		<kepler-repo.url>http://download.eclipse.org/releases/indigo
-		</kepler-repo.url>
+
+		<indigo-repo.url>http://download.eclipse.org/releases/indigo
+		</indigo-repo.url>
 	</properties>
 
 	<repositories>
 		<repository>
-			<id>kepler</id>
-			<url>${kepler-repo.url}</url>
+			<id>EclipseLink</id>
+			<layout>p2</layout>
+			<url>file:////home/syed/Documents/PluginsP2Repositories/EclipseLink</url>
+		</repository>
+		<repository>
+			<id>Nebula</id>
+			<layout>p2</layout>
+			<url>file:////home/syed/Documents/PluginsP2Repositories/nebula/snapshot</url>
+		</repository>
+		<repository>
+			<id>Nebula_Incubation</id>
+			<layout>p2</layout>
+			<url>file:////home/syed/Documents/PluginsP2Repositories/nebula/incubation/snapshot</url>
+		</repository>
+		<repository>
+			<id>indigo</id>
+			<url>${indigo-repo.url}</url>
 			<layout>p2</layout>
 		</repository>
 

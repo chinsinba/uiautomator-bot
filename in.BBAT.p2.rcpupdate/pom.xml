@@ -10,5 +10,5 @@
   </parent>
 
   <artifactId>in.BBAT.p2.rcpupdate</artifactId>
-  <packaging>eclipse-plugin</packaging>
+  <packaging>eclipse-feature</packaging>
 </project> 
