@@ -46,6 +46,8 @@
 	<panels>
 		<panel classname="HelloPanel" />
 		<panel classname="HTMLLicencePanel" />
+		 <panel classname="TargetPanel"/>
+		 <panel classname="InstallPanel"/>
 		<panel classname="SimpleFinishPanel" />
 	</panels>
 	<!-- The packs section. We specify here our packs. -->
@@ -54,6 +56,14 @@
 			<description>The base files</description>
 			<file src="Readme.txt" targetdir="$INSTALL_PATH" />
 			<file src="License.txt" targetdir="$INSTALL_PATH" />
+			<fileset dir="BBAT1" targetdir="$INSTALL_PATH" >
+            </fileset>
 		</pack>
 	</packs>
+	
+	<native
+        name="ShellLink.dll"
+        type="izpack" />
+        
+    <native type="izpack" name="ShellLink_x64.dll" />
 </installation>
