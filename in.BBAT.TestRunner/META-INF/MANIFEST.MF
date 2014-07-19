@@ -7,14 +7,31 @@ Bundle-Activator: in.BBAT.TestRunner.Activator
 Bundle-Vendor: ME
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
- in.BBAT.monkey.libs;bundle-version="1.0.0",
  in.BBAT.configuration;bundle-version="1.0.0",
  org.eclipse.ant.core,
  org.apache.log4j;bundle-version="1.2.15"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
-Bundle-ClassPath: .
-Export-Package: in.BBAT.TestRunner,
+Bundle-ClassPath: .,
+ lib/chimpchat.jar,
+ lib/ddmlib.jar,
+ lib/common.jar,
+ lib/ddmuilib.jar,
+ lib/guava-13.0.1.jar,
+ lib/kxml2-2.3.0.jar,
+ lib/monkeyrunner.jar
+Export-Package: com.android,
+ com.android.chimpchat.core,
+ com.android.ddmlib,
+ com.android.ddmlib.logcat,
+ com.android.ddmlib.testrunner,
+ com.android.ddmuilib,
+ com.android.ddmuilib.logcat,
+ com.android.monkeyrunner,
+ com.android.monkeyrunner.recorder,
+ com.android.monkeyrunner.recorder.actions,
+ com.android.xml,
+ in.BBAT.TestRunner,
  in.BBAT.TestRunner.Listener,
  in.BBAT.TestRunner.device,
  in.BBAT.TestRunner.runner

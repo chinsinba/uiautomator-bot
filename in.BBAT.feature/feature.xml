@@ -251,13 +251,6 @@
          unpack="false"/>
 
    <plugin
-         id="in.BBAT.monkey.libs"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
          id="in.BBAT.presenter"
          download-size="0"
          install-size="0"

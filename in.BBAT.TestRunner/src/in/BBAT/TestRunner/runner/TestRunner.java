@@ -32,6 +32,9 @@ public class TestRunner implements ITestRunner{
 		pushJarToDevice();
 
 	}
+	
+	public TestRunner(String jarPath,IAndroidDevice device ) {
+	}
 
 	@Override
 	public void execute(String testCaseClassName, ITestRunListener testCaseExecutionListener, ILogListener deviceLogListener,IUiAutomatorListener autoListener, IScreenShotListener listener,IMemoryUsageListener memListner,ICpuUsageListener cpuListener) {
