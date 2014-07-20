@@ -71,7 +71,7 @@ public class TestProjectModel extends AbstractProjectTree {
 	@Override
 	public void createResource() {
 		File f = new File(getPath());
-		f.mkdir();
+		f.mkdirs();
 	}
 
 	public void setDescription(String description) {
