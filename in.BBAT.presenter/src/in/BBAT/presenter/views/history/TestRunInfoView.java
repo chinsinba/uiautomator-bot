@@ -6,7 +6,6 @@ import in.BBAT.abstrakt.presenter.run.model.TestDeviceRunModel;
 import in.BBAT.abstrakt.presenter.run.model.TestRunInstanceModel;
 import in.BBAT.abstrakt.presenter.run.model.TestRunModel;
 import in.BBAT.abstrakt.presenter.run.model.TestStatus;
-import in.BBAT.presenter.DualAxisDemo2;
 import in.BBAT.presenter.labelProviders.HistoryTestRunInfoLabelProvider;
 import in.BBAT.presenter.views.BBATViewPart;
 import in.BBAT.presenter.views.tester.AutomatorLogView;
