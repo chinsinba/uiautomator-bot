@@ -14,7 +14,7 @@ import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
-public class BrowseApkPage extends WizardPage {
+public class BrowseFilePage extends WizardPage {
 
 
 	private Composite container;
@@ -23,12 +23,14 @@ public class BrowseApkPage extends WizardPage {
 	private Text apkPathText;
 	private String labelText;
 	protected String selctedApk;
-	
-	public  BrowseApkPage(String pageName,String labelText, String description) {
+	private String[] filterPatterns;
+
+	public  BrowseFilePage(String pageName,String labelText, String description,String[] filterStrings) {
 		super(pageName);
 		setTitle(pageName);
 		setDescription(description);
 		this.labelText = labelText;
+		this.filterPatterns = filterStrings;
 	}
 
 	@Override
@@ -62,7 +64,7 @@ public class BrowseApkPage extends WizardPage {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				FileDialog exportDialog = new FileDialog(getShell(),SWT.SAVE);
-				exportDialog.setFilterExtensions(new String[] {"*.apk"});
+				exportDialog.setFilterExtensions(filterPatterns);
 				String destinationPath = exportDialog.open();
 				if (destinationPath != null) {
 					apkPathText.setText(destinationPath);

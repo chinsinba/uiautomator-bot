@@ -1,7 +1,7 @@
 package in.BBAT.presenter.wizards;
 
 import in.BBAT.abstrakt.presenter.device.model.AndroidDevice;
-import in.BBAT.presenter.wizards.pages.BrowseApkPage;
+import in.BBAT.presenter.wizards.pages.BrowseFilePage;
 import in.bbat.logger.BBATLogger;
 
 import java.util.List;
@@ -17,7 +17,7 @@ public class ImportInstallApkWizard extends Wizard {
 
 	private List<AndroidDevice> devices;
 	private Logger LOG = BBATLogger.getLogger(ImportInstallApkWizard.class.getName());
-	private BrowseApkPage page;
+	private BrowseFilePage page;
 
 	public ImportInstallApkWizard(List<AndroidDevice> selectedDevices) {
 		devices = selectedDevices;
@@ -52,7 +52,7 @@ public class ImportInstallApkWizard extends Wizard {
 	@Override
 	public void addPages() {
 
-		page = new BrowseApkPage("Install APK", "Install APK", "Select APK to install");
+		page = new BrowseFilePage("Install APK", "Install APK", "Select APK to install",new String[] {"*.apk"});
 		addPage(page);
 	}
 }

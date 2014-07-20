@@ -27,6 +27,6 @@ public class ApplicationWorkbenchAdvisor extends WorkbenchAdvisor {
 
 	@Override
 	public void preStartup() {
-		P2Util.checkForUpdates();
+//		P2Util.checkForUpdates();
 	}
 }

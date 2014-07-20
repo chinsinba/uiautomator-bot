@@ -39,14 +39,14 @@ import org.osgi.framework.ServiceReference;
 public class P2Util {
 
 	private static final Logger LOG = BBATLogger.getLogger(P2Util.class.getName());
-	public static void checkForUpdates() {
+	public static void checkForUpdates(final String uri) {
 		try {
 			ProgressMonitorDialog progressDialog = new ProgressMonitorDialog(null);
 			progressDialog.run(true, true, new IRunnableWithProgress() {
 
 				@Override
 				public void run(IProgressMonitor monitor) throws InvocationTargetException, InterruptedException {
-					execute(new NullProgressMonitor());
+					execute(new NullProgressMonitor(), uri);
 				}
 
 			});
@@ -114,7 +114,7 @@ public class P2Util {
 		return status;
 	}
 
-	public static void execute( IProgressMonitor monitor) {
+	public static void execute( IProgressMonitor monitor,final String uri) {
 
 		
 		Job j = new Job("Update Job") {
@@ -132,10 +132,10 @@ public class P2Util {
 				}
 
 				final IProvisioningAgent agent = (IProvisioningAgent) bundleContext.getService(reference);
-				final String REPOSITORY_LOC = 
-						System.getProperty("UpdateHandler.Repo", 
+				final String REPOSITORY_LOC = uri;
+						/*System.getProperty("UpdateHandler.Repo", 
 								"file:///home/syed/Desktop/Backup_Desktop/BLACKANDRO/repository/");
-
+*/
 				/* 1. Prepare update plumbing */
 
 				final ProvisioningSession session = new ProvisioningSession(agent);

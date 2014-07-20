@@ -306,6 +306,14 @@
                   label="Exit">
             </command>
          </menu>
+         <menu
+               label="Help">
+            <command
+                  commandId="in.BBAT.presenter.Update"
+                  label="Update"
+                  style="push">
+            </command>
+         </menu>
       </menuContribution>
       <menuContribution
             allPopups="false"
@@ -590,6 +598,10 @@
             id="in.BBAT.presenter.history.openUIAutoLogs"
             name="Open UIAutomator Logs">
       </command>
+      <command
+            id="in.BBAT.presenter.Update"
+            name="Update">
+      </command>
    </extension>
    <extension
          point="org.eclipse.ui.handlers">
@@ -696,6 +708,13 @@
       <handler
             class="in.BBAT.presenter.history.handlers.OpenScreenShotsHandler"
             commandId="in.BBAT.presenter.history.openScreenShots">
+      </handler>
+      <handler
+            commandId="in.BBAT.presenter.handler1">
+      </handler>
+      <handler
+            class="in.BBAT.presenter.developer.handlers.UpdateBBATP2Handler"
+            commandId="in.BBAT.presenter.Update">
       </handler>
    </extension>
    <extension
