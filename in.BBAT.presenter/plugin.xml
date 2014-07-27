@@ -385,12 +385,6 @@
                style="push"
                tooltip="opens UI automator viewer">
          </command>
-         <command
-               commandId="in.BBAT.presenter.device.connectWifi"
-               icon="icons/w.png"
-               label="Connect via WiFi"
-               style="push">
-         </command>
       </menuContribution>
       <menuContribution
             allPopups="false"
