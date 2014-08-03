@@ -15,7 +15,6 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.ui.forms,
  org.eclipse.ui.ide,
  org.eclipse.core.resources,
- in.BBAT.web.utils;bundle-version="1.0.0",
  org.eclipse.nebula.widgets.gallery
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
