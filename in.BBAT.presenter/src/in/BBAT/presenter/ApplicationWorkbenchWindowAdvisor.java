@@ -131,12 +131,17 @@ public class ApplicationWorkbenchWindowAdvisor extends WorkbenchWindowAdvisor {
 					"SDK Error", errorMessage);
 		}
 
+		
+		//openActivationDialog();
+
+
+	}
+
+	private void openActivationDialog() {
 		if(BBATProperties.getInstance().getUserEmailId()==null ||BBATProperties.getInstance().getUserEmailId().isEmpty()){
 			ActivationCodeDialog d = new ActivationCodeDialog(new Shell());
 			d.open();
 		}
-
-
 	}
 
 	public static String validateAndroidSdkLocation(String osSdkLocation) {
