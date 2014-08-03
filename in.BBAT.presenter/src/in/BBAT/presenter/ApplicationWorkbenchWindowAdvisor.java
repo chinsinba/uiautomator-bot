@@ -147,7 +147,7 @@ public class ApplicationWorkbenchWindowAdvisor extends WorkbenchWindowAdvisor {
 	public static String validateAndroidSdkLocation(String osSdkLocation) {
 
 		if (osSdkLocation == null || osSdkLocation.trim().length() == 0) {
-			return "Location of the Android SDK has not been setup in the preferences.";
+			return "Unable to find android SDK. Please configure valid SDK path";
 		}
 
 		if (!osSdkLocation.endsWith(File.separator)) {
