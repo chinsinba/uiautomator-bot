@@ -13,7 +13,6 @@
 		<module>../in.BBAT.p2.rcpupdate.utils</module>
 		<module>../in.BBAT.presenter</module>
 		<module>../in.BBAT.TestRunner</module>
-		<module>../in.BBAT.web.utils</module>
 		<module>../in.BBAT.abstrakt.presenter</module>
 		<module>../in.BBAT.p2.rcpupdate</module>
 		
