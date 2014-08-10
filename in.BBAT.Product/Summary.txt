@@ -1,1 +1,1 @@
-This Swat tool tests the android devices.
+This tool tests the android devices.
