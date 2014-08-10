@@ -43,7 +43,7 @@ public class TestRunHistoryLabelProvider extends LabelProvider implements ITable
 		{
 			switch (columnIndex) {
 			case 0:
-				return ((TestDeviceRunModel) element).getDeviceName();
+				return ((TestDeviceRunModel) element).getDeviceLabel();
 			case 1:
 
 				DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");

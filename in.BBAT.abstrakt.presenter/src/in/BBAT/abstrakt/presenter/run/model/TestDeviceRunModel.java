@@ -205,8 +205,18 @@ public class TestDeviceRunModel extends AbstractTreeModel {
 	public Timestamp getEndTime(){
 		return ((TestDeviceRunEntity)getEntity()).getEndTime();
 	} 
+
+	/**
+	 *  be careful in changing this method. This is used to create and fetch screshots directory structure.
+	 *  any change to this method will effect the screenshot directory.
+	 * @return
+	 */
 	public String getDeviceName(){
 		return ((TestDeviceRunEntity)getEntity()).getDevice().getDeviceId();
+	}
+
+	public String getDeviceLabel(){
+		return ((TestDeviceRunEntity)getEntity()).getDevice().getBuild_model()+"-"+((TestDeviceRunEntity)getEntity()).getDevice().getDeviceId();
 	}
 
 	public long getTimeTaken(){
