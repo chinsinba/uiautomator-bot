@@ -339,7 +339,7 @@ public class TestDevice implements IAndroidDevice {
 	public void pullScreenShots(String destinationDir, String sourceDirInDevice , boolean delete) {
 
 		try {
-			Process exec = Runtime.getRuntime().exec(BBATProperties.getInstance().getAndroid_AdbPath()+" pull "+ SCREENSHOT_DIR+"/"+sourceDirInDevice + " "+ destinationDir);
+			Process exec = Runtime.getRuntime().exec(BBATProperties.getInstance().getAndroid_AdbPath()+" -s "+getDeviceId()+" pull "+ SCREENSHOT_DIR+"/"+sourceDirInDevice + " "+ destinationDir);
 			exec.waitFor();
 		} catch (IOException e1) {
 			e1.printStackTrace();
