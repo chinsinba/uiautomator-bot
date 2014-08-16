@@ -1,10 +1,11 @@
 package in.bbat.utility;
 
 public interface IBBATConstants {
-	public final static String BBAT_HIDDEN_FOLDER =".bbat";
-	public final static String UIWKSPCNAME ="UIAutoTestCases";
+	public final static String BBAT_HIDDEN_FOLDER =".uiautomator-bot";
+	public final static String BBAT_TITLE ="Uiautomator-bot";
+	public final static String UIWKSPCNAME ="TestCasesRepo";
 	public final static String DATA ="data";
-	public final static String SCREEN_SHOTS ="screenShots";
+	public final static String SCREEN_SHOTS ="screenshot";
 	public static final String USER_HOME_PROPERTY = "user.home";
 	public static final String ADT_SDK_PREFERENCE_KEY = "com.android.ide.eclipse.adt.sdk";
 	public static final String ADT_PLUGIN_PREFERENCE = "com.android.ide.eclipse.adt";

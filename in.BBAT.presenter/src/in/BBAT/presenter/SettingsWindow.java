@@ -267,7 +267,7 @@ public class SettingsWindow extends ApplicationWindow  {
 		}
 
 		if(wkspcPathText.getText().isEmpty()){
-			form.setMessage("UiAutomator scripts path cannot be empty", IMessageProvider.ERROR);
+			form.setMessage("UiAutomator test cases path cannot be empty", IMessageProvider.ERROR);
 			return false;
 		}
 
@@ -310,7 +310,7 @@ public class SettingsWindow extends ApplicationWindow  {
 		devClentComp.setLayoutData(new GridData(GridData.FILL_BOTH));
 
 		{
-			confToolkit.createLabel(devClentComp, "* Android SDK Path : ");
+			confToolkit.createLabel(devClentComp, "* Android SDK path : ");
 			sdkPathText = confToolkit.createText(devClentComp,BBATProperties.getInstance().getAndroid_SdkPath(),SWT.BORDER|SWT.READ_ONLY);
 			sdkPathText.setToolTipText(sdkPathText.getText());
 			sdkPathText.setLayoutData(new GridData(GridData.FILL_BOTH));
@@ -319,7 +319,7 @@ public class SettingsWindow extends ApplicationWindow  {
 			addTextFocuslisteners(sdkPathText);
 		}
 		{
-			confToolkit.createLabel(devClentComp, "* UIAutomator scripts path : ");
+			confToolkit.createLabel(devClentComp, "* UIautomator test cases path : ");
 			wkspcPathText = confToolkit.createText(devClentComp,BBATProperties.getInstance().getWkspc_UiAutomator(),SWT.BORDER|SWT.READ_ONLY);
 			wkspcPathText.setToolTipText(wkspcPathText.getText());
 			wkspcPathText.setLayoutData(new GridData(GridData.FILL_BOTH));

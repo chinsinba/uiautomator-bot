@@ -9,10 +9,10 @@ import com.android.uiautomator.testrunner.*;
 import static ${utility_import}.*;
 
 /**
-${description}
+  ${description}
 
-<br><b>NOTE:1.This class can contain only one test case.<br>
-		2.Do not change the class name.</b>
+NOTE:1.This class can contain only one test case.
+	 2.Do not change the class name.
 */
 public class ${testCase_name} extends UiAutomatorTestCase {   
 

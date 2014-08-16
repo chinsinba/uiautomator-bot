@@ -13,6 +13,7 @@ import in.BBAT.presenter.views.developer.DeveloperDeviceView;
 import in.BBAT.presenter.views.developer.TestCaseBrowserView;
 import in.bbat.configuration.BBATProperties;
 import in.bbat.logger.BBATLogger;
+import in.bbat.utility.IBBATConstants;
 
 import java.io.File;
 import java.net.UnknownHostException;
@@ -61,7 +62,7 @@ public class ApplicationWorkbenchWindowAdvisor extends WorkbenchWindowAdvisor {
 		//		configurer.setInitialSize(new Point(800, 600));
 		configurer.setShowCoolBar(false);
 		configurer.setShowStatusLine(true);
-		configurer.setTitle("BBAT");
+		configurer.setTitle(IBBATConstants.BBAT_TITLE);
 		configurer.setShowPerspectiveBar(true);
 		configurer.setShowProgressIndicator(true);
 		Rectangle localRectangle = Display.getCurrent().getBounds();
