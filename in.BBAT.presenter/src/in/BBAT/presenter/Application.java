@@ -8,10 +8,13 @@ import in.bbat.logger.BBATLogger;
 import java.net.UnknownHostException;
 
 import org.apache.log4j.Logger;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.equinox.app.IApplication;
 import org.eclipse.equinox.app.IApplicationContext;
 import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.osgi.service.datalocation.Location;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.PlatformUI;
 
@@ -25,18 +28,44 @@ public class Application implements IApplication {
 	 * @see org.eclipse.equinox.app.IApplication#start(org.eclipse.equinox.app.IApplicationContext)
 	 */
 	public Object start(IApplicationContext context) {
-		Display display = PlatformUI.createDisplay();
-		try {
-			
-			int returnCode = PlatformUI.createAndRunWorkbench(display, new ApplicationWorkbenchAdvisor());
 
-			if (returnCode == PlatformUI.RETURN_RESTART) {
-				return IApplication.EXIT_RESTART;
+		Display display = PlatformUI.createDisplay();
+		Location instanceLocation = null;
+		try
+		{
+			instanceLocation = Platform.getInstanceLocation();
+			instanceLocation.getURL();
+
+			if (!instanceLocation.lock()) 
+			{
+				MessageDialog.openError(new Shell(display), "Error",
+						"Another instance of uiautomator-bot is currently running.");
+				return IApplication.EXIT_OK;
+			} else {
+
+				if (PlatformUI.createAndRunWorkbench(display, new ApplicationWorkbenchAdvisor())==PlatformUI.RETURN_RESTART)
+					return IApplication.EXIT_RESTART;
+				else
+					return IApplication.EXIT_OK;
 			}
-			return IApplication.EXIT_OK;
-		} finally {
-			display.dispose();
 		}
+		catch (Exception e) 
+		{
+			LOG.error("Unable to start the application",e);
+
+		}
+		finally
+		{
+			if(instanceLocation!=null ){
+				instanceLocation.release();
+			}
+			if(display!=null)
+			{
+				display.dispose();
+			}
+		}
+		return IApplication.EXIT_OK;
+
 	}
 
 	/* (non-Javadoc)
