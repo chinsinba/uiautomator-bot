@@ -14,10 +14,10 @@
    <windowImages/>
 
    <splash
-      location="in.BBAT.Product"
+      location="in.BBAT.presenter"
       startupProgressRect="5,275,445,15"
       startupMessageRect="7,252,445,20"
-      startupForegroundColor="000000" />
+      startupForegroundColor="FF0000" />
    <launcher name="bbat">
       <solaris/>
       <win useIco="false">

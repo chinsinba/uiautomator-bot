@@ -730,7 +730,7 @@
          </property>
          <property
                name="startupForegroundColor"
-               value="000000">
+               value="FF0000">
          </property>
          <property
                name="startupMessageRect"
