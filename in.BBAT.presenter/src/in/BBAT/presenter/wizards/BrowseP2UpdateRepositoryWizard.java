@@ -1,8 +1,13 @@
 package in.BBAT.presenter.wizards;
 
+import java.io.File;
+import java.io.IOException;
+
 import in.BBAT.presenter.wizards.pages.BrowseFilePage;
 import in.bbat.logger.BBATLogger;
 import in.bbat.p2.rcpupdate.utils.P2Util;
+import in.bbat.utility.FileUtils;
+import in.bbat.utility.ZipFiles;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.Path;
@@ -20,8 +25,25 @@ public class BrowseP2UpdateRepositoryWizard extends Wizard{
 	public boolean performFinish() {
 
 		String path = page1.getPath();
-		P2Util.checkForUpdates("file:"+Path.SEPARATOR+Path.SEPARATOR+path);
-		return true;
+
+
+		File folder = new File("temp_update");
+		if(folder.exists()){
+			try {
+				FileUtils.delete(folder);
+			} catch (IOException e) {
+				LOG.error(e);
+			}
+		}
+		folder.mkdir();
+		try{
+			ZipFiles.unZipIt(path,folder.getAbsolutePath());
+			P2Util.checkForUpdates("file:"+Path.SEPARATOR+Path.SEPARATOR+folder.getAbsolutePath()+Path.SEPARATOR+"repository");
+			return true;
+		}
+		finally{
+
+		}
 	}
 
 	@Override
