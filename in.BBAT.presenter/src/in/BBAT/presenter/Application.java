@@ -1,11 +1,6 @@
 package in.BBAT.presenter;
 
-import in.BBAT.TestRunner.device.DeviceException;
-import in.BBAT.abstrakt.gui.ApplicationHelper;
-import in.BBAT.abstrakt.presenter.device.model.TestDeviceManager;
 import in.bbat.logger.BBATLogger;
-
-import java.net.UnknownHostException;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.Platform;
