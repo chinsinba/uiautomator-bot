@@ -313,6 +313,11 @@
                   label="Update"
                   style="push">
             </command>
+            <command
+                  commandId="org.eclipse.ui.help.aboutAction"
+                  label="About"
+                  style="push">
+            </command>
          </menu>
       </menuContribution>
       <menuContribution
@@ -719,26 +724,26 @@
          point="org.eclipse.core.runtime.products">
       <product
             application="in.BBAT.presenter.application"
-            name="UIautomator-bot">
+            name="BBAT">
          <property
                name="appName"
-               value="UIautomator-bot">
+               value="BBAT">
          </property>
          <property
                name="preferenceCustomization"
                value="plugin_customization.ini">
          </property>
          <property
-               name="startupForegroundColor"
-               value="FF0000">
+               name="aboutText"
+               value="hello me">
          </property>
          <property
-               name="startupMessageRect"
-               value="7,252,445,20">
+               name="aboutImage"
+               value="icons/32by32.png">
          </property>
          <property
-               name="startupProgressRect"
-               value="5,275,445,15">
+               name="windowImages"
+               value="icons/16by16.png,icons/32by32.png">
          </property>
       </product>
    </extension>
