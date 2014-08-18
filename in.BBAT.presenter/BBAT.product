@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?pde version="3.5"?>
 
-<product name="BBAT" id="in.BBAT.presenter.BBAT" application="in.BBAT.presenter.application" version="1.0.0.qualifier" useFeatures="true" includeLaunchers="true">
+<product name="Uiautomator-bot" id="in.BBAT.presenter.BBAT" application="in.BBAT.presenter.application" version="1.0.0.qualifier" useFeatures="true" includeLaunchers="true">
 
    <aboutInfo>
       <image path="/in.BBAT.presenter/icons/32by32.png"/>
       <text>
-         hello me
+         Tool for automating Uiautomator. 
+
+https://sourceforge.net/projects/uiautomator/  
+http://uiaiutomator-bot.blogspot.in/   
+Inatalled ver : 1.0.0
       </text>
    </aboutInfo>
 

@@ -724,10 +724,10 @@
          point="org.eclipse.core.runtime.products">
       <product
             application="in.BBAT.presenter.application"
-            name="BBAT">
+            name="Uiautomator-bot">
          <property
                name="appName"
-               value="BBAT">
+               value="Uiautomator-bot">
          </property>
          <property
                name="preferenceCustomization"
@@ -735,7 +735,7 @@
          </property>
          <property
                name="aboutText"
-               value="hello me">
+               value="Tool for automating Uiautomator. &#x0A;&#x0A;https://sourceforge.net/projects/uiautomator/  &#x0A;http://uiaiutomator-bot.blogspot.in/   &#x0A;Inatalled ver : 1.0.0">
          </property>
          <property
                name="aboutImage"
