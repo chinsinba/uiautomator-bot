@@ -169,9 +169,9 @@ public class P2Util {
 					Display.getDefault().syncExec(new Runnable() {
 						@Override
 						public void run() {
-							/*MessageDialog
+							MessageDialog
 							.openWarning(new Shell(), "No update",
-									"No updates for the current installation have been found");*/
+									"No updates for the current installation have been found");
 						}
 					});
 					return Status.CANCEL_STATUS;
