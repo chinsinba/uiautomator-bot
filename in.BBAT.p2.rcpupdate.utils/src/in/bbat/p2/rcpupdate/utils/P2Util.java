@@ -171,7 +171,7 @@ public class P2Util {
 						public void run() {
 							MessageDialog
 							.openWarning(new Shell(), "No update",
-									"No updates for the current installation have been found");
+									"No updates found.Already up to date.");
 						}
 					});
 					return Status.CANCEL_STATUS;
