@@ -3,6 +3,7 @@ package in.BBAT.TestRunner.runner;
 import in.bbat.configuration.BBATProperties;
 import in.bbat.logger.BBATLogger;
 import in.bbat.utility.FileUtils;
+import in.bbat.utility.StreamGobbler;
 
 import java.io.File;
 import java.io.IOException;
@@ -42,15 +43,15 @@ public class UiAutoTestCaseJar {
 	private void initializeBuildEnvironment(List<String> testScriptPaths) throws BuildJarException {
 
 		clearFolder(new File(TEMP_FOLDER_PATH));
-		
+
 		File temp = createTempDir();
-		
+
 		createPackandCopyTestCases(testScriptPaths, temp);
-		
+
 		createUiProject();
-		
+
 		buildBBATJar(TEMP_FOLDER_PATH);
-		
+
 		setJarFile(new File(TEMP_FOLDER_PATH+Path.SEPARATOR+BIN+Path.SEPARATOR+UIAUTOMATOR_JAR));
 
 	}
@@ -64,6 +65,10 @@ public class UiAutoTestCaseJar {
 	private void createUiProject() throws BuildJarException {
 		try {
 			Process p = Runtime.getRuntime().exec(ANDROID_SDK_TOOLS+getCreateUiProjCommand());
+			StreamGobbler errGobbler = new StreamGobbler(p.getErrorStream(),"error");
+			StreamGobbler opGobbler = new StreamGobbler(p.getInputStream(),"output");
+			errGobbler.start();
+			opGobbler.start();
 			p.waitFor();
 		} catch (IOException e) {
 			LOG.error(e);

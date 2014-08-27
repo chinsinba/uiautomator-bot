@@ -10,6 +10,7 @@ import in.BBAT.TestRunner.runner.UiAutoTestCaseJar;
 import in.BBAT.TestRunner.runner.internal.UIAutomatorRunner;
 import in.bbat.configuration.BBATProperties;
 import in.bbat.logger.BBATLogger;
+import in.bbat.utility.StreamGobbler;
 
 import java.io.IOException;
 import java.util.List;
@@ -340,6 +341,11 @@ public class TestDevice implements IAndroidDevice {
 
 		try {
 			Process exec = Runtime.getRuntime().exec(BBATProperties.getInstance().getAndroid_AdbPath()+" -s "+getDeviceId()+" pull "+ SCREENSHOT_DIR+"/"+sourceDirInDevice + " "+ destinationDir);
+			StreamGobbler errGobbler = new StreamGobbler(exec.getErrorStream(),"error");
+			StreamGobbler opGobbler = new StreamGobbler(exec.getInputStream(),"output");
+			errGobbler.start();
+			opGobbler.start();
+
 			exec.waitFor();
 		} catch (IOException e1) {
 			e1.printStackTrace();
