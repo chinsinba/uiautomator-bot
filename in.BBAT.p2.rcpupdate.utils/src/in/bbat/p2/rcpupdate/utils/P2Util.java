@@ -39,7 +39,7 @@ import org.osgi.framework.ServiceReference;
 public class P2Util {
 
 	private static final Logger LOG = BBATLogger.getLogger(P2Util.class.getName());
-	public static void checkForUpdates(final String uri) {
+	public static void checkForUpdates(final URI uri) {
 		try {
 			ProgressMonitorDialog progressDialog = new ProgressMonitorDialog(null);
 			progressDialog.run(true, true, new IRunnableWithProgress() {
@@ -114,7 +114,7 @@ public class P2Util {
 		return status;
 	}
 
-	public static void execute( IProgressMonitor monitor,final String uri) {
+	public static void execute( IProgressMonitor monitor,final URI uri) {
 
 		
 		Job j = new Job("Update Job") {
@@ -132,7 +132,6 @@ public class P2Util {
 				}
 
 				final IProvisioningAgent agent = (IProvisioningAgent) bundleContext.getService(reference);
-				final String REPOSITORY_LOC = uri;
 						/*System.getProperty("UpdateHandler.Repo", 
 								"file:///home//repository/");
 */
@@ -141,19 +140,6 @@ public class P2Util {
 				final ProvisioningSession session = new ProvisioningSession(agent);
 				final UpdateOperation operation = new UpdateOperation(session);
 
-				// create uri
-				URI uri = null;
-				try {
-					uri = new URI(REPOSITORY_LOC);
-				} catch (final URISyntaxException e) {
-					Display.getDefault().syncExec(new Runnable() {
-						@Override
-						public void run() {
-							MessageDialog.openError(new Shell(), "URI invalid", e.getMessage());
-						}
-					});
-					return Status.CANCEL_STATUS;
-				}
 
 				// set location of artifact and metadata repo
 				operation.getProvisioningContext().setArtifactRepositories(new URI[] { uri });

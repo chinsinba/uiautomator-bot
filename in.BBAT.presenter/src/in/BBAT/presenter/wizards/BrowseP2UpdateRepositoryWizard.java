@@ -37,8 +37,10 @@ public class BrowseP2UpdateRepositoryWizard extends Wizard{
 		}
 		folder.mkdir();
 		try{
+
 			ZipFiles.unZipIt(path,folder.getAbsolutePath());
-			P2Util.checkForUpdates("file:"+Path.SEPARATOR+Path.SEPARATOR+folder.getAbsolutePath()+Path.SEPARATOR+"repository");
+			File f = new File(folder,"repository");
+			P2Util.checkForUpdates(f.toURI());
 			return true;
 		}
 		finally{
