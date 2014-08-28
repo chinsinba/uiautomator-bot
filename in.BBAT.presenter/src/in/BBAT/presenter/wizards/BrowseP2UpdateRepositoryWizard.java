@@ -38,7 +38,12 @@ public class BrowseP2UpdateRepositoryWizard extends Wizard{
 		folder.mkdir();
 		try{
 
-			ZipFiles.unZipIt(path,folder.getAbsolutePath());
+			try {
+				ZipFiles.unZipIt(path,folder.getAbsolutePath());
+			} catch (Exception e) {
+				MessageDialog.openError(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(), "UnZip Error", "Failled to unzip update repository.");
+				return false;
+			}
 			File f = new File(folder,"repository");
 			P2Util.checkForUpdates(f.toURI());
 			return true;
