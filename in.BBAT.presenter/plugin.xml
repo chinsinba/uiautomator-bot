@@ -323,6 +323,11 @@
                   label="Feedback"
                   style="push">
             </command>
+            <command
+                  commandId="in.BBAT.presenter.ReportBug"
+                  label="Report Bug"
+                  style="push">
+            </command>
          </menu>
       </menuContribution>
       <menuContribution
@@ -610,6 +615,10 @@
             id="in.BBAT.presenter.Feedback"
             name="Feedback">
       </command>
+      <command
+            id="in.BBAT.presenter.ReportBug"
+            name="Report Bug">
+      </command>
    </extension>
    <extension
          point="org.eclipse.ui.handlers">
@@ -724,6 +733,10 @@
       <handler
             class="in.BBAT.presenter.developer.handlers.FeedBackHandler"
             commandId="in.BBAT.presenter.Feedback">
+      </handler>
+      <handler
+            class="in.BBAT.presenter.developer.handlers.ReportBugHandler"
+            commandId="in.BBAT.presenter.ReportBug">
       </handler>
    </extension>
    <extension
