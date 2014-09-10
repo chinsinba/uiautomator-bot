@@ -318,6 +318,11 @@
                   label="About"
                   style="push">
             </command>
+            <command
+                  commandId="in.BBAT.presenter.Feedback"
+                  label="Feedback"
+                  style="push">
+            </command>
          </menu>
       </menuContribution>
       <menuContribution
@@ -601,6 +606,10 @@
             id="in.BBAT.presenter.Update"
             name="Update">
       </command>
+      <command
+            id="in.BBAT.presenter.Feedback"
+            name="Feedback">
+      </command>
    </extension>
    <extension
          point="org.eclipse.ui.handlers">
@@ -709,11 +718,12 @@
             commandId="in.BBAT.presenter.history.openScreenShots">
       </handler>
       <handler
-            commandId="in.BBAT.presenter.handler1">
-      </handler>
-      <handler
             class="in.BBAT.presenter.developer.handlers.UpdateBBATP2Handler"
             commandId="in.BBAT.presenter.Update">
+      </handler>
+      <handler
+            class="in.BBAT.presenter.developer.handlers.FeedBackHandler"
+            commandId="in.BBAT.presenter.Feedback">
       </handler>
    </extension>
    <extension
