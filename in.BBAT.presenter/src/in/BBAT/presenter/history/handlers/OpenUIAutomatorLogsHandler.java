@@ -20,6 +20,7 @@ public class OpenUIAutomatorLogsHandler  extends AbstractTestRunInfoHandler{
 	@Override
 	public Object run(ExecutionEvent event, final List<?> selectedObjects) {
 
+		LOG.info("Open uiautomator logs");
 		Display.getDefault().asyncExec(new Runnable() {
 
 			@Override

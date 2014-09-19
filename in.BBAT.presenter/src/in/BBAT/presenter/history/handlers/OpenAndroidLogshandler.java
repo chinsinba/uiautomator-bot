@@ -20,6 +20,7 @@ public class OpenAndroidLogshandler extends AbstractTestRunInfoHandler {
 	private static final Logger LOG = BBATLogger.getLogger(OpenAndroidLogshandler.class.getName());
 	@Override
 	public Object run(ExecutionEvent event,final List<?> selectedObjects) {
+		LOG.info("OPen android logs");
 		Display.getDefault().asyncExec(new Runnable() {
 			@Override
 			public void run() {

@@ -19,6 +19,7 @@ public class OpenScreenShotsHandler extends AbstractTestRunInfoHandler {
 
 	@Override
 	public Object run(ExecutionEvent event, final List<?> selectedObjects) {
+		LOG.info("Open screen shot");
 		ScreenShotView.selectedTestRuncase((TestRunInstanceModel) selectedObjects.get(0));
 		Display.getDefault().asyncExec(new Runnable() {
 			public void run() {

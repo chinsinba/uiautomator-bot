@@ -20,6 +20,7 @@ public class OpenMemoryCPUUsageHandler  extends AbstractTestRunInfoHandler{
 	@Override
 	public Object run(ExecutionEvent event,final List<?> selectedObjects) {
 
+		LOG.info("Open memory and cpu usage");
 		ScreenShotView.selectedTestRuncase((TestRunInstanceModel) selectedObjects.get(0));
 		Display.getDefault().asyncExec(new Runnable() {
 			@Override
