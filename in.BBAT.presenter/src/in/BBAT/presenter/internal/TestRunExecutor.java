@@ -19,6 +19,9 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
+import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.ui.PlatformUI;
 
 
 public class TestRunExecutor{
@@ -46,10 +49,12 @@ public class TestRunExecutor{
 				} catch (BuildJarException e) {
 					endOfTestRun();
 					LOG.error(e);
+					showError();
 					return Status.CANCEL_STATUS;
 				} catch (Exception e) {
 					endOfTestRun();
 					LOG.error(e);
+					showError();
 					return Status.CANCEL_STATUS;
 				}
 				monitor.worked(1);
@@ -62,6 +67,19 @@ public class TestRunExecutor{
 				}
 				monitor.done();
 				return Status.OK_STATUS;
+			}
+
+			private void showError() {
+				Display.getDefault().asyncExec(new Runnable() {
+
+					@Override
+					public void run() {
+						MessageDialog.openError(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(), "Build Error", "Failed to build Uiautomator test cases.\n" +
+								"For more information do following steps:\n 1. open terminal/command prompt.\n 2. cd "+UiAutoTestCaseJar.TEMP_FOLDER_PATH+
+								"\n 3. ant build\n" +
+								" 4. The build errors will be listed on the terminal.");						
+					}
+				});
 			}
 		};
 		job.schedule();
