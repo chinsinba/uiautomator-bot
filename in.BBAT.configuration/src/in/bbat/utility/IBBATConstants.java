@@ -13,6 +13,7 @@ public interface IBBATConstants {
 	public  final static  String  UNIX_ADB ="adb";
 	public  final static  String  WINDOWS_ADB ="adb.exe";
 
+	
 	public  final static  String  UNIX_AAPT ="aapt";
 	public  final static  String  WINDOWS_AAPT ="aapt.exe";
 	public  final static  String  ANDROID_FOLDER =".android";
@@ -21,4 +22,6 @@ public interface IBBATConstants {
 	public  final static  String  TOOLS ="tools";
 	public  final static  String  LIB ="lib";
 	public  final static  String  DDM_LIB_JAR ="ddmlib.jar";
+	public static final String RECENT_SELECTED_WORKSPACE = "recent_workspace";
+	public static final String USER_WORKSPACES = "user.workspaces";
 }

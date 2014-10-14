@@ -1,5 +1,7 @@
 package in.BBAT.utils;
 
+import in.bbat.utility.IBBATConstants;
+
 import java.io.File;
 
 public class FileSystem
@@ -43,12 +45,12 @@ public class FileSystem
     {
     case 2:
     case 3:
-      str = System.getProperty("user.home");
+      str = System.getProperty(IBBATConstants.USER_HOME_PROPERTY);
       homeDir = new File(str);
       bool = homeDir.exists();
       break;
     case 1:
-      str = System.getProperty("user.home");
+      str = System.getProperty(IBBATConstants.USER_HOME_PROPERTY);
       homeDir = new File(str);
       bool = homeDir.exists();
       break;

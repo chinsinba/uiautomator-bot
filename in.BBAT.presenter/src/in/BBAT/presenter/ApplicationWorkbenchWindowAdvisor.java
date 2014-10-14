@@ -28,6 +28,7 @@ import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.swt.custom.BusyIndicator;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.graphics.Rectangle;
+import org.eclipse.swt.widgets.DirectoryDialog;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IPerspectiveDescriptor;
@@ -67,10 +68,15 @@ public class ApplicationWorkbenchWindowAdvisor extends WorkbenchWindowAdvisor {
 		configurer.setShowProgressIndicator(true);
 		Rectangle localRectangle = Display.getCurrent().getBounds();
 		configurer.setInitialSize(new Point(localRectangle.width, localRectangle.height));
+		
+		final WorkspaceSelectionDialog dirDialog = new WorkspaceSelectionDialog(new Shell());
+	    int selectedDir = dirDialog.open();
+	    System.out.println(dirDialog.getWorkspace());
+		
 		BusyIndicator.showWhile(Display.getCurrent(), new Runnable() {
 			@Override
 			public void run() {
-				initialize();				
+				initialize(dirDialog.getWorkspace());				
 			}
 		});
 	}
@@ -80,12 +86,12 @@ public class ApplicationWorkbenchWindowAdvisor extends WorkbenchWindowAdvisor {
 
 	}
 
-	private void initialize() {
+	private void initialize(String workspace) {
 		try {
 			LOG.info("Started....");
 
 			TestDeviceManager.init(BBATProperties.getInstance().getAndroid_AdbPath());
-			ApplicationHelper.initializeDb();
+			ApplicationHelper.initializeDb(workspace);
 			TestCaseBrowserView.refreshView();
 
 			BBATViewPart view = (BBATViewPart) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().findView(DeveloperDeviceView.ID);

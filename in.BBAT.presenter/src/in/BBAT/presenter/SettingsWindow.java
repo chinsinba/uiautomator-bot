@@ -5,6 +5,7 @@ import in.BBAT.abstrakt.presenter.pkg.model.BBATProject;
 import in.bbat.configuration.BBATProperties;
 import in.bbat.logger.BBATLogger;
 import in.bbat.utility.FileUtils;
+import in.bbat.utility.IBBATConstants;
 
 import java.io.File;
 import java.io.IOException;
@@ -324,6 +325,7 @@ public class SettingsWindow extends ApplicationWindow  {
 			wkspcPathText.setToolTipText(wkspcPathText.getText());
 			wkspcPathText.setLayoutData(new GridData(GridData.FILL_BOTH));
 			browseWkspcPathButton = confToolkit.createButton(devClentComp, "Browse", SWT.PUSH);
+			browseWkspcPathButton.setVisible(false);
 			addListnerForBrowseButton( browseWkspcPathButton, wkspcPathText);
 			addTextFocuslisteners(wkspcPathText);
 		}
@@ -391,7 +393,7 @@ public class SettingsWindow extends ApplicationWindow  {
 				DirectoryDialog importDialog = new DirectoryDialog(getShell(),SWT.OPEN);
 				String text = updateText.getText();
 				if(text==null||text.isEmpty() )	
-					importDialog.setFilterPath(System.getProperty("user.home"));
+					importDialog.setFilterPath(System.getProperty(IBBATConstants.USER_HOME_PROPERTY));
 				else
 					importDialog.setFilterPath(text.trim());
 				String selectedFile = importDialog.open();

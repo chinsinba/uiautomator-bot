@@ -18,10 +18,6 @@ import org.eclipse.core.runtime.preferences.InstanceScope;
 public class DefaultValueSetter
 {
 	
-	/*public final static String DATA_FOLDER =".bbat";
-	public final static String UIWKSPCNAME ="UIAutoTestCases";
-	public final static String DATA ="data";*/
-
 	public static String initializeSDKPath() throws JAXBException, IOException
 	{
 
@@ -29,8 +25,6 @@ public class DefaultValueSetter
 		String sdkPathFromPreference = Platform.getPreferencesService().getString(IBBATConstants.ADT_PLUGIN_PREFERENCE, IBBATConstants.ADT_SDK_PREFERENCE_KEY, null, arrayOfIScopeContext);
 		if ((sdkPathFromPreference != null) && (isValidSDK(sdkPathFromPreference)))
 		{
-			/*BBATConfigXml.getInstance().setAndroid_SdkPath(sdkPathFromPreference);
-			BBATConfigXml.getInstance().save();*/
 			return sdkPathFromPreference;
 		}
 		String homeDirPath = System.getProperty(IBBATConstants.USER_HOME_PROPERTY);
@@ -47,8 +41,6 @@ public class DefaultValueSetter
 						FileInputStream localFileInputStream = new FileInputStream(ddmsConfigFile);
 						localProperties.load(localFileInputStream);
 						sdkPathFromPreference = (String)localProperties.get(IBBATConstants.LAST_SDK_PATH);
-						/*BBATConfigXml.getInstance().setAndroid_SdkPath(sdkPathFromPreference);
-						BBATConfigXml.getInstance().save();*/
 						return sdkPathFromPreference;
 
 				}
@@ -78,15 +70,15 @@ public class DefaultValueSetter
 
 	public static String initializeUIAutoWorkspace() throws JAXBException, IOException{
 		String s = System.getProperty(IBBATConstants.USER_HOME_PROPERTY)+Path.SEPARATOR+IBBATConstants.BBAT_HIDDEN_FOLDER+Path.SEPARATOR+IBBATConstants.UIWKSPCNAME;
-		/*BBATConfigXml.getInstance().setWkspc_UiAutomator(s);
-		BBATConfigXml.getInstance().save();*/
 		return s;
 	}
 
-	public static String initializeDataBasePath() throws JAXBException, IOException{
-		String s = System.getProperty(IBBATConstants.USER_HOME_PROPERTY)+Path.SEPARATOR+IBBATConstants.BBAT_HIDDEN_FOLDER+Path.SEPARATOR+IBBATConstants.DATA;
-		/*	BBATConfigXml.getInstance().setDatabase_Name(s);
-		BBATConfigXml.getInstance().save();*/
+	public static String initializeDataBasePath(String workspaceDirectory) throws JAXBException, IOException{
+		if(workspaceDirectory==null)
+		{
+			workspaceDirectory =System.getProperty(IBBATConstants.USER_HOME_PROPERTY);
+		}
+		String s = workspaceDirectory +Path.SEPARATOR+IBBATConstants.BBAT_HIDDEN_FOLDER+Path.SEPARATOR+IBBATConstants.DATA;
 		return s;
 	}
 
@@ -98,5 +90,11 @@ public class DefaultValueSetter
 		if (!adbFile.exists())
 			adbFile = new File(platFormToolsDir, IBBATConstants.WINDOWS_ADB);
 		return adbFile.exists() ? adbFile.getAbsolutePath() : null;
+	}
+
+	public static boolean isDatabasePresent() {
+		File dataFile = new File(BBATProperties.getInstance().getWkspc_UiAutomator() +Path.SEPARATOR+IBBATConstants.BBAT_HIDDEN_FOLDER+Path.SEPARATOR+IBBATConstants.DATA);
+		
+		return dataFile.exists();
 	}
 }

@@ -11,6 +11,7 @@ import in.BBAT.abstrakt.presenter.run.model.TestStatus;
 import in.BBAT.presenter.labelProviders.AutoLogLabelProvider;
 import in.BBAT.presenter.views.BBATViewPart;
 import in.bbat.logger.BBATLogger;
+import in.bbat.utility.IBBATConstants;
 
 import org.apache.log4j.Logger;
 import org.eclipse.jface.dialogs.MessageDialog;
@@ -159,7 +160,7 @@ public class AutomatorLogView extends BBATViewPart {
 		//		fd.setFileName("log.txt");
 
 		if (mLogFileExportFolder == null) {
-			mLogFileExportFolder = System.getProperty("user.home");
+			mLogFileExportFolder = System.getProperty(IBBATConstants.USER_HOME_PROPERTY);
 		}
 		fd.setFilterPath(mLogFileExportFolder);
 		/*

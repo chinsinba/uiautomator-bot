@@ -18,6 +18,7 @@ package in.BBAT.presenter.views.tester;
 
 import in.BBAT.abstrakt.presenter.run.model.TestRunInstanceModel;
 import in.bbat.logger.BBATLogger;
+import in.bbat.utility.IBBATConstants;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -826,7 +827,7 @@ public final class LogCatPanel implements ILogCatBufferChangeListener {
 		//		fd.setFileName("log.txt");
 
 		if (mLogFileExportFolder == null) {
-			mLogFileExportFolder = System.getProperty("user.home");
+			mLogFileExportFolder = System.getProperty(IBBATConstants.USER_HOME_PROPERTY);
 		}
 		fd.setFilterPath(mLogFileExportFolder);
 		/*

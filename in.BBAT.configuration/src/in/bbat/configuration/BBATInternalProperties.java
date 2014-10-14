@@ -1,6 +1,7 @@
 package in.bbat.configuration;
 
 import in.bbat.utility.BBATPluginUtility;
+import in.bbat.utility.DefaultValueSetter;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -55,6 +56,10 @@ public class BBATInternalProperties {
 	}
 
 	public boolean getDatabaseCreate(){
+		if(!DefaultValueSetter.isDatabasePresent())
+		{
+			return true;
+		}
 		return Boolean.parseBoolean(bbatInternalProperty.getProperty(DATABASE_CREATE,"true"));
 	}
 

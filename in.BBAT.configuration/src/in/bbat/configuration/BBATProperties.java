@@ -4,7 +4,6 @@ import in.bbat.utility.AndroidSdkUtility;
 import in.bbat.utility.DefaultValueSetter;
 import in.bbat.utility.IBBATConstants;
 
-import java.awt.color.CMMException;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -177,7 +176,7 @@ public class BBATProperties {
 	public String getDatabase_Name() {
 
 		try {
-			return bbatProperty.getProperty(DATABASE_NAME,DefaultValueSetter.initializeDataBasePath());
+			return bbatProperty.getProperty(DATABASE_NAME,DefaultValueSetter.initializeDataBasePath(null));
 		} catch (JAXBException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -330,7 +329,7 @@ public class BBATProperties {
 	}
 
 	public String getScreenShotDirectory(){
-		return bbatProperty.getProperty(SCREEN_SHOT_DIR, System.getProperty("user.home")+Path.SEPARATOR+IBBATConstants.BBAT_HIDDEN_FOLDER+Path.SEPARATOR+IBBATConstants.SCREEN_SHOTS+Path.SEPARATOR);
+		return bbatProperty.getProperty(SCREEN_SHOT_DIR, getWkspc_UiAutomator()+Path.SEPARATOR+IBBATConstants.BBAT_HIDDEN_FOLDER+Path.SEPARATOR+IBBATConstants.SCREEN_SHOTS+Path.SEPARATOR);
 	}
 
 	public void setScreenShotDirectory(String screenShotDir){
