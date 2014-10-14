@@ -55,12 +55,12 @@ public class WorkspaceSelectionDialog extends TitleAreaDialog {
 		container.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		container.setLayout(layout);
 
-		createFirstName(container);
+		createWorkspaceInput(container);
 
 		return area;
 	}
 
-	private void createFirstName(Composite container) {
+	private void createWorkspaceInput(Composite container) {
 		new Label(container, SWT.NONE);
 		new Label(container, SWT.NONE);
 
@@ -90,7 +90,7 @@ public class WorkspaceSelectionDialog extends TitleAreaDialog {
 
 	@Override
 	protected boolean isResizable() {
-		return true;
+		return false;
 	}
 
 	// save content of the Text fields because they get disposed
@@ -127,6 +127,7 @@ public class WorkspaceSelectionDialog extends TitleAreaDialog {
 			}
 		});
 	}
+	
 	@Override
 	protected void cancelPressed() {
 		PlatformUI.getWorkbench().close();

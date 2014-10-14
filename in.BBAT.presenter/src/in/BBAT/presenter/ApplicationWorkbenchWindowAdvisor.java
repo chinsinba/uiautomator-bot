@@ -69,7 +69,7 @@ public class ApplicationWorkbenchWindowAdvisor extends WorkbenchWindowAdvisor {
 		Rectangle localRectangle = Display.getCurrent().getBounds();
 		configurer.setInitialSize(new Point(localRectangle.width, localRectangle.height));
 		
-		final WorkspaceSelectionDialog dirDialog = new WorkspaceSelectionDialog(new Shell());
+		final WorkspaceSelectionDialog dirDialog = new WorkspaceSelectionDialog(null);
 	    int selectedDir = dirDialog.open();
 	    System.out.println(dirDialog.getWorkspace());
 		
