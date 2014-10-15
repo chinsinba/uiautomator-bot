@@ -71,7 +71,6 @@ public class ApplicationWorkbenchWindowAdvisor extends WorkbenchWindowAdvisor {
 		
 		final WorkspaceSelectionDialog dirDialog = new WorkspaceSelectionDialog(null);
 	    int selectedDir = dirDialog.open();
-	    System.out.println(dirDialog.getWorkspace());
 		
 		BusyIndicator.showWhile(Display.getCurrent(), new Runnable() {
 			@Override

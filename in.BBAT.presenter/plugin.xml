@@ -370,6 +370,11 @@
                visible="true">
          </separator>
          <command
+               commandId="in.BBAT.presenter.testCase.exportAsEclipseProject"
+               label="Export as eclipse project"
+               style="push">
+         </command>
+         <command
                commandId="in.BBAT.presenter.testCase.export"
                label="Export"
                style="push">
@@ -619,6 +624,10 @@
             id="in.BBAT.presenter.ReportBug"
             name="Report Bug">
       </command>
+      <command
+            id="in.BBAT.presenter.testCase.exportAsEclipseProject"
+            name="Export Eclipse Project">
+      </command>
    </extension>
    <extension
          point="org.eclipse.ui.handlers">
@@ -737,6 +746,10 @@
       <handler
             class="in.BBAT.presenter.developer.handlers.ReportBugHandler"
             commandId="in.BBAT.presenter.ReportBug">
+      </handler>
+      <handler
+            class="in.BBAT.presenter.developer.handlers.testcaseBrowser.ExportEclipseProjectHandler"
+            commandId="in.BBAT.presenter.testCase.exportAsEclipseProject">
       </handler>
    </extension>
    <extension

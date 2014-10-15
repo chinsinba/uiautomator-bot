@@ -11,9 +11,9 @@ import org.eclipse.jface.wizard.Wizard;
 
 public class ExportTestProjectWizard extends Wizard {
 
-	private List<TestProjectModel> projects;
+	protected List<TestProjectModel> projects;
 	private Logger LOG = BBATLogger.getLogger(ExportTestProjectWizard.class.getName());
-	private BrowseDirectoryPage page1;
+	protected BrowseDirectoryPage page1;
 	
 	public ExportTestProjectWizard(List<TestProjectModel> selectedProjects) {
 		projects = selectedProjects;
