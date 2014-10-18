@@ -126,7 +126,10 @@ public abstract class AbstractProjectTree extends AbstractTreeModel implements I
 
 	public abstract List<TestRunEntity> getRefTestRunEntities();
 
+	public abstract int  getApiLevel();
 	public void refresh(){
 		getProject().refresh();		
 	}
+	
+
 }

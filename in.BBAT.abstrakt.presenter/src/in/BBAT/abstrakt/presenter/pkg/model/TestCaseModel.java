@@ -41,11 +41,12 @@ import org.eclipse.ui.part.FileEditorInput;
 public class TestCaseModel extends AbstractProjectTree{
 
 	public final static String JAVA = ".java";
-	
+
 	final static String UTILITY_TEMPLATE ="utility.ftl";
-	
+	final static String API_16_UTILITY_TEMPLATE ="ApiLevel16_utility.ftl";
+
 	final static String TESTCASE_TEMPLATE ="testcase.ftl";
-	
+
 	final static String LIBRARY_TEMPLATE ="libraryClass.ftl";
 
 	public final static String BBATUTILITY_CLASS_NAME ="BBATUtility";
@@ -131,7 +132,7 @@ public class TestCaseModel extends AbstractProjectTree{
 	}
 
 	public void createContents(boolean isLibraryCase) {
-		
+
 		String template = TESTCASE_TEMPLATE;
 		if(isLibraryCase)
 		{
@@ -141,7 +142,7 @@ public class TestCaseModel extends AbstractProjectTree{
 	}
 
 	private void fillContents(String template) {
-		
+
 		Configuration cfgFtl = new Configuration();
 		try {
 			cfgFtl.setDirectoryForTemplateLoading(new File(BBATPluginUtility.getInstance().getPluginDir(Activator.PLUGIN_ID)+Path.SEPARATOR+"lib"+Path.SEPARATOR));
@@ -168,7 +169,11 @@ public class TestCaseModel extends AbstractProjectTree{
 
 	public void createHelperContents()
 	{
-		fillContents(UTILITY_TEMPLATE);
+
+		if(getApiLevel()==16)
+			fillContents(API_16_UTILITY_TEMPLATE);
+		else
+			fillContents(UTILITY_TEMPLATE);
 	}
 
 	public void openEditor() throws Exception{
@@ -232,6 +237,11 @@ public class TestCaseModel extends AbstractProjectTree{
 
 	public boolean isHelper() {
 		return ((TestSuiteModel)getParent()).isHelper();
+	}
+
+	@Override
+	public int getApiLevel() {
+		return ((TestSuiteModel)getParent()).getApiLevel();
 	}
 }
 

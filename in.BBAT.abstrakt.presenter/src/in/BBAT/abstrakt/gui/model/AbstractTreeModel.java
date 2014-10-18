@@ -101,7 +101,6 @@ public abstract class  AbstractTreeModel implements IGUITreeNode {
 		return entity.getId();
 	}
 
-
 	protected abstract AbstractTreeModel getChild(AbstractEntity childEntity)throws Exception ;
 	//	protected abstract IGUITreeNode produceParent(AbstractEntity childEntties );
 

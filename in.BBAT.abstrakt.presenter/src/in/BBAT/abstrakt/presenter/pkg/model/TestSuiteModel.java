@@ -113,4 +113,8 @@ public class TestSuiteModel extends AbstractProjectTree{
 		}
 		return scripts;
 	}
+	@Override
+	public int getApiLevel() {
+		return ((TestProjectModel)getParent()).getApiLevel();
+	}
 }
