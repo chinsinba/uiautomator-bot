@@ -18,10 +18,13 @@ import org.eclipse.core.runtime.jobs.IJobChangeEvent;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.core.runtime.jobs.JobChangeAdapter;
 import org.eclipse.equinox.p2.core.IProvisioningAgent;
+import org.eclipse.equinox.p2.core.ProvisionException;
 import org.eclipse.equinox.p2.operations.ProvisioningJob;
 import org.eclipse.equinox.p2.operations.ProvisioningSession;
 import org.eclipse.equinox.p2.operations.Update;
 import org.eclipse.equinox.p2.operations.UpdateOperation;
+import org.eclipse.equinox.p2.repository.artifact.IArtifactRepositoryManager;
+import org.eclipse.equinox.p2.repository.metadata.IMetadataRepositoryManager;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.dialogs.ProgressMonitorDialog;
 import org.eclipse.jface.operation.IRunnableWithProgress;
@@ -81,7 +84,7 @@ public class P2Util {
 		}
 	}
 
-	static IStatus checkForUpdates(IProvisioningAgent agent, IProgressMonitor monitor)
+	private static IStatus checkForUpdates(IProvisioningAgent agent, IProgressMonitor monitor)
 			throws OperationCanceledException {
 		ProvisioningSession session = new ProvisioningSession(agent);
 		// the default update operation looks for updates to the currently
@@ -114,6 +117,39 @@ public class P2Util {
 		return status;
 	}
 
+	
+	public static void addUpdateSite(IProvisioningAgent provisioningAgent, URI uri)
+	        throws InvocationTargetException {
+	    // Load repository manager
+	    IMetadataRepositoryManager metadataManager = (IMetadataRepositoryManager) provisioningAgent
+	            .getService(IMetadataRepositoryManager.SERVICE_NAME);
+	    if (metadataManager == null) {
+	         Throwable throwable = new
+	         Throwable("Could not load Metadata Repository Manager");
+	         throwable.fillInStackTrace();
+	         throw new InvocationTargetException(throwable);
+	    }
+
+	    // Load artifact manager
+	    IArtifactRepositoryManager artifactManager = (IArtifactRepositoryManager) provisioningAgent
+	            .getService(IArtifactRepositoryManager.SERVICE_NAME);
+	    if (artifactManager == null) {
+	        Throwable throwable = new Throwable(
+	                "Could not load Artifact Repository Manager");
+	        throwable.fillInStackTrace();
+	        throw new InvocationTargetException(throwable);
+	    }
+
+	    // Load repo
+	    try {
+	        URI repoLocation = uri;
+	        metadataManager.loadRepository(repoLocation, null);
+	        artifactManager.loadRepository(repoLocation, null);
+	    } catch (ProvisionException pe) {
+	        throw new InvocationTargetException(pe);
+	    }
+	}
+	
 	public static void execute( IProgressMonitor monitor,final URI uri) {
 
 		
@@ -135,6 +171,13 @@ public class P2Util {
 						/*System.getProperty("UpdateHandler.Repo", 
 								"file:///home//repository/");
 */
+				
+				try {
+					addUpdateSite(agent,uri);
+				} catch (InvocationTargetException e) {
+					e.printStackTrace();
+				}
+				
 				/* 1. Prepare update plumbing */
 
 				final ProvisioningSession session = new ProvisioningSession(agent);

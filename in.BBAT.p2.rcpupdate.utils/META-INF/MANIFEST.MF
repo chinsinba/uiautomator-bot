@@ -13,7 +13,8 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.equinox.p2.ui;bundle-version="2.1.1",
  org.eclipse.equinox.p2.metadata;bundle-version="2.1.0",
  org.apache.log4j;bundle-version="1.2.15",
- in.BBAT.configuration;bundle-version="1.0.0"
+ in.BBAT.configuration;bundle-version="1.0.0",
+ org.eclipse.equinox.p2.repository;bundle-version="2.1.1"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
 Export-Package: in.bbat.p2.rcpupdate.utils

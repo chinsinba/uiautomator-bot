@@ -39,7 +39,6 @@ http://uiaiutomator-bot.blogspot.in/
       </win>
    </launcher>
 
-
    <vm>
    </vm>
 
@@ -51,8 +50,10 @@ http://uiaiutomator-bot.blogspot.in/
    </plugins>
 
    <features>
-      <feature id="in.BBAT.feature" version="1.0.0.qualifier"/>
-      <feature id="in.BBAT.p2.rcpupdate" version="1.0.0.qualifier"/>
+      <feature id="in.BBAT.feature" installMode="root"/>
+      <feature id="in.BBAT.p2.rcpupdate"/>
+      <feature id="in.BBAT.eclipse.featur"/>
+      <feature id="org.eclipse.rcp"/>
    </features>
 
    <configurations>
