@@ -22,7 +22,9 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.dynamichelpers.IExtensionChangeHandler;
+import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.swt.custom.BusyIndicator;
@@ -71,6 +73,9 @@ public class ApplicationWorkbenchWindowAdvisor extends WorkbenchWindowAdvisor {
 		
 		final WorkspaceSelectionDialog dirDialog = new WorkspaceSelectionDialog(null);
 	    int selectedDir = dirDialog.open();
+	    if(selectedDir== Dialog.CANCEL){
+	    	PlatformUI.getWorkbench().close();
+	    }
 		
 		BusyIndicator.showWhile(Display.getCurrent(), new Runnable() {
 			@Override

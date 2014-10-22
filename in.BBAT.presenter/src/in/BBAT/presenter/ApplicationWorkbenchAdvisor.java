@@ -1,5 +1,8 @@
 package in.BBAT.presenter;
 
+import java.net.URI;
+import java.net.URISyntaxException;
+
 import in.BBAT.presenter.perstpectives.DeveloperPerspective;
 import in.bbat.logger.BBATLogger;
 import in.bbat.p2.rcpupdate.utils.P2Util;
@@ -27,6 +30,11 @@ public class ApplicationWorkbenchAdvisor extends WorkbenchAdvisor {
 
 	@Override
 	public void preStartup() {
-//		P2Util.checkForUpdates();
+	try {
+		System.out.println(System.getProperty("UpdateHandler.Repo"));
+		P2Util.checkForUpdates(new URI(System.getProperty("UpdateHandler.Repo")));
+	} catch (URISyntaxException e) {
+		e.printStackTrace();
+	}
 	}
 }

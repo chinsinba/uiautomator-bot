@@ -117,39 +117,6 @@ public class P2Util {
 		return status;
 	}
 
-	
-	public static void addUpdateSite(IProvisioningAgent provisioningAgent, URI uri)
-	        throws InvocationTargetException {
-	    // Load repository manager
-	    IMetadataRepositoryManager metadataManager = (IMetadataRepositoryManager) provisioningAgent
-	            .getService(IMetadataRepositoryManager.SERVICE_NAME);
-	    if (metadataManager == null) {
-	         Throwable throwable = new
-	         Throwable("Could not load Metadata Repository Manager");
-	         throwable.fillInStackTrace();
-	         throw new InvocationTargetException(throwable);
-	    }
-
-	    // Load artifact manager
-	    IArtifactRepositoryManager artifactManager = (IArtifactRepositoryManager) provisioningAgent
-	            .getService(IArtifactRepositoryManager.SERVICE_NAME);
-	    if (artifactManager == null) {
-	        Throwable throwable = new Throwable(
-	                "Could not load Artifact Repository Manager");
-	        throwable.fillInStackTrace();
-	        throw new InvocationTargetException(throwable);
-	    }
-
-	    // Load repo
-	    try {
-	        URI repoLocation = uri;
-	        metadataManager.loadRepository(repoLocation, null);
-	        artifactManager.loadRepository(repoLocation, null);
-	    } catch (ProvisionException pe) {
-	        throw new InvocationTargetException(pe);
-	    }
-	}
-	
 	public static void execute( IProgressMonitor monitor,final URI uri) {
 
 		
@@ -171,13 +138,6 @@ public class P2Util {
 						/*System.getProperty("UpdateHandler.Repo", 
 								"file:///home//repository/");
 */
-				
-				try {
-					addUpdateSite(agent,uri);
-				} catch (InvocationTargetException e) {
-					e.printStackTrace();
-				}
-				
 				/* 1. Prepare update plumbing */
 
 				final ProvisioningSession session = new ProvisioningSession(agent);

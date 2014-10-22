@@ -43,7 +43,7 @@ public class WorkspaceSelectionDialog extends TitleAreaDialog {
 	public void create() {
 		super.create();
 		setTitle("Select a workspace");
-		setMessage("All of your source will be saved in this workspace.", IMessageProvider.INFORMATION);
+		setMessage("Your source files and execution data will be saved in this workspace.", IMessageProvider.INFORMATION);
 	}
 
 	@Override
