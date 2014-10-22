@@ -29,7 +29,7 @@ public class ApplicationWorkbenchAdvisor extends WorkbenchAdvisor {
 	}
 
 	@Override
-	public void preStartup() {
+	public void postStartup() {
 	try {
 		System.out.println(System.getProperty("UpdateHandler.Repo"));
 		P2Util.checkForUpdates(new URI(System.getProperty("UpdateHandler.Repo")));

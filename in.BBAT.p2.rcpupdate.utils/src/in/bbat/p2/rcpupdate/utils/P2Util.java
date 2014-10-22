@@ -49,6 +49,7 @@ public class P2Util {
 
 				@Override
 				public void run(IProgressMonitor monitor) throws InvocationTargetException, InterruptedException {
+					System.out.println("execute");
 					execute(new NullProgressMonitor(), uri);
 				}
 
@@ -69,7 +70,7 @@ public class P2Util {
 					"No provisioning agent found.  This application is not set up for updates."));
 			return;
 		}
-
+		System.out.println("docheckupdates");
 		final IProvisioningAgent agent = (IProvisioningAgent) bundleContext.getService(reference);
 		try {
 			IStatus updateStatus = P2Util.checkForUpdates(agent, monitor);
@@ -119,13 +120,13 @@ public class P2Util {
 
 	public static void execute( IProgressMonitor monitor,final URI uri) {
 
-		
+
 		Job j = new Job("Update Job") {
 			private boolean doInstall = false;
 
 			@Override
 			protected IStatus run(final IProgressMonitor monitor) {
-				
+
 				BundleContext bundleContext = Activator.getDefault().getBundle().getBundleContext();
 				ServiceReference reference = bundleContext.getServiceReference(IProvisioningAgent.SERVICE_NAME);
 				if (reference == null) {
@@ -135,11 +136,12 @@ public class P2Util {
 				}
 
 				final IProvisioningAgent agent = (IProvisioningAgent) bundleContext.getService(reference);
-						/*System.getProperty("UpdateHandler.Repo", 
+				/*System.getProperty("UpdateHandler.Repo", 
 								"file:///home//repository/");
-*/
+				 */
 				/* 1. Prepare update plumbing */
 
+				System.out.println("the update job.");
 				final ProvisioningSession session = new ProvisioningSession(agent);
 				final UpdateOperation operation = new UpdateOperation(session);
 
@@ -153,13 +155,14 @@ public class P2Util {
 				// run update checks causing I/O
 				final IStatus status = operation.resolveModal(monitor);
 
+				System.out.println(" operation.resolveModal(monitor)");
 				// failed to find updates (inform user and exit)
 				if (status.getCode() == UpdateOperation.STATUS_NOTHING_TO_UPDATE) {
 					Display.getDefault().syncExec(new Runnable() {
 						@Override
 						public void run() {
 							MessageDialog
-							.openWarning(new Shell(), "No update",
+							.openWarning(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(), "No update",
 									"No updates found.Already up to date.");
 						}
 					});
@@ -169,6 +172,7 @@ public class P2Util {
 				/* 3. Ask if updates should be installed and run installation */
 
 				// found updates, ask user if to install?
+				System.out.println("error found "+ (status.isOK() && status.getSeverity() != IStatus.ERROR));
 				if (status.isOK() && status.getSeverity() != IStatus.ERROR) {
 					Display.getDefault().syncExec(new Runnable() {
 						@Override
@@ -179,12 +183,13 @@ public class P2Util {
 							for (Update update : possibleUpdates) {
 								updates += update + "\n";
 							}
-							doInstall = MessageDialog.openQuestion(new Shell(),
+							doInstall = MessageDialog.openQuestion(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(),
 									"Really install updates?","Do you want to install available updates ?");
 						}
 					});
 				}
-
+				System.out.println(" status "+ status.isOK() + " severity "+ status.getSeverity());
+				System.out.println(status.getMessage());
 				// start installation
 				if (doInstall) {
 					//This is done because in windows if report server is started tool will not be allowed to update.
@@ -208,9 +213,9 @@ public class P2Util {
 
 									@Override
 									public void run() {
-										boolean restart = MessageDialog.openQuestion(new Shell(),
-														"Updates installed, restart?",
-														"Updates have been installed successfully, You will need to restart the tool for the updates to take effect.");
+										boolean restart = MessageDialog.openQuestion(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(),
+												"Updates installed, restart?",
+												"Updates have been installed successfully, You will need to restart the tool for the updates to take effect.");
 										if (restart) {
 											PlatformUI.getWorkbench().restart();
 										}
@@ -221,7 +226,7 @@ public class P2Util {
 							super.done(event);
 						}
 					});
-
+					System.out.println("schedule");
 					provisioningJob.schedule();
 				}
 				return Status.OK_STATUS;

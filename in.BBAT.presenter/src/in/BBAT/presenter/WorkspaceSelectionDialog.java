@@ -71,9 +71,9 @@ public class WorkspaceSelectionDialog extends TitleAreaDialog {
 
 		directoryCombo = new CCombo(container, SWT.BORDER);
 		directoryCombo.setLayoutData(dataFirstName);
-		String[] workspaces =  node.get(IBBATConstants.USER_WORKSPACES, System.getProperty("user.dir")).split(",");
+		String[] workspaces =  node.get(IBBATConstants.USER_WORKSPACES, System.getProperty(IBBATConstants.USER_HOME_PROPERTY)).split(",");
 		directoryCombo.setItems(workspaces);
-		directoryCombo.setText(node.get(IBBATConstants.RECENT_SELECTED_WORKSPACE, System.getProperty("user.dir")));
+		directoryCombo.setText(node.get(IBBATConstants.RECENT_SELECTED_WORKSPACE, System.getProperty(IBBATConstants.USER_HOME_PROPERTY)));
 		directoryCombo.setEditable(false);
 		directoryCombo.addSelectionListener(new SelectionAdapter() {
 			@Override
