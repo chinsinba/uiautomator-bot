@@ -334,19 +334,23 @@
             allPopups="false"
             locationURI="popup:in.BBAT.presenter.developer.testcaseBrowserView">
          <menu
+               icon="icons/add.png"
                label="New">
             <command
                   commandId="in.BBAT.presenter.testCase.CreateTestCase"
+                  icon="icons/testcase.gif"
                   label="Test Case"
                   style="push">
             </command>
             <command
                   commandId="in.BBAT.presenter.testCase.CreateSuite"
+                  icon="icons/suite.gif"
                   label="Test Suite"
                   style="push">
             </command>
             <command
                   commandId="in.BBAT.presenter.testCase.CreateProject"
+                  icon="icons/project.gif"
                   label="Test Project"
                   style="push">
             </command>
@@ -357,6 +361,7 @@
          </separator>
          <command
                commandId="in.BBAT.presenter.testCase.edit"
+               icon="icons/edit.png"
                label="Edit"
                style="push">
          </command>
@@ -371,16 +376,19 @@
          </separator>
          <command
                commandId="in.BBAT.presenter.testCase.exportAsEclipseProject"
+               icon="icons/export.gif"
                label="Export as eclipse project"
                style="push">
          </command>
          <command
                commandId="in.BBAT.presenter.testCase.export"
+               icon="icons/export.gif"
                label="Export"
                style="push">
          </command>
          <command
                commandId="in.BBAT.presenter.testCase.import"
+               icon="icons/import.gif"
                label="Import"
                style="push">
          </command>
@@ -473,6 +481,7 @@
             locationURI="popup:in.BBAT.presenter.history.TestRunInstanceView">
          <command
                commandId="in.BBAT.presenter.history.openAndroidLogs"
+               icon="icons/android.png"
                label="Open Android Logs"
                style="push">
          </command>
@@ -483,11 +492,13 @@
          </command>
          <command
                commandId="in.BBAT.presenter.history.openMemoryCpuUsage"
+               icon="icons/mem_cpu_usage.png"
                label="Open Memory and Cpu Usage"
                style="push">
          </command>
          <command
                commandId="in.BBAT.presenter.history.openScreenShots"
+               icon="icons/screenshotview.png"
                label="Show Screenshots"
                style="push">
          </command>
@@ -497,6 +508,7 @@
          </separator>
          <command
                commandId="in.BBAT.presenter.history.exportLogs"
+               icon="icons/export.gif"
                label="Export Logs"
                style="push">
          </command>
