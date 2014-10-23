@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: RCP Update Utils
 Bundle-SymbolicName: in.BBAT.p2.rcpupdate.utils;singleton:=true
 Bundle-Version: 1.0.0.qualifier
-Bundle-Vendor: Ralf Ebert
+Bundle-Vendor: Syed Mehtab
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  org.eclipse.equinox.p2.core;bundle-version="2.1.1",

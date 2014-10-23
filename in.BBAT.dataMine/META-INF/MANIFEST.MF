@@ -25,3 +25,4 @@ Bundle-ClassPath: .,
  lib/derbyclient.jar,
  lib/derbynet.jar,
  lib/derbytools.jar
+Bundle-Vendor: Syed Mehtab

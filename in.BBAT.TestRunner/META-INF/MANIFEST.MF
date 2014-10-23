@@ -4,7 +4,7 @@ Bundle-Name: TestRunner
 Bundle-SymbolicName: in.BBAT.TestRunner
 Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: in.BBAT.TestRunner.Activator
-Bundle-Vendor: ME
+Bundle-Vendor: Syed Mehtab
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  in.BBAT.configuration;bundle-version="1.0.0",

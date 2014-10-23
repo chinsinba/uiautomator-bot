@@ -26,3 +26,4 @@ Export-Package: in.BBAT.abstrakt.gui,
  in.BBAT.abstrakt.presenter.suite.model
 Bundle-ClassPath: .,
  lib/freemarker.jar
+Bundle-Vendor: Syed Mehtab

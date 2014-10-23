@@ -23,3 +23,4 @@ Bundle-ClassPath: .,
  lib/jfreechart-1.0.9.jar,
  lib/jfreechart-swt-1.0.9.jar
 Import-Package: in.bbat.p2.rcpupdate.utils
+Bundle-Vendor: Syed Mehtab

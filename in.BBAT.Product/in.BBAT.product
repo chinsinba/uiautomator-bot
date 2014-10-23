@@ -7,13 +7,13 @@
       <image path="/in.BBAT.presenter/icons/32by32.png"/>
       <text>
          Tool for automating Uiautomator. 
-Version : 1.0.0
+Version : 1.1.0
 
 This product is developed by Syed Mehtab (c) Copyrights by author. All rights reserved.
 This product is distributed under AGPL.
 License can be found at  http://www.gnu.org/licenses/agpl.html 
-https://sourceforge.net/projects/uiautomator/  
-http://uiaiutomator-bot.blogspot.in/
+Download : https://sourceforge.net/projects/uiautomator/  
+Blog     : http://uiaiutomator-bot.blogspot.in/
       </text>
    </aboutInfo>
 
