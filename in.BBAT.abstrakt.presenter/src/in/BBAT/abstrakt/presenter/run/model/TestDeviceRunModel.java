@@ -18,6 +18,7 @@ import in.BBAT.data.model.Entities.TestDeviceRunEntity;
 import in.BBAT.data.model.Entities.TestRunEntity;
 import in.BBAT.data.model.Entities.TestRunInfoEntity;
 import in.bbat.configuration.BBATProperties;
+import in.bbat.utility.FileUtils;
 
 public class TestDeviceRunModel extends AbstractTreeModel {
 
@@ -235,7 +236,13 @@ public class TestDeviceRunModel extends AbstractTreeModel {
 
 	public String getScreenShotDir()
 	{
-		return ((TestRunModel)getParent()).getScreenShotDir() + Path.SEPARATOR +getDeviceName();
+		String validDeviceName = getDeviceName();
+		if(!FileUtils.isValidName(validDeviceName))
+		{
+			validDeviceName = validDeviceName.replace('.', '_').replace(':', '_');
+		}
+
+		return ((TestRunModel)getParent()).getScreenShotDir() + Path.SEPARATOR +validDeviceName;
 	}
 
 	@Override
