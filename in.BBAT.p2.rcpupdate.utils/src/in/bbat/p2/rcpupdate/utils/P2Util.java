@@ -49,7 +49,7 @@ public class P2Util {
 
 				@Override
 				public void run(IProgressMonitor monitor) throws InvocationTargetException, InterruptedException {
-					System.out.println("execute");
+//					System.out.println("execute");
 					execute(new NullProgressMonitor(), uri);
 				}
 
@@ -70,7 +70,7 @@ public class P2Util {
 					"No provisioning agent found.  This application is not set up for updates."));
 			return;
 		}
-		System.out.println("docheckupdates");
+//		System.out.println("docheckupdates");
 		final IProvisioningAgent agent = (IProvisioningAgent) bundleContext.getService(reference);
 		try {
 			IStatus updateStatus = P2Util.checkForUpdates(agent, monitor);
@@ -141,7 +141,7 @@ public class P2Util {
 				 */
 				/* 1. Prepare update plumbing */
 
-				System.out.println("the update job.");
+//				System.out.println("the update job.");
 				final ProvisioningSession session = new ProvisioningSession(agent);
 				final UpdateOperation operation = new UpdateOperation(session);
 
@@ -158,21 +158,22 @@ public class P2Util {
 				System.out.println(" operation.resolveModal(monitor)");
 				// failed to find updates (inform user and exit)
 				if (status.getCode() == UpdateOperation.STATUS_NOTHING_TO_UPDATE) {
-					Display.getDefault().syncExec(new Runnable() {
+					/*Display.getDefault().syncExec(new Runnable() {
 						@Override
 						public void run() {
 							MessageDialog
 							.openWarning(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(), "No update",
 									"No updates found.Already up to date.");
 						}
-					});
+					});*/
+					LOG.info("No updates found.");
 					return Status.CANCEL_STATUS;
 				}
 
 				/* 3. Ask if updates should be installed and run installation */
 
 				// found updates, ask user if to install?
-				System.out.println("error found "+ (status.isOK() && status.getSeverity() != IStatus.ERROR));
+//				System.out.println("error found "+ (status.isOK() && status.getSeverity() != IStatus.ERROR));
 				if (status.isOK() && status.getSeverity() != IStatus.ERROR) {
 					Display.getDefault().syncExec(new Runnable() {
 						@Override
@@ -184,12 +185,12 @@ public class P2Util {
 								updates += update + "\n";
 							}
 							doInstall = MessageDialog.openQuestion(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(),
-									"Really install updates?","Do you want to install available updates ?");
+									"Install updates?","Do you want to install available updates ?");
 						}
 					});
 				}
-				System.out.println(" status "+ status.isOK() + " severity "+ status.getSeverity());
-				System.out.println(status.getMessage());
+//				System.out.println(" status "+ status.isOK() + " severity "+ status.getSeverity());
+//				System.out.println(status.getMessage());
 				// start installation
 				if (doInstall) {
 					//This is done because in windows if report server is started tool will not be allowed to update.
