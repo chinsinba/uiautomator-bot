@@ -24,4 +24,5 @@ public interface IBBATConstants {
 	public  final static  String  DDM_LIB_JAR ="ddmlib.jar";
 	public static final String RECENT_SELECTED_WORKSPACE = "recent_workspace";
 	public static final String USER_WORKSPACES = "user.workspaces";
+	public static final String TOOL_UPDATED_VERSION ="update_version";
 }

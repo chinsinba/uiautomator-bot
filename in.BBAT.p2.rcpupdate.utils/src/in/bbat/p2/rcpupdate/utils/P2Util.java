@@ -185,7 +185,7 @@ public class P2Util {
 								updates += update + "\n";
 							}
 							doInstall = MessageDialog.openQuestion(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(),
-									"Install updates?","Do you want to install available updates ?");
+									"Update Uiautomator-bot?","New update available. Do you want to update now ?");
 						}
 					});
 				}
@@ -215,8 +215,8 @@ public class P2Util {
 									@Override
 									public void run() {
 										boolean restart = MessageDialog.openQuestion(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(),
-												"Updates installed, restart?",
-												"Updates have been installed successfully, You will need to restart the tool for the updates to take effect.");
+												"Uiautomator Updated successfully, restart now?",
+												"Uiautomator-bot has been updated successfully to latest version. Restart the tool for updates to take effect.\n Do you want to restart now?");
 										if (restart) {
 											PlatformUI.getWorkbench().restart();
 										}
