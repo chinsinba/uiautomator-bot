@@ -52,7 +52,7 @@ public class ActivationCodeDialog extends TrayDialog
 	public void create()
 	{
 		super.create();
-		getShell().setText("BBAT Licensing");
+		getShell().setText("UIautomator-bot");
 	}
 
 	protected Control createDialogArea(Composite paramComposite)
@@ -139,19 +139,19 @@ public class ActivationCodeDialog extends TrayDialog
 		gd = new GridData(16777216, 4, true, false);
 		gd.widthHint = 200;
 		designationText.setLayoutData(gd);
-		final Button freeTrailButton = new Button(freeTrialComp, 8);
+		final Button startButton = new Button(freeTrialComp, 8);
 		//		freeTrailButton.setText("Start 3 month trial!");
-		freeTrailButton.setText(" Start ");
+		startButton.setText(" Start ");
 		gd = new GridData(16777216, 4, true, false);
 		gd.horizontalSpan = 2;
 		if (!firstTimeRun)
-			freeTrailButton.setEnabled(false);
-		freeTrailButton.setLayoutData(gd);
+			startButton.setEnabled(false);
+		startButton.setLayoutData(gd);
 		emailAddressText.addListener(14, new Listener()
 		{
 			public void handleEvent(Event e)
 			{
-				freeTrailButton.notifyListeners(13, e);
+				startButton.notifyListeners(13, e);
 			}
 		});
 
@@ -170,7 +170,7 @@ public class ActivationCodeDialog extends TrayDialog
 		(freeTrialComp).setLayoutData(gd);
 
 
-		freeTrailButton.addSelectionListener(new SelectionAdapter()
+		startButton.addSelectionListener(new SelectionAdapter()
 		{
 			public void widgetSelected(SelectionEvent paramAnonymousSelectionEvent)
 			{
@@ -196,8 +196,8 @@ public class ActivationCodeDialog extends TrayDialog
 					emailAddressText.getDisplay().update();
 					BBATProperties.getInstance().setUserCompany(companyName);
 					BBATProperties.getInstance().setUserEmailId(email);
-					BBATProperties.getInstance().save();
-//					MessageDialog.openInformation(Display.getDefault().getActiveShell(), "Thank you for trying out BBAT!", "Thank you for trying out BBAT! You can now jump right in and start exploring!");
+					HttpURLConnectionExample http = new HttpURLConnectionExample();
+					http.sendGet(email, companyName, designation, userName);
 					okPressed();
 				}catch (Exception e) {
 				}

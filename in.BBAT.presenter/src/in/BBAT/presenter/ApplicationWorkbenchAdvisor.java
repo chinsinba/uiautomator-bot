@@ -3,11 +3,14 @@ package in.BBAT.presenter;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import in.BBAT.presenter.dialogs.ActivationCodeDialog;
 import in.BBAT.presenter.perstpectives.DeveloperPerspective;
+import in.bbat.configuration.BBATProperties;
 import in.bbat.logger.BBATLogger;
 import in.bbat.p2.rcpupdate.utils.P2Util;
 
 import org.apache.log4j.Logger;
+import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IWorkbenchPreferenceConstants;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.application.IWorkbenchWindowConfigurer;
@@ -29,12 +32,24 @@ public class ApplicationWorkbenchAdvisor extends WorkbenchAdvisor {
 	}
 
 	@Override
-	public void postStartup() {
-	try {
-		System.out.println(System.getProperty("UpdateHandler.Repo"));
-		P2Util.checkForUpdates(new URI(System.getProperty("UpdateHandler.Repo")));
-	} catch (URISyntaxException e) {
-		e.printStackTrace();
+	public void preStartup() {
+
+		if(BBATProperties.getInstance().getUserEmailId()!=null && !BBATProperties.getInstance().getUserEmailId().isEmpty()){
+			return;
+		}
+		ActivationCodeDialog codeDlg = new ActivationCodeDialog(new Shell());
+		codeDlg.open();
 	}
+	@Override
+	public void postStartup() {
+		try {
+			if(System.getProperty("UpdateHandler.Repo")==null){
+				return;
+			}
+			System.out.println(System.getProperty("UpdateHandler.Repo"));
+			P2Util.checkForUpdates(new URI(System.getProperty("UpdateHandler.Repo")));
+		} catch (URISyntaxException e) {
+			e.printStackTrace();
+		}
 	}
 }
