@@ -1,4 +1,5 @@
 package in.BBAT.presenter;
+import in.bbat.configuration.BBATInternalProperties;
 import in.bbat.configuration.BBATProperties;
 import in.bbat.utility.IBBATConstants;
 
@@ -42,8 +43,8 @@ public class WorkspaceSelectionDialog extends TitleAreaDialog {
 	@Override
 	public void create() {
 		super.create();
-		setTitle("Select a workspace");
-		setMessage("Your source files and execution data will be saved in this workspace.", IMessageProvider.INFORMATION);
+		setTitle("UIautomator-bot("+BBATInternalProperties.getInstance().getToolLastUpdatedVersion()+") Workspace");
+		setMessage("Your test cases sources and execution data will be saved in this workspace.", IMessageProvider.INFORMATION);
 	}
 
 	@Override
