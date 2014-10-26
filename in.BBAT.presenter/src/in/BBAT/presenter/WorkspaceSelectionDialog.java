@@ -7,6 +7,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.prefs.Preferences;
 
+import org.eclipse.core.runtime.Path;
 import org.eclipse.jface.dialogs.IMessageProvider;
 import org.eclipse.jface.dialogs.TitleAreaDialog;
 import org.eclipse.swt.SWT;
@@ -72,9 +73,9 @@ public class WorkspaceSelectionDialog extends TitleAreaDialog {
 
 		directoryCombo = new CCombo(container, SWT.BORDER);
 		directoryCombo.setLayoutData(dataFirstName);
-		String[] workspaces =  node.get(IBBATConstants.USER_WORKSPACES, System.getProperty(IBBATConstants.USER_HOME_PROPERTY)).split(",");
+		String[] workspaces =  node.get(IBBATConstants.USER_WORKSPACES, System.getProperty(IBBATConstants.USER_HOME_PROPERTY)+Path.SEPARATOR+IBBATConstants.UIAUTOMATOR_BOT_DEFAULT_WORKSPACE).split(",");
 		directoryCombo.setItems(workspaces);
-		directoryCombo.setText(node.get(IBBATConstants.RECENT_SELECTED_WORKSPACE, System.getProperty(IBBATConstants.USER_HOME_PROPERTY)));
+		directoryCombo.setText(node.get(IBBATConstants.RECENT_SELECTED_WORKSPACE, System.getProperty(IBBATConstants.USER_HOME_PROPERTY)+Path.SEPARATOR+IBBATConstants.UIAUTOMATOR_BOT_DEFAULT_WORKSPACE));
 		directoryCombo.setEditable(false);
 		directoryCombo.addSelectionListener(new SelectionAdapter() {
 			@Override
