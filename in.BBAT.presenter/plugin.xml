@@ -787,7 +787,7 @@
          </property>
          <property
                name="aboutText"
-               value="Tool for automating Uiautomator. &#x0A;Version : 1.0.0&#x0A;&#x0A;This product is developed by Syed Mehtab (c) Copyrights by author. All rights reserved.&#x0A;This product is distributed under AGPL.&#x0A;License can be found at  http://www.gnu.org/licenses/agpl.html &#x0A;https://sourceforge.net/projects/uiautomator/  &#x0A;http://uiaiutomator-bot.blogspot.in/">
+               value="Tool for automating Uiautomator. &#x0A;Version : 1.1.0&#x0A;&#x0A;This product is developed by Syed Mehtab (c) Copyrights by author. All rights reserved.&#x0A;This product is distributed under AGPL.&#x0A;License can be found at  http://www.gnu.org/licenses/agpl.html &#x0A;Download : https://sourceforge.net/projects/uiautomator/  &#x0A;Blog     : http://uiaiutomator-bot.blogspot.in/">
          </property>
          <property
                name="windowImages"
