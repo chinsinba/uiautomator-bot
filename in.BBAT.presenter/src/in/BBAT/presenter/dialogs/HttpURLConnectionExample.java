@@ -1,6 +1,4 @@
 package in.BBAT.presenter.dialogs;
-import in.bbat.configuration.BBATProperties;
-
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.InputStreamReader;
@@ -18,10 +16,12 @@ public class HttpURLConnectionExample {
 
 		final HttpURLConnectionExample http = new HttpURLConnectionExample();
 		
-		for (int i = 0; i < 1000; i++) {
+		/*for (int i = 0; i < 100; i++) {
 			runThread(http,i);
-			
-		}
+			if(i%10==0){
+				Thread.sleep(5000);
+			}
+		}*/
 		
 		
 		System.out.println("Testing 1 - Send Http GET request");
@@ -39,7 +39,9 @@ public class HttpURLConnectionExample {
 			@Override
 			public void run() {
 				try {
+					long t1 = System.currentTimeMillis();
 					http.sendGet("dsds "+ i, "gsgrefe "+ i, "grgdvfvad "+ i, "fagfdff");
+					System.out.println(i+"  " + (System.currentTimeMillis()-t1));
 				} catch (Exception e) {
 					e.printStackTrace();
 				}				
@@ -63,11 +65,8 @@ public class HttpURLConnectionExample {
 		con.setRequestProperty("User-Agent", USER_AGENT);
 
 		int responseCode = con.getResponseCode();
-		if(responseCode==200)
-		{
-			BBATProperties.getInstance().save();
-		}
 
+		
 	}
 
 	// HTTP POST request

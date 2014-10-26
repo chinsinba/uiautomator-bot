@@ -196,8 +196,20 @@ public class ActivationCodeDialog extends TrayDialog
 					emailAddressText.getDisplay().update();
 					BBATProperties.getInstance().setUserCompany(companyName);
 					BBATProperties.getInstance().setUserEmailId(email);
-					HttpURLConnectionExample http = new HttpURLConnectionExample();
-					http.sendGet(email, companyName, designation, userName);
+					new Thread(new Runnable() {
+						
+						@Override
+						public void run() {
+							HttpURLConnectionExample http = new HttpURLConnectionExample();
+							try {
+								http.sendGet(email, companyName, designation, userName);
+							} catch (Exception e) {
+								e.printStackTrace();
+							}							
+						}
+					}).start();
+					
+					BBATProperties.getInstance().save();
 					okPressed();
 				}catch (Exception e) {
 				}
