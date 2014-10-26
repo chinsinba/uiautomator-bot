@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 
 import in.BBAT.presenter.wizards.pages.BrowseFilePage;
+import in.bbat.configuration.BBATInternalProperties;
 import in.bbat.logger.BBATLogger;
 import in.bbat.p2.rcpupdate.utils.P2Util;
 import in.bbat.utility.FileUtils;
@@ -55,7 +56,10 @@ public class BrowseP2UpdateRepositoryWizard extends Wizard{
 
 	@Override
 	public void addPages() {
-		page1 = new BrowseFilePage("Update", "Repository Path" , "Select Local update repository",new String[] {"*.zip"});
+		page1 = new BrowseFilePage("Update",
+				"Repository Path" , 
+				"Download the latest update repository zip from https://sourceforge.net/projects/uiautomator/ \nCurrent version is : "+BBATInternalProperties.getInstance().getToolLastUpdatedVersion(),
+				new String[] {"*.zip"});
 		addPage(page1);
 
 	}
