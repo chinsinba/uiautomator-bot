@@ -19,6 +19,7 @@ import org.eclipse.ui.application.WorkbenchWindowAdvisor;
 
 public class ApplicationWorkbenchAdvisor extends WorkbenchAdvisor {
 
+	private static final String UPDATE_REPO = "update.repo";
 	private static final Logger LOG = BBATLogger.getLogger(ApplicationWorkbenchAdvisor.class.getName());
 	public WorkbenchWindowAdvisor createWorkbenchWindowAdvisor(
 			IWorkbenchWindowConfigurer configurer) {
@@ -43,11 +44,11 @@ public class ApplicationWorkbenchAdvisor extends WorkbenchAdvisor {
 	@Override
 	public void postStartup() {
 		try {
-			if(System.getProperty("UpdateHandler.Repo")==null){
+			if(System.getProperty(UPDATE_REPO)==null){
 				return;
 			}
-			System.out.println(System.getProperty("UpdateHandler.Repo"));
-			P2Util.checkForUpdates(new URI(System.getProperty("UpdateHandler.Repo")));
+			System.out.println(System.getProperty(UPDATE_REPO));
+			P2Util.checkForUpdates(new URI(System.getProperty(UPDATE_REPO)));
 		} catch (URISyntaxException e) {
 			e.printStackTrace();
 		}
