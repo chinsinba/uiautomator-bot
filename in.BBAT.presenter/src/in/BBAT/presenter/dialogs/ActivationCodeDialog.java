@@ -63,7 +63,7 @@ public class ActivationCodeDialog extends TrayDialog
 		mainComposite.setLayout(mainGridLayout);
 
 		Label labl = new Label(mainComposite, 16384);
-		labl.setText("Welcome to BBAT!");
+		labl.setText("Welcome to UiAutomator-bot!");
 		GridData gd = new GridData();
 		gd.grabExcessHorizontalSpace = true;
 		gd.horizontalAlignment = 16777216;
