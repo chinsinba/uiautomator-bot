@@ -115,7 +115,7 @@ public class DeviceTestRun {
 					MemoryCpuUsageListener memCpuListener = new MemoryCpuUsageListener(testRunCase, getDevice());
 					LOG.info("Execute :"+testRunCase.getName());
 					runner.execute(testRunCase.getCompleteScriptName(), new TestCaseExecutionListener(testRunCase, DeviceTestRun.this), deviceLogListener,new UIAutomatorOutputListener(testRunCase),deviceLogListener,memCpuListener,memCpuListener);
-					LOG.info("Execution Completed"+testRunCase.getName());
+					LOG.info("Execution Completed "+testRunCase.getName());
 					getDevice().pullScreenShotsFromDevice(testRunCase.getScreenShotDir(),TestCaseModel.BBATUTILITY_CLASS_NAME,true);
 					testRunCase.setEndTime(System.currentTimeMillis());
 					testRunCase.update();
