@@ -193,7 +193,7 @@ public class TestDevice implements IAndroidDevice {
 				try {
 					Thread.sleep(2000);
 				} catch (InterruptedException e) {
-					e.printStackTrace();
+					LOG.error(e);
 				}
 				RawImage image = getScreenshot();
 				if(screenShotListener !=null)
@@ -348,9 +348,9 @@ public class TestDevice implements IAndroidDevice {
 
 			exec.waitFor();
 		} catch (IOException e1) {
-			e1.printStackTrace();
+			LOG.error(e1);
 		} catch (InterruptedException e) {
-			e.printStackTrace();
+			LOG.error(e);
 		}
 		if(delete)
 			deleteFolder(SCREENSHOT_DIR+"/"+sourceDirInDevice);

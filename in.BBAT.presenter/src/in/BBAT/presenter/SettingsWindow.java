@@ -210,6 +210,7 @@ public class SettingsWindow extends ApplicationWindow  {
 			form.setMessage("Updated all changes.", IMessageProvider.INFORMATION);
 		} catch (IOException e) {
 			form.setMessage("Failled to update the changes.", IMessageProvider.ERROR);
+			LOG.error(e);
 		}
 		close();
 		boolean openQuestion = MessageDialog.openQuestion(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(), "Restart", "You will need to restart the tool for the settings changes to take effect.");

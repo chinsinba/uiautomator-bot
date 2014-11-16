@@ -16,21 +16,6 @@ public class HttpURLConnectionExample {
 
 		final HttpURLConnectionExample http = new HttpURLConnectionExample();
 		
-		/*for (int i = 0; i < 100; i++) {
-			runThread(http,i);
-			if(i%10==0){
-				Thread.sleep(5000);
-			}
-		}*/
-		
-		
-		System.out.println("Testing 1 - Send Http GET request");
-
-
-
-		/*System.out.println("\nTesting 2 - Send Http POST request");
-		http.sendPost();
-		 */
 	}
 
 	private static void runThread(final HttpURLConnectionExample http, final int i) {
@@ -39,9 +24,7 @@ public class HttpURLConnectionExample {
 			@Override
 			public void run() {
 				try {
-					long t1 = System.currentTimeMillis();
 					http.sendGet("dsds "+ i, "gsgrefe "+ i, "grgdvfvad "+ i, "fagfdff");
-					System.out.println(i+"  " + (System.currentTimeMillis()-t1));
 				} catch (Exception e) {
 					e.printStackTrace();
 				}				

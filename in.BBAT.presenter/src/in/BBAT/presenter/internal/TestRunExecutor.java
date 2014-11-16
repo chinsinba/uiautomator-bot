@@ -43,6 +43,7 @@ public class TestRunExecutor{
 			protected IStatus run(IProgressMonitor monitor) {
 				monitor.beginTask("Create Uiautomator jar", deviceTestRuns.size()+2);
 				monitor.worked(1);
+				LOG.info("Create uiautomator jar");
 				UiAutoTestCaseJar jar = null;
 				try {
 					jar = new UiAutoTestCaseJar(getTestScriptPaths(),getTargetId());
@@ -58,7 +59,7 @@ public class TestRunExecutor{
 					return Status.CANCEL_STATUS;
 				}
 				monitor.worked(1);
-
+				LOG.info("Created uiautomator jar");
 				DeviceRunListener listener = new DeviceRunListener(deviceTestRuns.size());
 				for (DeviceTestRun deviceRun : deviceTestRuns) {
 					monitor.worked(1);
@@ -92,7 +93,9 @@ public class TestRunExecutor{
 			apiLevels.add(testRunCase.getMaxApiLevel());
 		}
 		Integer max = Collections.max(apiLevels);
-		return "android-"+max;
+		String targetId = "android-"+max;
+		LOG.info("target id : " +targetId);
+		return targetId;
 	}
 
 	public List<String> getTestScriptPaths() throws Exception {

@@ -53,6 +53,7 @@ public class TestRunExecutionManager {
 	}
 
 	public void addTestDevice(DeviceTestRun selectedDevice){
+		LOG.info("Added device "+ selectedDevice.getDevice().getName());
 		boolean present =false;
 		for(DeviceTestRun run : runContainer.getdeviceTestRuns()){
 			if(run.getDevice().getiDevice().getDeviceId().equals(selectedDevice.getDevice().getiDevice().getDeviceId())){

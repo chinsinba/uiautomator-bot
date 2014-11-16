@@ -95,6 +95,7 @@ public class DeviceTestRun {
 
 	public void execute(final UiAutoTestCaseJar jar,final TestRunModel testRun) {
 
+		LOG.info("executing test cases on "+getDevice().getName());
 		Job testRunJob = new Job("Execution on device") {
 			@Override
 			protected IStatus run(IProgressMonitor monitor) {
@@ -112,10 +113,13 @@ public class DeviceTestRun {
 					testRunCase.update();
 					DeviceLogListener deviceLogListener = new DeviceLogListener(testRunCase);
 					MemoryCpuUsageListener memCpuListener = new MemoryCpuUsageListener(testRunCase, getDevice());
+					LOG.info("Execute :"+testRunCase.getName());
 					runner.execute(testRunCase.getCompleteScriptName(), new TestCaseExecutionListener(testRunCase, DeviceTestRun.this), deviceLogListener,new UIAutomatorOutputListener(testRunCase),deviceLogListener,memCpuListener,memCpuListener);
+					LOG.info("Execution Completed"+testRunCase.getName());
 					getDevice().pullScreenShotsFromDevice(testRunCase.getScreenShotDir(),TestCaseModel.BBATUTILITY_CLASS_NAME,true);
 					testRunCase.setEndTime(System.currentTimeMillis());
 					testRunCase.update();
+					LOG.info("Updated execution info");
 
 				}
 				testDeviceRun.setEndTime(System.currentTimeMillis());
@@ -148,6 +152,7 @@ public class DeviceTestRun {
 	}
 
 	private void preExecute(final TestRunModel testRun) {
+		LOG.info("Prepare for execution");
 		reset();
 		testDeviceRun = new TestDeviceRunModel(testRun, getDevice());
 		testDeviceRun.save();
@@ -324,6 +329,7 @@ public class DeviceTestRun {
 				apiLevel =tempLevel;
 			}
 		}
+		LOG.info("Api level : "+ apiLevel);
 		return apiLevel;
 	}
 }
