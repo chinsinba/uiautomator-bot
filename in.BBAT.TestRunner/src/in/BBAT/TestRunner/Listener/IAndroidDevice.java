@@ -10,6 +10,9 @@ import com.android.ddmlib.RawImage;
 import com.android.ddmlib.testrunner.ITestRunListener;
 
 /**
+ * 
+ * @author Syed Mehtab
+ *
  */
 public interface IAndroidDevice {
 
@@ -65,7 +68,7 @@ public interface IAndroidDevice {
 
 	/**
 	 * 
-	 * @param testCaseName
+	 * @param testCaseName 
 	 * @param uiAutoListener
 	 * @param memoryListener
 	 * @param cpuListener

@@ -16,6 +16,12 @@ import org.eclipse.core.runtime.Path;
 
 import com.android.SdkConstants;
 
+/**
+ * 
+ * @author syed Mehtad
+ *
+ *This class is responsible for creating the uiautomator project and then compiling the test cases  into UIautomator jar.
+ */
 public class UiAutoTestCaseJar {
 
 	private static final Logger LOG = BBATLogger.getLogger(UiAutoTestCaseJar.class.getName());
@@ -64,6 +70,7 @@ public class UiAutoTestCaseJar {
 
 	private void createUiProject() throws BuildJarException {
 		try {
+			LOG.info("Executing command :" + ANDROID_SDK_TOOLS+getCreateUiProjCommand());
 			Process p = Runtime.getRuntime().exec(ANDROID_SDK_TOOLS+getCreateUiProjCommand());
 			StreamGobbler errGobbler = new StreamGobbler(p.getErrorStream(),"error");
 			StreamGobbler opGobbler = new StreamGobbler(p.getInputStream(),"output");

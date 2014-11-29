@@ -12,6 +12,8 @@ import com.android.ddmlib.testrunner.ITestRunListener;
 /**
  * 
  * @author Syed Mehtab
+ * 
+ * This class is responsible for execcuting testcases on the device.
  *
  */
 public class TestRunner implements ITestRunner{
@@ -82,7 +84,7 @@ public class TestRunner implements ITestRunner{
 
 	/**
 	 * Starts the execution of testcases on the devices
-	 * @param testCaseClassName 
+	 * @param testCaseClassName fully qualified test case name.
 	 * @param testCaseExecutionListener 
 	 * @param cpuListener 
 	 * @param memListner 

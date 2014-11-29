@@ -36,6 +36,15 @@ import org.eclipse.ui.PlatformUI;
 
 import com.android.uiautomator.MonkeyRecorderFrame;
 
+/**
+ * 
+ * @author Syed Mehtab
+ * 
+ * This class is a container for eacch device. Every test device will have a DeviceRun.
+ * This class is responsible for executing selected Uiautomator test cases on the corresponding device and 
+ * get the logs, screenshots and other execution artifacts.
+ *
+ */
 public class DeviceTestRun {
 
 	private static final Logger LOG = BBATLogger.getLogger(DeviceTestRun.class.getName());
@@ -47,6 +56,11 @@ public class DeviceTestRun {
 	private List<IDeviceRunExecutionlistener> listener = new ArrayList<IDeviceRunExecutionlistener>();
 	private TestDeviceRunModel testDeviceRun;
 
+	/**
+	 * 
+	 * @param device test device
+	 * @param testCases Selected test cases for execution.
+	 */
 	public DeviceTestRun(final AndroidDevice device,List<TestRunCaseModel> testCases) {
 		this.setDevice(device);
 		this.testCases.addAll(testCases);
@@ -93,6 +107,11 @@ public class DeviceTestRun {
 		return testScriptPaths;
 	}
 
+	/**
+	 * 
+	 * @param jar uiautomator testcases jar (BBAT.jar)
+	 * @param testRun 
+	 */
 	public void execute(final UiAutoTestCaseJar jar,final TestRunModel testRun) {
 
 		LOG.info("executing test cases on "+getDevice().getName());
