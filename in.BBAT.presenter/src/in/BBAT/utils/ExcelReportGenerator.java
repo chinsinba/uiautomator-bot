@@ -4,26 +4,19 @@ import in.BBAT.abstrakt.gui.model.AbstractTreeModel;
 import in.BBAT.abstrakt.presenter.run.model.TestDeviceRunModel;
 import in.BBAT.abstrakt.presenter.run.model.TestRunInstanceModel;
 import in.BBAT.abstrakt.presenter.run.model.TestRunModel;
-import in.BBAT.presenter.internal.TestRunContainer;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-import jxl.CellView;
 import jxl.Workbook;
 import jxl.WorkbookSettings;
 import jxl.format.Alignment;
 import jxl.format.Border;
 import jxl.format.BorderLineStyle;
 import jxl.format.Colour;
-import jxl.format.Pattern;
-import jxl.format.UnderlineStyle;
-import jxl.write.Formula;
 import jxl.write.Label;
-import jxl.write.Number;
 import jxl.write.WritableCellFormat;
 import jxl.write.WritableFont;
 import jxl.write.WritableSheet;
@@ -34,8 +27,6 @@ import jxl.write.biff.RowsExceededException;
 
 public class ExcelReportGenerator {
 
-	private WritableCellFormat timesBoldUnderline;
-	private WritableCellFormat times;
 	private String inputFile;
 	private TestRunModel model;
 
@@ -222,7 +213,7 @@ public class ExcelReportGenerator {
 
 
 		Label label;
-		label = new Label(0, 0, "Test Execution Report", titleCellFormat);
+		label = new Label(0, 0, "Test Execution Report-"+model.getName(), titleCellFormat);
 		sheet.addCell(label);
 
 	}
