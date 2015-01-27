@@ -475,6 +475,12 @@
                label="Delete"
                style="push">
          </command>
+         <command
+               commandId="in.BBAT.presenter.history.exportReport"
+               icon="icons/reporter.png"
+               label="Export Report"
+               style="push">
+         </command>
       </menuContribution>
       <menuContribution
             allPopups="false"
@@ -640,6 +646,10 @@
             id="in.BBAT.presenter.testCase.exportAsEclipseProject"
             name="Export Eclipse Project">
       </command>
+      <command
+            id="in.BBAT.presenter.history.exportReport"
+            name="Export TestRun Report">
+      </command>
    </extension>
    <extension
          point="org.eclipse.ui.handlers">
@@ -762,6 +772,10 @@
       <handler
             class="in.BBAT.presenter.developer.handlers.testcaseBrowser.ExportEclipseProjectHandler"
             commandId="in.BBAT.presenter.testCase.exportAsEclipseProject">
+      </handler>
+      <handler
+            class="in.BBAT.presenter.history.handlers.ExportReportHandler"
+            commandId="in.BBAT.presenter.history.exportReport">
       </handler>
    </extension>
    <extension

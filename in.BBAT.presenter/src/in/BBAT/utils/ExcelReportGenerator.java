@@ -30,9 +30,14 @@ public class ExcelReportGenerator {
 	private String inputFile;
 	private TestRunModel model;
 
-
-	public ExcelReportGenerator(TestRunModel run) {
+/**
+ * 
+ * @param run = testRun For which the report has to be generated.
+ * @param inputFile The absolute xls file path. Any older file will be over written. 
+ */
+	public ExcelReportGenerator(TestRunModel run,String inputFile) {
 		this.model= run;
+		this.inputFile = inputFile;
 	}
 
 	public void setOutputFile(String inputFile) {
@@ -48,6 +53,7 @@ public class ExcelReportGenerator {
 		WritableWorkbook workbook = Workbook.createWorkbook(file, wbSettings);
 		workbook.createSheet("Consolidated Report", 0);
 		WritableSheet excelSheet = workbook.getSheet(0);
+		
 		createTitleCell(excelSheet);
 		createReportDetails(excelSheet);
 		createCrossTableReport(excelSheet);
@@ -56,19 +62,13 @@ public class ExcelReportGenerator {
 		workbook.close();
 	}
 
-
-	class TestRun {
-		public String getName(){
-			return "hello";
-		}
-	}
-	class DeviceRun
-	{
-		public String getName(){
-			return "hello";
-		}
-
-	}
+	/**
+	 * Creates crostable of testcases and devices.
+	 * @param sheet
+	 * @throws RowsExceededException
+	 * @throws WriteException
+	 * @throws Exception
+	 */
 	private void createCrossTableReport(WritableSheet sheet) throws RowsExceededException, WriteException,Exception {
 
 		int row =8;
@@ -195,6 +195,12 @@ public class ExcelReportGenerator {
 
 	}
 
+	/**
+	 * Creates the header for the report
+	 * @param sheet
+	 * @throws RowsExceededException
+	 * @throws WriteException
+	 */
 	private void createTitleCell(WritableSheet sheet) throws RowsExceededException, WriteException {
 		// TODO Auto-generated method stub
 

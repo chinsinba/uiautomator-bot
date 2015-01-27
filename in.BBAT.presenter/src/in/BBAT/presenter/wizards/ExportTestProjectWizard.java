@@ -14,7 +14,7 @@ public class ExportTestProjectWizard extends Wizard {
 	protected List<TestProjectModel> projects;
 	private Logger LOG = BBATLogger.getLogger(ExportTestProjectWizard.class.getName());
 	protected BrowseDirectoryPage page1;
-	
+
 	public ExportTestProjectWizard(List<TestProjectModel> selectedProjects) {
 		projects = selectedProjects;
 	}
@@ -26,8 +26,8 @@ public class ExportTestProjectWizard extends Wizard {
 			try {
 				model.export(page1.getPath());
 			} catch (Exception e) {
-			LOG.error(e);
-			
+				LOG.error(e);
+
 			}
 		}
 		return true;
@@ -35,7 +35,7 @@ public class ExportTestProjectWizard extends Wizard {
 
 	@Override
 	public void addPages() {
-		 page1 = new BrowseDirectoryPage("Export", "Export Path: " , "Select directory");
+		page1 = new BrowseDirectoryPage("Export", "Export Path: " , "Select directory");
 		addPage(page1);
 
 	}
