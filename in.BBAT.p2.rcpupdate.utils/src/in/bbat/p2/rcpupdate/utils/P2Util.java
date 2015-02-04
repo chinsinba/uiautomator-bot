@@ -185,7 +185,7 @@ public class P2Util {
 								updates += update + "\n";
 							}
 							doInstall = MessageDialog.openQuestion(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(),
-									"Update Uiautomator-bot?","New update available. Do you want to update now ?");
+									"Update Uiautomator-bot?","New update available. Do you want to update now ?\n Please ignore Security warning.");
 						}
 					});
 				}
