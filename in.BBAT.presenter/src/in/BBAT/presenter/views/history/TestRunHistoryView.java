@@ -11,12 +11,15 @@ import in.BBAT.presenter.views.tester.MemoryCPUUsageView;
 import in.bbat.logger.BBATLogger;
 
 import org.apache.log4j.Logger;
+import org.eclipse.jface.action.IContributionItem;
 import org.eclipse.jface.layout.TreeColumnLayout;
 import org.eclipse.jface.viewers.ColumnWeightData;
 import org.eclipse.jface.viewers.DoubleClickEvent;
 import org.eclipse.jface.viewers.IDoubleClickListener;
 import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerFilter;
@@ -30,6 +33,7 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.TreeColumn;
 import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.menus.CommandContributionItem;
 
 public class TestRunHistoryView extends BBATViewPart {
 
@@ -41,7 +45,6 @@ public class TestRunHistoryView extends BBATViewPart {
 	@Override
 	public void refresh() throws Exception {
 		viewer.refresh();
-
 	}
 
 	@Override
@@ -124,6 +127,18 @@ public class TestRunHistoryView extends BBATViewPart {
 						view.setInput(((TestDeviceRunModel) sel));
 					} catch (Exception e) {
 						LOG.error(e);
+					}
+				}
+			}
+		});
+		viewer.addSelectionChangedListener(new ISelectionChangedListener() {
+
+			@Override
+			public void selectionChanged(SelectionChangedEvent event) {
+				IContributionItem[] items = getViewSite().getActionBars().getToolBarManager().getItems();
+				for(IContributionItem item : items){
+					if(item instanceof CommandContributionItem){
+						item.update();
 					}
 				}
 			}

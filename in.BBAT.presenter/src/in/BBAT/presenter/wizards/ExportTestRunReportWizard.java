@@ -41,7 +41,7 @@ public class ExportTestRunReportWizard extends Wizard {
 
 	@Override
 	public void addPages() {
-		page1 = new BrowseDirectoryPage("Export", "Export Path: " , "Select directory");
+		page1 = new BrowseDirectoryPage("Export Test Run Report", "Export path: " , "Select directory");
 		addPage(page1);
 
 	}

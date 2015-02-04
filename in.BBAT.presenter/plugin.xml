@@ -523,6 +523,16 @@
             allPopups="false"
             locationURI="toolbar:in.BBAT.presenter.history.TestRunInstanceView">
       </menuContribution>
+      <menuContribution
+            allPopups="false"
+            locationURI="toolbar:in.BBAT.presenter.history.TestRunHistoryView">
+         <command
+               commandId="in.BBAT.presenter.history.exportReport"
+               icon="icons/reporter.png"
+               label="Export Report"
+               style="push">
+         </command>
+      </menuContribution>
    </extension>
    <extension
          point="org.eclipse.ui.commands">
